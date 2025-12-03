@@ -1,0 +1,112 @@
+services:
+  # MongoDB Database
+  mongo:
+    image: mongo:6
+    container_name: dummy-mongo-prod
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - dummy-network
+
+  # Redis for sessions and Socket.io adapter
+  redis:
+    image: redis:7-alpine
+    container_name: dummy-redis-prod
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - dummy-network
+
+  # Backend Node.js Application
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: ${DOCKERHUB_USERNAME}/dummy-backend:latest
+    container_name: dummy-backend-prod
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      MONGODB_URI: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongo:27017/${MONGO_DATABASE}?authSource=admin
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      SESSION_SECRET: ${SESSION_SECRET}
+      JWT_SECRET: ${JWT_SECRET}
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
+    volumes:
+      - ./backend/uploads:/app/backend/uploads
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dummy-network
+
+  # Frontend React Application (Production with Nginx)
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile-production
+    image: ${DOCKERHUB_USERNAME}/dummy-frontend:latest
+    container_name: dummy-frontend-prod
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - dummy-network
+
+  # Backup Scheduler (Automated Daily Backups)
+  backup-scheduler:
+    build:
+      context: .
+      dockerfile: scripts/Dockerfile.backup-cron
+    container_name: dummy-backup-scheduler-prod
+    restart: always
+    environment:
+      TZ: Asia/Dhaka
+      MONGODB_URI: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongo:27017/${MONGO_DATABASE}?authSource=admin
+      DUMP_DIR: /app/backups
+      UPLOAD_TO_GCS: "false"
+      KEEP_LOCAL_BACKUP: "true"
+      LOCAL_RETENTION_DAYS: "7"
+    volumes:
+      - ./backups:/app/backups
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - dummy-network
+
+volumes:
+  mongo_data:
+  redis_data:
+
+networks:
+  dummy-network:
+    driver: bridge

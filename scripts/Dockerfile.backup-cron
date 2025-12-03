@@ -1,0 +1,64 @@
+# Backup scheduler container with cron
+FROM node:18-slim
+
+# Install MongoDB tools, cron, tzdata
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    gnupg \
+    curl \
+    cron \
+    tzdata \
+    && curl -fsSL https://www.mongodb.org/static/pgp/server-6.0.asc | gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg --dearmor \
+    && echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/6.0 main" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends mongodb-database-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set timezone (Bangladesh timezone GMT+6)
+ENV TZ=Asia/Dhaka
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Copy workspace files
+COPY pnpm-lock.yaml* pnpm-workspace.yaml* ./
+COPY scripts/package.json ./scripts/
+
+# Install dependencies for scripts workspace only
+RUN if [ -f pnpm-lock.yaml ]; then \
+      pnpm install --frozen-lockfile --filter dummy-backup-scripts --prod; \
+    else \
+      pnpm install --filter dummy-backup-scripts --prod; \
+    fi
+
+# Copy scripts source code
+COPY scripts/ ./scripts/
+
+# Set working directory to scripts
+WORKDIR /app/scripts
+
+# Create backup directory
+RUN mkdir -p /app/backups
+
+# Create a shell script wrapper for the backup
+RUN echo '#!/bin/bash' > /app/backup-wrapper.sh && \
+    echo 'export MONGODB_URI="${MONGODB_URI:-mongodb://dummyuser:dummypass@mongo:27017/dummy?authSource=admin}"' >> /app/backup-wrapper.sh && \
+    echo 'export DUMP_DIR=/app/backups' >> /app/backup-wrapper.sh && \
+    echo 'cd /app/scripts && /usr/local/bin/node dump-db.js' >> /app/backup-wrapper.sh && \
+    chmod +x /app/backup-wrapper.sh
+
+# Create cron job file - runs twice daily at 11 AM and 5 PM (Bangladesh time)
+RUN echo "0 11 * * * root /app/backup-wrapper.sh >> /app/backups/backup.log 2>&1" > /etc/cron.d/backup-cron && \
+    echo "0 17 * * * root /app/backup-wrapper.sh >> /app/backups/backup.log 2>&1" >> /etc/cron.d/backup-cron && \
+    echo "" >> /etc/cron.d/backup-cron && \
+    chmod 0644 /etc/cron.d/backup-cron && \
+    crontab /etc/cron.d/backup-cron
+
+# Create log file
+RUN touch /app/backups/backup.log
+
+# Start cron in foreground
+CMD ["cron", "-f"]

@@ -1,0 +1,543 @@
+import CryptoJS from "crypto-js";
+
+// Cache to store derived keys by conversationId
+const keyCache = {};
+
+// Helper function to get or create the encryption key
+function getEncryptionKey(conversationId) {
+  const storedKeys = Object.keys(localStorage).filter((key) =>
+    key.startsWith(`${conversationId}_`)
+  );
+  const defaultKey = `${conversationId}_${conversationId}`;
+  const customKey = storedKeys.find((key) => key !== defaultKey);
+
+  if (customKey) {
+    return localStorage.getItem(customKey);
+  }
+
+  if (storedKeys.includes(defaultKey)) {
+    return localStorage.getItem(defaultKey);
+  }
+
+  // Create and store default key if no keys exist
+  localStorage.setItem(defaultKey, conversationId);
+  return conversationId;
+}
+
+export function encryptMessage(msg, conversationId) {
+  if (!conversationId) {
+    // No conversation yet → just return plain text
+    return msg;
+  }
+
+  const K1 = getEncryptionKey(conversationId);
+  // Check cache for derived key, or generate and cache it
+  let derivedKey = keyCache[conversationId];
+  if (!derivedKey) {
+    // Use conversationId as a fixed salt for consistency
+    derivedKey = CryptoJS.PBKDF2(K1, conversationId, { keySize: 256/32, iterations: 1000 }).toString();
+    keyCache[conversationId] = derivedKey;
+  }
+  return CryptoJS.AES.encrypt(msg, derivedKey).toString();
+}
+
+export function decryptMessage(cipher, conversationId) {
+  if (!conversationId) {
+    // No key → treat it as plain text
+    return cipher;
+  }
+
+  try {
+    const K1 = getEncryptionKey(conversationId);
+    // Check cache for derived key, or generate and cache it
+    let derivedKey = keyCache[conversationId];
+    if (!derivedKey) {
+      // Use conversationId as a fixed salt for consistency
+      derivedKey = CryptoJS.PBKDF2(K1, conversationId, { keySize: 256/32, iterations: 1000 }).toString();
+      keyCache[conversationId] = derivedKey;
+    }
+    const bytes = CryptoJS.AES.decrypt(cipher, derivedKey);
+    const decrypted = bytes.toString(CryptoJS.enc.Utf8);
+
+    // If decryption failed (empty string), it means it's plain text
+    return decrypted || cipher;
+  } catch (err) {
+    // If anything blows up → return the original text
+    return cipher;
+  }
+}   here i want after encrypt message you will call another function where you generate some randdom value and you will take encrypt message and split that message into 5 parts you will remember which place you have split the message and after that you will add some generated ramdom key to currupt the message into splited message add merge the key corrupt message and again encrypt the message return, at the same way you will decrypt the message , first decrypt the message as asuall and remove that corrupt key to remove corrupted key based on the position which you have done earlier and merge and decrypt and return. now tell me what i have said you and what is the step you follow.
+Let me break down what you're asking for:
+
+Current Flow:
+Encrypt: message → AES encryption → encrypted message
+Decrypt: encrypted message → AES decryption → original message
+What You Want to Add:
+Enhanced Encryption Process:
+Encrypt the message normally (as you're doing now)
+Call a new function that:
+Generates random corruption keys
+Splits the encrypted message into 5 parts
+Records the split positions (so you know where each part starts/ends)
+Inserts random corruption data at specific positions within these 5 parts
+Merges everything back together (original parts + corruption data)
+Encrypts again this corrupted/merged string
+Returns the final double-encrypted message
+Enhanced Decryption Process (reverse order):
+Decrypt the message once (removes outer encryption layer)
+Call a corresponding function that:
+Uses the same split positions (stored/remembered somehow)
+Identifies and removes the corruption keys from their known positions
+Merges the clean parts back together
+Returns the once-encrypted message
+Decrypt again normally to get the original message
+Key Questions for Implementation:
+How do you want to store/remember the split positions? (as part of the encrypted string, in a separate metadata, or deterministically based on conversationId?)
+Should the random corruption keys be truly random or pseudo-random (reproducible) based on conversationId?
+What should be the size/pattern of corruption data?
+Is this understanding correct?
+
+How do you want to store/remember the split positions? (as part of the encrypted string, in a separate metadata, or deterministically based on conversationId?) answer: you will fix some postion like 5, 9, 15, 20, 30 in these position message will split and you will try to take this position form local storage if you do not get from there then you will use default static postion.
+Should the random corruption keys be truly random or pseudo-random (reproducible) based on conversationId? ans: do the best thing , i mean which will be best , use it.
+What should be the size/pattern of corruption data? ans: i have no idea what do you mean it exlpalain me and do the best pattern.
+Understanding Your Requirements:
+1. Split Positions:
+Default positions: 5, 9, 15, 20, 30
+Storage: Try to read from localStorage first (e.g., ${conversationId}_splitPositions)
+Fallback: Use the default static positions if not found
+2. Corruption Keys - Best Approach:
+Pseudo-random (deterministic) is BEST because:
+
+You need to decrypt the message later, so you must be able to regenerate the EXACT same corruption keys
+Using conversationId as a seed ensures consistency
+Truly random would be impossible to decrypt (you'd lose the corruption keys forever)
+3. Size/Pattern of Corruption Data - Explanation:
+What I mean by size/pattern:
+
+Size options:
+
+Fixed size (e.g., always insert 8 characters): Easy to remove, but predictable
+Variable size (e.g., 5-15 characters): More obfuscation, harder to detect pattern
+Proportional (e.g., 10% of segment length): Scales with message size
+Pattern options:
+
+Random characters (alphanumeric): aB3xK9m
+Random bytes/hex: 4f7a2b9c
+Mimics encryption format: Looks like Base64/encrypted text to blend in
+My Recommendation (BEST approach):
+
+Variable size: 8-16 characters per insertion point (makes it less predictable)
+Base64-like pattern: Uses characters that match encrypted output (A-Z, a-z, 0-9, +, /) so corruption blends in seamlessly
+Deterministic generation: Based on conversationId + position index, so it's reproducible
+Proposed Flow:
+Original: "Hello World"
+↓
+Encrypt: "U2FsdGVkX1+abc123..."
+↓
+Split at [5,9,15,20,30]: ["U2Fsd", "GVkX", "1+abc1", "23...", ""]
+↓
+Insert corruption at each split: ["U2Fsd"+"xK9p", "GVkX"+"m2Lq7", ...]
+↓
+Merge: "U2FsdxK9pGVkXm2Lq7..."
+↓
+Encrypt again: "U2FsdGVkX1+xyz789..."
+↓
+Return final encrypted string
+Should I proceed with this approach?
+
+
+Corruption Keys - Best Approach: Pseudo-random (deterministic) is BEST because:
+You need to decrypt the message later, so you must be able to regenerate the EXACT same corruption keys
+Using conversationId as a seed ensures consistency
+Truly random would be impossible to decrypt (you'd lose the corruption keys forever) ans: we do not need to regenerate the EXACT same corruption keys because we will decrypt message based on key position and we will determin what is the lenght of the corrupted key, let say we will insert 'jkl' , eog' ,lwr' like this so it's lenght is 3 we we will know the position of the insertion of the corrupted key in that messge then we can easily remove 3 , 3 , 3 length chareter , isn't ? what do you think?
+Ah, you're absolutely right! I misunderstood. Let me reconsider:
+
+Your Approach:
+You want to store metadata about the corruption:
+
+Positions where corruption was inserted: [5, 9, 15, 20, 30]
+Length of each corruption key: [3, 3, 3, 3, 3] (or variable like [3, 4, 5, 3, 4])
+Then during decryption:
+
+Decrypt outer layer
+Use the stored positions + lengths to extract and remove the corruption
+Merge clean parts
+Decrypt again
+This Works IF:
+You store the corruption metadata somewhere. Where will you store it?
+
+Option A: In localStorage
+javascript
+localStorage.setItem(`${conversationId}_corruptionMeta`, JSON.stringify({
+  positions: [5, 9, 15, 20, 30],
+  lengths: [3, 3, 3, 3, 3]
+}))
+✅ Clean separation
+❌ Requires localStorage (you mentioned avoiding it in artifacts)
+
+Option B: Embed in the encrypted message
+javascript
+// Prepend metadata to encrypted message
+const metadata = `${positions.join(',')}:${lengths.join(',')}|`;
+return metadata + encryptedMessage;
+✅ Self-contained
+✅ No external storage needed
+❌ Slightly increases message size
+❌ Metadata is visible (though encrypted in outer layer)
+
+Option C: Fixed pattern (deterministic lengths)
+Always use the same corruption length (e.g., always 8 characters at each position) ✅ No need to store lengths ✅ Simple to implement ❌ Less randomness/obfuscation
+
+My Question:
+Since you're already using localStorage for encryption keys, should we:
+
+Store corruption metadata in localStorage (similar to encryption keys)?
+Embed metadata in the message itself (makes it portable)?
+Use fixed-length corruption (simplest, no storage needed)?
+Which approach do you prefer?
+
+
+Store corruption metadata in localStorage, beacuse this postion will come from users so it will be dynamic, what do you think?
+
+Perfect! That makes complete sense!
+
+Your Design:
+Split positions: User-defined, stored in localStorage (e.g., ${conversationId}_splitPositions)
+Corruption metadata: Also stored in localStorage (e.g., ${conversationId}_corruptionMeta)
+Truly random corruption keys: Since we're storing metadata, we don't need deterministic generation anymore!
+Benefits of This Approach:
+✅ Flexible: Users can customize split positions per conversation ✅ Secure: Truly random corruption adds more obfuscation ✅ Portable: Works well with your existing localStorage pattern for keys ✅ Dynamic: Each encryption can have different corruption lengths
+
+Proposed Storage Structure:
+javascript
+// When user sets custom positions
+localStorage.setItem(`${conversationId}_splitPositions`, JSON.stringify([5, 9, 15, 20, 30]));
+
+// During encryption, store corruption metadata
+localStorage.setItem(`${conversationId}_corruptionMeta`, JSON.stringify({
+  positions: [5, 9, 15, 20, 30],
+  lengths: [8, 12, 10, 9, 11]  // Random lengths for each insertion
+}));
+Flow:
+Encryption:
+Get split positions from localStorage (or use default [5, 9, 15, 20, 30])
+Encrypt message → split at positions
+Generate truly random corruption keys (variable length 6-12 chars)
+Insert corruption at each split point
+Store corruption metadata in localStorage
+Merge everything → encrypt again → return
+Decryption:
+Decrypt outer layer
+Get corruption metadata from localStorage (positions + lengths)
+Remove corruption using positions and lengths
+Merge clean parts
+Decrypt again → return original message
+Should I implement this now?
+
+
+yea and one more thing how do you generate 3 , 4, or5 lenght random or curruption key to corrupt message/
+
+Great question! Here are the best ways to generate random corruption keys:
+
+Option 1: Random Alphanumeric (Best for blending with encrypted text)
+javascript
+function generateCorruptionKey(length) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnnopqrstuvwxyz0123456789+/=';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+✅ Uses Base64-like characters (blends with AES encrypted output)
+✅ Simple and fast
+
+Option 2: Using Crypto.randomBytes (More secure)
+javascript
+function generateCorruptionKey(length) {
+  const array = new Uint8Array(length);
+  crypto.getRandomValues(array);
+  return Array.from(array, byte => byte.toString(36)).join('').substring(0, length);
+}
+✅ Uses browser's crypto API (truly random)
+✅ More cryptographically secure
+
+Option 3: Using CryptoJS Random (Consistent with your code)
+javascript
+function generateCorruptionKey(length) {
+  const randomWords = CryptoJS.lib.WordArray.random(length);
+  return CryptoJS.enc.Base64.stringify(randomWords).substring(0, length);
+}
+✅ Uses CryptoJS (you're already importing it) ✅ Base64 output blends perfectly with AES encryption ✅ RECOMMENDED since you're already using CryptoJS
+
+Variable Length Generation:
+javascript
+// Generate random length between min and max
+function getRandomLength(min = 6, max = 12) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Usage:
+const corruptionKey = generateCorruptionKey(getRandomLength(3, 5)); // 3, 4, or 5 chars
+My Recommendation: Use Option 3 (CryptoJS) because:
+
+You're already importing CryptoJS
+Output is Base64 format (same as encrypted messages)
+Makes corruption invisible/blended
+Should I proceed with Option 3?
+
+
+use option three:Option 3: Using CryptoJS Random (Consistent with your code) and start implementation
+
+
+
+
+
+
+
+
+
+
+
+
+
+🔐 Complete Encryption Method Explanation
+📚 Table of Contents
+
+The Big Picture
+Step-by-Step Encryption
+Step-by-Step Decryption
+Visual Examples
+Why This Works
+Common Problems
+
+
+🎯 The Big Picture {#big-picture}
+What Are We Trying To Do?
+We want to encrypt a message TWICE with "corruption" (fake data) in the middle to make it extra secure and confusing for attackers.
+The Complete Flow:
+Original Message: "Hello"
+        ↓
+   [Encrypt #1]
+        ↓
+Encrypted: "U2FsdGVkX1ABC123XYZ..."
+        ↓
+  [Add Corruption]
+        ↓
+Corrupted: "U2FsdABCDGVkX1ABC123EFGHXYZ...IJKL"
+        ↓
+   [Encrypt #2]
+        ↓
+Final: "U2FsdGVkX19P+w9aFv..."
+When decrypting, we do the reverse:
+Final → Decrypt #1 → Remove Corruption → Decrypt #2 → Original
+
+🔒 Step-by-Step Encryption {#encryption-steps}
+STEP 1: First Encryption
+javascriptconst firstEncrypted = AES.encrypt("Hello", key);
+// Result: "U2FsdGVkX1ABC123XYZ789"  (22 characters)
+This is normal AES encryption. Nothing special yet.
+
+STEP 2: Add Corruption (The Tricky Part!)
+Now we want to insert fake 4-character keys at specific positions.
+2.1: Choose Split Positions
+javascriptpositions = [5, 9, 15, 20, 30]
+These are the positions where we'll split the encrypted message and insert 4-character corruption keys.
+2.2: Split The Message
+Let's say our encrypted message is: "U2FsdGVkX1ABC123XYZ789" (22 chars)
+We split at positions [5, 9, 15, 20, 30]:
+Position 5:  "U2Fsd"           (characters 0-5)
+Position 9:  "GVkX"            (characters 5-9)
+Position 15: "1ABC12"          (characters 9-15)
+Position 20: "3XYZ7"           (characters 15-20)
+Position 30: "89"              (characters 20-22) - can't reach 30, so just remaining
+Important: Position 30 is beyond our message length (22), so we ignore it!
+2.3: Generate Corruption Keys
+For each valid split position, we generate a deterministic 4-character key:
+javascriptseed = "conversationId_corruption_0"
+key1 = SHA256(seed).substring(0, 4).toUpperCase()
+// Result: "A1B2"
+
+seed = "conversationId_corruption_1"
+key2 = SHA256(seed).substring(0, 4).toUpperCase()
+// Result: "C3D4"
+
+// And so on...
+Why deterministic? So we can regenerate the exact same keys during decryption!
+2.4: Insert Corruption Keys
+Now we insert these keys between the segments:
+"U2Fsd" + "A1B2" + "GVkX" + "C3D4" + "1ABC12" + "E5F6" + "3XYZ7" + "G7H8" + "89"
+Final corrupted message:
+"U2FsdA1B2GVkXC3D41ABC12E5F63XYZ7G7H889"
+Length increased from 22 to 38 (added 4 keys × 4 chars = 16 characters)
+
+STEP 3: Second Encryption
+javascriptconst finalEncrypted = AES.encrypt(corruptedMessage, key);
+// Result: "U2FsdGVkX19P+w9aFvUGx62..."
+This is your final cipher that gets stored in the database!
+
+🔓 Step-by-Step Decryption {#decryption-steps}
+STEP 1: First Decryption
+javascriptconst firstDecrypted = AES.decrypt(finalEncrypted, key);
+// Result: "U2FsdA1B2GVkXC3D41ABC12E5F63XYZ7G7H889"
+We get back the corrupted message (with fake keys inside).
+
+STEP 2: Remove Corruption (The Reverse Tricky Part!)
+Now we need to remove those 4-character fake keys.
+2.1: Use Same Split Positions
+javascriptpositions = [5, 9, 15, 20, 30]  // Same as encryption!
+2.2: Extract Clean Segments
+We read the corrupted message and skip the 4-character keys:
+Read 5 chars:  "U2Fsd"          (position 0-5)
+Skip 4 chars:  "A1B2"           ← Corruption key #1, throw away!
+
+Read 4 chars:  "GVkX"           (next segment is 9-5 = 4 chars)
+Skip 4 chars:  "C3D4"           ← Corruption key #2, throw away!
+
+Read 6 chars:  "1ABC12"         (next segment is 15-9 = 6 chars)
+Skip 4 chars:  "E5F6"           ← Corruption key #3, throw away!
+
+Read 5 chars:  "3XYZ7"          (next segment is 20-15 = 5 chars)
+Skip 4 chars:  "G7H8"           ← Corruption key #4, throw away!
+
+Read remaining: "89"            (everything left)
+Clean message reconstructed:
+"U2FsdGVkX1ABC123XYZ789"
+This is the original first encrypted message!
+
+STEP 3: Second Decryption
+javascriptconst originalMessage = AES.decrypt(cleanMessage, key);
+// Result: "Hello"
+We get back the original message! 🎉
+
+📊 Visual Examples {#visual-examples}
+Example 1: Short Message
+Original: "Hi"
+
+Encrypt #1:
+"U2FsdGVkX1xyz" (13 chars)
+
+Add Corruption at [5, 9, 15, 20, 30]:
+Only positions 5 and 9 are valid (within 13 chars)
+
+Split:
+"U2Fsd" + [INSERT] + "GVkX" + [INSERT] + "1xyz"
+
+Add keys:
+"U2Fsd" + "A1B2" + "GVkX" + "C3D4" + "1xyz"
+
+Corrupted:
+"U2FsdA1B2GVkXC3D41xyz" (21 chars = 13 + 8)
+
+Encrypt #2:
+"U2FsdGVkX19abc..." (final cipher)
+Example 2: Long Message
+Original: "This is a long message for testing"
+
+Encrypt #1:
+"U2FsdGVkX1ABC123XYZ789DEF456GHI012JKL345MNO678PQR901" (50 chars)
+
+Add Corruption at [5, 9, 15, 20, 30]:
+All positions valid except 30 (only up to 20)
+
+Split into 5 parts:
+Part 1: [0-5]   = "U2Fsd"
+Part 2: [5-9]   = "GVkX"
+Part 3: [9-15]  = "1ABC12"
+Part 4: [15-20] = "3XYZ7"
+Part 5: [20-50] = "89DEF456GHI012JKL345MNO678PQR901"
+
+Add keys:
+"U2Fsd" + "A1B2" + "GVkX" + "C3D4" + "1ABC12" + "E5F6" + "3XYZ7" + "G7H8" + "89DEF456GHI012JKL345MNO678PQR901"
+
+Corrupted:
+"U2FsdA1B2GVkXC3D41ABC12E5F63XYZ7G7H889DEF456GHI012JKL345MNO678PQR901" (66 chars)
+
+Encrypt #2:
+"U2FsdGVkX19xyz..." (final cipher)
+
+✅ Why This Works {#why-it-works}
+1. Deterministic Corruption Keys
+javascriptSHA256("conversation123_corruption_0") → Always same key
+
+During encryption: Generate key "A1B2"
+During decryption: Generate same key "A1B2" to verify and skip
+
+2. Fixed Length Keys
+
+Always 4 characters
+Easy to skip during decryption
+Predictable: "Read X chars, skip 4 chars, read Y chars, skip 4 chars..."
+
+3. Position-Based
+
+Same positions used for encryption and decryption
+Positions stored in memory or use defaults [5, 9, 15, 20, 30]
+
+4. Double Encryption
+
+Even if someone figures out the corruption pattern
+They still need to decrypt twice with the key
+Extra layer of security
+
+
+⚠️ Common Problems {#common-problems}
+Problem 1: "Malformed UTF-8 Data"
+Cause: Corruption removal failed, so the "clean" message is still corrupted.
+Example:
+Should be:  "U2FsdGVkX1ABC123"
+Actually is: "U2FsdA1B2GVkX" (still has "A1B2" inside!)
+When you try to decrypt invalid AES data → UTF-8 error.
+Solution: Make sure corruption keys match exactly during removal.
+
+Problem 2: Messages Not Decrypting After Page Reload
+Cause: Message encrypted with one set of positions, but decrypting with different positions.
+Example:
+Encrypted with positions: [5, 9, 15, 20, 30]
+Decrypting with positions: [5, 10, 15, 20, 25]  ← Wrong!
+Solution: Use deterministic positions (default or stored).
+
+Problem 3: Short Messages
+Cause: If message is only 3 characters, position [5] is invalid!
+Example:
+Encrypted: "abc"
+Position 5: Beyond length!
+Solution: Filter positions to only use valid ones:
+javascriptvalidPositions = positions.filter(pos => pos < messageLength)
+
+🎓 Key Takeaways
+
+Encrypt twice with corruption in between
+Split at positions [5, 9, 15, 20, 30]
+Insert 4-char keys between segments
+Generate keys deterministically using SHA256(seed)
+During decryption: Read segments and skip 4-char keys
+Verify keys match expected values before skipping
+
+
+🔍 Debugging Tips
+If decryption fails, check:
+
+Are positions the same?
+
+Encryption used [5, 9, 15, 20, 30]?
+Decryption using [5, 9, 15, 20, 30]?
+
+
+Are corruption keys matching?
+
+Expected: "A1B2"
+Found: "A1B2" ✅
+Found: "X9Y8" ❌
+
+
+Is the conversation ID the same?
+
+Encryption used: "conv_123"
+Decryption using: "conv_123" ✅
+
+
+Did you clear old messages?
+
+Old messages encrypted with old code won't work with new code!
+
+

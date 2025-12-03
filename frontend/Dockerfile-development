@@ -1,0 +1,30 @@
+# Frontend Dockerfile for Development
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Copy workspace files from root
+COPY pnpm-lock.yaml* pnpm-workspace.yaml* ./
+COPY frontend/package.json ./frontend/
+
+# Install dependencies for frontend workspace only
+RUN if [ -f pnpm-lock.yaml ]; then \
+      pnpm install --frozen-lockfile --filter alfajr; \
+    else \
+      pnpm install --filter alfajr; \
+    fi
+
+# Copy frontend source code
+COPY frontend/ ./frontend/
+
+# Set working directory to frontend
+WORKDIR /app/frontend
+
+# Expose port for Vite dev server
+EXPOSE 3002
+
+# Start development server with host binding
+CMD ["pnpm", "run", "dev", "--host", "0.0.0.0"]

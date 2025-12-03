@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upside Down Arrowhead Shape</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .arrowhead {
+    @apply relative w-0 h-0 border-l-[50px] border-l-transparent border-r-[50px] border-r-transparent border-t-[100px] border-t-yellow-500;
+  }
+  
+  .arrowhead::after {
+    content: '';
+    @apply absolute bottom-[-10px] left-[-60px] w-0 h-0 border-l-[60px] border-l-transparent border-r-[60px] border-r-transparent border-t-[110px] border-t-brown-500;
+  }
+</style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+
+<div class="arrowhead"></div>
+
+</body>
+</html>
