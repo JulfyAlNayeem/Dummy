@@ -16,6 +16,7 @@
   "scripts": {
     "dev": "nodemon app",
     "start": "node app.js",
+    "seed": "node scripts/seed.js",
     "prisma:validate": "npx prisma validate",
     "prisma:generate": "npx prisma generate",
     "prisma:push": "npx prisma db push"
