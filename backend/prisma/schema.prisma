@@ -49,6 +49,10 @@ model User {
   two_factor_enabled    Boolean  @default(false)
   two_factor_secret     String?
 
+  // Relations
+  deletionSchedule      UserDeletionSchedule?
+  preventedDeletions    UserDeletionSchedule[] @relation("Prevention")
+
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
 
@@ -57,7 +61,7 @@ model User {
 
 model UserDeletionSchedule {
   id                String         @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String         @db.ObjectId
+  userId            String         @unique @db.ObjectId
   user              User           @relation(fields: [userId], references: [id])
   scheduled_for     DateTime
   reason            String         @default("Inactive for 7+ months")
