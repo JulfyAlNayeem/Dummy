@@ -40,9 +40,9 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
+    strategy:
+      matrix:
+        node: ['18.x', '20.x']
    
     steps:
     - name: Checkout code
@@ -51,7 +51,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ env.NODE_VERSION }}
+        node-version: ${{ matrix.node }}
     
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
@@ -59,21 +59,51 @@ jobs:
         version: latest
         run_install: false
     
-    - name: Install dependencies
-      run: pnpm install
+    # =========================================================================
+    # BACKEND TESTING - Node.js/Express with Prisma
+    # =========================================================================
+    - name: Backend - Install dependencies
+      run: pnpm install --frozen-lockfile
+      working-directory: backend
     
-    - name: Run linter
+    - name: Backend - Validate Prisma schema
+      run: pnpm run prisma:validate
+      working-directory: backend
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL || 'mongodb://user:password@localhost:27017/dummy_test' }}
+    
+    - name: Backend - Generate Prisma client
+      run: pnpm run prisma:generate
+      working-directory: backend
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL || 'mongodb://user:password@localhost:27017/dummy_test' }}
+    
+    - name: Backend - Build application
+      run: pnpm run build
+      working-directory: backend
+    
+    # =========================================================================
+    # FRONTEND TESTING - React/Vite
+    # =========================================================================
+    - name: Frontend - Install dependencies
+      run: pnpm install --frozen-lockfile
+      working-directory: frontend
+    
+    - name: Frontend - Run linter
       run: echo "Linter passed - skipping for now"
+      working-directory: frontend
       # TODO: Enable linting when ready
       # run: pnpm run lint
     
-    - name: Run tests
+    - name: Frontend - Run tests
       run: echo "Tests passed - skipping for now"
+      working-directory: frontend
       # TODO: Enable tests when ready
       # run: pnpm run test
       
-    - name: Test build
+    - name: Frontend - Test build
       run: pnpm run build
+      working-directory: frontend
       env:
         CI: false
 
