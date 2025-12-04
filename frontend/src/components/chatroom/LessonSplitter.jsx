@@ -115,7 +115,7 @@ const handleSubmit = async (e) => {
             ? "Splitting..."
             : isSaving
               ? "Saving..."
-              ? (
+              : (
                 <>
                   Split <LuSquareSplitHorizontal className="text-lg" />
                 </>
