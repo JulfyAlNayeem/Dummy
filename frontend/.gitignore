@@ -33,6 +33,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-src/utils/config.js
-src/utils/config.js
-src/utils/baseUrls.js
