@@ -34,6 +34,9 @@ jobs:
   # ===========================================================================
   # JOB 1: TEST
   # ===========================================================================
+  # Purpose: Validate code quality before building
+  # Runs: On every push and pull request
+  # ===========================================================================
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -117,11 +120,15 @@ jobs:
   # ===========================================================================
   # JOB 3: DEPLOY TO PRODUCTION VPS
   # ===========================================================================
+  # Purpose: SSH into VPS and deploy the new Docker images
+  # Runs: Only on 'main' branch after build completes
+  # Depends on: build job must complete successfully
+  # ===========================================================================
   deploy-production:
     name: Deploy to Production
     runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/main'
+    needs: build  # Wait for build job to complete
+    if: github.ref == 'refs/heads/main'  # Only run on main branch
     
     steps:
     - name: Checkout code
@@ -139,84 +146,152 @@ jobs:
           # DEPLOYMENT SCRIPT - Runs on VPS server
           # ===================================================================
           
+          # Exit immediately if any command fails
           set -e
           set -o pipefail
           
           echo "=== Starting Deployment ==="
           
-          # Navigate to project directory
+          # -------------------------------------------------------------------
+          # STEP 1: Navigate to project directory
+          # -------------------------------------------------------------------
           cd /opt/DummyProject || exit 1
           
-          # Pull latest code from GitHub
+          # -------------------------------------------------------------------
+          # STEP 2: Pull latest code from GitHub (docker-compose.yml, etc.)
+          # Skip if not needed - Docker images already contain application code
+          # -------------------------------------------------------------------
           echo "Checking for configuration updates..."
           if [ -d ".git" ]; then
             echo "Pulling latest configuration from GitHub..."
             git pull origin main || echo "Warning: Could not pull latest code."
           fi
           
-          # Ensure uploads directory exists
+          # -------------------------------------------------------------------
+          # STEP 3: Ensure uploads directory exists with correct permissions
+          # This is where user-uploaded images are stored
+          # -------------------------------------------------------------------
           echo "Setting up uploads directory..."
           sudo mkdir -p ./backend/uploads/images
-          sudo chown -R 1000:1000 ./backend/uploads
+          sudo chown -R 1000:1000 ./backend/uploads  # Match container user ID
           sudo chmod -R 755 ./backend/uploads
           
-          # Update Docker Hub username in environment file
+          # -------------------------------------------------------------------
+          # STEP 4: Update Docker Hub username in environment file
+          # This tells docker-compose which images to pull
+          # -------------------------------------------------------------------
           echo "Updating environment configuration..."
-          grep -q "^DOCKERHUB_USERNAME=" .env.production && \
-            sed -i "s|^DOCKERHUB_USERNAME=.*|DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}|" .env.production || \
-            echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> .env.production
+          grep -q "^DOCKERHUB_USERNAME=" .env.production && sed -i "s|^DOCKERHUB_USERNAME=.*|DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}|" .env.production || echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> .env.production
           
-          # Login to Docker Hub
+          # -------------------------------------------------------------------
+          # STEP 5: Login to Docker Hub on VPS
+          # Required to pull private images
+          # -------------------------------------------------------------------
           echo "Logging into Docker Hub..."
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | sudo docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin || exit 1
           
-          # Remove old cached images
+          # -------------------------------------------------------------------
+          # STEP 6: Clean up Docker disk space
+          # Removes unused images, containers, and build cache
+          # Prevents "no space left on device" errors during docker pull
+          # -------------------------------------------------------------------
+          echo "Cleaning up Docker resources..."
+          sudo docker system prune -af --volumes || true
+          
+          # -------------------------------------------------------------------
+          # STEP 7: Remove old cached images
+          # Forces Docker to download fresh images from Docker Hub
+          # -------------------------------------------------------------------
           echo "Removing old Docker images..."
           sudo docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/dummy-backend:latest || true
           sudo docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/dummy-frontend:latest || true
           
-          # Pull new images from Docker Hub
-          echo "Pulling latest Docker images..."
+          # -------------------------------------------------------------------
+          # STEP 8: Pull new images from Docker Hub
+          # Downloads the images we just built in the BUILD job
+          # -------------------------------------------------------------------
+          echo "Pulling latest Docker images from Docker Hub..."
           if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production pull backend frontend; then
-            echo "ERROR: Failed to pull images!"
+            echo "ERROR: Failed to pull images from Docker Hub!"
+            echo "Make sure images exist: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-backend:latest"
+            echo "Make sure images exist: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-frontend:latest"
             exit 1
           fi
           
-          # Stop and remove old containers
+          # -------------------------------------------------------------------
+          # STEP 9: Stop running containers gracefully
+          # -------------------------------------------------------------------
           echo "Stopping old containers..."
           sudo docker compose -f docker-compose.prod.yml --env-file .env.production stop backend frontend || true
+          
+          # -------------------------------------------------------------------
+          # STEP 10: Remove old containers (keeps volumes/data intact)
+          # -------------------------------------------------------------------
+          echo "Removing old containers..."
           sudo docker compose -f docker-compose.prod.yml --env-file .env.production rm -f backend frontend || true
           
-          # Start new containers
-          echo "Starting new containers..."
+          # -------------------------------------------------------------------
+          # STEP 11: Start new containers with pulled images
+          # -d: Run in background (detached mode)
+          # -------------------------------------------------------------------
+          echo "Starting new containers with pulled images..."
           if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production up -d backend frontend; then
             echo "ERROR: Failed to start containers"
+            echo "Showing docker-compose logs..."
             sudo docker compose -f docker-compose.prod.yml --env-file .env.production logs --tail 100
             exit 1
           fi
           
-          # Wait for initialization
+          # -------------------------------------------------------------------
+          # STEP 12: Wait for containers to fully initialize
+          # Gives apps time to start and connect to database
+          # -------------------------------------------------------------------
           echo "Waiting for containers to initialize..."
           sleep 20
           
-          # Verify deployment
+          # -------------------------------------------------------------------
+          # STEP 13: Verify containers are running
+          # If containers crashed, show logs and fail deployment
+          # -------------------------------------------------------------------
           echo "Verifying deployment..."
+          echo "Current container status:"
           sudo docker ps -a | grep dummy || true
           
           BACKEND_STATUS=$(sudo docker ps --filter "name=dummy-backend-prod" --format "{{.Status}}" 2>/dev/null || echo "")
           FRONTEND_STATUS=$(sudo docker ps --filter "name=dummy-frontend-prod" --format "{{.Status}}" 2>/dev/null || echo "")
           
+          echo "Backend status: '$BACKEND_STATUS'"
+          echo "Frontend status: '$FRONTEND_STATUS'"
+          
+          # Check if backend is running
           if [ -z "$BACKEND_STATUS" ]; then
             echo "ERROR: Backend container is not running!"
-            sudo docker logs dummy-backend-prod --tail 100 2>&1 || true
+            echo "Showing backend logs:"
+            sudo docker logs dummy-backend-prod --tail 100 2>&1 || echo "Could not retrieve backend logs"
+            echo "Checking if container exists:"
+            sudo docker ps -a --filter "name=dummy-backend-prod"
             exit 1
           fi
           
+          # Check if frontend is running
           if [ -z "$FRONTEND_STATUS" ]; then
             echo "ERROR: Frontend container is not running!"
-            sudo docker logs dummy-frontend-prod --tail 100 2>&1 || true
+            echo "Showing frontend logs:"
+            sudo docker logs dummy-frontend-prod --tail 100 2>&1 || echo "Could not retrieve frontend logs"
+            echo "Checking if container exists:"
+            sudo docker ps -a --filter "name=dummy-frontend-prod"
             exit 1
           fi
+          
+          echo "Backend status: $BACKEND_STATUS"
+          echo "Frontend status: $FRONTEND_STATUS"
+          
+          # -------------------------------------------------------------------
+          # STEP 14: Display deployment summary
+          # -------------------------------------------------------------------
+          echo ""
+          echo "=== Deployed Images ==="
+          sudo docker images | grep dummy | head -5
           
           echo ""
           echo "=== Container Status ==="
