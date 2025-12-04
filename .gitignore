@@ -33,7 +33,7 @@ node_modules/
 dist/
 build/
 .next/
-
+docs/
 # IDE
 .idea/
 .vscode/
