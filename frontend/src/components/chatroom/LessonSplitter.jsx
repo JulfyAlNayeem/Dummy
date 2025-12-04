@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useUser } from "@/redux/slices/authSlice";
-import { LuSplitSquareHorizontal } from "react-icons/lu";
+import { LuSquareSplitHorizontal } from "react-icons/lu";
 import { borderColor, chatInputBg, iconColor } from "../../constant";
 import { useAddQuickLessonMutation } from "../../redux/api/quickLessonApi";
 import { useSelector } from "react-redux";
@@ -115,9 +115,9 @@ const handleSubmit = async (e) => {
             ? "Splitting..."
             : isSaving
               ? "Saving..."
-              : (
+              ? (
                 <>
-                  Split <LuSplitSquareHorizontal className="text-lg" />
+                  Split <LuSquareSplitHorizontal className="text-lg" />
                 </>
               )}
         </button>
