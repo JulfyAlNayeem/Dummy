@@ -29,8 +29,8 @@ WORKDIR /app/frontend
 
 # Set build-time environment variables
 # This will be overridden by the actual VPS IP during deployment
-ARG VITE_API_URL=http://localhost:3001
-ENV VITE_API_URL=${VITE_API_URL}
+ARG VITE_BASE_URL=http://localhost:3001/
+ENV VITE_BASE_URL=${VITE_BASE_URL}
 
 # Build the application
 RUN pnpm run build
