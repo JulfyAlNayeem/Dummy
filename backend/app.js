@@ -48,7 +48,8 @@ let io; // Declare io for export
     app.use(helmet());
     app.use(compression());
 
-    const allowedOrigins = process.env.ORIGIN_URL.split(',').map(s => s.trim());
+    const originUrl = process.env.ORIGIN_URL || 'http://localhost:3000';
+    const allowedOrigins = originUrl.split(',').map(s => s.trim());
     app.use(cors({ origin: allowedOrigins, credentials: true }));
 
     app.use(
