@@ -17,6 +17,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
+    networks:
+      - dummy-network
 
   # Redis for sessions and Socket.io adapter
   redis:
@@ -32,6 +34,8 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+    networks:
+      - dummy-network
 
   # Backend Node.js Application
   backend:
@@ -49,12 +53,13 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3001
-      MONGODB_URI: mongodb://dummyuser:DummyDB@2025!Secure#Mongo@mongo:27017/dummy?authSource=admin
-      REDIS_URL: redis://localhost:6379
+      DATABASE_URL: mongodb://sadiq:DummyDB%402025%21Secure%23Mongo@mongo:27017/dummy?authSource=admin
+      REDIS_URL: redis://redis:6379
       SESSION_SECRET: dev-session-secret-change-in-production
       JWT_SECRET: dev-jwt-secret-change-in-production
-      ACCESS_TOKEN_SECRET: dev-access-token-secret
-      REFRESH_TOKEN_SECRET: dev-refresh-token-secret
+      ACCESS_TOKEN_SECRET: s3cr3tAcc3ssT0k3nK3y
+      REFRESH_TOKEN_SECRET: s3cr3tR3fr3shT0k3nK3y
+      ORIGIN_URL: http://localhost:3002
     depends_on:
       mongo:
         condition: service_healthy

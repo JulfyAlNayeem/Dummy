@@ -1,23 +1,19 @@
 # Backend Dockerfile for Monorepo
 FROM node:20
 
-WORKDIR /app
+WORKDIR /app/backend
 
 # Install pnpm
 RUN npm install -g pnpm
 
-# Copy workspace files
-COPY pnpm-lock.yaml pnpm-workspace.yaml .pnpmrc* ./
-COPY backend/package.json ./backend/
+# Copy package files
+COPY backend/package.json ./
 
-# Install dependencies
-RUN pnpm install --filter dummyprojectbackend
+# Install dependencies first (better caching)
+RUN pnpm install
 
 # Copy backend source code
-COPY backend/ ./backend/
-
-# Set working directory to backend
-WORKDIR /app/backend
+COPY backend/ ./
 
 # Generate Prisma client
 RUN npx prisma generate || true
