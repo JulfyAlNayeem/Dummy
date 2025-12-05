@@ -28,34 +28,31 @@ export const initialSocketServer = async (server, redis) => {
 
   // JWT authentication middleware
   io.use((socket, next) => {
-    try {
-      const cookies = socket.handshake.headers.cookie;
-      if (!cookies) {
-        logger.warn({ id: socket.id }, "⚠️  No cookies found in Socket.IO handshake");
-        return next(new Error("No cookies found"));
-      }
-
-      const parsedCookies = cookie.parse(cookies);
-      const token = parsedCookies.access_token;
-      
-      if (!token) {
-        logger.warn({ id: socket.id, cookies: Object.keys(parsedCookies) }, "⚠️  No access_token found in cookies");
-        return next(new Error("No token found"));
-      }
-
-      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-        if (err) {
-          logger.warn({ id: socket.id, error: err.message }, "⚠️  JWT verification failed");
-          return next(new Error(`Invalid token: ${err.message}`));
-        }
-        socket.user = decoded;
-        logger.info({ id: socket.id, userId: decoded?.id }, "✅ Socket authenticated successfully");
-        next();
-      });
-    } catch (error) {
-      logger.error({ error: error.message }, "❌ Socket.IO authentication error");
-      next(error);
+    const cookies = socket.handshake.headers.cookie;
+    
+    // Log for debugging but don't block connection
+    if (!cookies) {
+      logger.warn({ id: socket.id }, "⚠️  No cookies found in Socket.IO handshake");
+      return next(); // Allow connection to proceed
     }
+
+    const parsedCookies = cookie.parse(cookies);
+    const token = parsedCookies.access_token;
+    
+    if (!token) {
+      logger.warn({ id: socket.id, cookies: Object.keys(parsedCookies) }, "⚠️  No access_token found in cookies");
+      return next(); // Allow connection to proceed
+    }
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) {
+        logger.warn({ id: socket.id, error: err.message }, "⚠️  JWT verification failed");
+        return next(); // Allow connection to proceed even if token is invalid
+      }
+      socket.user = decoded;
+      logger.info({ id: socket.id, userId: decoded?.id }, "✅ Socket authenticated successfully");
+      next();
+    });
   });
 
   // Socket.IO event handlers

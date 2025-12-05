@@ -60,14 +60,8 @@ const UserAuthProvider = ({ children }) => {
     (currentUser) => {
       if (!currentUser || socket.current) return;
       
-      // Initialize Socket.IO with proper credentials and error handling
       socket.current = io(BASE_URL, {
         withCredentials: true,
-        reconnection: true,
-        reconnectionDelay: 1000,
-        reconnectionDelayMax: 5000,
-        reconnectionAttempts: 5,
-        transports: ['websocket', 'polling'], // Allow both transports
       });
       
       // Add debugging listeners
@@ -79,16 +73,6 @@ const UserAuthProvider = ({ children }) => {
       });
       socket.current.on('connect_error', (error) => {
         console.error('❌ Socket connection error:', error.message || error);
-        // Log full error for debugging
-        if (error.data) {
-          console.error('Error details:', error.data);
-        }
-      });
-      socket.current.on('reconnect', (attemptNumber) => {
-        console.log('🔄 Socket reconnected after', attemptNumber, 'attempts');
-      });
-      socket.current.on('reconnect_error', (error) => {
-        console.error('❌ Socket reconnection error:', error.message || error);
       });
       
       socket.current.emit("userOnline", currentUser._id);
