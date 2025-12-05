@@ -3,26 +3,18 @@ FROM node:20
 
 WORKDIR /app
 
-# Install build dependencies for native modules
-RUN apt-get update && apt-get install -y build-essential python3-dev && rm -rf /var/lib/apt/lists/*
+# Install build dependencies for bcrypt native module
+RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
 
 # Install pnpm
 RUN npm install -g pnpm
 
-# Copy workspace files from root
-COPY pnpm-lock.yaml* pnpm-workspace.yaml* ./
+# Copy workspace files
+COPY pnpm-lock.yaml pnpm-workspace.yaml .pnpmrc* ./
 COPY backend/package.json ./backend/
 
 # Install dependencies for backend workspace only
-# Use --no-frozen-lockfile if pnpm-lock.yaml doesn't exist yet
-RUN if [ -f pnpm-lock.yaml ]; then \
-      pnpm install --frozen-lockfile --filter dummyprojectbackend; \
-    else \
-      pnpm install --filter dummyprojectbackend; \
-    fi
-
-# Rebuild native modules like bcrypt
-RUN pnpm rebuild bcrypt --filter dummyprojectbackend
+RUN pnpm install --frozen-lockfile --filter dummyprojectbackend || pnpm install --filter dummyprojectbackend
 
 # Copy backend source code
 COPY backend/ ./backend/
@@ -30,11 +22,8 @@ COPY backend/ ./backend/
 # Set working directory to backend
 WORKDIR /app/backend
 
-# Generate Prisma client if prisma schema exists
-RUN if [ -f prisma/schema.prisma ]; then npx prisma generate; fi
+# Generate Prisma client
+RUN npx prisma generate || true
 
-# Expose port
 EXPOSE 3001
-
-# Start the application
 CMD ["node", "app.js"]
