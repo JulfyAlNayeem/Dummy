@@ -36,6 +36,7 @@ import AlertnessSession from "../models/alertnessSessionModel.js";
 import QuickLesson from "../models/quickLessonModel.js";
 import Notification from "../models/notificationModel.js";
 import Report from "../models/reportModel.js";
+import SiteSecurityMessage from "../models/siteSecurityMessageModel.js";
 
 // Database connection options (matching connectdb.js)
 const DB_OPTIONS = {
@@ -1091,6 +1092,33 @@ const createAdminSettings = async (adminUserId) => {
 };
 
 /**
+ * Create default site security messages
+ */
+const createSiteSecurityMessages = async () => {
+  console.log("🔐 Creating default site security messages...");
+
+  // Check if security messages already exist
+  const existingMessages = await SiteSecurityMessage.findOne();
+  if (existingMessages) {
+    console.log("ℹ️  Site security messages already exist, skipping...");
+    return existingMessages;
+  }
+
+  // Create default security messages
+  const securityMessage = new SiteSecurityMessage({
+    goodMessage: "assalam", // Good message for access
+    badMessage: "goodmorning", // Bad message that will be rejected
+  });
+
+  await securityMessage.save();
+
+  console.log("✅ Default site security messages created!");
+  console.log("   Good message: 'assalam' (allows access)");
+  console.log("   Bad message: 'goodmorning' (denies access)");
+  return securityMessage;
+};
+
+/**
  * Main seed function
  */
 const seed = async () => {
@@ -1133,6 +1161,9 @@ const seed = async () => {
     const superadmin = users.find(u => u.role === "superadmin");
     await createAdminSettings(superadmin._id);
 
+    // Create default site security messages
+    await createSiteSecurityMessages();
+
     console.log("\n" + "=".repeat(80));
     console.log("🎉 Database seeding completed successfully!");
     console.log("=".repeat(80));
@@ -1149,12 +1180,16 @@ const seed = async () => {
     console.log(`   📚 Quick Lessons: ${quickLessons.length}`);
     console.log(`   🔔 Notifications: ${notifications.length}`);
     console.log(`   🚨 Reports: ${reports.length}`);
+    console.log(`   🔐 Site Security Messages: 1 (good: 'assalam', bad: 'goodmorning')`);
     console.log("\n🔐 Login Credentials:");
     console.log("   Super Admin: superadmin@chatapp.com / Admin@123!");
     console.log("   Admin: admin.sarah@chatapp.com / Admin@123!");
     console.log("   Teacher: dr.johnson@university.edu / Teacher@123!");
     console.log("   Student: alice.chen@student.edu / Student@123!");
     console.log("   Moderator: mod.alex@chatapp.com / Mod@123!");
+    console.log("\n🔐 Site Security:");
+    console.log("   Good message: 'assalam' (allows login access)");
+    console.log("   Bad message: 'goodmorning' (denies access)");
     console.log("\n⚠️  Remember to change default passwords in production!\n");
   } catch (error) {
     console.error("\n❌ Seed Error:", error.message);

@@ -54,26 +54,53 @@ export const verifySiteSecurityMessage = async (req, res) => {
       $or: [{ goodMessage: message }, { badMessage: message }],
     });
 
-    // Check if message exists
-    if (!storedMessage) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid security message",
-      });
-    }
+    let isGoodMessage = false;
+    let messageType = "unknown";
+    let messageData = {};
 
-    // Determine if the message is good or bad
-    const isGoodMessage = storedMessage.goodMessage === message;
-    const messageType = isGoodMessage ? "good" : "bad";
+    // Check if message exists in database
+    if (storedMessage) {
+      // Use database message
+      isGoodMessage = storedMessage.goodMessage === message;
+      messageType = isGoodMessage ? "good" : "bad";
+      messageData = {
+        id: storedMessage._id,
+        verifiedAt: new Date(),
+      };
+    } else {
+      // No custom messages in database - use default behavior
+      const normalizedMessage = message.toLowerCase().trim();
+
+      if (normalizedMessage === "assalam") {
+        isGoodMessage = true;
+        messageType = "good";
+        messageData = {
+          messageType: "good",
+          verifiedAt: new Date(),
+          isDefault: true, // Indicates this used default logic
+        };
+      } else if (normalizedMessage === "goodmorning") {
+        isGoodMessage = false;
+        messageType = "bad";
+        messageData = {
+          messageType: "bad",
+          verifiedAt: new Date(),
+          isDefault: true,
+        };
+      } else {
+        // Unknown message when no custom messages are set
+        return res.status(401).json({
+          success: false,
+          message: "Invalid security message. Please enter 'valid passcode' or set up custom passmessages.",
+        });
+      }
+    }
 
     // If verification successful
     res.status(200).json({
       success: true,
       message: "Security message verified successfully",
-      data: {
-        id: storedMessage._id,
-        verifiedAt: new Date(),
-      },
+      data: messageData,
     });
   } catch (error) {
     res.status(500).json({
