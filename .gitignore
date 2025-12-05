@@ -74,3 +74,4 @@ uploads/
 tmp/
 temp/
 gitcommands
+.env.production.example
