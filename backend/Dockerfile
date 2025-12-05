@@ -22,7 +22,7 @@ RUN if [ -f pnpm-lock.yaml ]; then \
     fi
 
 # Rebuild native modules like bcrypt
-RUN pnpm rebuild bcrypt
+RUN pnpm rebuild bcrypt --filter dummyprojectbackend
 
 # Copy backend source code
 COPY backend/ ./backend/
