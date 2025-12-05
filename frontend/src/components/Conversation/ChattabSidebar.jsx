@@ -47,7 +47,7 @@ import {
   MenuSection,
   ReportDialog,
   MessagePermissionsItem,
-} from "./ChatTabSidebar";
+} from "./ChatTabSidebar/index.js";
 
 const ChatTabSidebar = ({ profileImage, name, isOpen, onClose }) => {
   const [currentView, setCurrentView] = useState("profile");
