@@ -19,7 +19,8 @@
     "seed": "node scripts/seed.js",
     "prisma:validate": "npx prisma validate",
     "prisma:generate": "npx prisma generate",
-    "prisma:push": "npx prisma db push"
+    "prisma:push": "npx prisma db push",
+    "build": "echo \"No build step required for backend (server runs directly)\""
   },
   "author": "",
   "license": "ISC",
