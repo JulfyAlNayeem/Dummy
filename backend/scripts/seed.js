@@ -22,12 +22,12 @@
 
 import "dotenv/config";
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import User from "../models/userModel.js";
 import AdminSettings from "../models/adminSettingsModel.js";
 import Conversation from "../models/conversationModel.js";
 import Message from "../models/messageModel.js";
-import Friendship from "../models/friendshipModel.js";
+import { Friendship } from "../models/friendshipModel.js";
 import JoinRequest from "../models/joinRequestModel.js";
 import AttendanceLog from "../models/attendanceLogModel.js";
 import Session from "../models/sessionModel.js";
@@ -999,7 +999,7 @@ const createNotifications = async (users) => {
 /**
  * Create reports
  */
-const createReports = async (users) => {
+const createReports = async (users, conversations) => {
   console.log("🚨 Creating reports...");
 
   const reports = [];
@@ -1017,7 +1017,7 @@ const createReports = async (users) => {
       const report = new Report({
         reporter: reporter._id,
         reportedUser: reportedUser._id,
-        conversation: null, // Would need conversation ID in real scenario
+        conversation: conversations[Math.floor(Math.random() * conversations.length)]._id,
         reason: reasons[Math.floor(Math.random() * reasons.length)],
         details: `Inappropriate behavior in class discussion ${i + 1}`,
         status: statuses[Math.floor(Math.random() * statuses.length)],
@@ -1155,7 +1155,7 @@ const seed = async () => {
     const alertnessSessions = await createAlertnessSessions(users, conversations);
     const quickLessons = await createQuickLessons(users, conversations);
     const notifications = await createNotifications(users);
-    const reports = await createReports(users);
+    const reports = await createReports(users, conversations);
 
     // Create admin settings
     const superadmin = users.find(u => u.role === "superadmin");

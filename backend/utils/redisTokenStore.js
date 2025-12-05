@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
-import { redisClient } from './redisClient.js';
+import { getRedisClient } from '../config/redisClient.js';
 
 const storeToken = async (res, token, userId) => {
+  const redisClient = getRedisClient();
   const { access, refresh } = token;
   const cookieOptions = {
     httpOnly: true,
@@ -25,6 +26,7 @@ const storeToken = async (res, token, userId) => {
 };
 
 const getToken = async (req) => {
+  const redisClient = getRedisClient();
   const cookies = req.cookies || {};
   console.log('Cookies received:', cookies);
   const access_token = cookies.access_token || null;
@@ -53,6 +55,7 @@ const getToken = async (req) => {
 };
 
 const removeToken = async (res, req) => {
+  const redisClient = getRedisClient();
   try {
     const { access_token, refresh_token } = req.cookies || {};
     if (!access_token && !refresh_token) {

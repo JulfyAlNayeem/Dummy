@@ -1,7 +1,7 @@
 import User from "../models/userModel.js"
 import UserDeletionSchedule from "../models/userDeletionScheduleModel.js"
 import AdminActivityLog from "../models/adminActivityLogModel.js"
-import bcrypt from "bcrypt"
+import bcrypt from "bcryptjs"
 
 // Log admin activity helper
 
