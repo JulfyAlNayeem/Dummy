@@ -13,8 +13,9 @@ RUN npm install -g pnpm
 COPY pnpm-lock.yaml pnpm-workspace.yaml .pnpmrc* ./
 COPY backend/package.json ./backend/
 
-# Install dependencies for backend workspace only
-RUN pnpm install --frozen-lockfile --filter dummyprojectbackend || pnpm install --filter dummyprojectbackend
+# Install dependencies and rebuild bcrypt for Linux
+RUN pnpm install --filter dummyprojectbackend && \
+    cd /app/node_modules/.pnpm/bcrypt@*/node_modules/bcrypt && npm rebuild
 
 # Copy backend source code
 COPY backend/ ./backend/
