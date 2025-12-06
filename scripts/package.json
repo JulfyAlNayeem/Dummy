@@ -1,0 +1,15 @@
+{
+  "name": "dummy-backup-scripts",
+  "version": "1.0.0",
+  "description": "Database backup scripts with optional GCS upload for MongoDB",
+  "main": "dump-db.js",
+  "type": "module",
+  "scripts": {
+    "backup": "node dump-db.js"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^7.14.0"
+  },
+  "author": "julfyalnayeem",
+  "license": "ISC"
+}

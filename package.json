@@ -1,0 +1,26 @@
+{
+  "name": "dummy-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:prod:up": "docker-compose -f docker-compose.prod.yml --env-file .env.production up -d",
+    "docker:prod:down": "docker-compose -f docker-compose.prod.yml --env-file .env.production down",
+    "docker:prod:logs": "docker-compose -f docker-compose.prod.yml --env-file .env.production logs -f",
+    "backup": "cd scripts && node dump-db.js"
+  },
+  "description": "Dummy Project - Monorepo with Docker, CI/CD, and VPS Deployment",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/julfyalnayeem/Dummy"
+  },
+  "author": "julfyalnayeem",
+  "license": "UNLICENSED"
+}
