@@ -185,7 +185,7 @@ jobs:
           # -------------------------------------------------------------------
           # STEP 1: Navigate to project directory
           # -------------------------------------------------------------------
-          cd /opt/DummyProject || exit 1
+          cd /opt/Dummy || exit 1
           
           # -------------------------------------------------------------------
           # STEP 2: Pull latest code from GitHub (docker-compose.yml, etc.)

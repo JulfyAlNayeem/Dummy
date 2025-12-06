@@ -65,10 +65,10 @@ const SAMPLE_USERS = [
   },
   // Admins
   {
-    name: "Admin Sarah",
-    email: "admin.sarah@chatapp.com",
-    password: "Admin@123!",
-    gender: "female",
+    name: "Admin Ahmed",
+    email: "admin.ahmed@chatapp.com",
+    password: "bismillah!@dmin@123!",
+    gender: "male",
     role: "admin",
     is_active: true,
     bio: "Platform Administrator",
@@ -90,8 +90,8 @@ const SAMPLE_USERS = [
   },
   // Moderators
   {
-    name: "Moderator Alex",
-    email: "mod.alex@chatapp.com",
+    name: "Moderator Ali",
+    email: "mod.ali@chatapp.com",
     password: "Mod@123!",
     gender: "male",
     role: "moderator",
@@ -102,10 +102,10 @@ const SAMPLE_USERS = [
     notification_settings: { new_message: true, mention: true, sound: true },
   },
   {
-    name: "Moderator Lisa",
-    email: "mod.lisa@chatapp.com",
+    name: "Moderator Omar",
+    email: "mod.omar@chatapp.com",
     password: "Mod@123!",
-    gender: "female",
+    gender: "male",
     role: "moderator",
     is_active: true,
     bio: "Safety Moderator",
@@ -127,10 +127,10 @@ const SAMPLE_USERS = [
     notification_settings: { new_message: true, mention: true, sound: true },
   },
   {
-    name: "Prof. Martinez",
-    email: "prof.martinez@university.edu",
+    name: "Prof. Muhammad",
+    email: "prof.muhammad@university.edu",
     password: "Teacher@123!",
-    gender: "female",
+    gender: "male",
     role: "teacher",
     is_active: true,
     bio: "Mathematics Professor",
@@ -139,10 +139,10 @@ const SAMPLE_USERS = [
     notification_settings: { new_message: true, mention: true, sound: true },
   },
   {
-    name: "Ms. Davis",
-    email: "ms.davis@university.edu",
+    name: "Mr. Hassan",
+    email: "mr.hassan@university.edu",
     password: "Teacher@123!",
-    gender: "female",
+    gender: "male",
     role: "teacher",
     is_active: true,
     bio: "English Literature Teacher",
@@ -152,10 +152,10 @@ const SAMPLE_USERS = [
   },
   // Students
   {
-    name: "Alice Chen",
-    email: "alice.chen@student.edu",
+    name: "Ahmed Chen",
+    email: "ahmed.chen@student.edu",
     password: "Student@123!",
-    gender: "female",
+    gender: "male",
     role: "user",
     is_active: true,
     bio: "Computer Science Student",
@@ -188,10 +188,10 @@ const SAMPLE_USERS = [
     notification_settings: { new_message: true, mention: true, sound: true },
   },
   {
-    name: "Diana Prince",
-    email: "diana.prince@student.edu",
+    name: "Hassan Prince",
+    email: "hassan.prince@student.edu",
     password: "Student@123!",
-    gender: "female",
+    gender: "male",
     role: "user",
     is_active: true,
     bio: "Literature Student",
@@ -212,10 +212,10 @@ const SAMPLE_USERS = [
     notification_settings: { new_message: true, mention: true, sound: true },
   },
   {
-    name: "Fiona Green",
-    email: "fiona.green@student.edu",
+    name: "Ismail Green",
+    email: "ismail.green@student.edu",
     password: "Student@123!",
-    gender: "female",
+    gender: "male",
     role: "user",
     is_active: true,
     bio: "Art History Student",
@@ -236,10 +236,10 @@ const SAMPLE_USERS = [
     notification_settings: { new_message: true, mention: true, sound: true },
   },
   {
-    name: "Hannah Montana",
-    email: "hannah.montana@student.edu",
+    name: "Hussein Montana",
+    email: "hussein.montana@student.edu",
     password: "Student@123!",
-    gender: "female",
+    gender: "male",
     role: "user",
     is_active: true,
     bio: "Music Performance",
@@ -372,7 +372,7 @@ const SAMPLE_MESSAGES = [
   },
   // System messages
   {
-    text: "Alice Chen joined the conversation",
+    text: "Ahmed Chen joined the conversation",
     messageType: "system",
     status: "delivered",
   },
@@ -984,7 +984,7 @@ const createNotifications = async (users) => {
       sender: students[0]._id,
       type: "join_request",
       title: "New Join Request",
-      message: "Alice Chen wants to join your English class",
+      message: "Ahmed Chen wants to join your English class",
       data: { classId: "eng301", userId: students[0]._id },
       isRead: Math.random() > 0.5,
     });
@@ -1183,10 +1183,10 @@ const seed = async () => {
     console.log(`   🔐 Site Security Messages: 1 (good: 'assalam', bad: 'goodmorning')`);
     console.log("\n🔐 Login Credentials:");
     console.log("   Super Admin: superadmin@chatapp.com / Admin@123!");
-    console.log("   Admin: admin.sarah@chatapp.com / Admin@123!");
+    console.log("   Admin: admin.ahmed@chatapp.com / Admin@123!");
     console.log("   Teacher: dr.johnson@university.edu / Teacher@123!");
-    console.log("   Student: alice.chen@student.edu / Student@123!");
-    console.log("   Moderator: mod.alex@chatapp.com / Mod@123!");
+    console.log("   Student: ahmed.chen@student.edu / Student@123!");
+    console.log("   Moderator: mod.ali@chatapp.com / Mod@123!");
     console.log("\n🔐 Site Security:");
     console.log("   Good message: 'assalam' (allows login access)");
     console.log("   Bad message: 'goodmorning' (denies access)");

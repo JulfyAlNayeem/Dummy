@@ -60,8 +60,13 @@ const UserAuthProvider = ({ children }) => {
     (currentUser) => {
       if (!currentUser || socket.current) return;
       
-      socket.current = io(BASE_URL, {
+      // In production, connect to the same origin (nginx will proxy /socket.io to backend)
+      // In development, connect to backend directly
+      const socketUrl = import.meta.env.PROD ? window.location.origin : BASE_URL;
+      
+      socket.current = io(socketUrl, {
         withCredentials: true,
+        path: '/socket.io',
       });
       
       // Add debugging listeners
