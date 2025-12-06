@@ -82,9 +82,9 @@ const uiSlice = createSlice({
       const { modalName, data } = typeof action.payload === "object" ? action.payload : { modalName: action.payload, data: null };
       state.modals[modalName] = true;
       if (data) {
-        if (modalName.includes("User")) {
+        if (modalName.includes("User") || modalName === "resetPassword") {
           state.selectedUser = data;
-        } else if (modalName.includes("Deletion")) {
+        } else if (modalName.includes("Deletion") || modalName === "preventDeletion") {
           state.selectedSchedule = data;
         }
       }
@@ -92,9 +92,9 @@ const uiSlice = createSlice({
     closeModal: (state, action) => {
       const modalName = action.payload;
       state.modals[modalName] = false;
-      if (modalName.includes("User")) {
+      if (modalName.includes("User") || modalName === "resetPassword") {
         state.selectedUser = null;
-      } else if (modalName.includes("Deletion")) {
+      } else if (modalName.includes("Deletion") || modalName === "preventDeletion") {
         state.selectedSchedule = null;
       }
     },

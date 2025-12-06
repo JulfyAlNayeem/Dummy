@@ -54,6 +54,10 @@ export default function UserActionDialog({
     } else if (modals.unblockUser) { // Added unblock user case
       onUnblockUser(selectedUser._id, formData.reason)
     } else if (modals.resetPassword) {
+      if (!selectedUser || !selectedUser._id) {
+        console.error("Reset password error: selectedUser is null or missing _id", selectedUser);
+        return;
+      }
       onResetPassword(selectedUser._id, formData.newPassword)
     } else if (modals.preventDeletion) {
       onPreventDeletion(selectedSchedule._id, formData.reason)
@@ -116,6 +120,17 @@ export default function UserActionDialog({
 
   const isOpen = Object.values(modals).some(Boolean)
   const config = getModalConfig()
+
+  // Check if submit should be disabled
+  const isSubmitDisabled = () => {
+    if (modals.editUser || modals.deleteUser || modals.blockUser || modals.unblockUser || modals.resetPassword) {
+      return !selectedUser || !selectedUser._id;
+    }
+    if (modals.preventDeletion) {
+      return !selectedSchedule || !selectedSchedule._id;
+    }
+    return false;
+  };
 
   const handleClose = () => {
     const openModalName = Object.keys(modals).find((key) => modals[key])
@@ -254,10 +269,11 @@ export default function UserActionDialog({
           <Button
             variant={config.buttonVariant}
             onClick={handleSubmit}
+            disabled={isSubmitDisabled()}
             className={
               config.buttonVariant === "destructive"
-                ? "bg-red-600 dark:bg-red-500 hover:bg-red-700 dark:hover:bg-red-600"
-                : "bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 text-white hover:from-blue-700 hover:to-blue-600 dark:hover:from-blue-600 dark:hover:to-blue-500"
+                ? "bg-red-600 dark:bg-red-500 hover:bg-red-700 dark:hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 text-white hover:from-blue-700 hover:to-blue-600 dark:hover:from-blue-600 dark:hover:to-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             }
           >
             {config.buttonText}
