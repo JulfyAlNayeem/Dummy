@@ -1,5 +1,8 @@
 import { useCreateSiteSecurityMessageMutation, useGetSiteSecurityMessageQuery } from '@/redux/api/securityApi';
 import React, { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const SiteSecurityMessages = () => {
   // State for form inputs
@@ -27,74 +30,80 @@ const SiteSecurityMessages = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-base font-bold mb-6">Site Security Messages</h1>
-
+    <div className="space-y-6">
       {/* Create Message Form */}
-      <div className="mb-8">
-        <h2 className="text-sm font-semibold mb-4">Create Security Messages</h2>
-        <form onSubmit={handleCreateSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="goodMessage" className="block text-sm font-medium ">
-              Good Message
-            </label>
-            <input
-              type="text"
-              name="goodMessage"
-              value={createForm.goodMessage}
-              onChange={handleCreateChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md text-black shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Enter good message"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="badMessage" className="block text-sm font-medium ">
-              Bad Message
-            </label>
-            <input
-              type="text"
-              name="badMessage"
-              value={createForm.badMessage}
-              onChange={handleCreateChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md text-black shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Enter bad message"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={isCreating}
-            className="bg-indigo-600 text-sm text-white px-4 py-2 rounded-md hover:bg-indigo-700 disabled:bg-indigo-400"
-          >
-            {isCreating ? 'Creating...' : 'Create Messages'}
-          </button>
-          {createError && <p className="text-red-500">{createError.data?.message || 'Error creating messages'}</p>}
-        </form>
-      </div>
+      <Card className="bg-[#1a2332] dark:bg-[#eff0f3] border-gray-600 dark:border-gray-300">
+        <CardHeader>
+          <CardTitle className="text-[#eff0f3] dark:text-[#1a2332]">Create Security Messages</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleCreateSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="goodMessage" className="block text-sm font-medium text-[#eff0f3] dark:text-[#1a2332] mb-2">
+                Good Message
+              </label>
+              <Input
+                type="text"
+                name="goodMessage"
+                value={createForm.goodMessage}
+                onChange={handleCreateChange}
+                className="w-full bg-gray-700 dark:bg-white border-gray-600 dark:border-gray-300 text-[#eff0f3] dark:text-[#1a2332] placeholder-gray-400 dark:placeholder-gray-600"
+                placeholder="Enter good message"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="badMessage" className="block text-sm font-medium text-[#eff0f3] dark:text-[#1a2332] mb-2">
+                Bad Message
+              </label>
+              <Input
+                type="text"
+                name="badMessage"
+                value={createForm.badMessage}
+                onChange={handleCreateChange}
+                className="w-full bg-gray-700 dark:bg-white border-gray-600 dark:border-gray-300 text-[#eff0f3] dark:text-[#1a2332] placeholder-gray-400 dark:placeholder-gray-600"
+                placeholder="Enter bad message"
+                required
+              />
+            </div>
+            <Button
+              type="submit"
+              disabled={isCreating}
+              className="bg-blue-600 hover:bg-blue-700 text-white dark:text-white"
+            >
+              {isCreating ? 'Creating...' : 'Create Messages'}
+            </Button>
+            {createError && <p className="text-red-500 mt-2">{createError.data?.message || 'Error creating messages'}</p>}
+          </form>
+        </CardContent>
+      </Card>
 
       {/* Display Messages */}
-      <div>
-        <h2 className="text-sm font-semibold mb-4">Stored Security Messages</h2>
-        {isFetching ? (
-          <p>Loading...</p>
-        ) : fetchError ? (
-          <p className="text-red-500">{fetchError.data?.message || 'Error fetching messages'}</p>
-        ) : messages && messages.data?.length > 0 ? (
-          <ul className="space-y-4">
-            {messages.data.map((msg) => (
-              <li key={msg.id} className=" p-4 rounded-md text-sm">
-                <p><strong>Good Message:</strong> {msg.goodMessage}</p>
-                <p><strong>Bad Message:</strong> {msg.badMessage}</p>
-                <p><strong>Created At:</strong> {new Date(msg.createdAt).toLocaleString()}</p>
-                <p><strong>Updated At:</strong> {new Date(msg.updatedAt).toLocaleString()}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No messages found</p>
-        )}
-      </div>
+      <Card className="bg-[#1a2332] dark:bg-[#eff0f3] border-gray-600 dark:border-gray-300">
+        <CardHeader>
+          <CardTitle className="text-[#eff0f3] dark:text-[#1a2332]">Stored Security Messages</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {isFetching ? (
+            <p className="text-[#eff0f3] dark:text-[#1a2332]">Loading...</p>
+          ) : fetchError ? (
+            <p className="text-red-500">{fetchError.data?.message || 'Error fetching messages'}</p>
+          ) : messages && messages.data?.length > 0 ? (
+            <div className="space-y-4">
+              {messages.data.map((msg) => (
+                <div key={msg.id} className="border border-gray-600 dark:border-gray-300 bg-gray-700 dark:bg-white p-4 rounded-md">
+                  <p className="text-[#eff0f3] dark:text-[#1a2332] mb-2"><strong>Good Message:</strong> {msg.goodMessage}</p>
+                  <p className="text-[#eff0f3] dark:text-[#1a2332] mb-2"><strong>Bad Message:</strong> {msg.badMessage}</p>
+                  <p className="text-[#eff0f3] dark:text-[#1a2332] opacity-70 text-sm"><strong>Created At:</strong> {new Date(msg.createdAt).toLocaleString()}</p>
+                  <p className="text-[#eff0f3] dark:text-[#1a2332] opacity-70 text-sm"><strong>Updated At:</strong> {new Date(msg.updatedAt).toLocaleString()}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-[#eff0f3] dark:text-[#1a2332] opacity-70">No messages found</p>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 };

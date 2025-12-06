@@ -103,7 +103,7 @@ export default function UserActionDialog({
     } else if (modals.resetPassword) {
       return {
         title: "Reset Password",
-        description: "Reset user password",
+        description: "",
         buttonText: "Reset",
         buttonVariant: "default",
       }

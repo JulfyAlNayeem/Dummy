@@ -58,7 +58,7 @@ services:
       REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
       ORIGIN_URL: ${ORIGIN_URL}
     volumes:
-      - ./backend/uploads:/app/backend/uploads
+      - uploads_data:/app/backend/uploads
     depends_on:
       mongo:
         condition: service_healthy
@@ -109,6 +109,7 @@ services:
 volumes:
   mongo_data:
   redis_data:
+  uploads_data:
 
 networks:
   dummy-network:

@@ -39,7 +39,7 @@ const SearchScreen = ({ themeIndex, setActiveScreen }) => {
               variant="ghost"
               size="sm"
               onClick={() => setActiveScreen("chats")}
-              className={`size-9 p-0 ${chatInputBg[themeIndex]} rounded-full`}
+              className={`size-9 p-0 ${chatInputBg[themeIndex]} rounded-full hover:bg-transparent`}
             >
               <CgArrowLongLeftC className={`h-5 w-5 text-gray-300`} />
             </Button>

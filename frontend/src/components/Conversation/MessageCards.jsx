@@ -332,7 +332,7 @@ const MessageCards = ({
                 )}
                 {msg.img && (
                   <div className="mb-2">
-                    <ImageDisplay img={msg.img} onImageClick={() => onImageClick(0, [{ img: msg.img }])} />
+                    <ImageDisplay img={[{ img: `${BASE_URL}${msg.img}` }]} onImageClick={() => onImageClick(0, [{ img: `${BASE_URL}${msg.img}` }])} />
                   </div>
                 )}
               </>

@@ -182,11 +182,144 @@ const Notice = () => {
 
   if (!notices || notices.length === 0) {
     return (
-      <Card className="bg-[#1a2332] dark:bg-[#eff0f3] border-gray-600 dark:border-gray-300">
-        <CardContent className="p-6">
-          <p className="text-center text-[#eff0f3] dark:text-[#1a2332] opacity-70">No notices available</p>
-        </CardContent>
-      </Card>
+      <DashboardLayout type="admin">
+        <div className="space-y-6">
+          {/* Error Message */}
+          {error && (
+            <Card className="bg-red-100 dark:bg-red-900 border-red-300 dark:border-red-700">
+              <CardContent className="p-4">
+                <p className="text-red-700 dark:text-red-300">{error}</p>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Create Notice Section */}
+          <Card className="bg-[#1a2332] dark:bg-[#eff0f3] border-gray-600 dark:border-gray-300">
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle className="text-[#eff0f3] dark:text-[#1a2332]">Notices</CardTitle>
+              <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <DialogTrigger asChild>
+                  <Button
+                    className="bg-blue-600 hover:bg-blue-700 text-white dark:text-white"
+                  >
+                    Create Notice
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-[#1a2332] dark:bg-[#eff0f3] border-gray-600 dark:border-gray-300 max-w-lg">
+                  <DialogHeader>
+                    <DialogTitle className="text-[#eff0f3] dark:text-[#1a2332]">
+                      {editingNotice ? "Edit Notice" : "Create New Notice"}
+                    </DialogTitle>
+                  </DialogHeader>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-[#eff0f3] dark:text-[#1a2332] mb-2">
+                        Title
+                      </label>
+                      <Input
+                        value={form.title}
+                        onChange={(e) => setForm({ ...form, title: e.target.value })}
+                        placeholder="Enter notice title"
+                        className="w-full bg-gray-700 dark:bg-white border-gray-600 dark:border-gray-300 text-[#eff0f3] dark:text-[#1a2332] placeholder-gray-400 dark:placeholder-gray-600"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-[#eff0f3] dark:text-[#1a2332] mb-2">
+                        Content
+                      </label>
+                      <Textarea
+                        value={form.content}
+                        onChange={(e) => setForm({ ...form, content: e.target.value })}
+                        placeholder="Enter notice content"
+                        className="w-full text-base bg-gray-700 dark:bg-white border-gray-600 dark:border-gray-300 text-[#eff0f3] dark:text-[#1a2332] placeholder-gray-400 dark:placeholder-gray-600 h-48"
+                        rows="12"
+                        required
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="block text-sm font-medium text-[#eff0f3] dark:text-[#1a2332] mb-2">
+                          Target Audience
+                        </label>
+                        <Select value={form.targetAudience} onValueChange={handleAudienceChange}>
+                          <SelectTrigger className="w-full bg-gray-700 dark:bg-white border-gray-600 dark:border-gray-300 text-[#eff0f3] dark:text-[#1a2332]">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent className="bg-gray-700 dark:bg-white text-[#eff0f3] dark:text-[#1a2332]">
+                            <SelectItem value="all">All</SelectItem>
+                            <SelectItem value="admin">Admin</SelectItem>
+                            <SelectItem value="teacher">Teacher</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-[#eff0f3] dark:text-[#1a2332] mb-2">
+                          Event Type
+                        </label>
+                        <Select value={form.eventType} onValueChange={(value) => setForm({ ...form, eventType: value })}>
+                          <SelectTrigger className="w-full bg-gray-700 dark:bg-white border-gray-600 dark:border-gray-300 text-[#eff0f3] dark:text-[#1a2332]">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent className="bg-gray-700 dark:bg-white text-[#eff0f3] dark:text-[#1a2332]">
+                            <SelectItem value="general">General</SelectItem>
+                            <SelectItem value="holiday">Holiday</SelectItem>
+                            <SelectItem value="exam">Exam</SelectItem>
+                            <SelectItem value="meeting">Meeting</SelectItem>
+                            <SelectItem value="special">Special</SelectItem>
+                            <SelectItem value="announcement">Announcement</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-[#eff0f3] dark:text-[#1a2332] mb-2">
+                          Event Date (if applicable)
+                        </label>
+                        <Input
+                          type="date"
+                          value={form.eventDate}
+                          onChange={(e) => setForm({ ...form, eventDate: e.target.value })}
+                          className="w-full bg-gray-700 dark:bg-white border-gray-600 dark:border-gray-300 text-[#eff0f3] dark:text-[#1a2332] placeholder-gray-400 dark:placeholder-gray-600"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-[#eff0f3] dark:text-[#1a2332] mb-2">
+                          Location (if applicable)
+                        </label>
+                        <Input
+                          value={form.location}
+                          onChange={(e) => setForm({ ...form, location: e.target.value })}
+                          placeholder="Enter location"
+                          className="w-full bg-gray-700 dark:bg-white border-gray-600 dark:border-gray-300 text-[#eff0f3] dark:text-[#1a2332] placeholder-gray-400 dark:placeholder-gray-600"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex space-x-3 pt-2">
+                      <Button
+                        type="submit"
+                        className="bg-blue-600 hover:bg-blue-700 text-white dark:text-white"
+                      >
+                        {editingNotice ? "Update Notice" : "Create Notice"}
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleCancel}
+                        className="bg-gray-600 dark:bg-white text-[#eff0f3] dark:text-[#1a2332] border-gray-500 dark:border-gray-300 hover:bg-gray-500 dark:hover:bg-gray-50"
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  </form>
+                </DialogContent>
+              </Dialog>
+            </CardHeader>
+            <CardContent className="p-6">
+              <p className="text-center text-[#eff0f3] dark:text-[#1a2332] opacity-70">No notices available</p>
+            </CardContent>
+          </Card>
+        </div>
+      </DashboardLayout>
     );
   }
 
