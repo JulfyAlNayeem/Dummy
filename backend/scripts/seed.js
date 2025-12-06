@@ -67,7 +67,7 @@ const SAMPLE_USERS = [
   {
     name: "Admin Ahmed",
     email: "admin.ahmed@chatapp.com",
-    password: "bismillah!@dmin@123!",
+    password: "Admin@123!",
     gender: "male",
     role: "admin",
     is_active: true,

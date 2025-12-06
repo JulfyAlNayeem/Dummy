@@ -76,7 +76,7 @@ const TextMessageCard = ({ text, plainText, senderId, messageId }) => {
       );
     }
     return (
-      <span key={index} className="text-start text-sm break-words">
+      <span key={index} className="text-start text-sm break-words whitespace-pre-wrap overflow-wrap-anywhere inline-block max-w-full">
         {part}
       </span>
     );

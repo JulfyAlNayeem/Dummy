@@ -18,6 +18,11 @@ export const initialSocketServer = async (server, redis) => {
       origin: allowedOrigins,
       credentials: true,
     },
+    pingTimeout: 60000,
+    pingInterval: 25000,
+    connectTimeout: 45000,
+    transports: ['websocket', 'polling'],
+    allowUpgrades: true,
   });
 
   // Set up Redis adapter

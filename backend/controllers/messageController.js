@@ -560,6 +560,12 @@ export const handleSendEmojiSocket = async ({
     clientTempId, // Pass clientTempId
   });
 
+  // Broadcast to all users in the conversation room
+  if (result.success && result.conversationId) {
+    io.to(result.conversationId).emit("receiveMessage", result.message);
+    console.log(`✅ Emoji broadcasted to room: ${result.conversationId}`);
+  }
+
   emitSocketEvents({
     io,
     socket,

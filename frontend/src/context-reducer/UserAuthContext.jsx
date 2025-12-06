@@ -67,14 +67,42 @@ const UserAuthProvider = ({ children }) => {
       socket.current = io(socketUrl, {
         withCredentials: true,
         path: '/socket.io',
+        reconnection: true,
+        reconnectionDelay: 1000,
+        reconnectionDelayMax: 5000,
+        reconnectionAttempts: 10,
+        timeout: 20000,
+        transports: ['websocket', 'polling'],
       });
       
       // Add debugging listeners
       socket.current.on('connect', () => {
         console.log('✅ Socket connected:', socket.current.id);
+        // Rejoin rooms after reconnection
+        socket.current.emit("userOnline", currentUser._id);
+        socket.current.emit("join", `user_${currentUser._id}`);
       });
       socket.current.on('disconnect', (reason) => {
         console.log('⚠️  Socket disconnected:', reason);
+        if (reason === 'io server disconnect') {
+          // Server disconnected, try to reconnect
+          socket.current.connect();
+        }
+      });
+      socket.current.on('reconnect', (attemptNumber) => {
+        console.log('🔄 Socket reconnected after', attemptNumber, 'attempts');
+        // Re-emit user online and rejoin rooms
+        socket.current.emit("userOnline", currentUser._id);
+        socket.current.emit("join", `user_${currentUser._id}`);
+      });
+      socket.current.on('reconnect_attempt', (attemptNumber) => {
+        console.log('🔄 Reconnection attempt:', attemptNumber);
+      });
+      socket.current.on('reconnect_error', (error) => {
+        console.error('❌ Reconnection error:', error.message);
+      });
+      socket.current.on('reconnect_failed', () => {
+        console.error('❌ Reconnection failed after all attempts');
       });
       socket.current.on('connect_error', (error) => {
         console.error('❌ Socket connection error:', error.message || error);
