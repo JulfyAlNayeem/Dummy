@@ -194,7 +194,7 @@ jobs:
           echo "Checking for configuration updates..."
           if [ -d ".git" ]; then
             echo "Pulling latest configuration from GitHub..."
-            git pull origin main || echo "Warning: Could not pull latest code."
+            git fetch origin main && git reset --hard origin/main || echo "Warning: Could not pull latest code."
           fi
           
           # -------------------------------------------------------------------
@@ -202,9 +202,9 @@ jobs:
           # This is where user-uploaded images are stored
           # -------------------------------------------------------------------
           echo "Setting up uploads directory..."
-          sudo mkdir -p ./backend/uploads/images
-          sudo chown -R 1000:1000 ./backend/uploads  # Match container user ID
-          sudo chmod -R 755 ./backend/uploads
+          mkdir -p ./backend/uploads/images
+          chown -R 1000:1000 ./backend/uploads  # Match container user ID
+          chmod -R 755 ./backend/uploads
           
           # -------------------------------------------------------------------
           # STEP 4: Update Docker Hub username in environment file
@@ -218,7 +218,7 @@ jobs:
           # Required to pull private images
           # -------------------------------------------------------------------
           echo "Logging into Docker Hub..."
-          echo "${{ secrets.DOCKERHUB_TOKEN }}" | sudo docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin || exit 1
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin || exit 1
           
           # -------------------------------------------------------------------
           # STEP 6: Clean up Docker disk space
@@ -226,22 +226,22 @@ jobs:
           # Prevents "no space left on device" errors during docker pull
           # -------------------------------------------------------------------
           echo "Cleaning up Docker resources..."
-          sudo docker system prune -af --volumes || true
+          docker system prune -af --volumes || true
           
           # -------------------------------------------------------------------
           # STEP 7: Remove old cached images
           # Forces Docker to download fresh images from Docker Hub
           # -------------------------------------------------------------------
           echo "Removing old Docker images..."
-          sudo docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/dummy-backend:latest || true
-          sudo docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/dummy-frontend:latest || true
+          docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/dummy-backend:latest || true
+          docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/dummy-frontend:latest || true
           
           # -------------------------------------------------------------------
           # STEP 8: Pull new images from Docker Hub
           # Downloads the images we just built in the BUILD job
           # -------------------------------------------------------------------
           echo "Pulling latest Docker images from Docker Hub..."
-          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production pull backend frontend; then
+          if ! docker compose -f docker-compose.prod.yml --env-file .env.production pull backend frontend; then
             echo "ERROR: Failed to pull images from Docker Hub!"
             echo "Make sure images exist: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-backend:latest"
             echo "Make sure images exist: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-frontend:latest"
@@ -252,23 +252,23 @@ jobs:
           # STEP 9: Stop running containers gracefully
           # -------------------------------------------------------------------
           echo "Stopping old containers..."
-          sudo docker compose -f docker-compose.prod.yml --env-file .env.production stop backend frontend || true
+          docker compose -f docker-compose.prod.yml --env-file .env.production stop backend frontend || true
           
           # -------------------------------------------------------------------
           # STEP 10: Remove old containers (keeps volumes/data intact)
           # -------------------------------------------------------------------
           echo "Removing old containers..."
-          sudo docker compose -f docker-compose.prod.yml --env-file .env.production rm -f backend frontend || true
+          docker compose -f docker-compose.prod.yml --env-file .env.production rm -f backend frontend || true
           
           # -------------------------------------------------------------------
           # STEP 11: Start new containers with pulled images
           # -d: Run in background (detached mode)
           # -------------------------------------------------------------------
           echo "Starting new containers with pulled images..."
-          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production up -d backend frontend; then
+          if ! docker compose -f docker-compose.prod.yml --env-file .env.production up -d backend frontend; then
             echo "ERROR: Failed to start containers"
             echo "Showing docker-compose logs..."
-            sudo docker compose -f docker-compose.prod.yml --env-file .env.production logs --tail 100
+            docker compose -f docker-compose.prod.yml --env-file .env.production logs --tail 100
             exit 1
           fi
           
@@ -285,10 +285,10 @@ jobs:
           # -------------------------------------------------------------------
           echo "Verifying deployment..."
           echo "Current container status:"
-          sudo docker ps -a | grep dummy || true
+          docker ps -a | grep dummy || true
           
-          BACKEND_STATUS=$(sudo docker ps --filter "name=dummy-backend-prod" --format "{{.Status}}" 2>/dev/null || echo "")
-          FRONTEND_STATUS=$(sudo docker ps --filter "name=dummy-frontend-prod" --format "{{.Status}}" 2>/dev/null || echo "")
+          BACKEND_STATUS=$(docker ps --filter "name=dummy-backend-prod" --format "{{.Status}}" 2>/dev/null || echo "")
+          FRONTEND_STATUS=$(docker ps --filter "name=dummy-frontend-prod" --format "{{.Status}}" 2>/dev/null || echo "")
           
           echo "Backend status: '$BACKEND_STATUS'"
           echo "Frontend status: '$FRONTEND_STATUS'"
@@ -297,9 +297,9 @@ jobs:
           if [ -z "$BACKEND_STATUS" ]; then
             echo "ERROR: Backend container is not running!"
             echo "Showing backend logs:"
-            sudo docker logs dummy-backend-prod --tail 100 2>&1 || echo "Could not retrieve backend logs"
+            docker logs dummy-backend-prod --tail 100 2>&1 || echo "Could not retrieve backend logs"
             echo "Checking if container exists:"
-            sudo docker ps -a --filter "name=dummy-backend-prod"
+            docker ps -a --filter "name=dummy-backend-prod"
             exit 1
           fi
           
@@ -307,9 +307,9 @@ jobs:
           if [ -z "$FRONTEND_STATUS" ]; then
             echo "ERROR: Frontend container is not running!"
             echo "Showing frontend logs:"
-            sudo docker logs dummy-frontend-prod --tail 100 2>&1 || echo "Could not retrieve frontend logs"
+            docker logs dummy-frontend-prod --tail 100 2>&1 || echo "Could not retrieve frontend logs"
             echo "Checking if container exists:"
-            sudo docker ps -a --filter "name=dummy-frontend-prod"
+            docker ps -a --filter "name=dummy-frontend-prod"
             exit 1
           fi
           
@@ -321,11 +321,11 @@ jobs:
           # -------------------------------------------------------------------
           echo ""
           echo "=== Deployed Images ==="
-          sudo docker images | grep dummy | head -5
+          docker images | grep dummy | head -5
           
           echo ""
           echo "=== Container Status ==="
-          sudo docker compose -f docker-compose.prod.yml --env-file .env.production ps
+          docker compose -f docker-compose.prod.yml --env-file .env.production ps
           
           echo ""
           echo "=========================================="
