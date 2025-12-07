@@ -71,7 +71,7 @@ const SignIn = () => {
     <AuthWrapper welcomeMessage="Welcome to " pageName="Sign In">
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1">
+          <label className="inline-block text-sm text-[#e8f0fe] bg-transparent md:bg-[#e3fbfe] md:text-slate-700 md:px-2 md:py-1 md:rounded-full capitalize mb-1">
             Email
           </label>
           <Input
@@ -85,7 +85,7 @@ const SignIn = () => {
           {errors.email && <span className="text-red-500">{errors.email}</span>}
         </div>
         <div>
-          <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1">
+          <label className="inline-block text-sm text-[#e8f0fe] bg-transparent md:bg-[#e3fbfe] md:text-slate-700 md:px-2 md:py-1 md:rounded-full capitalize mb-1">
             Password
           </label>
           <div className="relative">

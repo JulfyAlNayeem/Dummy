@@ -103,7 +103,7 @@ const SignUp = () => {
         return (
           <>
             <div>
-              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1"> Name </label>
+              <label className="inline-block text-sm text-[#e8f0fe] bg-transparent md:bg-[#e3fbfe] md:text-slate-700 md:px-2 md:py-1 md:rounded-full capitalize mb-1"> Name </label>
               <input
                 type="text"
                 name="name"
@@ -114,7 +114,7 @@ const SignUp = () => {
               {errors.name && <span className="text-red-500">{errors.name}</span>}
             </div>
             <div>
-              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1"> Gender </label>
+              <label className="inline-block text-sm text-[#e8f0fe] bg-transparent md:bg-[#e3fbfe] md:text-slate-700 md:px-2 md:py-1 md:rounded-full capitalize mb-1"> Gender </label>
               <Select
                 value={formData.gender}
                 defaultValue="male"
@@ -155,7 +155,7 @@ const SignUp = () => {
         return (
           <>
             <div>
-              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1">Fake Email </label>
+              <label className="inline-block text-sm text-[#e8f0fe] bg-transparent md:bg-[#e3fbfe] md:text-slate-700 md:px-2 md:py-1 md:rounded-full capitalize mb-1">Fake Email </label>
               <input
                 type="email"
                 name="email"
@@ -166,7 +166,7 @@ const SignUp = () => {
               {errors.email && <span className="text-red-500 text-xs">{errors.email}</span>}
             </div>
             <div>
-              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1"> Re-enter Fake Email </label>
+              <label className="inline-block text-sm text-[#e8f0fe] bg-transparent md:bg-[#e3fbfe] md:text-slate-700 md:px-2 md:py-1 md:rounded-full capitalize mb-1"> Re-enter Fake Email </label>
               <input
                 type="email"
                 name="reEnterEmail"
@@ -183,7 +183,7 @@ const SignUp = () => {
         return (
           <>
             <div>
-              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1"> Password </label>
+              <label className="inline-block text-sm text-[#e8f0fe] bg-transparent md:bg-[#e3fbfe] md:text-slate-700 md:px-2 md:py-1 md:rounded-full capitalize mb-1"> Password </label>
               <input
                 type="password"
                 name="password"
@@ -194,7 +194,7 @@ const SignUp = () => {
               {errors.password && <span className="text-red-500">{errors.password}</span>}
             </div>
             <div>
-              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1"> Re-enter Password </label>
+              <label className="inline-block text-sm text-[#e8f0fe] bg-transparent md:bg-[#e3fbfe] md:text-slate-700 md:px-2 md:py-1 md:rounded-full capitalize mb-1"> Re-enter Password </label>
               <input
                 type="password"
                 name="reEnterPassword"
