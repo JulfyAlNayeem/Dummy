@@ -2,8 +2,16 @@ import React, { useState, useEffect } from "react";
 import "animate.css";
 import rocket from "../assets/background/rocket.webp";
 import { useVerifySecurityMessageMutation } from "@/redux/api/securityApi";
+import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "@/context-reducer/UserAuthContext";
+import { useGetAllConversationsQuery } from "@/redux/api/conversationApi";
 
-const SiteSecuritypage = ({ setIsVerified }) => {
+const SiteSecuritypage = () => {
+  const navigate = useNavigate();
+  const { user } = useUserAuth();
+  const { data: conversations } = useGetAllConversationsQuery(user?._id, { 
+    skip: !user?._id 
+  });
   const [clickCount, setClickCount] = useState(0);
   const [isLaunched, setIsLaunched] = useState(false);
   const [lastClickTime, setLastClickTime] = useState(null);
@@ -11,6 +19,19 @@ const SiteSecuritypage = ({ setIsVerified }) => {
   const [verifyForm, setVerifyForm] = useState({ message: '' });
 
   const [verifySiteSecurityMessage, { isLoading: isVerifyingMessages, error: verifyError, isSuccess }] = useVerifySecurityMessageMutation();
+
+  // Redirect logged-in users to their first conversation
+  useEffect(() => {
+    if (user && conversations) {
+      const firstConvId = conversations[0]?._id;
+      if (firstConvId) {
+        navigate(`/e2ee/t/${firstConvId}`);
+      } else {
+        // If no conversations exist, go to empty chat state
+        navigate('/e2ee/t/empty');
+      }
+    }
+  }, [user, conversations, navigate]);
 
   const handleClick = () => {
     setClickCount((prev) => {
@@ -31,11 +52,12 @@ const SiteSecuritypage = ({ setIsVerified }) => {
     e.preventDefault();
     try {
       const response = await verifySiteSecurityMessage({ message: verifyForm.message }).unwrap();
-      // persist verification as a string in localStorage and update parent with boolean
+      // persist verification as a string in localStorage
       localStorage.setItem("isVerified", "true");
       setErrorMessage(`Message verified successfully as ${response.data.messageType}`);
-      setIsVerified(true);
       setVerifyForm({ message: '' });
+      // Redirect to signin page after successful verification
+      setTimeout(() => navigate('/signin'), 1500);
     } catch (err) {
       // persist failed verification explicitly
       localStorage.setItem("isVerified", "false");

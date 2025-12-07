@@ -33,6 +33,7 @@ export const Routes = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* Public Routes */}
+      <Route path={APP_ROUTES.HOME} element={<SiteSecuritypage />} />
       <Route
         path={APP_ROUTES.SIGNIN}
         element={<PublicRoute><SignIn /></PublicRoute>}
@@ -44,7 +45,6 @@ export const Routes = createBrowserRouter(
 
       {/* Protected Routes Wrapper */}
       <Route element={<ProtectedRoutes />}>
-        <Route path={APP_ROUTES.HOME} element={<Home />} />
         <Route path={APP_ROUTES.CLASS_MANAGEMENT} element={<ClassManagementPage />} />
         <Route path={APP_ROUTES.CHAT_TAB} element={<ChatTab/>} />
         <Route path={APP_ROUTES.NEW_CHAT_START} element={<ChatTab/>} />

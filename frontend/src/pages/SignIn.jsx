@@ -6,6 +6,7 @@ import { useUserAuth } from "@/context-reducer/UserAuthContext";
 import { setEncryptedToken } from "@/utils/tokenStorage";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
+import { BASE_URL } from "@/utils/baseUrls";
 
 const SignIn = () => {
   const auth = useUserAuth();
@@ -36,12 +37,6 @@ const SignIn = () => {
     return newErrors;
   };
 
-  useEffect(() => {
-    if (user) {
-      navigate("/"); // Use navigate instead of window.location.href
-    }
-  }, [user, navigate]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
@@ -55,7 +50,29 @@ const SignIn = () => {
       setEncryptedToken("accessToken", response.access);
       setEncryptedToken("refreshToken", response.refresh);
       toast.success(response.message || "Login successful");
-      navigate("/");
+      
+      // Fetch user's latest conversation
+      try {
+        const conversationsResponse = await fetch(`${BASE_URL}conversations/${response.user._id}`, {
+          headers: {
+            'Authorization': `Bearer ${response.access}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        const conversations = await conversationsResponse.json();
+        
+        // Redirect to first conversation if exists
+        if (conversations && conversations.length > 0) {
+          navigate(`/e2ee/t/${conversations[0]._id}`, { replace: true });
+        } else {
+          // No conversations, go to empty chat state
+          navigate('/e2ee/t/empty', { replace: true });
+        }
+      } catch (convError) {
+        console.error('Failed to fetch conversations:', convError);
+        // Fallback to empty chat state
+        navigate('/e2ee/t/empty', { replace: true });
+      }
     } catch (error) {
       const msg =
         error?.response?.data?.message ||

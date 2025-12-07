@@ -56,26 +56,39 @@ const ChatTab = () => {
   // Update conversation theme index
   const [updateConversationThemeIndex] = useUpdateConversationThemeIndexMutation();
 
+  // Clear stale state and update conversation when convId changes
   useEffect(() => {
-    if (userId) {
+    // When switching to NEW_CHAT_START route (userId without convId), clear conversation state
+    if (userId && !convId) {
       dispatch(setConversationId(null));
+      dispatch(setParticipant({}));
+      dispatch(setBlockList([]));
+      setConversationNotFoundError('');
     }
-    if (conversation) {
+    
+    // When convId changes, immediately update Redux to prevent showing stale data
+    if (convId) {
+      dispatch(setConversationId(convId));
+    }
+    
+    // Update state when conversation data is loaded
+    if (conversation && convId) {
       dispatch(setConversationId(convId));
       dispatch(setThemeIndex(conversation.themeIndex));
       dispatch(setIsGroup(conversation.group.is_group));
       dispatch(setReceiver(conversation.receiverId));
       dispatch(setConversationStatus(conversation.status));
       dispatch(setBlockList(conversation.blockList));
-      if (!isGroup) {
+      if (!conversation.group.is_group) {
         dispatch(setParticipant(conversation.participants.find((p) => p._id !== user._id) || {}));
       }
       setConversationNotFoundError('');
     }
+    
     if (conversationError) {
       setConversationNotFoundError('Conversation not found');
     }
-  }, [conversation, convId, conversationError, dispatch]);
+  }, [conversation, convId, userId, conversationError, dispatch, user]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -148,28 +161,42 @@ const ChatTab = () => {
             participants={conversation?.participants}
             convId={conversationId}
             themeIndex={themeIndex}
-            newParticipant={newParticipantInfo}
+            newParticipant={userId && !convId ? newParticipantInfo : null}
             onBackClick={() => setShowConversationList(true)}
           />
-          {!isGroup && user?._id === conversation?.participants[1]?._id && conversationStatus === 'pending' ? (
+          {!isGroup && conversation && user?._id === conversation?.participants[1]?._id && conversationStatus === 'pending' ? (
             <MessengeRequestCard messagesContainerRef={messagesContainerRef} />
           ) : (
             <>
-              {conversation && conversationId && (
+              {/* Show MessageContainer for existing conversations or empty state for new users */}
+              {conversationId ? (
                 <MessageContainer
                   messagesContainerRef={messagesContainerRef}
                   participant={conversation?.participants}
                 />
-              )}
-              {conversation && conversationId && (
+              ) : userId ? (
+                <div className="flex-grow flex flex-col items-center justify-center text-gray-400 overflow-auto space-y-6 p-8">
+                  <div className="relative">
+                    <img src={chatIcon} alt="Chat Icon" className="w-20 h-20 opacity-70 animate-pulse" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-20 animate-ping"></div>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xl font-semibold text-gray-300">Start a conversation</p>
+                    <p className="text-sm text-gray-500 mt-2">Send a message to begin chatting</p>
+                  </div>
+                </div>
+              ) : null}
+              
+              {/* Show footer for existing conversations OR new chat (userId route) */}
+              {(conversationId || userId) && (
                 !isGroup && blockList.length !== 0 ? (
                   blockList[0]?.blockedBy === user._id ? (
                     <UnblockButton />
                   ) : (
                     <p className="text-gray-300 text-xs w-full mb-15 text-center">
-                      <span className="capitalize font-semibold">{participant.name}</span> has blocked you, so you cannot send any messages to
-                      <span className="capitalize pl-1 font-semibold">{participant.name}</span> until
-                      <span className="capitalize pl-1 font-semibold">{participant.name}</span> unblocks you.
+                      <span className="capitalize font-semibold">{participant?.name}</span> has blocked you, so you cannot send any messages to
+                      <span className="capitalize pl-1 font-semibold">{participant?.name}</span> until
+                      <span className="capitalize pl-1 font-semibold">{participant?.name}</span> unblocks you.
                     </p>
                   )
                 ) : (
@@ -181,7 +208,7 @@ const ChatTab = () => {
                     }}
                     conversationId={conversationId}
                     sender={sender}
-                    receiver={participant._id}
+                    receiver={userId || participant?._id}
                     setReceiver={(receiverId) => dispatch(setReceiver(receiverId))}
                     setConversationStatus={(status) => dispatch(setConversationStatus(status))}
                     setIsGroup={(isGroup) => dispatch(setIsGroup(isGroup))}
