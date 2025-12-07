@@ -95,7 +95,7 @@ services:
     container_name: dummy-backup
     restart: "no"
     environment:
-      MONGODB_URI: mongodb://dummyuser:DummyDB@2025!Secure#Mongo@mongo:27017/dummy?authSource=admin
+      MONGODB_URI: mongodb://sadiq:DummyDB%402025%21Secure%23Mongo@mongo:27017/dummy?authSource=admin
       DUMP_DIR: /app/backups
       UPLOAD_TO_GCS: "false"
       GCS_BUCKET: ""
@@ -119,7 +119,7 @@ services:
     restart: always
     environment:
       TZ: Asia/Dhaka
-      MONGODB_URI: mongodb://dummyuser:DummyDB@2025!Secure#Mongo@mongo:27017/dummy?authSource=admin
+      MONGODB_URI: mongodb://sadiq:DummyDB%402025%21Secure%23Mongo@mongo:27017/dummy?authSource=admin
       DUMP_DIR: /app/backups
       UPLOAD_TO_GCS: "false"
       GCS_BUCKET: ""
