@@ -109,7 +109,7 @@ const SignUp = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full border-b  border-purple-900 bg-transparent text-blue-400 text-sm outline-none p-1"
+                className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0"
               />
               {errors.name && <span className="text-red-500">{errors.name}</span>}
             </div>
@@ -121,7 +121,7 @@ const SignUp = () => {
                 onValueChange={(val) => handleChange({ target: { name: "gender", value: val } })}
               >
                 <SelectTrigger
-                  className="w-full border-0 border-b border-purple-900 bg-transparent text-blue-400 text-sm focus:ring-0 focus:outline-none focus:border-purple-500 rounded-none shadow-none"
+                  className="w-full bg-[#e3fbfe] text-slate-900 text-base focus:ring-0 focus:outline-none rounded-full shadow-none px-4 py-3"
                 >
                   <SelectValue placeholder="Select your gender" />
                 </SelectTrigger>
@@ -161,7 +161,7 @@ const SignUp = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full border-b  border-purple-900 bg-transparent text-blue-400 text-sm outline-none p-1 placeholder:"
+                className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0"
               />
               {errors.email && <span className="text-red-500 text-xs">{errors.email}</span>}
             </div>
@@ -172,7 +172,7 @@ const SignUp = () => {
                 name="reEnterEmail"
                 value={formData.reEnterEmail}
                 onChange={handleChange}
-                className="w-full border-b  border-purple-900 bg-transparent text-blue-400 text-sm outline-none p-1"
+                className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0"
               />
               {errors.reEnterEmail && <span className="text-red-500">{errors.reEnterEmail}</span>}
             </div>
@@ -189,7 +189,7 @@ const SignUp = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full border-b border-purple-900 bg-transparent text-blue-400 text-sm outline-none p-1"
+                className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0"
               />
               {errors.password && <span className="text-red-500">{errors.password}</span>}
             </div>
@@ -200,7 +200,7 @@ const SignUp = () => {
                 name="reEnterPassword"
                 value={formData.reEnterPassword}
                 onChange={handleChange}
-                className="w-full border-b border-purple-900 bg-transparent text-blue-400 text-sm outline-none p-1 mb-10"
+                className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0 mb-10"
               />
               {errors.reEnterPassword && <span className="text-red-500">{errors.reEnterPassword}</span>}
             </div>

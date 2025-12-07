@@ -80,7 +80,7 @@ const SignIn = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="Enter email"
-            className="w-full border-b border-purple-900 bg-transparent text-blue-400 text-sm outline-none p-1 border-t-0 border-l-0 border-r-0 rounded-none focus-visible:ring-0"
+            className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0 focus-visible:ring-0"
           />
           {errors.email && <span className="text-red-500">{errors.email}</span>}
         </div>
@@ -95,7 +95,7 @@ const SignIn = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter password"
-              className="w-full border-b border-purple-900 bg-transparent text-blue-400 text-sm outline-none p-1 pr-10 border-t-0 border-l-0 border-r-0 rounded-none focus-visible:ring-0"
+              className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 pr-10 rounded-full border-0 focus-visible:ring-0"
             />
             <button
               type="button"

@@ -24,9 +24,8 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
   }
 
   return (
-    <main className="min-h-screen w-full bg-signin flex items-center justify-center relative">
-      <div className="absolute inset-0 bg-black/10 z-0 pointer-events-none" />
-      <div className="flex w-full max-w-6xl h-screen md:h-[86vh] shadow-2xl rounded-lg overflow-hidden flex-col md:flex-row relative z-10">
+    <main className="min-h-screen w-full bg-signin flex items-center justify-center">
+      <div className="flex w-full max-w-6xl h-screen md:h-[86vh] shadow-2xl rounded-lg overflow-hidden flex-col md:flex-row">
         {/* Left illustration / marketing area */}
         <div className="hidden md:flex w-2/3 bg-cover bg-center items-center justify-center bg-rocketsmall" >
           <div className="p-12 text-white max-w-md">
