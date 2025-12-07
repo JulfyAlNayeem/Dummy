@@ -225,7 +225,7 @@ const SignUp = () => {
             type="button"
             onClick={handlePrevious}
             disabled={currentStep === 1}
-            className={`w-1/3 bg-transparent border-2 border-purple-900 text-blue-400 rounded-full py-2 ${currentStep === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`w-1/3 bg-transparent border-2 border-[#0472a6] text-[#3da4ca] rounded-full py-2 ${currentStep === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             Previous
           </button>
@@ -233,18 +233,16 @@ const SignUp = () => {
             <button
               type="button"
               onClick={handleNext}
-              className="w-1/3 bg-gradient-to-r from-[#020617] via-purple-700 text-white rounded-full py-2 relative overflow-hidden group"
+              className="w-1/3 bg-[#3da4ca] hover:bg-[#0472a6] text-white rounded-full py-2 relative overflow-hidden group"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-purple-700 via-[#020617] to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
               <span className="relative z-10">Next</span>
             </button>
           ) : (
             <button
               type="submit"
               onClick={handleSubmit}
-              className="w-1/3 bg-gradient-to-r from-[#020617] via-purple-700 text-white rounded-full py-2 relative overflow-hidden group"
+              className="w-1/3 bg-[#3da4ca] hover:bg-[#0472a6] text-white rounded-full py-2 relative overflow-hidden group"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-purple-700 via-[#020617] to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
               <span className="relative z-10">Sign Up</span>
             </button>
           )}

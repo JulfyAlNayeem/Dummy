@@ -14,7 +14,8 @@ export default {
   			]
   		},
   		backgroundImage: {
-  			signin: "url('/src/assets/background/signin.svg')"
+  			signin: "url('/src/assets/background/curve-rocket.webp')",
+			"rocketsmall": "url('/src/assets/background/rocketsmall.webp')",
   		},
   		fontFamily: {
   			neon: [

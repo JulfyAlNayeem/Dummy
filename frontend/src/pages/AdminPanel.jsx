@@ -34,7 +34,7 @@ export default function AdminPanel() {
           <Button
             onClick={refetchStats}
             variant="outline"
-            className="bg-gradient-to-r from-gray-700 to-gray-600 dark:from-gray-300 dark:to-gray-200 text-white dark:text-gray-900 border-gray-600 dark:border-gray-300 hover:from-gray-600 hover:to-gray-500 dark:hover:from-gray-400 dark:hover:to-gray-300"
+            className="bg-gray-700 dark:bg-gray-200 text-white dark:text-gray-900 border-gray-600 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-300"
           >
             <RefreshCw className="h-4 w-4 mr-2" />
             Refresh

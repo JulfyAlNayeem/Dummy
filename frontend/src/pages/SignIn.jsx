@@ -111,10 +111,9 @@ const SignIn = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-[#020617] via-purple-700 text-white rounded-full py-2 relative overflow-hidden group"
+          className="w-full bg-[#3da4ca] hover:bg-[#0472a6] text-white rounded-full py-2 relative overflow-hidden group"
           disabled={isSubmitting}
         >
-          <span className="absolute inset-0 bg-gradient-to-r from-purple-700 via-[#020617] to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
           <span className="relative z-10">
             {isSubmitting ? "Signing..." : "Sign In"}
           </span>

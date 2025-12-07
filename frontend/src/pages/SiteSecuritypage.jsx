@@ -31,12 +31,14 @@ const SiteSecuritypage = ({ setIsVerified }) => {
     e.preventDefault();
     try {
       const response = await verifySiteSecurityMessage({ message: verifyForm.message }).unwrap();
-      // localStorage.setItem("isVerified", "true");
+      // persist verification as a string in localStorage and update parent with boolean
+      localStorage.setItem("isVerified", "true");
       setErrorMessage(`Message verified successfully as ${response.data.messageType}`);
-      setIsVerified("true");
+      setIsVerified(true);
       setVerifyForm({ message: '' });
     } catch (err) {
-      // localStorage.setItem("isVerified", "false");
+      // persist failed verification explicitly
+      localStorage.setItem("isVerified", "false");
       setErrorMessage('Verification failed: ' + (verifyError?.data?.message || 'Unknown error'));
     }
   };
