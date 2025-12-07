@@ -103,25 +103,25 @@ const SignUp = () => {
         return (
           <>
             <div>
-              <label className="text-sm text-gray-400 capitalize block mb-1"> Name </label>
+              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1"> Name </label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0"
+                  className="w-full bg-[#e3fbfe] h-10 text-slate-900 text-base outline-none px-4 py-3 rounded-full border-2 border-[#44aecf]"
               />
               {errors.name && <span className="text-red-500">{errors.name}</span>}
             </div>
             <div>
-              <label className="text-sm text-gray-400 capitalize block mb-1"> Gender </label>
+              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1"> Gender </label>
               <Select
                 value={formData.gender}
                 defaultValue="male"
                 onValueChange={(val) => handleChange({ target: { name: "gender", value: val } })}
               >
                 <SelectTrigger
-                  className="w-full bg-[#e3fbfe] text-slate-900 text-base focus:ring-0 focus:outline-none rounded-full shadow-none px-4 py-3"
+                  className="w-full h-10 bg-[#e3fbfe] text-slate-900 text-base focus:ring-0 focus:outline-none rounded-full shadow-none px-4 flex items-center border-2 border-[#44aecf]"
                 >
                   <SelectValue placeholder="Select your gender" />
                 </SelectTrigger>
@@ -155,24 +155,24 @@ const SignUp = () => {
         return (
           <>
             <div>
-              <label className="text-sm text-gray-400 capitalize block mb-1">Fake Email </label>
+              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1">Fake Email </label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0"
+                  className="w-full bg-[#e3fbfe] h-10 text-slate-900 text-base outline-none px-4 py-3 rounded-full border-2 border-[#44aecf]"
               />
               {errors.email && <span className="text-red-500 text-xs">{errors.email}</span>}
             </div>
             <div>
-              <label className="text-sm text-gray-400 capitalize block mb-1"> Re-enter Fake Email </label>
+              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1"> Re-enter Fake Email </label>
               <input
                 type="email"
                 name="reEnterEmail"
                 value={formData.reEnterEmail}
                 onChange={handleChange}
-                className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0"
+                  className="w-full bg-[#e3fbfe] h-10 text-slate-900 text-base outline-none px-4 py-3 rounded-full border-2 border-[#44aecf]"
               />
               {errors.reEnterEmail && <span className="text-red-500">{errors.reEnterEmail}</span>}
             </div>
@@ -183,24 +183,24 @@ const SignUp = () => {
         return (
           <>
             <div>
-              <label className="text-sm text-gray-400 capitalize block mb-1"> Password </label>
+              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1"> Password </label>
               <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0"
+                  className="w-full bg-[#e3fbfe] h-10 text-slate-900 text-base outline-none px-4 py-3 rounded-full border-2 border-[#44aecf]"
               />
               {errors.password && <span className="text-red-500">{errors.password}</span>}
             </div>
             <div>
-              <label className="text-sm text-gray-400 capitalize block mb-1"> Re-enter Password </label>
+              <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1"> Re-enter Password </label>
               <input
                 type="password"
                 name="reEnterPassword"
                 value={formData.reEnterPassword}
                 onChange={handleChange}
-                className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0 mb-10"
+                  className="w-full bg-[#e3fbfe] h-10 text-slate-900 text-base outline-none px-4 py-3 rounded-full border-2 border-[#44aecf] mb-10"
               />
               {errors.reEnterPassword && <span className="text-red-500">{errors.reEnterPassword}</span>}
             </div>
@@ -225,7 +225,7 @@ const SignUp = () => {
             type="button"
             onClick={handlePrevious}
             disabled={currentStep === 1}
-            className={`w-1/3 bg-transparent border-2 border-[#0472a6] text-[#3da4ca] rounded-full py-2 ${currentStep === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`w-1/3 h-10 flex items-center justify-center bg-transparent border-2 border-[#0472a6] text-[#3da4ca] rounded-full ${currentStep === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             Previous
           </button>
@@ -233,7 +233,7 @@ const SignUp = () => {
             <button
               type="button"
               onClick={handleNext}
-              className="w-1/3 bg-[#3da4ca] hover:bg-[#0472a6] text-white rounded-full py-2 relative overflow-hidden group"
+              className="w-1/3 h-10 flex items-center justify-center bg-[#3da4ca] hover:bg-[#0472a6] text-white rounded-full relative overflow-hidden group"
             >
               <span className="relative z-10">Next</span>
             </button>
@@ -241,7 +241,7 @@ const SignUp = () => {
             <button
               type="submit"
               onClick={handleSubmit}
-              className="w-1/3 bg-[#3da4ca] hover:bg-[#0472a6] text-white rounded-full py-2 relative overflow-hidden group"
+              className="w-1/3 h-10 flex items-center justify-center bg-[#3da4ca] hover:bg-[#0472a6] text-white rounded-full relative overflow-hidden group"
             >
               <span className="relative z-10">Sign Up</span>
             </button>

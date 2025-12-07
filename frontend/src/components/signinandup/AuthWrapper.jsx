@@ -27,14 +27,26 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
     <main className="min-h-screen w-full bg-signin flex items-center justify-center">
       <div className="flex w-full max-w-6xl h-screen md:h-[86vh] shadow-2xl rounded-lg overflow-hidden flex-col md:flex-row">
         {/* Left illustration / marketing area */}
-        <div className="hidden md:flex w-2/3 bg-cover bg-center items-center justify-center bg-rocketsmall" >
-          <div className="p-12 text-white max-w-md">
-            {/* Example content: keep simple so it's easy to customize */}
-            <h2 className="text-3xl font-bold mb-4">{welcomeMessage || 'Welcome'}</h2>
-            <p className="text-sm opacity-90">
-              Plan your activities and control your progress online. Use the right side to
-              sign in or create a new account.
-            </p>
+        <div className="hidden md:flex w-2/3 bg-cover bg-bottom pt-2 items-center justify-start px-8 -mt-40 bg-rocketsmall" >
+          <div className=" text-white  max-w-md">
+              {/* Stylish space-themed content for the left panel */}
+              <div className="inline-block mb-3 px-3 py-1 rounded-full bg-[#001231]/30 text-xs font-medium tracking-wide">
+                Explore • Beyond
+              </div>
+
+              <h2 className="text-3xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-[#3da4ca] via-[#0472a6] to-[#001231]">
+                {welcomeMessage || 'Welcome'}
+              </h2>
+
+              <p className="text-sm opacity-90 leading-relaxed mb-4">
+                Sail the cosmic seas — discover ideas that orbit possibility. Chart your
+                path among the stars, track progress like a mission log, and build a
+                universe of small wins that add up to giant leaps.
+              </p>
+
+              <div className="mt-3 text-xs text-[#def6ff] bg-[#001231]/20 inline-block px-3 py-1 rounded-md">
+                Inspired by space — small steps, big horizons
+              </div>
           </div>
         </div>
 
@@ -45,7 +57,7 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
           <div className="w-full h-full p-8 backdrop-blur-sm  shadow-md">
             <div className="mb-6 flex justify-between items-center">
               <div>
-                <h1 className="text-2xl font-semibold text-slate-900">{pageName || 'Auth'}</h1>
+                <h1 className="text-2xl font-semibold text-[#dff5ff]">{pageName || 'Auth'}</h1>
                 <p className="text-sm text-[#def6ff]">Use your credentials to continue</p>
               </div>
               <div className="flex items-center justify-center w-auto">

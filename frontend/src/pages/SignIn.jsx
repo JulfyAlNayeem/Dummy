@@ -71,7 +71,7 @@ const SignIn = () => {
     <AuthWrapper welcomeMessage="Welcome to " pageName="Sign In">
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="text-sm text-gray-400 capitalize block mb-1">
+          <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1">
             Email
           </label>
           <Input
@@ -80,12 +80,12 @@ const SignIn = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="Enter email"
-            className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 rounded-full border-0 focus-visible:ring-0"
+              className="w-full bg-[#e3fbfe] h-10 text-[#43aece] text-base outline-none px-4 py-3 rounded-full border-2 border-[#44aecf] focus-visible:ring-0"
           />
           {errors.email && <span className="text-red-500">{errors.email}</span>}
         </div>
         <div>
-          <label className="text-sm text-gray-400 capitalize block mb-1">
+          <label className="inline-block text-sm text-slate-700 bg-[#e3fbfe] px-2 py-1 rounded-full capitalize mb-1">
             Password
           </label>
           <div className="relative">
@@ -95,7 +95,7 @@ const SignIn = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter password"
-              className="w-full bg-[#e3fbfe] text-slate-900 text-base outline-none px-4 py-3 pr-10 rounded-full border-0 focus-visible:ring-0"
+                className="w-full bg-[#e3fbfe] text-[#43aece] text-base outline-none px-4 py-4 h-10 pr-10 rounded-full border-2 border-[#44aecf] focus-visible:ring-0"
             />
             <button
               type="button"
@@ -111,7 +111,7 @@ const SignIn = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-[#3da4ca] hover:bg-[#0472a6] text-white rounded-full py-2 relative overflow-hidden group"
+          className="w-full h-10 flex items-center justify-center bg-[#3da4ca] hover:bg-[#0472a6] text-white rounded-full relative overflow-hidden group"
           disabled={isSubmitting}
         >
           <span className="relative z-10">
