@@ -15,6 +15,9 @@ RUN pnpm install
 # Copy backend source code
 COPY backend/ ./
 
+# Create uploads directory with proper permissions
+RUN mkdir -p /app/backend/uploads && chmod 777 /app/backend/uploads
+
 # Generate Prisma client
 RUN npx prisma generate || true
 
