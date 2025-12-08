@@ -26,8 +26,10 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
   return (
     <main className="min-h-screen w-full bg-signin flex items-center justify-center">
       <div className="flex w-full max-w-6xl h-screen md:h-[86vh] shadow-2xl rounded-lg overflow-hidden flex-col md:flex-row">
+        
         {/* Left illustration / marketing area */}
         <div className="hidden md:flex w-2/3 bg-cover bg-bottom pt-2 items-center justify-start px-8 -mt-40 bg-rocketsmall" >
+        
           <div className=" text-white  max-w-md">
               {/* Stylish space-themed content for the left panel */}
               <div className="inline-block mb-3 px-3 py-1 rounded-full bg-[#001231]/30 text-xs font-medium tracking-wide">
@@ -35,7 +37,7 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
               </div>
 
               <h2 className="text-3xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-[#3da4ca] via-[#0472a6] to-[#001231]">
-                {welcomeMessage || 'Welcome'}
+                {welcomeMessage || 'Paper Rocket Agency'} Paper Rocket Agency
               </h2>
 
               <p className="text-sm opacity-90 leading-relaxed mb-4">
@@ -55,12 +57,11 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
           className="flex w-full h-full md:w-1/2 items-center bg-rocketsmall md:bg-none md:bg-transparent justify-center bg-cover bg-center relative">
           {/* translucent card on top of the background to keep the form readable */}
           <div className="w-full h-full p-8 backdrop-blur-sm  shadow-md">
-            <div className="mb-6 flex justify-between items-center">
-              <div>
-                <h1 className="text-2xl font-semibold text-[#dff5ff]">{pageName || 'Auth'}</h1>
-                <p className="text-sm text-[#def6ff]">Use your credentials to continue</p>
-              </div>
-              <div className="flex items-center justify-center w-auto">
+            <div className="flex sm:hidden items-center justify-between ">
+              <h2 className="text-xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-[#3da4ca] via-[#0472a6] to-[#001231]">
+                 Paper Rocket Agency
+              </h2>
+               <div className="flex  items-center justify-center min-w-[154px]">
                 <div className="flex items-center bg-slate-700/40 rounded-full p-1">
                   <Link
                     to="/signin"
@@ -85,6 +86,39 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
                   </Link>
                 </div>
               </div>
+            </div>
+            
+            <div className="mb-6 flex justify-between items-center">
+              <div>
+                <h1 className="text-2xl font-semibold text-[#dff5ff]">{pageName || 'Auth'}</h1>
+                <p className="text-sm text-[#def6ff]">Use your credentials to continue</p>
+              </div>
+              <div className="flex sm:block  items-center justify-center min-w-[154px]">
+                <div className="flex items-center bg-slate-700/40 rounded-full p-1">
+                  <Link
+                    to="/signin"
+                    className={`px-3 py-1 rounded-full text-sm transition-all duration-200 ${
+                      location.pathname === '/signin'
+                        ? 'bg-[#3da4ca] hover:bg-[#0472a6] text-white shadow-md'
+                        : 'text-slate-300 bg-transparent'
+                    }`}
+                  >
+                    Sign In
+                  </Link>
+
+                  <Link
+                    to="/signup"
+                    className={`ml-1 px-3 py-1 rounded-full text-sm transition-all duration-200 ${
+                      location.pathname === '/signup'
+                        ? 'bg-[#3da4ca] hover:bg-[#0472a6] text-white shadow-md'
+                        : 'text-slate-300 bg-transparent'
+                    }`}
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              </div>
+              {/* <div className="text-4xl">🚀</div> */}
             </div>
 
             <div className="bg-transparent text-slate-900 dark:text-slate-100">{children}</div>
