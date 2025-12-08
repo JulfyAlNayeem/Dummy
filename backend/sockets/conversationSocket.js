@@ -10,12 +10,21 @@ import { incrementUnreadRequest, resetUnreadRequests } from "../utils/controller
 export const registerConversationHandlers = (io, socket) => {
 
   socket.on("join_conversations_room", () => {
-    socket.join(`user_${socket.user.id}`);
+    // Only join if user is authenticated
+    if (socket.user && socket.user.id) {
+      socket.join(`user_${socket.user.id}`);
+    } else {
+      console.warn(`Socket ${socket.id} attempted to join without authentication`);
+    }
   });
 
   // Reset specific request type dynamically
   socket.on("reset_unread_request", async (type) => {
     try {
+      if (!socket.user || !socket.user.id) {
+        console.warn(`Socket ${socket.id} attempted reset without authentication`);
+        return;
+      }
       const updated = await resetUnreadRequests(socket.user.id, type);
       io.to(`user_${socket.user.id}`).emit("unread_counts_updated", updated);
     } catch (err) {
@@ -26,6 +35,10 @@ export const registerConversationHandlers = (io, socket) => {
   // Reset unread messages for a conversation
   socket.on("reset_unread_messages", async (conversationId) => {
     try {
+      if (!socket.user || !socket.user.id) {
+        console.warn(`Socket ${socket.id} attempted reset without authentication`);
+        return;
+      }
       const unread = await UnreadCount.findOne({ user: socket.user.id });
 
       if (!unread) return;
