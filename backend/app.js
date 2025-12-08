@@ -44,6 +44,9 @@ let io; // Declare io for export
     logger.info('🔐 Backend encryption service initialized');
 
     // Core middlewares
+    // Trust proxy - MUST be set before other middleware when behind Nginx
+    app.set('trust proxy', 1);
+    
     // app.use(pinoHttp({ logger }));
     app.use(helmet());
     app.use(compression());
