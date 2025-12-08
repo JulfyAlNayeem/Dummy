@@ -57,35 +57,11 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
           className="flex w-full h-full md:w-1/2 items-center bg-rocketsmall md:bg-none md:bg-transparent justify-center bg-cover bg-center relative">
           {/* translucent card on top of the background to keep the form readable */}
           <div className="w-full h-full p-8 backdrop-blur-sm  shadow-md">
-            <div className="flex sm:hidden items-center justify-between ">
-              <h2 className="text-xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-[#3da4ca] via-[#0472a6] to-[#001231]">
+            <div className="flex sm:hidden items-center justify-center mb-10">
+              <h2 className="text-3xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-[#3da4ca] via-[#0472a6] to-[#001231]">
                  Paper Rocket Agency
               </h2>
-               <div className="flex  items-center justify-center min-w-[154px]">
-                <div className="flex items-center bg-slate-700/40 rounded-full p-1">
-                  <Link
-                    to="/signin"
-                    className={`px-3 py-1 rounded-full text-sm transition-all duration-200 ${
-                      location.pathname === '/signin'
-                        ? 'bg-[#3da4ca] hover:bg-[#0472a6] text-white shadow-md'
-                        : 'text-slate-300 bg-transparent'
-                    }`}
-                  >
-                    Sign In
-                  </Link>
-
-                  <Link
-                    to="/signup"
-                    className={`ml-1 px-3 py-1 rounded-full text-sm transition-all duration-200 ${
-                      location.pathname === '/signup'
-                        ? 'bg-[#3da4ca] hover:bg-[#0472a6] text-white shadow-md'
-                        : 'text-slate-300 bg-transparent'
-                    }`}
-                  >
-                    Sign Up
-                  </Link>
-                </div>
-              </div>
+              
             </div>
             
             <div className="mb-6 flex justify-between items-center">

@@ -125,22 +125,22 @@ const SignUp = () => {
                 >
                   <SelectValue placeholder="Select your gender" />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-950 text-blue-400 border-purple-900">
+                <SelectContent className="bg-white text-blue-400 border-transparent rounded-b-md shadow-md">
                   <SelectItem
                     value="male"
-                    className="focus:bg-purple-800 focus:text-white cursor-pointer"
+                    className="focus:bg-blue-500 focus:text-white cursor-pointer"
                   >
                     Male
                   </SelectItem>
                   <SelectItem
                     value="female"
-                    className="focus:bg-purple-800 focus:text-white cursor-pointer"
+                    className="focus:bg-blue-500 focus:text-white cursor-pointer"
                   >
                     Female
                   </SelectItem>
                   <SelectItem
                     value="other"
-                    className="focus:bg-purple-800 focus:text-white cursor-pointer"
+                    className="focus:bg-blue-500 focus:text-white cursor-pointer"
                   >
                     Other
                   </SelectItem>
@@ -148,7 +148,6 @@ const SignUp = () => {
               </Select>
               {errors.gender && <span className="text-red-500">{errors.gender}</span>}
             </div>
-            <div className="h-10"></div>
           </>
         );
       case 2:
@@ -176,7 +175,6 @@ const SignUp = () => {
               />
               {errors.reEnterEmail && <span className="text-red-500">{errors.reEnterEmail}</span>}
             </div>
-            <div className="h-10"></div>
           </>
         );
       case 3:
@@ -200,7 +198,7 @@ const SignUp = () => {
                 name="reEnterPassword"
                 value={formData.reEnterPassword}
                 onChange={handleChange}
-                  className="w-full bg-[#e3fbfe] h-10 text-slate-900 text-base outline-none px-4 py-3 rounded-full border-2 border-[#44aecf] mb-10"
+                  className="w-full bg-[#e3fbfe] h-10 text-slate-900 text-base outline-none px-4 py-3 rounded-full border-2 border-[#44aecf]"
               />
               {errors.reEnterPassword && <span className="text-red-500">{errors.reEnterPassword}</span>}
             </div>
@@ -213,14 +211,14 @@ const SignUp = () => {
 
   return (
     <AuthWrapper welcomeMessage="Let's begin with " pageName="Sign Up">
-      <div className="space-y-4">
+      <div className="space-y-2">
         <div className="text-center text-sm text-gray-400">
           Step {currentStep} of 3
         </div>
-        <div className="min-h-[180px] space-y-4">
+        <div className=" space-y-4">
           {renderStep()}
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between pt-1">
           <button
             type="button"
             onClick={handlePrevious}
