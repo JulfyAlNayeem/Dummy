@@ -28,6 +28,7 @@ import SignUp from "@/pages/SignUp";
 import ChatTab from "@/components/Conversation/ChatTab";
 import Notice from "@/pages/Notice";
 import SiteSecuritypage from "@/pages/SiteSecuritypage";
+import ErrorFallback, { RouterErrorFallback } from "@/pages/ErrorFallback";
 
 export const Routes = createBrowserRouter(
   createRoutesFromElements(
@@ -77,5 +78,8 @@ export const Routes = createBrowserRouter(
       {/* Fallback Route */}
       <Route path="*" element={<Navigate to={APP_ROUTES.HOME} />} />
     </>
-  )
+  ),
+  {
+    errorElement: <RouterErrorFallback />,
+  }
 );
