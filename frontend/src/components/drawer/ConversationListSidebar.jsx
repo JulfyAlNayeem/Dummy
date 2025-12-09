@@ -11,7 +11,6 @@ import ProfilePictureUploader from "../popup/ProfilePictureUploader";
 import SettingsModal from '../Conversation/SettingModal';
 import 'animate.css';
 import ActiveUserList from './ActiveUserList';
-import { removeToken } from '@/utils/tokenStorage';
 import { useDispatch } from 'react-redux';
 import { useUser } from '@/redux/slices/authSlice';
 import { logout } from '@/redux/slices/authSlice';

@@ -60,12 +60,12 @@ const UserAuthProvider = ({ children }) => {
     (currentUser) => {
       if (!currentUser || socket.current) return;
       
-      // In production, connect to the same origin (nginx will proxy /socket.io to backend)
-      // In development, connect to backend directly
-      const socketUrl = import.meta.env.PROD ? window.location.origin : BASE_URL;
+      // In both dev and production, connect to same origin
+      // Vite proxy (dev) and nginx (prod) will forward /socket.io to backend
+      const socketUrl = window.location.origin;
       
       socket.current = io(socketUrl, {
-        withCredentials: true,
+        withCredentials: true, // Cookies will be sent automatically
         path: '/socket.io',
         reconnection: true,
         reconnectionDelay: 1000,
@@ -122,13 +122,13 @@ const UserAuthProvider = ({ children }) => {
       try {
         const { data } = await apiInterceptor.post(`${AUTH_URL}login/`, userData);
         // Dispatch setCredentials to update Redux state
+        // Tokens are now stored in HTTP-only cookies by the backend (more secure)
         if (data && data.user) {
           dispatch(setCredentials({ user: data.user, isAuthenticated: true }));
           initializeSocket(data.user);
         }
         else {
           dispatch(setCredentials({ user: null, isAuthenticated: false }));
-
         }
         return data;
       } catch (error) {
@@ -151,6 +151,7 @@ const UserAuthProvider = ({ children }) => {
         console.error("Error logging out:", error);
         throw error;
       } finally {
+        // Cookies are cleared by the backend
         if (socket.current) {
           socket.current.disconnect();
           socket.current = null;

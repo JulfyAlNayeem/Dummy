@@ -3,7 +3,6 @@ import AuthWrapper from "../components/signinandup/AuthWrapper";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useUserAuth } from "@/context-reducer/UserAuthContext";
-import { setEncryptedToken } from "@/utils/tokenStorage";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
 import { BASE_URL } from "@/utils/baseUrls";
@@ -47,15 +46,14 @@ const SignIn = () => {
     setIsSubmitting(true);
     try {
       const response = await loginUser(formData);
-      setEncryptedToken("accessToken", response.access);
-      setEncryptedToken("refreshToken", response.refresh);
+      // Tokens are now stored in HTTP-only cookies by the backend (more secure)
       toast.success(response.message || "Login successful");
       
       // Fetch user's latest conversation
       try {
         const conversationsResponse = await fetch(`${BASE_URL}conversations/${response.user._id}`, {
+          credentials: 'include', // This sends cookies
           headers: {
-            'Authorization': `Bearer ${response.access}`,
             'Content-Type': 'application/json'
           }
         });

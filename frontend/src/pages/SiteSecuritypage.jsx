@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "@/context-reducer/UserAuthContext";
 import { useGetAllConversationsQuery } from "@/redux/api/conversationApi";
 import { toast } from "react-hot-toast";
+import { Rocket } from "lucide-react";
 
 const SiteSecuritypage = () => {
   const navigate = useNavigate();
@@ -113,18 +114,18 @@ const SiteSecuritypage = () => {
                 name="message"
                 value={verifyForm.message}
                 onChange={handleVerifyChange}
-                className="mt-1 block w-full border border-[#41a9cd] rounded-md shadow-sm px-2 py-1.5 focus:ring-[#41a9cd] focus:border-[#41a9cd] text-[#41a9cd] bg-transparent"
+                className="mt-1 block w-full border-2 rounded-full border-[#41a9cd]  shadow-sm px-2 py-1.5 focus:ring-[#41a9cd] focus:border-[#41a9cd] text-[#41a9cd] bg-transparent focus-within:outline-none transition-all"
                 placeholder="Enter pin to verify"
                 required
               />
             <button
               type="submit"
               disabled={isVerifyingMessages}
-              className={`bg-[#40a5c9] text-white px-4 text-sm py-2 rounded transition-colors ${
+              className={`bg-[#40a5c9] text-white flex items-center justify-center gap-2 px-4 text-sm py-2 rounded-full transition-colors font-semibold ${
                 isVerifyingMessages ? "opacity-50 cursor-not-allowed" : "hover:bg-[#358aa3]"
               }`}
             >
-              {isVerifyingMessages ? 'Verifying...' : 'Verify Message'}
+              {isVerifyingMessages ? 'Verifying...' : 'Verify Pin!'} <Rocket />
             </button>
           </form>
         </div>

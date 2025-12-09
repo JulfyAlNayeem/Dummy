@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BASE_URL } from '@/utils/baseUrls';
 import { defaultProfileImage } from '@/constant';
-import { addMessage, updateMessage, addMessages, removeMessage, useConversation, checkScheduledDeletions } from '@/redux/slices/conversationSlice';
+import { addMessage, updateMessage, updateMessageReaction, addMessages, removeMessage, useConversation, checkScheduledDeletions } from '@/redux/slices/conversationSlice';
 import MessageCards from './MessageCards';
 import TypingIndicator from './TypingIndicator';
 import ImagePreviewModal from './ImagePreviewModal';
@@ -19,7 +19,6 @@ import useInfiniteScroll from '@/lib/useInfiniteScroll';
 import { useUserAuth } from '@/context-reducer/UserAuthContext';
 import ResponseAllertnessButton from './ResponseAllertnessButton';
 import useDynamicHeight from '@/hooks/updateContainerHeight';
-import { getDecryptedToken } from '@/utils/tokenStorage';
 import { hasKeys, storePrivateKey, storeUserPublicKey, exchangePublicKey, ensureAllConversationKeysInStorage } from '@/utils/messageEncryptionHelperFuction';
 import { generateKeyPair } from '@/utils/messageEncryption';
 import '@/utils/debugEncryption'; // Load debug utilities
@@ -45,7 +44,6 @@ const MessageContainer = ({ messagesContainerRef, participant }) => {
   const [currentMessageText, setCurrentMessageText] = useState('');
   const [activeMessageId, setActiveMessageId] = useState(null);
   const [currentButtonRect, setCurrentButtonRect] = useState(null);
-  const token = getDecryptedToken("accessToken");
   const buttonRefs = useRef({});
 
   const fetchMessages = useCallback(async (pageNum, limit = 20) => {
@@ -59,11 +57,10 @@ const MessageContainer = ({ messagesContainerRef, participant }) => {
         `${BASE_URL}messages/get-messages/${conversationId}?userId=${user._id}&page=${pageNum}&limit=${limit}`,
         {
           method: "GET",
+          credentials: "include", // Cookies are sent automatically
           headers: {
             "Content-Type": "application/json",
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
           },
-          // credentials: "include", // keep cookies if backend uses them
         }
       )
       const data = await res.json();
@@ -186,58 +183,8 @@ const MessageContainer = ({ messagesContainerRef, participant }) => {
     };
   }, [socket, conversationId, user?._id, dispatch, isGroup, messages]);
 
-  const getUniqueReadBy = (existingReadBy, newReadBy) => {
-    const combined = [...(existingReadBy || []), ...(newReadBy || [])];
-    return Array.from(new Map(combined.map(item => [item.user + item.readAt, item])).values());
-  };
-
-  const handleReceiveMessage = useCallback((message) => {
-    // Quick validation checks first
-    if (!message || message.conversation !== conversationId) {
-      return;
-    }
-    if ((!message._id && !message.clientTempId) || (!message.text?.trim() && !message.media?.length && !message.voice && !message.call && !message.img)) {
-      return;
-    }
-
-    const existingMessage = messages.find(m =>
-      (message.clientTempId && m.clientTempId === message.clientTempId) ||
-      (message._id && m._id === message._id)
-    );
-
-    if (existingMessage) {
-      // Update existing message (optimistic or server-confirmed)
-      const updatedMessage = {
-        ...existingMessage,
-        _id: message._id || existingMessage._id,
-        clientTempId: message.clientTempId || existingMessage.clientTempId,
-        status: message.status || existingMessage.status || 'sent',
-        readBy: getUniqueReadBy(existingMessage.readBy, message.readBy),
-        text: message.text || existingMessage.text,
-        media: message.media || existingMessage.media,
-        voice: message.voice || existingMessage.voice,
-        call: message.call || existingMessage.call,
-        img: message.img || existingMessage.img,
-        createdAt: message.createdAt || existingMessage.createdAt,
-        sender: message.sender || existingMessage.sender,
-        conversation: message.conversation || existingMessage.conversation,
-        updatedAt: new Date().toISOString()
-      };
-      dispatch(updateMessage({
-        messageId: existingMessage._id || existingMessage.clientTempId,
-        message: updatedMessage
-      }));
-    } else {
-      // Add new message (non-optimistic case, e.g., from another user)
-      const newMessage = {
-        ...message,
-        readBy: message.readBy || [],
-        status: message.status || 'sent',
-        updatedAt: new Date().toISOString()
-      };
-      dispatch(addMessage(newMessage));
-    }
-  }, [conversationId, user._id, dispatch, messages]);
+  // Note: Global message reception is now handled by GlobalMessageHandler component
+  // This component only handles conversation-specific events like typing, reactions, etc.
 
   useEffect(() => {
     if (!socket || !conversationId || !user || !user._id) {
@@ -245,52 +192,23 @@ const MessageContainer = ({ messagesContainerRef, participant }) => {
       return;
     }
 
+    // Join conversation room for typing indicators and read receipts
     socket.emit('joinRoom', conversationId);
+    
+    // Notify server that this conversation is focused (for read receipts optimization)
+    socket.emit('focusConversation', conversationId);
 
-    socket.on('receiveMessage', handleReceiveMessage);
-    socket.on('typing', ({ userId, isTyping }) => {
+    // Only handle typing indicator locally - messages are handled by GlobalMessageHandler
+    const handleTyping = ({ userId, isTyping }) => {
       if (!userId || userId === user._id || isGroup) return;
       setTypingUsers((prev) => {
         if (isTyping && !prev.includes(userId)) return [userId];
         return prev.filter((id) => id !== userId);
       });
-    });
-    socket.on('messageDeleted', ({ messageId, userId, hardDelete }) => {
-      dispatch(updateMessage({
-        messageId,
-        message: hardDelete ? null : { _id: messageId, deletedBy: [...(messages.find(m => m._id === messageId)?.deletedBy || []), userId] }
-      }));
-    });
-    socket.on('messageStatus', ({ messageId, status, readBy }) => {
-      const existingMessage = messages.find(m => m._id === messageId || m.clientTempId === messageId);
-      if (!existingMessage) {
-        console.warn(`Message ${messageId} not found in store for status update, skipping`);
-        return;
-      }
-      const currentReadBy = existingMessage.readBy || [];
-      if (readBy && readBy.some(entry => currentReadBy.some(existing => existing.user === entry.user))) {
-        return;
-      }
-      dispatch(updateMessage({
-        messageId,
-        message: {
-          _id: messageId,
-          clientTempId: existingMessage.clientTempId,
-          status: isGroup ? undefined : status,
-          readBy: readBy || currentReadBy,
-          text: existingMessage.text,
-          media: existingMessage.media,
-          voice: existingMessage.voice,
-          call: existingMessage.call,
-          img: existingMessage.img,
-          createdAt: existingMessage.createdAt,
-          sender: existingMessage.sender,
-          conversation: existingMessage.conversation
-        }
-      }));
-    });
+    };
 
-    socket.on('messageSendError', ({ clientTempId, error }) => {
+    // Handle message send errors for this conversation
+    const handleSendError = ({ clientTempId, error }) => {
       console.error('Message send error:', { clientTempId, error });
       const existingMessage = messages.find(m => m.clientTempId === clientTempId);
       if (existingMessage) {
@@ -300,16 +218,43 @@ const MessageContainer = ({ messagesContainerRef, participant }) => {
         }));
         toast.error(`Failed to send message: ${error}`);
       }
-    });
+    };
+
+    // Handle reply message events for this conversation
+    const handleReplyReceive = (message) => {
+      if (message.conversation === conversationId) {
+        dispatch(addMessage({
+          ...message,
+          conversation: conversationId,
+          readBy: message.readBy || [],
+          status: message.status || 'sent'
+        }));
+      }
+    };
+
+    // Handle reaction updates for this conversation
+    const handleReactionUpdate = ({ messageId, reactions }) => {
+      dispatch(updateMessageReaction({
+        conversationId,
+        messageId,
+        reactions
+      }));
+    };
+
+    socket.on('typing', handleTyping);
+    socket.on('messageSendError', handleSendError);
+    socket.on('replyReceiveMessage', handleReplyReceive);
+    socket.on('reactionUpdate', handleReactionUpdate);
 
     return () => {
-      socket.off('receiveMessage', handleReceiveMessage);
-      socket.off('typing');
-      socket.off('messageDeleted');
-      socket.off('messageStatus');
-      socket.off('messageSendError');
+      // Unfocus conversation when leaving
+      socket.emit('unfocusConversation');
+      socket.off('typing', handleTyping);
+      socket.off('messageSendError', handleSendError);
+      socket.off('replyReceiveMessage', handleReplyReceive);
+      socket.off('reactionUpdate', handleReactionUpdate);
     };
-  }, [socket, conversationId, isGroup, dispatch, user?._id, handleReceiveMessage, messages]);
+  }, [socket, conversationId, isGroup, dispatch, user?._id, messages]);
 
   useEffect(() => {
     const interval = setInterval(() => {

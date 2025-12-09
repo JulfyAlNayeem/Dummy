@@ -337,7 +337,7 @@ export const sendTextMessageUsingSocket = async ({
   try {
     const formData = new FormData();
     formData.append("text", inputValue);
-    console.debug('sendTextMessageUsingSocket: falling back to API', { conversationId, clientTempId, textSample: String(inputValue).slice(0, 80) });
+    console.debug('sendTextMessageUsingSocket: falling back to API', { conversationId, clientTempId: tempMessageId, textSample: String(inputValue).slice(0, 80) });
     if (!conversationId) formData.append("receiver", receiver);
     media.forEach((file) => file instanceof File && formData.append('media', file));
     formData.append("clientTempId", tempMessageId);
