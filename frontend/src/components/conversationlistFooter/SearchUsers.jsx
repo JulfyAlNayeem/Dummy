@@ -111,8 +111,10 @@ const SearchUsers = ({ searchQuery, themeIndex, setActiveScreen }) => {
                     'border-transparent'
                   )}
                   onClick={() => {
-                    navigate(`/e2ee/t/${user.conversationId}`);
-                    setActiveScreen("chats");
+                    if (user.conversationId && user.conversationId !== 'null') {
+                      navigate(`/e2ee/t/${user.conversationId}`);
+                      setActiveScreen("chats");
+                    }
                   }}
                 >
                   <div className="flex size-5 items-center justify-center rounded-full text-blue-600">

@@ -289,34 +289,28 @@ export const getUnreadRequestCounts = async (req, res) => {
 };
 
 export const acceptMessageRequest = async (req, res) => {
-  const session = await mongoose.startSession();
-  session.startTransaction();
-
   try {
     const { conversationId } = req.params;
     const { status } = req.body;
     const userId = req.user._id;
 
+    // Validate input
+    if (!conversationId || conversationId === 'null') {
+      return res.status(400).json({ message: "Invalid conversation ID" });
+    }
+
     if (status !== "accepted") {
-      await session.abortTransaction();
-      session.endSession();
       return res.status(400).json({ message: "Invalid status update" });
     }
 
     // Find the conversation
-    const conversation = await Conversation.findById(conversationId).session(
-      session
-    );
+    const conversation = await Conversation.findById(conversationId);
     if (!conversation) {
-      await session.abortTransaction();
-      session.endSession();
       return res.status(404).json({ message: "Conversation not found" });
     }
 
-    // Must be at index 1
+    // Must be at index 1 (receiver of the request)
     if (conversation.participants[1].toString() !== userId.toString()) {
-      await session.abortTransaction();
-      session.endSession();
       return res
         .status(403)
         .json({ message: "You are not authorized to accept this request" });
@@ -324,8 +318,6 @@ export const acceptMessageRequest = async (req, res) => {
 
     // Already accepted check
     if (conversation.status === "accepted") {
-      await session.abortTransaction();
-      session.endSession();
       return res
         .status(400)
         .json({ message: "Message request already accepted" });
@@ -333,7 +325,7 @@ export const acceptMessageRequest = async (req, res) => {
 
     // Update status
     conversation.status = "accepted";
-    await conversation.save({ session });
+    await conversation.save();
 
     // Add friends
     const [userA, userB] = conversation.participants;
@@ -341,17 +333,14 @@ export const acceptMessageRequest = async (req, res) => {
     await FriendList.updateOne(
       { user: userA },
       { $addToSet: { friends: userB } },
-      { upsert: true, session }
+      { upsert: true }
     );
 
     await FriendList.updateOne(
       { user: userB },
       { $addToSet: { friends: userA } },
-      { upsert: true, session }
+      { upsert: true }
     );
-
-    await session.commitTransaction();
-    session.endSession();
 
     // Notify both participants
     conversation.participants.forEach((participant) => {
@@ -367,9 +356,7 @@ export const acceptMessageRequest = async (req, res) => {
     });
   } catch (error) {
     console.error("Error accepting message request:", error);
-    await session.abortTransaction();
-    session.endSession();
-    return res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
