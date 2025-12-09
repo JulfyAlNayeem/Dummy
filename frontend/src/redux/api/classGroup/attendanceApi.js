@@ -1,12 +1,9 @@
-import { prepareAuthHeaders } from "@/utils/authHeaders";
 import { BASE_URL } from "@/utils/baseUrls";
-import { getDecryptedToken } from "@/utils/tokenStorage";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${BASE_URL}class-group/attendance`,
-  // credentials: "include",
-  prepareHeaders: prepareAuthHeaders,
+  credentials: "include",
 });
 
 export const attendanceApi = createApi({

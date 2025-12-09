@@ -1,15 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "@/utils/baseUrls";
-import { getDecryptedToken } from "@/utils/tokenStorage";
-import { prepareAuthHeaders } from "@/utils/authHeaders";
 
 export const classManagementApi = createApi({
   reducerPath: "classManagementApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}class-group/`,
-    
-    // credentials: "include",
-  prepareHeaders: prepareAuthHeaders,
+    credentials: "include",
   }),
   tagTypes: [
     "Class",

@@ -1,17 +1,9 @@
 import { BASE_URL } from "@/utils/baseUrls";
-import { getDecryptedToken } from "@/utils/tokenStorage";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${BASE_URL}class-group/alertness`,
-  
-  prepareHeaders: (headers, { getState }) => {
-    const token = getDecryptedToken("accessToken");
-    if (token) {
-      headers.set("authorization", `Bearer ${token}`);
-    }
-    return headers;
-  },
+  credentials: 'include', // This sends cookies with every request
 });
 
 export const alertnessApi = createApi({

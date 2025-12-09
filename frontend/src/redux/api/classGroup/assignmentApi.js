@@ -1,17 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "@/utils/baseUrls";
-import { getDecryptedToken } from "@/utils/tokenStorage";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${BASE_URL}class-group/assignments`,
-  
-  prepareHeaders: (headers, { getState }) => {
-    const token = getDecryptedToken("accessToken");
-    if (token) {
-      headers.set("authorization", `Bearer ${token}`);
-    }
-    return headers;
-  },
+  credentials: "include",
 });
 
 export const assignmentApi = createApi({
