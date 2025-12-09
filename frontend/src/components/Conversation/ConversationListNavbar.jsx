@@ -35,7 +35,7 @@ export default function ChatListNavbar({ uiBounce, chatContainerRef, themeIndex 
       </Link>
       <div className="flex items-center gap-2.5">
 
-        {user.role === "admin" || "superadmin" ? (
+        {user.role === "admin" || user.role === "superadmin" ? (
           <Link to={APP_ROUTES.ADMIN_DASHBOARD} >
             <TbUserStar className={`${navbarIconColor[themeIndex]} size-[22px]  cursor-pointer`} />
           </Link>
