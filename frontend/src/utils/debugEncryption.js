@@ -4,21 +4,17 @@
  */
 
 import { BASE_URL } from './baseUrls';
-import { getDecryptedToken } from '@/utils/tokenStorage';
 
 // Check if local keys match server keys
 export async function verifyKeysMatchServer(conversationId, currentUserId) {
   console.log('🔍 Verifying local keys match server keys...');
   
   try {
-    const token = getDecryptedToken("accessToken");
     const response = await fetch(
       `${BASE_URL}conversations/${conversationId}/keys`,
       {
         method: "GET",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
+        credentials: "include",
       }
     );
     

@@ -3,6 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import Loading from '../../pages/Loading'; 
 import { useUser } from '@/redux/slices/authSlice';
 import ErrorFallback from '@/pages/ErrorFallback';
+import GlobalMessageHandler from '@/components/Conversation/GlobalMessageHandler';
 
 const AdminRoutes = () => {
   const { user, loading } = useUser();
@@ -16,7 +17,12 @@ const AdminRoutes = () => {
     return <ErrorFallback />;
   }
 
-  return <Outlet />;
+  return (
+    <>
+      <GlobalMessageHandler />
+      <Outlet />
+    </>
+  );
 };
 
 export default AdminRoutes;

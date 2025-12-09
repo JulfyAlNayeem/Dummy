@@ -3,6 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import Loading from '../../pages/Loading'; 
 import Home from '@/pages/Home';
 import { useUserAuth } from '@/context-reducer/UserAuthContext';
+import GlobalMessageHandler from '@/components/Conversation/GlobalMessageHandler';
 
 const TeacherRoutes = ({ children }) => {
 
@@ -19,7 +20,12 @@ const TeacherRoutes = ({ children }) => {
     return <Home />;
   }
 
-  return <Outlet />;
+  return (
+    <>
+      <GlobalMessageHandler />
+      <Outlet />
+    </>
+  );
 };
 
 export default TeacherRoutes;

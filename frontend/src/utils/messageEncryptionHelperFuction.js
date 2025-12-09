@@ -1,6 +1,5 @@
 // messageEncryption.js - Utility for key management (simplified mock version)
 import { BASE_URL } from './baseUrls';
-import { getDecryptedToken } from '@/utils/tokenStorage';
 
 
 // NEW: Structured key storage format
@@ -354,14 +353,11 @@ export async function fetchParticipantKey(conversationId, userId, currentUserId)
   }
 
   try {
-    const token = getDecryptedToken("accessToken");
     const response = await fetch(
       `${BASE_URL}conversations/${conversationId}/keys`,
       {
         method: "GET",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
+        credentials: "include",
       }
     );
     if (!response.ok) throw new Error("Failed to fetch key");
@@ -459,14 +455,11 @@ export async function fetchConversationKeys(conversationId, currentUserId) {
     }
     globalThis.__fetchConversationKeysLast[conversationId] = now;
 
-    const token = getDecryptedToken("accessToken");
     const response = await fetch(
       `${BASE_URL}conversations/${conversationId}/keys`,
       {
         method: "GET",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
+        credentials: "include",
       }
     );
     console.log("Fetch conversation keys response:", response);
@@ -524,13 +517,12 @@ export async function fetchConversationKeys(conversationId, currentUserId) {
 // Helper to exchange public key with backend
 export async function exchangePublicKey(conversationId, publicKey) {
   try {
-    const token = getDecryptedToken("accessToken");
     // Send as JSON so express.json() on the server can parse req.body.publicKey
     const response = await fetch(`${BASE_URL}conversations/${conversationId}/key-exchange`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({ publicKey }),
     });

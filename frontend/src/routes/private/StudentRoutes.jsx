@@ -4,6 +4,7 @@ import Loading from '../../pages/Loading';
 import Home from '@/pages/Home';
 import { useUserAuth } from '@/context-reducer/UserAuthContext';
 import { useGetClassMembersQuery } from '@/redux/api/classGroup/classApi';
+import GlobalMessageHandler from '@/components/Conversation/GlobalMessageHandler';
 
 const StudentRoutes = () => {
     const { classId } = useParams();
@@ -21,7 +22,12 @@ const StudentRoutes = () => {
         return <Home />;
     }
 
-    return <Outlet />;
+    return (
+        <>
+            <GlobalMessageHandler />
+            <Outlet />
+        </>
+    );
 };
 
 export default StudentRoutes;
