@@ -35,10 +35,9 @@ export const initialSocketServer = async (server, redis) => {
   io.use((socket, next) => {
     const cookies = socket.handshake.headers.cookie;
     
-    // Log for debugging but don't block connection
     if (!cookies) {
       logger.warn({ id: socket.id }, "⚠️  No cookies found in Socket.IO handshake");
-      return next(); // Allow connection to proceed
+      return next(new Error('Authentication required'));
     }
 
     const parsedCookies = cookie.parse(cookies);
@@ -46,13 +45,13 @@ export const initialSocketServer = async (server, redis) => {
     
     if (!token) {
       logger.warn({ id: socket.id, cookies: Object.keys(parsedCookies) }, "⚠️  No access_token found in cookies");
-      return next(); // Allow connection to proceed
+      return next(new Error('Authentication required'));
     }
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
       if (err) {
         logger.warn({ id: socket.id, error: err.message }, "⚠️  JWT verification failed");
-        return next(); // Allow connection to proceed even if token is invalid
+        return next(new Error('Authentication failed'));
       }
       socket.user = decoded;
       logger.info({ id: socket.id, userId: decoded?.id }, "✅ Socket authenticated successfully");

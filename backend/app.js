@@ -116,7 +116,7 @@ let io; // Declare io for export
     logger.info('🕐 All cron jobs started including encryption key rotation');
 
     // Start server
-    server.listen(port, () => logger.info(`Server running on port ${port}`));
+    server.listen(port, '0.0.0.0', () => logger.info(`Server running on port ${port}`));
 
     // Graceful shutdown
     const shutdown = (signal) => async () => {
