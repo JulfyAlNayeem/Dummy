@@ -173,11 +173,12 @@ const login = async (req, res) => {
     }
     await userModel.findByIdAndUpdate(user._id, { last_seen: new Date() });
 
-    // Clear old cookies
+    // Clear old cookies - use consistent cookie options
+    const isProduction = process.env.NODE_ENV === "production";
     const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       path: "/",
     };
 

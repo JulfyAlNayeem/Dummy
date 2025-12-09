@@ -29,6 +29,14 @@ export const exchangeConversationKey = async (req, res) => {
     });
   }
 // console.log(conversationId)
+    // Handle "empty" conversation ID (no active conversation state)
+    if (conversationId === "empty") {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot exchange keys for empty conversation"
+      });
+    }
+
     if (!isValidObjectId(conversationId)) {
       return res.status(400).json({
         success: false,
@@ -194,6 +202,14 @@ export const getParticipantKey = async (req, res) => {
     const currentUserId = req.user._id;
     const { conversationId, userId } = req.params;
 
+    // Handle "empty" conversation ID (no active conversation state)
+    if (conversationId === "empty") {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot get participant key for empty conversation"
+      });
+    }
+
     if (!isValidObjectId(conversationId) || !isValidObjectId(userId)) {
       return res.status(400).json({
         success: false,
@@ -323,6 +339,18 @@ export const getConversationKeys = async (req, res) => {
   try {
     const currentUserId = req.user._id;
     const { conversationId } = req.params;
+
+    // Handle "empty" conversation ID (no active conversation state)
+    if (conversationId === "empty") {
+      return res.status(200).json({
+        success: true,
+        message: "No active conversation",
+        data: {
+          keys: []
+        }
+      });
+    }
+
     if (!isValidObjectId(conversationId)) {
       return res.status(400).json({
         success: false,
@@ -481,6 +509,14 @@ export const rotateConversationKey = async (req, res) => {
     const userId = req.user._id;
     const { conversationId } = req.params;
     const { newPublicKey } = req.body;
+
+    // Handle "empty" conversation ID (no active conversation state)
+    if (conversationId === "empty") {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot rotate key for empty conversation"
+      });
+    }
 
     if (!isValidObjectId(conversationId)) {
       return res.status(400).json({

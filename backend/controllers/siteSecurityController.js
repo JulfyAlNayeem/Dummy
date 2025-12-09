@@ -91,7 +91,7 @@ export const verifySiteSecurityMessage = async (req, res) => {
         // Unknown message when no custom messages are set
         return res.status(401).json({
           success: false,
-          message: "Invalid security message. Please enter 'valid passcode' or set up custom passmessages.",
+          message: "Invalid pin. Please enter 'valid pin'.",
         });
       }
     }
@@ -99,13 +99,13 @@ export const verifySiteSecurityMessage = async (req, res) => {
     // If verification successful
     res.status(200).json({
       success: true,
-      message: "Security message verified successfully",
+      message: "Security Pin verified successfully",
       data: messageData,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error verifying security message",
+      message: "Error verifying security Pin",
       error: error.message,
     });
   }

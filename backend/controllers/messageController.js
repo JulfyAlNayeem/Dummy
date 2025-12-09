@@ -15,6 +15,7 @@ import {
 } from "../utils/controller-utils/messageControllerUtils.js";
 import mongoose from "mongoose";
 import { emitConversationUpdate } from "../sockets/conversationSocket.js";
+import { emitMessageToConversationParticipants, emitNewMessageNotification } from "../sockets/centralizedMessageSocket.js";
 import { 
   enhanceMessageWithZeroKnowledgeEncryption,
   shouldMessageBeEncrypted,
@@ -208,12 +209,10 @@ export const sendFileMessage = async (req, res) => {
       clientTempId, // Include clientTempId in response
     };
 
-    // Emit Socket.IO event
-    // console.log(
-    //   "sendFileMessage: Emitting receiveMessage to room:",
-    //   resolvedConversationId
-    // );
-    req.io.to(resolvedConversationId).emit("receiveMessage", responseMessage);
+    // Emit Socket.IO event using centralized approach
+    await emitMessageToConversationParticipants(req.io, resolvedConversationId, 'receiveMessage', responseMessage);
+    await emitNewMessageNotification(req.io, resolvedConversationId, responseMessage, userId);
+    emitConversationUpdate(req.io, resolvedConversationId);
 
     res.status(201).json({
       message: responseMessage,
@@ -340,17 +339,21 @@ export const sendTextMessage = async ({
       clientTempId, // Include clientTempId in response
     };
 
-    // Emit Socket.IO events
-    // console.log(
-    //   "sendTextMessage: Emitting receiveMessage to room:",
-    //   responseMessage
-    // );
-    io.to(resolvedConversationId).emit("receiveMessage", responseMessage);
+    // Emit Socket.IO events using centralized approach
+    // This ensures all participants receive the message even if not viewing this conversation
+    await emitMessageToConversationParticipants(io, resolvedConversationId, 'receiveMessage', responseMessage);
+    
+    // Also emit new message notification for users not actively viewing this conversation
+    await emitNewMessageNotification(io, resolvedConversationId, responseMessage, sender);
+    
+    // Emit success to the sender
     socket.emit("sendMessageSuccess", {
       message: responseMessage,
       conversationId: resolvedConversationId,
     });
-    emitConversationUpdate(io, conversationId);
+    
+    // Update conversation in the list for all participants
+    emitConversationUpdate(io, resolvedConversationId);
 
     return {
       success: true,
@@ -392,7 +395,7 @@ const validateEmojiData = ({
 };
 
 // Utility to emit Socket.IO events
-const emitSocketEvents = ({
+const emitSocketEvents = async ({
   io,
   socket,
   conversationId,
@@ -400,6 +403,7 @@ const emitSocketEvents = ({
   result,
   errorMessage,
   clientTempId,
+  senderId,
 }) => {
   if (errorMessage && !result.success) {
     if (socket) {
@@ -407,7 +411,12 @@ const emitSocketEvents = ({
     }
     return;
   }
-  io.to(conversationId).emit("receiveMessage", message);
+  // Use centralized emission for messenger-like real-time updates
+  await emitMessageToConversationParticipants(io, conversationId, 'receiveMessage', message);
+  if (senderId) {
+    await emitNewMessageNotification(io, conversationId, message, senderId);
+  }
+  emitConversationUpdate(io, conversationId);
   if (socket) {
     socket.emit("sendMessageSuccess", { ...result, clientTempId }); // Include clientTempId in success
   }
@@ -560,13 +569,15 @@ export const handleSendEmojiSocket = async ({
     clientTempId, // Pass clientTempId
   });
 
-  // Broadcast to all users in the conversation room
+  // Broadcast to all users using centralized emission for messenger-like real-time updates
   if (result.success && result.conversationId) {
-    io.to(result.conversationId).emit("receiveMessage", result.message);
-    console.log(`✅ Emoji broadcasted to room: ${result.conversationId}`);
+    await emitMessageToConversationParticipants(io, result.conversationId, 'receiveMessage', result.message);
+    await emitNewMessageNotification(io, result.conversationId, result.message, sender);
+    emitConversationUpdate(io, result.conversationId);
+    console.log(`✅ Emoji broadcasted to all participants: ${result.conversationId}`);
   }
 
-  emitSocketEvents({
+  await emitSocketEvents({
     io,
     socket,
     conversationId: result.conversationId,
@@ -574,6 +585,7 @@ export const handleSendEmojiSocket = async ({
     result,
     errorMessage: result.message,
     clientTempId, // Pass clientTempId
+    senderId: sender,
   });
 
   return result;
@@ -1264,7 +1276,10 @@ export const replyMessage = async (req, res) => {
     clientTempId,
   };
 
-  req.io.to(conversationId).emit("receiveMessage", responseMessage);
+  // Use centralized emission for messenger-like real-time updates
+  await emitMessageToConversationParticipants(req.io, conversationId, 'receiveMessage', responseMessage);
+  await emitNewMessageNotification(req.io, conversationId, responseMessage, req.user._id.toString());
+  emitConversationUpdate(req.io, conversationId);
 
   res.status(201).json({
     message: responseMessage,
