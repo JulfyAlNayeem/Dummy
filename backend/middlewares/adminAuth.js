@@ -3,12 +3,21 @@ import User from "../models/userModel.js";
 
 export const requireAdmin = async (req, res, next) => {
   try {
-    const authHeader = req.headers["authorization"];
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    // First try to get token from cookies (preferred, more secure)
+    let token = req.cookies?.access_token;
+
+    // Fallback to Authorization header for backwards compatibility
+    if (!token) {
+      const authHeader = req.headers["authorization"];
+      if (authHeader && authHeader.startsWith("Bearer ")) {
+        token = authHeader.split(" ")[1];
+      }
+    }
+
+    if (!token) {
       return res.status(401).json({ message: "Access token required" });
     }
 
-    const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     const user = await User.findById(decoded.id);
