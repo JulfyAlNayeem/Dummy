@@ -106,7 +106,7 @@ const MessagePermissionsItem = ({ conversationId }) => {
           </div>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="w-64 bg-gray-800 border border-gray-700 text-gray-100">
+        <DropdownMenuContent className="w-56 bg-gray-800 border border-gray-700 text-gray-100">
           {!showRequestForm ? (
             <div className="p-1">
               {/* Render permission status list first */}
@@ -128,17 +128,17 @@ const MessagePermissionsItem = ({ conversationId }) => {
                       {isEnabled ? (
                         <span className="flex items-center gap-1 text-green-400 text-xs">
                           <Check className="h-3 w-3" />
-                          Enabled
+                          
                         </span>
                       ) : isPending ? (
                         <span className="flex items-center gap-1 text-yellow-400 text-xs">
                           <Clock className="h-3 w-3" />
-                          Pending
+                          
                         </span>
                       ) : (
                         <span className="flex items-center gap-1 text-red-400 text-xs">
                           <X className="h-3 w-3" />
-                          Disabled
+                          
                         </span>
                       )}
                     </div>
