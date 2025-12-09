@@ -25,7 +25,7 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
 
   return (
     <main className="min-h-screen w-full bg-signin flex items-center justify-center">
-      <div className="flex w-full max-w-6xl h-screen md:h-[86vh] shadow-2xl rounded-lg overflow-hidden flex-col md:flex-row">
+      <div className="flex w-full max-w-6xl h-screen md:h-[86vh] shadow-2xl md:rounded-lg overflow-hidden flex-col md:flex-row">
         
         {/* Left illustration / marketing area */}
         <div className="hidden md:flex w-2/3 bg-cover bg-bottom pt-2 items-center justify-start px-8 -mt-40 bg-rocketsmall" >
@@ -37,7 +37,7 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
               </div>
 
               <h2 className="text-3xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-[#3da4ca] via-[#0472a6] to-[#001231]">
-                {welcomeMessage || 'Paper Rocket Agency'} Paper Rocket Agency
+                {welcomeMessage || 'Paper Rocket '} Paper Rocket 
               </h2>
 
               <p className="text-sm opacity-90 leading-relaxed mb-4">
@@ -56,10 +56,11 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
         <div
           className="flex w-full h-full md:w-1/2 items-center bg-rocketsmall md:bg-none md:bg-transparent justify-center bg-cover bg-center relative">
           {/* translucent card on top of the background to keep the form readable */}
-          <div className="w-full h-full p-8 backdrop-blur-sm  shadow-md">
+          <div className="backdrop-blur-sm shadow-md w-full  h-full  flex items-center justify-center">
+            <div className="w-full h-fit p-8   ">
             <div className="flex sm:hidden items-center justify-center mb-10">
               <h2 className="text-3xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-[#3da4ca] via-[#0472a6] to-[#001231]">
-                 Paper Rocket Agency
+                 Paper Rocket 
               </h2>
               
             </div>
@@ -99,9 +100,10 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
 
             <div className="bg-transparent text-slate-900 dark:text-slate-100">{children}</div>
 
-            <div className="mt-6 text-center text-xs text-slate-400 dark:text-slate-300">
+            <div className="mt-6 text-center text-xs text-blue-400 dark:text-slate-300">
               By continuing you agree to our terms and privacy policy.
             </div>
+          </div>
           </div>
         </div>
       </div>

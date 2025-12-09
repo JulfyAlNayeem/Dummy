@@ -147,7 +147,7 @@ const NotificationScreen = () => {
   if (!notices || notices.length === 0) {
     return (
       <div className="h-[90vh] w-full flex items-center justify-center bg-[#020617]">
-        <Card className=" bg-[#060c24] dark:from-[#f8fafc] w-[70%] dark:to-[#eef2f7] border-gray-600 dark:border-gray-300 rounded-lg">
+        <Card className=" bg-[#060c24] dark:from-[#f8fafc] h-[90vh] dark:to-[#eef2f7] border-gray-600 dark:border-gray-300 rounded-lg">
           <CardContent className="p-8 flex flex-col items-center gap-4">
             <div className="w-20 h-20 rounded-full flex items-center justify-center bg-[#022033] dark:bg-[#dff4fb]">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-10 h-10 text-[#3da4ca] dark:text-[#0472a6]">

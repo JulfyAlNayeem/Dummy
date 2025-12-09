@@ -5,6 +5,7 @@ import { useVerifySecurityMessageMutation } from "@/redux/api/securityApi";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "@/context-reducer/UserAuthContext";
 import { useGetAllConversationsQuery } from "@/redux/api/conversationApi";
+import { toast } from "react-hot-toast";
 
 const SiteSecuritypage = () => {
   const navigate = useNavigate();
@@ -15,7 +16,6 @@ const SiteSecuritypage = () => {
   const [clickCount, setClickCount] = useState(0);
   const [isLaunched, setIsLaunched] = useState(false);
   const [lastClickTime, setLastClickTime] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
   const [verifyForm, setVerifyForm] = useState({ message: '' });
 
   const [verifySiteSecurityMessage, { isLoading: isVerifyingMessages, error: verifyError, isSuccess }] = useVerifySecurityMessageMutation();
@@ -54,14 +54,15 @@ const SiteSecuritypage = () => {
       const response = await verifySiteSecurityMessage({ message: verifyForm.message }).unwrap();
       // persist verification as a string in localStorage
       localStorage.setItem("isVerified", "true");
-      setErrorMessage(`Message verified successfully as ${response.data.messageType}`);
+      toast.success(`Message verified successfully as ${response.data.messageType}`);
       setVerifyForm({ message: '' });
       // Redirect to signin page after successful verification
       setTimeout(() => navigate('/signin'), 1500);
     } catch (err) {
       // persist failed verification explicitly
       localStorage.setItem("isVerified", "false");
-      setErrorMessage('Verification failed: ' + (verifyError?.data?.message || 'Unknown error'));
+      console.error('Verification error:', err);
+      toast.error('Verification failed: ' + (err?.data?.message || err?.message || 'Unknown error'));
     }
   };
 
@@ -125,9 +126,6 @@ const SiteSecuritypage = () => {
             >
               {isVerifyingMessages ? 'Verifying...' : 'Verify Message'}
             </button>
-            {errorMessage && (
-              <p className="text-red-500 text-sm">{errorMessage}</p>
-            )}
           </form>
         </div>
       </div>
