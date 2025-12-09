@@ -70,13 +70,13 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
                 <p className="text-sm text-[#def6ff]">Use your credentials to continue</p>
               </div>
               <div className="flex sm:block  items-center justify-center min-w-[154px]">
-                <div className="flex items-center bg-slate-700/40 rounded-full p-1">
+                <div className="flex items-center bg-[#35a9cd]/40 rounded-full p-1">
                   <Link
                     to="/signin"
                     className={`px-3 py-1 rounded-full text-sm transition-all duration-200 ${
                       location.pathname === '/signin'
                         ? 'bg-[#3da4ca] hover:bg-[#0472a6] text-white shadow-md'
-                        : 'text-slate-300 bg-transparent'
+                        : 'text-sky-50 bg-transparent'
                     }`}
                   >
                     Sign In
@@ -87,7 +87,7 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
                     className={`ml-1 px-3 py-1 rounded-full text-sm transition-all duration-200 ${
                       location.pathname === '/signup'
                         ? 'bg-[#3da4ca] hover:bg-[#0472a6] text-white shadow-md'
-                        : 'text-slate-300 bg-transparent'
+                        : 'text-sky-50 bg-transparent'
                     }`}
                   >
                     Sign Up

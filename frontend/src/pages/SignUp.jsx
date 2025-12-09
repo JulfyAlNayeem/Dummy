@@ -125,7 +125,7 @@ const SignUp = () => {
                 >
                   <SelectValue placeholder="Select your gender" />
                 </SelectTrigger>
-                <SelectContent className="bg-white text-blue-400 border-transparent rounded-b-md shadow-md">
+                <SelectContent className="bg-white text-blue-400 border-transparent rounded-b-md shadow-md`">
                   <SelectItem
                     value="male"
                     className="focus:bg-blue-500 focus:text-white cursor-pointer"
@@ -212,8 +212,21 @@ const SignUp = () => {
   return (
     <AuthWrapper welcomeMessage="Let's begin with " pageName="Sign Up">
       <div className="space-y-2">
-        <div className="text-center text-sm text-gray-400">
-          Step {currentStep} of 3
+        <div className="flex items-center justify-center">
+          <div className="flex w-1/3 justify-center space-x-2 mb-4">
+          {[1, 2, 3].map((step) => (
+            <div
+              key={step}
+              className="flex-1 h-2 bg-gray-300 rounded-full overflow-hidden"
+            >
+              <div
+                className={`h-full rounded-full transition-all duration-300 ${
+                  step <= currentStep ? 'bg-[#3da4ca]' : ''
+                }`}
+              ></div>
+            </div>
+          ))}
+        </div>
         </div>
         <div className=" space-y-4">
           {renderStep()}
