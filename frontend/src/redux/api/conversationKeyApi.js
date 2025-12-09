@@ -1,14 +1,13 @@
 // API service for conversation key exchange
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { prepareAuthHeaders } from '@/utils/authHeaders';
 import { BASE_URL } from '@/utils/baseUrls';
 
 export const conversationKeyApi = createApi({
   reducerPath: 'conversationKeyApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}conversations/`,
-    prepareHeaders: prepareAuthHeaders,
+    credentials: 'include',
   }),
   tagTypes: ['ConversationKeys'],
   endpoints: (builder) => ({

@@ -1,14 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import axios from "axios";
 import { BASE_URL, AUTH_URL } from "../../utils/baseUrls";
-import { prepareAuthHeaders } from "@/utils/authHeaders";
 
 export const conversationApi = createApi({
   reducerPath: "conversationApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}conversations`,
-    // credentials: "include",
-    prepareHeaders: prepareAuthHeaders,
+    credentials: "include",
   }),
   tagTypes: [
     "Conversation",

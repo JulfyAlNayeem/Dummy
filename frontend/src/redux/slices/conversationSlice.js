@@ -310,6 +310,26 @@ const conversationSlice = createSlice({
     setIsGroup(state, action) {
       state.isGroup = action.payload;
     },
+    /**
+     * Update the last message for a conversation in the list
+     * This is used by the GlobalMessageHandler to update conversation previews
+     */
+    updateConversationLastMessage(state, action) {
+      const { conversationId, lastMessage, lastMessageTime } = action.payload;
+      const conversationIndex = state.allConversations.findIndex(
+        (c) => c._id === conversationId
+      );
+      if (conversationIndex !== -1) {
+        state.allConversations[conversationIndex] = {
+          ...state.allConversations[conversationIndex],
+          lastMessage: lastMessage,
+          lastMessageTime: lastMessageTime || new Date().toISOString(),
+        };
+        // Move updated conversation to top of list
+        const [updatedConversation] = state.allConversations.splice(conversationIndex, 1);
+        state.allConversations.unshift(updatedConversation);
+      }
+    },
     reset: () => initialState,
     clearError: (state) => {
       state.error = null;
@@ -464,6 +484,7 @@ export const {
   setIsGroup,
   setParticipant,
   setBlockList,
+  updateConversationLastMessage,
   reset,
   clearError,
   checkScheduledDeletions,
