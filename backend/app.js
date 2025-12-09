@@ -66,6 +66,7 @@ let io; // Declare io for export
     app.use(cookieParser());
 
     // Sessions (Redis)
+    const isProduction = process.env.NODE_ENV === "production";
     app.use(
       session({
         store: new RedisStore({ client: redis, prefix: "alfajr:sess:" }),
@@ -73,9 +74,9 @@ let io; // Declare io for export
         resave: false,
         saveUninitialized: false,
         cookie: {
-          secure: process.env.NODE_ENV === "production",
+          secure: isProduction,
           httpOnly: true,
-          sameSite: "none",
+          sameSite: isProduction ? "none" : "lax",
           maxAge: 24 * 60 * 60 * 1000,
         },
         name: "sid",

@@ -1,23 +1,10 @@
 import axios from "axios";
-import { AUTH_URL, BASE_URL } from "./baseUrls";
-import { getDecryptedToken, setEncryptedToken } from "./tokenStorage";
 
 const apiInterceptor = axios.create({
-  baseURL: BASE_URL,
-  withCredentials: true,
+  withCredentials: true, // This sends cookies with every request
 });
 
-// Request interceptor: attach access token
-apiInterceptor.interceptors.request.use(
-  async (config) => {
-    const token = getDecryptedToken("accessToken");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+// No need to attach token in request interceptor - cookies are sent automatically
 
 // Response interceptor: refresh token logic
 apiInterceptor.interceptors.response.use(
@@ -34,21 +21,16 @@ apiInterceptor.interceptors.response.use(
     ) {
       originalRequest._retry = true;
       try {
-        // Use refresh token
-        const refreshToken = getDecryptedToken("refreshToken");
-        if (!refreshToken) throw new Error("No refresh token found");
-
+        // Call refresh-token endpoint - cookies are sent automatically
         const response = await axios.post(
           `${AUTH_URL}refresh-token`,
-          { refresh: refreshToken },
-          // { withCredentials: true }
+          {},
+          { withCredentials: true }
         );
 
-        if (response.status === 200 && response.data?.access) {
-          // Store new access token
-          setEncryptedToken("accessToken", response.data.access);
-
-          // Retry the original request with new token
+        if (response.status === 200) {
+          // Cookies are automatically updated by the browser
+          // Retry the original request
           return apiInterceptor(originalRequest);
         }
       } catch (err) {

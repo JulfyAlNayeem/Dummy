@@ -4,13 +4,18 @@ import { getRedisClient } from '../config/redisClient.js';
 const storeToken = async (res, token, userId) => {
   const redisClient = getRedisClient();
   const { access, refresh } = token;
+  
+  // In production: secure=true, sameSite=none (for cross-origin)
+  // In development: secure=false, sameSite=lax (for same-origin localhost)
+  const isProduction = process.env.NODE_ENV === "production";
+  
   const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
     maxAge: 7 * 24 * 60 * 60 * 1000,
     path: "/",
-    domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : undefined
+    domain: isProduction ? process.env.COOKIE_DOMAIN : undefined
   };
 
   await redisClient.set(`access_token_${userId}`, access, { EX: 60 * 60 * 24 * 7 });

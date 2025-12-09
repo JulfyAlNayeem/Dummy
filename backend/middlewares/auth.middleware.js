@@ -5,12 +5,19 @@ import User from "../models/userModel.js";
 
 const isLogin = async (req, res, next) => {
   try {
-    const authHeader = req.headers["authorization"];
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return res.status(401).json({ message: "Unauthorized: No token provided." });
+    // First try to get token from cookies (preferred, more secure)
+    let token = req.cookies?.access_token;
+    // Fallback to Authorization header for backwards compatibility
+    if (!token) {
+      const authHeader = req.headers["authorization"];
+      if (authHeader && authHeader.startsWith("Bearer ")) {
+        token = authHeader.split(" ")[1];
+      }
     }
 
-    const token = authHeader.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized: No token provided." });
+    }
 
     try {
       const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);

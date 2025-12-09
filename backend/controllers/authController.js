@@ -102,17 +102,28 @@ export const login = async (req, res) => {
     user.refreshToken = refreshToken
     await user.save()
 
-    // Set refresh token as httpOnly cookie
-    res.cookie("refreshToken", refreshToken, {
+    const isProduction = process.env.NODE_ENV === "production"
+    const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
+      path: "/", // Make cookies accessible for all paths
+    }
+
+    // Set access token as httpOnly cookie (15 min)
+    res.cookie("accessToken", accessToken, {
+      ...cookieOptions,
+      maxAge: 15 * 60 * 1000, // 15 minutes
+    })
+
+    // Set refresh token as httpOnly cookie (7 days)
+    res.cookie("refreshToken", refreshToken, {
+      ...cookieOptions,
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     })
 
     res.json({
       message: "Login successful",
-      accessToken,
       user: {
         id: user._id,
         name: user.name,
@@ -135,7 +146,16 @@ export const logout = async (req, res) => {
       await user.save()
     }
 
-    res.clearCookie("refreshToken")
+    const isProduction = process.env.NODE_ENV === "production"
+    const cookieOptions = {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
+      path: "/",
+    }
+
+    res.clearCookie("accessToken", cookieOptions)
+    res.clearCookie("refreshToken", cookieOptions)
     res.json({ message: "Logout successful" })
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message })
@@ -166,15 +186,27 @@ export const refreshToken = async (req, res) => {
     user.refreshToken = newRefreshToken
     await user.save()
 
-    // Set new refresh token cookie
-    res.cookie("refreshToken", newRefreshToken, {
+    const isProduction = process.env.NODE_ENV === "production"
+    const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
+      path: "/",
+    }
+
+    // Set new access token cookie
+    res.cookie("accessToken", accessToken, {
+      ...cookieOptions,
+      maxAge: 15 * 60 * 1000, // 15 minutes
     })
 
-    res.json({ accessToken })
+    // Set new refresh token cookie
+    res.cookie("refreshToken", newRefreshToken, {
+      ...cookieOptions,
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    })
+
+    res.json({ message: "Token refreshed successfully" })
   } catch (error) {
     res.status(401).json({ message: "Invalid refresh token" })
   }
