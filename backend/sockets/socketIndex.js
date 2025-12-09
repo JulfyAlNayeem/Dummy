@@ -10,6 +10,7 @@ import registerAlertnessHandlers from "./alertnessSocket.js";
 import { registerConversationActiveUsersHandlers } from "./conversationActiveUsers.js";
 import { registerConversationHandlers } from "./conversationSocket.js";
 import { registerEncryptionKeyHandlers } from "./encryptionKeySocket.js";
+import { registerCentralizedMessageHandlers } from "./centralizedMessageSocket.js";
 
 export const initialSocketServer = async (server, redis) => {
   const allowedOrigins = process.env.ORIGIN_URL.split(',').map(s => s.trim());
@@ -33,18 +34,23 @@ export const initialSocketServer = async (server, redis) => {
 
   // JWT authentication middleware
   io.use((socket, next) => {
-    const cookies = socket.handshake.headers.cookie;
+    let token = null;
     
-    if (!cookies) {
-      logger.warn({ id: socket.id }, "⚠️  No cookies found in Socket.IO handshake");
-      return next(new Error('Authentication required'));
+    // Try to get token from cookies first
+    const cookies = socket.handshake.headers.cookie;
+    if (cookies) {
+      const parsedCookies = cookie.parse(cookies);
+      // Try both camelCase and snake_case cookie names
+      token = parsedCookies.accessToken || parsedCookies.access_token;
     }
-
-    const parsedCookies = cookie.parse(cookies);
-    const token = parsedCookies.access_token;
+    
+    // Fallback: try to get token from query string (for some clients)
+    if (!token && socket.handshake.query?.token) {
+      token = socket.handshake.query.token;
+    }
     
     if (!token) {
-      logger.warn({ id: socket.id, cookies: Object.keys(parsedCookies) }, "⚠️  No access_token found in cookies");
+      logger.warn({ id: socket.id }, "⚠️  No accessToken found in cookies or query");
       return next(new Error('Authentication required'));
     }
 
@@ -63,7 +69,10 @@ export const initialSocketServer = async (server, redis) => {
   io.on("connection", (socket) => {
     logger.info({ id: socket.id }, "🔌 Socket connected");
 
-    // Register custom handlers
+    // Register centralized message handler FIRST (handles auto-join to all conversations)
+    registerCentralizedMessageHandlers(io, socket);
+    
+    // Register other custom handlers
     registerConversationHandlers(io, socket);
     registerOnlineUserHandlers(io, socket);
     registerConversationActiveUsersHandlers(io, socket);
