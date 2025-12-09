@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useUserAuth } from '../../context-reducer/UserAuthContext';
 import { borderColor, miniThemeBg, themeBg, navbarIconColor, navbarTheme } from '../../constant';
 import ConversationList from './ConversationList';
 import { BiArrowBack } from 'react-icons/bi';
 import {
   useFetchConversationByIdQuery,
+  useGetAllConversationsQuery,
   useUpdateConversationThemeIndexMutation,
 } from '../../redux/api/conversationApi';
 import MessengeRequestCard from './MessengeRequestCard';
@@ -30,6 +31,7 @@ import { fetchConversationKeys } from '@/utils/messageEncryptionHelperFuction';
 
 const ChatTab = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { convId, userId } = useParams();
   const { user, socket } = useUserAuth();
   const { themeIndex, conversationId, isGroup, conversationStatus, participant, blockList } = useSelector((state) => state.conversation);
@@ -42,11 +44,19 @@ const ChatTab = () => {
   const [themeBackground, setThemeBackground] = useState(themeBg);
   const [showConversationList, setShowConversationList] = useState(false); 
 
-  // Fetch conversation by ID
+  // Fetch conversation by ID or get all conversations if convId is 'empty'
   const { data: conversation, isError: conversationError, isLoading: isConversationLoading } = useFetchConversationByIdQuery(
     { chatId: convId, userId: user?._id },
-    { skip: !convId || !user?._id }
+    { skip: !convId || convId === 'empty' || !user?._id }
   );
+
+  const { data: conversationsList, isError: conversationsListError, isLoading: isConversationsListLoading } = useGetAllConversationsQuery(
+    user?._id,
+    { skip: convId !== 'empty' || !user?._id }
+  );
+
+  // Combined loading state
+  const isLoading = isConversationLoading || isConversationsListLoading;
 
   const { data: newParticipantInfo, isError: isNewParticipantInfoError, isLoading: isNewParticipantLoadingInfo } = useGetUserInfoQuery(
     userId,
@@ -66,9 +76,14 @@ const ChatTab = () => {
       setConversationNotFoundError('');
     }
     
-    // When convId changes, immediately update Redux to prevent showing stale data
-    if (convId) {
+    // When convId changes, immediately update Redux and join the conversation room
+    if (convId && convId !== 'empty') {
       dispatch(setConversationId(convId));
+      
+      // Ensure socket joins this conversation room for real-time updates
+      if (socket) {
+        socket.emit('joinNewConversation', convId);
+      }
     }
     
     // Update state when conversation data is loaded
@@ -88,7 +103,16 @@ const ChatTab = () => {
     if (conversationError) {
       setConversationNotFoundError('Conversation not found');
     }
-  }, [conversation, convId, userId, conversationError, dispatch, user]);
+
+    // Handle conversations list when convId is 'empty'
+    if (convId === 'empty' && conversationsList) {
+      if (conversationsList.length > 0) {
+        // Navigate to the first conversation
+        navigate(`/e2ee/t/${conversationsList[0]._id}`, { replace: true });
+      }
+      // If no conversations, stay on empty state (don't navigate)
+    }
+  }, [conversation, convId, userId, conversationError, conversationsList, dispatch, user, socket, navigate]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -130,7 +154,7 @@ const ChatTab = () => {
     },
   };
 
-  if (isConversationLoading) {
+  if (isLoading) {
     return (
       <Loading themeIndex={themeIndex} />
     );
@@ -148,9 +172,14 @@ const ChatTab = () => {
       </section>
 
       {/* Main Chat Section */}
-      {conversationNotFoundError ? (
+      {conversationNotFoundError || convId === 'empty' ? (
         <div className={`flex items-center ${navbarTheme[themeIndex]} justify-center md:w-3/5 w-full text-white`}>
-          <img src="/icons/message.png" className="w-72" alt="" />
+          <div className="text-center">
+            <img src="/icons/message.png" className="w-72 mx-auto mb-4" alt="" />
+            <p className="text-lg">
+              {convId === 'empty' ? 'No conversations yet. Start a new chat!' : 'Conversation not found'}
+            </p>
+          </div>
         </div>
       ) : (
         <div className={`md:w-3/5 w-full flex flex-col h-screen ${windowWidth < 640 && showConversationList ? 'hidden' : 'flex'}`}>

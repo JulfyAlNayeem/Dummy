@@ -35,15 +35,16 @@ const MessengeRequestCard = ({
   conversationStatus,
   messagesContainerRef,
 }) => {
+
   const {user} = useUser(); 
   const { participant} = useConversation();
   return (
     <div className="text-white min-h-screen flex flex-col bg-[#020617]/30 backdrop-blur-sm">
-      <div className="px-4 rounded-lg">
+      <div className="px-4 rounded-lg flex flex-col h-full">
         <div
           ref={messagesContainerRef}
           className="flex-1 overflow-y-auto space-y-6"
-          style={{ maxHeight: 'calc(100vh - 150px)', minHeight: 'calc(100vh - 150px)' }}
+          style={{ maxHeight: 'calc(100dvh - 200px)', minHeight: 'calc(100dvh - 200px)' }}
         >
           {/* Profile + Encryption */}
           <div className="space-y-4">
@@ -57,10 +58,12 @@ const MessengeRequestCard = ({
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <RequestActionButtons
-          conversationStatus={conversationStatus}
-        />
+        {/* Action Buttons - Fixed at bottom */}
+        <div className="flex-shrink-0 mt-4 pb-4">
+          <RequestActionButtons
+            conversationStatus={conversationStatus}
+          />
+        </div>
       </div>
     </div>
   );
