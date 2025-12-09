@@ -1,4 +1,3 @@
-import { prepareAuthHeaders } from "@/utils/authHeaders";
 import { BASE_URL } from "@/utils/baseUrls";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -6,8 +5,7 @@ export const adminApi = createApi({
   reducerPath: "adminApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}admin`,
-    // credentials: "include",
-  prepareHeaders: prepareAuthHeaders,
+    credentials: "include",
   }),
   tagTypes: [
     "DashboardStats",

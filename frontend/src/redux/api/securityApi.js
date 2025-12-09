@@ -1,11 +1,9 @@
-import { prepareAuthHeaders } from "@/utils/authHeaders";
 import { BASE_URL } from "@/utils/baseUrls";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${BASE_URL}site-security/`,
-    // credentials: "include",
-    prepareHeaders: prepareAuthHeaders,
+  credentials: "include",
 });
 
 export const securityApi = createApi({

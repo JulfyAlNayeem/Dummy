@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "@/utils/baseUrls";
-import { prepareAuthHeaders } from "@/utils/authHeaders";
 
 /**
  * User Management API slice for CRUD operations on users
@@ -9,8 +8,7 @@ export const userManagementApi = createApi({
   reducerPath: "userManagementApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}admin/user-management`,
-    // credentials: "include",
-  prepareHeaders: prepareAuthHeaders,
+    credentials: "include",
   }),
   tagTypes: ["User", "ScheduledDeletion", "InactiveUser", "UserList"],
   endpoints: (builder) => ({

@@ -1,13 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "@/utils/baseUrls";
-import { prepareAuthHeaders } from "@/utils/authHeaders";
 
 export const socialApi = createApi({
   reducerPath: "socialApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}social`,
-    // credentials: "include",
-  prepareHeaders: prepareAuthHeaders,
+    credentials: "include",
   }),
   tagTypes: ["Posts", "Post"],
   endpoints: (builder) => ({
