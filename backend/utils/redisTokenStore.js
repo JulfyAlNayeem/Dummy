@@ -1,21 +1,24 @@
 import jwt from 'jsonwebtoken';
 import { getRedisClient } from '../config/redisClient.js';
 
-const storeToken = async (res, token, userId) => {
+const storeToken = async (res, token, userId, req) => {
   const redisClient = getRedisClient();
   const { access, refresh } = token;
-  
-  // In production: secure=true, sameSite=none (for cross-origin)
-  // In development: secure=false, sameSite=lax (for same-origin localhost)
+
+  // Determine transport/protocol when deciding secure flag
   const isProduction = process.env.NODE_ENV === "production";
-  
+  const forwardedProto = (req && req.headers && req.headers['x-forwarded-proto']) || "";
+  const proto = (req && req.protocol) || forwardedProto.split(',')[0]?.trim() || "http";
+  const isHttps = String(proto).toLowerCase() === 'https';
+
   const cookieOptions = {
     httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? "none" : "lax",
+    // Only set Secure when in production AND the current request was over HTTPS
+    secure: Boolean(isProduction && isHttps),
+    sameSite: isProduction && isHttps ? "none" : "lax",
     maxAge: 7 * 24 * 60 * 60 * 1000,
     path: "/",
-    domain: isProduction ? process.env.COOKIE_DOMAIN : undefined
+    domain: isProduction ? process.env.COOKIE_DOMAIN : undefined,
   };
 
   await redisClient.set(`access_token_${userId}`, access, { EX: 60 * 60 * 24 * 7 });
@@ -24,7 +27,7 @@ const storeToken = async (res, token, userId) => {
   if (!res.headersSent) {
     res.cookie("access_token", access, cookieOptions);
     res.cookie("refresh_token", refresh, cookieOptions);
-    console.log('Cookies set:', { access_token: access, refresh_token: refresh });
+    console.log('Cookies set:', { access_token: !!access, refresh_token: !!refresh, cookieOptions });
   } else {
     console.error("Headers already sent during storeToken");
   }

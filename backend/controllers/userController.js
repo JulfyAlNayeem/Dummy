@@ -206,7 +206,8 @@ const login = async (req, res) => {
     await storeToken(
       res,
       { access: accessToken, refresh: refreshToken },
-      user._id.toString()
+      user._id.toString(),
+      req
     );
 
     // Emit online users update (if using Socket.IO)
@@ -461,7 +462,8 @@ const refreshToken = async (req, res) => {
     await storeToken(
       res,
       { access: accessToken, refresh: refreshToken },
-      userId
+      userId,
+      req
     );
     res.status(200).json({ accessToken });
   } catch (error) {
