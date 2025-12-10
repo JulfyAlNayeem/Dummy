@@ -99,9 +99,12 @@ export const updateUser = async (req, res) => {
       delete updates.password
     }
 
-    // Validate role changes
-    if (updates.role && !["user", "admin", "moderator"].includes(updates.role)) {
-      return res.status(400).json({ message: "Invalid role specified" })
+    // Validate role changes against model enum to avoid drift
+    if (updates.role) {
+      const allowedRoles = User.schema.path('role').enumValues || ["user", "admin", "moderator"];
+      if (!allowedRoles.includes(updates.role)) {
+        return res.status(400).json({ message: "Invalid role specified" })
+      }
     }
 
     const updatedUser = await User.findByIdAndUpdate(
