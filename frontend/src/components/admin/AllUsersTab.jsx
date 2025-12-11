@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { UserPlus, Edit, Trash2, Shield, ShieldOff, Key, RefreshCw } from "lucide-react"
+import { UserPlus, Edit, Trash2, Shield, ShieldOff, Key, RefreshCw, FileText } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { useGetAllUsersQuery } from "@/redux/api/admin/userManagementApi"
 import { openModal, updateFilter, selectFilters } from "@/redux/slices/uiSlice"
@@ -149,6 +149,19 @@ export default function AllUsersTab() {
                       className="text-white dark:text-gray-900 hover:bg-gray-900/50 dark:hover:bg-gray-300/50"
                     >
                       <Edit className="h-3 w-3" />
+                    </Button>
+                    {/* Toggle File Sending Permission */}
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => dispatch(openModal({ modalName: "toggleFilePermission", data: user }))}
+                      className={cn(
+                        "text-white dark:text-gray-900 hover:bg-gray-900/50 dark:hover:bg-gray-300/50",
+                        user.fileSendingAllowed && "text-green-400 dark:text-green-600"
+                      )}
+                      title={user.fileSendingAllowed ? "File sending enabled" : "File sending disabled"}
+                    >
+                      <FileText className="h-3 w-3" />
                     </Button>
                     {/* Reset Password Button */}
                     <Button

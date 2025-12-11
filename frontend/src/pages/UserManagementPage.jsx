@@ -182,6 +182,16 @@ export default function UserManagementTabs() {
     }
   }
 
+  const handleToggleFilePermission = async (userId, fileSendingAllowed) => {
+    try {
+      await updateUser({ userId, fileSendingAllowed }).unwrap()
+      toast.success(`File sending permission ${fileSendingAllowed ? 'enabled' : 'disabled'} successfully`)
+      dispatch(closeModal("toggleFilePermission"))
+    } catch (err) {
+      toast.error(err?.data?.message || "Failed to update file permission")
+    }
+  }
+
 
   return (
     <DashboardLayout type={"admin"}>
@@ -235,6 +245,7 @@ export default function UserManagementTabs() {
           onUnblockUser={handleUnblockUser}
           onResetPassword={handleResetPassword}
           onPreventDeletion={handlePreventDeletion}
+          onToggleFilePermission={handleToggleFilePermission}
         />
       </Tabs>
     </DashboardLayout>

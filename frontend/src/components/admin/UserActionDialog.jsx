@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Dialog,
   DialogContent,
@@ -23,6 +24,7 @@ export default function UserActionDialog({
   onUnblockUser, // Added to props destructuring
   onResetPassword,
   onPreventDeletion,
+  onToggleFilePermission,
 }) {
   const dispatch = useDispatch()
   const modals = useSelector(selectModals)
@@ -61,6 +63,8 @@ export default function UserActionDialog({
       onResetPassword(selectedUser._id, formData.newPassword)
     } else if (modals.preventDeletion) {
       onPreventDeletion(selectedSchedule._id, formData.reason)
+    } else if (modals.toggleFilePermission) {
+      onToggleFilePermission(selectedUser._id, !selectedUser.fileSendingAllowed)
     }
   }
 
@@ -112,6 +116,13 @@ export default function UserActionDialog({
         title: "Prevent Deletion",
         description: "Prevent automatic deletion of inactive user",
         buttonText: "Prevent",
+        buttonVariant: "default",
+      }
+    } else if (modals.toggleFilePermission) {
+      return {
+        title: "Toggle File Sending Permission",
+        description: `${selectedUser?.fileSendingAllowed ? 'Disable' : 'Enable'} file sending for ${selectedUser?.name}`,
+        buttonText: selectedUser?.fileSendingAllowed ? "Disable" : "Enable",
         buttonVariant: "default",
       }
     }
@@ -214,6 +225,17 @@ export default function UserActionDialog({
                   </SelectContent>
                 </Select>
               </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="fileSendingAllowed"
+                  checked={formData.fileSendingAllowed || false}
+                  onCheckedChange={(checked) => setFormData({ ...formData, fileSendingAllowed: checked })}
+                  className="border-gray-600 dark:border-blue-300"
+                />
+                <Label htmlFor="fileSendingAllowed" className="text-white dark:text-gray-900 cursor-pointer">
+                  Allow file sending
+                </Label>
+              </div>
             </>
           )}
 
@@ -254,6 +276,16 @@ export default function UserActionDialog({
                 onChange={(e) => setFormData({ ...formData, newPassword: e.target.value })}
                 className="bg-gray-900 dark:bg-blue-100 text-white dark:text-gray-900 border-gray-600 dark:border-blue-300"
               />
+            </div>
+          )}
+
+          {modals.toggleFilePermission && (
+            <div className="space-y-2">
+              <p className="text-white dark:text-gray-900">
+                {selectedUser?.fileSendingAllowed
+                  ? `Are you sure you want to disable file sending for ${selectedUser?.name}?`
+                  : `Are you sure you want to enable file sending for ${selectedUser?.name}?`}
+              </p>
             </div>
           )}
         </div>
