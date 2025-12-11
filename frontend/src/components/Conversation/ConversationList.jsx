@@ -1,5 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from "react";
 import "animate.css";
+import { MessageSquare } from 'lucide-react';
 import ConversationCard from "../card/ConversationCard";
 import ChatListNavbar from "./ConversationListNavbar";
 import { useNavigate } from "react-router-dom";
@@ -161,8 +162,10 @@ const ConversationList = ({ themeIndex, setShowConversationList }) => {
                 )}
                 {!isConversationsLoading &&
                   (!allConversations || allConversations.length === 0) && (
-                    <div className="text-center py-4 text-gray-500 animate__animated animate__fadeIn">
-                      No conversations found
+                    <div className="text-center py-8 text-gray-300 animate__animated animate__fadeIn flex flex-col items-center space-y-4">
+                      <MessageSquare size={48} className="text-gray-400 animate__animated animate__bounceIn" />
+                      <p className="text-lg font-medium">No conversations yet!</p>
+                      <p className="text-sm">Start a new chat to see your conversations here.</p>
                     </div>
                   )}
                 <div className="space-y-2">

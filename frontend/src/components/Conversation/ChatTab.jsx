@@ -42,7 +42,18 @@ const ChatTab = () => {
   const [conversationNotFoundError, setConversationNotFoundError] = useState('');
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [themeBackground, setThemeBackground] = useState(themeBg);
-  const [showConversationList, setShowConversationList] = useState(false); 
+  const isMobile = windowWidth < 640;
+  
+  // Initialize showConversationList based on screen size and route
+  // On mobile: show list by default UNLESS userId is present (user search scenario)
+  const [showConversationList, setShowConversationList] = useState(() => {
+    if (isMobile) {
+      // If userId exists (user search), show chat room
+      // Otherwise, show conversation list
+      return !userId;
+    }
+    return false; // Desktop always shows both
+  }); 
 
   // Fetch conversation by ID or get all conversations if convId is 'empty'
   const { data: conversation, isError: conversationError, isLoading: isConversationLoading } = useFetchConversationByIdQuery(
@@ -126,6 +137,25 @@ const ChatTab = () => {
     setThemeBackground(windowWidth <= 765 ? miniThemeBg : themeBg);
   }, [windowWidth]);
 
+  // Update showConversationList when route or screen size changes
+  useEffect(() => {
+    const isMobile = windowWidth < 640;
+    
+    if (isMobile) {
+      // On mobile: show chat room if userId exists (user search scenario)
+      // Otherwise, show conversation list
+      if (userId) {
+        setShowConversationList(false); // Show chat room for user search
+      } else if (convId && convId !== 'empty') {
+        setShowConversationList(false); // Show chat room when conversation selected
+      } else {
+        setShowConversationList(true); // Show list by default
+      }
+    } else {
+      setShowConversationList(false); // Desktop always shows both
+    }
+  }, [convId, userId, windowWidth]);
+
   // Auto-fetch encryption keys when conversation loads
   useEffect(() => {
     const autoFetchKeys = async () => {
@@ -173,10 +203,12 @@ const ChatTab = () => {
 
       {/* Main Chat Section */}
       {conversationNotFoundError || convId === 'empty' ? (
-        <div className={`flex items-center ${navbarTheme[themeIndex]} justify-center md:w-3/5 w-full text-white`}>
+        <div className={`items-center bg-[#020617] justify-center md:w-3/5 w-full h-screen  text-white ${
+          windowWidth < 640 && showConversationList ? 'hidden' : 'flex'
+        }`}>
           <div className="text-center">
             <img src="/icons/message.png" className="w-72 mx-auto mb-4" alt="" />
-            <p className="text-lg">
+            <p className="text-lg text-gray-300">
               {convId === 'empty' ? 'No conversations yet. Start a new chat!' : 'Conversation not found'}
             </p>
           </div>
