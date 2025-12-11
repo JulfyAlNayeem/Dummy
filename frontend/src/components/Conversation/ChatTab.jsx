@@ -179,8 +179,6 @@ const ChatTab = () => {
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center bottom',
-      overflow: 'hidden',
-      minHeight: '100vh',
     },
   };
 
@@ -191,10 +189,10 @@ const ChatTab = () => {
   }
 
   return (
-    <div className="min-h-screen flex gap-3 " ref={chatContainerRef} style={styles.container}>
+    <div className="h-[100dvh] flex gap-3 overflow-hidden" ref={chatContainerRef} style={styles.container}>
       {/* ConversationList Section */}
       <section
-        className={`${navbarIconColor[themeIndex]} ${borderColor[themeIndex]} w-full md:w-2/5 flex-col ${
+        className={`${navbarIconColor[themeIndex]} ${borderColor[themeIndex]} w-full md:w-2/5 h-full flex-col overflow-hidden ${
           windowWidth < 640 && !showConversationList ? 'hidden' : 'flex'
         } sm:flex`}
       >
@@ -203,7 +201,7 @@ const ChatTab = () => {
 
       {/* Main Chat Section */}
       {conversationNotFoundError || convId === 'empty' ? (
-        <div className={`items-center bg-[#020617] justify-center md:w-3/5 w-full h-screen  text-white ${
+        <div className={`items-center bg-[#020617] justify-center md:w-3/5 w-full h-full text-white ${
           windowWidth < 640 && showConversationList ? 'hidden' : 'flex'
         }`}>
           <div className="text-center">
@@ -214,7 +212,7 @@ const ChatTab = () => {
           </div>
         </div>
       ) : (
-        <div className={`md:w-3/5 w-full flex flex-col h-screen ${windowWidth < 640 && showConversationList ? 'hidden' : 'flex'}`}>
+        <div className={`md:w-3/5 w-full flex flex-col h-full overflow-hidden ${windowWidth < 640 && showConversationList ? 'hidden' : 'flex'}`}>
           <ChatTabNavbar
             updateConversationThemeIndex={updateConversationThemeIndex}
             isGroup={isGroup}

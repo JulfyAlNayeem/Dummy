@@ -105,7 +105,7 @@ const ChatTabFooter = ({
   return (
     <div
       ref={containerRef}
-      className={`flex items-center flex-col shadow-lg w-full transition-all duration-500  bg-`}
+      className={`flex items-center flex-col shadow-lg w-full transition-all duration-500 flex-shrink-0`}
     >
       {(selectedImages.length > 0 || selectedFiles.length > 0 || replyingMessage || editingMessage) && (
         <div className={` ${footerBg[themeIndex]} w-full  px-5 py-2 bg-opacity-50 rounded-t-3xl  flex flex-wrap gap-2`}>

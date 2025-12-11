@@ -414,7 +414,6 @@ const MessageContainer = ({ messagesContainerRef, participant }) => {
       className="relative p-4 space-y-4 overflow-y-auto flex-1"
       onClick={handleContainerClick}
       ref={messagesContainerRef}
-      style={{ maxHeight: useDynamicHeight(120) }}
     >
       <div>
         {isLoading && (
