@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MoreVertical } from 'lucide-react';
 import ImageDisplay from '../chat/ImageDisplay';
 import VoiceMessageCard from '../chat/VoiceMessageCard';
 import VideoMessageCard from '../chat/VideoMessageCard';
 import CallCard from '../chat/CallCard';
 import MessageReactions from '../chat/MessageReactions';
 import ReactionPicker from '../chat/ReactionPicker';
-import { messageSenderCard, receiverMessageCard, senderMessageCard } from '@/constant';
+import { receiverMessageCard, senderMessageCard } from '@/constant';
 import { BASE_URL } from '@/utils/baseUrls';
 import { useConversation, updateMessageReaction } from '@/redux/slices/conversationSlice';
 import { useUserAuth } from '@/context-reducer/UserAuthContext';
@@ -94,7 +93,7 @@ const MessageCards = ({
     longPressTimer.current = setTimeout(() => {
       const rect = messageRef.current.getBoundingClientRect();
       setIsReactionPickerOpen(true);
-    }, 500);
+    }, 700);
   };
 
   const handleLongPressEnd = () => {
@@ -191,7 +190,7 @@ const MessageCards = ({
     msg.messageType === "text" && !msg.replyTo && !msg.media?.length && msg.emojiType !== "custom";
 
   return (
-    <div className="max-w-[90%] relative overflow-x-hidden">
+    <div className="max-w-[90%] relative ">
       {activeMessageId === (msg._id || msg.clientTempId) && !isOwnMessage && (
         <MessageHeader
           sender={sender}

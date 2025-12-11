@@ -239,7 +239,7 @@ const TextMessageCard = ({ text, plainText, senderId, messageId }) => {
             textDecoration: 'underline',
             cursor: 'pointer',
           }}
-          className="text-start text-sm break-all overflow-hidden inline-block max-w-full"
+          className="text-start text-base break-all overflow-hidden inline-block max-w-full"
           title={part} // Show full URL on hover
         >
           {truncateUrl(part)}
