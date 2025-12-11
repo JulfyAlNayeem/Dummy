@@ -11,7 +11,8 @@ import orange from "../assets/background/orange.svg";
 import sunset from "../assets/background/sunset.svg";
 import minisunset from "../assets/background/sunsetmini.svg";
 import bridge from "../assets/background/bridge.svg";
-
+import rocket from "../assets/background/curve-rocket.webp"; 
+import smallRocket from "../assets/background/rocketsmall.webp";
 import minibridge from "../assets/background/bridgemini.svg";
 import mangroovmini from "../assets/background/mangroovmini.webp";
 import mangroov from "../assets/background/mangroov.svg";
@@ -48,7 +49,7 @@ export const theme = [
   "bg-lightPink",
   "bg-[#bcc363] b",
   "bg-[#6981d6]",
-  "bg-slate-950 shadow-blue-950",
+  "bg-[#041033] text-white shadow-teal-700",
   "bg-slate-950 shadow-blue-950",
   "bg-[#2d2f7fff]/20   ", // Sunset Reflection
   "bg-[#0a0f24ff]", // Magical Deer
@@ -64,7 +65,7 @@ export const navbarTheme = [
   "bg-lightPink",
   "bg-[#bcc363]/50",
   "bg-[#6981d6]",
-  "bg-slate-950 shadow-blue-950",
+  "bg-[#41b0d3]/80",
   "bg-[#03426f]/40", // Firefly
   "bg-[#2d2f7fff]/20   ", // Sunset Reflection
   "bg-[#0a0f24ff]", // Magical Deer
@@ -82,8 +83,7 @@ export const iconColor = [
   "text-lightChocolate border-lightChocolate border-hidden",
   "text-parrot border-parrot",
   "text-deepSlate border-deepSlate",
-  "text-oceanBlue border-oceanBlue border-hidden",
-  "text-[#404b0f] border-[#404b0f] border-hidden",
+  "text-[#132757] border-[#132757] border-hidden", // Rocket
   "text-[#8e4c95] border-[#8e4c95]", // Sunset Reflection
   "text-[#60a5fa] border-[#60a5fa]", // Magical Deer
   "text-[#c75400] border-[#c75400]", // Cave City 2
@@ -98,7 +98,7 @@ export const chatInputBg = [
   "bg-[#fabf78] text-lightChocolate placeholder:text-brown placeholder:text-white",
   "bg-[#8dcc90] placeholder:text-white text-white",
   "bg-[#15214dff] backdrop-blur-lg backdrop-opacity-10 placeholder:text-deepSlate",
-  "bg-[#0a0f24ff] backdrop-blur-lg backdrop-opacity-10 placeholder:text-oceanBlue",
+  "bg-[#0a81b2] text-[#e0f5ff] placeholder:text-[#4FD1C5]",
   "bg-[#404b0f]/60 backdrop-blur-lg backdrop-opacity-10 placeholder:text-[#c4a91e]",
   "bg-[#2A1F4D] text-[#8e4c95] backdrop-blur-sm backdrop-opacity-80 placeholder:text-[#8e4c95]", // Sunset Reflection
   "bg-[#0a0f24ff] text-[#60a5fa] backdrop-blur-sm backdrop-opacity-80 placeholder:text-[#60a5fa]", // Magical Deer
@@ -114,7 +114,7 @@ export const navbarIconColor = [
   "text-lightChocolate border-brown placeholder:text-brown",
   "text-parrot border-parrot",
   "text-[#274490ff] border-deepSlate placeholder:text-deepSlate",
-  "text-oceanBlue border-oceanBlue placeholder:text-oceanBlue border-hidden",
+  "text-[#e0f5ff] border-[#e0f5ff] placeholder:text-[#4FD1C5]",
   "text-[#369eba] border-[#404b0f] placeholder:text-[#404b0f] border-hidden", // Firefly
   "text-[#8e4c95] border-[#8e4c95] placeholder:text-[#8e4c95]", // Sunset Reflection
   "text-[#60a5fa] border-[#60a5fa] placeholder:text-[#60a5fa]", // Magical Deer
@@ -130,7 +130,7 @@ export const borderColor = [
   "text-lightChocolate border-lightChocolate border-hidden",
   "text-parrot border-parrot",
   "text-[#788fc2] border-deepSlate",
-  "text-oceanBlue border-oceanBlue border-hidden",
+  "text-[#e0f5ff] border-[#e0f5ff]",
   "text-[#887409] border-[#404b0f] border-hidden",
   "text-purple-300 border-[#8e4c95]", // Sunset Reflection
   "text-[#60a5fa] border-[#60a5fa]", // Magical Deer
@@ -146,7 +146,7 @@ export const footerIconColor = [
   "text-lightChocolate border-lightChocolate border-hidden",
   "text-parrot border-parrot",
   "text-deepSlate border-deepSlate",
-  "text-oceanBlue border-oceanBlue border-hidden",
+  "text-[#e0f5ff] border-[#e0f5ff]",
   "text-[#404b0f] border-[#404b0f] border-hidden",
   "text-[#8e4c95] border-[#8e4c95]", // Sunset Reflection
   "text-[#60a5fa] border-[#60a5fa]", // Magical Deer
@@ -162,7 +162,7 @@ export const searchBox = [
   "bg-[#e08f60] border-hidden",
   "bg-parrot",
   "text-[#5771b3] border-[#5771b3]",
-  "text-oceanBlue bg-[#027bb3ff]/10 border-hidden",
+  "text-[#e0f5ff] bg-[#041033]/10 border-hidden",
   "text-[#404b0f] bg-[#404b0f]/20 border-none",
   "text-[#8e4c95] bg-[#2A1F4D]/20 border-[#8e4c95]", // Sunset Reflection
   "text-[#60a5fa] bg-[#0a0f24ff]/20 border-[#60a5fa]", // Magical Deer
@@ -178,7 +178,7 @@ export const emojiColor = [
   "#663039",
   "#8dcc90",
   "#274490",
-  "#027bb3ff",
+  "#e0f5ff",
   "#404b0f",
   "#8e4c95", // Sunset Reflection
   "#60a5fa", // Magical Deer
@@ -209,8 +209,8 @@ export const chatListFooterColor = [
   "#533004ff",
   "#8dcc90",
   "#8dcc90",
-  "#152651ff",
-  "#131d34ff",
+  "#041033",
+  "#0b8cbb",
   "#131d34ff",
   "#2A1F4D", // Sunset Reflection
   "#0a0f24ff", // Magical Deer
@@ -225,7 +225,7 @@ export const chatListFooterBorderColor = [
   "#291702",
   "#111e40ff #8dcc90]",
   "#8dcc90 #8dcc90",
-  "#111e40ff",
+  "#041033",
   "#111e40ff",
   "border-[#111e40ff] bg-[#131d34ff]",
   "#1E1E4B", // Sunset Reflection
@@ -242,7 +242,7 @@ export const footerBg = [
   "bg-lightPink",
   "bg-lightYellow/40",
   "bg-[#111c3d]/70",
-  "",
+  "bg-[#0b8cbb]/70", // Rocket
   "bg-[#173b1d]/30 backdrop-blur-sm ",
   "bg-[#2A1F4D]/70 ", // Sunset Reflection
   "bg-[#0a0f24ff]/70", // Magical Deer
@@ -258,7 +258,7 @@ export const chatOptionBg = [
   "bg-lightYellow",
   "bg-lightYellow/40",
   "bg-[#111c3d]/30",
-  "bg-[#1E1E4B]/50", // Sunset Reflection
+  "bg-[#0a81b2]/50", // rocket theme
   "bg-[#0a0f24ff]/50", // Magical Deer
   "bg-[#f4a261]/50",// Wolf in Snow
   "bg-[#a3e4d7]/50", // Forest Deer
@@ -272,7 +272,7 @@ export const sidebarBg = [
   "bg-lightYellow",
   "bg-lightYellow/40",
   "bg-[#111c3d]/90",
-  "bg-[#2A1F4D]/80", // Sunset Reflection
+  "bg-[#041033]/80", // rocket theme
   "bg-[#0a0f24ff]/80", // Magical Deer
   "bg-[#f4a261]/80", // Cave City
   "bg-[#a3e4d7]/80", // Forest Deer
@@ -286,7 +286,7 @@ export const cardClass = [
   "bg-gradient-to-r from-[#db8963] via-#ffd787] to-[#faa850] text-white",
   "bg-gradient-to-r from-[#8ecd91] to-[#bcc363]  text-white  shadow-md text-white",
   "text-blue-200 bg-[#7f94dcff]/60",
-  "text-blue-200 bg-[#027bb3ff]/10",
+  "text-white bg-[#3492b4]/80",  // Rocket
   "text-blue-200 bg-[#404b0f]/60",
   "text-white bg-gradient-to-r from-[#8e4c95] to-[#2A1F4D] shadow-md", // Sunset Reflection
   "text-white bg-[#0a0f24ff] shadow-md", // Magical Deer
@@ -302,7 +302,7 @@ export const themeBgColor = [
   "bg-gradient-to-r from-[#db8963] via-#ffd787] to-[#faa850] text-white backdrop-blur",
   "bg-gradient-to-br from-[#f5ff82] via-[#d5e055] to-[#8dcc90] text-white backdrop-blur",
   "text-blue-200 bg-[#7f94dcff]/60 backdrop-blur",
-  "text-blue-200 bg-[#027bb3ff]/10 backdrop-blur",
+  "text-white bg-[#041033]/80 shadow-teal-700",
   "text-blue-200 bg-[#404b0f]/60 backdrop-blur",
   "text-white bg-gradient-to-r from-[#8e4c95] to-[#2A1F4D] ", // Sunset Reflection
   "text-white bg-[#0a0f24ff]/20 shadow-[#004f95] shadow-lg backdrop-blur-lg", // Magical Deer
@@ -382,7 +382,7 @@ export const themeImg = [
   { theme: minisunset, title: "Mountain Sunset" },
   { theme: minibridge, title: "Suspension Bridge" },
   { theme: minielephant, title: "Elephant In The Misty Fog" },
-  { theme: blueSmall, title: "Let Them Test Of ..." },
+  { theme: rocket, title: "Let Them Test Of ..." },
   { theme: orangeSmall, title: "Let Them Know Of ..." },
   { theme: mangroov, title: "Sunset Reflection" }, // Sunset Reflection
   { theme: magicaldeer, title: "Magical Deer" }, // Magical Deer
@@ -398,7 +398,7 @@ export const themeBg = [
   sunset,
   bridge,
   elephant,
-  blue,
+  rocket,
   orange,
   mangroov,
   magicaldeer,
@@ -413,7 +413,7 @@ export const miniThemeBg = [
   minisunset,
   minibridge,
   minielephant,
-  blueSmall,
+  smallRocket,
   orangeSmall,
   mangroovmini,
   magicaldeersmall,
@@ -522,7 +522,7 @@ export const senderMessageCard = [
   "bg-gradient-to-r from-[#c0656d] to-[#ff9764] text-white", // Boat
   "bg-gradient-to-t from-[#a9b244] to-[#71a373] text-white",    //Suspention
   "bg-gradient-to-r from-indigo-500 to-[#4c68a9] text-blue-100", // হাতি ও বড় গাছ
-  "bg-gradient-to-r from-orange-600 to-pink-500 text-white",  // নৌকা ও সূর্যোদয়
+  "bg-[#3492b5] text-white",  // rocket theme (navy -> teal)
   "bg-[#173b1d]/70 text-white", // Firefly
   "bg-gradient-to-r from-[#b54c8b] to-[#602b83] text-white",  // Sunset reflection
   "bg-gradient-to-r from-[#000f18] to-[#000e10] text-slate-200",   // Magical Deer
@@ -538,7 +538,7 @@ export const receiverMessageCard = [
   "bg-gradient-to-tl from-[#faa851] to-[#ff9764] text-white", // বন ও নৌকা ও পাহাড়
   "bg-gradient-to-t from-[#a9b244] to-[#71a373] text-white",    //Suspention
   "bg-gradient-to-r from-[#4c68a9] to-indigo-500 text-blue-100", // হাতি ও বড় গাছ
-  "bg-gradient-to-r from-pink-500 to-[#3e2432] text-white",  //  সূর্যোদয়
+  "bg-[#0a88b6]  text-white",  // rocket theme (navy -> teal)
 
   "bg-[#03426f]/70 text-white", // শহরের দৃশ্য
   "bg-gradient-to-l from-[#da5b78] to-purple-500 text-white", // Sunset reflection
