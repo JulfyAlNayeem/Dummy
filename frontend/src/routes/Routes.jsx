@@ -27,6 +27,7 @@ import SignIn from "@/pages/SignIn";
 import SignUp from "@/pages/SignUp";
 import ChatTab from "@/components/Conversation/ChatTab";
 import Notice from "@/pages/Notice";
+import ConversationListPage from "@/pages/ConversationListPage";
 import SiteSecuritypage from "@/pages/SiteSecuritypage";
 import ErrorFallback, { RouterErrorFallback } from "@/pages/ErrorFallback";
 
@@ -46,6 +47,7 @@ export const Routes = createBrowserRouter(
 
       {/* Protected Routes Wrapper */}
       <Route element={<ProtectedRoutes />}>
+        <Route path={APP_ROUTES.CONVERSATION_LIST} element={<ConversationListPage />} />
         <Route path={APP_ROUTES.CLASS_MANAGEMENT} element={<ClassManagementPage />} />
         <Route path={APP_ROUTES.CHAT_TAB} element={<ChatTab/>} />
         <Route path={APP_ROUTES.NEW_CHAT_START} element={<ChatTab/>} />

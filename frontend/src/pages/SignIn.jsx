@@ -49,27 +49,35 @@ const SignIn = () => {
       // Tokens are now stored in HTTP-only cookies by the backend (more secure)
       toast.success(response.message || "Login successful");
       
-      // Fetch user's latest conversation
-      try {
-        const conversationsResponse = await fetch(`${BASE_URL}conversations/${response.user._id}`, {
-          credentials: 'include', // This sends cookies
-          headers: {
-            'Content-Type': 'application/json'
+      // Check if mobile screen
+      const isMobile = window.innerWidth < 768;
+      
+      if (isMobile) {
+        // Redirect to conversation list on mobile
+        navigate('/conversationlist', { replace: true });
+      } else {
+        // Fetch user's latest conversation for desktop
+        try {
+          const conversationsResponse = await fetch(`${BASE_URL}conversations/${response.user._id}`, {
+            credentials: 'include', // This sends cookies
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          const conversations = await conversationsResponse.json();
+          
+          // Redirect to first conversation if exists
+          if (conversations && conversations.length > 0) {
+            navigate(`/e2ee/t/${conversations[0]._id}`, { replace: true });
+          } else {
+            // No conversations, go to empty chat state
+            navigate('/e2ee/t/empty', { replace: true });
           }
-        });
-        const conversations = await conversationsResponse.json();
-        
-        // Redirect to first conversation if exists
-        if (conversations && conversations.length > 0) {
-          navigate(`/e2ee/t/${conversations[0]._id}`, { replace: true });
-        } else {
-          // No conversations, go to empty chat state
+        } catch (convError) {
+          console.error('Failed to fetch conversations:', convError);
+          // Fallback to empty chat state
           navigate('/e2ee/t/empty', { replace: true });
         }
-      } catch (convError) {
-        console.error('Failed to fetch conversations:', convError);
-        // Fallback to empty chat state
-        navigate('/e2ee/t/empty', { replace: true });
       }
     } catch (error) {
       const msg =

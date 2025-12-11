@@ -5,6 +5,7 @@ export const APP_ROUTES = {
   SIGNUP: "/signup",
 
   // Protected Routes
+  CONVERSATION_LIST: "/conversationlist",
   NEW_CHAT_START: "/t/:userId",
   CLASS_MANAGEMENT: "/e2ee/t2/55",
   CHAT_TAB: "/e2ee/t/:convId",
