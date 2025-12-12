@@ -54,9 +54,9 @@ const ChatTabNavbar = ({
     <nav className={`${navbarTheme[themeIndex]} flex items-center rounded-t-2xl shadow-md p-[10px] gap-2 text-white z-30`}>
       <div className="" aria-hidden="true" />
 
-      <button className="sm:hidden" onClick={onBackClick}>
+      <Link className="sm:hidden" to={APP_ROUTES.CONVERSATION_LIST} onClick={onBackClick}>
         <BiArrowBack />
-      </button>
+      </Link>
 
       <div className="sm:size-10 size-8  avatar">
         <img

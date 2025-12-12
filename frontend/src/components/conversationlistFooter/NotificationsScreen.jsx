@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Heart, X } from "lucide-react";
+import { Bell, Heart, X } from "lucide-react";
 import { useUserAuth } from "@/context-reducer/UserAuthContext";
 import {
   useGetNoticesQuery,
@@ -146,14 +146,11 @@ const NotificationScreen = () => {
   // No notices state - show a nicer empty state card that takes ~90% of viewport height
   if (!notices || notices.length === 0) {
     return (
-      <div className="h-[90vh] w-full flex items-center justify-center bg-[#020617]">
-        <Card className=" bg-[#060c24] dark:from-[#f8fafc] h-[90vh] dark:to-[#eef2f7] border-gray-600 dark:border-gray-300 rounded-lg">
+      <div className="h-full w-full flex items-center justify-center bg-[#020617]">
+        <Card className=" bg-[#060c24] w-[70%] dark:from-[#f8fafc] dark:to-[#eef2f7] border-gray-600 dark:border-gray-300 rounded-lg">
           <CardContent className="p-8 flex flex-col items-center gap-4">
             <div className="w-20 h-20 rounded-full flex items-center justify-center bg-[#022033] dark:bg-[#dff4fb]">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-10 h-10 text-[#3da4ca] dark:text-[#0472a6]">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7-5 7 5v6a6 6 0 01-6 6H9a6 6 0 01-6-6V8z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 22a3 3 0 006 0" />
-              </svg>
+              <Bell className="w-10 h-10 text-[#9fe0ef] dark:text-[#334155]" />
             </div>
 
             <h3 className="text-lg font-semibold text-[#e6f8fb] dark:text-[#0b1720]">No notices yet</h3>

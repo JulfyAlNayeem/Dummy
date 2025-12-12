@@ -110,7 +110,7 @@ const ConversationListFooter = ({ themeIndex, uiBounce, isSearchOpen, setIsSearc
                 <span
                   className={`relative block leading-[70px] text-lg text-center transition-all duration-500 z-50 ${footerIconColor[themeIndex]
                     } ${activeScreen === ["search", "social", "chats", "notifications", "requests"][index]
-                      ? "translate-y-[-38px]"
+                      ? (themeIndex === 5 ? "opacity-0" : "translate-y-[-38px]")
                       : ""
                     }`}
                 >

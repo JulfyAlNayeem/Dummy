@@ -30,7 +30,7 @@ export default function ChatListNavbar({ uiBounce, chatContainerRef, themeIndex 
 
   return (
     <div className={`${uiBounce ? "animate__slideOutUp" : "animate__slideInDown"} ${navbarTheme[themeIndex]} shadow-md px-5 h-[60px] flex items-center justify-between py-1 relative rounded-t-3xl ${!convId ? "" : ""}`}>
-      <Link className="w-full p-2 mb-2 font-bold text-4xl rounded-md">
+      <Link  className="w-full p-2 mb-2 font-bold text-4xl rounded-md">
         <img src={chatIcon} className="size-10" alt="" />
       </Link>
       <div className="flex items-center gap-2.5">

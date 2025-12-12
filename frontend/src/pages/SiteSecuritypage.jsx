@@ -58,7 +58,7 @@ const SiteSecuritypage = () => {
       toast.success(`Message verified successfully as ${response.data.messageType}`);
       setVerifyForm({ message: '' });
       // Redirect to signin page after successful verification
-      setTimeout(() => navigate('/signin'), 1500);
+       navigate('/signin');
     } catch (err) {
       // persist failed verification explicitly
       localStorage.setItem("isVerified", "false");
@@ -105,7 +105,10 @@ const SiteSecuritypage = () => {
         }`}
         style={{ animationDuration: "1600ms" }}
       >
-        <h1 className="text-[#41a9cd] sm:text-4xl text-2xl font-bold">Rocket Launched!</h1>
+        <div className=" flex items-center flex-col justify-center gap-2 px-4 text-center">
+          <h1 className="text-[#3d91ad] sm:text-4xl text-2xl font-bold">Rocket Launched!</h1>
+        <h3 className=" font-semibold text-[#41a9cd]">Humm...! May be we know each other, right? But we need to very you first!</h3>
+        </div>
         {/* Verify Message Form */}
         <div className="w-full max-w-md px-4">
           <form onSubmit={handleVerifySubmit} className="space-y-4 flex items-center flex-col justify-center">

@@ -27,7 +27,6 @@ function App() {
 
   return (
     <main className={`${navbarTheme[themeIndex]} max-w-[2200px] mx-auto`}>
-      <Toaster position="top-center" />
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Suspense fallback={<Loading />}>
           <RouterProvider router={Routes} />

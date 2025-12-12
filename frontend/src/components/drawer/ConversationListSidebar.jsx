@@ -14,6 +14,7 @@ import ActiveUserList from './ActiveUserList';
 import { useDispatch } from 'react-redux';
 import { useUser } from '@/redux/slices/authSlice';
 import { logout } from '@/redux/slices/authSlice';
+import toast from 'react-hot-toast';
 
 const ConversationListSidebar = ({ isOpen, setIsOpen, themeIndex }) => {
     const { user, onlineUsers, logoutUser } = useUserAuth();
@@ -31,15 +32,13 @@ const ConversationListSidebar = ({ isOpen, setIsOpen, themeIndex }) => {
             localStorage.clear();
             const response = await logoutUser();
             
+            if (response?.message === "Logged out successfully") {
+                toast.success("Logged out successfully", { duration: 3000 });
+            }
             
-            // if (response?.message === "Logged out successfully" || response?.status === 200) {
-            // conavigate('/signin');
-                
-            // } else {
-            //     console.error('Logout failed: Invalid response', response);
-            // }
         } catch (error) {
             console.error('Error logging out:', error);
+            toast.error("Logout failed");
         }
     };
 

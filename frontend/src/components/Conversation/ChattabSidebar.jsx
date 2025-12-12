@@ -37,6 +37,7 @@ import "animate.css";
 import { cardClass, chatInputBg, sheetColor } from "@/constant";
 import { handleBlock } from "./RequestActionButtons";
 import { useDispatch } from "react-redux";
+import toast from 'react-hot-toast';
 import { useBlockUserMutation } from "@/redux/api/user/userApi";
 import { logout } from "@/redux/slices/authSlice";
 import EndToEndEncryptionSetting from "../chatTabSidebarScreens/EndToEndEncryptionSettingNew";
@@ -73,11 +74,13 @@ const ChatTabSidebar = ({ profileImage, name, isOpen, onClose }) => {
 
   const handleLogout = async () => {
     try {
+      toast.success("Logged out successfully", { duration: 3000 });
       dispatch(logout());
       localStorage.clear();
       navigate("/signin");
     } catch (error) {
       console.error("Error logging out:", error);
+      toast.error("Logout failed");
     }
   };
 
@@ -86,17 +89,17 @@ const ChatTabSidebar = ({ profileImage, name, isOpen, onClose }) => {
   };
 
   const settingsMenuItems = [
-    { icon: Files, title: "View media, files and links", onClick: () => {} },
-    { icon: Pin, title: "Pinned messages", onClick: () => {} },
+    { icon: Files, title: "View media, files and links", onClick: () => { } },
+    { icon: Pin, title: "Pinned messages", onClick: () => { } },
     {
       icon: Bell,
       title: "Notifications & sounds",
       subtitle: "On",
       hasToggle: true,
       isToggleOn: true,
-      onClick: () => {},
+      onClick: () => { },
     },
-    { icon: Share2, title: "Share contact", onClick: () => {} },
+    { icon: Share2, title: "Share contact", onClick: () => { } },
   ];
 
   const privacyItems = [
@@ -115,17 +118,17 @@ const ChatTabSidebar = ({ profileImage, name, isOpen, onClose }) => {
   ];
 
   const customisationItems = [
-    { icon: Palette, title: "Theme", onClick: () => {} },
-    { icon: ThumbsUp, title: "Quick reaction", onClick: () => {} },
-    { icon: FileText, title: "Nicknames", onClick: () => {} },
-    { icon: Sparkles, title: "Word effects", onClick: () => {} },
+    { icon: Palette, title: "Theme", onClick: () => { } },
+    { icon: ThumbsUp, title: "Quick reaction", onClick: () => { } },
+    { icon: FileText, title: "Nicknames", onClick: () => { } },
+    { icon: Sparkles, title: "Word effects", onClick: () => { } },
   ];
 
   const actionButtons = [
-    { icon: Phone, label: "Audio", onClick: () => {} },
-    { icon: Video, label: "Video", onClick: () => {} },
+    { icon: Phone, label: "Audio", onClick: () => { } },
+    { icon: Video, label: "Video", onClick: () => { } },
     { icon: User, label: "Profile", onClick: () => setCurrentView("profile") },
-    { icon: BellOff, label: "Mute", onClick: () => {} },
+    { icon: BellOff, label: "Mute", onClick: () => { } },
   ];
 
   const SettingsView = () => (
@@ -246,11 +249,10 @@ const ChatTabSidebar = ({ profileImage, name, isOpen, onClose }) => {
                   <Button
                     variant={currentView === "profile" ? "secondary" : "ghost"}
                     size="sm"
-                    className={`text-gray-100 ${
-                      currentView === "profile"
+                    className={`text-gray-100 ${currentView === "profile"
                         ? "bg-gray-700"
                         : "hover:bg-white/10"
-                    }`}
+                      }`}
                     onClick={() => setCurrentView("profile")}
                   >
                     Profile
@@ -259,11 +261,10 @@ const ChatTabSidebar = ({ profileImage, name, isOpen, onClose }) => {
                   <Button
                     variant={currentView === "settings" ? "secondary" : "ghost"}
                     size="sm"
-                    className={`text-gray-100 ${
-                      currentView === "settings"
+                    className={`text-gray-100 ${currentView === "settings"
                         ? "bg-gray-700"
                         : "hover:bg-white/10"
-                    }`}
+                      }`}
                     onClick={() => setCurrentView("settings")}
                   >
                     Settings

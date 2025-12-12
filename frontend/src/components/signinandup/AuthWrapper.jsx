@@ -68,7 +68,7 @@ const AuthWrapper = ({ children, pageName, welcomeMessage }) => {
             <div className="mb-6 flex justify-between items-center">
               <div>
                 <h1 className="text-2xl font-semibold text-[#dff5ff]">{pageName || 'Auth'}</h1>
-                <p className="text-sm text-[#def6ff]">Use your credentials to continue</p>
+                <p className="text-sm text-[#def6ff]">Yea! yea! I got it! We know each other! but You need to use your credentials to continue!</p>
               </div>
               <div className="flex sm:block  items-center justify-center min-w-[154px]">
                 <div className="flex items-center bg-[#35a9cd]/40 rounded-full p-1">

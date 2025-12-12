@@ -47,7 +47,7 @@ const SignIn = () => {
     try {
       const response = await loginUser(formData);
       // Tokens are now stored in HTTP-only cookies by the backend (more secure)
-      toast.success(response.message || "Login successful");
+      toast.success(response.message || "Finnaly You are logged in! Mashaallh!", { duration: 3000 });
       
       // Check if mobile screen
       const isMobile = window.innerWidth < 768;
@@ -83,7 +83,7 @@ const SignIn = () => {
       const msg =
         error?.response?.data?.message ||
         error?.message ||
-        "Login failed. Please try again.";
+        "Inna lillah! Login failed. Please try again.";
       toast.error(msg);
     } finally {
       setIsSubmitting(false);
