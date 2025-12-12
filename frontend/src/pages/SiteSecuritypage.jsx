@@ -107,7 +107,7 @@ const SiteSecuritypage = () => {
       >
         <div className=" flex items-center flex-col justify-center gap-2 px-4 text-center">
           <h1 className="text-[#3d91ad] sm:text-4xl text-2xl font-bold">Rocket Launched!</h1>
-        <h3 className=" font-semibold text-[#41a9cd]">Humm...! May be we know each other, right? But we need to very you first!</h3>
+        <h3 className=" font-semibold text-[#41a9cd]">Humm...! May be we know each other, right? But we need to verify you first!</h3>
         </div>
         {/* Verify Message Form */}
         <div className="w-full max-w-md px-4">
