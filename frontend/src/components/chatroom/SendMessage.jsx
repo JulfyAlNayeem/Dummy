@@ -43,6 +43,22 @@ const SendMessage = forwardRef(
     const [editMessageMutation] = useEditMessageMutation();
     const [replyMessageMutation] = useReplyMessageMutation();
     const inputRef = useRef();
+    const focusInput = () => {
+      if (!inputRef.current) return;
+      // Ensure focus happens after React updates and after the click completes
+      setTimeout(() => {
+        try {
+          const el = inputRef.current;
+          el.focus();
+          const len = (el.value || '').length;
+          if (typeof el.setSelectionRange === 'function') {
+            el.setSelectionRange(len, len);
+          }
+        } catch (e) {
+          // ignore
+        }
+      }, 0);
+    };
     const typingTimeoutRef = useRef(null);
     const isTypingRef = useRef(false);
     const dispatch = useDispatch();
@@ -203,6 +219,7 @@ const SendMessage = forwardRef(
       dispatch(editMessage(null));
       setInputValue('');
       inputRef.current.style.height = '37px';
+      focusInput();
       return true;
     };
 
@@ -270,6 +287,7 @@ const SendMessage = forwardRef(
       setSelectedFiles([]);
       dispatch(replyMessage(null));
       inputRef.current.style.height = '37px';
+      focusInput();
 
       if (hasFiles) {
         try {
@@ -550,6 +568,7 @@ const SendMessage = forwardRef(
       clearReplyingMessage();
       dispatch(replyMessage(null));
       inputRef.current.style.height = '37px';
+      focusInput();
 
       if (hasFiles) {
         try {
@@ -695,6 +714,7 @@ const SendMessage = forwardRef(
           <div className="flex items-center gap-2">
             <button
               type="submit"
+              onMouseDown={(e) => e.preventDefault()}
               className={`${borderColor[themeIndex]} relative chatIcon border-r-2 border-l-transparent text-xl rounded-lg text-gray-200 p-2 min-w-fit ml-2`}
             >
               {editingMessage ? (
@@ -713,6 +733,7 @@ const SendMessage = forwardRef(
             ) : (
               <button
                 type="submit"
+                onMouseDown={(e) => e.preventDefault()}
                 className={`${borderColor[themeIndex]} relative chatIcon border-r-2 border-l-transparent text-xl rounded-lg text-gray-200 p-2 min-w-fit ml-2`}
               >
                 <Send themeIndex={themeIndex} />
