@@ -11,15 +11,11 @@ import Loading from "./pages/Loading.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <HotToaster position="top-center" reverseOrder={false} />
+    <HotToaster position="top-right" reverseOrder={false} />
     <Provider store={store}>
-      <PersistGate loading={<Loading/>} persistor={persistor}>
+      <PersistGate loading={<Loading />} persistor={persistor}>
         <UserAuthProvider>
-            {/* MessageProvider removed */}
-              {/* ChatProvider removed */}
-                <App />
-              {/* ChatProvider removed */}
-            {/* MessageProvider removed */}
+          <App />
         </UserAuthProvider>
       </PersistGate>
     </Provider>
