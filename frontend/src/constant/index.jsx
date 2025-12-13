@@ -12,7 +12,7 @@ import sunset from "../assets/background/sunset.svg";
 import minisunset from "../assets/background/sunsetmini.svg";
 import bridge from "../assets/background/bridge.svg";
 import rocket from "../assets/background/curve-rocket.webp"; 
-import smallRocket from "../assets/background/rocketSmall.webp";
+import smallRocket from "../assets/background/rocketsmall.webp";
 import minibridge from "../assets/background/bridgemini.svg";
 import mangroovmini from "../assets/background/mangroovmini.webp";
 import mangroov from "../assets/background/mangroov.svg";
