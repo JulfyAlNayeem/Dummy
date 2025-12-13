@@ -12,7 +12,7 @@ const ProtectedRoutes = () => {
   }
 
   if (!user) {
-    return <Navigate to="/" />;
+    return <Navigate to="/signin" />;
   }
 
   return (

@@ -32,7 +32,7 @@ const ConversationList = ({ themeIndex, setShowConversationList }) => {
   const bounceTimerRef = useRef(null);
   const [activeScreen, setActiveScreen] = useState("chats");
   const { allConversations } = useSelector((state) => state.conversation);
-console.log("Rendering ConversationList with themeIndex:", themeIndex);
+
   const {
     data: conversationData,
     isFetching: isConversationsFetching,

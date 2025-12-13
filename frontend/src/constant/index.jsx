@@ -12,7 +12,7 @@ import sunset from "../assets/background/sunset.svg";
 import minisunset from "../assets/background/sunsetmini.svg";
 import bridge from "../assets/background/bridge.svg";
 import rocket from "../assets/background/curve-rocket.webp"; 
-import smallRocket from "../assets/background/rocketsmall.webp";
+import smallRocket from "../assets/background/rocketSmall.webp";
 import minibridge from "../assets/background/bridgemini.svg";
 import mangroovmini from "../assets/background/mangroovmini.webp";
 import mangroov from "../assets/background/mangroov.svg";
@@ -38,6 +38,7 @@ import ArabicDarkMosque from "@/components/Svg/ArabicDarkMosque";
 import DeerHorn from "@/components/Marker/DeerHorn";
 import Circle from "@/components/Marker/Circle";
 import ElephantHead from "@/components/Marker/ElephantHead";
+import Rocket from "@/components/Marker/Rocket";
 
 export const defaultProfileImage = "/images/avatar/default-avatar.svg";
 export const defaultCoverImage = "/images/cover/default-cover.jpg";
@@ -443,7 +444,7 @@ export const marker = [
   <div></div >,
   <DeerHorn />,
   <ElephantHead />,
-  <Circle />,
+  <Rocket />,
   <Circle />,
   <MarkerTriangle />,
   <MarkerTriangle />,
@@ -456,7 +457,7 @@ export const markerShape = [
   "top-[-45%]",
   "top-[-45%]",
   "top-[-45%]",
-  "top-[-45%]",
+  "top-[-45%] ",
   "top-[-45%]",
   "top-[-65%]",
   "top-[-45%]",
