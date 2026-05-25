@@ -1,0 +1,346 @@
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8
+    container_name: dummy-mysql-prod
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    expose:
+      - "3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD --silent || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    networks:
+      - dummy-network
+
+  # Redis for sessions and Socket.io adapter
+  redis:
+    image: redis:7-alpine
+    container_name: dummy-redis-prod
+    restart: always
+    expose:
+      - "6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - dummy-network
+
+  # Backend Node.js Application
+  backend:
+    build:
+      context: .
+      dockerfile: backend/api-service/Dockerfile
+    image: ${DOCKERHUB_USERNAME}/dummy-backend:latest
+    container_name: api-service
+    restart: always
+    env_file:
+      - .env.production
+    expose:
+      - "3001"
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      SESSION_SECRET: ${SESSION_SECRET}
+      JWT_SECRET: ${JWT_SECRET}
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
+      ORIGIN_URL: ${ORIGIN_URL}
+      COOKIE_DOMAIN: ${COOKIE_DOMAIN}
+    volumes:
+      - backend_uploads:/app/backend/api-service/uploads
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    networks:
+      - dummy-network
+
+  # Messenger Frontend (Production with Nginx)
+  frontend-messenger:
+    build:
+      context: .
+      dockerfile: frontend/messenger/Dockerfile-production
+      args:
+        VITE_API_URL: /api
+    image: ${DOCKERHUB_USERNAME}/dummy-messenger:latest
+    container_name: dummy-messenger-prod
+    restart: always
+    expose:
+      - "80"
+    depends_on:
+      - backend
+    networks:
+      - dummy-network
+
+  # Social Frontend (Production with Nginx)
+  frontend-social:
+    build:
+      context: .
+      dockerfile: frontend/social/Dockerfile-production
+      args:
+        VITE_API_URL: /api
+        VITE_BASE_PATH: /
+    image: ${DOCKERHUB_USERNAME}/dummy-social-frontend:latest
+    container_name: dummy-social-frontend-prod
+    restart: always
+    expose:
+      - "80"
+    depends_on:
+      - backend
+      - social-service
+    networks:
+      - dummy-network
+
+  # Nginx Reverse Proxy
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: dummy-nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "3008:3008"
+    volumes:
+      - ./nginx-reverse-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - frontend-messenger
+      - frontend-social
+      - backend
+      - calling-service
+      - message-service
+      - class-service
+      - form-service
+      - alarm-service
+      - social-service
+    networks:
+      - dummy-network
+
+  # Audio/Video Calling Microservice (Production)
+  calling-service:
+    build:
+      context: .
+      dockerfile: backend/calling-service/Dockerfile
+    image: ${DOCKERHUB_USERNAME}/dummy-calling:latest
+    container_name: calling-service
+    restart: always
+    expose:
+      - "3003"
+    ports:
+      - "10000-10100:10000-10100/udp"
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      PORT: 3003
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      ORIGIN_URL: ${ORIGIN_URL}
+      MEDIASOUP_LISTEN_IP: 0.0.0.0
+      MEDIASOUP_ANNOUNCED_IP: ${MEDIASOUP_ANNOUNCED_IP:-0.0.0.0}
+      MEDIASOUP_WORKERS: ${MEDIASOUP_WORKERS:-2}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dummy-network
+
+  # Message Microservice (Production)
+  message-service:
+    build:
+      context: .
+      dockerfile: backend/message-service/Dockerfile
+    image: ${DOCKERHUB_USERNAME}/dummy-message:latest
+    container_name: message-service
+    restart: always
+    expose:
+      - "3004"
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      PORT: 3004
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      ORIGIN_URL: ${ORIGIN_URL}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dummy-network
+
+  # Class Microservice (Production)
+  class-service:
+    build:
+      context: .
+      dockerfile: backend/class-service/Dockerfile
+    image: ${DOCKERHUB_USERNAME}/dummy-class:latest
+    container_name: class-service
+    restart: always
+    expose:
+      - "3005"
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      PORT: 3005
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      ORIGIN_URL: ${ORIGIN_URL}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dummy-network
+
+  # Form Microservice (Production)
+  form-service:
+    build:
+      context: .
+      dockerfile: backend/form-service/Dockerfile
+    image: ${DOCKERHUB_USERNAME}/dummy-form:latest
+    container_name: form-service
+    restart: always
+    expose:
+      - "3006"
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      PORT: 3006
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      ORIGIN_URL: ${ORIGIN_URL}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - dummy-network
+
+  # Alarm Microservice (Production)
+  alarm-service:
+    build:
+      context: .
+      dockerfile: backend/alarm-service/Dockerfile
+    image: ${DOCKERHUB_USERNAME}/dummy-alarm:latest
+    container_name: alarm-service
+    restart: always
+    expose:
+      - "3007"
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      PORT: 3007
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      ORIGIN_URL: ${ORIGIN_URL}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dummy-network
+
+  # Social Microservice (Production)
+  social-service:
+    build:
+      context: .
+      dockerfile: backend/social-service/Dockerfile
+    image: ${DOCKERHUB_USERNAME}/dummy-social:latest
+    container_name: social-service
+    restart: always
+    expose:
+      - "3008"
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      PORT: 3008
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      ORIGIN_URL: ${ORIGIN_URL}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dummy-network
+
+  # Scheduler Microservice (Production)
+  scheduler-service:
+    build:
+      context: .
+      dockerfile: backend/scheduler-service/Dockerfile
+    image: ${DOCKERHUB_USERNAME}/dummy-scheduler:latest
+    container_name: scheduler-service
+    restart: always
+    expose:
+      - "3009"
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      PORT: 3009
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      TZ: Asia/Dhaka
+      DUMP_DIR: ${DUMP_DIR:-/app/backups}
+      UPLOAD_TO_GCS: ${UPLOAD_TO_GCS:-false}
+      GCS_BUCKET: ${GCS_BUCKET:-}
+      GCS_PREFIX: ${GCS_PREFIX:-dummy/}
+      KEEP_LOCAL_BACKUP: ${KEEP_LOCAL_BACKUP:-true}
+      LOCAL_RETENTION_DAYS: ${LOCAL_RETENTION_DAYS:-7}
+    volumes:
+      - ./backups:/app/backups
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dummy-network
+
+volumes:
+  mysql_data:
+  redis_data:
+  backend_uploads:
+
+networks:
+  dummy-network:
+    driver: bridge
