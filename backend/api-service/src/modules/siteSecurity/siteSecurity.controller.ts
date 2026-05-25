@@ -5,8 +5,8 @@ import prisma from '../../config/database.js';
 const SITE_SECURITY_SECRET = process.env.SITE_SECURITY_SECRET || process.env.ACCESS_TOKEN_SECRET!;
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production',
-  sameSite: (process.env.NODE_ENV === 'production' ? 'none' : 'lax') as 'none' | 'lax',
+  secure: false, // site runs on HTTP, not HTTPS
+  sameSite: 'lax' as 'lax',
   maxAge: 24 * 60 * 60 * 1000,
   path: '/',
 };
