@@ -1,6 +1,7 @@
 packages:
   - backend/api-service
-  - frontend
+  - frontend/messenger
+  - frontend/social
   - backend/calling-service
   - backend/message-service
   - backend/class-service
@@ -18,3 +19,7 @@ onlyBuiltDependencies:
 
 ignoredBuiltDependencies:
   - prisma
+
+# Disable minimum release age security policy (allow recently published packages)
+pnpm:
+  minimumReleaseAge: "0 seconds"

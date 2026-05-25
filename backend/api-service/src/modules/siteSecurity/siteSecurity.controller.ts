@@ -1,5 +1,15 @@
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import prisma from '../../config/database.js';
+
+const SITE_SECURITY_SECRET = process.env.SITE_SECURITY_SECRET || process.env.ACCESS_TOKEN_SECRET!;
+const COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: (process.env.NODE_ENV === 'production' ? 'none' : 'lax') as 'none' | 'lax',
+  maxAge: 24 * 60 * 60 * 1000,
+  path: '/',
+};
 
 export const createSiteSecurityMessage = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -45,6 +55,8 @@ export const verifySiteSecurityMessage = async (req: Request, res: Response): Pr
 
     if (record) {
       if (record.goodMessage === message) {
+        const token = jwt.sign({ verified: true }, SITE_SECURITY_SECRET, { expiresIn: '1d' });
+        res.cookie('site_verified', token, COOKIE_OPTIONS);
         res.status(200).json({
           success: true,
           message: 'Security Pin verified successfully',
@@ -53,6 +65,8 @@ export const verifySiteSecurityMessage = async (req: Request, res: Response): Pr
         return;
       }
       if (record.badMessage === message) {
+        const token = jwt.sign({ verified: true }, SITE_SECURITY_SECRET, { expiresIn: '1d' });
+        res.cookie('site_verified', token, COOKIE_OPTIONS);
         res.status(200).json({
           success: true,
           message: 'Security Pin verified successfully',
@@ -65,6 +79,8 @@ export const verifySiteSecurityMessage = async (req: Request, res: Response): Pr
     // Default fallback messages (matching old behavior)
     const normalizedMessage = message.toLowerCase().trim();
     if (normalizedMessage === 'assalam') {
+      const token = jwt.sign({ verified: true }, SITE_SECURITY_SECRET, { expiresIn: '1d' });
+      res.cookie('site_verified', token, COOKIE_OPTIONS);
       res.status(200).json({
         success: true,
         message: 'Security Pin verified successfully',
@@ -73,6 +89,8 @@ export const verifySiteSecurityMessage = async (req: Request, res: Response): Pr
       return;
     }
     if (normalizedMessage === 'goodmorning') {
+      const token = jwt.sign({ verified: true }, SITE_SECURITY_SECRET, { expiresIn: '1d' });
+      res.cookie('site_verified', token, COOKIE_OPTIONS);
       res.status(200).json({
         success: true,
         message: 'Security Pin verified successfully',
@@ -134,5 +152,19 @@ export const getSiteSecurityMessages = async (req: Request, res: Response): Prom
   } catch (error: any) {
     console.error('Get site security messages error:', error);
     res.status(500).json({ message: 'Failed to get site security messages.', error: error.message });
+  }
+};
+
+export const checkSiteVerification = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const token = req.cookies?.site_verified;
+    if (!token) {
+      res.status(401).json({ verified: false, message: 'Not verified' });
+      return;
+    }
+    jwt.verify(token, SITE_SECURITY_SECRET);
+    res.status(200).json({ verified: true });
+  } catch {
+    res.status(401).json({ verified: false, message: 'Verification expired or invalid' });
   }
 };

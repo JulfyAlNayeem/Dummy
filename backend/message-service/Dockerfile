@@ -12,7 +12,12 @@ RUN apt-get update && \
 COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .pnpmrc* ./
 COPY backend/message-service/package.json ./backend/message-service/
 
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile --ignore-scripts --filter message-service
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
+    for attempt in 1 2 3 4 5; do \
+        echo "=== pnpm install attempt $attempt/5 ===" && \
+        pnpm install --frozen-lockfile --ignore-scripts --filter message-service && break || \
+        { echo "Attempt $attempt failed, waiting 30s before retry..."; sleep 30; }; \
+    done
 
 COPY backend/message-service/ ./backend/message-service/
 

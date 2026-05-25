@@ -29,7 +29,9 @@ export type PostCommentMinAggregateOutputType = {
   postId: string | null
   userId: string | null
   content: string | null
+  isEdited: boolean | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type PostCommentMaxAggregateOutputType = {
@@ -37,7 +39,9 @@ export type PostCommentMaxAggregateOutputType = {
   postId: string | null
   userId: string | null
   content: string | null
+  isEdited: boolean | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type PostCommentCountAggregateOutputType = {
@@ -45,7 +49,9 @@ export type PostCommentCountAggregateOutputType = {
   postId: number
   userId: number
   content: number
+  isEdited: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -55,7 +61,9 @@ export type PostCommentMinAggregateInputType = {
   postId?: true
   userId?: true
   content?: true
+  isEdited?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type PostCommentMaxAggregateInputType = {
@@ -63,7 +71,9 @@ export type PostCommentMaxAggregateInputType = {
   postId?: true
   userId?: true
   content?: true
+  isEdited?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type PostCommentCountAggregateInputType = {
@@ -71,7 +81,9 @@ export type PostCommentCountAggregateInputType = {
   postId?: true
   userId?: true
   content?: true
+  isEdited?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -152,7 +164,9 @@ export type PostCommentGroupByOutputType = {
   postId: string
   userId: string
   content: string
+  isEdited: boolean
   createdAt: Date
+  updatedAt: Date
   _count: PostCommentCountAggregateOutputType | null
   _min: PostCommentMinAggregateOutputType | null
   _max: PostCommentMaxAggregateOutputType | null
@@ -181,10 +195,13 @@ export type PostCommentWhereInput = {
   postId?: Prisma.StringFilter<"PostComment"> | string
   userId?: Prisma.StringFilter<"PostComment"> | string
   content?: Prisma.StringFilter<"PostComment"> | string
+  isEdited?: Prisma.BoolFilter<"PostComment"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PostComment"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"PostComment"> | Date | string
   post?: Prisma.XOR<Prisma.PostScalarRelationFilter, Prisma.PostWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   replies?: Prisma.PostCommentReplyListRelationFilter
+  reactions?: Prisma.PostCommentReactionListRelationFilter
 }
 
 export type PostCommentOrderByWithRelationInput = {
@@ -192,10 +209,13 @@ export type PostCommentOrderByWithRelationInput = {
   postId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  isEdited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   post?: Prisma.PostOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   replies?: Prisma.PostCommentReplyOrderByRelationAggregateInput
+  reactions?: Prisma.PostCommentReactionOrderByRelationAggregateInput
   _relevance?: Prisma.PostCommentOrderByRelevanceInput
 }
 
@@ -207,10 +227,13 @@ export type PostCommentWhereUniqueInput = Prisma.AtLeast<{
   postId?: Prisma.StringFilter<"PostComment"> | string
   userId?: Prisma.StringFilter<"PostComment"> | string
   content?: Prisma.StringFilter<"PostComment"> | string
+  isEdited?: Prisma.BoolFilter<"PostComment"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PostComment"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"PostComment"> | Date | string
   post?: Prisma.XOR<Prisma.PostScalarRelationFilter, Prisma.PostWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   replies?: Prisma.PostCommentReplyListRelationFilter
+  reactions?: Prisma.PostCommentReactionListRelationFilter
 }, "id">
 
 export type PostCommentOrderByWithAggregationInput = {
@@ -218,7 +241,9 @@ export type PostCommentOrderByWithAggregationInput = {
   postId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  isEdited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.PostCommentCountOrderByAggregateInput
   _max?: Prisma.PostCommentMaxOrderByAggregateInput
   _min?: Prisma.PostCommentMinOrderByAggregateInput
@@ -232,16 +257,21 @@ export type PostCommentScalarWhereWithAggregatesInput = {
   postId?: Prisma.StringWithAggregatesFilter<"PostComment"> | string
   userId?: Prisma.StringWithAggregatesFilter<"PostComment"> | string
   content?: Prisma.StringWithAggregatesFilter<"PostComment"> | string
+  isEdited?: Prisma.BoolWithAggregatesFilter<"PostComment"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PostComment"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PostComment"> | Date | string
 }
 
 export type PostCommentCreateInput = {
   id?: string
   content: string
+  isEdited?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
   post: Prisma.PostCreateNestedOneWithoutCommentsInput
   user: Prisma.UserCreateNestedOneWithoutPostCommentsInput
   replies?: Prisma.PostCommentReplyCreateNestedManyWithoutCommentInput
+  reactions?: Prisma.PostCommentReactionCreateNestedManyWithoutCommentInput
 }
 
 export type PostCommentUncheckedCreateInput = {
@@ -249,17 +279,23 @@ export type PostCommentUncheckedCreateInput = {
   postId: string
   userId: string
   content: string
+  isEdited?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
   replies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutCommentInput
+  reactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutCommentInput
 }
 
 export type PostCommentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   post?: Prisma.PostUpdateOneRequiredWithoutCommentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPostCommentsNestedInput
   replies?: Prisma.PostCommentReplyUpdateManyWithoutCommentNestedInput
+  reactions?: Prisma.PostCommentReactionUpdateManyWithoutCommentNestedInput
 }
 
 export type PostCommentUncheckedUpdateInput = {
@@ -267,8 +303,11 @@ export type PostCommentUncheckedUpdateInput = {
   postId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutCommentNestedInput
+  reactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutCommentNestedInput
 }
 
 export type PostCommentCreateManyInput = {
@@ -276,13 +315,17 @@ export type PostCommentCreateManyInput = {
   postId: string
   userId: string
   content: string
+  isEdited?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type PostCommentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PostCommentUncheckedUpdateManyInput = {
@@ -290,7 +333,9 @@ export type PostCommentUncheckedUpdateManyInput = {
   postId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PostCommentListRelationFilter = {
@@ -314,7 +359,9 @@ export type PostCommentCountOrderByAggregateInput = {
   postId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  isEdited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PostCommentMaxOrderByAggregateInput = {
@@ -322,7 +369,9 @@ export type PostCommentMaxOrderByAggregateInput = {
   postId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  isEdited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PostCommentMinOrderByAggregateInput = {
@@ -330,7 +379,9 @@ export type PostCommentMinOrderByAggregateInput = {
   postId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  isEdited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PostCommentScalarRelationFilter = {
@@ -436,20 +487,40 @@ export type PostCommentUpdateOneRequiredWithoutRepliesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PostCommentUpdateToOneWithWhereWithoutRepliesInput, Prisma.PostCommentUpdateWithoutRepliesInput>, Prisma.PostCommentUncheckedUpdateWithoutRepliesInput>
 }
 
+export type PostCommentCreateNestedOneWithoutReactionsInput = {
+  create?: Prisma.XOR<Prisma.PostCommentCreateWithoutReactionsInput, Prisma.PostCommentUncheckedCreateWithoutReactionsInput>
+  connectOrCreate?: Prisma.PostCommentCreateOrConnectWithoutReactionsInput
+  connect?: Prisma.PostCommentWhereUniqueInput
+}
+
+export type PostCommentUpdateOneRequiredWithoutReactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.PostCommentCreateWithoutReactionsInput, Prisma.PostCommentUncheckedCreateWithoutReactionsInput>
+  connectOrCreate?: Prisma.PostCommentCreateOrConnectWithoutReactionsInput
+  upsert?: Prisma.PostCommentUpsertWithoutReactionsInput
+  connect?: Prisma.PostCommentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PostCommentUpdateToOneWithWhereWithoutReactionsInput, Prisma.PostCommentUpdateWithoutReactionsInput>, Prisma.PostCommentUncheckedUpdateWithoutReactionsInput>
+}
+
 export type PostCommentCreateWithoutUserInput = {
   id?: string
   content: string
+  isEdited?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
   post: Prisma.PostCreateNestedOneWithoutCommentsInput
   replies?: Prisma.PostCommentReplyCreateNestedManyWithoutCommentInput
+  reactions?: Prisma.PostCommentReactionCreateNestedManyWithoutCommentInput
 }
 
 export type PostCommentUncheckedCreateWithoutUserInput = {
   id?: string
   postId: string
   content: string
+  isEdited?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
   replies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutCommentInput
+  reactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutCommentInput
 }
 
 export type PostCommentCreateOrConnectWithoutUserInput = {
@@ -486,23 +557,31 @@ export type PostCommentScalarWhereInput = {
   postId?: Prisma.StringFilter<"PostComment"> | string
   userId?: Prisma.StringFilter<"PostComment"> | string
   content?: Prisma.StringFilter<"PostComment"> | string
+  isEdited?: Prisma.BoolFilter<"PostComment"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PostComment"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"PostComment"> | Date | string
 }
 
 export type PostCommentCreateWithoutPostInput = {
   id?: string
   content: string
+  isEdited?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutPostCommentsInput
   replies?: Prisma.PostCommentReplyCreateNestedManyWithoutCommentInput
+  reactions?: Prisma.PostCommentReactionCreateNestedManyWithoutCommentInput
 }
 
 export type PostCommentUncheckedCreateWithoutPostInput = {
   id?: string
   userId: string
   content: string
+  isEdited?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
   replies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutCommentInput
+  reactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutCommentInput
 }
 
 export type PostCommentCreateOrConnectWithoutPostInput = {
@@ -534,9 +613,12 @@ export type PostCommentUpdateManyWithWhereWithoutPostInput = {
 export type PostCommentCreateWithoutRepliesInput = {
   id?: string
   content: string
+  isEdited?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
   post: Prisma.PostCreateNestedOneWithoutCommentsInput
   user: Prisma.UserCreateNestedOneWithoutPostCommentsInput
+  reactions?: Prisma.PostCommentReactionCreateNestedManyWithoutCommentInput
 }
 
 export type PostCommentUncheckedCreateWithoutRepliesInput = {
@@ -544,7 +626,10 @@ export type PostCommentUncheckedCreateWithoutRepliesInput = {
   postId: string
   userId: string
   content: string
+  isEdited?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
+  reactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutCommentInput
 }
 
 export type PostCommentCreateOrConnectWithoutRepliesInput = {
@@ -566,9 +651,12 @@ export type PostCommentUpdateToOneWithWhereWithoutRepliesInput = {
 export type PostCommentUpdateWithoutRepliesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   post?: Prisma.PostUpdateOneRequiredWithoutCommentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPostCommentsNestedInput
+  reactions?: Prisma.PostCommentReactionUpdateManyWithoutCommentNestedInput
 }
 
 export type PostCommentUncheckedUpdateWithoutRepliesInput = {
@@ -576,67 +664,150 @@ export type PostCommentUncheckedUpdateWithoutRepliesInput = {
   postId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutCommentNestedInput
+}
+
+export type PostCommentCreateWithoutReactionsInput = {
+  id?: string
+  content: string
+  isEdited?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  post: Prisma.PostCreateNestedOneWithoutCommentsInput
+  user: Prisma.UserCreateNestedOneWithoutPostCommentsInput
+  replies?: Prisma.PostCommentReplyCreateNestedManyWithoutCommentInput
+}
+
+export type PostCommentUncheckedCreateWithoutReactionsInput = {
+  id?: string
+  postId: string
+  userId: string
+  content: string
+  isEdited?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutCommentInput
+}
+
+export type PostCommentCreateOrConnectWithoutReactionsInput = {
+  where: Prisma.PostCommentWhereUniqueInput
+  create: Prisma.XOR<Prisma.PostCommentCreateWithoutReactionsInput, Prisma.PostCommentUncheckedCreateWithoutReactionsInput>
+}
+
+export type PostCommentUpsertWithoutReactionsInput = {
+  update: Prisma.XOR<Prisma.PostCommentUpdateWithoutReactionsInput, Prisma.PostCommentUncheckedUpdateWithoutReactionsInput>
+  create: Prisma.XOR<Prisma.PostCommentCreateWithoutReactionsInput, Prisma.PostCommentUncheckedCreateWithoutReactionsInput>
+  where?: Prisma.PostCommentWhereInput
+}
+
+export type PostCommentUpdateToOneWithWhereWithoutReactionsInput = {
+  where?: Prisma.PostCommentWhereInput
+  data: Prisma.XOR<Prisma.PostCommentUpdateWithoutReactionsInput, Prisma.PostCommentUncheckedUpdateWithoutReactionsInput>
+}
+
+export type PostCommentUpdateWithoutReactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  post?: Prisma.PostUpdateOneRequiredWithoutCommentsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutPostCommentsNestedInput
+  replies?: Prisma.PostCommentReplyUpdateManyWithoutCommentNestedInput
+}
+
+export type PostCommentUncheckedUpdateWithoutReactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutCommentNestedInput
 }
 
 export type PostCommentCreateManyUserInput = {
   id?: string
   postId: string
   content: string
+  isEdited?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type PostCommentUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   post?: Prisma.PostUpdateOneRequiredWithoutCommentsNestedInput
   replies?: Prisma.PostCommentReplyUpdateManyWithoutCommentNestedInput
+  reactions?: Prisma.PostCommentReactionUpdateManyWithoutCommentNestedInput
 }
 
 export type PostCommentUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   postId?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutCommentNestedInput
+  reactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutCommentNestedInput
 }
 
 export type PostCommentUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   postId?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PostCommentCreateManyPostInput = {
   id?: string
   userId: string
   content: string
+  isEdited?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type PostCommentUpdateWithoutPostInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutPostCommentsNestedInput
   replies?: Prisma.PostCommentReplyUpdateManyWithoutCommentNestedInput
+  reactions?: Prisma.PostCommentReactionUpdateManyWithoutCommentNestedInput
 }
 
 export type PostCommentUncheckedUpdateWithoutPostInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutCommentNestedInput
+  reactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutCommentNestedInput
 }
 
 export type PostCommentUncheckedUpdateManyWithoutPostInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isEdited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -646,10 +817,12 @@ export type PostCommentUncheckedUpdateManyWithoutPostInput = {
 
 export type PostCommentCountOutputType = {
   replies: number
+  reactions: number
 }
 
 export type PostCommentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   replies?: boolean | PostCommentCountOutputTypeCountRepliesArgs
+  reactions?: boolean | PostCommentCountOutputTypeCountReactionsArgs
 }
 
 /**
@@ -669,16 +842,26 @@ export type PostCommentCountOutputTypeCountRepliesArgs<ExtArgs extends runtime.T
   where?: Prisma.PostCommentReplyWhereInput
 }
 
+/**
+ * PostCommentCountOutputType without action
+ */
+export type PostCommentCountOutputTypeCountReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PostCommentReactionWhereInput
+}
+
 
 export type PostCommentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   postId?: boolean
   userId?: boolean
   content?: boolean
+  isEdited?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   replies?: boolean | Prisma.PostComment$repliesArgs<ExtArgs>
+  reactions?: boolean | Prisma.PostComment$reactionsArgs<ExtArgs>
   _count?: boolean | Prisma.PostCommentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["postComment"]>
 
@@ -689,14 +872,17 @@ export type PostCommentSelectScalar = {
   postId?: boolean
   userId?: boolean
   content?: boolean
+  isEdited?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type PostCommentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "postId" | "userId" | "content" | "createdAt", ExtArgs["result"]["postComment"]>
+export type PostCommentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "postId" | "userId" | "content" | "isEdited" | "createdAt" | "updatedAt", ExtArgs["result"]["postComment"]>
 export type PostCommentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   replies?: boolean | Prisma.PostComment$repliesArgs<ExtArgs>
+  reactions?: boolean | Prisma.PostComment$reactionsArgs<ExtArgs>
   _count?: boolean | Prisma.PostCommentCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -706,13 +892,16 @@ export type $PostCommentPayload<ExtArgs extends runtime.Types.Extensions.Interna
     post: Prisma.$PostPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
     replies: Prisma.$PostCommentReplyPayload<ExtArgs>[]
+    reactions: Prisma.$PostCommentReactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     postId: string
     userId: string
     content: string
+    isEdited: boolean
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["postComment"]>
   composites: {}
 }
@@ -1056,6 +1245,7 @@ export interface Prisma__PostCommentClient<T, Null = never, ExtArgs extends runt
   post<T extends Prisma.PostDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PostDefaultArgs<ExtArgs>>): Prisma.Prisma__PostClient<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   replies<T extends Prisma.PostComment$repliesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PostComment$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostCommentReplyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reactions<T extends Prisma.PostComment$reactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PostComment$reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostCommentReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1089,7 +1279,9 @@ export interface PostCommentFieldRefs {
   readonly postId: Prisma.FieldRef<"PostComment", 'String'>
   readonly userId: Prisma.FieldRef<"PostComment", 'String'>
   readonly content: Prisma.FieldRef<"PostComment", 'String'>
+  readonly isEdited: Prisma.FieldRef<"PostComment", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"PostComment", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"PostComment", 'DateTime'>
 }
     
 
@@ -1454,6 +1646,30 @@ export type PostComment$repliesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.PostCommentReplyScalarFieldEnum | Prisma.PostCommentReplyScalarFieldEnum[]
+}
+
+/**
+ * PostComment.reactions
+ */
+export type PostComment$reactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PostCommentReaction
+   */
+  select?: Prisma.PostCommentReactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PostCommentReaction
+   */
+  omit?: Prisma.PostCommentReactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PostCommentReactionInclude<ExtArgs> | null
+  where?: Prisma.PostCommentReactionWhereInput
+  orderBy?: Prisma.PostCommentReactionOrderByWithRelationInput | Prisma.PostCommentReactionOrderByWithRelationInput[]
+  cursor?: Prisma.PostCommentReactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PostCommentReactionScalarFieldEnum | Prisma.PostCommentReactionScalarFieldEnum[]
 }
 
 /**

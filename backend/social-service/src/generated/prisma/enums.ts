@@ -9,7 +9,26 @@
 * 🟢 You can import this file directly.
 */
 
+export const PostVisibility = {
+  PUBLIC: 'PUBLIC',
+  FOLLOWERS: 'FOLLOWERS',
+  FRIENDS: 'FRIENDS',
+  ONLY_ME: 'ONLY_ME'
+} as const
+
+export type PostVisibility = (typeof PostVisibility)[keyof typeof PostVisibility]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const NotificationType = {
+  FOLLOW: 'FOLLOW',
+  POST_REACTION: 'POST_REACTION',
+  POST_COMMENT: 'POST_COMMENT',
+  COMMENT_REPLY: 'COMMENT_REPLY',
+  COMMENT_REACTION: 'COMMENT_REACTION',
+  POST_SHARE: 'POST_SHARE',
+  PAGE_LIKE: 'PAGE_LIKE',
+  MENTION: 'MENTION',
+  STORY_VIEW: 'STORY_VIEW'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]

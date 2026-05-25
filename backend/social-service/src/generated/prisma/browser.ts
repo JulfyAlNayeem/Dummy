@@ -23,10 +23,20 @@ export * from './enums';
  */
 export type User = Prisma.UserModel
 /**
+ * Model Follow
+ * 
+ */
+export type Follow = Prisma.FollowModel
+/**
  * Model Post
  * 
  */
 export type Post = Prisma.PostModel
+/**
+ * Model PostShare
+ * 
+ */
+export type PostShare = Prisma.PostShareModel
 /**
  * Model PostComment
  * 
@@ -42,3 +52,58 @@ export type PostCommentReply = Prisma.PostCommentReplyModel
  * 
  */
 export type PostReaction = Prisma.PostReactionModel
+/**
+ * Model PostCommentReaction
+ * 
+ */
+export type PostCommentReaction = Prisma.PostCommentReactionModel
+/**
+ * Model Hashtag
+ * 
+ */
+export type Hashtag = Prisma.HashtagModel
+/**
+ * Model PostHashtag
+ * 
+ */
+export type PostHashtag = Prisma.PostHashtagModel
+/**
+ * Model PostMention
+ * 
+ */
+export type PostMention = Prisma.PostMentionModel
+/**
+ * Model Page
+ * 
+ */
+export type Page = Prisma.PageModel
+/**
+ * Model PageLike
+ * 
+ */
+export type PageLike = Prisma.PageLikeModel
+/**
+ * Model PagePost
+ * 
+ */
+export type PagePost = Prisma.PagePostModel
+/**
+ * Model Story
+ * 
+ */
+export type Story = Prisma.StoryModel
+/**
+ * Model StoryView
+ * 
+ */
+export type StoryView = Prisma.StoryViewModel
+/**
+ * Model Bookmark
+ * 
+ */
+export type Bookmark = Prisma.BookmarkModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel

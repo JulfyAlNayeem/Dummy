@@ -17,7 +17,12 @@ COPY backend/calling-service/package.json ./backend/calling-service/
 
 # Install dependencies for calling-service workspace only
 # --ignore-scripts prevents ERR_PNPM_IGNORED_BUILDS; mediasoup is built manually below
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile --ignore-scripts --filter calling-service
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
+    for attempt in 1 2 3 4 5; do \
+        echo "=== pnpm install attempt $attempt/5 ===" && \
+        pnpm install --frozen-lockfile --ignore-scripts --filter calling-service && break || \
+        { echo "Attempt $attempt failed, waiting 30s before retry..."; sleep 30; }; \
+    done
 
 # Build mediasoup native worker manually (required since --ignore-scripts skips postinstall)
 RUN pnpm --filter calling-service rebuild mediasoup

@@ -28,18 +28,30 @@ export type UserMinAggregateOutputType = {
   id: string | null
   name: string | null
   image: string | null
+  bio: string | null
+  coverImage: string | null
+  website: string | null
+  location: string | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: string | null
   name: string | null
   image: string | null
+  bio: string | null
+  coverImage: string | null
+  website: string | null
+  location: string | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   name: number
   image: number
+  bio: number
+  coverImage: number
+  website: number
+  location: number
   _all: number
 }
 
@@ -48,18 +60,30 @@ export type UserMinAggregateInputType = {
   id?: true
   name?: true
   image?: true
+  bio?: true
+  coverImage?: true
+  website?: true
+  location?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   name?: true
   image?: true
+  bio?: true
+  coverImage?: true
+  website?: true
+  location?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   name?: true
   image?: true
+  bio?: true
+  coverImage?: true
+  website?: true
+  location?: true
   _all?: true
 }
 
@@ -139,6 +163,10 @@ export type UserGroupByOutputType = {
   id: string
   name: string
   image: string
+  bio: string | null
+  coverImage: string | null
+  website: string | null
+  location: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -166,20 +194,52 @@ export type UserWhereInput = {
   id?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
   image?: Prisma.StringFilter<"User"> | string
+  bio?: Prisma.StringNullableFilter<"User"> | string | null
+  coverImage?: Prisma.StringNullableFilter<"User"> | string | null
+  website?: Prisma.StringNullableFilter<"User"> | string | null
+  location?: Prisma.StringNullableFilter<"User"> | string | null
   posts?: Prisma.PostListRelationFilter
   postComments?: Prisma.PostCommentListRelationFilter
   commentReplies?: Prisma.PostCommentReplyListRelationFilter
   postReactions?: Prisma.PostReactionListRelationFilter
+  commentReactions?: Prisma.PostCommentReactionListRelationFilter
+  followers?: Prisma.FollowListRelationFilter
+  following?: Prisma.FollowListRelationFilter
+  pages?: Prisma.PageListRelationFilter
+  pageLikes?: Prisma.PageLikeListRelationFilter
+  postShares?: Prisma.PostShareListRelationFilter
+  bookmarks?: Prisma.BookmarkListRelationFilter
+  stories?: Prisma.StoryListRelationFilter
+  storyViews?: Prisma.StoryViewListRelationFilter
+  notificationsIn?: Prisma.NotificationListRelationFilter
+  notificationsOut?: Prisma.NotificationListRelationFilter
+  mentions?: Prisma.PostMentionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  bio?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
   posts?: Prisma.PostOrderByRelationAggregateInput
   postComments?: Prisma.PostCommentOrderByRelationAggregateInput
   commentReplies?: Prisma.PostCommentReplyOrderByRelationAggregateInput
   postReactions?: Prisma.PostReactionOrderByRelationAggregateInput
+  commentReactions?: Prisma.PostCommentReactionOrderByRelationAggregateInput
+  followers?: Prisma.FollowOrderByRelationAggregateInput
+  following?: Prisma.FollowOrderByRelationAggregateInput
+  pages?: Prisma.PageOrderByRelationAggregateInput
+  pageLikes?: Prisma.PageLikeOrderByRelationAggregateInput
+  postShares?: Prisma.PostShareOrderByRelationAggregateInput
+  bookmarks?: Prisma.BookmarkOrderByRelationAggregateInput
+  stories?: Prisma.StoryOrderByRelationAggregateInput
+  storyViews?: Prisma.StoryViewOrderByRelationAggregateInput
+  notificationsIn?: Prisma.NotificationOrderByRelationAggregateInput
+  notificationsOut?: Prisma.NotificationOrderByRelationAggregateInput
+  mentions?: Prisma.PostMentionOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -190,16 +250,36 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
   image?: Prisma.StringFilter<"User"> | string
+  bio?: Prisma.StringNullableFilter<"User"> | string | null
+  coverImage?: Prisma.StringNullableFilter<"User"> | string | null
+  website?: Prisma.StringNullableFilter<"User"> | string | null
+  location?: Prisma.StringNullableFilter<"User"> | string | null
   posts?: Prisma.PostListRelationFilter
   postComments?: Prisma.PostCommentListRelationFilter
   commentReplies?: Prisma.PostCommentReplyListRelationFilter
   postReactions?: Prisma.PostReactionListRelationFilter
+  commentReactions?: Prisma.PostCommentReactionListRelationFilter
+  followers?: Prisma.FollowListRelationFilter
+  following?: Prisma.FollowListRelationFilter
+  pages?: Prisma.PageListRelationFilter
+  pageLikes?: Prisma.PageLikeListRelationFilter
+  postShares?: Prisma.PostShareListRelationFilter
+  bookmarks?: Prisma.BookmarkListRelationFilter
+  stories?: Prisma.StoryListRelationFilter
+  storyViews?: Prisma.StoryViewListRelationFilter
+  notificationsIn?: Prisma.NotificationListRelationFilter
+  notificationsOut?: Prisma.NotificationListRelationFilter
+  mentions?: Prisma.PostMentionListRelationFilter
 }, "id">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  bio?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -212,64 +292,144 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   image?: Prisma.StringWithAggregatesFilter<"User"> | string
+  bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  coverImage?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  website?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  location?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
   id?: string
   name: string
   image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
   posts?: Prisma.PostCreateNestedManyWithoutUserInput
   postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
   commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
   postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
   name: string
   image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
   commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
   postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
   commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
   postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
   commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
   postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
   name: string
   image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserOrderByRelevanceInput = {
@@ -282,18 +442,30 @@ export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
+  coverImage?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  location?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
+  coverImage?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  location?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
+  coverImage?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  location?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -301,8 +473,45 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type UserCreateNestedOneWithoutFollowingInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFollowingInput, Prisma.UserUncheckedCreateWithoutFollowingInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFollowingInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutFollowersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFollowersInput, Prisma.UserUncheckedCreateWithoutFollowersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFollowersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFollowingNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFollowingInput, Prisma.UserUncheckedCreateWithoutFollowingInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFollowingInput
+  upsert?: Prisma.UserUpsertWithoutFollowingInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFollowingInput, Prisma.UserUpdateWithoutFollowingInput>, Prisma.UserUncheckedUpdateWithoutFollowingInput>
+}
+
+export type UserUpdateOneRequiredWithoutFollowersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFollowersInput, Prisma.UserUncheckedCreateWithoutFollowersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFollowersInput
+  upsert?: Prisma.UserUpsertWithoutFollowersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFollowersInput, Prisma.UserUpdateWithoutFollowersInput>, Prisma.UserUncheckedUpdateWithoutFollowersInput>
 }
 
 export type UserCreateNestedOneWithoutPostsInput = {
@@ -317,6 +526,20 @@ export type UserUpdateOneRequiredWithoutPostsNestedInput = {
   upsert?: Prisma.UserUpsertWithoutPostsInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPostsInput, Prisma.UserUpdateWithoutPostsInput>, Prisma.UserUncheckedUpdateWithoutPostsInput>
+}
+
+export type UserCreateNestedOneWithoutPostSharesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPostSharesInput, Prisma.UserUncheckedCreateWithoutPostSharesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPostSharesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPostSharesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPostSharesInput, Prisma.UserUncheckedCreateWithoutPostSharesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPostSharesInput
+  upsert?: Prisma.UserUpsertWithoutPostSharesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPostSharesInput, Prisma.UserUpdateWithoutPostSharesInput>, Prisma.UserUncheckedUpdateWithoutPostSharesInput>
 }
 
 export type UserCreateNestedOneWithoutPostCommentsInput = {
@@ -361,22 +584,414 @@ export type UserUpdateOneRequiredWithoutPostReactionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPostReactionsInput, Prisma.UserUpdateWithoutPostReactionsInput>, Prisma.UserUncheckedUpdateWithoutPostReactionsInput>
 }
 
+export type UserCreateNestedOneWithoutCommentReactionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCommentReactionsInput, Prisma.UserUncheckedCreateWithoutCommentReactionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCommentReactionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCommentReactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCommentReactionsInput, Prisma.UserUncheckedCreateWithoutCommentReactionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCommentReactionsInput
+  upsert?: Prisma.UserUpsertWithoutCommentReactionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCommentReactionsInput, Prisma.UserUpdateWithoutCommentReactionsInput>, Prisma.UserUncheckedUpdateWithoutCommentReactionsInput>
+}
+
+export type UserCreateNestedOneWithoutMentionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMentionsInput, Prisma.UserUncheckedCreateWithoutMentionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMentionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMentionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMentionsInput, Prisma.UserUncheckedCreateWithoutMentionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMentionsInput
+  upsert?: Prisma.UserUpsertWithoutMentionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMentionsInput, Prisma.UserUpdateWithoutMentionsInput>, Prisma.UserUncheckedUpdateWithoutMentionsInput>
+}
+
+export type UserCreateNestedOneWithoutPagesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPagesInput, Prisma.UserUncheckedCreateWithoutPagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPagesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPagesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPagesInput, Prisma.UserUncheckedCreateWithoutPagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPagesInput
+  upsert?: Prisma.UserUpsertWithoutPagesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPagesInput, Prisma.UserUpdateWithoutPagesInput>, Prisma.UserUncheckedUpdateWithoutPagesInput>
+}
+
+export type UserCreateNestedOneWithoutPageLikesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPageLikesInput, Prisma.UserUncheckedCreateWithoutPageLikesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPageLikesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPageLikesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPageLikesInput, Prisma.UserUncheckedCreateWithoutPageLikesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPageLikesInput
+  upsert?: Prisma.UserUpsertWithoutPageLikesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPageLikesInput, Prisma.UserUpdateWithoutPageLikesInput>, Prisma.UserUncheckedUpdateWithoutPageLikesInput>
+}
+
+export type UserCreateNestedOneWithoutStoriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoriesInput, Prisma.UserUncheckedCreateWithoutStoriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoriesInput, Prisma.UserUncheckedCreateWithoutStoriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoriesInput
+  upsert?: Prisma.UserUpsertWithoutStoriesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStoriesInput, Prisma.UserUpdateWithoutStoriesInput>, Prisma.UserUncheckedUpdateWithoutStoriesInput>
+}
+
+export type UserCreateNestedOneWithoutStoryViewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoryViewsInput, Prisma.UserUncheckedCreateWithoutStoryViewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoryViewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStoryViewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoryViewsInput, Prisma.UserUncheckedCreateWithoutStoryViewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoryViewsInput
+  upsert?: Prisma.UserUpsertWithoutStoryViewsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStoryViewsInput, Prisma.UserUpdateWithoutStoryViewsInput>, Prisma.UserUncheckedUpdateWithoutStoryViewsInput>
+}
+
+export type UserCreateNestedOneWithoutBookmarksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBookmarksInput, Prisma.UserUncheckedCreateWithoutBookmarksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBookmarksInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutBookmarksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBookmarksInput, Prisma.UserUncheckedCreateWithoutBookmarksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBookmarksInput
+  upsert?: Prisma.UserUpsertWithoutBookmarksInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBookmarksInput, Prisma.UserUpdateWithoutBookmarksInput>, Prisma.UserUncheckedUpdateWithoutBookmarksInput>
+}
+
+export type UserCreateNestedOneWithoutNotificationsInInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInInput, Prisma.UserUncheckedCreateWithoutNotificationsInInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutNotificationsOutInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsOutInput, Prisma.UserUncheckedCreateWithoutNotificationsOutInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsOutInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationsInNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInInput, Prisma.UserUncheckedCreateWithoutNotificationsInInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsInInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInInput, Prisma.UserUpdateWithoutNotificationsInInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInInput>
+}
+
+export type UserUpdateOneWithoutNotificationsOutNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsOutInput, Prisma.UserUncheckedCreateWithoutNotificationsOutInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsOutInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsOutInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsOutInput, Prisma.UserUpdateWithoutNotificationsOutInput>, Prisma.UserUncheckedUpdateWithoutNotificationsOutInput>
+}
+
+export type UserCreateWithoutFollowingInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFollowingInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFollowingInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFollowingInput, Prisma.UserUncheckedCreateWithoutFollowingInput>
+}
+
+export type UserCreateWithoutFollowersInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFollowersInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFollowersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFollowersInput, Prisma.UserUncheckedCreateWithoutFollowersInput>
+}
+
+export type UserUpsertWithoutFollowingInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFollowingInput, Prisma.UserUncheckedUpdateWithoutFollowingInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFollowingInput, Prisma.UserUncheckedCreateWithoutFollowingInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFollowingInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFollowingInput, Prisma.UserUncheckedUpdateWithoutFollowingInput>
+}
+
+export type UserUpdateWithoutFollowingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFollowingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutFollowersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFollowersInput, Prisma.UserUncheckedUpdateWithoutFollowersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFollowersInput, Prisma.UserUncheckedCreateWithoutFollowersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFollowersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFollowersInput, Prisma.UserUncheckedUpdateWithoutFollowersInput>
+}
+
+export type UserUpdateWithoutFollowersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFollowersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutPostsInput = {
   id?: string
   name: string
   image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
   postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
   commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
   postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
   id?: string
   name: string
   image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
   postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
   commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
   postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -399,36 +1014,216 @@ export type UserUpdateWithoutPostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
   commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
   postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
   commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
   postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPostSharesInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPostSharesInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPostSharesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPostSharesInput, Prisma.UserUncheckedCreateWithoutPostSharesInput>
+}
+
+export type UserUpsertWithoutPostSharesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPostSharesInput, Prisma.UserUncheckedUpdateWithoutPostSharesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPostSharesInput, Prisma.UserUncheckedCreateWithoutPostSharesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPostSharesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPostSharesInput, Prisma.UserUncheckedUpdateWithoutPostSharesInput>
+}
+
+export type UserUpdateWithoutPostSharesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPostSharesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPostCommentsInput = {
   id?: string
   name: string
   image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
   posts?: Prisma.PostCreateNestedManyWithoutUserInput
   commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
   postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPostCommentsInput = {
   id?: string
   name: string
   image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
   postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPostCommentsInput = {
@@ -451,36 +1246,100 @@ export type UserUpdateWithoutPostCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
   postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
   postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCommentRepliesInput = {
   id?: string
   name: string
   image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
   posts?: Prisma.PostCreateNestedManyWithoutUserInput
   postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
   postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentRepliesInput = {
   id?: string
   name: string
   image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
   postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentRepliesInput = {
@@ -503,36 +1362,100 @@ export type UserUpdateWithoutCommentRepliesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
   postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentRepliesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
   postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPostReactionsInput = {
   id?: string
   name: string
   image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
   posts?: Prisma.PostCreateNestedManyWithoutUserInput
   postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
   commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPostReactionsInput = {
   id?: string
   name: string
   image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
   commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPostReactionsInput = {
@@ -555,18 +1478,1094 @@ export type UserUpdateWithoutPostReactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
   commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostReactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
   commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCommentReactionsInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCommentReactionsInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCommentReactionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCommentReactionsInput, Prisma.UserUncheckedCreateWithoutCommentReactionsInput>
+}
+
+export type UserUpsertWithoutCommentReactionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCommentReactionsInput, Prisma.UserUncheckedUpdateWithoutCommentReactionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCommentReactionsInput, Prisma.UserUncheckedCreateWithoutCommentReactionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCommentReactionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCommentReactionsInput, Prisma.UserUncheckedUpdateWithoutCommentReactionsInput>
+}
+
+export type UserUpdateWithoutCommentReactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCommentReactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMentionsInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+}
+
+export type UserUncheckedCreateWithoutMentionsInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+}
+
+export type UserCreateOrConnectWithoutMentionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMentionsInput, Prisma.UserUncheckedCreateWithoutMentionsInput>
+}
+
+export type UserUpsertWithoutMentionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMentionsInput, Prisma.UserUncheckedUpdateWithoutMentionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMentionsInput, Prisma.UserUncheckedCreateWithoutMentionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMentionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMentionsInput, Prisma.UserUncheckedUpdateWithoutMentionsInput>
+}
+
+export type UserUpdateWithoutMentionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMentionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+}
+
+export type UserCreateWithoutPagesInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPagesInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPagesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPagesInput, Prisma.UserUncheckedCreateWithoutPagesInput>
+}
+
+export type UserUpsertWithoutPagesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPagesInput, Prisma.UserUncheckedUpdateWithoutPagesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPagesInput, Prisma.UserUncheckedCreateWithoutPagesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPagesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPagesInput, Prisma.UserUncheckedUpdateWithoutPagesInput>
+}
+
+export type UserUpdateWithoutPagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPageLikesInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPageLikesInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPageLikesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPageLikesInput, Prisma.UserUncheckedCreateWithoutPageLikesInput>
+}
+
+export type UserUpsertWithoutPageLikesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPageLikesInput, Prisma.UserUncheckedUpdateWithoutPageLikesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPageLikesInput, Prisma.UserUncheckedCreateWithoutPageLikesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPageLikesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPageLikesInput, Prisma.UserUncheckedUpdateWithoutPageLikesInput>
+}
+
+export type UserUpdateWithoutPageLikesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPageLikesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutStoriesInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStoriesInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStoriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoriesInput, Prisma.UserUncheckedCreateWithoutStoriesInput>
+}
+
+export type UserUpsertWithoutStoriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStoriesInput, Prisma.UserUncheckedUpdateWithoutStoriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoriesInput, Prisma.UserUncheckedCreateWithoutStoriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStoriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStoriesInput, Prisma.UserUncheckedUpdateWithoutStoriesInput>
+}
+
+export type UserUpdateWithoutStoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutStoryViewsInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStoryViewsInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStoryViewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoryViewsInput, Prisma.UserUncheckedCreateWithoutStoryViewsInput>
+}
+
+export type UserUpsertWithoutStoryViewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStoryViewsInput, Prisma.UserUncheckedUpdateWithoutStoryViewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoryViewsInput, Prisma.UserUncheckedCreateWithoutStoryViewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStoryViewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStoryViewsInput, Prisma.UserUncheckedUpdateWithoutStoryViewsInput>
+}
+
+export type UserUpdateWithoutStoryViewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStoryViewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutBookmarksInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBookmarksInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBookmarksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBookmarksInput, Prisma.UserUncheckedCreateWithoutBookmarksInput>
+}
+
+export type UserUpsertWithoutBookmarksInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBookmarksInput, Prisma.UserUncheckedUpdateWithoutBookmarksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBookmarksInput, Prisma.UserUncheckedCreateWithoutBookmarksInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBookmarksInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBookmarksInput, Prisma.UserUncheckedUpdateWithoutBookmarksInput>
+}
+
+export type UserUpdateWithoutBookmarksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBookmarksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationsInInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsOut?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsInInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsOut?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsInInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInInput, Prisma.UserUncheckedCreateWithoutNotificationsInInput>
+}
+
+export type UserCreateWithoutNotificationsOutInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  mentions?: Prisma.PostMentionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsOutInput = {
+  id?: string
+  name: string
+  image?: string
+  bio?: string | null
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedCreateNestedManyWithoutUserInput
+  postReactions?: Prisma.PostReactionUncheckedCreateNestedManyWithoutUserInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutOwnerInput
+  pageLikes?: Prisma.PageLikeUncheckedCreateNestedManyWithoutUserInput
+  postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  notificationsIn?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  mentions?: Prisma.PostMentionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsOutInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsOutInput, Prisma.UserUncheckedCreateWithoutNotificationsOutInput>
+}
+
+export type UserUpsertWithoutNotificationsInInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInInput, Prisma.UserUncheckedUpdateWithoutNotificationsInInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInInput, Prisma.UserUncheckedCreateWithoutNotificationsInInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsInInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInInput, Prisma.UserUncheckedUpdateWithoutNotificationsInInput>
+}
+
+export type UserUpdateWithoutNotificationsInInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsOut?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsInInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsOut?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutNotificationsOutInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsOutInput, Prisma.UserUncheckedUpdateWithoutNotificationsOutInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsOutInput, Prisma.UserUncheckedCreateWithoutNotificationsOutInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsOutInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsOutInput, Prisma.UserUncheckedUpdateWithoutNotificationsOutInput>
+}
+
+export type UserUpdateWithoutNotificationsOutInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  mentions?: Prisma.PostMentionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsOutInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  commentReplies?: Prisma.PostCommentReplyUncheckedUpdateManyWithoutUserNestedInput
+  postReactions?: Prisma.PostReactionUncheckedUpdateManyWithoutUserNestedInput
+  commentReactions?: Prisma.PostCommentReactionUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutOwnerNestedInput
+  pageLikes?: Prisma.PageLikeUncheckedUpdateManyWithoutUserNestedInput
+  postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  notificationsIn?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  mentions?: Prisma.PostMentionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -579,6 +2578,18 @@ export type UserCountOutputType = {
   postComments: number
   commentReplies: number
   postReactions: number
+  commentReactions: number
+  followers: number
+  following: number
+  pages: number
+  pageLikes: number
+  postShares: number
+  bookmarks: number
+  stories: number
+  storyViews: number
+  notificationsIn: number
+  notificationsOut: number
+  mentions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -586,6 +2597,18 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   postComments?: boolean | UserCountOutputTypeCountPostCommentsArgs
   commentReplies?: boolean | UserCountOutputTypeCountCommentRepliesArgs
   postReactions?: boolean | UserCountOutputTypeCountPostReactionsArgs
+  commentReactions?: boolean | UserCountOutputTypeCountCommentReactionsArgs
+  followers?: boolean | UserCountOutputTypeCountFollowersArgs
+  following?: boolean | UserCountOutputTypeCountFollowingArgs
+  pages?: boolean | UserCountOutputTypeCountPagesArgs
+  pageLikes?: boolean | UserCountOutputTypeCountPageLikesArgs
+  postShares?: boolean | UserCountOutputTypeCountPostSharesArgs
+  bookmarks?: boolean | UserCountOutputTypeCountBookmarksArgs
+  stories?: boolean | UserCountOutputTypeCountStoriesArgs
+  storyViews?: boolean | UserCountOutputTypeCountStoryViewsArgs
+  notificationsIn?: boolean | UserCountOutputTypeCountNotificationsInArgs
+  notificationsOut?: boolean | UserCountOutputTypeCountNotificationsOutArgs
+  mentions?: boolean | UserCountOutputTypeCountMentionsArgs
 }
 
 /**
@@ -626,15 +2649,115 @@ export type UserCountOutputTypeCountPostReactionsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.PostReactionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCommentReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PostCommentReactionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFollowersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FollowWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFollowingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FollowWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PageWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPageLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PageLikeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPostSharesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PostShareWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBookmarksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookmarkWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StoryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStoryViewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StoryViewWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsInArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsOutArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMentionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PostMentionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   image?: boolean
+  bio?: boolean
+  coverImage?: boolean
+  website?: boolean
+  location?: boolean
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   postComments?: boolean | Prisma.User$postCommentsArgs<ExtArgs>
   commentReplies?: boolean | Prisma.User$commentRepliesArgs<ExtArgs>
   postReactions?: boolean | Prisma.User$postReactionsArgs<ExtArgs>
+  commentReactions?: boolean | Prisma.User$commentReactionsArgs<ExtArgs>
+  followers?: boolean | Prisma.User$followersArgs<ExtArgs>
+  following?: boolean | Prisma.User$followingArgs<ExtArgs>
+  pages?: boolean | Prisma.User$pagesArgs<ExtArgs>
+  pageLikes?: boolean | Prisma.User$pageLikesArgs<ExtArgs>
+  postShares?: boolean | Prisma.User$postSharesArgs<ExtArgs>
+  bookmarks?: boolean | Prisma.User$bookmarksArgs<ExtArgs>
+  stories?: boolean | Prisma.User$storiesArgs<ExtArgs>
+  storyViews?: boolean | Prisma.User$storyViewsArgs<ExtArgs>
+  notificationsIn?: boolean | Prisma.User$notificationsInArgs<ExtArgs>
+  notificationsOut?: boolean | Prisma.User$notificationsOutArgs<ExtArgs>
+  mentions?: boolean | Prisma.User$mentionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -644,14 +2767,30 @@ export type UserSelectScalar = {
   id?: boolean
   name?: boolean
   image?: boolean
+  bio?: boolean
+  coverImage?: boolean
+  website?: boolean
+  location?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "image", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "image" | "bio" | "coverImage" | "website" | "location", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   postComments?: boolean | Prisma.User$postCommentsArgs<ExtArgs>
   commentReplies?: boolean | Prisma.User$commentRepliesArgs<ExtArgs>
   postReactions?: boolean | Prisma.User$postReactionsArgs<ExtArgs>
+  commentReactions?: boolean | Prisma.User$commentReactionsArgs<ExtArgs>
+  followers?: boolean | Prisma.User$followersArgs<ExtArgs>
+  following?: boolean | Prisma.User$followingArgs<ExtArgs>
+  pages?: boolean | Prisma.User$pagesArgs<ExtArgs>
+  pageLikes?: boolean | Prisma.User$pageLikesArgs<ExtArgs>
+  postShares?: boolean | Prisma.User$postSharesArgs<ExtArgs>
+  bookmarks?: boolean | Prisma.User$bookmarksArgs<ExtArgs>
+  stories?: boolean | Prisma.User$storiesArgs<ExtArgs>
+  storyViews?: boolean | Prisma.User$storyViewsArgs<ExtArgs>
+  notificationsIn?: boolean | Prisma.User$notificationsInArgs<ExtArgs>
+  notificationsOut?: boolean | Prisma.User$notificationsOutArgs<ExtArgs>
+  mentions?: boolean | Prisma.User$mentionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -662,11 +2801,27 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     postComments: Prisma.$PostCommentPayload<ExtArgs>[]
     commentReplies: Prisma.$PostCommentReplyPayload<ExtArgs>[]
     postReactions: Prisma.$PostReactionPayload<ExtArgs>[]
+    commentReactions: Prisma.$PostCommentReactionPayload<ExtArgs>[]
+    followers: Prisma.$FollowPayload<ExtArgs>[]
+    following: Prisma.$FollowPayload<ExtArgs>[]
+    pages: Prisma.$PagePayload<ExtArgs>[]
+    pageLikes: Prisma.$PageLikePayload<ExtArgs>[]
+    postShares: Prisma.$PostSharePayload<ExtArgs>[]
+    bookmarks: Prisma.$BookmarkPayload<ExtArgs>[]
+    stories: Prisma.$StoryPayload<ExtArgs>[]
+    storyViews: Prisma.$StoryViewPayload<ExtArgs>[]
+    notificationsIn: Prisma.$NotificationPayload<ExtArgs>[]
+    notificationsOut: Prisma.$NotificationPayload<ExtArgs>[]
+    mentions: Prisma.$PostMentionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
     image: string
+    bio: string | null
+    coverImage: string | null
+    website: string | null
+    location: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1011,6 +3166,18 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   postComments<T extends Prisma.User$postCommentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   commentReplies<T extends Prisma.User$commentRepliesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentRepliesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostCommentReplyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   postReactions<T extends Prisma.User$postReactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  commentReactions<T extends Prisma.User$commentReactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostCommentReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  followers<T extends Prisma.User$followersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$followersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  following<T extends Prisma.User$followingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$followingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pages<T extends Prisma.User$pagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pageLikes<T extends Prisma.User$pageLikesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pageLikesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PageLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  postShares<T extends Prisma.User$postSharesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postSharesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bookmarks<T extends Prisma.User$bookmarksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookmarkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stories<T extends Prisma.User$storiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  storyViews<T extends Prisma.User$storyViewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storyViewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StoryViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationsIn<T extends Prisma.User$notificationsInArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsInArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationsOut<T extends Prisma.User$notificationsOutArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsOutArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  mentions<T extends Prisma.User$mentionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mentionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostMentionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1043,6 +3210,10 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly image: Prisma.FieldRef<"User", 'String'>
+  readonly bio: Prisma.FieldRef<"User", 'String'>
+  readonly coverImage: Prisma.FieldRef<"User", 'String'>
+  readonly website: Prisma.FieldRef<"User", 'String'>
+  readonly location: Prisma.FieldRef<"User", 'String'>
 }
     
 
@@ -1479,6 +3650,294 @@ export type User$postReactionsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.PostReactionScalarFieldEnum | Prisma.PostReactionScalarFieldEnum[]
+}
+
+/**
+ * User.commentReactions
+ */
+export type User$commentReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PostCommentReaction
+   */
+  select?: Prisma.PostCommentReactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PostCommentReaction
+   */
+  omit?: Prisma.PostCommentReactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PostCommentReactionInclude<ExtArgs> | null
+  where?: Prisma.PostCommentReactionWhereInput
+  orderBy?: Prisma.PostCommentReactionOrderByWithRelationInput | Prisma.PostCommentReactionOrderByWithRelationInput[]
+  cursor?: Prisma.PostCommentReactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PostCommentReactionScalarFieldEnum | Prisma.PostCommentReactionScalarFieldEnum[]
+}
+
+/**
+ * User.followers
+ */
+export type User$followersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Follow
+   */
+  select?: Prisma.FollowSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Follow
+   */
+  omit?: Prisma.FollowOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FollowInclude<ExtArgs> | null
+  where?: Prisma.FollowWhereInput
+  orderBy?: Prisma.FollowOrderByWithRelationInput | Prisma.FollowOrderByWithRelationInput[]
+  cursor?: Prisma.FollowWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FollowScalarFieldEnum | Prisma.FollowScalarFieldEnum[]
+}
+
+/**
+ * User.following
+ */
+export type User$followingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Follow
+   */
+  select?: Prisma.FollowSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Follow
+   */
+  omit?: Prisma.FollowOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FollowInclude<ExtArgs> | null
+  where?: Prisma.FollowWhereInput
+  orderBy?: Prisma.FollowOrderByWithRelationInput | Prisma.FollowOrderByWithRelationInput[]
+  cursor?: Prisma.FollowWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FollowScalarFieldEnum | Prisma.FollowScalarFieldEnum[]
+}
+
+/**
+ * User.pages
+ */
+export type User$pagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Page
+   */
+  select?: Prisma.PageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Page
+   */
+  omit?: Prisma.PageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PageInclude<ExtArgs> | null
+  where?: Prisma.PageWhereInput
+  orderBy?: Prisma.PageOrderByWithRelationInput | Prisma.PageOrderByWithRelationInput[]
+  cursor?: Prisma.PageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PageScalarFieldEnum | Prisma.PageScalarFieldEnum[]
+}
+
+/**
+ * User.pageLikes
+ */
+export type User$pageLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PageLike
+   */
+  select?: Prisma.PageLikeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PageLike
+   */
+  omit?: Prisma.PageLikeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PageLikeInclude<ExtArgs> | null
+  where?: Prisma.PageLikeWhereInput
+  orderBy?: Prisma.PageLikeOrderByWithRelationInput | Prisma.PageLikeOrderByWithRelationInput[]
+  cursor?: Prisma.PageLikeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PageLikeScalarFieldEnum | Prisma.PageLikeScalarFieldEnum[]
+}
+
+/**
+ * User.postShares
+ */
+export type User$postSharesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PostShare
+   */
+  select?: Prisma.PostShareSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PostShare
+   */
+  omit?: Prisma.PostShareOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PostShareInclude<ExtArgs> | null
+  where?: Prisma.PostShareWhereInput
+  orderBy?: Prisma.PostShareOrderByWithRelationInput | Prisma.PostShareOrderByWithRelationInput[]
+  cursor?: Prisma.PostShareWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PostShareScalarFieldEnum | Prisma.PostShareScalarFieldEnum[]
+}
+
+/**
+ * User.bookmarks
+ */
+export type User$bookmarksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Bookmark
+   */
+  select?: Prisma.BookmarkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Bookmark
+   */
+  omit?: Prisma.BookmarkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookmarkInclude<ExtArgs> | null
+  where?: Prisma.BookmarkWhereInput
+  orderBy?: Prisma.BookmarkOrderByWithRelationInput | Prisma.BookmarkOrderByWithRelationInput[]
+  cursor?: Prisma.BookmarkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookmarkScalarFieldEnum | Prisma.BookmarkScalarFieldEnum[]
+}
+
+/**
+ * User.stories
+ */
+export type User$storiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Story
+   */
+  select?: Prisma.StorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Story
+   */
+  omit?: Prisma.StoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StoryInclude<ExtArgs> | null
+  where?: Prisma.StoryWhereInput
+  orderBy?: Prisma.StoryOrderByWithRelationInput | Prisma.StoryOrderByWithRelationInput[]
+  cursor?: Prisma.StoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StoryScalarFieldEnum | Prisma.StoryScalarFieldEnum[]
+}
+
+/**
+ * User.storyViews
+ */
+export type User$storyViewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StoryView
+   */
+  select?: Prisma.StoryViewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StoryView
+   */
+  omit?: Prisma.StoryViewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StoryViewInclude<ExtArgs> | null
+  where?: Prisma.StoryViewWhereInput
+  orderBy?: Prisma.StoryViewOrderByWithRelationInput | Prisma.StoryViewOrderByWithRelationInput[]
+  cursor?: Prisma.StoryViewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StoryViewScalarFieldEnum | Prisma.StoryViewScalarFieldEnum[]
+}
+
+/**
+ * User.notificationsIn
+ */
+export type User$notificationsInArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.notificationsOut
+ */
+export type User$notificationsOutArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.mentions
+ */
+export type User$mentionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PostMention
+   */
+  select?: Prisma.PostMentionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PostMention
+   */
+  omit?: Prisma.PostMentionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PostMentionInclude<ExtArgs> | null
+  where?: Prisma.PostMentionWhereInput
+  orderBy?: Prisma.PostMentionOrderByWithRelationInput | Prisma.PostMentionOrderByWithRelationInput[]
+  cursor?: Prisma.PostMentionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PostMentionScalarFieldEnum | Prisma.PostMentionScalarFieldEnum[]
 }
 
 /**
