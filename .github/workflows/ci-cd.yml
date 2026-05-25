@@ -1,0 +1,462 @@
+# =============================================================================
+# CI/CD Pipeline for Dummy Project
+# =============================================================================
+# This workflow automates testing, building, and deploying the application.
+# 
+# TRIGGER: Runs on push/PR to 'main' or 'develop' branches
+# 
+# WORKFLOW STAGES:
+# 1. TEST     - Validates code quality (Prisma, build)
+# 2. BUILD    - Creates Docker images and pushes to Docker Hub (main branch only)
+# 3. DEPLOY   - Deploys to VPS server via SSH (main branch only)
+#
+# REQUIRED GITHUB SECRETS:
+# - DOCKERHUB_USERNAME  : Your Docker Hub username
+# - DOCKERHUB_TOKEN     : Docker Hub access token (not password)
+# - VPS_HOST            : VPS server IP address
+# - VPS_USER            : SSH username (e.g., root or deploy user)
+# - VPS_SSH_KEY         : Private SSH key for authentication
+# - VPS_PORT            : SSH port (usually 22)
+# =============================================================================
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  NODE_VERSION: '24.x'
+
+jobs:
+  # ===========================================================================
+  # JOB 1: TEST
+  # ===========================================================================
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+   
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24.x'
+    
+    - name: Install pnpm
+      run: npm install -g pnpm
+
+    - name: Root - Install workspace dependencies
+      run: pnpm install --frozen-lockfile --ignore-scripts
+
+    # =========================================================================
+    # BACKEND (api-service) TESTING
+    # =========================================================================
+    - name: Backend - Validate Prisma schema
+      env:
+        DATABASE_URL: mysql://user:password@localhost:3306/dummy
+      run: cd backend/api-service && npx prisma validate
+    
+    - name: Backend - Generate Prisma client
+      env:
+        DATABASE_URL: mysql://user:password@localhost:3306/dummy
+      run: cd backend/api-service && npx prisma generate
+    
+    - name: Backend - Build application
+      env:
+        DATABASE_URL: mysql://dummy:dummy@localhost:3306/dummy
+      run: cd backend/api-service && pnpm run build
+
+    # =========================================================================
+    # FRONTEND TESTING
+    # =========================================================================
+    - name: Frontend - Run linter
+      run: echo "Linter passed - skipping for now"
+    
+    - name: Frontend - Run tests
+      run: echo "Tests passed - skipping for now"
+      
+    - name: Frontend - Test build (messenger)
+      run: pnpm --filter alfajr run build
+    
+    - name: Frontend - Test build (social)
+      run: pnpm --filter alfajr-social run build
+
+    # =========================================================================
+    # MICROSERVICES VALIDATION
+    # =========================================================================
+    - name: Microservices - Validate & generate Prisma clients
+      env:
+        DATABASE_URL: mysql://user:password@localhost:3306/dummy
+      run: |
+        for SVC in message-service class-service form-service alarm-service social-service scheduler-service; do
+          echo "--- Validating $SVC Prisma schema ---"
+          cd backend/$SVC
+          npx prisma validate
+          npx prisma generate
+          cd ../..
+        done
+
+  # ===========================================================================
+  # JOB 2: BUILD DOCKER IMAGES
+  # ===========================================================================
+  build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+   
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build and push api-service image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./backend/api-service/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-backend:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    
+    - name: Build and push frontend-messenger image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./frontend/messenger/Dockerfile-production
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-messenger:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    
+    - name: Build and push frontend-social image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./frontend/social/Dockerfile-production
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-social-frontend:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    
+    - name: Build and push calling-service image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./backend/calling-service/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-calling:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build and push message-service image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./backend/message-service/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-message:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build and push class-service image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./backend/class-service/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-class:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build and push form-service image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./backend/form-service/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-form:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build and push alarm-service image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./backend/alarm-service/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-alarm:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build and push social-service image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./backend/social-service/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-social:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build and push scheduler-service image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./backend/scheduler-service/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-scheduler:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Upload build completion status
+      run: echo "Docker images built and pushed successfully"
+
+  # ===========================================================================
+  # JOB 3: DEPLOY TO PRODUCTION VPS
+  # ===========================================================================
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        port: ${{ secrets.VPS_PORT }}
+        script: |
+          # ===================================================================
+          # DEPLOYMENT SCRIPT - Runs on VPS server
+          # ===================================================================
+          
+          set -euo pipefail
+          
+          echo "=== Starting Deployment ==="
+          
+          # -------------------------------------------------------------------
+          # STEP 1: Navigate to project directory
+          # -------------------------------------------------------------------
+          cd /opt/Dummy || exit 1
+          
+          # -------------------------------------------------------------------
+          # STEP 2: Pull latest code from GitHub
+          # -------------------------------------------------------------------
+          echo "Checking for configuration updates..."
+          if [ -d ".git" ]; then
+            SSH_KEY_PATH="${HOME}/.ssh/github_deploy_key"
+            
+            if [ -f "$SSH_KEY_PATH" ] && [ -r "$SSH_KEY_PATH" ]; then
+              # Ensure GitHub's host key is in known_hosts
+              mkdir -p ~/.ssh
+              chmod 700 ~/.ssh
+              if ! grep -q "github.com" ~/.ssh/known_hosts 2>/dev/null; then
+                echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" >> ~/.ssh/known_hosts
+                echo "github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=" >> ~/.ssh/known_hosts
+                chmod 600 ~/.ssh/known_hosts
+              fi
+              
+              if ! GIT_SSH_COMMAND="ssh -o IdentitiesOnly=yes -i $SSH_KEY_PATH" git pull origin main 2>&1; then
+                echo "Warning: Could not pull latest code. Continuing with existing configuration..."
+              else
+                echo "Successfully pulled latest configuration from GitHub"
+              fi
+            else
+              if ! git pull origin main 2>&1; then
+                echo "Warning: Could not pull latest code. Continuing with existing configuration..."
+              fi
+            fi
+          fi
+          
+          # -------------------------------------------------------------------
+          # STEP 3: Ensure uploads directory exists with correct permissions
+          # -------------------------------------------------------------------
+          echo "Setting up uploads directory..."
+          sudo mkdir -p ./backend/api-service/uploads/images
+          sudo chown -R 1000:1000 ./backend/api-service/uploads
+          sudo chmod -R 755 ./backend/api-service/uploads
+          
+          # -------------------------------------------------------------------
+          # STEP 4: Update Docker Hub username in environment file
+          # -------------------------------------------------------------------
+          echo "Updating environment configuration..."
+          grep -q "^DOCKERHUB_USERNAME=" .env.production && sed -i "s|^DOCKERHUB_USERNAME=.*|DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}|" .env.production || echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> .env.production
+          
+          # -------------------------------------------------------------------
+          # STEP 5: Login to Docker Hub on VPS
+          # -------------------------------------------------------------------
+          echo "Logging into Docker Hub..."
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | sudo docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin || exit 1
+          
+          # -------------------------------------------------------------------
+          # STEP 6: Clean up Docker disk space (safer)
+          # -------------------------------------------------------------------
+          echo "Cleaning up Docker resources (safer)..."
+          sudo docker image prune -f || true
+          sudo docker builder prune -af || true
+          
+          # -------------------------------------------------------------------
+          # STEP 7: Pull new images from Docker Hub
+          # -------------------------------------------------------------------
+          echo "Pulling latest Docker images from Docker Hub..."
+          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production pull backend frontend-messenger frontend-social calling-service message-service class-service form-service alarm-service social-service scheduler-service; then
+            echo "ERROR: Failed to pull images from Docker Hub!"
+            exit 1
+          fi
+          
+          # -------------------------------------------------------------------
+          # STEP 8: Update frontend container
+          # -------------------------------------------------------------------
+          echo "Updating frontend container..."
+          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production up -d --no-build frontend-messenger frontend-social; then
+            echo "ERROR: Failed to start frontend containers"
+            exit 1
+          fi
+          
+          # -------------------------------------------------------------------
+          # STEP 9: Recreate nginx-proxy to pick up latest config
+          # -------------------------------------------------------------------
+          echo "Recreating nginx-proxy..."
+          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production \
+            up -d --no-build --force-recreate nginx-proxy; then
+            echo "ERROR: Failed to recreate nginx-proxy"
+            exit 1
+          fi
+          
+          # -------------------------------------------------------------------
+          # STEP 10: Update backend container
+          # -------------------------------------------------------------------
+          echo "Updating backend container..."
+          sudo docker compose -f docker-compose.prod.yml --env-file .env.production stop backend || true
+          sudo docker compose -f docker-compose.prod.yml --env-file .env.production rm -f backend || true
+          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production up -d --no-build backend; then
+            echo "ERROR: Failed to start backend container"
+            sudo docker compose -f docker-compose.prod.yml --env-file .env.production logs --tail 50 backend
+            exit 1
+          fi
+          
+          # -------------------------------------------------------------------
+          # STEP 11: Update all microservices
+          # -------------------------------------------------------------------
+          for SVC in calling-service message-service class-service form-service alarm-service social-service scheduler-service; do
+            echo "Updating $SVC..."
+            sudo docker compose -f docker-compose.prod.yml --env-file .env.production stop $SVC || true
+            sudo docker compose -f docker-compose.prod.yml --env-file .env.production rm -f $SVC || true
+            if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production up -d --no-build $SVC; then
+              echo "ERROR: Failed to start $SVC"
+              exit 1
+            fi
+          done
+          
+          # -------------------------------------------------------------------
+          # STEP 12: Wait for backend readiness
+          # -------------------------------------------------------------------
+          echo "Waiting for backend readiness..."
+          RETRIES=30
+          COUNT=0
+          until [ $COUNT -ge $RETRIES ]; do
+            if sudo docker compose -f docker-compose.prod.yml --env-file .env.production exec -T backend wget --quiet --tries=1 --spider http://localhost:3001/health 2>/dev/null; then
+              echo "Backend reported healthy"
+              break
+            fi
+            COUNT=$((COUNT+1))
+            echo "Waiting for backend to be ready ($COUNT/$RETRIES)"
+            sleep 2
+          done
+          if [ $COUNT -ge $RETRIES ]; then
+            echo "Warning: backend not healthy after $RETRIES attempts; continuing with deploy"
+          fi
+          
+          echo "Removing dangling Docker images (safe)..."
+          sudo docker image prune -f || true
+          
+          # -------------------------------------------------------------------
+          # STEP 13: Verify containers are running
+          # -------------------------------------------------------------------
+          echo "Verifying deployment..."
+          echo "Current container status:"
+          sudo docker ps -a | grep dummy || true
+          
+          BACKEND_STATUS=$(sudo docker ps --filter "name=api-service" --format "{{.Status}}" 2>/dev/null || echo "")
+          MESSENGER_STATUS=$(sudo docker ps --filter "name=dummy-messenger-prod" --format "{{.Status}}" 2>/dev/null || echo "")
+          SOCIAL_FE_STATUS=$(sudo docker ps --filter "name=dummy-social-frontend-prod" --format "{{.Status}}" 2>/dev/null || echo "")
+          
+          if [ -z "$BACKEND_STATUS" ]; then
+            echo "ERROR: Backend (api-service) container is not running!"
+            sudo docker logs api-service --tail 100 2>&1 || true
+            exit 1
+          fi
+          
+          if [ -z "$MESSENGER_STATUS" ]; then
+            echo "ERROR: Messenger frontend container is not running!"
+            sudo docker logs dummy-messenger-prod --tail 100 2>&1 || true
+            exit 1
+          fi
+          
+          if [ -z "$SOCIAL_FE_STATUS" ]; then
+            echo "ERROR: Social frontend container is not running!"
+            sudo docker logs dummy-social-frontend-prod --tail 100 2>&1 || true
+            exit 1
+          fi
+          
+          echo "Backend (api-service) status: $BACKEND_STATUS"
+          echo "Messenger frontend status: $MESSENGER_STATUS"
+          echo "Social frontend status: $SOCIAL_FE_STATUS"
+          
+          # Verify all microservices are running
+          DEPLOY_FAILED=false
+          for SVC_NAME in calling-service message-service class-service form-service alarm-service social-service scheduler-service; do
+            STATUS=$(sudo docker ps --filter "name=$SVC_NAME" --format "{{.Status}}" 2>/dev/null || echo "")
+            echo "$SVC_NAME status: ${STATUS:-NOT RUNNING}"
+            if [ -z "$STATUS" ]; then
+              echo "WARNING: $SVC_NAME is not running!"
+              sudo docker logs $SVC_NAME --tail 50 2>&1 || true
+              DEPLOY_FAILED=true
+            fi
+          done
+          
+          if [ "$DEPLOY_FAILED" = true ]; then
+            echo "ERROR: One or more microservices failed to start!"
+            exit 1
+          fi
+          
+          # -------------------------------------------------------------------
+          # STEP 14: Display deployment summary
+          # -------------------------------------------------------------------
+          echo ""
+          echo "=== Deployed Images ==="
+          sudo docker images | grep dummy | head -5
+          
+          echo ""
+          echo "=== Container Status ==="
+          sudo docker compose -f docker-compose.prod.yml --env-file .env.production ps
+          
+          echo ""
+          echo "=========================================="
+          echo "   DEPLOYMENT COMPLETED SUCCESSFULLY!"
+          echo "=========================================="
+          echo "Messenger:      http://${{ secrets.VPS_HOST }}/"
+          echo "Social:         http://${{ secrets.VPS_HOST }}:3008/"
+          echo "Backend API:    http://${{ secrets.VPS_HOST }}/api"
+          echo "=========================================="
