@@ -277,14 +277,17 @@ jobs:
                 chmod 600 ~/.ssh/known_hosts
               fi
               
-              if ! GIT_SSH_COMMAND="ssh -o IdentitiesOnly=yes -i $SSH_KEY_PATH" git pull origin main 2>&1; then
-                echo "Warning: Could not pull latest code. Continuing with existing configuration..."
+              if ! GIT_SSH_COMMAND="ssh -o IdentitiesOnly=yes -i $SSH_KEY_PATH" git fetch origin main 2>&1; then
+                echo "Warning: Could not fetch latest code. Continuing with existing configuration..."
               else
+                GIT_SSH_COMMAND="ssh -o IdentitiesOnly=yes -i $SSH_KEY_PATH" git reset --hard origin/main
                 echo "Successfully pulled latest configuration from GitHub"
               fi
             else
-              if ! git pull origin main 2>&1; then
-                echo "Warning: Could not pull latest code. Continuing with existing configuration..."
+              if ! git fetch origin main 2>&1; then
+                echo "Warning: Could not fetch latest code. Continuing with existing configuration..."
+              else
+                git reset --hard origin/main
               fi
             fi
           fi
