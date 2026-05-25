@@ -1,0 +1,217 @@
+// Prisma schema – Message Service
+// Connects to the shared MySQL DB; only includes Message-domain models.
+// Read-only stubs (User, Conversation, ConversationParticipant) are kept
+// minimal so Prisma can resolve foreign-key relations without owning those tables.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// ─── Read-only stubs ─────────────────────────────────────────────────────────
+
+model User {
+  id                 String  @id @default(uuid())
+  name               String
+  image              String  @default("/images/avatar/default-avatar.svg")
+  fileSendingAllowed Boolean @default(false)
+
+  sentMessages     Message[]  @relation("MessageSender")
+  receivedMessages Message[]  @relation("MessageReceiver")
+  readReceipts     MessageReadBy[]
+  deletions        MessageDeletedBy[]
+  reactions        MessageReaction[]
+
+  @@map("users")
+}
+
+model Conversation {
+  id                      String  @id @default(uuid())
+  autoDeleteMessagesAfter Int     @default(24)
+  permText                Boolean @default(true)
+  permImage               Boolean @default(true)
+  permVoice               Boolean @default(false)
+  permVideo               Boolean @default(false)
+  permFile                Boolean @default(false)
+  fileSendingAllowed      Boolean @default(false)
+  smteKeyVersion          Int     @default(0)
+  v1Keys                  Json?
+
+  messages              Message[]
+  participants          ConversationParticipant[]
+  unreadMessages        UnreadMessage[]
+  conversationUnreads   ConversationUnread[]
+
+  @@map("conversations")
+}
+
+model ConversationParticipant {
+  id             String @id @default(uuid())
+  conversationId String
+  userId         String
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@index([userId])
+  @@map("conversation_participants")
+}
+
+// ─── Message Domain ──────────────────────────────────────────────────────────
+
+model Message {
+  id                    String        @id @default(uuid())
+  conversationId        String
+  senderId              String
+  receiverId            String?
+  text                  String?       @db.Text
+  isEncrypted           Boolean       @default(false)
+  isBackendEncrypted    Boolean       @default(false)
+  messageType           MessageType   @default(text)
+  htmlEmoji             String?       @db.Text
+  emojiType             EmojiType?
+  replyToId             String?
+  status                MessageStatus @default(sent)
+  edited                Boolean       @default(false)
+  scheduledDeletionTime DateTime?
+  reactions             Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  conversation  Conversation        @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender        User                @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver      User?               @relation("MessageReceiver", fields: [receiverId], references: [id], onDelete: SetNull)
+  replyTo       Message?            @relation("MessageReplies", fields: [replyToId], references: [id], onDelete: SetNull)
+  replies       Message[]           @relation("MessageReplies")
+  media         MessageMedia[]
+  readBy        MessageReadBy[]
+  deletedBy     MessageDeletedBy[]
+  editHistory   MessageEditHistory[]
+  messageReactions MessageReaction[]
+
+  @@index([conversationId, createdAt])
+  @@index([senderId])
+  @@index([scheduledDeletionTime])
+  @@map("messages")
+}
+
+enum MessageType {
+  text
+  image
+  video
+  audio
+  file
+  system
+  reply
+  mixed
+}
+
+enum EmojiType {
+  custom
+  standard
+}
+
+enum MessageStatus {
+  sent
+  delivered
+  read
+}
+
+model MessageMedia {
+  id        String     @id @default(uuid())
+  messageId String
+  url       String?
+  type      MediaType?
+  filename  String?
+  size      Int?
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@map("message_media")
+}
+
+enum MediaType {
+  image
+  video
+  audio
+  file
+}
+
+model MessageReadBy {
+  id        String   @id @default(uuid())
+  messageId String
+  userId    String
+  readAt    DateTime @default(now())
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId])
+  @@map("message_read_by")
+}
+
+model MessageDeletedBy {
+  id        String @id @default(uuid())
+  messageId String
+  userId    String
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId])
+  @@map("message_deleted_by")
+}
+
+model MessageEditHistory {
+  id        String   @id @default(uuid())
+  messageId String
+  oldText   String   @db.Text
+  editedAt  DateTime @default(now())
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@map("message_edit_history")
+}
+
+model MessageReaction {
+  id        String   @id @default(uuid())
+  messageId String
+  userId    String
+  type      String
+  createdAt DateTime @default(now())
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId])
+  @@map("message_reactions")
+}
+
+model UnreadMessage {
+  id             String @id @default(uuid())
+  conversationId String
+  userId         String
+  messageId      String
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId, messageId])
+  @@map("unread_messages")
+}
+
+model ConversationUnread {
+  id             String @id @default(uuid())
+  conversationId String
+  userId         String
+  count          Int    @default(0)
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@map("conversation_unreads")
+}

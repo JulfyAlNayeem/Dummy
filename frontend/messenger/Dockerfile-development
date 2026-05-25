@@ -1,0 +1,30 @@
+# Frontend Dockerfile for Development
+FROM node:24-alpine
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Copy workspace files
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .pnpmrc* ./
+COPY frontend/messenger/package.json ./frontend/messenger/
+
+# Install dependencies for frontend workspace only
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
+    pnpm install --frozen-lockfile --filter alfajr --ignore-scripts
+
+# Rebuild esbuild binary (needed by vite dev server)
+RUN pnpm --filter alfajr rebuild esbuild
+
+# Copy frontend source code
+COPY frontend/messenger/ ./frontend/messenger/
+
+# Set working directory to messenger
+WORKDIR /app/frontend/messenger
+
+# Expose port for Vite dev server
+EXPOSE 3002
+
+# Start development server
+CMD ["pnpm", "run", "dev"]

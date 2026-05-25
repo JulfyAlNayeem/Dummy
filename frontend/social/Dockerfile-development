@@ -1,0 +1,23 @@
+# Social Frontend Dockerfile for Development
+FROM node:24-alpine
+
+WORKDIR /app
+
+RUN npm install -g pnpm
+
+# Copy workspace files
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .pnpmrc* ./
+COPY frontend/social/package.json ./frontend/social/
+
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
+    pnpm install --frozen-lockfile --filter alfajr-social --ignore-scripts
+
+RUN pnpm --filter alfajr-social rebuild esbuild
+
+COPY frontend/social/ ./frontend/social/
+
+WORKDIR /app/frontend/social
+
+EXPOSE 3010
+
+CMD ["pnpm", "run", "dev"]

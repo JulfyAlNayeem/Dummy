@@ -1,4 +1,20 @@
 packages:
-  - 'backend'
-  - 'frontend'
-  - 'scripts'
+  - backend/api-service
+  - frontend
+  - backend/calling-service
+  - backend/message-service
+  - backend/class-service
+  - backend/form-service
+  - backend/alarm-service
+  - backend/social-service
+  - backend/scheduler-service
+
+# pnpm v10: explicitly list packages allowed to run install scripts
+onlyBuiltDependencies:
+  - "@prisma/engines"
+  - esbuild
+  - mediasoup
+  - sharp
+
+ignoredBuiltDependencies:
+  - prisma

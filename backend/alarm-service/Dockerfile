@@ -1,0 +1,13 @@
+FROM node:24-slim
+WORKDIR /app
+RUN npm install -g pnpm
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .pnpmrc* ./
+COPY backend/alarm-service/package.json ./backend/alarm-service/
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile --ignore-scripts --filter alarm-service
+COPY backend/alarm-service/ ./backend/alarm-service/
+WORKDIR /app/backend/alarm-service
+ARG DATABASE_URL="mysql://dummy:dummy@localhost:3306/dummy"
+RUN npx prisma generate
+EXPOSE 3007
+CMD ["sh", "-c", "npx tsx src/app.ts"]

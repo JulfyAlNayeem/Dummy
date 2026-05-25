@@ -55,16 +55,22 @@ pnpm-debug.log*
 # Testing
 coverage/
 
+# Backend-Old
+backend-old/
+
+calling-service-old/
+
 # Backups
 backups/
 *.sql
 *.sql.gz
+!backend/prisma/migrations/**/*.sql
 
 # Docker
+docker-backups/
 docker-compose.override.yml
 
 # Prisma
-prisma/migrations/
 *.db
 *.db-journal
 
@@ -76,3 +82,5 @@ tmp/
 temp/
 gitcommands
 .env.production.example
+.old/
+Screenshot 2026-01-02 170240.png

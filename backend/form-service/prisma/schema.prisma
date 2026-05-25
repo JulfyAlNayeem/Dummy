@@ -1,0 +1,129 @@
+// Prisma schema – Form Service
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum FormVisibility {
+  public
+  private
+}
+
+enum FrequencyType {
+  one_time
+  daily
+  weekly
+  bi_weekly
+  monthly
+}
+
+// ─── Stubs ────────────────────────────────────────────────────────────────────
+
+model User {
+  id   String @id @default(uuid())
+  name String
+
+  formsCreated    Form[]
+  formAssignments FormAssignment[] @relation("FormAssigner")
+  formSubmissions FormSubmission[]
+  formAssignees   FormAssignee[]
+
+  @@map("users")
+}
+
+model Conversation {
+  id String @id @default(uuid())
+
+  formAssignments FormAssignment[]
+
+  @@map("conversations")
+}
+
+// ─── Form Domain ─────────────────────────────────────────────────────────────
+
+model Form {
+  id         String         @id @default(uuid())
+  name       String
+  visibility FormVisibility @default(private)
+  creatorId  String
+  isArchived Boolean        @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  creator     User             @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  fields      FormField[]
+  assignments FormAssignment[]
+
+  @@map("forms")
+}
+
+model FormField {
+  id     String @id @default(uuid())
+  formId String
+  label  String
+  type   String // text | number | checkbox | select | textarea
+  order  Int    @default(0)
+
+  form Form @relation(fields: [formId], references: [id], onDelete: Cascade)
+
+  @@map("form_fields")
+}
+
+model FormAssignment {
+  id             String        @id @default(uuid())
+  formId         String
+  conversationId String
+  assignedById   String
+  frequency      FrequencyType @default(one_time)
+  startDate      DateTime?
+  endDate        DateTime?
+  isActive       Boolean       @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  form         Form         @relation(fields: [formId], references: [id], onDelete: Cascade)
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  assignedBy   User         @relation("FormAssigner", fields: [assignedById], references: [id], onDelete: Cascade)
+  assignees    FormAssignee[]
+  submissions  FormSubmission[]
+
+  @@map("form_assignments")
+}
+
+model FormAssignee {
+  id           String @id @default(uuid())
+  assignmentId String
+  userId       String
+
+  assignment FormAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([assignmentId, userId])
+  @@map("form_assignees")
+}
+
+model FormSubmission {
+  id           String    @id @default(uuid())
+  assignmentId String
+  submittedById String
+  answers      Json
+  submittedAt  DateTime  @default(now())
+  reviewedAt   DateTime?
+  reviewedById String?
+  grade        String?
+  feedback     String?   @db.Text
+
+  createdAt DateTime @default(now())
+
+  assignment  FormAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  submittedBy User           @relation(fields: [submittedById], references: [id], onDelete: Cascade)
+
+  @@map("form_submissions")
+}

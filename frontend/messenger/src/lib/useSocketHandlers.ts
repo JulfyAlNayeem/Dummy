@@ -1,0 +1,149 @@
+// @ts-nocheck
+import { useEffect } from 'react';
+import { updateMessage, addMessage } from '@/redux/slices/conversationSlice';
+
+import toast from 'react-hot-toast';
+import { cacheMessages, loadCachedMessages, getUniqueReadBy, isValidMessage } from './messageUtils';
+import { handleKeyRotated, requestTransportKeys } from '@/utils/smteEncryption';
+
+const useSocketHandlers = ({ socket, conversationId, userId, messages, dispatch, isGroup, setTypingUsers }: any): any => {
+  const handleReceiveMessage = (message: any): void => {
+    if ((message.conversationId || message.conversation) !== conversationId || !isValidMessage(userId)(message)) return;
+
+    const existingMessage = messages.find(
+      (m) => (message.clientTempId && m.clientTempId === message.clientTempId) || (message.id && m.id === message.id)
+    );
+
+    if (existingMessage) {
+      const updatedMessage = {
+        ...existingMessage,
+        id: message.id || existingMessage.id,
+        clientTempId: message.clientTempId || existingMessage.clientTempId,
+        status: message.status || existingMessage.status || 'sent',
+        readBy: getUniqueReadBy(existingMessage.readBy, message.readBy),
+        text: message.text || existingMessage.text,
+        media: message.media || existingMessage.media,
+        voice: message.voice || existingMessage.voice,
+        call: message.call || existingMessage.call,
+        img: message.img || existingMessage.img,
+        createdAt: message.createdAt || existingMessage.createdAt,
+        sender: message.sender || existingMessage.sender,
+        conversation: message.conversation || existingMessage.conversation,
+        updatedAt: new Date().toISOString(),
+      };
+      dispatch(updateMessage({ messageId: existingMessage.id || existingMessage.clientTempId, message: updatedMessage }));
+      const cachedMessages = loadCachedMessages(conversationId, userId);
+      const updatedCached = cachedMessages
+        .map((msg) => (msg.id === message.id || msg.clientTempId === message.clientTempId ? updatedMessage : msg))
+        .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      cacheMessages(conversationId, userId, updatedCached);
+    } else {
+      const newMessage = {
+        ...message,
+        readBy: message.readBy || [],
+        status: message.status || 'sent',
+        updatedAt: new Date().toISOString(),
+      };
+      dispatch(addMessage(newMessage));
+      const cachedMessages = loadCachedMessages(conversationId, userId);
+      const newMessages = [...cachedMessages, newMessage].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      cacheMessages(conversationId, userId, newMessages);
+    }
+  };
+
+  useEffect(() => {
+    if (!socket || !conversationId || conversationId === 'new' || !userId) return;
+
+    socket.emit('joinRoom', conversationId);
+
+    // Pre-fetch SMTE transport keys for this conversation
+    const method = localStorage.getItem(`encryptionMethod_${conversationId}`) || 'Backend';
+    if (method === 'Backend') {
+      requestTransportKeys(socket, conversationId).catch((err) =>
+        console.warn('SMTE: pre-fetch keys failed (will retry on send)', err.message)
+      );
+    }
+
+    socket.on('receiveMessage', handleReceiveMessage);
+    socket.on('smte:key-rotated', handleKeyRotated);
+    socket.on('typing', ({ userId: typingUserId, isTyping }) => {
+      if (!typingUserId || typingUserId === userId || isGroup) return;
+      setTypingUsers((prev) => (isTyping && !prev.includes(typingUserId) ? [typingUserId] : prev.filter((id) => id !== typingUserId)));
+    });
+    socket.on('messageDeleted', ({ messageId, userId, hardDelete }) => {
+      dispatch(
+        updateMessage({
+          messageId,
+          message: hardDelete ? null : { id: messageId, deletedBy: [...(messages.find((m) => m.id === messageId)?.deletedBy || []), userId] },
+        })
+      );
+      const cachedMessages = loadCachedMessages(conversationId, userId);
+      const newMessages = hardDelete
+        ? cachedMessages.filter((msg) => msg.id !== messageId)
+        : cachedMessages
+            .map((msg) => (msg.id === messageId ? { ...msg, deletedBy: [...(msg.deletedBy || []), userId] } : msg))
+            .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      cacheMessages(conversationId, userId, newMessages);
+    });
+    socket.on('messageStatus', ({ messageId, status, readBy }) => {
+      const existingMessage = messages.find((m) => m.id === messageId || m.clientTempId === messageId);
+      if (!existingMessage) return;
+      const currentReadBy = existingMessage.readBy || [];
+      if (readBy && readBy.some((entry) => currentReadBy.some((existing) => existing.user === entry.user))) return;
+      dispatch(
+        updateMessage({
+          messageId,
+          message: {
+            id: messageId,
+            clientTempId: existingMessage.clientTempId,
+            status: isGroup ? undefined : status,
+            readBy: readBy || currentReadBy,
+            text: existingMessage.text,
+            media: existingMessage.media,
+            voice: existingMessage.voice,
+            call: existingMessage.call,
+            img: existingMessage.img,
+            createdAt: existingMessage.createdAt,
+            sender: existingMessage.sender,
+            conversation: existingMessage.conversation,
+          },
+        })
+      );
+      const cachedMessages = loadCachedMessages(conversationId, userId);
+      const updatedMessages = cachedMessages
+        .map((msg) =>
+          msg.id === messageId || msg.clientTempId === existingMessage.clientTempId
+            ? { ...msg, status: isGroup ? msg.status : status, readBy: readBy || msg.readBy }
+            : msg
+        )
+        .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      cacheMessages(conversationId, userId, updatedMessages);
+    });
+    socket.on('sendMessageError', ({ clientTempId, message: errorMsg }) => {
+      const existingMessage = messages.find((m) => m.clientTempId === clientTempId);
+      if (existingMessage) {
+        dispatch(updateMessage({ messageId: existingMessage.id || existingMessage.clientTempId, message: { ...existingMessage, status: 'fail' } }));
+        const cachedMessages = loadCachedMessages(conversationId, userId);
+        const updatedCached = cachedMessages
+          .map((msg) => (msg.clientTempId === clientTempId ? { ...msg, status: 'fail' } : msg))
+          .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        cacheMessages(conversationId, userId, updatedCached);
+        toast.error(`Failed to send message: ${errorMsg}`);
+      }
+    });
+
+    return () => {
+      socket.emit('leaveRoom', conversationId);
+      socket.off('receiveMessage', handleReceiveMessage);
+      socket.off('smte:key-rotated', handleKeyRotated);
+      socket.off('typing');
+      socket.off('messageDeleted');
+      socket.off('messageStatus');
+      socket.off('sendMessageError');
+    };
+  }, [socket, conversationId, userId, messages, dispatch, isGroup, setTypingUsers]);
+
+  return { handleReceiveMessage };
+};
+
+export default useSocketHandlers;

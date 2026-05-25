@@ -1,0 +1,83 @@
+// Prisma schema – Social Service
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// ─── Stub ─────────────────────────────────────────────────────────────────────
+
+model User {
+  id    String @id @default(uuid())
+  name  String
+  image String @default("/images/avatar/default-avatar.svg")
+
+  posts         Post[]
+  postComments  PostComment[]
+  commentReplies PostCommentReply[]
+  postReactions PostReaction[]
+
+  @@map("users")
+}
+
+// ─── Post Domain ─────────────────────────────────────────────────────────────
+
+model Post {
+  id        String   @id @default(uuid())
+  userId    String
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments  PostComment[]
+  reactions PostReaction[]
+
+  @@index([createdAt])
+  @@map("posts")
+}
+
+model PostComment {
+  id        String   @id @default(uuid())
+  postId    String
+  userId    String
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+
+  post    Post               @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user    User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  replies PostCommentReply[]
+
+  @@map("post_comments")
+}
+
+model PostCommentReply {
+  id        String   @id @default(uuid())
+  commentId String
+  userId    String
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+
+  comment PostComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("post_comment_replies")
+}
+
+model PostReaction {
+  id        String   @id @default(uuid())
+  postId    String
+  userId    String
+  type      String   // like | love | haha | wow | sad | angry
+  createdAt DateTime @default(now())
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+  @@map("post_reactions")
+}

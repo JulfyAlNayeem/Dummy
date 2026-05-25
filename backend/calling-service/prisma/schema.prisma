@@ -1,0 +1,121 @@
+// Prisma schema for Calling Service - MySQL
+// Migrated from MongoDB Call + User models
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+// ─── User (read-only reference to shared users table) ────────────────────────
+// Minimal model - only fields needed for caller/callee display info
+
+model User {
+  id    String  @id @default(uuid())
+  name  String
+  image String  @default("/images/avatar/default-avatar.svg")
+
+  // Reverse relations (read-only)
+  callsAsCaller     Call[]            @relation("CallCaller")
+  callParticipants  CallParticipant[] @relation("ParticipantUser")
+
+  @@map("users")
+}
+
+// ─── Call Enums ──────────────────────────────────────────────────────────────
+
+enum CallType {
+  audio
+  video
+}
+
+enum CallStatus {
+  initiated
+  ringing
+  ongoing
+  ended
+  missed
+  declined
+  failed
+}
+
+enum ParticipantStatus {
+  ringing
+  accepted
+  declined
+  missed
+  busy
+  left
+  removed
+}
+
+enum EndReason {
+  normal
+  missed
+  declined
+  busy
+  failed
+  network_error
+  timeout
+}
+
+// ─── Call ────────────────────────────────────────────────────────────────────
+
+model Call {
+  id              String      @id @default(uuid())
+  callerId        String      @map("caller_id")
+  callType        CallType    @map("call_type")
+  isGroup         Boolean     @default(false) @map("is_group")
+  conversationId  String?     @map("conversation_id")
+  status          CallStatus  @default(initiated)
+  startedAt       DateTime?   @map("started_at")
+  endedAt         DateTime?   @map("ended_at")
+  duration        Int         @default(0)
+  endReason       EndReason?  @map("end_reason")
+  roomId          String?     @map("room_id")
+
+  // Quality metrics (stored as JSON)
+  qualityAvgBitrate  Float?   @map("quality_avg_bitrate")
+  qualityPacketLoss  Float?   @map("quality_packet_loss")
+  qualityLatency     Float?   @map("quality_latency")
+
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  caller          User              @relation("CallCaller", fields: [callerId], references: [id])
+  participants    CallParticipant[]
+
+  @@index([callerId, createdAt(sort: Desc)])
+  @@index([conversationId, createdAt(sort: Desc)])
+  @@index([status])
+  @@index([roomId])
+  @@map("calls")
+}
+
+// ─── CallParticipant ─────────────────────────────────────────────────────────
+// Replaces the embedded participants array from MongoDB
+
+model CallParticipant {
+  id        String            @id @default(uuid())
+  callId    String            @map("call_id")
+  userId    String            @map("user_id")
+  status    ParticipantStatus @default(ringing)
+  joinedAt  DateTime?         @map("joined_at")
+  leftAt    DateTime?         @map("left_at")
+  hasAudio  Boolean           @default(true)  @map("has_audio")
+  hasVideo  Boolean           @default(false) @map("has_video")
+
+  // Relations
+  call      Call              @relation(fields: [callId], references: [id], onDelete: Cascade)
+  user      User              @relation("ParticipantUser", fields: [userId], references: [id])
+
+  @@unique([callId, userId])
+  @@index([userId, callId])
+  @@map("call_participants")
+}

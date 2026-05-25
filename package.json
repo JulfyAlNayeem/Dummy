@@ -5,6 +5,7 @@
   "scripts": {
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend && npm run dev",
+    "dev:calling": "cd calling-service && npm run dev",
     "build:frontend": "cd frontend && npm run build",
     "build:backend": "cd backend && npm run build",
     "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
@@ -22,5 +23,8 @@
     "url": "https://github.com/julfyalnayeem/Dummy"
   },
   "author": "julfyalnayeem",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "pnpm": {
+    "onlyBuiltDependencies": ["@prisma/engines", "esbuild", "mediasoup", "sharp"]
+  }
 }

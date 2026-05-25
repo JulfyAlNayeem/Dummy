@@ -1,0 +1,141 @@
+import React, { useState, useEffect } from "react";
+import "animate.css";
+import rocket from "../assets/background/rocket.webp";
+import { useVerifySecurityMessageMutation } from "@/redux/api/securityApi";
+import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "@/context-reducer/UserAuthContext";
+import { useGetAllConversationsQuery } from "@/redux/api/conversationApi";
+import { toast } from "react-hot-toast";
+import { Rocket } from "lucide-react";
+
+const SiteSecuritypage = (): JSX.Element => {
+  const navigate = useNavigate();
+  const { user }: any = useUserAuth();
+  const { data: conversations }: any = useGetAllConversationsQuery(user?.id, { 
+    skip: !user?.id 
+  });
+  const [clickCount, setClickCount] = useState<number>(0);
+  const [isLaunched, setIsLaunched] = useState<boolean>(false);
+  const [lastClickTime, setLastClickTime] = useState<number | null>(null);
+  const [verifyForm, setVerifyForm] = useState<{ message: string }>({ message: '' });
+
+  const [verifySiteSecurityMessage, { isLoading: isVerifyingMessages, error: verifyError, isSuccess }]: any = useVerifySecurityMessageMutation();
+
+  // Redirect logged-in users to their first conversation
+  useEffect(() => {
+    if (user && conversations) {
+      const firstConvId = conversations[0]?.id;
+      if (firstConvId) {
+        navigate(`/e2ee/t/${firstConvId}`);
+      } else {
+        // If no conversations exist, go to empty chat state
+        navigate('/e2ee/t/empty');
+      }
+    }
+  }, [user, conversations, navigate]);
+
+  const handleClick = (): void => {
+    setClickCount((prev) => {
+      const newCount = prev + 1;
+      if (newCount >= 5) {
+        setIsLaunched(true);
+      }
+      return newCount;
+    });
+    setLastClickTime(Date.now());
+  };
+
+  const handleVerifyChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setVerifyForm({ message: e.target.value });
+  };
+
+  const handleVerifySubmit = async (e: React.FormEvent): Promise<void> => {
+    e.preventDefault();
+    try {
+      const response: any = await verifySiteSecurityMessage({ message: verifyForm.message }).unwrap();
+      toast.success(`Message verified successfully as ${response.data.messageType}`);
+      setVerifyForm({ message: '' });
+      navigate('/signin');
+    } catch (err: any) {
+      console.error('Verification error:', err);
+      toast.error('Verification failed: ' + (err?.data?.message || err?.message || 'Unknown error'));
+    }
+  };
+
+  useEffect(() => {
+    if (lastClickTime === null) return;
+
+    const timeout = setTimeout(() => {
+      const timeSinceLastClick = Date.now() - lastClickTime;
+      if (timeSinceLastClick >= 1000 && !isLaunched) {
+        setClickCount(0);
+        setLastClickTime(null);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [lastClickTime, isLaunched]);
+
+  useEffect(() => {
+    if (clickCount === 0 && isLaunched) {
+      setIsLaunched(false);
+    }
+  }, [clickCount]);
+
+  return (
+    <div className="h-screen w-screen overflow-hidden bg-[#e3f9ff] relative">
+      {/* Rocket */}
+      <img
+        src={rocket}
+        alt="Rocket background"
+        className={`w-full h-full object-cover object-bottom ${
+          isLaunched ? "animate__animated animate__slideOutUp animate__slow" : ""
+        }`}
+      />
+
+      {/* Screen cover */}
+      <div
+        className={`absolute bottom-0 left-0 w-full h-screen bg-[#e3f9ff] flex items-center justify-center flex-col gap-4 ${
+          isLaunched ? "animate__animated animate__fadeInUpBig" : "hidden"
+        }`}
+        style={{ animationDuration: "1600ms" }}
+      >
+        <div className=" flex items-center flex-col justify-center gap-2 px-4 text-center">
+          <h1 className="text-[#3d91ad] sm:text-4xl text-2xl font-bold">Rocket Launched!</h1>
+        <h3 className=" font-semibold text-[#41a9cd]">Humm...! May be we know each other, right? But we need to verify you first!</h3>
+        </div>
+        {/* Verify Message Form */}
+        <div className="w-full max-w-md px-4">
+          <form onSubmit={handleVerifySubmit} className="space-y-4 flex items-center flex-col justify-center">
+              <input
+                type="text"
+                name="message"
+                value={verifyForm.message}
+                onChange={handleVerifyChange}
+                className="mt-1 block w-full border-2 rounded-full border-[#41a9cd]  shadow-sm px-2 py-1.5 focus:ring-[#41a9cd] focus:border-[#41a9cd] text-[#41a9cd] bg-transparent focus-within:outline-none transition-all"
+                placeholder="Enter pin to verify"
+                required
+              />
+            <button
+              type="submit"
+              disabled={isVerifyingMessages}
+              className={`bg-[#40a5c9] text-white flex items-center justify-center gap-2 px-4 text-sm py-2 rounded-full transition-colors font-semibold ${
+                isVerifyingMessages ? "opacity-50 cursor-not-allowed" : "hover:bg-[#358aa3]"
+              }`}
+            >
+              {isVerifyingMessages ? 'Verifying...' : 'Verify Pin!'} <Rocket />
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Launch Button */}
+      <div
+        onClick={handleClick}
+        className="absolute size-5 rounded-full bottom-4 right-4 bg-[#40a5c9] text-white transition-colors z-10"
+      />
+    </div>
+  );
+};
+
+export default SiteSecuritypage;
