@@ -342,16 +342,6 @@ jobs:
           fi
           
           # -------------------------------------------------------------------
-          # STEP 9: Recreate nginx-proxy to pick up latest config
-          # -------------------------------------------------------------------
-          echo "Recreating nginx-proxy..."
-          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production \
-            up -d --no-build --force-recreate nginx-proxy; then
-            echo "ERROR: Failed to recreate nginx-proxy"
-            exit 1
-          fi
-          
-          # -------------------------------------------------------------------
           # STEP 10: Update backend container
           # -------------------------------------------------------------------
           echo "Updating backend container..."
@@ -396,6 +386,19 @@ jobs:
           done
           if [ $COUNT -ge $RETRIES ]; then
             echo "Warning: backend not healthy after $RETRIES attempts; continuing with deploy"
+          fi
+          
+          # -------------------------------------------------------------------
+          # STEP 12b: Recreate nginx-proxy AFTER all services are healthy
+          # -------------------------------------------------------------------
+          # nginx resolves upstream DNS at startup. If recreated before services
+          # restart it caches stale IPs → 502. Recreating last ensures correct
+          # IP resolution for all upstream containers.
+          echo "Recreating nginx-proxy (after all services are up)..."
+          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production \
+            up -d --no-build --force-recreate nginx-proxy; then
+            echo "ERROR: Failed to recreate nginx-proxy"
+            exit 1
           fi
           
           echo "Removing dangling Docker images (safe)..."
