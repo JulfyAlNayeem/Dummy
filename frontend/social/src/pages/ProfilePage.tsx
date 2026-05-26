@@ -1,12 +1,17 @@
 // @ts-nocheck
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useGetUserProfileQuery, useGetProfilePostsQuery } from '@/redux/api/socialApi';
+import {
+  useGetUserProfileQuery,
+  useGetProfilePostsQuery,
+  useUpdateProfileMutation,
+  useUploadFileMutation,
+} from '@/redux/api/socialApi';
 import { useAppSelector } from '@/redux/hooks';
 import FollowButton from '@/components/profile/FollowButton';
 import PostCard from '@/components/post/PostCard';
 import EditProfileModal from '@/components/profile/EditProfileModal';
-import { MapPin, Link as LinkIcon, Pencil } from 'lucide-react';
+import { Camera, MapPin, Link as LinkIcon, Pencil, Trash2 } from 'lucide-react';
 
 export default function ProfilePage() {
   const { userId } = useParams();
@@ -17,7 +22,13 @@ export default function ProfilePage() {
 
   const { data: profile, isLoading } = useGetUserProfileQuery(targetId!, { skip: !targetId });
   const { data: postsData } = useGetProfilePostsQuery({ userId: targetId!, page: 1, limit: 20 }, { skip: !targetId });
+  const [updateProfile, { isLoading: savingProfile }] = useUpdateProfileMutation();
+  const [uploadFile] = useUploadFileMutation();
   const [editing, setEditing] = useState(false);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [coverUploading, setCoverUploading] = useState(false);
+  const avatarRef = useRef<HTMLInputElement>(null);
+  const coverRef = useRef<HTMLInputElement>(null);
 
   if (isLoading) return <div className="text-center py-12 text-gray-400">Loading profile…</div>;
 
@@ -27,32 +38,131 @@ export default function ProfilePage() {
 
   const counts = user._count ?? {};
 
+  const uploadAndUpdate = async (file: File, field: 'image' | 'coverImage') => {
+    const setLoading = field === 'image' ? setAvatarUploading : setCoverUploading;
+    setLoading(true);
+    try {
+      const fd = new FormData();
+      fd.append('image', file);
+      const uploaded = await uploadFile(fd).unwrap();
+      await updateProfile({ [field]: uploaded.url }).unwrap();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const removeImage = async (field: 'image' | 'coverImage') => {
+    const setLoading = field === 'image' ? setAvatarUploading : setCoverUploading;
+    setLoading(true);
+    try {
+      await updateProfile({ [field]: null }).unwrap();
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="space-y-4">
       {/* Cover + Avatar */}
       <div className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800">
-        <div className="h-48 bg-gradient-to-br from-blue-900 to-purple-900 relative">
+        <div className="h-48 bg-gradient-to-br from-blue-900 to-purple-900 relative overflow-hidden">
           {user.coverImage && (
-            <img src={user.coverImage} alt="Cover" className="w-full h-full object-cover" />
+            <img src={user.coverImage} alt="Cover" className="absolute inset-0 w-full h-full object-cover" />
           )}
+          {isMe && (
+            <div className="absolute top-3 right-3 z-20 flex gap-2">
+              <button
+                type="button"
+                onClick={() => coverRef.current?.click()}
+                disabled={coverUploading || savingProfile}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-black/60 hover:bg-black/80 rounded-lg text-white text-xs font-medium transition-colors disabled:opacity-50"
+              >
+                <Camera className="w-3.5 h-3.5" />
+                {coverUploading ? 'Uploading…' : 'Upload Cover'}
+              </button>
+              {user.coverImage && (
+                <button
+                  type="button"
+                  onClick={() => removeImage('coverImage')}
+                  disabled={coverUploading || savingProfile}
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-red-600/80 hover:bg-red-600 rounded-lg text-white text-xs font-medium transition-colors disabled:opacity-50"
+                >
+                  <Trash2 className="w-3.5 h-3.5" /> Remove
+                </button>
+              )}
+            </div>
+          )}
+          <input
+            ref={coverRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) uploadAndUpdate(f, 'coverImage');
+              e.target.value = '';
+            }}
+          />
         </div>
         <div className="px-4 pb-4">
           <div className="flex items-end justify-between -mt-14 mb-3">
-            <div className="w-28 h-28 rounded-full border-4 border-gray-900 bg-blue-600 flex items-center justify-center text-white text-4xl font-bold overflow-hidden">
+            <div className="relative z-30 w-28 h-28 rounded-full border-4 border-gray-900 bg-blue-600 flex items-center justify-center text-white text-4xl font-bold overflow-hidden group">
               {user.image ? (
                 <img src={user.image} alt={user.name} className="w-full h-full object-cover" />
               ) : (
                 user.name?.[0]
               )}
+              {isMe && (
+                <button
+                  type="button"
+                  onClick={() => avatarRef.current?.click()}
+                  disabled={avatarUploading || savingProfile}
+                  className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity disabled:cursor-not-allowed"
+                >
+                  <Camera className="w-5 h-5 text-white" />
+                </button>
+              )}
             </div>
+            <input
+              ref={avatarRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) uploadAndUpdate(f, 'image');
+                e.target.value = '';
+              }}
+            />
             <div className="flex gap-2 mt-16">
               {isMe ? (
-                <button
-                  onClick={() => setEditing(true)}
-                  className="flex items-center gap-1.5 px-4 py-1.5 bg-gray-700 rounded-xl text-sm hover:bg-gray-600 transition-colors"
-                >
-                  <Pencil className="w-4 h-4" /> Edit Profile
-                </button>
+                <>
+                  <button
+                    type="button"
+                    onClick={() => avatarRef.current?.click()}
+                    disabled={avatarUploading || savingProfile}
+                    className="flex items-center gap-1.5 px-4 py-1.5 bg-gray-700 rounded-xl text-sm hover:bg-gray-600 transition-colors disabled:opacity-50"
+                  >
+                    <Camera className="w-4 h-4" />
+                    {avatarUploading ? 'Uploading…' : 'Change Photo'}
+                  </button>
+                  {user.image && (
+                    <button
+                      type="button"
+                      onClick={() => removeImage('image')}
+                      disabled={avatarUploading || savingProfile}
+                      className="flex items-center gap-1.5 px-4 py-1.5 bg-red-700/70 rounded-xl text-sm hover:bg-red-700 transition-colors disabled:opacity-50"
+                    >
+                      <Trash2 className="w-4 h-4" /> Remove
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setEditing(true)}
+                    className="flex items-center gap-1.5 px-4 py-1.5 bg-gray-700 rounded-xl text-sm hover:bg-gray-600 transition-colors"
+                  >
+                    <Pencil className="w-4 h-4" /> Edit Profile
+                  </button>
+                </>
               ) : (
                 <FollowButton userId={user.id} />
               )}

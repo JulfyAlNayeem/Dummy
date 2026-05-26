@@ -173,7 +173,10 @@ export const socialApi = createApi({
     }),
     updateProfile: builder.mutation({
       query: (data) => ({ url: '/profile/me', method: 'PUT', body: data }),
-      invalidatesTags: [{ type: 'Profile', id: 'ME' }],
+      invalidatesTags: (result) => [
+        { type: 'Profile', id: 'ME' },
+        ...(result?.profile?.id ? [{ type: 'Profile' as const, id: result.profile.id }] : []),
+      ],
     }),
     getProfilePosts: builder.query({
       query: ({ userId, page = 1, limit = 10 }) => `/profile/${userId}/posts?page=${page}&limit=${limit}`,
