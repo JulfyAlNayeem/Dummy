@@ -249,6 +249,7 @@ jobs:
         username: ${{ secrets.VPS_USER }}
         key: ${{ secrets.VPS_SSH_KEY }}
         port: ${{ secrets.VPS_PORT }}
+        command_timeout: 30m
         script: |
           # ===================================================================
           # DEPLOYMENT SCRIPT - Runs on VPS server
@@ -363,17 +364,20 @@ jobs:
           fi
           
           # -------------------------------------------------------------------
-          # STEP 11: Update all microservices
+          # STEP 11: Update all microservices (stop all, then start all in parallel)
           # -------------------------------------------------------------------
-          for SVC in calling-service message-service class-service form-service alarm-service social-service scheduler-service; do
-            echo "Updating $SVC..."
-            sudo docker compose -f docker-compose.prod.yml --env-file .env.production stop $SVC || true
-            sudo docker compose -f docker-compose.prod.yml --env-file .env.production rm -f $SVC || true
-            if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production up -d --no-build $SVC; then
-              echo "ERROR: Failed to start $SVC"
-              exit 1
-            fi
-          done
+          echo "Stopping all microservices..."
+          sudo docker compose -f docker-compose.prod.yml --env-file .env.production \
+            stop calling-service message-service class-service form-service alarm-service social-service scheduler-service || true
+          sudo docker compose -f docker-compose.prod.yml --env-file .env.production \
+            rm -f calling-service message-service class-service form-service alarm-service social-service scheduler-service || true
+
+          echo "Starting all microservices in parallel..."
+          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production \
+            up -d --no-build calling-service message-service class-service form-service alarm-service social-service scheduler-service; then
+            echo "ERROR: Failed to start one or more microservices"
+            exit 1
+          fi
           
           # -------------------------------------------------------------------
           # STEP 12: Wait for backend readiness
