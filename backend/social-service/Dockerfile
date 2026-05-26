@@ -14,5 +14,6 @@ COPY backend/social-service/ ./backend/social-service/
 WORKDIR /app/backend/social-service
 ARG DATABASE_URL="mysql://dummy:dummy@localhost:3306/dummy"
 RUN npx prisma generate
+RUN chmod +x /app/backend/social-service/docker-entrypoint.sh
 EXPOSE 3008
-CMD ["sh", "-c", "npx prisma migrate deploy && npx tsx src/app.ts"]
+CMD ["sh", "/app/backend/social-service/docker-entrypoint.sh"]

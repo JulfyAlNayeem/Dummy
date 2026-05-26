@@ -8,7 +8,7 @@ export const socialApi = createApi({
     baseUrl: `${BASE_URL}social`,
     credentials: "include",
   }),
-  tagTypes: ["Posts", "Post"],
+  tagTypes: ["Posts", "Post", "Stories", "Profile"],
   endpoints: (builder) => ({
     // GET /social/posts?page=1&limit=10
     getPosts: builder.query({
@@ -98,6 +98,47 @@ export const socialApi = createApi({
         { type: "Posts", id: "LIST" },
       ],
     }),
+
+    // POST /social/upload  (multipart FormData, returns { url })
+    uploadImage: builder.mutation({
+      query: (formData) => ({
+        url: `/upload`,
+        method: "POST",
+        body: formData,
+      }),
+    }),
+
+    // POST /social/stories
+    createStory: builder.mutation({
+      query: (data) => ({
+        url: `/stories`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: [{ type: "Stories", id: "LIST" }],
+    }),
+
+    // GET /social/stories/my
+    getMyStories: builder.query({
+      query: () => ({ url: `/stories/my`, method: "GET" }),
+      providesTags: [{ type: "Stories", id: "LIST" }],
+    }),
+
+    // GET /social/profile/me
+    getMyProfile: builder.query({
+      query: () => ({ url: `/profile/me`, method: "GET" }),
+      providesTags: [{ type: "Profile", id: "me" }],
+    }),
+
+    // PUT /social/profile/me
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: `/profile/me`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: [{ type: "Profile", id: "me" }],
+    }),
   }),
 });
 
@@ -109,4 +150,9 @@ export const {
   useAddReactionMutation,
   useAddCommentMutation,
   useAddReplyMutation,
+  useUploadImageMutation,
+  useCreateStoryMutation,
+  useGetMyStoriesQuery,
+  useGetMyProfileQuery,
+  useUpdateProfileMutation,
 } = socialApi;

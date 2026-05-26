@@ -18,13 +18,18 @@ model User {
   email               String   @unique
   password            String
   gender              String
-  image               String   @default("/images/avatar/default-avatar.svg")
+  image               String   @default("/images/avatar/default-avatar.png")
   bio                 String?  @db.VarChar(150)
   role                UserRole @default(user)
   isActive            Boolean  @default(false) @map("is_active")
   lastSeen            DateTime? @map("last_seen")
   themeIndex          Int      @default(0)
   fileSendingAllowed  Boolean  @default(false)
+
+  // Social profile fields (used by social-service)
+  coverImage          String?  @map("cover_image")
+  website             String?
+  location            String?
   
   // Notification settings (flattened from embedded document)
   notifNewMessage     Boolean? @map("notif_new_message")

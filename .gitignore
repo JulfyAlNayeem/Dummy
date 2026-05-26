@@ -65,6 +65,7 @@ backups/
 *.sql
 *.sql.gz
 !backend/prisma/migrations/**/*.sql
+!backend/**/prisma/migrations/**/*.sql
 
 # Docker
 docker-backups/

@@ -11,6 +11,11 @@ import {
   useAddReactionMutation,
   useAddCommentMutation,
   useAddReplyMutation,
+  useUploadImageMutation,
+  useCreateStoryMutation,
+  useGetMyStoriesQuery,
+  useGetMyProfileQuery,
+  useUpdateProfileMutation,
 } from '@/redux/api/social/socialApi';
 import { RefreshCw } from 'lucide-react';
 
@@ -27,8 +32,17 @@ const SocialScreen = (): JSX.Element => {
   const [editContent, setEditContent] = useState('');
   const [showComments, setShowComments] = useState({}); // New state for toggling comments
   const [page, setPage] = useState(1); // State for pagination
+  const [postImage, setPostImage] = useState<File | null>(null);
+  const [postImagePreview, setPostImagePreview] = useState<string | null>(null);
+  const [storyImage, setStoryImage] = useState<File | null>(null);
+  const [storyCaption, setStoryCaption] = useState('');
+  const [showStoryModal, setShowStoryModal] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const containerRef = useRef();
   const observerRef = useRef(); // Ref for intersection observer
+  const postImageRef = useRef<HTMLInputElement>(null);
+  const storyImageRef = useRef<HTMLInputElement>(null);
+  const profileImageRef = useRef<HTMLInputElement>(null);
 
   const { data: postsData, isSuccess, isFetching } = useGetPostsQuery({ page, limit: 10 });
   const [createPost] = useCreatePostMutation();
@@ -37,6 +51,11 @@ const SocialScreen = (): JSX.Element => {
   const [addReaction] = useAddReactionMutation();
   const [addComment] = useAddCommentMutation();
   const [addReply] = useAddReplyMutation();
+  const [uploadImage] = useUploadImageMutation();
+  const [createStory] = useCreateStoryMutation();
+  const [updateProfile] = useUpdateProfileMutation();
+  const { data: profileData } = useGetMyProfileQuery();
+  const { data: storiesData } = useGetMyStoriesQuery();
 
   useEffect(() => {
     if (isSuccess && postsData) {
@@ -73,16 +92,61 @@ const SocialScreen = (): JSX.Element => {
 
   const handleStatusSubmit = async (e) => {
     e.preventDefault();
-    if (!newStatus.trim()) return;
+    if (!newStatus.trim() && !postImage) return;
     try {
-      const result = await createPost({ content: newStatus }).unwrap();
-      // Add the new post to the local state immediately
+      setIsUploading(true);
+      let mediaUrls: any = undefined;
+      if (postImage) {
+        const formData = new FormData();
+        formData.append('image', postImage);
+        const uploadResult = await uploadImage(formData).unwrap();
+        mediaUrls = [{ url: uploadResult.url, type: 'image' }];
+      }
+      const result = await createPost({ content: newStatus, mediaUrls }).unwrap();
       if (result?.post) {
         setPosts((prev) => [result.post, ...prev]);
       }
       setNewStatus('');
+      setPostImage(null);
+      setPostImagePreview(null);
     } catch (err) {
       alert(err.data?.message || 'Error posting status');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleStorySubmit = async () => {
+    if (!storyImage) return;
+    try {
+      setIsUploading(true);
+      const formData = new FormData();
+      formData.append('image', storyImage);
+      const uploadResult = await uploadImage(formData).unwrap();
+      await createStory({ mediaUrl: uploadResult.url, mediaType: 'image', caption: storyCaption }).unwrap();
+      setShowStoryModal(false);
+      setStoryImage(null);
+      setStoryCaption('');
+    } catch (err) {
+      alert(err?.data?.message || 'Error creating story');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleProfilePicChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      setIsUploading(true);
+      const formData = new FormData();
+      formData.append('image', file);
+      const uploadResult = await uploadImage(formData).unwrap();
+      await updateProfile({ image: uploadResult.url }).unwrap();
+    } catch (err) {
+      alert(err?.data?.message || 'Error updating profile picture');
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -199,22 +263,109 @@ const SocialScreen = (): JSX.Element => {
         style={{ maxHeight: 'calc(var(--vh, 1vh) * 100 - 130px)', marginTop: '64px' }}
       >
         <div className="w-full max-w-2xl space-y-6 mx-auto p-4">
+          {/* Stories Section */}
+          <div className={themeCard(themeIndex, "rounded-lg shadow-md p-3 overflow-x-auto")}>
+            <div className="flex space-x-3 items-start pb-1">
+              <div
+                onClick={() => setShowStoryModal(true)}
+                className="flex-shrink-0 flex flex-col items-center cursor-pointer"
+              >
+                <div className="w-16 h-24 rounded-lg bg-gray-700 flex flex-col items-center justify-end overflow-hidden ring-2 ring-blue-500">
+                  <div className="flex-1 flex items-center justify-center text-2xl text-gray-400">📷</div>
+                  <div className="w-full bg-blue-500 py-1 text-center">
+                    <span className="text-white text-xs font-bold">+</span>
+                  </div>
+                </div>
+                <span className="text-xs text-gray-400 mt-1">Add Story</span>
+              </div>
+              {(storiesData?.stories || []).map((story) => (
+                <div key={story.id} className="flex-shrink-0 flex flex-col items-center">
+                  <div className="w-16 h-24 rounded-lg overflow-hidden ring-2 ring-blue-500">
+                    <img src={story.mediaUrl} alt="story" className="w-full h-full object-cover" />
+                  </div>
+                  <span className="text-xs text-gray-400 mt-1 truncate w-16 text-center">
+                    {story.user?.name || user?.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Post Status Section */}
           <div className={themeCard(themeIndex, "rounded-lg shadow-md p-6")}>
             <form onSubmit={handleStatusSubmit}>
-              <textarea
-                value={newStatus}
-                onChange={(e) => setNewStatus(e.target.value)}
-                placeholder="What's on your mind?"
-                className={themeCard(themeIndex, 'w-full h-32 p-3 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none')}
-                rows="3"
-              />
-              <div className="mt-3 flex justify-end">
+              <div className="flex items-start space-x-3 mb-3">
+                <div className="relative flex-shrink-0">
+                  <img
+                    src={profileData?.profile?.image || user?.image || '/images/avatar/default-avatar.png'}
+                    alt="avatar"
+                    className="w-10 h-10 rounded-full object-cover cursor-pointer"
+                    onClick={() => profileImageRef.current?.click()}
+                    title="Click to update profile picture"
+                  />
+                  <div className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-0.5 pointer-events-none">
+                    <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <input
+                    ref={profileImageRef}
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleProfilePicChange}
+                  />
+                </div>
+                <textarea
+                  value={newStatus}
+                  onChange={(e) => setNewStatus(e.target.value)}
+                  placeholder="What's on your mind?"
+                  className={themeCard(themeIndex, 'flex-1 p-3 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none')}
+                  rows={3}
+                />
+              </div>
+              {postImagePreview && (
+                <div className="relative mb-3 inline-block">
+                  <img src={postImagePreview} alt="preview" className="max-h-48 rounded-lg object-cover" />
+                  <button
+                    type="button"
+                    onClick={() => { setPostImage(null); setPostImagePreview(null); }}
+                    className="absolute top-1 right-1 bg-black bg-opacity-60 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-opacity-80"
+                  >✕</button>
+                </div>
+              )}
+              <div className="mt-3 flex justify-between items-center">
+                <button
+                  type="button"
+                  onClick={() => postImageRef.current?.click()}
+                  className="flex items-center space-x-1 text-sm text-gray-400 hover:text-blue-500 px-3 py-1 rounded-lg hover:bg-gray-700"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span>Photo</span>
+                </button>
+                <input
+                  ref={postImageRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setPostImage(file);
+                      setPostImagePreview(URL.createObjectURL(file));
+                    }
+                    e.target.value = '';
+                  }}
+                />
                 <button
                   type="submit"
-                  className="px-4 py-2  text-sm  bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                  disabled={isUploading || (!newStatus.trim() && !postImage)}
+                  className="px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
                 >
-                  Post
+                  {isUploading ? 'Posting...' : 'Post'}
                 </button>
               </div>
             </form>
@@ -283,7 +434,23 @@ const SocialScreen = (): JSX.Element => {
                   </div>
                 </form>
               ) : (
-                <p className="mt-4 text-gray-300">{post.content}</p>
+                <div>
+                  <p className="mt-4 text-gray-300">{post.content}</p>
+                  {Array.isArray(post.mediaUrls) && post.mediaUrls.length > 0 && (
+                    <div className="mt-3 space-y-2">
+                      {post.mediaUrls.map((media, i) =>
+                        media.type === 'image' ? (
+                          <img
+                            key={i}
+                            src={media.url}
+                            alt="Post image"
+                            className="w-full max-h-96 object-cover rounded-lg"
+                          />
+                        ) : null
+                      )}
+                    </div>
+                  )}
+                </div>
               )}
               {/* Reaction Summary */}
               {Object.values(post.reactions || {}).reduce((sum, count) => sum + count, 0) > 0 && (
@@ -435,6 +602,64 @@ const SocialScreen = (): JSX.Element => {
           )}
         </div>
       </div>
+
+      {/* Story Creation Modal */}
+      {showStoryModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
+          <div className={themeCard(themeIndex, "rounded-xl p-6 w-full max-w-sm shadow-2xl")}>
+            <h3 className="text-lg font-semibold text-gray-300 mb-4">Create Story</h3>
+            <input
+              ref={storyImageRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => setStoryImage(e.target.files?.[0] || null)}
+            />
+            {storyImage ? (
+              <div className="relative mb-3">
+                <img src={URL.createObjectURL(storyImage)} alt="preview" className="w-full h-48 object-cover rounded-lg" />
+                <button
+                  type="button"
+                  onClick={() => setStoryImage(null)}
+                  className="absolute top-1 right-1 bg-black bg-opacity-60 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+                >✕</button>
+              </div>
+            ) : (
+              <div
+                onClick={() => storyImageRef.current?.click()}
+                className="w-full h-48 border-2 border-dashed border-gray-600 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 mb-3 transition-colors"
+              >
+                <svg className="w-10 h-10 text-gray-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span className="text-gray-400 text-sm">Click to select image</span>
+              </div>
+            )}
+            <input
+              type="text"
+              placeholder="Add caption (optional)..."
+              value={storyCaption}
+              onChange={(e) => setStoryCaption(e.target.value)}
+              className={themeCard(themeIndex, "w-full p-2 border border-gray-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4")}
+            />
+            <div className="flex space-x-2">
+              <button
+                onClick={() => { setShowStoryModal(false); setStoryImage(null); setStoryCaption(''); }}
+                className="flex-1 py-2 bg-gray-600 text-gray-300 rounded-lg text-sm hover:bg-gray-500"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleStorySubmit}
+                disabled={!storyImage || isUploading}
+                className="flex-1 py-2 bg-blue-500 text-white rounded-lg text-sm hover:bg-blue-600 disabled:opacity-50"
+              >
+                {isUploading ? 'Posting...' : 'Share Story'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

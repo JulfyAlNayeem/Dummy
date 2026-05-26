@@ -35,7 +35,7 @@ enum NotificationType {
 model User {
   id         String  @id @default(uuid())
   name       String
-  image      String  @default("/images/avatar/default-avatar.svg")
+  image      String  @default("/images/avatar/default-avatar.png")
   bio        String? @db.Text
   coverImage String? @map("cover_image")
   website    String?
@@ -74,7 +74,7 @@ model Follow {
 
   @@unique([followerId, followingId])
   @@index([followingId])
-  @@map("follows")
+  @@map("social_follows")
 }
 
 // ─── Post Domain ─────────────────────────────────────────────────────────────
@@ -100,7 +100,7 @@ model Post {
   @@index([createdAt])
   @@index([userId, createdAt])
   @@index([visibility, createdAt])
-  @@map("posts")
+  @@map("social_posts")
 }
 
 model PostShare {
@@ -116,14 +116,14 @@ model PostShare {
 
   @@unique([postId, userId])
   @@index([userId, createdAt])
-  @@map("post_shares")
+  @@map("social_post_shares")
 }
 
 model PostComment {
   id        String   @id @default(uuid())
   postId    String
   userId    String
-  content   String   @db.Text @map("text")
+  content   String   @db.Text
   isEdited  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -134,14 +134,14 @@ model PostComment {
   reactions PostCommentReaction[]
 
   @@index([postId, createdAt])
-  @@map("post_comments")
+  @@map("social_post_comments")
 }
 
 model PostCommentReply {
   id        String   @id @default(uuid())
   commentId String
   userId    String
-  content   String   @db.Text @map("text")
+  content   String   @db.Text
   isEdited  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -150,7 +150,7 @@ model PostCommentReply {
   user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([commentId])
-  @@map("post_comment_replies")
+  @@map("social_post_comment_replies")
 }
 
 model PostReaction {
@@ -164,7 +164,7 @@ model PostReaction {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([postId, userId])
-  @@map("post_reactions")
+  @@map("social_post_reactions")
 }
 
 model PostCommentReaction {
@@ -178,7 +178,7 @@ model PostCommentReaction {
   user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([commentId, userId])
-  @@map("post_comment_reactions")
+  @@map("social_post_comment_reactions")
 }
 
 // ─── Hashtag & Mention ────────────────────────────────────────────────────────
@@ -191,7 +191,7 @@ model Hashtag {
 
   posts PostHashtag[]
 
-  @@map("hashtags")
+  @@map("social_hashtags")
 }
 
 model PostHashtag {
@@ -202,7 +202,7 @@ model PostHashtag {
   hashtag Hashtag @relation(fields: [hashtagId], references: [id], onDelete: Cascade)
 
   @@id([postId, hashtagId])
-  @@map("post_hashtags")
+  @@map("social_post_hashtags")
 }
 
 model PostMention {
@@ -213,7 +213,7 @@ model PostMention {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([postId, userId])
-  @@map("post_mentions")
+  @@map("social_post_mentions")
 }
 
 // ─── Page Domain ─────────────────────────────────────────────────────────────
@@ -236,7 +236,7 @@ model Page {
   posts PagePost[]
 
   @@index([name])
-  @@map("pages")
+  @@map("social_pages")
 }
 
 model PageLike {
@@ -249,7 +249,7 @@ model PageLike {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([pageId, userId])
-  @@map("page_likes")
+  @@map("social_page_likes")
 }
 
 model PagePost {
@@ -264,7 +264,7 @@ model PagePost {
   page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)
 
   @@index([pageId, createdAt])
-  @@map("page_posts")
+  @@map("social_page_posts")
 }
 
 // ─── Story Domain ─────────────────────────────────────────────────────────────
@@ -282,7 +282,7 @@ model Story {
   views StoryView[]
 
   @@index([userId, expiresAt])
-  @@map("stories")
+  @@map("social_stories")
 }
 
 model StoryView {
@@ -295,7 +295,7 @@ model StoryView {
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([storyId, userId])
-  @@map("story_views")
+  @@map("social_story_views")
 }
 
 // ─── Bookmark ─────────────────────────────────────────────────────────────────
@@ -311,7 +311,7 @@ model Bookmark {
 
   @@unique([userId, postId])
   @@index([userId, createdAt])
-  @@map("bookmarks")
+  @@map("social_bookmarks")
 }
 
 // ─── Notification ─────────────────────────────────────────────────────────────
