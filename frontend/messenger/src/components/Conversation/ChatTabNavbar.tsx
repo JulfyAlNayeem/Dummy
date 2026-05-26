@@ -9,6 +9,7 @@ import { themeIcon, themeNavbarIcon, themeNavbar } from '@/lib/themeUtils';
 import { useUserAuth } from '@/context-reducer/UserAuthContext';
 import { GraduationCap, Group, Info, Menu, Phone, Video } from 'lucide-react';
 import ChatTabSidebar from './ChattabSidebar';
+import ConversationListSidebar from '../drawer/ConversationListSidebar';
 import { APP_ROUTES } from '@/routes/appRoutes/APP_ROUTES';
 import { useCall } from '@/components/Call/CallProvider';
 import toast from 'react-hot-toast';
@@ -28,6 +29,7 @@ const ChatTabNavbar = ({
   const [showActivePersons, setShowActivePersons] = React.useState<boolean>(false);
   const [activeUsers, setActiveUsers] = useState<any[]>([]); // State for active users
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const callActions: any = useCall();
 
   // Get profile image and display name — must be above call handlers
@@ -94,6 +96,12 @@ const ChatTabNavbar = ({
       <Link className="sm:hidden" to={APP_ROUTES.CONVERSATION_LIST} onClick={onBackClick}>
         <BiArrowBack />
       </Link>
+
+      {/* Hamburger menu — only on small screens */}
+      <button className="sm:hidden" onClick={() => setMenuOpen(true)}>
+        <Menu className={themeNavbarIcon(themeIndex, "size-5")} />
+      </button>
+      <ConversationListSidebar isOpen={menuOpen} setIsOpen={setMenuOpen} themeIndex={themeIndex} />
 
       <div className="sm:size-10 size-8  avatar">
         <img

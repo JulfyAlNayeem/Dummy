@@ -76,7 +76,7 @@ const ConversationListSidebar = ({ isOpen, setIsOpen, themeIndex }: any): JSX.El
                                 <div className="group avatar  relative overflow-hidden cursor-pointer">
                                     {user.image ?
                                         <img src={`${user.image}`} alt="Profile" className="size-10  border-transparent" />
-                                        : <div className="size-16 rounded-full bg-gray-500 flex items-center justify-center text-white ">{user.name?.[0] || 'U'}</div>}
+                                        : <img src="/images/avatar/default-avatar.png" alt="Default Avatar" className="size-10" />}
                                     <button
                                         className="absolute flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 w-full left-0 right-0 bottom-0 bg-sky-500/50 pt-0.5 pb-1"
                                         onClick={() => setIsOpenPopup(true)}

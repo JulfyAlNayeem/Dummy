@@ -41,7 +41,7 @@ import ElephantHead from "@/components/Marker/ElephantHead";
 import Rocket from "@/components/Marker/Rocket";
 import RahinoHead from "@/components/Marker/RahinoHead";
 
-export const defaultProfileImage = "/images/avatar/default-avatar.svg";
+export const defaultProfileImage = "/images/avatar/default-avatar.png";
 export const defaultCoverImage = "/images/cover/default-cover.jpg";
 
 

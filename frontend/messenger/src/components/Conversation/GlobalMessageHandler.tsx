@@ -130,10 +130,10 @@ const GlobalMessageHandler = (): JSX.Element | null => {
         className="flex items-center gap-3 cursor-pointer"
       >
         <img 
-          src={senderInfo?.image || '/default-avatar.png'} 
+          src={senderInfo?.image || '/images/avatar/default-avatar.png'} 
           alt={senderName}
           className="w-10 h-10 rounded-full object-cover"
-          onError={(e) => { e.target.src = '/default-avatar.png'; }}
+          onError={(e) => { e.target.src = '/images/avatar/default-avatar.png'; }}
         />
         <div>
           <p className="font-semibold text-sm">{senderName}</p>
