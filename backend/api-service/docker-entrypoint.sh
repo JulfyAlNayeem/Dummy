@@ -10,6 +10,11 @@ if [ "${DB_FORCE_RESET:-false}" = "true" ]; then
   npx prisma migrate reset --force --skip-seed
   echo "✅ Schema reset complete. App will auto-seed on startup."
 else
+  # Resolve any legacy rolled-back or renamed migrations whose files no longer exist.
+  for LEGACY in 0001_baseline 0002_notification_system_upgrade 0003_add_social_profile_fields; do
+    npx prisma migrate resolve --applied "$LEGACY" 2>/dev/null || true
+  done
+
   # Attempt migrate deploy; on failure (e.g. tables already exist from old
   # migrations), resolve the current init migration as applied and retry.
   if ! npx prisma migrate deploy 2>&1; then

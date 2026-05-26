@@ -3,6 +3,12 @@ set -e
 
 echo "Running Prisma migrations for social-service..."
 
+# Resolve any legacy rolled-back migrations whose files no longer exist.
+# Without this, prisma migrate deploy would fail trying to re-apply them.
+for LEGACY in 0002_fix_table_names 0001_init; do
+  npx prisma migrate resolve --applied "$LEGACY" 2>/dev/null || true
+done
+
 # Attempt migrate deploy; on failure (e.g. tables exist from old migrations),
 # resolve the current init migration as applied (drift recovery) and retry.
 if ! npx prisma migrate deploy 2>&1; then
