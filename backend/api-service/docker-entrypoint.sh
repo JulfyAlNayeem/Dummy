@@ -10,20 +10,20 @@ if [ "${DB_FORCE_RESET:-false}" = "true" ]; then
   npx prisma migrate reset --force --skip-seed
   echo "✅ Schema reset complete. App will auto-seed on startup."
 else
-  # Attempt migrate deploy; if it fails due to a failed baseline (P3009),
-  # auto-resolve the baseline as applied and retry.
+  # Attempt migrate deploy; on failure (e.g. tables already exist from old
+  # migrations), resolve the current init migration as applied and retry.
   if ! npx prisma migrate deploy 2>&1; then
     echo ""
-    echo "⚠️  Migration failed. Checking for failed baseline migration..."
+    echo "⚠️  Migration deploy failed. Attempting drift recovery..."
 
-    # Check if the baseline migration is the one that failed
-    if npx prisma migrate status 2>&1 | grep -q "0001_baseline"; then
-      echo "Resolving baseline migration as already applied..."
-      npx prisma migrate resolve --applied 0001_baseline
+    MIGRATION_NAME=$(ls prisma/migrations/ | grep -v migration_lock | head -1)
+    if [ -n "$MIGRATION_NAME" ]; then
+      echo "Resolving '$MIGRATION_NAME' as already applied (drift recovery)..."
+      npx prisma migrate resolve --applied "$MIGRATION_NAME" 2>/dev/null || true
       echo "Retrying migrate deploy..."
       npx prisma migrate deploy
     else
-      echo "❌ Migration failure is not a baseline issue. Exiting."
+      echo "❌ No migration found to resolve. Exiting."
       exit 1
     fi
   fi

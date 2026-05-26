@@ -3,14 +3,21 @@ set -e
 
 echo "Running Prisma migrations for social-service..."
 
-# Attempt migrate deploy; if it fails (e.g. 0001_init was broken due to table conflicts),
-# mark the failed migration as resolved and retry with migration 0002.
+# Attempt migrate deploy; on failure (e.g. tables exist from old migrations),
+# resolve the current init migration as applied (drift recovery) and retry.
 if ! npx prisma migrate deploy 2>&1; then
   echo ""
-  echo "⚠️  Migration deploy failed. Attempting to resolve 0001_init as applied..."
-  npx prisma migrate resolve --applied 0001_init 2>/dev/null || true
-  echo "Retrying migrate deploy (will run 0002_fix_table_names)..."
-  npx prisma migrate deploy
+  echo "⚠️  Migration deploy failed. Attempting drift recovery..."
+  MIGRATION_NAME=$(ls prisma/migrations/ | grep -v migration_lock | head -1)
+  if [ -n "$MIGRATION_NAME" ]; then
+    echo "Resolving '$MIGRATION_NAME' as already applied..."
+    npx prisma migrate resolve --applied "$MIGRATION_NAME" 2>/dev/null || true
+    echo "Retrying migrate deploy..."
+    npx prisma migrate deploy
+  else
+    echo "❌ No migration found. Exiting."
+    exit 1
+  fi
 fi
 
 echo "✅ Migrations complete. Starting social-service..."

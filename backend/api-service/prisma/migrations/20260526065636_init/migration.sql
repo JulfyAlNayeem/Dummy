@@ -5,13 +5,16 @@ CREATE TABLE `users` (
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
     `gender` VARCHAR(191) NOT NULL,
-    `image` VARCHAR(191) NOT NULL DEFAULT '/images/avatar/default-avatar.svg',
+    `image` VARCHAR(191) NOT NULL DEFAULT '/images/avatar/default-avatar.png',
     `bio` VARCHAR(150) NULL,
     `role` ENUM('user', 'admin', 'superadmin', 'moderator', 'teacher') NOT NULL DEFAULT 'user',
     `is_active` BOOLEAN NOT NULL DEFAULT false,
     `last_seen` DATETIME(3) NULL,
     `themeIndex` INTEGER NOT NULL DEFAULT 0,
     `fileSendingAllowed` BOOLEAN NOT NULL DEFAULT false,
+    `cover_image` VARCHAR(191) NULL,
+    `website` VARCHAR(191) NULL,
+    `location` VARCHAR(191) NULL,
     `notif_new_message` BOOLEAN NULL,
     `notif_mention` BOOLEAN NULL,
     `notif_sound` BOOLEAN NULL,
@@ -713,7 +716,7 @@ CREATE TABLE `notices` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191) NOT NULL,
     `content` TEXT NOT NULL,
-    `targetAudience` ENUM('all', 'admin', 'teacher') NOT NULL,
+    `targetAudience` ENUM('all', 'user', 'admin', 'superadmin', 'moderator', 'teacher') NOT NULL,
     `eventType` ENUM('general', 'holiday', 'exam', 'meeting', 'special', 'announcement') NOT NULL DEFAULT 'general',
     `creatorId` VARCHAR(191) NOT NULL,
     `isActive` BOOLEAN NOT NULL DEFAULT true,
@@ -764,7 +767,7 @@ CREATE TABLE `notifications` (
     `id` VARCHAR(191) NOT NULL,
     `recipientId` VARCHAR(191) NOT NULL,
     `senderId` VARCHAR(191) NULL,
-    `type` ENUM('assignment', 'grade', 'class_invite', 'join_request', 'message', 'system') NOT NULL,
+    `type` ENUM('assignment', 'grade', 'class_invite', 'join_request', 'message', 'system', 'notice', 'friend_request', 'friend_accept', 'like', 'mention', 'comment', 'admin_alert', 'role_change', 'account_action', 'reminder', 'attendance', 'form', 'permission', 'report') NOT NULL,
     `title` VARCHAR(191) NOT NULL,
     `message` TEXT NOT NULL,
     `data` JSON NULL,
@@ -1170,4 +1173,3 @@ ALTER TABLE `reports` ADD CONSTRAINT `reports_conversationId_fkey` FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE `reports` ADD CONSTRAINT `reports_reviewedById_fkey` FOREIGN KEY (`reviewedById`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-

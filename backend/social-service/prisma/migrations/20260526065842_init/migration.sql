@@ -1,6 +1,15 @@
--- Social-service initial migration
--- NOTE: `users` table is owned by api-service. This migration does NOT touch it.
--- NOTE: All tables are prefixed with `social_` to avoid conflicts with api-service tables.
+-- CreateTable
+CREATE TABLE `users` (
+    `id` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
+    `image` VARCHAR(191) NOT NULL DEFAULT '/images/avatar/default-avatar.png',
+    `bio` TEXT NULL,
+    `cover_image` VARCHAR(191) NULL,
+    `website` VARCHAR(191) NULL,
+    `location` VARCHAR(191) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `social_follows` (
@@ -9,7 +18,7 @@ CREATE TABLE `social_follows` (
     `followingId` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
-    INDEX `follows_followingId_idx`(`followingId`),
+    INDEX `social_follows_followingId_idx`(`followingId`),
     UNIQUE INDEX `social_follows_followerId_followingId_key`(`followerId`, `followingId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -205,7 +214,7 @@ CREATE TABLE `social_bookmarks` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- CreateTable (social-specific notifications, separate from api-service notifications)
+-- CreateTable
 CREATE TABLE `social_notifications` (
     `id` VARCHAR(191) NOT NULL,
     `receiverId` VARCHAR(191) NOT NULL,
