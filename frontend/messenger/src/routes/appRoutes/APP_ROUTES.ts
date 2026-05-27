@@ -30,4 +30,7 @@ export const APP_ROUTES = {
   STUDENT_ASSIGNMENT_PANEL: "/e2ee/t/student/assignmentpanel/:classId",
   STUDENT_ALERTNESS: "/e2ee/t/student/alertness/:classId",
   STUDENT_ATTENDANCE: "/e2ee/t/teacher/attendance/:classId",
+
+  // Forms
+  FORMS_PAGE: "/forms",
 };

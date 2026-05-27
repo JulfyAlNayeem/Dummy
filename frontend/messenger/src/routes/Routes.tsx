@@ -20,6 +20,7 @@ import AlertnessPanelSocket from "@/components/class-management/AlertnessPanel";
 import AttendancePanel from "@/components/class-management/AttendancePanel";
 import StudentRoutes from "./private/StudentRoutes";
 import StudentAssignmentPanelPage from "@/pages/StudentAssignmentPanelPage";
+import FormsPage from "@/pages/FormsPage";
 import ProtectedRoutes from "./protected/ProtectedRoute";
 import AdminRoutes from "./private/AdminRoutes";
 import TeacherRoutes from "./private/TeacherRoutes";
@@ -55,6 +56,7 @@ export const Routes = createBrowserRouter(
         <Route path={APP_ROUTES.CHAT_TAB} element={<ChatTabWithErrorBoundary/>} />
         <Route path={APP_ROUTES.NEW_CHAT_START} element={<ChatTabWithErrorBoundary/>} />
         <Route path={APP_ROUTES.ACCOUNT_SETTINGS} element={<Account />} />
+        <Route path={APP_ROUTES.FORMS_PAGE} element={<FormsPage />} />
       </Route>
 
       {/* Admin Routes Wrapper */}

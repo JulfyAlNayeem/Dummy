@@ -41,9 +41,9 @@ const AssignmentCard = ({ assignment, conversationId }: any): JSX.Element => {
   const [deactivateAssignment]: any = useDeactivateAssignmentMutation();
 
   const isAssigner =
-    assignment.assigner?.id?.toString() === user?.id?.toString();
+    assignment.assignedBy?.id?.toString() === user?.id?.toString();
   const isAssignee = assignment.assignees?.some(
-    (a) => (a.id || a)?.toString() === user?.id?.toString()
+    (a: any) => (a.userId || a.user?.id || a.id)?.toString() === user?.id?.toString()
   );
 
   const form = assignment.form;
@@ -149,11 +149,11 @@ const AssignmentCard = ({ assignment, conversationId }: any): JSX.Element => {
             <div className="flex flex-wrap gap-1">
               {assignment.assignees.map((a) => (
                 <Badge
-                  key={a.id || a}
+                  key={a.id || a.userId}
                   variant="secondary"
                   className="bg-gray-700 text-gray-300 text-[10px] capitalize"
                 >
-                  {a.name || "User"}
+                  {a.user?.name || a.name || "User"}
                 </Badge>
               ))}
             </div>

@@ -6,7 +6,7 @@ import ConversationListSidebar from "../drawer/ConversationListSidebar";
 import ThemeDrawer from "../drawer/ThemeDrawer";
 import { Link, useParams } from "react-router-dom";
 import { useUserAuth } from "../../context-reducer/UserAuthContext";
-import { UserPlus, GraduationCap } from 'lucide-react';
+import { UserPlus, GraduationCap, ClipboardList } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import CreateClassForm from "../class-management/CreateClassForm";
 import CreateGroupForm from "./CreateGroupForm";
@@ -67,6 +67,10 @@ export default function ChatListNavbar({ uiBounce, chatContainerRef, themeIndex 
         ) : null}
 
         {!convId ? <ThemeDrawer chatContainerRef={chatContainerRef} isChatlist={true} themeIndex={themeIndex} /> : null}
+
+        <Link to={APP_ROUTES.FORMS_PAGE} title="Forms">
+          <ClipboardList className={themeNavbarIcon(themeIndex, "size-[22px] cursor-pointer")} />
+        </Link>
 
         <button onClick={() => setIsOpen(true)}>
           <HiMenuAlt3 className={themeNavbarIcon(themeIndex, "size-6 cursor-pointer")} />

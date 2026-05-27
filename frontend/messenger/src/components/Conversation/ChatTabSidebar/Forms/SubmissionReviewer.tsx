@@ -80,10 +80,10 @@ const SubmissionReviewer = ({ assignment, onClose }: any): JSX.Element => {
                 <User className="h-4 w-4 text-gray-400 flex-shrink-0" />
                 <div className="min-w-0">
                   <span className="text-gray-100 text-sm block truncate capitalize">
-                    {sub.submitter?.name || "User"}
+                    {sub.submittedBy?.name || "User"}
                   </span>
                   <span className="text-gray-400 text-xs">
-                    {new Date(sub.dueDate).toLocaleDateString()}
+                    {sub.dueDate ? new Date(sub.dueDate).toLocaleDateString() : "No date"}
                   </span>
                 </div>
               </div>
@@ -170,10 +170,10 @@ const SubmissionDetail = ({ submissionId, assignment, onBack, onClose }: any): J
         </Button>
         <div className="flex-1">
           <h2 className="text-lg font-semibold text-gray-100">
-            Review: {submission.submitter?.name || "User"}
+            Review: {submission.submittedBy?.name || "User"}
           </h2>
           <p className="text-xs text-gray-400">
-            {new Date(submission.dueDate).toLocaleDateString()}
+            {submission.dueDate ? new Date(submission.dueDate).toLocaleDateString() : "No date"}
           </p>
         </div>
         <StatusBadge status={submission.status} />
