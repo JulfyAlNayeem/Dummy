@@ -144,12 +144,11 @@ export const FormSubmissionScalarFieldEnum = {
   id: 'id',
   assignmentId: 'assignmentId',
   submittedById: 'submittedById',
+  dueDate: 'dueDate',
   answers: 'answers',
+  status: 'status',
   submittedAt: 'submittedAt',
   reviewedAt: 'reviewedAt',
-  reviewedById: 'reviewedById',
-  grade: 'grade',
-  feedback: 'feedback',
   createdAt: 'createdAt'
 } as const
 
@@ -252,10 +251,7 @@ export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 export const FormSubmissionOrderByRelevanceFieldEnum = {
   id: 'id',
   assignmentId: 'assignmentId',
-  submittedById: 'submittedById',
-  reviewedById: 'reviewedById',
-  grade: 'grade',
-  feedback: 'feedback'
+  submittedById: 'submittedById'
 } as const
 
 export type FormSubmissionOrderByRelevanceFieldEnum = (typeof FormSubmissionOrderByRelevanceFieldEnum)[keyof typeof FormSubmissionOrderByRelevanceFieldEnum]

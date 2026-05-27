@@ -1,4 +1,4 @@
--- CreateTable
+﻿-- CreateTable
 CREATE TABLE `users` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
@@ -68,14 +68,14 @@ CREATE TABLE `form_submissions` (
     `id` VARCHAR(191) NOT NULL,
     `assignmentId` VARCHAR(191) NOT NULL,
     `submittedById` VARCHAR(191) NOT NULL,
+    `dueDate` DATETIME(3) NULL,
     `answers` JSON NOT NULL,
+    `status` ENUM('submitted', 'accepted', 'partially_accepted') NOT NULL DEFAULT 'submitted',
     `submittedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `reviewedAt` DATETIME(3) NULL,
-    `reviewedById` VARCHAR(191) NULL,
-    `grade` VARCHAR(191) NULL,
-    `feedback` TEXT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
+    UNIQUE INDEX `form_submissions_assignmentId_submittedById_dueDate_key`(`assignmentId`, `submittedById`, `dueDate`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -105,3 +105,4 @@ ALTER TABLE `form_submissions` ADD CONSTRAINT `form_submissions_assignmentId_fke
 
 -- AddForeignKey
 ALTER TABLE `form_submissions` ADD CONSTRAINT `form_submissions_submittedById_fkey` FOREIGN KEY (`submittedById`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+

@@ -26,3 +26,12 @@ export const FrequencyType = {
 } as const
 
 export type FrequencyType = (typeof FrequencyType)[keyof typeof FrequencyType]
+
+
+export const SubmissionStatus = {
+  submitted: 'submitted',
+  accepted: 'accepted',
+  partially_accepted: 'partially_accepted'
+} as const
+
+export type SubmissionStatus = (typeof SubmissionStatus)[keyof typeof SubmissionStatus]

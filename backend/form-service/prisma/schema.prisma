@@ -22,6 +22,12 @@ enum FrequencyType {
   monthly
 }
 
+enum SubmissionStatus {
+  submitted
+  accepted
+  partially_accepted
+}
+
 // ─── Stubs ────────────────────────────────────────────────────────────────────
 
 model User {
@@ -110,20 +116,20 @@ model FormAssignee {
 }
 
 model FormSubmission {
-  id           String    @id @default(uuid())
+  id           String           @id @default(uuid())
   assignmentId String
   submittedById String
+  dueDate      DateTime?
   answers      Json
-  submittedAt  DateTime  @default(now())
+  status       SubmissionStatus @default(submitted)
+  submittedAt  DateTime         @default(now())
   reviewedAt   DateTime?
-  reviewedById String?
-  grade        String?
-  feedback     String?   @db.Text
 
   createdAt DateTime @default(now())
 
   assignment  FormAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
   submittedBy User           @relation(fields: [submittedById], references: [id], onDelete: Cascade)
 
+  @@unique([assignmentId, submittedById, dueDate])
   @@map("form_submissions")
 }

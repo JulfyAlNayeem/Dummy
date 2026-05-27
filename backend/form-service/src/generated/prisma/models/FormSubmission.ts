@@ -28,11 +28,10 @@ export type FormSubmissionMinAggregateOutputType = {
   id: string | null
   assignmentId: string | null
   submittedById: string | null
+  dueDate: Date | null
+  status: $Enums.SubmissionStatus | null
   submittedAt: Date | null
   reviewedAt: Date | null
-  reviewedById: string | null
-  grade: string | null
-  feedback: string | null
   createdAt: Date | null
 }
 
@@ -40,11 +39,10 @@ export type FormSubmissionMaxAggregateOutputType = {
   id: string | null
   assignmentId: string | null
   submittedById: string | null
+  dueDate: Date | null
+  status: $Enums.SubmissionStatus | null
   submittedAt: Date | null
   reviewedAt: Date | null
-  reviewedById: string | null
-  grade: string | null
-  feedback: string | null
   createdAt: Date | null
 }
 
@@ -52,12 +50,11 @@ export type FormSubmissionCountAggregateOutputType = {
   id: number
   assignmentId: number
   submittedById: number
+  dueDate: number
   answers: number
+  status: number
   submittedAt: number
   reviewedAt: number
-  reviewedById: number
-  grade: number
-  feedback: number
   createdAt: number
   _all: number
 }
@@ -67,11 +64,10 @@ export type FormSubmissionMinAggregateInputType = {
   id?: true
   assignmentId?: true
   submittedById?: true
+  dueDate?: true
+  status?: true
   submittedAt?: true
   reviewedAt?: true
-  reviewedById?: true
-  grade?: true
-  feedback?: true
   createdAt?: true
 }
 
@@ -79,11 +75,10 @@ export type FormSubmissionMaxAggregateInputType = {
   id?: true
   assignmentId?: true
   submittedById?: true
+  dueDate?: true
+  status?: true
   submittedAt?: true
   reviewedAt?: true
-  reviewedById?: true
-  grade?: true
-  feedback?: true
   createdAt?: true
 }
 
@@ -91,12 +86,11 @@ export type FormSubmissionCountAggregateInputType = {
   id?: true
   assignmentId?: true
   submittedById?: true
+  dueDate?: true
   answers?: true
+  status?: true
   submittedAt?: true
   reviewedAt?: true
-  reviewedById?: true
-  grade?: true
-  feedback?: true
   createdAt?: true
   _all?: true
 }
@@ -177,12 +171,11 @@ export type FormSubmissionGroupByOutputType = {
   id: string
   assignmentId: string
   submittedById: string
+  dueDate: Date | null
   answers: runtime.JsonValue
+  status: $Enums.SubmissionStatus
   submittedAt: Date
   reviewedAt: Date | null
-  reviewedById: string | null
-  grade: string | null
-  feedback: string | null
   createdAt: Date
   _count: FormSubmissionCountAggregateOutputType | null
   _min: FormSubmissionMinAggregateOutputType | null
@@ -211,12 +204,11 @@ export type FormSubmissionWhereInput = {
   id?: Prisma.StringFilter<"FormSubmission"> | string
   assignmentId?: Prisma.StringFilter<"FormSubmission"> | string
   submittedById?: Prisma.StringFilter<"FormSubmission"> | string
+  dueDate?: Prisma.DateTimeNullableFilter<"FormSubmission"> | Date | string | null
   answers?: Prisma.JsonFilter<"FormSubmission">
+  status?: Prisma.EnumSubmissionStatusFilter<"FormSubmission"> | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFilter<"FormSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"FormSubmission"> | Date | string | null
-  reviewedById?: Prisma.StringNullableFilter<"FormSubmission"> | string | null
-  grade?: Prisma.StringNullableFilter<"FormSubmission"> | string | null
-  feedback?: Prisma.StringNullableFilter<"FormSubmission"> | string | null
   createdAt?: Prisma.DateTimeFilter<"FormSubmission"> | Date | string
   assignment?: Prisma.XOR<Prisma.FormAssignmentScalarRelationFilter, Prisma.FormAssignmentWhereInput>
   submittedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -226,12 +218,11 @@ export type FormSubmissionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   assignmentId?: Prisma.SortOrder
   submittedById?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
   answers?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  reviewedById?: Prisma.SortOrderInput | Prisma.SortOrder
-  grade?: Prisma.SortOrderInput | Prisma.SortOrder
-  feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   assignment?: Prisma.FormAssignmentOrderByWithRelationInput
   submittedBy?: Prisma.UserOrderByWithRelationInput
@@ -240,32 +231,31 @@ export type FormSubmissionOrderByWithRelationInput = {
 
 export type FormSubmissionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  assignmentId_submittedById_dueDate?: Prisma.FormSubmissionAssignmentIdSubmittedByIdDueDateCompoundUniqueInput
   AND?: Prisma.FormSubmissionWhereInput | Prisma.FormSubmissionWhereInput[]
   OR?: Prisma.FormSubmissionWhereInput[]
   NOT?: Prisma.FormSubmissionWhereInput | Prisma.FormSubmissionWhereInput[]
   assignmentId?: Prisma.StringFilter<"FormSubmission"> | string
   submittedById?: Prisma.StringFilter<"FormSubmission"> | string
+  dueDate?: Prisma.DateTimeNullableFilter<"FormSubmission"> | Date | string | null
   answers?: Prisma.JsonFilter<"FormSubmission">
+  status?: Prisma.EnumSubmissionStatusFilter<"FormSubmission"> | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFilter<"FormSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"FormSubmission"> | Date | string | null
-  reviewedById?: Prisma.StringNullableFilter<"FormSubmission"> | string | null
-  grade?: Prisma.StringNullableFilter<"FormSubmission"> | string | null
-  feedback?: Prisma.StringNullableFilter<"FormSubmission"> | string | null
   createdAt?: Prisma.DateTimeFilter<"FormSubmission"> | Date | string
   assignment?: Prisma.XOR<Prisma.FormAssignmentScalarRelationFilter, Prisma.FormAssignmentWhereInput>
   submittedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "assignmentId_submittedById_dueDate">
 
 export type FormSubmissionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   assignmentId?: Prisma.SortOrder
   submittedById?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
   answers?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  reviewedById?: Prisma.SortOrderInput | Prisma.SortOrder
-  grade?: Prisma.SortOrderInput | Prisma.SortOrder
-  feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.FormSubmissionCountOrderByAggregateInput
   _max?: Prisma.FormSubmissionMaxOrderByAggregateInput
@@ -279,23 +269,21 @@ export type FormSubmissionScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"FormSubmission"> | string
   assignmentId?: Prisma.StringWithAggregatesFilter<"FormSubmission"> | string
   submittedById?: Prisma.StringWithAggregatesFilter<"FormSubmission"> | string
+  dueDate?: Prisma.DateTimeNullableWithAggregatesFilter<"FormSubmission"> | Date | string | null
   answers?: Prisma.JsonWithAggregatesFilter<"FormSubmission">
+  status?: Prisma.EnumSubmissionStatusWithAggregatesFilter<"FormSubmission"> | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeWithAggregatesFilter<"FormSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"FormSubmission"> | Date | string | null
-  reviewedById?: Prisma.StringNullableWithAggregatesFilter<"FormSubmission"> | string | null
-  grade?: Prisma.StringNullableWithAggregatesFilter<"FormSubmission"> | string | null
-  feedback?: Prisma.StringNullableWithAggregatesFilter<"FormSubmission"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FormSubmission"> | Date | string
 }
 
 export type FormSubmissionCreateInput = {
   id?: string
+  dueDate?: Date | string | null
   answers: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.SubmissionStatus
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
-  reviewedById?: string | null
-  grade?: string | null
-  feedback?: string | null
   createdAt?: Date | string
   assignment: Prisma.FormAssignmentCreateNestedOneWithoutSubmissionsInput
   submittedBy: Prisma.UserCreateNestedOneWithoutFormSubmissionsInput
@@ -305,23 +293,21 @@ export type FormSubmissionUncheckedCreateInput = {
   id?: string
   assignmentId: string
   submittedById: string
+  dueDate?: Date | string | null
   answers: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.SubmissionStatus
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
-  reviewedById?: string | null
-  grade?: string | null
-  feedback?: string | null
   createdAt?: Date | string
 }
 
 export type FormSubmissionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   answers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignment?: Prisma.FormAssignmentUpdateOneRequiredWithoutSubmissionsNestedInput
   submittedBy?: Prisma.UserUpdateOneRequiredWithoutFormSubmissionsNestedInput
@@ -331,12 +317,11 @@ export type FormSubmissionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentId?: Prisma.StringFieldUpdateOperationsInput | string
   submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   answers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -344,23 +329,21 @@ export type FormSubmissionCreateManyInput = {
   id?: string
   assignmentId: string
   submittedById: string
+  dueDate?: Date | string | null
   answers: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.SubmissionStatus
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
-  reviewedById?: string | null
-  grade?: string | null
-  feedback?: string | null
   createdAt?: Date | string
 }
 
 export type FormSubmissionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   answers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -368,12 +351,11 @@ export type FormSubmissionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentId?: Prisma.StringFieldUpdateOperationsInput | string
   submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   answers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -393,16 +375,21 @@ export type FormSubmissionOrderByRelevanceInput = {
   search: string
 }
 
+export type FormSubmissionAssignmentIdSubmittedByIdDueDateCompoundUniqueInput = {
+  assignmentId: string
+  submittedById: string
+  dueDate: Date | string
+}
+
 export type FormSubmissionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   assignmentId?: Prisma.SortOrder
   submittedById?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   answers?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
-  reviewedById?: Prisma.SortOrder
-  grade?: Prisma.SortOrder
-  feedback?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -410,11 +397,10 @@ export type FormSubmissionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   assignmentId?: Prisma.SortOrder
   submittedById?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
-  reviewedById?: Prisma.SortOrder
-  grade?: Prisma.SortOrder
-  feedback?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -422,11 +408,10 @@ export type FormSubmissionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   assignmentId?: Prisma.SortOrder
   submittedById?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
-  reviewedById?: Prisma.SortOrder
-  grade?: Prisma.SortOrder
-  feedback?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -514,18 +499,17 @@ export type FormSubmissionUncheckedUpdateManyWithoutAssignmentNestedInput = {
   deleteMany?: Prisma.FormSubmissionScalarWhereInput | Prisma.FormSubmissionScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
+export type EnumSubmissionStatusFieldUpdateOperationsInput = {
+  set?: $Enums.SubmissionStatus
 }
 
 export type FormSubmissionCreateWithoutSubmittedByInput = {
   id?: string
+  dueDate?: Date | string | null
   answers: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.SubmissionStatus
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
-  reviewedById?: string | null
-  grade?: string | null
-  feedback?: string | null
   createdAt?: Date | string
   assignment: Prisma.FormAssignmentCreateNestedOneWithoutSubmissionsInput
 }
@@ -533,12 +517,11 @@ export type FormSubmissionCreateWithoutSubmittedByInput = {
 export type FormSubmissionUncheckedCreateWithoutSubmittedByInput = {
   id?: string
   assignmentId: string
+  dueDate?: Date | string | null
   answers: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.SubmissionStatus
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
-  reviewedById?: string | null
-  grade?: string | null
-  feedback?: string | null
   createdAt?: Date | string
 }
 
@@ -575,23 +558,21 @@ export type FormSubmissionScalarWhereInput = {
   id?: Prisma.StringFilter<"FormSubmission"> | string
   assignmentId?: Prisma.StringFilter<"FormSubmission"> | string
   submittedById?: Prisma.StringFilter<"FormSubmission"> | string
+  dueDate?: Prisma.DateTimeNullableFilter<"FormSubmission"> | Date | string | null
   answers?: Prisma.JsonFilter<"FormSubmission">
+  status?: Prisma.EnumSubmissionStatusFilter<"FormSubmission"> | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFilter<"FormSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"FormSubmission"> | Date | string | null
-  reviewedById?: Prisma.StringNullableFilter<"FormSubmission"> | string | null
-  grade?: Prisma.StringNullableFilter<"FormSubmission"> | string | null
-  feedback?: Prisma.StringNullableFilter<"FormSubmission"> | string | null
   createdAt?: Prisma.DateTimeFilter<"FormSubmission"> | Date | string
 }
 
 export type FormSubmissionCreateWithoutAssignmentInput = {
   id?: string
+  dueDate?: Date | string | null
   answers: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.SubmissionStatus
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
-  reviewedById?: string | null
-  grade?: string | null
-  feedback?: string | null
   createdAt?: Date | string
   submittedBy: Prisma.UserCreateNestedOneWithoutFormSubmissionsInput
 }
@@ -599,12 +580,11 @@ export type FormSubmissionCreateWithoutAssignmentInput = {
 export type FormSubmissionUncheckedCreateWithoutAssignmentInput = {
   id?: string
   submittedById: string
+  dueDate?: Date | string | null
   answers: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.SubmissionStatus
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
-  reviewedById?: string | null
-  grade?: string | null
-  feedback?: string | null
   createdAt?: Date | string
 }
 
@@ -637,23 +617,21 @@ export type FormSubmissionUpdateManyWithWhereWithoutAssignmentInput = {
 export type FormSubmissionCreateManySubmittedByInput = {
   id?: string
   assignmentId: string
+  dueDate?: Date | string | null
   answers: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.SubmissionStatus
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
-  reviewedById?: string | null
-  grade?: string | null
-  feedback?: string | null
   createdAt?: Date | string
 }
 
 export type FormSubmissionUpdateWithoutSubmittedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   answers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignment?: Prisma.FormAssignmentUpdateOneRequiredWithoutSubmissionsNestedInput
 }
@@ -661,47 +639,43 @@ export type FormSubmissionUpdateWithoutSubmittedByInput = {
 export type FormSubmissionUncheckedUpdateWithoutSubmittedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentId?: Prisma.StringFieldUpdateOperationsInput | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   answers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FormSubmissionUncheckedUpdateManyWithoutSubmittedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentId?: Prisma.StringFieldUpdateOperationsInput | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   answers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FormSubmissionCreateManyAssignmentInput = {
   id?: string
   submittedById: string
+  dueDate?: Date | string | null
   answers: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.SubmissionStatus
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
-  reviewedById?: string | null
-  grade?: string | null
-  feedback?: string | null
   createdAt?: Date | string
 }
 
 export type FormSubmissionUpdateWithoutAssignmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   answers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   submittedBy?: Prisma.UserUpdateOneRequiredWithoutFormSubmissionsNestedInput
 }
@@ -709,24 +683,22 @@ export type FormSubmissionUpdateWithoutAssignmentInput = {
 export type FormSubmissionUncheckedUpdateWithoutAssignmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   answers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FormSubmissionUncheckedUpdateManyWithoutAssignmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   answers?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -736,12 +708,11 @@ export type FormSubmissionSelect<ExtArgs extends runtime.Types.Extensions.Intern
   id?: boolean
   assignmentId?: boolean
   submittedById?: boolean
+  dueDate?: boolean
   answers?: boolean
+  status?: boolean
   submittedAt?: boolean
   reviewedAt?: boolean
-  reviewedById?: boolean
-  grade?: boolean
-  feedback?: boolean
   createdAt?: boolean
   assignment?: boolean | Prisma.FormAssignmentDefaultArgs<ExtArgs>
   submittedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -753,16 +724,15 @@ export type FormSubmissionSelectScalar = {
   id?: boolean
   assignmentId?: boolean
   submittedById?: boolean
+  dueDate?: boolean
   answers?: boolean
+  status?: boolean
   submittedAt?: boolean
   reviewedAt?: boolean
-  reviewedById?: boolean
-  grade?: boolean
-  feedback?: boolean
   createdAt?: boolean
 }
 
-export type FormSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "assignmentId" | "submittedById" | "answers" | "submittedAt" | "reviewedAt" | "reviewedById" | "grade" | "feedback" | "createdAt", ExtArgs["result"]["formSubmission"]>
+export type FormSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "assignmentId" | "submittedById" | "dueDate" | "answers" | "status" | "submittedAt" | "reviewedAt" | "createdAt", ExtArgs["result"]["formSubmission"]>
 export type FormSubmissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignment?: boolean | Prisma.FormAssignmentDefaultArgs<ExtArgs>
   submittedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -778,12 +748,11 @@ export type $FormSubmissionPayload<ExtArgs extends runtime.Types.Extensions.Inte
     id: string
     assignmentId: string
     submittedById: string
+    dueDate: Date | null
     answers: runtime.JsonValue
+    status: $Enums.SubmissionStatus
     submittedAt: Date
     reviewedAt: Date | null
-    reviewedById: string | null
-    grade: string | null
-    feedback: string | null
     createdAt: Date
   }, ExtArgs["result"]["formSubmission"]>
   composites: {}
@@ -1159,12 +1128,11 @@ export interface FormSubmissionFieldRefs {
   readonly id: Prisma.FieldRef<"FormSubmission", 'String'>
   readonly assignmentId: Prisma.FieldRef<"FormSubmission", 'String'>
   readonly submittedById: Prisma.FieldRef<"FormSubmission", 'String'>
+  readonly dueDate: Prisma.FieldRef<"FormSubmission", 'DateTime'>
   readonly answers: Prisma.FieldRef<"FormSubmission", 'Json'>
+  readonly status: Prisma.FieldRef<"FormSubmission", 'SubmissionStatus'>
   readonly submittedAt: Prisma.FieldRef<"FormSubmission", 'DateTime'>
   readonly reviewedAt: Prisma.FieldRef<"FormSubmission", 'DateTime'>
-  readonly reviewedById: Prisma.FieldRef<"FormSubmission", 'String'>
-  readonly grade: Prisma.FieldRef<"FormSubmission", 'String'>
-  readonly feedback: Prisma.FieldRef<"FormSubmission", 'String'>
   readonly createdAt: Prisma.FieldRef<"FormSubmission", 'DateTime'>
 }
     
