@@ -14,7 +14,8 @@ export const UserRole = {
   admin: 'admin',
   superadmin: 'superadmin',
   moderator: 'moderator',
-  teacher: 'teacher'
+  teacher: 'teacher',
+  developer: 'developer'
 } as const
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
@@ -274,6 +275,14 @@ export const PermissionReqStatus = {
 export type PermissionReqStatus = (typeof PermissionReqStatus)[keyof typeof PermissionReqStatus]
 
 
+export const ReportType = {
+  user_report: 'user_report',
+  bug_report: 'bug_report'
+} as const
+
+export type ReportType = (typeof ReportType)[keyof typeof ReportType]
+
+
 export const ReportReason = {
   spam: 'spam',
   harassment: 'harassment',
@@ -282,7 +291,13 @@ export const ReportReason = {
   nudity: 'nudity',
   false_info: 'false_info',
   impersonation: 'impersonation',
-  other: 'other'
+  other: 'other',
+  ui_bug: 'ui_bug',
+  crash: 'crash',
+  performance: 'performance',
+  data_loss: 'data_loss',
+  security_issue: 'security_issue',
+  feature_request: 'feature_request'
 } as const
 
 export type ReportReason = (typeof ReportReason)[keyof typeof ReportReason]

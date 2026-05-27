@@ -75,6 +75,11 @@ export type ConversationModerator = Prisma.ConversationModeratorModel
  */
 export type ConversationBlockEntry = Prisma.ConversationBlockEntryModel
 /**
+ * Model ConversationSelectedDay
+ * 
+ */
+export type ConversationSelectedDay = Prisma.ConversationSelectedDayModel
+/**
  * Model JoinRequest
  * 
  */
@@ -130,6 +135,16 @@ export type AdminActivityLog = Prisma.AdminActivityLogModel
  */
 export type AdminSettings = Prisma.AdminSettingsModel
 /**
+ * Model AdminSettingsAllowedFileType
+ * 
+ */
+export type AdminSettingsAllowedFileType = Prisma.AdminSettingsAllowedFileTypeModel
+/**
+ * Model AdminSettingsBlockedWord
+ * 
+ */
+export type AdminSettingsBlockedWord = Prisma.AdminSettingsBlockedWordModel
+/**
  * Model AttendanceLog
  * 
  */
@@ -155,6 +170,11 @@ export type NoticeLike = Prisma.NoticeLikeModel
  */
 export type NoticeRead = Prisma.NoticeReadModel
 /**
+ * Model NoticeRecipient
+ * 
+ */
+export type NoticeRecipient = Prisma.NoticeRecipientModel
+/**
  * Model Notification
  * 
  */
@@ -169,6 +189,11 @@ export type PermissionRequest = Prisma.PermissionRequestModel
  * 
  */
 export type QuickLesson = Prisma.QuickLessonModel
+/**
+ * Model QuickLessonPart
+ * 
+ */
+export type QuickLessonPart = Prisma.QuickLessonPartModel
 /**
  * Model QuickMessage
  * 

@@ -452,6 +452,7 @@ export type UserWhereInput = {
   sessions?: Prisma.SessionListRelationFilter
   noticeLikes?: Prisma.NoticeLikeListRelationFilter
   noticeReads?: Prisma.NoticeReadListRelationFilter
+  noticeRecipients?: Prisma.NoticeRecipientListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -521,6 +522,7 @@ export type UserOrderByWithRelationInput = {
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   noticeLikes?: Prisma.NoticeLikeOrderByRelationAggregateInput
   noticeReads?: Prisma.NoticeReadOrderByRelationAggregateInput
+  noticeRecipients?: Prisma.NoticeRecipientOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -594,6 +596,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   sessions?: Prisma.SessionListRelationFilter
   noticeLikes?: Prisma.NoticeLikeListRelationFilter
   noticeReads?: Prisma.NoticeReadListRelationFilter
+  noticeRecipients?: Prisma.NoticeRecipientListRelationFilter
 }, "id" | "name" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -737,6 +740,7 @@ export type UserCreateInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -806,6 +810,7 @@ export type UserUncheckedCreateInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -875,6 +880,7 @@ export type UserUpdateInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -944,6 +950,7 @@ export type UserUncheckedUpdateInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1594,6 +1601,20 @@ export type UserUpdateOneRequiredWithoutNoticeReadsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNoticeReadsInput, Prisma.UserUpdateWithoutNoticeReadsInput>, Prisma.UserUncheckedUpdateWithoutNoticeReadsInput>
 }
 
+export type UserCreateNestedOneWithoutNoticeRecipientsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNoticeRecipientsInput, Prisma.UserUncheckedCreateWithoutNoticeRecipientsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNoticeRecipientsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNoticeRecipientsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNoticeRecipientsInput, Prisma.UserUncheckedCreateWithoutNoticeRecipientsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNoticeRecipientsInput
+  upsert?: Prisma.UserUpsertWithoutNoticeRecipientsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNoticeRecipientsInput, Prisma.UserUpdateWithoutNoticeRecipientsInput>, Prisma.UserUncheckedUpdateWithoutNoticeRecipientsInput>
+}
+
 export type UserCreateNestedOneWithoutNotificationsReceivedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsReceivedInput, Prisma.UserUncheckedCreateWithoutNotificationsReceivedInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsReceivedInput
@@ -1708,10 +1729,12 @@ export type UserUpdateOneRequiredWithoutReportsSubmittedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportsSubmittedInput, Prisma.UserUpdateWithoutReportsSubmittedInput>, Prisma.UserUncheckedUpdateWithoutReportsSubmittedInput>
 }
 
-export type UserUpdateOneRequiredWithoutReportsReceivedNestedInput = {
+export type UserUpdateOneWithoutReportsReceivedNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutReportsReceivedInput, Prisma.UserUncheckedCreateWithoutReportsReceivedInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportsReceivedInput
   upsert?: Prisma.UserUpsertWithoutReportsReceivedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportsReceivedInput, Prisma.UserUpdateWithoutReportsReceivedInput>, Prisma.UserUncheckedUpdateWithoutReportsReceivedInput>
 }
@@ -1792,6 +1815,7 @@ export type UserCreateWithoutBlocksInitiatedInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBlocksInitiatedInput = {
@@ -1860,6 +1884,7 @@ export type UserUncheckedCreateWithoutBlocksInitiatedInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBlocksInitiatedInput = {
@@ -1933,6 +1958,7 @@ export type UserCreateWithoutBlocksReceivedInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBlocksReceivedInput = {
@@ -2001,6 +2027,7 @@ export type UserUncheckedCreateWithoutBlocksReceivedInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBlocksReceivedInput = {
@@ -2085,6 +2112,7 @@ export type UserUpdateWithoutBlocksInitiatedInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBlocksInitiatedInput = {
@@ -2153,6 +2181,7 @@ export type UserUncheckedUpdateWithoutBlocksInitiatedInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutBlocksReceivedInput = {
@@ -2232,6 +2261,7 @@ export type UserUpdateWithoutBlocksReceivedInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBlocksReceivedInput = {
@@ -2300,6 +2330,7 @@ export type UserUncheckedUpdateWithoutBlocksReceivedInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLastMessagesSentInput = {
@@ -2368,6 +2399,7 @@ export type UserCreateWithoutLastMessagesSentInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLastMessagesSentInput = {
@@ -2436,6 +2468,7 @@ export type UserUncheckedCreateWithoutLastMessagesSentInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLastMessagesSentInput = {
@@ -2520,6 +2553,7 @@ export type UserUpdateWithoutLastMessagesSentInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLastMessagesSentInput = {
@@ -2588,6 +2622,7 @@ export type UserUncheckedUpdateWithoutLastMessagesSentInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversationsInput = {
@@ -2656,6 +2691,7 @@ export type UserCreateWithoutConversationsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationsInput = {
@@ -2724,6 +2760,7 @@ export type UserUncheckedCreateWithoutConversationsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationsInput = {
@@ -2808,6 +2845,7 @@ export type UserUpdateWithoutConversationsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationsInput = {
@@ -2876,6 +2914,7 @@ export type UserUncheckedUpdateWithoutConversationsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversationAdminsInput = {
@@ -2944,6 +2983,7 @@ export type UserCreateWithoutConversationAdminsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationAdminsInput = {
@@ -3012,6 +3052,7 @@ export type UserUncheckedCreateWithoutConversationAdminsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationAdminsInput = {
@@ -3096,6 +3137,7 @@ export type UserUpdateWithoutConversationAdminsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationAdminsInput = {
@@ -3164,6 +3206,7 @@ export type UserUncheckedUpdateWithoutConversationAdminsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversationModeratorsInput = {
@@ -3232,6 +3275,7 @@ export type UserCreateWithoutConversationModeratorsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationModeratorsInput = {
@@ -3300,6 +3344,7 @@ export type UserUncheckedCreateWithoutConversationModeratorsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationModeratorsInput = {
@@ -3384,6 +3429,7 @@ export type UserUpdateWithoutConversationModeratorsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationModeratorsInput = {
@@ -3452,6 +3498,7 @@ export type UserUncheckedUpdateWithoutConversationModeratorsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversationBlocksByInput = {
@@ -3520,6 +3567,7 @@ export type UserCreateWithoutConversationBlocksByInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationBlocksByInput = {
@@ -3588,6 +3636,7 @@ export type UserUncheckedCreateWithoutConversationBlocksByInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationBlocksByInput = {
@@ -3661,6 +3710,7 @@ export type UserCreateWithoutConversationBlocksOnInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationBlocksOnInput = {
@@ -3729,6 +3779,7 @@ export type UserUncheckedCreateWithoutConversationBlocksOnInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationBlocksOnInput = {
@@ -3813,6 +3864,7 @@ export type UserUpdateWithoutConversationBlocksByInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationBlocksByInput = {
@@ -3881,6 +3933,7 @@ export type UserUncheckedUpdateWithoutConversationBlocksByInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutConversationBlocksOnInput = {
@@ -3960,6 +4013,7 @@ export type UserUpdateWithoutConversationBlocksOnInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationBlocksOnInput = {
@@ -4028,6 +4082,7 @@ export type UserUncheckedUpdateWithoutConversationBlocksOnInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutJoinRequestsInput = {
@@ -4096,6 +4151,7 @@ export type UserCreateWithoutJoinRequestsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutJoinRequestsInput = {
@@ -4164,6 +4220,7 @@ export type UserUncheckedCreateWithoutJoinRequestsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutJoinRequestsInput = {
@@ -4237,6 +4294,7 @@ export type UserCreateWithoutJoinRequestsProcessedInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutJoinRequestsProcessedInput = {
@@ -4305,6 +4363,7 @@ export type UserUncheckedCreateWithoutJoinRequestsProcessedInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutJoinRequestsProcessedInput = {
@@ -4389,6 +4448,7 @@ export type UserUpdateWithoutJoinRequestsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJoinRequestsInput = {
@@ -4457,6 +4517,7 @@ export type UserUncheckedUpdateWithoutJoinRequestsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutJoinRequestsProcessedInput = {
@@ -4536,6 +4597,7 @@ export type UserUpdateWithoutJoinRequestsProcessedInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJoinRequestsProcessedInput = {
@@ -4604,6 +4666,7 @@ export type UserUncheckedUpdateWithoutJoinRequestsProcessedInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSentMessagesInput = {
@@ -4672,6 +4735,7 @@ export type UserCreateWithoutSentMessagesInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -4740,6 +4804,7 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -4813,6 +4878,7 @@ export type UserCreateWithoutReceivedMessagesInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReceivedMessagesInput = {
@@ -4881,6 +4947,7 @@ export type UserUncheckedCreateWithoutReceivedMessagesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReceivedMessagesInput = {
@@ -4965,6 +5032,7 @@ export type UserUpdateWithoutSentMessagesInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -5033,6 +5101,7 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReceivedMessagesInput = {
@@ -5112,6 +5181,7 @@ export type UserUpdateWithoutReceivedMessagesInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
@@ -5180,6 +5250,7 @@ export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRemindersInput = {
@@ -5248,6 +5319,7 @@ export type UserCreateWithoutRemindersInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRemindersInput = {
@@ -5316,6 +5388,7 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRemindersInput = {
@@ -5400,6 +5473,7 @@ export type UserUpdateWithoutRemindersInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRemindersInput = {
@@ -5468,6 +5542,7 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -5536,6 +5611,7 @@ export type UserCreateWithoutSessionsInput = {
   lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -5604,6 +5680,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -5688,6 +5765,7 @@ export type UserUpdateWithoutSessionsInput = {
   lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -5756,6 +5834,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUnreadCountInput = {
@@ -5824,6 +5903,7 @@ export type UserCreateWithoutUnreadCountInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUnreadCountInput = {
@@ -5892,6 +5972,7 @@ export type UserUncheckedCreateWithoutUnreadCountInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUnreadCountInput = {
@@ -5976,6 +6057,7 @@ export type UserUpdateWithoutUnreadCountInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUnreadCountInput = {
@@ -6044,6 +6126,7 @@ export type UserUncheckedUpdateWithoutUnreadCountInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUnreadMessagesInput = {
@@ -6112,6 +6195,7 @@ export type UserCreateWithoutUnreadMessagesInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUnreadMessagesInput = {
@@ -6180,6 +6264,7 @@ export type UserUncheckedCreateWithoutUnreadMessagesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUnreadMessagesInput = {
@@ -6264,6 +6349,7 @@ export type UserUpdateWithoutUnreadMessagesInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUnreadMessagesInput = {
@@ -6332,6 +6418,7 @@ export type UserUncheckedUpdateWithoutUnreadMessagesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserApprovalInput = {
@@ -6400,6 +6487,7 @@ export type UserCreateWithoutUserApprovalInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserApprovalInput = {
@@ -6468,6 +6556,7 @@ export type UserUncheckedCreateWithoutUserApprovalInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserApprovalInput = {
@@ -6541,6 +6630,7 @@ export type UserCreateWithoutUserApprovalReviewsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserApprovalReviewsInput = {
@@ -6609,6 +6699,7 @@ export type UserUncheckedCreateWithoutUserApprovalReviewsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserApprovalReviewsInput = {
@@ -6693,6 +6784,7 @@ export type UserUpdateWithoutUserApprovalInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserApprovalInput = {
@@ -6761,6 +6853,7 @@ export type UserUncheckedUpdateWithoutUserApprovalInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutUserApprovalReviewsInput = {
@@ -6840,6 +6933,7 @@ export type UserUpdateWithoutUserApprovalReviewsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserApprovalReviewsInput = {
@@ -6908,6 +7002,7 @@ export type UserUncheckedUpdateWithoutUserApprovalReviewsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDeletionSchedulesInput = {
@@ -6976,6 +7071,7 @@ export type UserCreateWithoutDeletionSchedulesInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeletionSchedulesInput = {
@@ -7044,6 +7140,7 @@ export type UserUncheckedCreateWithoutDeletionSchedulesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeletionSchedulesInput = {
@@ -7117,6 +7214,7 @@ export type UserCreateWithoutDeletionPreventionsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeletionPreventionsInput = {
@@ -7185,6 +7283,7 @@ export type UserUncheckedCreateWithoutDeletionPreventionsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeletionPreventionsInput = {
@@ -7269,6 +7368,7 @@ export type UserUpdateWithoutDeletionSchedulesInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeletionSchedulesInput = {
@@ -7337,6 +7437,7 @@ export type UserUncheckedUpdateWithoutDeletionSchedulesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutDeletionPreventionsInput = {
@@ -7416,6 +7517,7 @@ export type UserUpdateWithoutDeletionPreventionsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeletionPreventionsInput = {
@@ -7484,6 +7586,7 @@ export type UserUncheckedUpdateWithoutDeletionPreventionsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAdminActivityLogsInput = {
@@ -7552,6 +7655,7 @@ export type UserCreateWithoutAdminActivityLogsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAdminActivityLogsInput = {
@@ -7620,6 +7724,7 @@ export type UserUncheckedCreateWithoutAdminActivityLogsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAdminActivityLogsInput = {
@@ -7704,6 +7809,7 @@ export type UserUpdateWithoutAdminActivityLogsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAdminActivityLogsInput = {
@@ -7772,6 +7878,7 @@ export type UserUncheckedUpdateWithoutAdminActivityLogsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAdminSettingsInput = {
@@ -7840,6 +7947,7 @@ export type UserCreateWithoutAdminSettingsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAdminSettingsInput = {
@@ -7908,6 +8016,7 @@ export type UserUncheckedCreateWithoutAdminSettingsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAdminSettingsInput = {
@@ -7992,6 +8101,7 @@ export type UserUpdateWithoutAdminSettingsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAdminSettingsInput = {
@@ -8060,6 +8170,7 @@ export type UserUncheckedUpdateWithoutAdminSettingsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAttendanceLogsInput = {
@@ -8128,6 +8239,7 @@ export type UserCreateWithoutAttendanceLogsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAttendanceLogsInput = {
@@ -8196,6 +8308,7 @@ export type UserUncheckedCreateWithoutAttendanceLogsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAttendanceLogsInput = {
@@ -8280,6 +8393,7 @@ export type UserUpdateWithoutAttendanceLogsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAttendanceLogsInput = {
@@ -8348,6 +8462,7 @@ export type UserUncheckedUpdateWithoutAttendanceLogsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFilesUploadedInput = {
@@ -8416,6 +8531,7 @@ export type UserCreateWithoutFilesUploadedInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFilesUploadedInput = {
@@ -8484,6 +8600,7 @@ export type UserUncheckedCreateWithoutFilesUploadedInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFilesUploadedInput = {
@@ -8568,6 +8685,7 @@ export type UserUpdateWithoutFilesUploadedInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFilesUploadedInput = {
@@ -8636,6 +8754,7 @@ export type UserUncheckedUpdateWithoutFilesUploadedInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNoticesCreatedInput = {
@@ -8704,6 +8823,7 @@ export type UserCreateWithoutNoticesCreatedInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNoticesCreatedInput = {
@@ -8772,6 +8892,7 @@ export type UserUncheckedCreateWithoutNoticesCreatedInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNoticesCreatedInput = {
@@ -8856,6 +8977,7 @@ export type UserUpdateWithoutNoticesCreatedInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNoticesCreatedInput = {
@@ -8924,6 +9046,7 @@ export type UserUncheckedUpdateWithoutNoticesCreatedInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNoticeLikesInput = {
@@ -8992,6 +9115,7 @@ export type UserCreateWithoutNoticeLikesInput = {
   lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNoticeLikesInput = {
@@ -9060,6 +9184,7 @@ export type UserUncheckedCreateWithoutNoticeLikesInput = {
   lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNoticeLikesInput = {
@@ -9144,6 +9269,7 @@ export type UserUpdateWithoutNoticeLikesInput = {
   lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNoticeLikesInput = {
@@ -9212,6 +9338,7 @@ export type UserUncheckedUpdateWithoutNoticeLikesInput = {
   lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNoticeReadsInput = {
@@ -9280,6 +9407,7 @@ export type UserCreateWithoutNoticeReadsInput = {
   lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNoticeReadsInput = {
@@ -9348,6 +9476,7 @@ export type UserUncheckedCreateWithoutNoticeReadsInput = {
   lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNoticeReadsInput = {
@@ -9432,6 +9561,7 @@ export type UserUpdateWithoutNoticeReadsInput = {
   lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNoticeReadsInput = {
@@ -9500,6 +9630,299 @@ export type UserUncheckedUpdateWithoutNoticeReadsInput = {
   lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNoticeRecipientsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  gender: string
+  image?: string
+  bio?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  lastSeen?: Date | string | null
+  themeIndex?: number
+  fileSendingAllowed?: boolean
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  notifNewMessage?: boolean | null
+  notifMention?: boolean | null
+  notifSound?: boolean | null
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  isEmailVerified?: boolean
+  emailVerificationToken?: string | null
+  passwordResetToken?: string | null
+  passwordResetExpires?: Date | string | null
+  refreshToken?: string | null
+  blockedAt?: Date | string | null
+  blockReason?: string | null
+  blockDuration?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
+  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
+  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
+  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
+  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
+  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
+  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
+  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
+  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
+  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
+  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
+  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
+  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
+  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
+  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
+  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
+  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
+  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
+  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
+  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
+  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
+  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
+  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
+  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
+  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
+  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
+  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNoticeRecipientsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  gender: string
+  image?: string
+  bio?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  lastSeen?: Date | string | null
+  themeIndex?: number
+  fileSendingAllowed?: boolean
+  coverImage?: string | null
+  website?: string | null
+  location?: string | null
+  notifNewMessage?: boolean | null
+  notifMention?: boolean | null
+  notifSound?: boolean | null
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
+  isEmailVerified?: boolean
+  emailVerificationToken?: string | null
+  passwordResetToken?: string | null
+  passwordResetExpires?: Date | string | null
+  refreshToken?: string | null
+  blockedAt?: Date | string | null
+  blockReason?: string | null
+  blockDuration?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
+  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
+  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
+  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
+  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
+  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
+  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
+  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
+  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
+  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
+  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
+  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
+  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
+  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
+  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
+  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
+  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
+  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
+  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
+  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
+  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
+  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
+  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
+  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
+  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNoticeRecipientsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNoticeRecipientsInput, Prisma.UserUncheckedCreateWithoutNoticeRecipientsInput>
+}
+
+export type UserUpsertWithoutNoticeRecipientsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNoticeRecipientsInput, Prisma.UserUncheckedUpdateWithoutNoticeRecipientsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNoticeRecipientsInput, Prisma.UserUncheckedCreateWithoutNoticeRecipientsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNoticeRecipientsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNoticeRecipientsInput, Prisma.UserUncheckedUpdateWithoutNoticeRecipientsInput>
+}
+
+export type UserUpdateWithoutNoticeRecipientsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
+  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
+  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
+  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
+  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
+  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
+  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
+  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
+  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
+  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
+  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
+  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
+  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
+  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
+  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
+  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
+  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
+  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
+  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
+  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
+  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
+  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
+  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
+  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
+  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
+  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNoticeRecipientsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
+  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
+  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
+  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
+  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
+  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
+  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
+  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
+  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
+  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
+  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
+  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
+  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
+  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
+  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
+  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
+  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
+  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
+  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
+  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
+  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
+  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsReceivedInput = {
@@ -9568,6 +9991,7 @@ export type UserCreateWithoutNotificationsReceivedInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsReceivedInput = {
@@ -9636,6 +10060,7 @@ export type UserUncheckedCreateWithoutNotificationsReceivedInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsReceivedInput = {
@@ -9709,6 +10134,7 @@ export type UserCreateWithoutNotificationsSentInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsSentInput = {
@@ -9777,6 +10203,7 @@ export type UserUncheckedCreateWithoutNotificationsSentInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsSentInput = {
@@ -9861,6 +10288,7 @@ export type UserUpdateWithoutNotificationsReceivedInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsReceivedInput = {
@@ -9929,6 +10357,7 @@ export type UserUncheckedUpdateWithoutNotificationsReceivedInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutNotificationsSentInput = {
@@ -10008,6 +10437,7 @@ export type UserUpdateWithoutNotificationsSentInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsSentInput = {
@@ -10076,6 +10506,7 @@ export type UserUncheckedUpdateWithoutNotificationsSentInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPermissionRequestsInput = {
@@ -10144,6 +10575,7 @@ export type UserCreateWithoutPermissionRequestsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPermissionRequestsInput = {
@@ -10212,6 +10644,7 @@ export type UserUncheckedCreateWithoutPermissionRequestsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPermissionRequestsInput = {
@@ -10285,6 +10718,7 @@ export type UserCreateWithoutPermissionReviewsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPermissionReviewsInput = {
@@ -10353,6 +10787,7 @@ export type UserUncheckedCreateWithoutPermissionReviewsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPermissionReviewsInput = {
@@ -10437,6 +10872,7 @@ export type UserUpdateWithoutPermissionRequestsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPermissionRequestsInput = {
@@ -10505,6 +10941,7 @@ export type UserUncheckedUpdateWithoutPermissionRequestsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutPermissionReviewsInput = {
@@ -10584,6 +11021,7 @@ export type UserUpdateWithoutPermissionReviewsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPermissionReviewsInput = {
@@ -10652,6 +11090,7 @@ export type UserUncheckedUpdateWithoutPermissionReviewsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutQuickLessonsInput = {
@@ -10720,6 +11159,7 @@ export type UserCreateWithoutQuickLessonsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutQuickLessonsInput = {
@@ -10788,6 +11228,7 @@ export type UserUncheckedCreateWithoutQuickLessonsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutQuickLessonsInput = {
@@ -10872,6 +11313,7 @@ export type UserUpdateWithoutQuickLessonsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuickLessonsInput = {
@@ -10940,6 +11382,7 @@ export type UserUncheckedUpdateWithoutQuickLessonsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutQuickMessagesInput = {
@@ -11008,6 +11451,7 @@ export type UserCreateWithoutQuickMessagesInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutQuickMessagesInput = {
@@ -11076,6 +11520,7 @@ export type UserUncheckedCreateWithoutQuickMessagesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutQuickMessagesInput = {
@@ -11160,6 +11605,7 @@ export type UserUpdateWithoutQuickMessagesInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuickMessagesInput = {
@@ -11228,6 +11674,7 @@ export type UserUncheckedUpdateWithoutQuickMessagesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReportsSubmittedInput = {
@@ -11296,6 +11743,7 @@ export type UserCreateWithoutReportsSubmittedInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsSubmittedInput = {
@@ -11364,6 +11812,7 @@ export type UserUncheckedCreateWithoutReportsSubmittedInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsSubmittedInput = {
@@ -11437,6 +11886,7 @@ export type UserCreateWithoutReportsReceivedInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsReceivedInput = {
@@ -11505,6 +11955,7 @@ export type UserUncheckedCreateWithoutReportsReceivedInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsReceivedInput = {
@@ -11578,6 +12029,7 @@ export type UserCreateWithoutReportReviewsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportReviewsInput = {
@@ -11646,6 +12098,7 @@ export type UserUncheckedCreateWithoutReportReviewsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportReviewsInput = {
@@ -11730,6 +12183,7 @@ export type UserUpdateWithoutReportsSubmittedInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsSubmittedInput = {
@@ -11798,6 +12252,7 @@ export type UserUncheckedUpdateWithoutReportsSubmittedInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReportsReceivedInput = {
@@ -11877,6 +12332,7 @@ export type UserUpdateWithoutReportsReceivedInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsReceivedInput = {
@@ -11945,6 +12401,7 @@ export type UserUncheckedUpdateWithoutReportsReceivedInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReportReviewsInput = {
@@ -12024,6 +12481,7 @@ export type UserUpdateWithoutReportReviewsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportReviewsInput = {
@@ -12092,6 +12550,7 @@ export type UserUncheckedUpdateWithoutReportReviewsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
+  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -12134,6 +12593,7 @@ export type UserCountOutputType = {
   sessions: number
   noticeLikes: number
   noticeReads: number
+  noticeRecipients: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -12171,6 +12631,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   noticeLikes?: boolean | UserCountOutputTypeCountNoticeLikesArgs
   noticeReads?: boolean | UserCountOutputTypeCountNoticeReadsArgs
+  noticeRecipients?: boolean | UserCountOutputTypeCountNoticeRecipientsArgs
 }
 
 /**
@@ -12421,6 +12882,13 @@ export type UserCountOutputTypeCountNoticeReadsArgs<ExtArgs extends runtime.Type
   where?: Prisma.NoticeReadWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNoticeRecipientsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NoticeRecipientWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -12489,6 +12957,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   noticeLikes?: boolean | Prisma.User$noticeLikesArgs<ExtArgs>
   noticeReads?: boolean | Prisma.User$noticeReadsArgs<ExtArgs>
+  noticeRecipients?: boolean | Prisma.User$noticeRecipientsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -12565,6 +13034,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   noticeLikes?: boolean | Prisma.User$noticeLikesArgs<ExtArgs>
   noticeReads?: boolean | Prisma.User$noticeReadsArgs<ExtArgs>
+  noticeRecipients?: boolean | Prisma.User$noticeRecipientsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -12607,6 +13077,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     noticeLikes: Prisma.$NoticeLikePayload<ExtArgs>[]
     noticeReads: Prisma.$NoticeReadPayload<ExtArgs>[]
+    noticeRecipients: Prisma.$NoticeRecipientPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -13015,6 +13486,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   noticeLikes<T extends Prisma.User$noticeLikesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$noticeLikesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NoticeLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   noticeReads<T extends Prisma.User$noticeReadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$noticeReadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NoticeReadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  noticeRecipients<T extends Prisma.User$noticeRecipientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$noticeRecipientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NoticeRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14268,6 +14740,30 @@ export type User$noticeReadsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.NoticeReadScalarFieldEnum | Prisma.NoticeReadScalarFieldEnum[]
+}
+
+/**
+ * User.noticeRecipients
+ */
+export type User$noticeRecipientsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NoticeRecipient
+   */
+  select?: Prisma.NoticeRecipientSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NoticeRecipient
+   */
+  omit?: Prisma.NoticeRecipientOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NoticeRecipientInclude<ExtArgs> | null
+  where?: Prisma.NoticeRecipientWhereInput
+  orderBy?: Prisma.NoticeRecipientOrderByWithRelationInput | Prisma.NoticeRecipientOrderByWithRelationInput[]
+  cursor?: Prisma.NoticeRecipientWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NoticeRecipientScalarFieldEnum | Prisma.NoticeRecipientScalarFieldEnum[]
 }
 
 /**

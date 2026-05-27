@@ -96,6 +96,7 @@ model User {
   sessions                  Session[]
   noticeLikes               NoticeLike[]
   noticeReads               NoticeRead[]
+  noticeRecipients          NoticeRecipient[]
 
   @@map("users")
 }
@@ -106,6 +107,7 @@ enum UserRole {
   superadmin
   moderator
   teacher
+  developer
 }
 
 // ─── Block ───────────────────────────────────────────────────────────────────
@@ -187,6 +189,7 @@ model Conversation {
   quickLessons          QuickLesson[]
   reports               Report[]
   unreadMessages        UnreadMessage[]
+  selectedDays          ConversationSelectedDay[]
   lastMessageSender     User?    @relation("LastMessageSender", fields: [lastMessageSenderId], references: [id], onDelete: SetNull)
 
   @@index([visibility])
@@ -275,6 +278,17 @@ model ConversationBlockEntry {
 
   @@unique([conversationId, blockedById, blockedUserId])
   @@map("conversation_block_entries")
+}
+
+model ConversationSelectedDay {
+  id             String @id @default(uuid())
+  conversationId String
+  day            Int    // 0=Sunday, 1=Monday, ... 6=Saturday
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, day])
+  @@map("conversation_selected_days")
 }
 
 // ─── JoinRequest ─────────────────────────────────────────────────────────────
@@ -644,10 +658,33 @@ model AdminSettings {
   updatedById String
   updatedBy   User     @relation(fields: [updatedById], references: [id], onDelete: Cascade)
 
+  allowedFileTypes AdminSettingsAllowedFileType[]
+  blockedWords     AdminSettingsBlockedWord[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("admin_settings")
+}
+
+model AdminSettingsAllowedFileType {
+  id              String @id @default(uuid())
+  adminSettingsId String
+  fileType        String
+
+  adminSettings AdminSettings @relation(fields: [adminSettingsId], references: [id], onDelete: Cascade)
+
+  @@map("admin_settings_allowed_file_types")
+}
+
+model AdminSettingsBlockedWord {
+  id              String @id @default(uuid())
+  adminSettingsId String
+  word            String
+
+  adminSettings AdminSettings @relation(fields: [adminSettingsId], references: [id], onDelete: Cascade)
+
+  @@map("admin_settings_blocked_words")
 }
 
 // ─── AttendanceLog ───────────────────────────────────────────────────────────
@@ -727,6 +764,7 @@ model Notice {
   creator    User          @relation(fields: [creatorId], references: [id], onDelete: Cascade)
   likes      NoticeLike[]
   readBy     NoticeRead[]
+  recipients NoticeRecipient[]
 
   @@index([creatorId])
   @@index([createdAt])
@@ -757,6 +795,18 @@ model NoticeRead {
 
   @@unique([noticeId, userId])
   @@map("notice_reads")
+}
+
+model NoticeRecipient {
+  id       String @id @default(uuid())
+  noticeId String
+  userId   String
+
+  notice Notice @relation(fields: [noticeId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([noticeId, userId])
+  @@map("notice_recipients")
 }
 
 enum NoticeAudience {
@@ -883,8 +933,20 @@ model QuickLesson {
 
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  parts        QuickLessonPart[]
 
   @@map("quick_lessons")
+}
+
+model QuickLessonPart {
+  id            String @id @default(uuid())
+  quickLessonId String
+  content       String @db.Text
+  order         Int    @default(0)
+
+  quickLesson QuickLesson @relation(fields: [quickLessonId], references: [id], onDelete: Cascade)
+
+  @@map("quick_lesson_parts")
 }
 
 // ─── QuickMessage ────────────────────────────────────────────────────────────
@@ -908,8 +970,9 @@ model QuickMessage {
 model Report {
   id             String           @id @default(uuid())
   reporterId     String
-  reportedUserId String
-  conversationId String
+  reportedUserId String?
+  conversationId String?
+  reportType     ReportType       @default(user_report)
   reason         ReportReason
   details        String           @default("") @db.VarChar(2000)
   status         ReportStatus     @default(pending)
@@ -921,16 +984,22 @@ model Report {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  reporter     User         @relation("Reporter", fields: [reporterId], references: [id], onDelete: Cascade)
-  reportedUser User         @relation("ReportedUser", fields: [reportedUserId], references: [id], onDelete: Cascade)
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  reviewedBy   User?        @relation("ReportReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  reporter     User          @relation("Reporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  reportedUser User?         @relation("ReportedUser", fields: [reportedUserId], references: [id], onDelete: SetNull)
+  conversation Conversation? @relation(fields: [conversationId], references: [id], onDelete: SetNull)
+  reviewedBy   User?         @relation("ReportReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
 
   @@index([reporterId, conversationId])
   @@index([reportedUserId])
   @@index([status])
+  @@index([reportType])
   @@index([createdAt])
   @@map("reports")
+}
+
+enum ReportType {
+  user_report
+  bug_report
 }
 
 enum ReportReason {
@@ -942,6 +1011,13 @@ enum ReportReason {
   false_info
   impersonation
   other
+  // bug_report reasons
+  ui_bug
+  crash
+  performance
+  data_loss
+  security_issue
+  feature_request
 }
 
 enum ReportStatus {

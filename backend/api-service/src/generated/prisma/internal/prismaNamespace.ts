@@ -391,6 +391,7 @@ export const ModelName = {
   ConversationAdmin: 'ConversationAdmin',
   ConversationModerator: 'ConversationModerator',
   ConversationBlockEntry: 'ConversationBlockEntry',
+  ConversationSelectedDay: 'ConversationSelectedDay',
   JoinRequest: 'JoinRequest',
   Message: 'Message',
   MessageMedia: 'MessageMedia',
@@ -402,14 +403,18 @@ export const ModelName = {
   UserDeletionSchedule: 'UserDeletionSchedule',
   AdminActivityLog: 'AdminActivityLog',
   AdminSettings: 'AdminSettings',
+  AdminSettingsAllowedFileType: 'AdminSettingsAllowedFileType',
+  AdminSettingsBlockedWord: 'AdminSettingsBlockedWord',
   AttendanceLog: 'AttendanceLog',
   File: 'File',
   Notice: 'Notice',
   NoticeLike: 'NoticeLike',
   NoticeRead: 'NoticeRead',
+  NoticeRecipient: 'NoticeRecipient',
   Notification: 'Notification',
   PermissionRequest: 'PermissionRequest',
   QuickLesson: 'QuickLesson',
+  QuickLessonPart: 'QuickLessonPart',
   QuickMessage: 'QuickMessage',
   Report: 'Report',
   SiteSecurityMessage: 'SiteSecurityMessage'
@@ -428,7 +433,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "block" | "conversation" | "conversationParticipant" | "conversationAdmin" | "conversationModerator" | "conversationBlockEntry" | "joinRequest" | "message" | "messageMedia" | "reminder" | "session" | "unreadCount" | "unreadMessage" | "userApproval" | "userDeletionSchedule" | "adminActivityLog" | "adminSettings" | "attendanceLog" | "file" | "notice" | "noticeLike" | "noticeRead" | "notification" | "permissionRequest" | "quickLesson" | "quickMessage" | "report" | "siteSecurityMessage"
+    modelProps: "user" | "block" | "conversation" | "conversationParticipant" | "conversationAdmin" | "conversationModerator" | "conversationBlockEntry" | "conversationSelectedDay" | "joinRequest" | "message" | "messageMedia" | "reminder" | "session" | "unreadCount" | "unreadMessage" | "userApproval" | "userDeletionSchedule" | "adminActivityLog" | "adminSettings" | "adminSettingsAllowedFileType" | "adminSettingsBlockedWord" | "attendanceLog" | "file" | "notice" | "noticeLike" | "noticeRead" | "noticeRecipient" | "notification" | "permissionRequest" | "quickLesson" | "quickLessonPart" | "quickMessage" | "report" | "siteSecurityMessage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -891,6 +896,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ConversationBlockEntryCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ConversationBlockEntryCountAggregateOutputType> | number
+        }
+      }
+    }
+    ConversationSelectedDay: {
+      payload: Prisma.$ConversationSelectedDayPayload<ExtArgs>
+      fields: Prisma.ConversationSelectedDayFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ConversationSelectedDayFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSelectedDayPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ConversationSelectedDayFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSelectedDayPayload>
+        }
+        findFirst: {
+          args: Prisma.ConversationSelectedDayFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSelectedDayPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ConversationSelectedDayFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSelectedDayPayload>
+        }
+        findMany: {
+          args: Prisma.ConversationSelectedDayFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSelectedDayPayload>[]
+        }
+        create: {
+          args: Prisma.ConversationSelectedDayCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSelectedDayPayload>
+        }
+        createMany: {
+          args: Prisma.ConversationSelectedDayCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ConversationSelectedDayDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSelectedDayPayload>
+        }
+        update: {
+          args: Prisma.ConversationSelectedDayUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSelectedDayPayload>
+        }
+        deleteMany: {
+          args: Prisma.ConversationSelectedDayDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ConversationSelectedDayUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ConversationSelectedDayUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSelectedDayPayload>
+        }
+        aggregate: {
+          args: Prisma.ConversationSelectedDayAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConversationSelectedDay>
+        }
+        groupBy: {
+          args: Prisma.ConversationSelectedDayGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConversationSelectedDayGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ConversationSelectedDayCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConversationSelectedDayCountAggregateOutputType> | number
         }
       }
     }
@@ -1620,6 +1691,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AdminSettingsAllowedFileType: {
+      payload: Prisma.$AdminSettingsAllowedFileTypePayload<ExtArgs>
+      fields: Prisma.AdminSettingsAllowedFileTypeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdminSettingsAllowedFileTypeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsAllowedFileTypePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdminSettingsAllowedFileTypeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsAllowedFileTypePayload>
+        }
+        findFirst: {
+          args: Prisma.AdminSettingsAllowedFileTypeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsAllowedFileTypePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdminSettingsAllowedFileTypeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsAllowedFileTypePayload>
+        }
+        findMany: {
+          args: Prisma.AdminSettingsAllowedFileTypeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsAllowedFileTypePayload>[]
+        }
+        create: {
+          args: Prisma.AdminSettingsAllowedFileTypeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsAllowedFileTypePayload>
+        }
+        createMany: {
+          args: Prisma.AdminSettingsAllowedFileTypeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AdminSettingsAllowedFileTypeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsAllowedFileTypePayload>
+        }
+        update: {
+          args: Prisma.AdminSettingsAllowedFileTypeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsAllowedFileTypePayload>
+        }
+        deleteMany: {
+          args: Prisma.AdminSettingsAllowedFileTypeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdminSettingsAllowedFileTypeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AdminSettingsAllowedFileTypeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsAllowedFileTypePayload>
+        }
+        aggregate: {
+          args: Prisma.AdminSettingsAllowedFileTypeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdminSettingsAllowedFileType>
+        }
+        groupBy: {
+          args: Prisma.AdminSettingsAllowedFileTypeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminSettingsAllowedFileTypeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdminSettingsAllowedFileTypeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminSettingsAllowedFileTypeCountAggregateOutputType> | number
+        }
+      }
+    }
+    AdminSettingsBlockedWord: {
+      payload: Prisma.$AdminSettingsBlockedWordPayload<ExtArgs>
+      fields: Prisma.AdminSettingsBlockedWordFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdminSettingsBlockedWordFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsBlockedWordPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdminSettingsBlockedWordFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsBlockedWordPayload>
+        }
+        findFirst: {
+          args: Prisma.AdminSettingsBlockedWordFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsBlockedWordPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdminSettingsBlockedWordFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsBlockedWordPayload>
+        }
+        findMany: {
+          args: Prisma.AdminSettingsBlockedWordFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsBlockedWordPayload>[]
+        }
+        create: {
+          args: Prisma.AdminSettingsBlockedWordCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsBlockedWordPayload>
+        }
+        createMany: {
+          args: Prisma.AdminSettingsBlockedWordCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AdminSettingsBlockedWordDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsBlockedWordPayload>
+        }
+        update: {
+          args: Prisma.AdminSettingsBlockedWordUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsBlockedWordPayload>
+        }
+        deleteMany: {
+          args: Prisma.AdminSettingsBlockedWordDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdminSettingsBlockedWordUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AdminSettingsBlockedWordUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSettingsBlockedWordPayload>
+        }
+        aggregate: {
+          args: Prisma.AdminSettingsBlockedWordAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdminSettingsBlockedWord>
+        }
+        groupBy: {
+          args: Prisma.AdminSettingsBlockedWordGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminSettingsBlockedWordGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdminSettingsBlockedWordCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminSettingsBlockedWordCountAggregateOutputType> | number
+        }
+      }
+    }
     AttendanceLog: {
       payload: Prisma.$AttendanceLogPayload<ExtArgs>
       fields: Prisma.AttendanceLogFieldRefs
@@ -1950,6 +2153,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    NoticeRecipient: {
+      payload: Prisma.$NoticeRecipientPayload<ExtArgs>
+      fields: Prisma.NoticeRecipientFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NoticeRecipientFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoticeRecipientPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NoticeRecipientFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoticeRecipientPayload>
+        }
+        findFirst: {
+          args: Prisma.NoticeRecipientFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoticeRecipientPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NoticeRecipientFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoticeRecipientPayload>
+        }
+        findMany: {
+          args: Prisma.NoticeRecipientFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoticeRecipientPayload>[]
+        }
+        create: {
+          args: Prisma.NoticeRecipientCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoticeRecipientPayload>
+        }
+        createMany: {
+          args: Prisma.NoticeRecipientCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.NoticeRecipientDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoticeRecipientPayload>
+        }
+        update: {
+          args: Prisma.NoticeRecipientUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoticeRecipientPayload>
+        }
+        deleteMany: {
+          args: Prisma.NoticeRecipientDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NoticeRecipientUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.NoticeRecipientUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoticeRecipientPayload>
+        }
+        aggregate: {
+          args: Prisma.NoticeRecipientAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNoticeRecipient>
+        }
+        groupBy: {
+          args: Prisma.NoticeRecipientGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NoticeRecipientGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NoticeRecipientCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NoticeRecipientCountAggregateOutputType> | number
+        }
+      }
+    }
     Notification: {
       payload: Prisma.$NotificationPayload<ExtArgs>
       fields: Prisma.NotificationFieldRefs
@@ -2145,6 +2414,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.QuickLessonCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.QuickLessonCountAggregateOutputType> | number
+        }
+      }
+    }
+    QuickLessonPart: {
+      payload: Prisma.$QuickLessonPartPayload<ExtArgs>
+      fields: Prisma.QuickLessonPartFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.QuickLessonPartFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuickLessonPartPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.QuickLessonPartFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuickLessonPartPayload>
+        }
+        findFirst: {
+          args: Prisma.QuickLessonPartFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuickLessonPartPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.QuickLessonPartFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuickLessonPartPayload>
+        }
+        findMany: {
+          args: Prisma.QuickLessonPartFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuickLessonPartPayload>[]
+        }
+        create: {
+          args: Prisma.QuickLessonPartCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuickLessonPartPayload>
+        }
+        createMany: {
+          args: Prisma.QuickLessonPartCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.QuickLessonPartDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuickLessonPartPayload>
+        }
+        update: {
+          args: Prisma.QuickLessonPartUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuickLessonPartPayload>
+        }
+        deleteMany: {
+          args: Prisma.QuickLessonPartDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.QuickLessonPartUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.QuickLessonPartUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuickLessonPartPayload>
+        }
+        aggregate: {
+          args: Prisma.QuickLessonPartAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateQuickLessonPart>
+        }
+        groupBy: {
+          args: Prisma.QuickLessonPartGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QuickLessonPartGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.QuickLessonPartCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QuickLessonPartCountAggregateOutputType> | number
         }
       }
     }
@@ -2509,6 +2844,15 @@ export const ConversationBlockEntryScalarFieldEnum = {
 export type ConversationBlockEntryScalarFieldEnum = (typeof ConversationBlockEntryScalarFieldEnum)[keyof typeof ConversationBlockEntryScalarFieldEnum]
 
 
+export const ConversationSelectedDayScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  day: 'day'
+} as const
+
+export type ConversationSelectedDayScalarFieldEnum = (typeof ConversationSelectedDayScalarFieldEnum)[keyof typeof ConversationSelectedDayScalarFieldEnum]
+
+
 export const JoinRequestScalarFieldEnum = {
   id: 'id',
   classId: 'classId',
@@ -2714,6 +3058,24 @@ export const AdminSettingsScalarFieldEnum = {
 export type AdminSettingsScalarFieldEnum = (typeof AdminSettingsScalarFieldEnum)[keyof typeof AdminSettingsScalarFieldEnum]
 
 
+export const AdminSettingsAllowedFileTypeScalarFieldEnum = {
+  id: 'id',
+  adminSettingsId: 'adminSettingsId',
+  fileType: 'fileType'
+} as const
+
+export type AdminSettingsAllowedFileTypeScalarFieldEnum = (typeof AdminSettingsAllowedFileTypeScalarFieldEnum)[keyof typeof AdminSettingsAllowedFileTypeScalarFieldEnum]
+
+
+export const AdminSettingsBlockedWordScalarFieldEnum = {
+  id: 'id',
+  adminSettingsId: 'adminSettingsId',
+  word: 'word'
+} as const
+
+export type AdminSettingsBlockedWordScalarFieldEnum = (typeof AdminSettingsBlockedWordScalarFieldEnum)[keyof typeof AdminSettingsBlockedWordScalarFieldEnum]
+
+
 export const AttendanceLogScalarFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
@@ -2784,6 +3146,15 @@ export const NoticeReadScalarFieldEnum = {
 export type NoticeReadScalarFieldEnum = (typeof NoticeReadScalarFieldEnum)[keyof typeof NoticeReadScalarFieldEnum]
 
 
+export const NoticeRecipientScalarFieldEnum = {
+  id: 'id',
+  noticeId: 'noticeId',
+  userId: 'userId'
+} as const
+
+export type NoticeRecipientScalarFieldEnum = (typeof NoticeRecipientScalarFieldEnum)[keyof typeof NoticeRecipientScalarFieldEnum]
+
+
 export const NotificationScalarFieldEnum = {
   id: 'id',
   recipientId: 'recipientId',
@@ -2830,6 +3201,16 @@ export const QuickLessonScalarFieldEnum = {
 export type QuickLessonScalarFieldEnum = (typeof QuickLessonScalarFieldEnum)[keyof typeof QuickLessonScalarFieldEnum]
 
 
+export const QuickLessonPartScalarFieldEnum = {
+  id: 'id',
+  quickLessonId: 'quickLessonId',
+  content: 'content',
+  order: 'order'
+} as const
+
+export type QuickLessonPartScalarFieldEnum = (typeof QuickLessonPartScalarFieldEnum)[keyof typeof QuickLessonPartScalarFieldEnum]
+
+
 export const QuickMessageScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -2847,6 +3228,7 @@ export const ReportScalarFieldEnum = {
   reporterId: 'reporterId',
   reportedUserId: 'reportedUserId',
   conversationId: 'conversationId',
+  reportType: 'reportType',
   reason: 'reason',
   details: 'details',
   status: 'status',
@@ -2995,6 +3377,14 @@ export const ConversationBlockEntryOrderByRelevanceFieldEnum = {
 export type ConversationBlockEntryOrderByRelevanceFieldEnum = (typeof ConversationBlockEntryOrderByRelevanceFieldEnum)[keyof typeof ConversationBlockEntryOrderByRelevanceFieldEnum]
 
 
+export const ConversationSelectedDayOrderByRelevanceFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId'
+} as const
+
+export type ConversationSelectedDayOrderByRelevanceFieldEnum = (typeof ConversationSelectedDayOrderByRelevanceFieldEnum)[keyof typeof ConversationSelectedDayOrderByRelevanceFieldEnum]
+
+
 export const JoinRequestOrderByRelevanceFieldEnum = {
   id: 'id',
   classId: 'classId',
@@ -3112,6 +3502,24 @@ export const AdminSettingsOrderByRelevanceFieldEnum = {
 export type AdminSettingsOrderByRelevanceFieldEnum = (typeof AdminSettingsOrderByRelevanceFieldEnum)[keyof typeof AdminSettingsOrderByRelevanceFieldEnum]
 
 
+export const AdminSettingsAllowedFileTypeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  adminSettingsId: 'adminSettingsId',
+  fileType: 'fileType'
+} as const
+
+export type AdminSettingsAllowedFileTypeOrderByRelevanceFieldEnum = (typeof AdminSettingsAllowedFileTypeOrderByRelevanceFieldEnum)[keyof typeof AdminSettingsAllowedFileTypeOrderByRelevanceFieldEnum]
+
+
+export const AdminSettingsBlockedWordOrderByRelevanceFieldEnum = {
+  id: 'id',
+  adminSettingsId: 'adminSettingsId',
+  word: 'word'
+} as const
+
+export type AdminSettingsBlockedWordOrderByRelevanceFieldEnum = (typeof AdminSettingsBlockedWordOrderByRelevanceFieldEnum)[keyof typeof AdminSettingsBlockedWordOrderByRelevanceFieldEnum]
+
+
 export const AttendanceLogOrderByRelevanceFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
@@ -3166,6 +3574,15 @@ export const NoticeReadOrderByRelevanceFieldEnum = {
 export type NoticeReadOrderByRelevanceFieldEnum = (typeof NoticeReadOrderByRelevanceFieldEnum)[keyof typeof NoticeReadOrderByRelevanceFieldEnum]
 
 
+export const NoticeRecipientOrderByRelevanceFieldEnum = {
+  id: 'id',
+  noticeId: 'noticeId',
+  userId: 'userId'
+} as const
+
+export type NoticeRecipientOrderByRelevanceFieldEnum = (typeof NoticeRecipientOrderByRelevanceFieldEnum)[keyof typeof NoticeRecipientOrderByRelevanceFieldEnum]
+
+
 export const NotificationOrderByRelevanceFieldEnum = {
   id: 'id',
   recipientId: 'recipientId',
@@ -3197,6 +3614,15 @@ export const QuickLessonOrderByRelevanceFieldEnum = {
 } as const
 
 export type QuickLessonOrderByRelevanceFieldEnum = (typeof QuickLessonOrderByRelevanceFieldEnum)[keyof typeof QuickLessonOrderByRelevanceFieldEnum]
+
+
+export const QuickLessonPartOrderByRelevanceFieldEnum = {
+  id: 'id',
+  quickLessonId: 'quickLessonId',
+  content: 'content'
+} as const
+
+export type QuickLessonPartOrderByRelevanceFieldEnum = (typeof QuickLessonPartOrderByRelevanceFieldEnum)[keyof typeof QuickLessonPartOrderByRelevanceFieldEnum]
 
 
 export const QuickMessageOrderByRelevanceFieldEnum = {
@@ -3455,6 +3881,13 @@ export type EnumPermissionReqStatusFieldRefInput<$PrismaModel> = FieldRefInputTy
 
 
 /**
+ * Reference to a field of type 'ReportType'
+ */
+export type EnumReportTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReportType'>
+    
+
+
+/**
  * Reference to a field of type 'ReportReason'
  */
 export type EnumReportReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReportReason'>
@@ -3583,6 +4016,7 @@ export type GlobalOmitConfig = {
   conversationAdmin?: Prisma.ConversationAdminOmit
   conversationModerator?: Prisma.ConversationModeratorOmit
   conversationBlockEntry?: Prisma.ConversationBlockEntryOmit
+  conversationSelectedDay?: Prisma.ConversationSelectedDayOmit
   joinRequest?: Prisma.JoinRequestOmit
   message?: Prisma.MessageOmit
   messageMedia?: Prisma.MessageMediaOmit
@@ -3594,14 +4028,18 @@ export type GlobalOmitConfig = {
   userDeletionSchedule?: Prisma.UserDeletionScheduleOmit
   adminActivityLog?: Prisma.AdminActivityLogOmit
   adminSettings?: Prisma.AdminSettingsOmit
+  adminSettingsAllowedFileType?: Prisma.AdminSettingsAllowedFileTypeOmit
+  adminSettingsBlockedWord?: Prisma.AdminSettingsBlockedWordOmit
   attendanceLog?: Prisma.AttendanceLogOmit
   file?: Prisma.FileOmit
   notice?: Prisma.NoticeOmit
   noticeLike?: Prisma.NoticeLikeOmit
   noticeRead?: Prisma.NoticeReadOmit
+  noticeRecipient?: Prisma.NoticeRecipientOmit
   notification?: Prisma.NotificationOmit
   permissionRequest?: Prisma.PermissionRequestOmit
   quickLesson?: Prisma.QuickLessonOmit
+  quickLessonPart?: Prisma.QuickLessonPartOmit
   quickMessage?: Prisma.QuickMessageOmit
   report?: Prisma.ReportOmit
   siteSecurityMessage?: Prisma.SiteSecurityMessageOmit

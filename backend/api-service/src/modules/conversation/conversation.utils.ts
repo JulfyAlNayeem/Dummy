@@ -97,7 +97,7 @@ export function formatConversationList(conversation: any, userId: string) {
   const participants = (conversation.participants ?? []).map(flattenParticipant);
 
   // Compute unread count for this user
-  const unreadEntry = (conversation.unreadEntries ?? []).find(
+  const unreadEntry = (conversation.unreadMessages ?? []).find(
     (e: any) => e.userId === userId
   );
   const unreadCount = unreadEntry?.count ?? 0;

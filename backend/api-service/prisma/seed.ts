@@ -577,43 +577,9 @@ const createMessages = async (users: any[], conversations: any[]) => {
 };
 
 // --- Create friendships ---
-const createFriendships = async (users: any[]) => {
-  console.log("🤝 Creating friendships...");
-  const students = users.filter((u) => u.role === "user");
-  const teachers = users.filter((u) => u.role === "teacher");
-
-  // Students befriending each other
-  for (let i = 0; i < students.length - 1; i++) {
-    try {
-      await prisma.friendship.upsert({
-        // use `any` for composite unique where to avoid generated-type mismatches
-        where: ({ requesterId_recipientId: { requesterId: students[i].id, recipientId: students[i + 1].id } } as any),
-        update: { status: "accepted" },
-        create: ({
-          requesterId: students[i].id,
-          recipientId: students[i + 1].id,
-          status: "accepted",
-        } as any),
-      });
-    } catch (e) {}
-  }
-
-  // Teachers befriending each other
-  for (let i = 0; i < teachers.length - 1; i++) {
-    try {
-      await prisma.friendship.upsert({
-        where: ({ requesterId_recipientId: { requesterId: teachers[i].id, recipientId: teachers[i + 1].id } } as any),
-        update: { status: "accepted" },
-        create: ({
-          requesterId: teachers[i].id,
-          recipientId: teachers[i + 1].id,
-          status: "accepted",
-        } as any),
-      });
-    } catch (e) {}
-  }
-
-  console.log("✅ Created friendships");
+const createFriendships = async (_users: any[]) => {
+  // Friendship model lives in social-service, not api-service — skip
+  console.log("⏭️  Skipping friendships (handled by social-service)");
 };
 
 // --- Create join requests ---
@@ -708,65 +674,15 @@ const createAttendanceLogs = async (users: any[], conversations: any[], sessions
 };
 
 // --- Create assignment submissions ---
-const createAssignmentSubmissions = async (users: any[], conversations: any[]) => {
-  console.log("📝 Creating assignment submissions...");
-  const students = users.filter((u) => u.role === "user");
-  const teachers = users.filter((u) => u.role === "teacher");
-
-  for (let i = 0; i < Math.min(3, SAMPLE_ASSIGNMENTS.length); i++) {
-    for (const student of students.slice(0, 2)) {
-      try {
-        const assignment = SAMPLE_ASSIGNMENTS[i];
-        await prisma.assignmentSubmission.create({
-          data: {
-            classId: conversations[2]?.id || conversations[0].id,
-            assignmentTitle: assignment.assignmentTitle,
-            assignmentDescription: assignment.assignmentDescription,
-            userId: student.id,
-            status: assignment.status as any,
-            mark: assignment.mark || undefined,
-            feedback: assignment.feedback || undefined,
-            markedById: teachers[0]?.id,
-            submittedAt: new Date(),
-          },
-        });
-      } catch (e) {}
-    }
-  }
-
-  console.log("✅ Created assignment submissions");
+const createAssignmentSubmissions = async (_users: any[], _conversations: any[]) => {
+  // AssignmentSubmission model lives in form-service, not api-service — skip
+  console.log("⏭️  Skipping assignment submissions (handled by form-service)");
 };
 
 // --- Create alertness sessions ---
-const createAlertnessSessions = async (users: any[], conversations: any[]) => {
-  console.log("🚨 Creating alertness sessions...");
-  const students = users.filter((u) => u.role === "user");
-  const classrooms = conversations.filter((c) => c.groupType === "classroom");
-
-  if (classrooms.length > 0) {
-    for (const student of students.slice(0, 2)) {
-      try {
-        const session = await prisma.alertnessSession.create({
-          data: {
-            classId: classrooms[0].id,
-            startedById: users.find((u) => u.role === "teacher")?.id || users[0].id,
-            duration: 30000,
-          } as any,
-        });
-
-        // Create responses (AlertnessResponse uses `alertnessSessionId`)
-        await prisma.alertnessResponse.create({
-          data: {
-            alertnessSessionId: session.id,
-            userId: student.id,
-            respondedAt: new Date(),
-          } as any,
-        });
-      } catch (e) {}
-    }
-  }
-
-  console.log("✅ Created alertness sessions");
+const createAlertnessSessions = async (_users: any[], _conversations: any[]) => {
+  // AlertnessSession/Response models live in alarm-service, not api-service — skip
+  console.log("⏭️  Skipping alertness sessions (handled by alarm-service)");
 };
 
 // --- Create quick lessons ---
@@ -787,7 +703,7 @@ const createQuickLessons = async (users: any[], conversations: any[]) => {
               order: idx + 1,
             })),
           },
-        } as any,
+        },
       });
     } catch (e) {}
   }

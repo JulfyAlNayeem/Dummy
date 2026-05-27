@@ -453,6 +453,8 @@ export type AdminSettingsWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"AdminSettings"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AdminSettings"> | Date | string
   updatedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeListRelationFilter
+  blockedWords?: Prisma.AdminSettingsBlockedWordListRelationFilter
 }
 
 export type AdminSettingsOrderByWithRelationInput = {
@@ -488,6 +490,8 @@ export type AdminSettingsOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   updatedBy?: Prisma.UserOrderByWithRelationInput
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeOrderByRelationAggregateInput
+  blockedWords?: Prisma.AdminSettingsBlockedWordOrderByRelationAggregateInput
   _relevance?: Prisma.AdminSettingsOrderByRelevanceInput
 }
 
@@ -527,6 +531,8 @@ export type AdminSettingsWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"AdminSettings"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AdminSettings"> | Date | string
   updatedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeListRelationFilter
+  blockedWords?: Prisma.AdminSettingsBlockedWordListRelationFilter
 }, "id">
 
 export type AdminSettingsOrderByWithAggregationInput = {
@@ -637,6 +643,8 @@ export type AdminSettingsCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   updatedBy: Prisma.UserCreateNestedOneWithoutAdminSettingsInput
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeCreateNestedManyWithoutAdminSettingsInput
+  blockedWords?: Prisma.AdminSettingsBlockedWordCreateNestedManyWithoutAdminSettingsInput
 }
 
 export type AdminSettingsUncheckedCreateInput = {
@@ -671,6 +679,8 @@ export type AdminSettingsUncheckedCreateInput = {
   updatedById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeUncheckedCreateNestedManyWithoutAdminSettingsInput
+  blockedWords?: Prisma.AdminSettingsBlockedWordUncheckedCreateNestedManyWithoutAdminSettingsInput
 }
 
 export type AdminSettingsUpdateInput = {
@@ -705,6 +715,8 @@ export type AdminSettingsUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.UserUpdateOneRequiredWithoutAdminSettingsNestedInput
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeUpdateManyWithoutAdminSettingsNestedInput
+  blockedWords?: Prisma.AdminSettingsBlockedWordUpdateManyWithoutAdminSettingsNestedInput
 }
 
 export type AdminSettingsUncheckedUpdateInput = {
@@ -739,6 +751,8 @@ export type AdminSettingsUncheckedUpdateInput = {
   updatedById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeUncheckedUpdateManyWithoutAdminSettingsNestedInput
+  blockedWords?: Prisma.AdminSettingsBlockedWordUncheckedUpdateManyWithoutAdminSettingsNestedInput
 }
 
 export type AdminSettingsCreateManyInput = {
@@ -982,6 +996,11 @@ export type AdminSettingsSumOrderByAggregateInput = {
   rlGroupCreationPerDay?: Prisma.SortOrder
 }
 
+export type AdminSettingsScalarRelationFilter = {
+  is?: Prisma.AdminSettingsWhereInput
+  isNot?: Prisma.AdminSettingsWhereInput
+}
+
 export type AdminSettingsCreateNestedManyWithoutUpdatedByInput = {
   create?: Prisma.XOR<Prisma.AdminSettingsCreateWithoutUpdatedByInput, Prisma.AdminSettingsUncheckedCreateWithoutUpdatedByInput> | Prisma.AdminSettingsCreateWithoutUpdatedByInput[] | Prisma.AdminSettingsUncheckedCreateWithoutUpdatedByInput[]
   connectOrCreate?: Prisma.AdminSettingsCreateOrConnectWithoutUpdatedByInput | Prisma.AdminSettingsCreateOrConnectWithoutUpdatedByInput[]
@@ -1024,6 +1043,34 @@ export type AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput = {
   deleteMany?: Prisma.AdminSettingsScalarWhereInput | Prisma.AdminSettingsScalarWhereInput[]
 }
 
+export type AdminSettingsCreateNestedOneWithoutAllowedFileTypesInput = {
+  create?: Prisma.XOR<Prisma.AdminSettingsCreateWithoutAllowedFileTypesInput, Prisma.AdminSettingsUncheckedCreateWithoutAllowedFileTypesInput>
+  connectOrCreate?: Prisma.AdminSettingsCreateOrConnectWithoutAllowedFileTypesInput
+  connect?: Prisma.AdminSettingsWhereUniqueInput
+}
+
+export type AdminSettingsUpdateOneRequiredWithoutAllowedFileTypesNestedInput = {
+  create?: Prisma.XOR<Prisma.AdminSettingsCreateWithoutAllowedFileTypesInput, Prisma.AdminSettingsUncheckedCreateWithoutAllowedFileTypesInput>
+  connectOrCreate?: Prisma.AdminSettingsCreateOrConnectWithoutAllowedFileTypesInput
+  upsert?: Prisma.AdminSettingsUpsertWithoutAllowedFileTypesInput
+  connect?: Prisma.AdminSettingsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AdminSettingsUpdateToOneWithWhereWithoutAllowedFileTypesInput, Prisma.AdminSettingsUpdateWithoutAllowedFileTypesInput>, Prisma.AdminSettingsUncheckedUpdateWithoutAllowedFileTypesInput>
+}
+
+export type AdminSettingsCreateNestedOneWithoutBlockedWordsInput = {
+  create?: Prisma.XOR<Prisma.AdminSettingsCreateWithoutBlockedWordsInput, Prisma.AdminSettingsUncheckedCreateWithoutBlockedWordsInput>
+  connectOrCreate?: Prisma.AdminSettingsCreateOrConnectWithoutBlockedWordsInput
+  connect?: Prisma.AdminSettingsWhereUniqueInput
+}
+
+export type AdminSettingsUpdateOneRequiredWithoutBlockedWordsNestedInput = {
+  create?: Prisma.XOR<Prisma.AdminSettingsCreateWithoutBlockedWordsInput, Prisma.AdminSettingsUncheckedCreateWithoutBlockedWordsInput>
+  connectOrCreate?: Prisma.AdminSettingsCreateOrConnectWithoutBlockedWordsInput
+  upsert?: Prisma.AdminSettingsUpsertWithoutBlockedWordsInput
+  connect?: Prisma.AdminSettingsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AdminSettingsUpdateToOneWithWhereWithoutBlockedWordsInput, Prisma.AdminSettingsUpdateWithoutBlockedWordsInput>, Prisma.AdminSettingsUncheckedUpdateWithoutBlockedWordsInput>
+}
+
 export type AdminSettingsCreateWithoutUpdatedByInput = {
   id?: string
   featureVoiceMessages?: boolean
@@ -1055,6 +1102,8 @@ export type AdminSettingsCreateWithoutUpdatedByInput = {
   notifSystemMaintenanceMode?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeCreateNestedManyWithoutAdminSettingsInput
+  blockedWords?: Prisma.AdminSettingsBlockedWordCreateNestedManyWithoutAdminSettingsInput
 }
 
 export type AdminSettingsUncheckedCreateWithoutUpdatedByInput = {
@@ -1088,6 +1137,8 @@ export type AdminSettingsUncheckedCreateWithoutUpdatedByInput = {
   notifSystemMaintenanceMode?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeUncheckedCreateNestedManyWithoutAdminSettingsInput
+  blockedWords?: Prisma.AdminSettingsBlockedWordUncheckedCreateNestedManyWithoutAdminSettingsInput
 }
 
 export type AdminSettingsCreateOrConnectWithoutUpdatedByInput = {
@@ -1151,6 +1202,318 @@ export type AdminSettingsScalarWhereInput = {
   updatedById?: Prisma.StringFilter<"AdminSettings"> | string
   createdAt?: Prisma.DateTimeFilter<"AdminSettings"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AdminSettings"> | Date | string
+}
+
+export type AdminSettingsCreateWithoutAllowedFileTypesInput = {
+  id?: string
+  featureVoiceMessages?: boolean
+  featureSmsNotif?: boolean
+  featureImageSharing?: boolean
+  featureVideoSharing?: boolean
+  featureFileSharing?: boolean
+  featureVoiceCalling?: boolean
+  featureVideoCalling?: boolean
+  featureGroupCreation?: boolean
+  featureUserRegistration?: boolean
+  secRequireAdminApproval?: boolean
+  secAutoApproveAfterHours?: number
+  secMaxFileSizeMb?: number
+  secMessageEncryption?: boolean
+  secTwoFactorRequired?: boolean
+  secSessionTimeoutMinutes?: number
+  modAutoModerateMessages?: boolean
+  modMaxMessageLength?: number
+  modSpamDetection?: boolean
+  modImageContentFilter?: boolean
+  rlMessagesPerMinute?: number
+  rlFilesPerHour?: number
+  rlFriendRequestsPerDay?: number
+  rlGroupCreationPerDay?: number
+  notifAdminEmailAlerts?: boolean
+  notifNewUserNotifications?: boolean
+  notifSuspiciousActivityAlerts?: boolean
+  notifSystemMaintenanceMode?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  updatedBy: Prisma.UserCreateNestedOneWithoutAdminSettingsInput
+  blockedWords?: Prisma.AdminSettingsBlockedWordCreateNestedManyWithoutAdminSettingsInput
+}
+
+export type AdminSettingsUncheckedCreateWithoutAllowedFileTypesInput = {
+  id?: string
+  featureVoiceMessages?: boolean
+  featureSmsNotif?: boolean
+  featureImageSharing?: boolean
+  featureVideoSharing?: boolean
+  featureFileSharing?: boolean
+  featureVoiceCalling?: boolean
+  featureVideoCalling?: boolean
+  featureGroupCreation?: boolean
+  featureUserRegistration?: boolean
+  secRequireAdminApproval?: boolean
+  secAutoApproveAfterHours?: number
+  secMaxFileSizeMb?: number
+  secMessageEncryption?: boolean
+  secTwoFactorRequired?: boolean
+  secSessionTimeoutMinutes?: number
+  modAutoModerateMessages?: boolean
+  modMaxMessageLength?: number
+  modSpamDetection?: boolean
+  modImageContentFilter?: boolean
+  rlMessagesPerMinute?: number
+  rlFilesPerHour?: number
+  rlFriendRequestsPerDay?: number
+  rlGroupCreationPerDay?: number
+  notifAdminEmailAlerts?: boolean
+  notifNewUserNotifications?: boolean
+  notifSuspiciousActivityAlerts?: boolean
+  notifSystemMaintenanceMode?: boolean
+  updatedById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  blockedWords?: Prisma.AdminSettingsBlockedWordUncheckedCreateNestedManyWithoutAdminSettingsInput
+}
+
+export type AdminSettingsCreateOrConnectWithoutAllowedFileTypesInput = {
+  where: Prisma.AdminSettingsWhereUniqueInput
+  create: Prisma.XOR<Prisma.AdminSettingsCreateWithoutAllowedFileTypesInput, Prisma.AdminSettingsUncheckedCreateWithoutAllowedFileTypesInput>
+}
+
+export type AdminSettingsUpsertWithoutAllowedFileTypesInput = {
+  update: Prisma.XOR<Prisma.AdminSettingsUpdateWithoutAllowedFileTypesInput, Prisma.AdminSettingsUncheckedUpdateWithoutAllowedFileTypesInput>
+  create: Prisma.XOR<Prisma.AdminSettingsCreateWithoutAllowedFileTypesInput, Prisma.AdminSettingsUncheckedCreateWithoutAllowedFileTypesInput>
+  where?: Prisma.AdminSettingsWhereInput
+}
+
+export type AdminSettingsUpdateToOneWithWhereWithoutAllowedFileTypesInput = {
+  where?: Prisma.AdminSettingsWhereInput
+  data: Prisma.XOR<Prisma.AdminSettingsUpdateWithoutAllowedFileTypesInput, Prisma.AdminSettingsUncheckedUpdateWithoutAllowedFileTypesInput>
+}
+
+export type AdminSettingsUpdateWithoutAllowedFileTypesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  featureVoiceMessages?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureSmsNotif?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureImageSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVideoSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureFileSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVoiceCalling?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVideoCalling?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureGroupCreation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureUserRegistration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secRequireAdminApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secAutoApproveAfterHours?: Prisma.IntFieldUpdateOperationsInput | number
+  secMaxFileSizeMb?: Prisma.IntFieldUpdateOperationsInput | number
+  secMessageEncryption?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secTwoFactorRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secSessionTimeoutMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  modAutoModerateMessages?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  modMaxMessageLength?: Prisma.IntFieldUpdateOperationsInput | number
+  modSpamDetection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  modImageContentFilter?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rlMessagesPerMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  rlFilesPerHour?: Prisma.IntFieldUpdateOperationsInput | number
+  rlFriendRequestsPerDay?: Prisma.IntFieldUpdateOperationsInput | number
+  rlGroupCreationPerDay?: Prisma.IntFieldUpdateOperationsInput | number
+  notifAdminEmailAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifNewUserNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifSuspiciousActivityAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifSystemMaintenanceMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.UserUpdateOneRequiredWithoutAdminSettingsNestedInput
+  blockedWords?: Prisma.AdminSettingsBlockedWordUpdateManyWithoutAdminSettingsNestedInput
+}
+
+export type AdminSettingsUncheckedUpdateWithoutAllowedFileTypesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  featureVoiceMessages?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureSmsNotif?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureImageSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVideoSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureFileSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVoiceCalling?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVideoCalling?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureGroupCreation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureUserRegistration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secRequireAdminApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secAutoApproveAfterHours?: Prisma.IntFieldUpdateOperationsInput | number
+  secMaxFileSizeMb?: Prisma.IntFieldUpdateOperationsInput | number
+  secMessageEncryption?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secTwoFactorRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secSessionTimeoutMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  modAutoModerateMessages?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  modMaxMessageLength?: Prisma.IntFieldUpdateOperationsInput | number
+  modSpamDetection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  modImageContentFilter?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rlMessagesPerMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  rlFilesPerHour?: Prisma.IntFieldUpdateOperationsInput | number
+  rlFriendRequestsPerDay?: Prisma.IntFieldUpdateOperationsInput | number
+  rlGroupCreationPerDay?: Prisma.IntFieldUpdateOperationsInput | number
+  notifAdminEmailAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifNewUserNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifSuspiciousActivityAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifSystemMaintenanceMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  blockedWords?: Prisma.AdminSettingsBlockedWordUncheckedUpdateManyWithoutAdminSettingsNestedInput
+}
+
+export type AdminSettingsCreateWithoutBlockedWordsInput = {
+  id?: string
+  featureVoiceMessages?: boolean
+  featureSmsNotif?: boolean
+  featureImageSharing?: boolean
+  featureVideoSharing?: boolean
+  featureFileSharing?: boolean
+  featureVoiceCalling?: boolean
+  featureVideoCalling?: boolean
+  featureGroupCreation?: boolean
+  featureUserRegistration?: boolean
+  secRequireAdminApproval?: boolean
+  secAutoApproveAfterHours?: number
+  secMaxFileSizeMb?: number
+  secMessageEncryption?: boolean
+  secTwoFactorRequired?: boolean
+  secSessionTimeoutMinutes?: number
+  modAutoModerateMessages?: boolean
+  modMaxMessageLength?: number
+  modSpamDetection?: boolean
+  modImageContentFilter?: boolean
+  rlMessagesPerMinute?: number
+  rlFilesPerHour?: number
+  rlFriendRequestsPerDay?: number
+  rlGroupCreationPerDay?: number
+  notifAdminEmailAlerts?: boolean
+  notifNewUserNotifications?: boolean
+  notifSuspiciousActivityAlerts?: boolean
+  notifSystemMaintenanceMode?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  updatedBy: Prisma.UserCreateNestedOneWithoutAdminSettingsInput
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeCreateNestedManyWithoutAdminSettingsInput
+}
+
+export type AdminSettingsUncheckedCreateWithoutBlockedWordsInput = {
+  id?: string
+  featureVoiceMessages?: boolean
+  featureSmsNotif?: boolean
+  featureImageSharing?: boolean
+  featureVideoSharing?: boolean
+  featureFileSharing?: boolean
+  featureVoiceCalling?: boolean
+  featureVideoCalling?: boolean
+  featureGroupCreation?: boolean
+  featureUserRegistration?: boolean
+  secRequireAdminApproval?: boolean
+  secAutoApproveAfterHours?: number
+  secMaxFileSizeMb?: number
+  secMessageEncryption?: boolean
+  secTwoFactorRequired?: boolean
+  secSessionTimeoutMinutes?: number
+  modAutoModerateMessages?: boolean
+  modMaxMessageLength?: number
+  modSpamDetection?: boolean
+  modImageContentFilter?: boolean
+  rlMessagesPerMinute?: number
+  rlFilesPerHour?: number
+  rlFriendRequestsPerDay?: number
+  rlGroupCreationPerDay?: number
+  notifAdminEmailAlerts?: boolean
+  notifNewUserNotifications?: boolean
+  notifSuspiciousActivityAlerts?: boolean
+  notifSystemMaintenanceMode?: boolean
+  updatedById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeUncheckedCreateNestedManyWithoutAdminSettingsInput
+}
+
+export type AdminSettingsCreateOrConnectWithoutBlockedWordsInput = {
+  where: Prisma.AdminSettingsWhereUniqueInput
+  create: Prisma.XOR<Prisma.AdminSettingsCreateWithoutBlockedWordsInput, Prisma.AdminSettingsUncheckedCreateWithoutBlockedWordsInput>
+}
+
+export type AdminSettingsUpsertWithoutBlockedWordsInput = {
+  update: Prisma.XOR<Prisma.AdminSettingsUpdateWithoutBlockedWordsInput, Prisma.AdminSettingsUncheckedUpdateWithoutBlockedWordsInput>
+  create: Prisma.XOR<Prisma.AdminSettingsCreateWithoutBlockedWordsInput, Prisma.AdminSettingsUncheckedCreateWithoutBlockedWordsInput>
+  where?: Prisma.AdminSettingsWhereInput
+}
+
+export type AdminSettingsUpdateToOneWithWhereWithoutBlockedWordsInput = {
+  where?: Prisma.AdminSettingsWhereInput
+  data: Prisma.XOR<Prisma.AdminSettingsUpdateWithoutBlockedWordsInput, Prisma.AdminSettingsUncheckedUpdateWithoutBlockedWordsInput>
+}
+
+export type AdminSettingsUpdateWithoutBlockedWordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  featureVoiceMessages?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureSmsNotif?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureImageSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVideoSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureFileSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVoiceCalling?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVideoCalling?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureGroupCreation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureUserRegistration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secRequireAdminApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secAutoApproveAfterHours?: Prisma.IntFieldUpdateOperationsInput | number
+  secMaxFileSizeMb?: Prisma.IntFieldUpdateOperationsInput | number
+  secMessageEncryption?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secTwoFactorRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secSessionTimeoutMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  modAutoModerateMessages?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  modMaxMessageLength?: Prisma.IntFieldUpdateOperationsInput | number
+  modSpamDetection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  modImageContentFilter?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rlMessagesPerMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  rlFilesPerHour?: Prisma.IntFieldUpdateOperationsInput | number
+  rlFriendRequestsPerDay?: Prisma.IntFieldUpdateOperationsInput | number
+  rlGroupCreationPerDay?: Prisma.IntFieldUpdateOperationsInput | number
+  notifAdminEmailAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifNewUserNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifSuspiciousActivityAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifSystemMaintenanceMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.UserUpdateOneRequiredWithoutAdminSettingsNestedInput
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeUpdateManyWithoutAdminSettingsNestedInput
+}
+
+export type AdminSettingsUncheckedUpdateWithoutBlockedWordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  featureVoiceMessages?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureSmsNotif?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureImageSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVideoSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureFileSharing?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVoiceCalling?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureVideoCalling?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureGroupCreation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featureUserRegistration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secRequireAdminApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secAutoApproveAfterHours?: Prisma.IntFieldUpdateOperationsInput | number
+  secMaxFileSizeMb?: Prisma.IntFieldUpdateOperationsInput | number
+  secMessageEncryption?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secTwoFactorRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  secSessionTimeoutMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  modAutoModerateMessages?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  modMaxMessageLength?: Prisma.IntFieldUpdateOperationsInput | number
+  modSpamDetection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  modImageContentFilter?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rlMessagesPerMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  rlFilesPerHour?: Prisma.IntFieldUpdateOperationsInput | number
+  rlFriendRequestsPerDay?: Prisma.IntFieldUpdateOperationsInput | number
+  rlGroupCreationPerDay?: Prisma.IntFieldUpdateOperationsInput | number
+  notifAdminEmailAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifNewUserNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifSuspiciousActivityAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifSystemMaintenanceMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeUncheckedUpdateManyWithoutAdminSettingsNestedInput
 }
 
 export type AdminSettingsCreateManyUpdatedByInput = {
@@ -1217,6 +1580,8 @@ export type AdminSettingsUpdateWithoutUpdatedByInput = {
   notifSystemMaintenanceMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeUpdateManyWithoutAdminSettingsNestedInput
+  blockedWords?: Prisma.AdminSettingsBlockedWordUpdateManyWithoutAdminSettingsNestedInput
 }
 
 export type AdminSettingsUncheckedUpdateWithoutUpdatedByInput = {
@@ -1250,6 +1615,8 @@ export type AdminSettingsUncheckedUpdateWithoutUpdatedByInput = {
   notifSystemMaintenanceMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  allowedFileTypes?: Prisma.AdminSettingsAllowedFileTypeUncheckedUpdateManyWithoutAdminSettingsNestedInput
+  blockedWords?: Prisma.AdminSettingsBlockedWordUncheckedUpdateManyWithoutAdminSettingsNestedInput
 }
 
 export type AdminSettingsUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1286,6 +1653,44 @@ export type AdminSettingsUncheckedUpdateManyWithoutUpdatedByInput = {
 }
 
 
+/**
+ * Count Type AdminSettingsCountOutputType
+ */
+
+export type AdminSettingsCountOutputType = {
+  allowedFileTypes: number
+  blockedWords: number
+}
+
+export type AdminSettingsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  allowedFileTypes?: boolean | AdminSettingsCountOutputTypeCountAllowedFileTypesArgs
+  blockedWords?: boolean | AdminSettingsCountOutputTypeCountBlockedWordsArgs
+}
+
+/**
+ * AdminSettingsCountOutputType without action
+ */
+export type AdminSettingsCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdminSettingsCountOutputType
+   */
+  select?: Prisma.AdminSettingsCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * AdminSettingsCountOutputType without action
+ */
+export type AdminSettingsCountOutputTypeCountAllowedFileTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AdminSettingsAllowedFileTypeWhereInput
+}
+
+/**
+ * AdminSettingsCountOutputType without action
+ */
+export type AdminSettingsCountOutputTypeCountBlockedWordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AdminSettingsBlockedWordWhereInput
+}
+
 
 export type AdminSettingsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1320,6 +1725,9 @@ export type AdminSettingsSelect<ExtArgs extends runtime.Types.Extensions.Interna
   createdAt?: boolean
   updatedAt?: boolean
   updatedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  allowedFileTypes?: boolean | Prisma.AdminSettings$allowedFileTypesArgs<ExtArgs>
+  blockedWords?: boolean | Prisma.AdminSettings$blockedWordsArgs<ExtArgs>
+  _count?: boolean | Prisma.AdminSettingsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["adminSettings"]>
 
 
@@ -1361,12 +1769,17 @@ export type AdminSettingsSelectScalar = {
 export type AdminSettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "featureVoiceMessages" | "featureSmsNotif" | "featureImageSharing" | "featureVideoSharing" | "featureFileSharing" | "featureVoiceCalling" | "featureVideoCalling" | "featureGroupCreation" | "featureUserRegistration" | "secRequireAdminApproval" | "secAutoApproveAfterHours" | "secMaxFileSizeMb" | "secMessageEncryption" | "secTwoFactorRequired" | "secSessionTimeoutMinutes" | "modAutoModerateMessages" | "modMaxMessageLength" | "modSpamDetection" | "modImageContentFilter" | "rlMessagesPerMinute" | "rlFilesPerHour" | "rlFriendRequestsPerDay" | "rlGroupCreationPerDay" | "notifAdminEmailAlerts" | "notifNewUserNotifications" | "notifSuspiciousActivityAlerts" | "notifSystemMaintenanceMode" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["adminSettings"]>
 export type AdminSettingsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   updatedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  allowedFileTypes?: boolean | Prisma.AdminSettings$allowedFileTypesArgs<ExtArgs>
+  blockedWords?: boolean | Prisma.AdminSettings$blockedWordsArgs<ExtArgs>
+  _count?: boolean | Prisma.AdminSettingsCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $AdminSettingsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AdminSettings"
   objects: {
     updatedBy: Prisma.$UserPayload<ExtArgs>
+    allowedFileTypes: Prisma.$AdminSettingsAllowedFileTypePayload<ExtArgs>[]
+    blockedWords: Prisma.$AdminSettingsBlockedWordPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1741,6 +2154,8 @@ readonly fields: AdminSettingsFieldRefs;
 export interface Prisma__AdminSettingsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   updatedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  allowedFileTypes<T extends Prisma.AdminSettings$allowedFileTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AdminSettings$allowedFileTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminSettingsAllowedFileTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  blockedWords<T extends Prisma.AdminSettings$blockedWordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AdminSettings$blockedWordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminSettingsBlockedWordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2141,6 +2556,54 @@ export type AdminSettingsDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many AdminSettings to delete.
    */
   limit?: number
+}
+
+/**
+ * AdminSettings.allowedFileTypes
+ */
+export type AdminSettings$allowedFileTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdminSettingsAllowedFileType
+   */
+  select?: Prisma.AdminSettingsAllowedFileTypeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdminSettingsAllowedFileType
+   */
+  omit?: Prisma.AdminSettingsAllowedFileTypeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdminSettingsAllowedFileTypeInclude<ExtArgs> | null
+  where?: Prisma.AdminSettingsAllowedFileTypeWhereInput
+  orderBy?: Prisma.AdminSettingsAllowedFileTypeOrderByWithRelationInput | Prisma.AdminSettingsAllowedFileTypeOrderByWithRelationInput[]
+  cursor?: Prisma.AdminSettingsAllowedFileTypeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AdminSettingsAllowedFileTypeScalarFieldEnum | Prisma.AdminSettingsAllowedFileTypeScalarFieldEnum[]
+}
+
+/**
+ * AdminSettings.blockedWords
+ */
+export type AdminSettings$blockedWordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdminSettingsBlockedWord
+   */
+  select?: Prisma.AdminSettingsBlockedWordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdminSettingsBlockedWord
+   */
+  omit?: Prisma.AdminSettingsBlockedWordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdminSettingsBlockedWordInclude<ExtArgs> | null
+  where?: Prisma.AdminSettingsBlockedWordWhereInput
+  orderBy?: Prisma.AdminSettingsBlockedWordOrderByWithRelationInput | Prisma.AdminSettingsBlockedWordOrderByWithRelationInput[]
+  cursor?: Prisma.AdminSettingsBlockedWordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AdminSettingsBlockedWordScalarFieldEnum | Prisma.AdminSettingsBlockedWordScalarFieldEnum[]
 }
 
 /**

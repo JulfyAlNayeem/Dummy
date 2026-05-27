@@ -58,6 +58,7 @@ export const ModelName = {
   ConversationAdmin: 'ConversationAdmin',
   ConversationModerator: 'ConversationModerator',
   ConversationBlockEntry: 'ConversationBlockEntry',
+  ConversationSelectedDay: 'ConversationSelectedDay',
   JoinRequest: 'JoinRequest',
   Message: 'Message',
   MessageMedia: 'MessageMedia',
@@ -69,14 +70,18 @@ export const ModelName = {
   UserDeletionSchedule: 'UserDeletionSchedule',
   AdminActivityLog: 'AdminActivityLog',
   AdminSettings: 'AdminSettings',
+  AdminSettingsAllowedFileType: 'AdminSettingsAllowedFileType',
+  AdminSettingsBlockedWord: 'AdminSettingsBlockedWord',
   AttendanceLog: 'AttendanceLog',
   File: 'File',
   Notice: 'Notice',
   NoticeLike: 'NoticeLike',
   NoticeRead: 'NoticeRead',
+  NoticeRecipient: 'NoticeRecipient',
   Notification: 'Notification',
   PermissionRequest: 'PermissionRequest',
   QuickLesson: 'QuickLesson',
+  QuickLessonPart: 'QuickLessonPart',
   QuickMessage: 'QuickMessage',
   Report: 'Report',
   SiteSecurityMessage: 'SiteSecurityMessage'
@@ -220,6 +225,15 @@ export const ConversationBlockEntryScalarFieldEnum = {
 } as const
 
 export type ConversationBlockEntryScalarFieldEnum = (typeof ConversationBlockEntryScalarFieldEnum)[keyof typeof ConversationBlockEntryScalarFieldEnum]
+
+
+export const ConversationSelectedDayScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  day: 'day'
+} as const
+
+export type ConversationSelectedDayScalarFieldEnum = (typeof ConversationSelectedDayScalarFieldEnum)[keyof typeof ConversationSelectedDayScalarFieldEnum]
 
 
 export const JoinRequestScalarFieldEnum = {
@@ -427,6 +441,24 @@ export const AdminSettingsScalarFieldEnum = {
 export type AdminSettingsScalarFieldEnum = (typeof AdminSettingsScalarFieldEnum)[keyof typeof AdminSettingsScalarFieldEnum]
 
 
+export const AdminSettingsAllowedFileTypeScalarFieldEnum = {
+  id: 'id',
+  adminSettingsId: 'adminSettingsId',
+  fileType: 'fileType'
+} as const
+
+export type AdminSettingsAllowedFileTypeScalarFieldEnum = (typeof AdminSettingsAllowedFileTypeScalarFieldEnum)[keyof typeof AdminSettingsAllowedFileTypeScalarFieldEnum]
+
+
+export const AdminSettingsBlockedWordScalarFieldEnum = {
+  id: 'id',
+  adminSettingsId: 'adminSettingsId',
+  word: 'word'
+} as const
+
+export type AdminSettingsBlockedWordScalarFieldEnum = (typeof AdminSettingsBlockedWordScalarFieldEnum)[keyof typeof AdminSettingsBlockedWordScalarFieldEnum]
+
+
 export const AttendanceLogScalarFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
@@ -497,6 +529,15 @@ export const NoticeReadScalarFieldEnum = {
 export type NoticeReadScalarFieldEnum = (typeof NoticeReadScalarFieldEnum)[keyof typeof NoticeReadScalarFieldEnum]
 
 
+export const NoticeRecipientScalarFieldEnum = {
+  id: 'id',
+  noticeId: 'noticeId',
+  userId: 'userId'
+} as const
+
+export type NoticeRecipientScalarFieldEnum = (typeof NoticeRecipientScalarFieldEnum)[keyof typeof NoticeRecipientScalarFieldEnum]
+
+
 export const NotificationScalarFieldEnum = {
   id: 'id',
   recipientId: 'recipientId',
@@ -543,6 +584,16 @@ export const QuickLessonScalarFieldEnum = {
 export type QuickLessonScalarFieldEnum = (typeof QuickLessonScalarFieldEnum)[keyof typeof QuickLessonScalarFieldEnum]
 
 
+export const QuickLessonPartScalarFieldEnum = {
+  id: 'id',
+  quickLessonId: 'quickLessonId',
+  content: 'content',
+  order: 'order'
+} as const
+
+export type QuickLessonPartScalarFieldEnum = (typeof QuickLessonPartScalarFieldEnum)[keyof typeof QuickLessonPartScalarFieldEnum]
+
+
 export const QuickMessageScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -560,6 +611,7 @@ export const ReportScalarFieldEnum = {
   reporterId: 'reporterId',
   reportedUserId: 'reportedUserId',
   conversationId: 'conversationId',
+  reportType: 'reportType',
   reason: 'reason',
   details: 'details',
   status: 'status',
@@ -708,6 +760,14 @@ export const ConversationBlockEntryOrderByRelevanceFieldEnum = {
 export type ConversationBlockEntryOrderByRelevanceFieldEnum = (typeof ConversationBlockEntryOrderByRelevanceFieldEnum)[keyof typeof ConversationBlockEntryOrderByRelevanceFieldEnum]
 
 
+export const ConversationSelectedDayOrderByRelevanceFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId'
+} as const
+
+export type ConversationSelectedDayOrderByRelevanceFieldEnum = (typeof ConversationSelectedDayOrderByRelevanceFieldEnum)[keyof typeof ConversationSelectedDayOrderByRelevanceFieldEnum]
+
+
 export const JoinRequestOrderByRelevanceFieldEnum = {
   id: 'id',
   classId: 'classId',
@@ -825,6 +885,24 @@ export const AdminSettingsOrderByRelevanceFieldEnum = {
 export type AdminSettingsOrderByRelevanceFieldEnum = (typeof AdminSettingsOrderByRelevanceFieldEnum)[keyof typeof AdminSettingsOrderByRelevanceFieldEnum]
 
 
+export const AdminSettingsAllowedFileTypeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  adminSettingsId: 'adminSettingsId',
+  fileType: 'fileType'
+} as const
+
+export type AdminSettingsAllowedFileTypeOrderByRelevanceFieldEnum = (typeof AdminSettingsAllowedFileTypeOrderByRelevanceFieldEnum)[keyof typeof AdminSettingsAllowedFileTypeOrderByRelevanceFieldEnum]
+
+
+export const AdminSettingsBlockedWordOrderByRelevanceFieldEnum = {
+  id: 'id',
+  adminSettingsId: 'adminSettingsId',
+  word: 'word'
+} as const
+
+export type AdminSettingsBlockedWordOrderByRelevanceFieldEnum = (typeof AdminSettingsBlockedWordOrderByRelevanceFieldEnum)[keyof typeof AdminSettingsBlockedWordOrderByRelevanceFieldEnum]
+
+
 export const AttendanceLogOrderByRelevanceFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
@@ -879,6 +957,15 @@ export const NoticeReadOrderByRelevanceFieldEnum = {
 export type NoticeReadOrderByRelevanceFieldEnum = (typeof NoticeReadOrderByRelevanceFieldEnum)[keyof typeof NoticeReadOrderByRelevanceFieldEnum]
 
 
+export const NoticeRecipientOrderByRelevanceFieldEnum = {
+  id: 'id',
+  noticeId: 'noticeId',
+  userId: 'userId'
+} as const
+
+export type NoticeRecipientOrderByRelevanceFieldEnum = (typeof NoticeRecipientOrderByRelevanceFieldEnum)[keyof typeof NoticeRecipientOrderByRelevanceFieldEnum]
+
+
 export const NotificationOrderByRelevanceFieldEnum = {
   id: 'id',
   recipientId: 'recipientId',
@@ -910,6 +997,15 @@ export const QuickLessonOrderByRelevanceFieldEnum = {
 } as const
 
 export type QuickLessonOrderByRelevanceFieldEnum = (typeof QuickLessonOrderByRelevanceFieldEnum)[keyof typeof QuickLessonOrderByRelevanceFieldEnum]
+
+
+export const QuickLessonPartOrderByRelevanceFieldEnum = {
+  id: 'id',
+  quickLessonId: 'quickLessonId',
+  content: 'content'
+} as const
+
+export type QuickLessonPartOrderByRelevanceFieldEnum = (typeof QuickLessonPartOrderByRelevanceFieldEnum)[keyof typeof QuickLessonPartOrderByRelevanceFieldEnum]
 
 
 export const QuickMessageOrderByRelevanceFieldEnum = {

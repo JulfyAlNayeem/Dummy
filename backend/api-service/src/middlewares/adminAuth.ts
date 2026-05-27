@@ -49,3 +49,85 @@ export const requireSuperAdmin = async (req: Request, res: Response, next: NextF
     res.status(403).json({ message: 'Access denied' });
   }
 };
+
+/**
+ * Middleware for developer-only routes.
+ * Reads the user from the JWT (same pattern as requireAdmin) since
+ * developers may not have gone through the isLogin middleware first.
+ */
+export const requireDeveloper = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    let token = req.cookies?.access_token;
+
+    if (!token) {
+      const authHeader = req.headers['authorization'];
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.split(' ')[1];
+      }
+    }
+
+    if (!token) {
+      res.status(401).json({ message: 'Access token required' });
+      return;
+    }
+
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!) as { id: string };
+
+    const user = await prisma.user.findUnique({ where: { id: decoded.id } });
+    if (!user) {
+      res.status(401).json({ message: 'User not found' });
+      return;
+    }
+
+    if (user.role !== 'developer') {
+      res.status(403).json({ message: 'Developer access required' });
+      return;
+    }
+
+    (req as any).user = user;
+    next();
+  } catch {
+    res.status(401).json({ message: 'Invalid token' });
+  }
+};
+
+/**
+ * Middleware that allows both admin/superadmin AND developer roles.
+ * Used for shared endpoints like updateReportStatus where both roles
+ * can act but on different report types (enforced in the controller).
+ */
+export const requireAdminOrDeveloper = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    let token = req.cookies?.access_token;
+
+    if (!token) {
+      const authHeader = req.headers['authorization'];
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.split(' ')[1];
+      }
+    }
+
+    if (!token) {
+      res.status(401).json({ message: 'Access token required' });
+      return;
+    }
+
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!) as { id: string };
+
+    const user = await prisma.user.findUnique({ where: { id: decoded.id } });
+    if (!user) {
+      res.status(401).json({ message: 'User not found' });
+      return;
+    }
+
+    if (!['admin', 'superadmin', 'developer'].includes(user.role)) {
+      res.status(403).json({ message: 'Admin or developer access required' });
+      return;
+    }
+
+    (req as any).user = user;
+    next();
+  } catch {
+    res.status(401).json({ message: 'Invalid token' });
+  }
+};

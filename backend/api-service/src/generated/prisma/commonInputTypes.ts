@@ -691,6 +691,13 @@ export type EnumPermissionReqStatusWithAggregatesFilter<$PrismaModel = never> = 
   _max?: Prisma.NestedEnumPermissionReqStatusFilter<$PrismaModel>
 }
 
+export type EnumReportTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReportType | Prisma.EnumReportTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReportType[]
+  notIn?: $Enums.ReportType[]
+  not?: Prisma.NestedEnumReportTypeFilter<$PrismaModel> | $Enums.ReportType
+}
+
 export type EnumReportReasonFilter<$PrismaModel = never> = {
   equals?: $Enums.ReportReason | Prisma.EnumReportReasonFieldRefInput<$PrismaModel>
   in?: $Enums.ReportReason[]
@@ -710,6 +717,16 @@ export type EnumReportActionFilter<$PrismaModel = never> = {
   in?: $Enums.ReportAction[]
   notIn?: $Enums.ReportAction[]
   not?: Prisma.NestedEnumReportActionFilter<$PrismaModel> | $Enums.ReportAction
+}
+
+export type EnumReportTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReportType | Prisma.EnumReportTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReportType[]
+  notIn?: $Enums.ReportType[]
+  not?: Prisma.NestedEnumReportTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReportType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReportTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReportTypeFilter<$PrismaModel>
 }
 
 export type EnumReportReasonWithAggregatesFilter<$PrismaModel = never> = {
@@ -1409,6 +1426,13 @@ export type NestedEnumPermissionReqStatusWithAggregatesFilter<$PrismaModel = nev
   _max?: Prisma.NestedEnumPermissionReqStatusFilter<$PrismaModel>
 }
 
+export type NestedEnumReportTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReportType | Prisma.EnumReportTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReportType[]
+  notIn?: $Enums.ReportType[]
+  not?: Prisma.NestedEnumReportTypeFilter<$PrismaModel> | $Enums.ReportType
+}
+
 export type NestedEnumReportReasonFilter<$PrismaModel = never> = {
   equals?: $Enums.ReportReason | Prisma.EnumReportReasonFieldRefInput<$PrismaModel>
   in?: $Enums.ReportReason[]
@@ -1428,6 +1452,16 @@ export type NestedEnumReportActionFilter<$PrismaModel = never> = {
   in?: $Enums.ReportAction[]
   notIn?: $Enums.ReportAction[]
   not?: Prisma.NestedEnumReportActionFilter<$PrismaModel> | $Enums.ReportAction
+}
+
+export type NestedEnumReportTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReportType | Prisma.EnumReportTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReportType[]
+  notIn?: $Enums.ReportType[]
+  not?: Prisma.NestedEnumReportTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReportType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReportTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReportTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumReportReasonWithAggregatesFilter<$PrismaModel = never> = {

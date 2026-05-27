@@ -61,7 +61,7 @@ export const getAllConversations = async (req: Request, res: Response) => {
       where: { participants: { some: { userId } } },
       include: {
         participants: { include: { user: { select: { id: true, name: true, image: true } } } },
-        unreadEntries: { where: { userId } },
+        unreadMessages: { where: { userId } },
       },
       orderBy: { updatedAt: 'desc' },
       take: 30,
