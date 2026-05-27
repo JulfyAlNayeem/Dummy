@@ -8,6 +8,7 @@ import MessageReactions from '../chat/MessageReactions';
 import ReactionPicker from '../chat/ReactionPicker';
 import { themeSenderMessage, themeReceiverMessage } from '@/lib/themeUtils';
 import { BASE_URL } from '@/utils/baseUrls';
+import { cn } from '@/lib/utils';
 import { useConversation, updateMessageReaction } from '@/redux/slices/conversationSlice';
 import { useUserAuth } from '@/context-reducer/UserAuthContext';
 import ProfileAvatar from '../chat/ProfileAvatar';

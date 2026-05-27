@@ -58,12 +58,17 @@ export const sendMessage = async (req: Request, res: Response): Promise<void> =>
       }
     }
 
-    // Encrypt text if provided
+    // Encrypt text if provided (fall back to storing as-is if Redis unavailable)
     let encryptedText: string | null = null;
     let backendEncrypted = false;
     if (text) {
-      encryptedText = await encryptMessage(text);
-      backendEncrypted = true;
+      try {
+        encryptedText = await encryptMessage(text);
+        backendEncrypted = true;
+      } catch {
+        encryptedText = text;
+        backendEncrypted = false;
+      }
     }
 
     const messageType = files.length > 0 ? (files.length > 1 ? 'mixed' : mimeToMediaType(files[0].mimetype)) : 'text';

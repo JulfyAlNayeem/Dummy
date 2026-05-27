@@ -4,6 +4,7 @@ import VideoMessageCard from "./VideoMessageCard";
 import VoiceMessageCard from "./VoiceMessageCard";
 import { themeSenderMessage, themeReceiverMessage } from "@/lib/themeUtils";
 import { useConversation } from "@/redux/slices/conversationSlice";
+import { cn } from "@/lib/utils";
 
 const renderMedia = (type: string, value: any): JSX.Element | null => {
   if (!value) return null;
