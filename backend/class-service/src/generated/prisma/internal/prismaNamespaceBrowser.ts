@@ -59,6 +59,7 @@ export const ModelName = {
   ConversationSelectedDay: 'ConversationSelectedDay',
   JoinRequest: 'JoinRequest',
   Session: 'Session',
+  AlertnessSession: 'AlertnessSession',
   AttendanceLog: 'AttendanceLog',
   AssignmentSubmission: 'AssignmentSubmission'
 } as const
@@ -183,6 +184,24 @@ export const SessionScalarFieldEnum = {
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
+export const AlertnessSessionScalarFieldEnum = {
+  id: 'id',
+  classId: 'classId',
+  startedById: 'startedById',
+  duration: 'duration',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  isActive: 'isActive',
+  totalParticipants: 'totalParticipants',
+  responseRate: 'responseRate',
+  responses: 'responses',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AlertnessSessionScalarFieldEnum = (typeof AlertnessSessionScalarFieldEnum)[keyof typeof AlertnessSessionScalarFieldEnum]
+
+
 export const AttendanceLogScalarFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
@@ -229,6 +248,14 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const UserOrderByRelevanceFieldEnum = {
@@ -315,6 +342,32 @@ export const SessionOrderByRelevanceFieldEnum = {
 } as const
 
 export type SessionOrderByRelevanceFieldEnum = (typeof SessionOrderByRelevanceFieldEnum)[keyof typeof SessionOrderByRelevanceFieldEnum]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const AlertnessSessionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  classId: 'classId',
+  startedById: 'startedById'
+} as const
+
+export type AlertnessSessionOrderByRelevanceFieldEnum = (typeof AlertnessSessionOrderByRelevanceFieldEnum)[keyof typeof AlertnessSessionOrderByRelevanceFieldEnum]
 
 
 export const AttendanceLogOrderByRelevanceFieldEnum = {

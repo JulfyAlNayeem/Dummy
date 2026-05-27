@@ -392,6 +392,7 @@ export const ModelName = {
   ConversationSelectedDay: 'ConversationSelectedDay',
   JoinRequest: 'JoinRequest',
   Session: 'Session',
+  AlertnessSession: 'AlertnessSession',
   AttendanceLog: 'AttendanceLog',
   AssignmentSubmission: 'AssignmentSubmission'
 } as const
@@ -409,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "conversation" | "conversationParticipant" | "conversationAdmin" | "conversationModerator" | "conversationSelectedDay" | "joinRequest" | "session" | "attendanceLog" | "assignmentSubmission"
+    modelProps: "user" | "conversation" | "conversationParticipant" | "conversationAdmin" | "conversationModerator" | "conversationSelectedDay" | "joinRequest" | "session" | "alertnessSession" | "attendanceLog" | "assignmentSubmission"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -941,6 +942,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AlertnessSession: {
+      payload: Prisma.$AlertnessSessionPayload<ExtArgs>
+      fields: Prisma.AlertnessSessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AlertnessSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlertnessSessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AlertnessSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlertnessSessionPayload>
+        }
+        findFirst: {
+          args: Prisma.AlertnessSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlertnessSessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AlertnessSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlertnessSessionPayload>
+        }
+        findMany: {
+          args: Prisma.AlertnessSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlertnessSessionPayload>[]
+        }
+        create: {
+          args: Prisma.AlertnessSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlertnessSessionPayload>
+        }
+        createMany: {
+          args: Prisma.AlertnessSessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AlertnessSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlertnessSessionPayload>
+        }
+        update: {
+          args: Prisma.AlertnessSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlertnessSessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.AlertnessSessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AlertnessSessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AlertnessSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlertnessSessionPayload>
+        }
+        aggregate: {
+          args: Prisma.AlertnessSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAlertnessSession>
+        }
+        groupBy: {
+          args: Prisma.AlertnessSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AlertnessSessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AlertnessSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AlertnessSessionCountAggregateOutputType> | number
+        }
+      }
+    }
     AttendanceLog: {
       payload: Prisma.$AttendanceLogPayload<ExtArgs>
       fields: Prisma.AttendanceLogFieldRefs
@@ -1216,6 +1283,24 @@ export const SessionScalarFieldEnum = {
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
+export const AlertnessSessionScalarFieldEnum = {
+  id: 'id',
+  classId: 'classId',
+  startedById: 'startedById',
+  duration: 'duration',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  isActive: 'isActive',
+  totalParticipants: 'totalParticipants',
+  responseRate: 'responseRate',
+  responses: 'responses',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AlertnessSessionScalarFieldEnum = (typeof AlertnessSessionScalarFieldEnum)[keyof typeof AlertnessSessionScalarFieldEnum]
+
+
 export const AttendanceLogScalarFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
@@ -1262,6 +1347,14 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const UserOrderByRelevanceFieldEnum = {
@@ -1348,6 +1441,32 @@ export const SessionOrderByRelevanceFieldEnum = {
 } as const
 
 export type SessionOrderByRelevanceFieldEnum = (typeof SessionOrderByRelevanceFieldEnum)[keyof typeof SessionOrderByRelevanceFieldEnum]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const AlertnessSessionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  classId: 'classId',
+  startedById: 'startedById'
+} as const
+
+export type AlertnessSessionOrderByRelevanceFieldEnum = (typeof AlertnessSessionOrderByRelevanceFieldEnum)[keyof typeof AlertnessSessionOrderByRelevanceFieldEnum]
 
 
 export const AttendanceLogOrderByRelevanceFieldEnum = {
@@ -1468,6 +1587,27 @@ export type EnumSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
 
 
 /**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
  * Reference to a field of type 'AttendanceStatus'
  */
 export type EnumAttendanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttendanceStatus'>
@@ -1478,13 +1618,6 @@ export type EnumAttendanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'AssignmentStatus'
  */
 export type EnumAssignmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssignmentStatus'>
-    
-
-
-/**
- * Reference to a field of type 'Float'
- */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 /**
@@ -1590,6 +1723,7 @@ export type GlobalOmitConfig = {
   conversationSelectedDay?: Prisma.ConversationSelectedDayOmit
   joinRequest?: Prisma.JoinRequestOmit
   session?: Prisma.SessionOmit
+  alertnessSession?: Prisma.AlertnessSessionOmit
   attendanceLog?: Prisma.AttendanceLogOmit
   assignmentSubmission?: Prisma.AssignmentSubmissionOmit
 }

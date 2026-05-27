@@ -10,6 +10,7 @@ import classRoutes from './routes/class.routes.js';
 import attendanceRoutes from './routes/attendance.routes.js';
 import assignmentRoutes from './routes/assignment.routes.js';
 import { startSessionCreationScheduler } from './jobs/sessionCreation.js';
+import { initializeSocketServer } from './socket.js';
 
 const logger = pino({ transport: { target: 'pino-pretty', options: { colorize: true } } });
 
@@ -35,6 +36,9 @@ app.use('/api/class-group/assignments', assignmentRoutes);
 const startServer = async (): Promise<void> => {
   try {
     logger.info('Prisma client ready (lazy connection to MySQL)');
+
+    initializeSocketServer(server, ORIGIN_URL);
+    logger.info('Socket.IO server initialized');
 
     // Start session creation cron jobs for all active classes
     await startSessionCreationScheduler();

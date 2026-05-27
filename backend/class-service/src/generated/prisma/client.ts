@@ -80,6 +80,11 @@ export type JoinRequest = Prisma.JoinRequestModel
  */
 export type Session = Prisma.SessionModel
 /**
+ * Model AlertnessSession
+ * 
+ */
+export type AlertnessSession = Prisma.AlertnessSessionModel
+/**
  * Model AttendanceLog
  * 
  */
