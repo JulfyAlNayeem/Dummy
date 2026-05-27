@@ -180,7 +180,9 @@ export type UserWhereInput = {
   joinRequests?: Prisma.JoinRequestListRelationFilter
   processedRequests?: Prisma.JoinRequestListRelationFilter
   attendanceLogs?: Prisma.AttendanceLogListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
+  createdSessions?: Prisma.SessionListRelationFilter
+  submittedAssignments?: Prisma.AssignmentSubmissionListRelationFilter
+  markedAssignments?: Prisma.AssignmentSubmissionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -194,7 +196,9 @@ export type UserOrderByWithRelationInput = {
   joinRequests?: Prisma.JoinRequestOrderByRelationAggregateInput
   processedRequests?: Prisma.JoinRequestOrderByRelationAggregateInput
   attendanceLogs?: Prisma.AttendanceLogOrderByRelationAggregateInput
-  sessions?: Prisma.SessionOrderByRelationAggregateInput
+  createdSessions?: Prisma.SessionOrderByRelationAggregateInput
+  submittedAssignments?: Prisma.AssignmentSubmissionOrderByRelationAggregateInput
+  markedAssignments?: Prisma.AssignmentSubmissionOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -212,7 +216,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   joinRequests?: Prisma.JoinRequestListRelationFilter
   processedRequests?: Prisma.JoinRequestListRelationFilter
   attendanceLogs?: Prisma.AttendanceLogListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
+  createdSessions?: Prisma.SessionListRelationFilter
+  submittedAssignments?: Prisma.AssignmentSubmissionListRelationFilter
+  markedAssignments?: Prisma.AssignmentSubmissionListRelationFilter
 }, "id">
 
 export type UserOrderByWithAggregationInput = {
@@ -246,7 +252,9 @@ export type UserCreateInput = {
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -260,7 +268,9 @@ export type UserUncheckedCreateInput = {
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserUpdateInput = {
@@ -274,7 +284,9 @@ export type UserUpdateInput = {
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -288,7 +300,9 @@ export type UserUncheckedUpdateInput = {
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -347,16 +361,6 @@ export type UserScalarRelationFilter = {
 export type UserNullableScalarRelationFilter = {
   is?: Prisma.UserWhereInput | null
   isNot?: Prisma.UserWhereInput | null
-}
-
-export type UserListRelationFilter = {
-  every?: Prisma.UserWhereInput
-  some?: Prisma.UserWhereInput
-  none?: Prisma.UserWhereInput
-}
-
-export type UserOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -439,42 +443,20 @@ export type UserUpdateOneWithoutProcessedRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProcessedRequestsInput, Prisma.UserUpdateWithoutProcessedRequestsInput>, Prisma.UserUncheckedUpdateWithoutProcessedRequestsInput>
 }
 
-export type UserCreateNestedManyWithoutSessionsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput> | Prisma.UserCreateWithoutSessionsInput[] | Prisma.UserUncheckedCreateWithoutSessionsInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput | Prisma.UserCreateOrConnectWithoutSessionsInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+export type UserCreateNestedOneWithoutCreatedSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedSessionsInput, Prisma.UserUncheckedCreateWithoutCreatedSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUncheckedCreateNestedManyWithoutSessionsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput> | Prisma.UserCreateWithoutSessionsInput[] | Prisma.UserUncheckedCreateWithoutSessionsInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput | Prisma.UserCreateOrConnectWithoutSessionsInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
-export type UserUpdateManyWithoutSessionsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput> | Prisma.UserCreateWithoutSessionsInput[] | Prisma.UserUncheckedCreateWithoutSessionsInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput | Prisma.UserCreateOrConnectWithoutSessionsInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSessionsInput | Prisma.UserUpsertWithWhereUniqueWithoutSessionsInput[]
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutSessionsInput | Prisma.UserUpdateWithWhereUniqueWithoutSessionsInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSessionsInput | Prisma.UserUpdateManyWithWhereWithoutSessionsInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
-export type UserUncheckedUpdateManyWithoutSessionsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput> | Prisma.UserCreateWithoutSessionsInput[] | Prisma.UserUncheckedCreateWithoutSessionsInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput | Prisma.UserCreateOrConnectWithoutSessionsInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSessionsInput | Prisma.UserUpsertWithWhereUniqueWithoutSessionsInput[]
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutSessionsInput | Prisma.UserUpdateWithWhereUniqueWithoutSessionsInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSessionsInput | Prisma.UserUpdateManyWithWhereWithoutSessionsInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+export type UserUpdateOneWithoutCreatedSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedSessionsInput, Prisma.UserUncheckedCreateWithoutCreatedSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedSessionsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedSessionsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedSessionsInput, Prisma.UserUpdateWithoutCreatedSessionsInput>, Prisma.UserUncheckedUpdateWithoutCreatedSessionsInput>
 }
 
 export type UserCreateNestedOneWithoutAttendanceLogsInput = {
@@ -491,6 +473,36 @@ export type UserUpdateOneRequiredWithoutAttendanceLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAttendanceLogsInput, Prisma.UserUpdateWithoutAttendanceLogsInput>, Prisma.UserUncheckedUpdateWithoutAttendanceLogsInput>
 }
 
+export type UserCreateNestedOneWithoutSubmittedAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubmittedAssignmentsInput, Prisma.UserUncheckedCreateWithoutSubmittedAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubmittedAssignmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutMarkedAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMarkedAssignmentsInput, Prisma.UserUncheckedCreateWithoutMarkedAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMarkedAssignmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSubmittedAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubmittedAssignmentsInput, Prisma.UserUncheckedCreateWithoutSubmittedAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubmittedAssignmentsInput
+  upsert?: Prisma.UserUpsertWithoutSubmittedAssignmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubmittedAssignmentsInput, Prisma.UserUpdateWithoutSubmittedAssignmentsInput>, Prisma.UserUncheckedUpdateWithoutSubmittedAssignmentsInput>
+}
+
+export type UserUpdateOneWithoutMarkedAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMarkedAssignmentsInput, Prisma.UserUncheckedCreateWithoutMarkedAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMarkedAssignmentsInput
+  upsert?: Prisma.UserUpsertWithoutMarkedAssignmentsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMarkedAssignmentsInput, Prisma.UserUpdateWithoutMarkedAssignmentsInput>, Prisma.UserUncheckedUpdateWithoutMarkedAssignmentsInput>
+}
+
 export type UserCreateWithoutParticipantsInput = {
   id?: string
   name: string
@@ -501,7 +513,9 @@ export type UserCreateWithoutParticipantsInput = {
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserUncheckedCreateWithoutParticipantsInput = {
@@ -514,7 +528,9 @@ export type UserUncheckedCreateWithoutParticipantsInput = {
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserCreateOrConnectWithoutParticipantsInput = {
@@ -543,7 +559,9 @@ export type UserUpdateWithoutParticipantsInput = {
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParticipantsInput = {
@@ -556,7 +574,9 @@ export type UserUncheckedUpdateWithoutParticipantsInput = {
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserCreateWithoutAdminsInput = {
@@ -569,7 +589,9 @@ export type UserCreateWithoutAdminsInput = {
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserUncheckedCreateWithoutAdminsInput = {
@@ -582,7 +604,9 @@ export type UserUncheckedCreateWithoutAdminsInput = {
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserCreateOrConnectWithoutAdminsInput = {
@@ -611,7 +635,9 @@ export type UserUpdateWithoutAdminsInput = {
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAdminsInput = {
@@ -624,7 +650,9 @@ export type UserUncheckedUpdateWithoutAdminsInput = {
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserCreateWithoutModeratorsInput = {
@@ -637,7 +665,9 @@ export type UserCreateWithoutModeratorsInput = {
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserUncheckedCreateWithoutModeratorsInput = {
@@ -650,7 +680,9 @@ export type UserUncheckedCreateWithoutModeratorsInput = {
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserCreateOrConnectWithoutModeratorsInput = {
@@ -679,7 +711,9 @@ export type UserUpdateWithoutModeratorsInput = {
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutModeratorsInput = {
@@ -692,7 +726,9 @@ export type UserUncheckedUpdateWithoutModeratorsInput = {
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserCreateWithoutJoinRequestsInput = {
@@ -705,7 +741,9 @@ export type UserCreateWithoutJoinRequestsInput = {
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserUncheckedCreateWithoutJoinRequestsInput = {
@@ -718,7 +756,9 @@ export type UserUncheckedCreateWithoutJoinRequestsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserCreateOrConnectWithoutJoinRequestsInput = {
@@ -736,7 +776,9 @@ export type UserCreateWithoutProcessedRequestsInput = {
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserUncheckedCreateWithoutProcessedRequestsInput = {
@@ -749,7 +791,9 @@ export type UserUncheckedCreateWithoutProcessedRequestsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserCreateOrConnectWithoutProcessedRequestsInput = {
@@ -778,7 +822,9 @@ export type UserUpdateWithoutJoinRequestsInput = {
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJoinRequestsInput = {
@@ -791,7 +837,9 @@ export type UserUncheckedUpdateWithoutJoinRequestsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserUpsertWithoutProcessedRequestsInput = {
@@ -815,7 +863,9 @@ export type UserUpdateWithoutProcessedRequestsInput = {
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessedRequestsInput = {
@@ -828,10 +878,12 @@ export type UserUncheckedUpdateWithoutProcessedRequestsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutMarkedByNestedInput
 }
 
-export type UserCreateWithoutSessionsInput = {
+export type UserCreateWithoutCreatedSessionsInput = {
   id?: string
   name: string
   image?: string
@@ -842,9 +894,11 @@ export type UserCreateWithoutSessionsInput = {
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
+  submittedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutMarkedByInput
 }
 
-export type UserUncheckedCreateWithoutSessionsInput = {
+export type UserUncheckedCreateWithoutCreatedSessionsInput = {
   id?: string
   name: string
   image?: string
@@ -855,37 +909,54 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutMarkedByInput
 }
 
-export type UserCreateOrConnectWithoutSessionsInput = {
+export type UserCreateOrConnectWithoutCreatedSessionsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedSessionsInput, Prisma.UserUncheckedCreateWithoutCreatedSessionsInput>
 }
 
-export type UserUpsertWithWhereUniqueWithoutSessionsInput = {
-  where: Prisma.UserWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+export type UserUpsertWithoutCreatedSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedSessionsInput, Prisma.UserUncheckedUpdateWithoutCreatedSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedSessionsInput, Prisma.UserUncheckedCreateWithoutCreatedSessionsInput>
+  where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateWithWhereUniqueWithoutSessionsInput = {
-  where: Prisma.UserWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+export type UserUpdateToOneWithWhereWithoutCreatedSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedSessionsInput, Prisma.UserUncheckedUpdateWithoutCreatedSessionsInput>
 }
 
-export type UserUpdateManyWithWhereWithoutSessionsInput = {
-  where: Prisma.UserScalarWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutSessionsInput>
+export type UserUpdateWithoutCreatedSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  participants?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
+  admins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
+  moderators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
+  processedRequests?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutMarkedByNestedInput
 }
 
-export type UserScalarWhereInput = {
-  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-  OR?: Prisma.UserScalarWhereInput[]
-  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-  id?: Prisma.StringFilter<"User"> | string
-  name?: Prisma.StringFilter<"User"> | string
-  image?: Prisma.StringFilter<"User"> | string
-  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+export type UserUncheckedUpdateWithoutCreatedSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+  admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
+  moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
+  processedRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserCreateWithoutAttendanceLogsInput = {
@@ -898,7 +969,9 @@ export type UserCreateWithoutAttendanceLogsInput = {
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserUncheckedCreateWithoutAttendanceLogsInput = {
@@ -911,7 +984,9 @@ export type UserUncheckedCreateWithoutAttendanceLogsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
   processedRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutStudentsInput
+  createdSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutUserInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutMarkedByInput
 }
 
 export type UserCreateOrConnectWithoutAttendanceLogsInput = {
@@ -940,7 +1015,9 @@ export type UserUpdateWithoutAttendanceLogsInput = {
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutMarkedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAttendanceLogsInput = {
@@ -953,10 +1030,93 @@ export type UserUncheckedUpdateWithoutAttendanceLogsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutStudentsNestedInput
+  createdSessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutUserNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutMarkedByNestedInput
 }
 
-export type UserUpdateWithoutSessionsInput = {
+export type UserCreateWithoutSubmittedAssignmentsInput = {
+  id?: string
+  name: string
+  image?: string
+  role?: $Enums.UserRole
+  participants?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
+  admins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
+  moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
+  processedRequests?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
+  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
+  createdSessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
+  markedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutMarkedByInput
+}
+
+export type UserUncheckedCreateWithoutSubmittedAssignmentsInput = {
+  id?: string
+  name: string
+  image?: string
+  role?: $Enums.UserRole
+  participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+  admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
+  moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
+  processedRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
+  createdSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutMarkedByInput
+}
+
+export type UserCreateOrConnectWithoutSubmittedAssignmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubmittedAssignmentsInput, Prisma.UserUncheckedCreateWithoutSubmittedAssignmentsInput>
+}
+
+export type UserCreateWithoutMarkedAssignmentsInput = {
+  id?: string
+  name: string
+  image?: string
+  role?: $Enums.UserRole
+  participants?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
+  admins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
+  moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
+  processedRequests?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
+  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
+  createdSessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMarkedAssignmentsInput = {
+  id?: string
+  name: string
+  image?: string
+  role?: $Enums.UserRole
+  participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+  admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
+  moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
+  processedRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
+  createdSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMarkedAssignmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMarkedAssignmentsInput, Prisma.UserUncheckedCreateWithoutMarkedAssignmentsInput>
+}
+
+export type UserUpsertWithoutSubmittedAssignmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSubmittedAssignmentsInput, Prisma.UserUncheckedUpdateWithoutSubmittedAssignmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubmittedAssignmentsInput, Prisma.UserUncheckedCreateWithoutSubmittedAssignmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSubmittedAssignmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSubmittedAssignmentsInput, Prisma.UserUncheckedUpdateWithoutSubmittedAssignmentsInput>
+}
+
+export type UserUpdateWithoutSubmittedAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
@@ -967,9 +1127,11 @@ export type UserUpdateWithoutSessionsInput = {
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
+  createdSessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutMarkedByNestedInput
 }
 
-export type UserUncheckedUpdateWithoutSessionsInput = {
+export type UserUncheckedUpdateWithoutSubmittedAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
@@ -980,13 +1142,49 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
   processedRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
+  createdSessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  markedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutMarkedByNestedInput
 }
 
-export type UserUncheckedUpdateManyWithoutSessionsInput = {
+export type UserUpsertWithoutMarkedAssignmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMarkedAssignmentsInput, Prisma.UserUncheckedUpdateWithoutMarkedAssignmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMarkedAssignmentsInput, Prisma.UserUncheckedCreateWithoutMarkedAssignmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMarkedAssignmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMarkedAssignmentsInput, Prisma.UserUncheckedUpdateWithoutMarkedAssignmentsInput>
+}
+
+export type UserUpdateWithoutMarkedAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  participants?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
+  admins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
+  moderators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
+  processedRequests?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
+  createdSessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMarkedAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+  admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
+  moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
+  processedRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
+  createdSessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
+  submittedAssignments?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1001,7 +1199,9 @@ export type UserCountOutputType = {
   joinRequests: number
   processedRequests: number
   attendanceLogs: number
-  sessions: number
+  createdSessions: number
+  submittedAssignments: number
+  markedAssignments: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1011,7 +1211,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   joinRequests?: boolean | UserCountOutputTypeCountJoinRequestsArgs
   processedRequests?: boolean | UserCountOutputTypeCountProcessedRequestsArgs
   attendanceLogs?: boolean | UserCountOutputTypeCountAttendanceLogsArgs
-  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+  createdSessions?: boolean | UserCountOutputTypeCountCreatedSessionsArgs
+  submittedAssignments?: boolean | UserCountOutputTypeCountSubmittedAssignmentsArgs
+  markedAssignments?: boolean | UserCountOutputTypeCountMarkedAssignmentsArgs
 }
 
 /**
@@ -1069,8 +1271,22 @@ export type UserCountOutputTypeCountAttendanceLogsArgs<ExtArgs extends runtime.T
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountCreatedSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSubmittedAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AssignmentSubmissionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMarkedAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AssignmentSubmissionWhereInput
 }
 
 
@@ -1085,7 +1301,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   joinRequests?: boolean | Prisma.User$joinRequestsArgs<ExtArgs>
   processedRequests?: boolean | Prisma.User$processedRequestsArgs<ExtArgs>
   attendanceLogs?: boolean | Prisma.User$attendanceLogsArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  createdSessions?: boolean | Prisma.User$createdSessionsArgs<ExtArgs>
+  submittedAssignments?: boolean | Prisma.User$submittedAssignmentsArgs<ExtArgs>
+  markedAssignments?: boolean | Prisma.User$markedAssignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1106,7 +1324,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   joinRequests?: boolean | Prisma.User$joinRequestsArgs<ExtArgs>
   processedRequests?: boolean | Prisma.User$processedRequestsArgs<ExtArgs>
   attendanceLogs?: boolean | Prisma.User$attendanceLogsArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  createdSessions?: boolean | Prisma.User$createdSessionsArgs<ExtArgs>
+  submittedAssignments?: boolean | Prisma.User$submittedAssignmentsArgs<ExtArgs>
+  markedAssignments?: boolean | Prisma.User$markedAssignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1119,7 +1339,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     joinRequests: Prisma.$JoinRequestPayload<ExtArgs>[]
     processedRequests: Prisma.$JoinRequestPayload<ExtArgs>[]
     attendanceLogs: Prisma.$AttendanceLogPayload<ExtArgs>[]
-    sessions: Prisma.$SessionPayload<ExtArgs>[]
+    createdSessions: Prisma.$SessionPayload<ExtArgs>[]
+    submittedAssignments: Prisma.$AssignmentSubmissionPayload<ExtArgs>[]
+    markedAssignments: Prisma.$AssignmentSubmissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1472,7 +1694,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   joinRequests<T extends Prisma.User$joinRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$joinRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JoinRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processedRequests<T extends Prisma.User$processedRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$processedRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JoinRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   attendanceLogs<T extends Prisma.User$attendanceLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$attendanceLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendanceLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdSessions<T extends Prisma.User$createdSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  submittedAssignments<T extends Prisma.User$submittedAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$submittedAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssignmentSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  markedAssignments<T extends Prisma.User$markedAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$markedAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssignmentSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1993,9 +2217,9 @@ export type User$attendanceLogsArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * User.sessions
+ * User.createdSessions
  */
-export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$createdSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Session
    */
@@ -2014,6 +2238,54 @@ export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
+}
+
+/**
+ * User.submittedAssignments
+ */
+export type User$submittedAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AssignmentSubmission
+   */
+  select?: Prisma.AssignmentSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AssignmentSubmission
+   */
+  omit?: Prisma.AssignmentSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AssignmentSubmissionInclude<ExtArgs> | null
+  where?: Prisma.AssignmentSubmissionWhereInput
+  orderBy?: Prisma.AssignmentSubmissionOrderByWithRelationInput | Prisma.AssignmentSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.AssignmentSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AssignmentSubmissionScalarFieldEnum | Prisma.AssignmentSubmissionScalarFieldEnum[]
+}
+
+/**
+ * User.markedAssignments
+ */
+export type User$markedAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AssignmentSubmission
+   */
+  select?: Prisma.AssignmentSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AssignmentSubmission
+   */
+  omit?: Prisma.AssignmentSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AssignmentSubmissionInclude<ExtArgs> | null
+  where?: Prisma.AssignmentSubmissionWhereInput
+  orderBy?: Prisma.AssignmentSubmissionOrderByWithRelationInput | Prisma.AssignmentSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.AssignmentSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AssignmentSubmissionScalarFieldEnum | Prisma.AssignmentSubmissionScalarFieldEnum[]
 }
 
 /**

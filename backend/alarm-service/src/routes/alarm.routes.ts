@@ -7,6 +7,7 @@ import {
   getActiveSessions,
   getSessionStats,
   getSessions,
+  deleteAlertnessSession,
 } from '../controllers/alarm.controller.js';
 
 const router = Router();
@@ -18,5 +19,6 @@ router.post('/class/:classId/end', requireAdmin, endAlertnessSession);
 router.get('/class/:classId/active', getActiveSessions);
 router.get('/class/:classId/sessions', getSessions);
 router.get('/session/:sessionId/stats', getSessionStats);
+router.delete('/session/:sessionId', requireAdmin, deleteAlertnessSession);
 
 export default router;

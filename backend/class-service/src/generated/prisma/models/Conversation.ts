@@ -343,6 +343,7 @@ export type ConversationWhereInput = {
   joinRequests?: Prisma.JoinRequestListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   attendanceLogs?: Prisma.AttendanceLogListRelationFilter
+  assignmentSubmissions?: Prisma.AssignmentSubmissionListRelationFilter
 }
 
 export type ConversationOrderByWithRelationInput = {
@@ -373,6 +374,7 @@ export type ConversationOrderByWithRelationInput = {
   joinRequests?: Prisma.JoinRequestOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   attendanceLogs?: Prisma.AttendanceLogOrderByRelationAggregateInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionOrderByRelationAggregateInput
   _relevance?: Prisma.ConversationOrderByRelevanceInput
 }
 
@@ -407,6 +409,7 @@ export type ConversationWhereUniqueInput = Prisma.AtLeast<{
   joinRequests?: Prisma.JoinRequestListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   attendanceLogs?: Prisma.AttendanceLogListRelationFilter
+  assignmentSubmissions?: Prisma.AssignmentSubmissionListRelationFilter
 }, "id">
 
 export type ConversationOrderByWithAggregationInput = {
@@ -489,8 +492,9 @@ export type ConversationCreateInput = {
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
 }
 
 export type ConversationUncheckedCreateInput = {
@@ -519,8 +523,9 @@ export type ConversationUncheckedCreateInput = {
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ConversationUpdateInput = {
@@ -549,8 +554,9 @@ export type ConversationUpdateInput = {
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationUncheckedUpdateInput = {
@@ -579,8 +585,9 @@ export type ConversationUncheckedUpdateInput = {
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationCreateManyInput = {
@@ -874,6 +881,20 @@ export type ConversationUpdateOneRequiredWithoutAttendanceLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutAttendanceLogsInput, Prisma.ConversationUpdateWithoutAttendanceLogsInput>, Prisma.ConversationUncheckedUpdateWithoutAttendanceLogsInput>
 }
 
+export type ConversationCreateNestedOneWithoutAssignmentSubmissionsInput = {
+  create?: Prisma.XOR<Prisma.ConversationCreateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedCreateWithoutAssignmentSubmissionsInput>
+  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutAssignmentSubmissionsInput
+  connect?: Prisma.ConversationWhereUniqueInput
+}
+
+export type ConversationUpdateOneRequiredWithoutAssignmentSubmissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.ConversationCreateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedCreateWithoutAssignmentSubmissionsInput>
+  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutAssignmentSubmissionsInput
+  upsert?: Prisma.ConversationUpsertWithoutAssignmentSubmissionsInput
+  connect?: Prisma.ConversationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutAssignmentSubmissionsInput, Prisma.ConversationUpdateWithoutAssignmentSubmissionsInput>, Prisma.ConversationUncheckedUpdateWithoutAssignmentSubmissionsInput>
+}
+
 export type ConversationCreateWithoutParticipantsInput = {
   id?: string
   status?: $Enums.ConversationStatus
@@ -899,8 +920,9 @@ export type ConversationCreateWithoutParticipantsInput = {
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
 }
 
 export type ConversationUncheckedCreateWithoutParticipantsInput = {
@@ -928,8 +950,9 @@ export type ConversationUncheckedCreateWithoutParticipantsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ConversationCreateOrConnectWithoutParticipantsInput = {
@@ -973,8 +996,9 @@ export type ConversationUpdateWithoutParticipantsInput = {
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationUncheckedUpdateWithoutParticipantsInput = {
@@ -1002,8 +1026,9 @@ export type ConversationUncheckedUpdateWithoutParticipantsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationCreateWithoutAdminsInput = {
@@ -1031,8 +1056,9 @@ export type ConversationCreateWithoutAdminsInput = {
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
 }
 
 export type ConversationUncheckedCreateWithoutAdminsInput = {
@@ -1060,8 +1086,9 @@ export type ConversationUncheckedCreateWithoutAdminsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ConversationCreateOrConnectWithoutAdminsInput = {
@@ -1105,8 +1132,9 @@ export type ConversationUpdateWithoutAdminsInput = {
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationUncheckedUpdateWithoutAdminsInput = {
@@ -1134,8 +1162,9 @@ export type ConversationUncheckedUpdateWithoutAdminsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationCreateWithoutModeratorsInput = {
@@ -1163,8 +1192,9 @@ export type ConversationCreateWithoutModeratorsInput = {
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
 }
 
 export type ConversationUncheckedCreateWithoutModeratorsInput = {
@@ -1192,8 +1222,9 @@ export type ConversationUncheckedCreateWithoutModeratorsInput = {
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ConversationCreateOrConnectWithoutModeratorsInput = {
@@ -1237,8 +1268,9 @@ export type ConversationUpdateWithoutModeratorsInput = {
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationUncheckedUpdateWithoutModeratorsInput = {
@@ -1266,8 +1298,9 @@ export type ConversationUncheckedUpdateWithoutModeratorsInput = {
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationCreateWithoutSelectedDaysInput = {
@@ -1295,8 +1328,9 @@ export type ConversationCreateWithoutSelectedDaysInput = {
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
 }
 
 export type ConversationUncheckedCreateWithoutSelectedDaysInput = {
@@ -1324,8 +1358,9 @@ export type ConversationUncheckedCreateWithoutSelectedDaysInput = {
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ConversationCreateOrConnectWithoutSelectedDaysInput = {
@@ -1369,8 +1404,9 @@ export type ConversationUpdateWithoutSelectedDaysInput = {
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationUncheckedUpdateWithoutSelectedDaysInput = {
@@ -1398,8 +1434,9 @@ export type ConversationUncheckedUpdateWithoutSelectedDaysInput = {
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationCreateWithoutJoinRequestsInput = {
@@ -1427,8 +1464,9 @@ export type ConversationCreateWithoutJoinRequestsInput = {
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
 }
 
 export type ConversationUncheckedCreateWithoutJoinRequestsInput = {
@@ -1456,8 +1494,9 @@ export type ConversationUncheckedCreateWithoutJoinRequestsInput = {
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutConversationInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ConversationCreateOrConnectWithoutJoinRequestsInput = {
@@ -1501,8 +1540,9 @@ export type ConversationUpdateWithoutJoinRequestsInput = {
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationUncheckedUpdateWithoutJoinRequestsInput = {
@@ -1530,8 +1570,9 @@ export type ConversationUncheckedUpdateWithoutJoinRequestsInput = {
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutConversationNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationCreateWithoutSessionsInput = {
@@ -1560,7 +1601,8 @@ export type ConversationCreateWithoutSessionsInput = {
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
 }
 
 export type ConversationUncheckedCreateWithoutSessionsInput = {
@@ -1589,7 +1631,8 @@ export type ConversationUncheckedCreateWithoutSessionsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ConversationCreateOrConnectWithoutSessionsInput = {
@@ -1634,7 +1677,8 @@ export type ConversationUpdateWithoutSessionsInput = {
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationUncheckedUpdateWithoutSessionsInput = {
@@ -1663,7 +1707,8 @@ export type ConversationUncheckedUpdateWithoutSessionsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationCreateWithoutAttendanceLogsInput = {
@@ -1692,7 +1737,8 @@ export type ConversationCreateWithoutAttendanceLogsInput = {
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutConversationInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
 }
 
 export type ConversationUncheckedCreateWithoutAttendanceLogsInput = {
@@ -1721,7 +1767,8 @@ export type ConversationUncheckedCreateWithoutAttendanceLogsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutConversationInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ConversationCreateOrConnectWithoutAttendanceLogsInput = {
@@ -1766,7 +1813,8 @@ export type ConversationUpdateWithoutAttendanceLogsInput = {
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutConversationNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
 }
 
 export type ConversationUncheckedUpdateWithoutAttendanceLogsInput = {
@@ -1795,7 +1843,144 @@ export type ConversationUncheckedUpdateWithoutAttendanceLogsInput = {
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
   selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutConversationNestedInput
+  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
+}
+
+export type ConversationCreateWithoutAssignmentSubmissionsInput = {
+  id?: string
+  status?: $Enums.ConversationStatus
+  visibility?: $Enums.Visibility
+  isGroup?: boolean
+  groupType?: $Enums.GroupType | null
+  groupName?: string | null
+  groupIntro?: string | null
+  groupImage?: string
+  classType?: $Enums.ClassType
+  startTime?: string
+  cutoffTime?: string
+  checkInterval?: number
+  fileSendingAllowed?: boolean
+  permText?: boolean
+  permImage?: boolean
+  permVoice?: boolean
+  permVideo?: boolean
+  permFile?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
+  admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
+  moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
+  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
+}
+
+export type ConversationUncheckedCreateWithoutAssignmentSubmissionsInput = {
+  id?: string
+  status?: $Enums.ConversationStatus
+  visibility?: $Enums.Visibility
+  isGroup?: boolean
+  groupType?: $Enums.GroupType | null
+  groupName?: string | null
+  groupIntro?: string | null
+  groupImage?: string
+  classType?: $Enums.ClassType
+  startTime?: string
+  cutoffTime?: string
+  checkInterval?: number
+  fileSendingAllowed?: boolean
+  permText?: boolean
+  permImage?: boolean
+  permVoice?: boolean
+  permVideo?: boolean
+  permFile?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
+  admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
+  moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
+  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutConversationInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
+}
+
+export type ConversationCreateOrConnectWithoutAssignmentSubmissionsInput = {
+  where: Prisma.ConversationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ConversationCreateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedCreateWithoutAssignmentSubmissionsInput>
+}
+
+export type ConversationUpsertWithoutAssignmentSubmissionsInput = {
+  update: Prisma.XOR<Prisma.ConversationUpdateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedUpdateWithoutAssignmentSubmissionsInput>
+  create: Prisma.XOR<Prisma.ConversationCreateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedCreateWithoutAssignmentSubmissionsInput>
+  where?: Prisma.ConversationWhereInput
+}
+
+export type ConversationUpdateToOneWithWhereWithoutAssignmentSubmissionsInput = {
+  where?: Prisma.ConversationWhereInput
+  data: Prisma.XOR<Prisma.ConversationUpdateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedUpdateWithoutAssignmentSubmissionsInput>
+}
+
+export type ConversationUpdateWithoutAssignmentSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
+  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
+  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
+  startTime?: Prisma.StringFieldUpdateOperationsInput | string
+  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
+  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
+  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
+  admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
+  moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
+  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
+}
+
+export type ConversationUncheckedUpdateWithoutAssignmentSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
+  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
+  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
+  startTime?: Prisma.StringFieldUpdateOperationsInput | string
+  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
+  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
+  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
+  admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
+  moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
+  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutConversationNestedInput
+  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
 }
 
 
@@ -1811,6 +1996,7 @@ export type ConversationCountOutputType = {
   joinRequests: number
   sessions: number
   attendanceLogs: number
+  assignmentSubmissions: number
 }
 
 export type ConversationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1821,6 +2007,7 @@ export type ConversationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   joinRequests?: boolean | ConversationCountOutputTypeCountJoinRequestsArgs
   sessions?: boolean | ConversationCountOutputTypeCountSessionsArgs
   attendanceLogs?: boolean | ConversationCountOutputTypeCountAttendanceLogsArgs
+  assignmentSubmissions?: boolean | ConversationCountOutputTypeCountAssignmentSubmissionsArgs
 }
 
 /**
@@ -1882,6 +2069,13 @@ export type ConversationCountOutputTypeCountAttendanceLogsArgs<ExtArgs extends r
   where?: Prisma.AttendanceLogWhereInput
 }
 
+/**
+ * ConversationCountOutputType without action
+ */
+export type ConversationCountOutputTypeCountAssignmentSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AssignmentSubmissionWhereInput
+}
+
 
 export type ConversationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1911,6 +2105,7 @@ export type ConversationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   joinRequests?: boolean | Prisma.Conversation$joinRequestsArgs<ExtArgs>
   sessions?: boolean | Prisma.Conversation$sessionsArgs<ExtArgs>
   attendanceLogs?: boolean | Prisma.Conversation$attendanceLogsArgs<ExtArgs>
+  assignmentSubmissions?: boolean | Prisma.Conversation$assignmentSubmissionsArgs<ExtArgs>
   _count?: boolean | Prisma.ConversationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["conversation"]>
 
@@ -1948,6 +2143,7 @@ export type ConversationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   joinRequests?: boolean | Prisma.Conversation$joinRequestsArgs<ExtArgs>
   sessions?: boolean | Prisma.Conversation$sessionsArgs<ExtArgs>
   attendanceLogs?: boolean | Prisma.Conversation$attendanceLogsArgs<ExtArgs>
+  assignmentSubmissions?: boolean | Prisma.Conversation$assignmentSubmissionsArgs<ExtArgs>
   _count?: boolean | Prisma.ConversationCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1961,6 +2157,7 @@ export type $ConversationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     joinRequests: Prisma.$JoinRequestPayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     attendanceLogs: Prisma.$AttendanceLogPayload<ExtArgs>[]
+    assignmentSubmissions: Prisma.$AssignmentSubmissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2330,6 +2527,7 @@ export interface Prisma__ConversationClient<T, Null = never, ExtArgs extends run
   joinRequests<T extends Prisma.Conversation$joinRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$joinRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JoinRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.Conversation$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   attendanceLogs<T extends Prisma.Conversation$attendanceLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$attendanceLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendanceLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assignmentSubmissions<T extends Prisma.Conversation$assignmentSubmissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$assignmentSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssignmentSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2887,6 +3085,30 @@ export type Conversation$attendanceLogsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.AttendanceLogScalarFieldEnum | Prisma.AttendanceLogScalarFieldEnum[]
+}
+
+/**
+ * Conversation.assignmentSubmissions
+ */
+export type Conversation$assignmentSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AssignmentSubmission
+   */
+  select?: Prisma.AssignmentSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AssignmentSubmission
+   */
+  omit?: Prisma.AssignmentSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AssignmentSubmissionInclude<ExtArgs> | null
+  where?: Prisma.AssignmentSubmissionWhereInput
+  orderBy?: Prisma.AssignmentSubmissionOrderByWithRelationInput | Prisma.AssignmentSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.AssignmentSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AssignmentSubmissionScalarFieldEnum | Prisma.AssignmentSubmissionScalarFieldEnum[]
 }
 
 /**

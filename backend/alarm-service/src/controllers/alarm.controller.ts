@@ -42,7 +42,7 @@ async function autoEndSession(sessionId: string, classId: string) {
 export const startAlertnessSession = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = (req as any).user.id;
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
     const { duration = 30000 } = req.body;
 
     const existing = await prisma.alertnessSession.findFirst({
@@ -83,7 +83,7 @@ export const startAlertnessSession = async (req: Request, res: Response): Promis
 export const respondToSession = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = (req as any).user.id;
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
 
     const session = await prisma.alertnessSession.findFirst({
       where: { classId, isActive: true },
@@ -115,7 +115,7 @@ export const respondToSession = async (req: Request, res: Response): Promise<voi
 
 export const endAlertnessSession = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
 
     const session = await prisma.alertnessSession.findFirst({
       where: { classId, isActive: true },
@@ -137,7 +137,7 @@ export const endAlertnessSession = async (req: Request, res: Response): Promise<
 
 export const getActiveSessions = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
     const session = await prisma.alertnessSession.findFirst({
       where: { classId, isActive: true },
       include: { startedBy: { select: { id: true, name: true } } },
@@ -150,7 +150,7 @@ export const getActiveSessions = async (req: Request, res: Response): Promise<vo
 
 export const getSessions = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
     const sessions = await prisma.alertnessSession.findMany({
       where: { classId },
       include: { startedBy: { select: { id: true, name: true } } },
@@ -165,7 +165,7 @@ export const getSessions = async (req: Request, res: Response): Promise<void> =>
 
 export const getSessionStats = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { sessionId } = req.params;
+    const { sessionId } = req.params as Record<string, string>;
     const session = await prisma.alertnessSession.findUnique({
       where: { id: sessionId },
       include: {
@@ -177,5 +177,33 @@ export const getSessionStats = async (req: Request, res: Response): Promise<void
     res.json({ session });
   } catch (error: any) {
     res.status(500).json({ message: 'Failed to get stats', error: error.message });
+  }
+};
+
+// ─── Delete ───────────────────────────────────────────────────────────────────
+
+export const deleteAlertnessSession = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { sessionId } = req.params as Record<string, string>;
+    const userId = (req as any).user.id;
+
+    const session = await prisma.alertnessSession.findUnique({ where: { id: sessionId } });
+    if (!session) { res.status(404).json({ message: 'Session not found' }); return; }
+
+    const isAdmin = await prisma.conversationAdmin.findUnique({
+      where: { conversationId_userId: { conversationId: session.classId, userId } },
+    });
+    if (!isAdmin) { res.status(403).json({ message: 'Access denied' }); return; }
+
+    // Clear timer if still running
+    const timer = sessionTimers.get(sessionId);
+    if (timer) { clearTimeout(timer); sessionTimers.delete(sessionId); }
+
+    await prisma.alertnessResponse.deleteMany({ where: { sessionId } });
+    await prisma.alertnessSession.delete({ where: { id: sessionId } });
+
+    res.json({ message: 'Alertness session deleted successfully' });
+  } catch (error: any) {
+    res.status(500).json({ message: 'Failed to delete session', error: error.message });
   }
 };

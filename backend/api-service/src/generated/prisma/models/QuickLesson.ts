@@ -192,7 +192,6 @@ export type QuickLessonWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"QuickLesson"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
-  parts?: Prisma.QuickLessonPartListRelationFilter
 }
 
 export type QuickLessonOrderByWithRelationInput = {
@@ -204,7 +203,6 @@ export type QuickLessonOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   conversation?: Prisma.ConversationOrderByWithRelationInput
-  parts?: Prisma.QuickLessonPartOrderByRelationAggregateInput
   _relevance?: Prisma.QuickLessonOrderByRelevanceInput
 }
 
@@ -220,7 +218,6 @@ export type QuickLessonWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"QuickLesson"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
-  parts?: Prisma.QuickLessonPartListRelationFilter
 }, "id">
 
 export type QuickLessonOrderByWithAggregationInput = {
@@ -254,7 +251,6 @@ export type QuickLessonCreateInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutQuickLessonsInput
   conversation: Prisma.ConversationCreateNestedOneWithoutQuickLessonsInput
-  parts?: Prisma.QuickLessonPartCreateNestedManyWithoutQuickLessonInput
 }
 
 export type QuickLessonUncheckedCreateInput = {
@@ -264,7 +260,6 @@ export type QuickLessonUncheckedCreateInput = {
   lessonName: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  parts?: Prisma.QuickLessonPartUncheckedCreateNestedManyWithoutQuickLessonInput
 }
 
 export type QuickLessonUpdateInput = {
@@ -274,7 +269,6 @@ export type QuickLessonUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutQuickLessonsNestedInput
   conversation?: Prisma.ConversationUpdateOneRequiredWithoutQuickLessonsNestedInput
-  parts?: Prisma.QuickLessonPartUpdateManyWithoutQuickLessonNestedInput
 }
 
 export type QuickLessonUncheckedUpdateInput = {
@@ -284,7 +278,6 @@ export type QuickLessonUncheckedUpdateInput = {
   lessonName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  parts?: Prisma.QuickLessonPartUncheckedUpdateManyWithoutQuickLessonNestedInput
 }
 
 export type QuickLessonCreateManyInput = {
@@ -353,11 +346,6 @@ export type QuickLessonMinOrderByAggregateInput = {
   lessonName?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type QuickLessonScalarRelationFilter = {
-  is?: Prisma.QuickLessonWhereInput
-  isNot?: Prisma.QuickLessonWhereInput
 }
 
 export type QuickLessonCreateNestedManyWithoutUserInput = {
@@ -444,27 +432,12 @@ export type QuickLessonUncheckedUpdateManyWithoutConversationNestedInput = {
   deleteMany?: Prisma.QuickLessonScalarWhereInput | Prisma.QuickLessonScalarWhereInput[]
 }
 
-export type QuickLessonCreateNestedOneWithoutPartsInput = {
-  create?: Prisma.XOR<Prisma.QuickLessonCreateWithoutPartsInput, Prisma.QuickLessonUncheckedCreateWithoutPartsInput>
-  connectOrCreate?: Prisma.QuickLessonCreateOrConnectWithoutPartsInput
-  connect?: Prisma.QuickLessonWhereUniqueInput
-}
-
-export type QuickLessonUpdateOneRequiredWithoutPartsNestedInput = {
-  create?: Prisma.XOR<Prisma.QuickLessonCreateWithoutPartsInput, Prisma.QuickLessonUncheckedCreateWithoutPartsInput>
-  connectOrCreate?: Prisma.QuickLessonCreateOrConnectWithoutPartsInput
-  upsert?: Prisma.QuickLessonUpsertWithoutPartsInput
-  connect?: Prisma.QuickLessonWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.QuickLessonUpdateToOneWithWhereWithoutPartsInput, Prisma.QuickLessonUpdateWithoutPartsInput>, Prisma.QuickLessonUncheckedUpdateWithoutPartsInput>
-}
-
 export type QuickLessonCreateWithoutUserInput = {
   id?: string
   lessonName: string
   createdAt?: Date | string
   updatedAt?: Date | string
   conversation: Prisma.ConversationCreateNestedOneWithoutQuickLessonsInput
-  parts?: Prisma.QuickLessonPartCreateNestedManyWithoutQuickLessonInput
 }
 
 export type QuickLessonUncheckedCreateWithoutUserInput = {
@@ -473,7 +446,6 @@ export type QuickLessonUncheckedCreateWithoutUserInput = {
   lessonName: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  parts?: Prisma.QuickLessonPartUncheckedCreateNestedManyWithoutQuickLessonInput
 }
 
 export type QuickLessonCreateOrConnectWithoutUserInput = {
@@ -520,7 +492,6 @@ export type QuickLessonCreateWithoutConversationInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutQuickLessonsInput
-  parts?: Prisma.QuickLessonPartCreateNestedManyWithoutQuickLessonInput
 }
 
 export type QuickLessonUncheckedCreateWithoutConversationInput = {
@@ -529,7 +500,6 @@ export type QuickLessonUncheckedCreateWithoutConversationInput = {
   lessonName: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  parts?: Prisma.QuickLessonPartUncheckedCreateNestedManyWithoutQuickLessonInput
 }
 
 export type QuickLessonCreateOrConnectWithoutConversationInput = {
@@ -558,58 +528,6 @@ export type QuickLessonUpdateManyWithWhereWithoutConversationInput = {
   data: Prisma.XOR<Prisma.QuickLessonUpdateManyMutationInput, Prisma.QuickLessonUncheckedUpdateManyWithoutConversationInput>
 }
 
-export type QuickLessonCreateWithoutPartsInput = {
-  id?: string
-  lessonName: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutQuickLessonsInput
-  conversation: Prisma.ConversationCreateNestedOneWithoutQuickLessonsInput
-}
-
-export type QuickLessonUncheckedCreateWithoutPartsInput = {
-  id?: string
-  userId: string
-  conversationId: string
-  lessonName: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type QuickLessonCreateOrConnectWithoutPartsInput = {
-  where: Prisma.QuickLessonWhereUniqueInput
-  create: Prisma.XOR<Prisma.QuickLessonCreateWithoutPartsInput, Prisma.QuickLessonUncheckedCreateWithoutPartsInput>
-}
-
-export type QuickLessonUpsertWithoutPartsInput = {
-  update: Prisma.XOR<Prisma.QuickLessonUpdateWithoutPartsInput, Prisma.QuickLessonUncheckedUpdateWithoutPartsInput>
-  create: Prisma.XOR<Prisma.QuickLessonCreateWithoutPartsInput, Prisma.QuickLessonUncheckedCreateWithoutPartsInput>
-  where?: Prisma.QuickLessonWhereInput
-}
-
-export type QuickLessonUpdateToOneWithWhereWithoutPartsInput = {
-  where?: Prisma.QuickLessonWhereInput
-  data: Prisma.XOR<Prisma.QuickLessonUpdateWithoutPartsInput, Prisma.QuickLessonUncheckedUpdateWithoutPartsInput>
-}
-
-export type QuickLessonUpdateWithoutPartsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  lessonName?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutQuickLessonsNestedInput
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutQuickLessonsNestedInput
-}
-
-export type QuickLessonUncheckedUpdateWithoutPartsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  lessonName?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type QuickLessonCreateManyUserInput = {
   id?: string
   conversationId: string
@@ -624,7 +542,6 @@ export type QuickLessonUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversation?: Prisma.ConversationUpdateOneRequiredWithoutQuickLessonsNestedInput
-  parts?: Prisma.QuickLessonPartUpdateManyWithoutQuickLessonNestedInput
 }
 
 export type QuickLessonUncheckedUpdateWithoutUserInput = {
@@ -633,7 +550,6 @@ export type QuickLessonUncheckedUpdateWithoutUserInput = {
   lessonName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  parts?: Prisma.QuickLessonPartUncheckedUpdateManyWithoutQuickLessonNestedInput
 }
 
 export type QuickLessonUncheckedUpdateManyWithoutUserInput = {
@@ -658,7 +574,6 @@ export type QuickLessonUpdateWithoutConversationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutQuickLessonsNestedInput
-  parts?: Prisma.QuickLessonPartUpdateManyWithoutQuickLessonNestedInput
 }
 
 export type QuickLessonUncheckedUpdateWithoutConversationInput = {
@@ -667,7 +582,6 @@ export type QuickLessonUncheckedUpdateWithoutConversationInput = {
   lessonName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  parts?: Prisma.QuickLessonPartUncheckedUpdateManyWithoutQuickLessonNestedInput
 }
 
 export type QuickLessonUncheckedUpdateManyWithoutConversationInput = {
@@ -679,35 +593,6 @@ export type QuickLessonUncheckedUpdateManyWithoutConversationInput = {
 }
 
 
-/**
- * Count Type QuickLessonCountOutputType
- */
-
-export type QuickLessonCountOutputType = {
-  parts: number
-}
-
-export type QuickLessonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  parts?: boolean | QuickLessonCountOutputTypeCountPartsArgs
-}
-
-/**
- * QuickLessonCountOutputType without action
- */
-export type QuickLessonCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the QuickLessonCountOutputType
-   */
-  select?: Prisma.QuickLessonCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * QuickLessonCountOutputType without action
- */
-export type QuickLessonCountOutputTypeCountPartsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.QuickLessonPartWhereInput
-}
-
 
 export type QuickLessonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -718,8 +603,6 @@ export type QuickLessonSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
-  parts?: boolean | Prisma.QuickLesson$partsArgs<ExtArgs>
-  _count?: boolean | Prisma.QuickLessonCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quickLesson"]>
 
 
@@ -737,8 +620,6 @@ export type QuickLessonOmit<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type QuickLessonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
-  parts?: boolean | Prisma.QuickLesson$partsArgs<ExtArgs>
-  _count?: boolean | Prisma.QuickLessonCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $QuickLessonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -746,7 +627,6 @@ export type $QuickLessonPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     conversation: Prisma.$ConversationPayload<ExtArgs>
-    parts: Prisma.$QuickLessonPartPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1097,7 +977,6 @@ export interface Prisma__QuickLessonClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   conversation<T extends Prisma.ConversationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConversationDefaultArgs<ExtArgs>>): Prisma.Prisma__ConversationClient<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  parts<T extends Prisma.QuickLesson$partsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.QuickLesson$partsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuickLessonPartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1473,30 +1352,6 @@ export type QuickLessonDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many QuickLessons to delete.
    */
   limit?: number
-}
-
-/**
- * QuickLesson.parts
- */
-export type QuickLesson$partsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the QuickLessonPart
-   */
-  select?: Prisma.QuickLessonPartSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the QuickLessonPart
-   */
-  omit?: Prisma.QuickLessonPartOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.QuickLessonPartInclude<ExtArgs> | null
-  where?: Prisma.QuickLessonPartWhereInput
-  orderBy?: Prisma.QuickLessonPartOrderByWithRelationInput | Prisma.QuickLessonPartOrderByWithRelationInput[]
-  cursor?: Prisma.QuickLessonPartWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.QuickLessonPartScalarFieldEnum | Prisma.QuickLessonPartScalarFieldEnum[]
 }
 
 /**

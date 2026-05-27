@@ -314,7 +314,6 @@ export type UserApprovalWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"UserApproval"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  riskFactors?: Prisma.UserApprovalRiskFactorListRelationFilter
 }
 
 export type UserApprovalOrderByWithRelationInput = {
@@ -337,7 +336,6 @@ export type UserApprovalOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   reviewedBy?: Prisma.UserOrderByWithRelationInput
-  riskFactors?: Prisma.UserApprovalRiskFactorOrderByRelationAggregateInput
   _relevance?: Prisma.UserApprovalOrderByRelevanceInput
 }
 
@@ -364,7 +362,6 @@ export type UserApprovalWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"UserApproval"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  riskFactors?: Prisma.UserApprovalRiskFactorListRelationFilter
 }, "id" | "userId">
 
 export type UserApprovalOrderByWithAggregationInput = {
@@ -433,7 +430,6 @@ export type UserApprovalCreateInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutUserApprovalInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutUserApprovalReviewsInput
-  riskFactors?: Prisma.UserApprovalRiskFactorCreateNestedManyWithoutUserApprovalInput
 }
 
 export type UserApprovalUncheckedCreateInput = {
@@ -454,7 +450,6 @@ export type UserApprovalUncheckedCreateInput = {
   expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  riskFactors?: Prisma.UserApprovalRiskFactorUncheckedCreateNestedManyWithoutUserApprovalInput
 }
 
 export type UserApprovalUpdateInput = {
@@ -475,7 +470,6 @@ export type UserApprovalUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutUserApprovalNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutUserApprovalReviewsNestedInput
-  riskFactors?: Prisma.UserApprovalRiskFactorUpdateManyWithoutUserApprovalNestedInput
 }
 
 export type UserApprovalUncheckedUpdateInput = {
@@ -496,7 +490,6 @@ export type UserApprovalUncheckedUpdateInput = {
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  riskFactors?: Prisma.UserApprovalRiskFactorUncheckedUpdateManyWithoutUserApprovalNestedInput
 }
 
 export type UserApprovalCreateManyInput = {
@@ -646,11 +639,6 @@ export type UserApprovalSumOrderByAggregateInput = {
   riskScore?: Prisma.SortOrder
 }
 
-export type UserApprovalScalarRelationFilter = {
-  is?: Prisma.UserApprovalWhereInput
-  isNot?: Prisma.UserApprovalWhereInput
-}
-
 export type UserApprovalCreateNestedOneWithoutUserInput = {
   create?: Prisma.XOR<Prisma.UserApprovalCreateWithoutUserInput, Prisma.UserApprovalUncheckedCreateWithoutUserInput>
   connectOrCreate?: Prisma.UserApprovalCreateOrConnectWithoutUserInput
@@ -729,20 +717,6 @@ export type EnumApprovalStatusFieldUpdateOperationsInput = {
   set?: $Enums.ApprovalStatus
 }
 
-export type UserApprovalCreateNestedOneWithoutRiskFactorsInput = {
-  create?: Prisma.XOR<Prisma.UserApprovalCreateWithoutRiskFactorsInput, Prisma.UserApprovalUncheckedCreateWithoutRiskFactorsInput>
-  connectOrCreate?: Prisma.UserApprovalCreateOrConnectWithoutRiskFactorsInput
-  connect?: Prisma.UserApprovalWhereUniqueInput
-}
-
-export type UserApprovalUpdateOneRequiredWithoutRiskFactorsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserApprovalCreateWithoutRiskFactorsInput, Prisma.UserApprovalUncheckedCreateWithoutRiskFactorsInput>
-  connectOrCreate?: Prisma.UserApprovalCreateOrConnectWithoutRiskFactorsInput
-  upsert?: Prisma.UserApprovalUpsertWithoutRiskFactorsInput
-  connect?: Prisma.UserApprovalWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserApprovalUpdateToOneWithWhereWithoutRiskFactorsInput, Prisma.UserApprovalUpdateWithoutRiskFactorsInput>, Prisma.UserApprovalUncheckedUpdateWithoutRiskFactorsInput>
-}
-
 export type UserApprovalCreateWithoutUserInput = {
   id?: string
   status?: $Enums.ApprovalStatus
@@ -760,7 +734,6 @@ export type UserApprovalCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   reviewedBy?: Prisma.UserCreateNestedOneWithoutUserApprovalReviewsInput
-  riskFactors?: Prisma.UserApprovalRiskFactorCreateNestedManyWithoutUserApprovalInput
 }
 
 export type UserApprovalUncheckedCreateWithoutUserInput = {
@@ -780,7 +753,6 @@ export type UserApprovalUncheckedCreateWithoutUserInput = {
   expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  riskFactors?: Prisma.UserApprovalRiskFactorUncheckedCreateNestedManyWithoutUserApprovalInput
 }
 
 export type UserApprovalCreateOrConnectWithoutUserInput = {
@@ -805,7 +777,6 @@ export type UserApprovalCreateWithoutReviewedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutUserApprovalInput
-  riskFactors?: Prisma.UserApprovalRiskFactorCreateNestedManyWithoutUserApprovalInput
 }
 
 export type UserApprovalUncheckedCreateWithoutReviewedByInput = {
@@ -825,7 +796,6 @@ export type UserApprovalUncheckedCreateWithoutReviewedByInput = {
   expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  riskFactors?: Prisma.UserApprovalRiskFactorUncheckedCreateNestedManyWithoutUserApprovalInput
 }
 
 export type UserApprovalCreateOrConnectWithoutReviewedByInput = {
@@ -866,7 +836,6 @@ export type UserApprovalUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedBy?: Prisma.UserUpdateOneWithoutUserApprovalReviewsNestedInput
-  riskFactors?: Prisma.UserApprovalRiskFactorUpdateManyWithoutUserApprovalNestedInput
 }
 
 export type UserApprovalUncheckedUpdateWithoutUserInput = {
@@ -886,7 +855,6 @@ export type UserApprovalUncheckedUpdateWithoutUserInput = {
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  riskFactors?: Prisma.UserApprovalRiskFactorUncheckedUpdateManyWithoutUserApprovalNestedInput
 }
 
 export type UserApprovalUpsertWithWhereUniqueWithoutReviewedByInput = {
@@ -928,102 +896,6 @@ export type UserApprovalScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"UserApproval"> | Date | string
 }
 
-export type UserApprovalCreateWithoutRiskFactorsInput = {
-  id?: string
-  status?: $Enums.ApprovalStatus
-  requestedAt?: Date | string
-  reviewedAt?: Date | string | null
-  rejectionReason?: string | null
-  approvalNotes?: string | null
-  userAgent?: string | null
-  registrationSource?: string | null
-  emailVerified?: boolean
-  phoneVerified?: boolean
-  riskScore?: number
-  autoApproved?: boolean
-  expiresAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutUserApprovalInput
-  reviewedBy?: Prisma.UserCreateNestedOneWithoutUserApprovalReviewsInput
-}
-
-export type UserApprovalUncheckedCreateWithoutRiskFactorsInput = {
-  id?: string
-  userId: string
-  status?: $Enums.ApprovalStatus
-  requestedAt?: Date | string
-  reviewedAt?: Date | string | null
-  reviewedById?: string | null
-  rejectionReason?: string | null
-  approvalNotes?: string | null
-  userAgent?: string | null
-  registrationSource?: string | null
-  emailVerified?: boolean
-  phoneVerified?: boolean
-  riskScore?: number
-  autoApproved?: boolean
-  expiresAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type UserApprovalCreateOrConnectWithoutRiskFactorsInput = {
-  where: Prisma.UserApprovalWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserApprovalCreateWithoutRiskFactorsInput, Prisma.UserApprovalUncheckedCreateWithoutRiskFactorsInput>
-}
-
-export type UserApprovalUpsertWithoutRiskFactorsInput = {
-  update: Prisma.XOR<Prisma.UserApprovalUpdateWithoutRiskFactorsInput, Prisma.UserApprovalUncheckedUpdateWithoutRiskFactorsInput>
-  create: Prisma.XOR<Prisma.UserApprovalCreateWithoutRiskFactorsInput, Prisma.UserApprovalUncheckedCreateWithoutRiskFactorsInput>
-  where?: Prisma.UserApprovalWhereInput
-}
-
-export type UserApprovalUpdateToOneWithWhereWithoutRiskFactorsInput = {
-  where?: Prisma.UserApprovalWhereInput
-  data: Prisma.XOR<Prisma.UserApprovalUpdateWithoutRiskFactorsInput, Prisma.UserApprovalUncheckedUpdateWithoutRiskFactorsInput>
-}
-
-export type UserApprovalUpdateWithoutRiskFactorsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approvalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  registrationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  phoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  riskScore?: Prisma.IntFieldUpdateOperationsInput | number
-  autoApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutUserApprovalNestedInput
-  reviewedBy?: Prisma.UserUpdateOneWithoutUserApprovalReviewsNestedInput
-}
-
-export type UserApprovalUncheckedUpdateWithoutRiskFactorsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approvalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  registrationSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  phoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  riskScore?: Prisma.IntFieldUpdateOperationsInput | number
-  autoApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type UserApprovalCreateManyReviewedByInput = {
   id?: string
   userId: string
@@ -1060,7 +932,6 @@ export type UserApprovalUpdateWithoutReviewedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutUserApprovalNestedInput
-  riskFactors?: Prisma.UserApprovalRiskFactorUpdateManyWithoutUserApprovalNestedInput
 }
 
 export type UserApprovalUncheckedUpdateWithoutReviewedByInput = {
@@ -1080,7 +951,6 @@ export type UserApprovalUncheckedUpdateWithoutReviewedByInput = {
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  riskFactors?: Prisma.UserApprovalRiskFactorUncheckedUpdateManyWithoutUserApprovalNestedInput
 }
 
 export type UserApprovalUncheckedUpdateManyWithoutReviewedByInput = {
@@ -1103,35 +973,6 @@ export type UserApprovalUncheckedUpdateManyWithoutReviewedByInput = {
 }
 
 
-/**
- * Count Type UserApprovalCountOutputType
- */
-
-export type UserApprovalCountOutputType = {
-  riskFactors: number
-}
-
-export type UserApprovalCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  riskFactors?: boolean | UserApprovalCountOutputTypeCountRiskFactorsArgs
-}
-
-/**
- * UserApprovalCountOutputType without action
- */
-export type UserApprovalCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserApprovalCountOutputType
-   */
-  select?: Prisma.UserApprovalCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * UserApprovalCountOutputType without action
- */
-export type UserApprovalCountOutputTypeCountRiskFactorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserApprovalRiskFactorWhereInput
-}
-
 
 export type UserApprovalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1153,8 +994,6 @@ export type UserApprovalSelect<ExtArgs extends runtime.Types.Extensions.Internal
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.UserApproval$reviewedByArgs<ExtArgs>
-  riskFactors?: boolean | Prisma.UserApproval$riskFactorsArgs<ExtArgs>
-  _count?: boolean | Prisma.UserApprovalCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userApproval"]>
 
 
@@ -1183,8 +1022,6 @@ export type UserApprovalOmit<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type UserApprovalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.UserApproval$reviewedByArgs<ExtArgs>
-  riskFactors?: boolean | Prisma.UserApproval$riskFactorsArgs<ExtArgs>
-  _count?: boolean | Prisma.UserApprovalCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $UserApprovalPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1192,7 +1029,6 @@ export type $UserApprovalPayload<ExtArgs extends runtime.Types.Extensions.Intern
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     reviewedBy: Prisma.$UserPayload<ExtArgs> | null
-    riskFactors: Prisma.$UserApprovalRiskFactorPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1554,7 +1390,6 @@ export interface Prisma__UserApprovalClient<T, Null = never, ExtArgs extends run
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reviewedBy<T extends Prisma.UserApproval$reviewedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserApproval$reviewedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  riskFactors<T extends Prisma.UserApproval$riskFactorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserApproval$riskFactorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserApprovalRiskFactorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1960,30 +1795,6 @@ export type UserApproval$reviewedByArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
-}
-
-/**
- * UserApproval.riskFactors
- */
-export type UserApproval$riskFactorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserApprovalRiskFactor
-   */
-  select?: Prisma.UserApprovalRiskFactorSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserApprovalRiskFactor
-   */
-  omit?: Prisma.UserApprovalRiskFactorOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserApprovalRiskFactorInclude<ExtArgs> | null
-  where?: Prisma.UserApprovalRiskFactorWhereInput
-  orderBy?: Prisma.UserApprovalRiskFactorOrderByWithRelationInput | Prisma.UserApprovalRiskFactorOrderByWithRelationInput[]
-  cursor?: Prisma.UserApprovalRiskFactorWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UserApprovalRiskFactorScalarFieldEnum | Prisma.UserApprovalRiskFactorScalarFieldEnum[]
 }
 
 /**

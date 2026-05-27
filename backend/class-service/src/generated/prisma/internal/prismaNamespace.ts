@@ -392,7 +392,8 @@ export const ModelName = {
   ConversationSelectedDay: 'ConversationSelectedDay',
   JoinRequest: 'JoinRequest',
   Session: 'Session',
-  AttendanceLog: 'AttendanceLog'
+  AttendanceLog: 'AttendanceLog',
+  AssignmentSubmission: 'AssignmentSubmission'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "conversation" | "conversationParticipant" | "conversationAdmin" | "conversationModerator" | "conversationSelectedDay" | "joinRequest" | "session" | "attendanceLog"
+    modelProps: "user" | "conversation" | "conversationParticipant" | "conversationAdmin" | "conversationModerator" | "conversationSelectedDay" | "joinRequest" | "session" | "attendanceLog" | "assignmentSubmission"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1006,6 +1007,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AssignmentSubmission: {
+      payload: Prisma.$AssignmentSubmissionPayload<ExtArgs>
+      fields: Prisma.AssignmentSubmissionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AssignmentSubmissionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssignmentSubmissionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AssignmentSubmissionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssignmentSubmissionPayload>
+        }
+        findFirst: {
+          args: Prisma.AssignmentSubmissionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssignmentSubmissionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AssignmentSubmissionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssignmentSubmissionPayload>
+        }
+        findMany: {
+          args: Prisma.AssignmentSubmissionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssignmentSubmissionPayload>[]
+        }
+        create: {
+          args: Prisma.AssignmentSubmissionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssignmentSubmissionPayload>
+        }
+        createMany: {
+          args: Prisma.AssignmentSubmissionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AssignmentSubmissionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssignmentSubmissionPayload>
+        }
+        update: {
+          args: Prisma.AssignmentSubmissionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssignmentSubmissionPayload>
+        }
+        deleteMany: {
+          args: Prisma.AssignmentSubmissionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AssignmentSubmissionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AssignmentSubmissionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AssignmentSubmissionPayload>
+        }
+        aggregate: {
+          args: Prisma.AssignmentSubmissionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAssignmentSubmission>
+        }
+        groupBy: {
+          args: Prisma.AssignmentSubmissionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AssignmentSubmissionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AssignmentSubmissionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AssignmentSubmissionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1137,9 +1204,13 @@ export const SessionScalarFieldEnum = {
   classId: 'classId',
   date: 'date',
   startTime: 'startTime',
-  endTime: 'endTime',
-  isActive: 'isActive',
-  createdAt: 'createdAt'
+  type: 'type',
+  createdById: 'createdById',
+  status: 'status',
+  duration: 'duration',
+  cutoffTime: 'cutoffTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -1148,14 +1219,41 @@ export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeo
 export const AttendanceLogScalarFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
+  classId: 'classId',
   userId: 'userId',
-  conversationId: 'conversationId',
   status: 'status',
-  joinedAt: 'joinedAt',
-  leftAt: 'leftAt'
+  enteredAt: 'enteredAt',
+  leftAt: 'leftAt',
+  duration: 'duration',
+  sessionDate: 'sessionDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type AttendanceLogScalarFieldEnum = (typeof AttendanceLogScalarFieldEnum)[keyof typeof AttendanceLogScalarFieldEnum]
+
+
+export const AssignmentSubmissionScalarFieldEnum = {
+  id: 'id',
+  classId: 'classId',
+  userId: 'userId',
+  assignmentTitle: 'assignmentTitle',
+  assignmentDescription: 'assignmentDescription',
+  status: 'status',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  fileType: 'fileType',
+  mark: 'mark',
+  feedback: 'feedback',
+  markedById: 'markedById',
+  markedAt: 'markedAt',
+  submittedAt: 'submittedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssignmentSubmissionScalarFieldEnum = (typeof AssignmentSubmissionScalarFieldEnum)[keyof typeof AssignmentSubmissionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1245,7 +1343,8 @@ export const SessionOrderByRelevanceFieldEnum = {
   classId: 'classId',
   date: 'date',
   startTime: 'startTime',
-  endTime: 'endTime'
+  createdById: 'createdById',
+  cutoffTime: 'cutoffTime'
 } as const
 
 export type SessionOrderByRelevanceFieldEnum = (typeof SessionOrderByRelevanceFieldEnum)[keyof typeof SessionOrderByRelevanceFieldEnum]
@@ -1254,12 +1353,28 @@ export type SessionOrderByRelevanceFieldEnum = (typeof SessionOrderByRelevanceFi
 export const AttendanceLogOrderByRelevanceFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
+  classId: 'classId',
   userId: 'userId',
-  conversationId: 'conversationId',
-  status: 'status'
+  sessionDate: 'sessionDate'
 } as const
 
 export type AttendanceLogOrderByRelevanceFieldEnum = (typeof AttendanceLogOrderByRelevanceFieldEnum)[keyof typeof AttendanceLogOrderByRelevanceFieldEnum]
+
+
+export const AssignmentSubmissionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  classId: 'classId',
+  userId: 'userId',
+  assignmentTitle: 'assignmentTitle',
+  assignmentDescription: 'assignmentDescription',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  fileType: 'fileType',
+  feedback: 'feedback',
+  markedById: 'markedById'
+} as const
+
+export type AssignmentSubmissionOrderByRelevanceFieldEnum = (typeof AssignmentSubmissionOrderByRelevanceFieldEnum)[keyof typeof AssignmentSubmissionOrderByRelevanceFieldEnum]
 
 
 
@@ -1335,6 +1450,34 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'JoinRequestStatus'
  */
 export type EnumJoinRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JoinRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SessionType'
+ */
+export type EnumSessionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SessionType'>
+    
+
+
+/**
+ * Reference to a field of type 'SessionStatus'
+ */
+export type EnumSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SessionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AttendanceStatus'
+ */
+export type EnumAttendanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttendanceStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AssignmentStatus'
+ */
+export type EnumAssignmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssignmentStatus'>
     
 
 
@@ -1448,6 +1591,7 @@ export type GlobalOmitConfig = {
   joinRequest?: Prisma.JoinRequestOmit
   session?: Prisma.SessionOmit
   attendanceLog?: Prisma.AttendanceLogOmit
+  assignmentSubmission?: Prisma.AssignmentSubmissionOmit
 }
 
 /* Types for Logging */

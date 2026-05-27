@@ -81,8 +81,8 @@ export default function MemberManagement({  }): JSX.Element {
       member.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const isAdmin = (userId) => classData?.class?.group.admins.some((admin) => admin.id === userId);
-  const isModerator = (userId) => classData?.class?.group.moderators.some((mod) => mod.id === userId);
+  const isAdmin = (userId) => classData?.class?.admins?.some((admin) => admin.id === userId);
+  const isModerator = (userId) => classData?.class?.moderators?.some((mod) => mod.id === userId);
   const canManage = isAdmin || isModerator;
 
 

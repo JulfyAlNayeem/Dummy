@@ -106,7 +106,7 @@ export const assignmentApi = createApi({
 
     // Get user's assignments
     getUserAssignments: builder.query({
-      query: () => "/my-assignments",
+      query: () => "/my",
       providesTags: ["Assignment"],
     }),
 

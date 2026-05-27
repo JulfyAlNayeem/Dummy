@@ -447,22 +447,17 @@ export type ConversationWhereInput = {
   participants?: Prisma.ConversationParticipantListRelationFilter
   admins?: Prisma.ConversationAdminListRelationFilter
   moderators?: Prisma.ConversationModeratorListRelationFilter
-  selectedDays?: Prisma.ConversationSelectedDayListRelationFilter
   blockList?: Prisma.ConversationBlockEntryListRelationFilter
-  unreadEntries?: Prisma.ConversationUnreadListRelationFilter
   messages?: Prisma.MessageListRelationFilter
   joinRequests?: Prisma.JoinRequestListRelationFilter
   reminders?: Prisma.ReminderListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
-  alertnessSessions?: Prisma.AlertnessSessionListRelationFilter
-  assignmentSubmissions?: Prisma.AssignmentSubmissionListRelationFilter
   attendanceLogs?: Prisma.AttendanceLogListRelationFilter
   files?: Prisma.FileListRelationFilter
   permissionRequests?: Prisma.PermissionRequestListRelationFilter
   quickLessons?: Prisma.QuickLessonListRelationFilter
   reports?: Prisma.ReportListRelationFilter
   unreadMessages?: Prisma.UnreadMessageListRelationFilter
-  formAssignments?: Prisma.FormAssignmentListRelationFilter
   lastMessageSender?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
@@ -503,22 +498,17 @@ export type ConversationOrderByWithRelationInput = {
   participants?: Prisma.ConversationParticipantOrderByRelationAggregateInput
   admins?: Prisma.ConversationAdminOrderByRelationAggregateInput
   moderators?: Prisma.ConversationModeratorOrderByRelationAggregateInput
-  selectedDays?: Prisma.ConversationSelectedDayOrderByRelationAggregateInput
   blockList?: Prisma.ConversationBlockEntryOrderByRelationAggregateInput
-  unreadEntries?: Prisma.ConversationUnreadOrderByRelationAggregateInput
   messages?: Prisma.MessageOrderByRelationAggregateInput
   joinRequests?: Prisma.JoinRequestOrderByRelationAggregateInput
   reminders?: Prisma.ReminderOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
-  alertnessSessions?: Prisma.AlertnessSessionOrderByRelationAggregateInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionOrderByRelationAggregateInput
   attendanceLogs?: Prisma.AttendanceLogOrderByRelationAggregateInput
   files?: Prisma.FileOrderByRelationAggregateInput
   permissionRequests?: Prisma.PermissionRequestOrderByRelationAggregateInput
   quickLessons?: Prisma.QuickLessonOrderByRelationAggregateInput
   reports?: Prisma.ReportOrderByRelationAggregateInput
   unreadMessages?: Prisma.UnreadMessageOrderByRelationAggregateInput
-  formAssignments?: Prisma.FormAssignmentOrderByRelationAggregateInput
   lastMessageSender?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.ConversationOrderByRelevanceInput
 }
@@ -563,22 +553,17 @@ export type ConversationWhereUniqueInput = Prisma.AtLeast<{
   participants?: Prisma.ConversationParticipantListRelationFilter
   admins?: Prisma.ConversationAdminListRelationFilter
   moderators?: Prisma.ConversationModeratorListRelationFilter
-  selectedDays?: Prisma.ConversationSelectedDayListRelationFilter
   blockList?: Prisma.ConversationBlockEntryListRelationFilter
-  unreadEntries?: Prisma.ConversationUnreadListRelationFilter
   messages?: Prisma.MessageListRelationFilter
   joinRequests?: Prisma.JoinRequestListRelationFilter
   reminders?: Prisma.ReminderListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
-  alertnessSessions?: Prisma.AlertnessSessionListRelationFilter
-  assignmentSubmissions?: Prisma.AssignmentSubmissionListRelationFilter
   attendanceLogs?: Prisma.AttendanceLogListRelationFilter
   files?: Prisma.FileListRelationFilter
   permissionRequests?: Prisma.PermissionRequestListRelationFilter
   quickLessons?: Prisma.QuickLessonListRelationFilter
   reports?: Prisma.ReportListRelationFilter
   unreadMessages?: Prisma.UnreadMessageListRelationFilter
-  formAssignments?: Prisma.FormAssignmentListRelationFilter
   lastMessageSender?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
@@ -698,22 +683,17 @@ export type ConversationCreateInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -754,22 +734,17 @@ export type ConversationUncheckedCreateInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationUpdateInput = {
@@ -808,22 +783,17 @@ export type ConversationUpdateInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -864,22 +834,17 @@ export type ConversationUncheckedUpdateInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateManyInput = {
@@ -1237,20 +1202,6 @@ export type ConversationUpdateOneRequiredWithoutModeratorsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutModeratorsInput, Prisma.ConversationUpdateWithoutModeratorsInput>, Prisma.ConversationUncheckedUpdateWithoutModeratorsInput>
 }
 
-export type ConversationCreateNestedOneWithoutSelectedDaysInput = {
-  create?: Prisma.XOR<Prisma.ConversationCreateWithoutSelectedDaysInput, Prisma.ConversationUncheckedCreateWithoutSelectedDaysInput>
-  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutSelectedDaysInput
-  connect?: Prisma.ConversationWhereUniqueInput
-}
-
-export type ConversationUpdateOneRequiredWithoutSelectedDaysNestedInput = {
-  create?: Prisma.XOR<Prisma.ConversationCreateWithoutSelectedDaysInput, Prisma.ConversationUncheckedCreateWithoutSelectedDaysInput>
-  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutSelectedDaysInput
-  upsert?: Prisma.ConversationUpsertWithoutSelectedDaysInput
-  connect?: Prisma.ConversationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutSelectedDaysInput, Prisma.ConversationUpdateWithoutSelectedDaysInput>, Prisma.ConversationUncheckedUpdateWithoutSelectedDaysInput>
-}
-
 export type ConversationCreateNestedOneWithoutBlockListInput = {
   create?: Prisma.XOR<Prisma.ConversationCreateWithoutBlockListInput, Prisma.ConversationUncheckedCreateWithoutBlockListInput>
   connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutBlockListInput
@@ -1263,20 +1214,6 @@ export type ConversationUpdateOneRequiredWithoutBlockListNestedInput = {
   upsert?: Prisma.ConversationUpsertWithoutBlockListInput
   connect?: Prisma.ConversationWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutBlockListInput, Prisma.ConversationUpdateWithoutBlockListInput>, Prisma.ConversationUncheckedUpdateWithoutBlockListInput>
-}
-
-export type ConversationCreateNestedOneWithoutUnreadEntriesInput = {
-  create?: Prisma.XOR<Prisma.ConversationCreateWithoutUnreadEntriesInput, Prisma.ConversationUncheckedCreateWithoutUnreadEntriesInput>
-  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutUnreadEntriesInput
-  connect?: Prisma.ConversationWhereUniqueInput
-}
-
-export type ConversationUpdateOneRequiredWithoutUnreadEntriesNestedInput = {
-  create?: Prisma.XOR<Prisma.ConversationCreateWithoutUnreadEntriesInput, Prisma.ConversationUncheckedCreateWithoutUnreadEntriesInput>
-  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutUnreadEntriesInput
-  upsert?: Prisma.ConversationUpsertWithoutUnreadEntriesInput
-  connect?: Prisma.ConversationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutUnreadEntriesInput, Prisma.ConversationUpdateWithoutUnreadEntriesInput>, Prisma.ConversationUncheckedUpdateWithoutUnreadEntriesInput>
 }
 
 export type ConversationCreateNestedOneWithoutJoinRequestsInput = {
@@ -1349,34 +1286,6 @@ export type ConversationUpdateOneRequiredWithoutUnreadMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutUnreadMessagesInput, Prisma.ConversationUpdateWithoutUnreadMessagesInput>, Prisma.ConversationUncheckedUpdateWithoutUnreadMessagesInput>
 }
 
-export type ConversationCreateNestedOneWithoutAlertnessSessionsInput = {
-  create?: Prisma.XOR<Prisma.ConversationCreateWithoutAlertnessSessionsInput, Prisma.ConversationUncheckedCreateWithoutAlertnessSessionsInput>
-  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutAlertnessSessionsInput
-  connect?: Prisma.ConversationWhereUniqueInput
-}
-
-export type ConversationUpdateOneRequiredWithoutAlertnessSessionsNestedInput = {
-  create?: Prisma.XOR<Prisma.ConversationCreateWithoutAlertnessSessionsInput, Prisma.ConversationUncheckedCreateWithoutAlertnessSessionsInput>
-  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutAlertnessSessionsInput
-  upsert?: Prisma.ConversationUpsertWithoutAlertnessSessionsInput
-  connect?: Prisma.ConversationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutAlertnessSessionsInput, Prisma.ConversationUpdateWithoutAlertnessSessionsInput>, Prisma.ConversationUncheckedUpdateWithoutAlertnessSessionsInput>
-}
-
-export type ConversationCreateNestedOneWithoutAssignmentSubmissionsInput = {
-  create?: Prisma.XOR<Prisma.ConversationCreateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedCreateWithoutAssignmentSubmissionsInput>
-  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutAssignmentSubmissionsInput
-  connect?: Prisma.ConversationWhereUniqueInput
-}
-
-export type ConversationUpdateOneRequiredWithoutAssignmentSubmissionsNestedInput = {
-  create?: Prisma.XOR<Prisma.ConversationCreateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedCreateWithoutAssignmentSubmissionsInput>
-  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutAssignmentSubmissionsInput
-  upsert?: Prisma.ConversationUpsertWithoutAssignmentSubmissionsInput
-  connect?: Prisma.ConversationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutAssignmentSubmissionsInput, Prisma.ConversationUpdateWithoutAssignmentSubmissionsInput>, Prisma.ConversationUncheckedUpdateWithoutAssignmentSubmissionsInput>
-}
-
 export type ConversationCreateNestedOneWithoutAttendanceLogsInput = {
   create?: Prisma.XOR<Prisma.ConversationCreateWithoutAttendanceLogsInput, Prisma.ConversationUncheckedCreateWithoutAttendanceLogsInput>
   connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutAttendanceLogsInput
@@ -1405,20 +1314,6 @@ export type ConversationUpdateOneWithoutFilesNestedInput = {
   delete?: Prisma.ConversationWhereInput | boolean
   connect?: Prisma.ConversationWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutFilesInput, Prisma.ConversationUpdateWithoutFilesInput>, Prisma.ConversationUncheckedUpdateWithoutFilesInput>
-}
-
-export type ConversationCreateNestedOneWithoutFormAssignmentsInput = {
-  create?: Prisma.XOR<Prisma.ConversationCreateWithoutFormAssignmentsInput, Prisma.ConversationUncheckedCreateWithoutFormAssignmentsInput>
-  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutFormAssignmentsInput
-  connect?: Prisma.ConversationWhereUniqueInput
-}
-
-export type ConversationUpdateOneRequiredWithoutFormAssignmentsNestedInput = {
-  create?: Prisma.XOR<Prisma.ConversationCreateWithoutFormAssignmentsInput, Prisma.ConversationUncheckedCreateWithoutFormAssignmentsInput>
-  connectOrCreate?: Prisma.ConversationCreateOrConnectWithoutFormAssignmentsInput
-  upsert?: Prisma.ConversationUpsertWithoutFormAssignmentsInput
-  connect?: Prisma.ConversationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ConversationUpdateToOneWithWhereWithoutFormAssignmentsInput, Prisma.ConversationUpdateWithoutFormAssignmentsInput>, Prisma.ConversationUncheckedUpdateWithoutFormAssignmentsInput>
 }
 
 export type ConversationCreateNestedOneWithoutPermissionRequestsInput = {
@@ -1499,22 +1394,17 @@ export type ConversationCreateWithoutLastMessageSenderInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationUncheckedCreateWithoutLastMessageSenderInput = {
@@ -1553,22 +1443,17 @@ export type ConversationUncheckedCreateWithoutLastMessageSenderInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutLastMessageSenderInput = {
@@ -1671,22 +1556,17 @@ export type ConversationCreateWithoutParticipantsInput = {
   updatedAt?: Date | string
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -1726,22 +1606,17 @@ export type ConversationUncheckedCreateWithoutParticipantsInput = {
   updatedAt?: Date | string
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutParticipantsInput = {
@@ -1795,22 +1670,17 @@ export type ConversationUpdateWithoutParticipantsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -1850,22 +1720,17 @@ export type ConversationUncheckedUpdateWithoutParticipantsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutAdminsInput = {
@@ -1903,22 +1768,17 @@ export type ConversationCreateWithoutAdminsInput = {
   updatedAt?: Date | string
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -1958,22 +1818,17 @@ export type ConversationUncheckedCreateWithoutAdminsInput = {
   updatedAt?: Date | string
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutAdminsInput = {
@@ -2027,22 +1882,17 @@ export type ConversationUpdateWithoutAdminsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -2082,22 +1932,17 @@ export type ConversationUncheckedUpdateWithoutAdminsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutModeratorsInput = {
@@ -2135,22 +1980,17 @@ export type ConversationCreateWithoutModeratorsInput = {
   updatedAt?: Date | string
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -2190,22 +2030,17 @@ export type ConversationUncheckedCreateWithoutModeratorsInput = {
   updatedAt?: Date | string
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutModeratorsInput = {
@@ -2259,22 +2094,17 @@ export type ConversationUpdateWithoutModeratorsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -2314,254 +2144,17 @@ export type ConversationUncheckedUpdateWithoutModeratorsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
-}
-
-export type ConversationCreateWithoutSelectedDaysInput = {
-  id?: string
-  status?: $Enums.ConversationStatus
-  visibility?: $Enums.Visibility
-  themeIndex?: number
-  isGroup?: boolean
-  groupType?: $Enums.GroupType | null
-  groupName?: string | null
-  groupIntro?: string | null
-  groupImage?: string
-  classType?: $Enums.ClassType
-  fileSendingAllowed?: boolean
-  startTime?: string
-  cutoffTime?: string
-  checkInterval?: number
-  permText?: boolean
-  permImage?: boolean
-  permVoice?: boolean
-  permVideo?: boolean
-  permFile?: boolean
-  permSticker?: boolean
-  permGif?: boolean
-  lastMessageText?: string | null
-  lastMessageTimestamp?: Date | string | null
-  autoDeleteMessagesAfter?: number
-  keyExchangeStatus?: $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Date | string | null
-  keyExchangeLastActivity?: Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
-  admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
-  moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
-  messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
-  files?: Prisma.FileCreateNestedManyWithoutClassInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
-  reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
-  lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
-}
-
-export type ConversationUncheckedCreateWithoutSelectedDaysInput = {
-  id?: string
-  status?: $Enums.ConversationStatus
-  visibility?: $Enums.Visibility
-  themeIndex?: number
-  isGroup?: boolean
-  groupType?: $Enums.GroupType | null
-  groupName?: string | null
-  groupIntro?: string | null
-  groupImage?: string
-  classType?: $Enums.ClassType
-  fileSendingAllowed?: boolean
-  startTime?: string
-  cutoffTime?: string
-  checkInterval?: number
-  permText?: boolean
-  permImage?: boolean
-  permVoice?: boolean
-  permVideo?: boolean
-  permFile?: boolean
-  permSticker?: boolean
-  permGif?: boolean
-  lastMessageText?: string | null
-  lastMessageSenderId?: string | null
-  lastMessageTimestamp?: Date | string | null
-  autoDeleteMessagesAfter?: number
-  keyExchangeStatus?: $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Date | string | null
-  keyExchangeLastActivity?: Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
-  admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
-  moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
-  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
-  files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
-  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
-}
-
-export type ConversationCreateOrConnectWithoutSelectedDaysInput = {
-  where: Prisma.ConversationWhereUniqueInput
-  create: Prisma.XOR<Prisma.ConversationCreateWithoutSelectedDaysInput, Prisma.ConversationUncheckedCreateWithoutSelectedDaysInput>
-}
-
-export type ConversationUpsertWithoutSelectedDaysInput = {
-  update: Prisma.XOR<Prisma.ConversationUpdateWithoutSelectedDaysInput, Prisma.ConversationUncheckedUpdateWithoutSelectedDaysInput>
-  create: Prisma.XOR<Prisma.ConversationCreateWithoutSelectedDaysInput, Prisma.ConversationUncheckedCreateWithoutSelectedDaysInput>
-  where?: Prisma.ConversationWhereInput
-}
-
-export type ConversationUpdateToOneWithWhereWithoutSelectedDaysInput = {
-  where?: Prisma.ConversationWhereInput
-  data: Prisma.XOR<Prisma.ConversationUpdateWithoutSelectedDaysInput, Prisma.ConversationUncheckedUpdateWithoutSelectedDaysInput>
-}
-
-export type ConversationUpdateWithoutSelectedDaysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
-  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
-  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  startTime?: Prisma.StringFieldUpdateOperationsInput | string
-  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
-  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
-  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permSticker?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permGif?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastMessageText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  keyExchangeStatus?: Prisma.EnumKeyExchangeStatusFieldUpdateOperationsInput | $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  keyExchangeLastActivity?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
-  admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
-  moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
-  messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
-  files?: Prisma.FileUpdateManyWithoutClassNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
-  reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
-  lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
-}
-
-export type ConversationUncheckedUpdateWithoutSelectedDaysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
-  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
-  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  startTime?: Prisma.StringFieldUpdateOperationsInput | string
-  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
-  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
-  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permSticker?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permGif?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastMessageText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageSenderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  keyExchangeStatus?: Prisma.EnumKeyExchangeStatusFieldUpdateOperationsInput | $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  keyExchangeLastActivity?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
-  admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
-  moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
-  messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
-  files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
-  reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutBlockListInput = {
@@ -2600,21 +2193,16 @@ export type ConversationCreateWithoutBlockListInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -2655,21 +2243,16 @@ export type ConversationUncheckedCreateWithoutBlockListInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutBlockListInput = {
@@ -2724,21 +2307,16 @@ export type ConversationUpdateWithoutBlockListInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -2779,253 +2357,16 @@ export type ConversationUncheckedUpdateWithoutBlockListInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
-}
-
-export type ConversationCreateWithoutUnreadEntriesInput = {
-  id?: string
-  status?: $Enums.ConversationStatus
-  visibility?: $Enums.Visibility
-  themeIndex?: number
-  isGroup?: boolean
-  groupType?: $Enums.GroupType | null
-  groupName?: string | null
-  groupIntro?: string | null
-  groupImage?: string
-  classType?: $Enums.ClassType
-  fileSendingAllowed?: boolean
-  startTime?: string
-  cutoffTime?: string
-  checkInterval?: number
-  permText?: boolean
-  permImage?: boolean
-  permVoice?: boolean
-  permVideo?: boolean
-  permFile?: boolean
-  permSticker?: boolean
-  permGif?: boolean
-  lastMessageText?: string | null
-  lastMessageTimestamp?: Date | string | null
-  autoDeleteMessagesAfter?: number
-  keyExchangeStatus?: $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Date | string | null
-  keyExchangeLastActivity?: Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
-  admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
-  moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
-  blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
-  files?: Prisma.FileCreateNestedManyWithoutClassInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
-  reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
-  lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
-}
-
-export type ConversationUncheckedCreateWithoutUnreadEntriesInput = {
-  id?: string
-  status?: $Enums.ConversationStatus
-  visibility?: $Enums.Visibility
-  themeIndex?: number
-  isGroup?: boolean
-  groupType?: $Enums.GroupType | null
-  groupName?: string | null
-  groupIntro?: string | null
-  groupImage?: string
-  classType?: $Enums.ClassType
-  fileSendingAllowed?: boolean
-  startTime?: string
-  cutoffTime?: string
-  checkInterval?: number
-  permText?: boolean
-  permImage?: boolean
-  permVoice?: boolean
-  permVideo?: boolean
-  permFile?: boolean
-  permSticker?: boolean
-  permGif?: boolean
-  lastMessageText?: string | null
-  lastMessageSenderId?: string | null
-  lastMessageTimestamp?: Date | string | null
-  autoDeleteMessagesAfter?: number
-  keyExchangeStatus?: $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Date | string | null
-  keyExchangeLastActivity?: Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
-  admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
-  moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
-  blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
-  files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
-  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
-}
-
-export type ConversationCreateOrConnectWithoutUnreadEntriesInput = {
-  where: Prisma.ConversationWhereUniqueInput
-  create: Prisma.XOR<Prisma.ConversationCreateWithoutUnreadEntriesInput, Prisma.ConversationUncheckedCreateWithoutUnreadEntriesInput>
-}
-
-export type ConversationUpsertWithoutUnreadEntriesInput = {
-  update: Prisma.XOR<Prisma.ConversationUpdateWithoutUnreadEntriesInput, Prisma.ConversationUncheckedUpdateWithoutUnreadEntriesInput>
-  create: Prisma.XOR<Prisma.ConversationCreateWithoutUnreadEntriesInput, Prisma.ConversationUncheckedCreateWithoutUnreadEntriesInput>
-  where?: Prisma.ConversationWhereInput
-}
-
-export type ConversationUpdateToOneWithWhereWithoutUnreadEntriesInput = {
-  where?: Prisma.ConversationWhereInput
-  data: Prisma.XOR<Prisma.ConversationUpdateWithoutUnreadEntriesInput, Prisma.ConversationUncheckedUpdateWithoutUnreadEntriesInput>
-}
-
-export type ConversationUpdateWithoutUnreadEntriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
-  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
-  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  startTime?: Prisma.StringFieldUpdateOperationsInput | string
-  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
-  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
-  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permSticker?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permGif?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastMessageText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  keyExchangeStatus?: Prisma.EnumKeyExchangeStatusFieldUpdateOperationsInput | $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  keyExchangeLastActivity?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
-  admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
-  moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
-  blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
-  files?: Prisma.FileUpdateManyWithoutClassNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
-  reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
-  lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
-}
-
-export type ConversationUncheckedUpdateWithoutUnreadEntriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
-  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
-  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  startTime?: Prisma.StringFieldUpdateOperationsInput | string
-  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
-  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
-  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permSticker?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permGif?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastMessageText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageSenderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  keyExchangeStatus?: Prisma.EnumKeyExchangeStatusFieldUpdateOperationsInput | $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  keyExchangeLastActivity?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
-  admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
-  moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
-  blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
-  files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
-  reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutJoinRequestsInput = {
@@ -3064,21 +2405,16 @@ export type ConversationCreateWithoutJoinRequestsInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -3119,21 +2455,16 @@ export type ConversationUncheckedCreateWithoutJoinRequestsInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutJoinRequestsInput = {
@@ -3188,21 +2519,16 @@ export type ConversationUpdateWithoutJoinRequestsInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -3243,21 +2569,16 @@ export type ConversationUncheckedUpdateWithoutJoinRequestsInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutMessagesInput = {
@@ -3296,21 +2617,16 @@ export type ConversationCreateWithoutMessagesInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -3351,21 +2667,16 @@ export type ConversationUncheckedCreateWithoutMessagesInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutMessagesInput = {
@@ -3420,21 +2731,16 @@ export type ConversationUpdateWithoutMessagesInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -3475,21 +2781,16 @@ export type ConversationUncheckedUpdateWithoutMessagesInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutRemindersInput = {
@@ -3528,21 +2829,16 @@ export type ConversationCreateWithoutRemindersInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -3583,21 +2879,16 @@ export type ConversationUncheckedCreateWithoutRemindersInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutRemindersInput = {
@@ -3652,21 +2943,16 @@ export type ConversationUpdateWithoutRemindersInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -3707,21 +2993,16 @@ export type ConversationUncheckedUpdateWithoutRemindersInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutSessionsInput = {
@@ -3760,21 +3041,16 @@ export type ConversationCreateWithoutSessionsInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -3815,21 +3091,16 @@ export type ConversationUncheckedCreateWithoutSessionsInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutSessionsInput = {
@@ -3884,21 +3155,16 @@ export type ConversationUpdateWithoutSessionsInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -3939,21 +3205,16 @@ export type ConversationUncheckedUpdateWithoutSessionsInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutUnreadMessagesInput = {
@@ -3992,21 +3253,16 @@ export type ConversationCreateWithoutUnreadMessagesInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -4047,21 +3303,16 @@ export type ConversationUncheckedCreateWithoutUnreadMessagesInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutUnreadMessagesInput = {
@@ -4116,21 +3367,16 @@ export type ConversationUpdateWithoutUnreadMessagesInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -4171,485 +3417,16 @@ export type ConversationUncheckedUpdateWithoutUnreadMessagesInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
-}
-
-export type ConversationCreateWithoutAlertnessSessionsInput = {
-  id?: string
-  status?: $Enums.ConversationStatus
-  visibility?: $Enums.Visibility
-  themeIndex?: number
-  isGroup?: boolean
-  groupType?: $Enums.GroupType | null
-  groupName?: string | null
-  groupIntro?: string | null
-  groupImage?: string
-  classType?: $Enums.ClassType
-  fileSendingAllowed?: boolean
-  startTime?: string
-  cutoffTime?: string
-  checkInterval?: number
-  permText?: boolean
-  permImage?: boolean
-  permVoice?: boolean
-  permVideo?: boolean
-  permFile?: boolean
-  permSticker?: boolean
-  permGif?: boolean
-  lastMessageText?: string | null
-  lastMessageTimestamp?: Date | string | null
-  autoDeleteMessagesAfter?: number
-  keyExchangeStatus?: $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Date | string | null
-  keyExchangeLastActivity?: Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
-  admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
-  moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
-  blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
-  messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
-  files?: Prisma.FileCreateNestedManyWithoutClassInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
-  reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
-  lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
-}
-
-export type ConversationUncheckedCreateWithoutAlertnessSessionsInput = {
-  id?: string
-  status?: $Enums.ConversationStatus
-  visibility?: $Enums.Visibility
-  themeIndex?: number
-  isGroup?: boolean
-  groupType?: $Enums.GroupType | null
-  groupName?: string | null
-  groupIntro?: string | null
-  groupImage?: string
-  classType?: $Enums.ClassType
-  fileSendingAllowed?: boolean
-  startTime?: string
-  cutoffTime?: string
-  checkInterval?: number
-  permText?: boolean
-  permImage?: boolean
-  permVoice?: boolean
-  permVideo?: boolean
-  permFile?: boolean
-  permSticker?: boolean
-  permGif?: boolean
-  lastMessageText?: string | null
-  lastMessageSenderId?: string | null
-  lastMessageTimestamp?: Date | string | null
-  autoDeleteMessagesAfter?: number
-  keyExchangeStatus?: $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Date | string | null
-  keyExchangeLastActivity?: Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
-  admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
-  moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
-  blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
-  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
-  files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
-  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
-}
-
-export type ConversationCreateOrConnectWithoutAlertnessSessionsInput = {
-  where: Prisma.ConversationWhereUniqueInput
-  create: Prisma.XOR<Prisma.ConversationCreateWithoutAlertnessSessionsInput, Prisma.ConversationUncheckedCreateWithoutAlertnessSessionsInput>
-}
-
-export type ConversationUpsertWithoutAlertnessSessionsInput = {
-  update: Prisma.XOR<Prisma.ConversationUpdateWithoutAlertnessSessionsInput, Prisma.ConversationUncheckedUpdateWithoutAlertnessSessionsInput>
-  create: Prisma.XOR<Prisma.ConversationCreateWithoutAlertnessSessionsInput, Prisma.ConversationUncheckedCreateWithoutAlertnessSessionsInput>
-  where?: Prisma.ConversationWhereInput
-}
-
-export type ConversationUpdateToOneWithWhereWithoutAlertnessSessionsInput = {
-  where?: Prisma.ConversationWhereInput
-  data: Prisma.XOR<Prisma.ConversationUpdateWithoutAlertnessSessionsInput, Prisma.ConversationUncheckedUpdateWithoutAlertnessSessionsInput>
-}
-
-export type ConversationUpdateWithoutAlertnessSessionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
-  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
-  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  startTime?: Prisma.StringFieldUpdateOperationsInput | string
-  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
-  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
-  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permSticker?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permGif?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastMessageText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  keyExchangeStatus?: Prisma.EnumKeyExchangeStatusFieldUpdateOperationsInput | $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  keyExchangeLastActivity?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
-  admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
-  moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
-  blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
-  messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
-  files?: Prisma.FileUpdateManyWithoutClassNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
-  reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
-  lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
-}
-
-export type ConversationUncheckedUpdateWithoutAlertnessSessionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
-  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
-  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  startTime?: Prisma.StringFieldUpdateOperationsInput | string
-  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
-  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
-  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permSticker?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permGif?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastMessageText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageSenderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  keyExchangeStatus?: Prisma.EnumKeyExchangeStatusFieldUpdateOperationsInput | $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  keyExchangeLastActivity?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
-  admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
-  moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
-  blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
-  messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
-  files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
-  reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
-}
-
-export type ConversationCreateWithoutAssignmentSubmissionsInput = {
-  id?: string
-  status?: $Enums.ConversationStatus
-  visibility?: $Enums.Visibility
-  themeIndex?: number
-  isGroup?: boolean
-  groupType?: $Enums.GroupType | null
-  groupName?: string | null
-  groupIntro?: string | null
-  groupImage?: string
-  classType?: $Enums.ClassType
-  fileSendingAllowed?: boolean
-  startTime?: string
-  cutoffTime?: string
-  checkInterval?: number
-  permText?: boolean
-  permImage?: boolean
-  permVoice?: boolean
-  permVideo?: boolean
-  permFile?: boolean
-  permSticker?: boolean
-  permGif?: boolean
-  lastMessageText?: string | null
-  lastMessageTimestamp?: Date | string | null
-  autoDeleteMessagesAfter?: number
-  keyExchangeStatus?: $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Date | string | null
-  keyExchangeLastActivity?: Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
-  admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
-  moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
-  blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
-  messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
-  files?: Prisma.FileCreateNestedManyWithoutClassInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
-  reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
-  lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
-}
-
-export type ConversationUncheckedCreateWithoutAssignmentSubmissionsInput = {
-  id?: string
-  status?: $Enums.ConversationStatus
-  visibility?: $Enums.Visibility
-  themeIndex?: number
-  isGroup?: boolean
-  groupType?: $Enums.GroupType | null
-  groupName?: string | null
-  groupIntro?: string | null
-  groupImage?: string
-  classType?: $Enums.ClassType
-  fileSendingAllowed?: boolean
-  startTime?: string
-  cutoffTime?: string
-  checkInterval?: number
-  permText?: boolean
-  permImage?: boolean
-  permVoice?: boolean
-  permVideo?: boolean
-  permFile?: boolean
-  permSticker?: boolean
-  permGif?: boolean
-  lastMessageText?: string | null
-  lastMessageSenderId?: string | null
-  lastMessageTimestamp?: Date | string | null
-  autoDeleteMessagesAfter?: number
-  keyExchangeStatus?: $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Date | string | null
-  keyExchangeLastActivity?: Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
-  admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
-  moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
-  blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
-  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
-  files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
-  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
-}
-
-export type ConversationCreateOrConnectWithoutAssignmentSubmissionsInput = {
-  where: Prisma.ConversationWhereUniqueInput
-  create: Prisma.XOR<Prisma.ConversationCreateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedCreateWithoutAssignmentSubmissionsInput>
-}
-
-export type ConversationUpsertWithoutAssignmentSubmissionsInput = {
-  update: Prisma.XOR<Prisma.ConversationUpdateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedUpdateWithoutAssignmentSubmissionsInput>
-  create: Prisma.XOR<Prisma.ConversationCreateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedCreateWithoutAssignmentSubmissionsInput>
-  where?: Prisma.ConversationWhereInput
-}
-
-export type ConversationUpdateToOneWithWhereWithoutAssignmentSubmissionsInput = {
-  where?: Prisma.ConversationWhereInput
-  data: Prisma.XOR<Prisma.ConversationUpdateWithoutAssignmentSubmissionsInput, Prisma.ConversationUncheckedUpdateWithoutAssignmentSubmissionsInput>
-}
-
-export type ConversationUpdateWithoutAssignmentSubmissionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
-  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
-  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  startTime?: Prisma.StringFieldUpdateOperationsInput | string
-  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
-  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
-  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permSticker?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permGif?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastMessageText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  keyExchangeStatus?: Prisma.EnumKeyExchangeStatusFieldUpdateOperationsInput | $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  keyExchangeLastActivity?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
-  admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
-  moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
-  blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
-  messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
-  files?: Prisma.FileUpdateManyWithoutClassNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
-  reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
-  lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
-}
-
-export type ConversationUncheckedUpdateWithoutAssignmentSubmissionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
-  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
-  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  startTime?: Prisma.StringFieldUpdateOperationsInput | string
-  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
-  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
-  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permSticker?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permGif?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastMessageText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageSenderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  keyExchangeStatus?: Prisma.EnumKeyExchangeStatusFieldUpdateOperationsInput | $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  keyExchangeLastActivity?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
-  admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
-  moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
-  blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
-  messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
-  files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
-  reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutAttendanceLogsInput = {
@@ -4688,21 +3465,16 @@ export type ConversationCreateWithoutAttendanceLogsInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -4743,21 +3515,16 @@ export type ConversationUncheckedCreateWithoutAttendanceLogsInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutAttendanceLogsInput = {
@@ -4812,21 +3579,16 @@ export type ConversationUpdateWithoutAttendanceLogsInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -4867,21 +3629,16 @@ export type ConversationUncheckedUpdateWithoutAttendanceLogsInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutFilesInput = {
@@ -4920,21 +3677,16 @@ export type ConversationCreateWithoutFilesInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -4975,21 +3727,16 @@ export type ConversationUncheckedCreateWithoutFilesInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutFilesInput = {
@@ -5044,21 +3791,16 @@ export type ConversationUpdateWithoutFilesInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -5099,249 +3841,12 @@ export type ConversationUncheckedUpdateWithoutFilesInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
-  reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
-}
-
-export type ConversationCreateWithoutFormAssignmentsInput = {
-  id?: string
-  status?: $Enums.ConversationStatus
-  visibility?: $Enums.Visibility
-  themeIndex?: number
-  isGroup?: boolean
-  groupType?: $Enums.GroupType | null
-  groupName?: string | null
-  groupIntro?: string | null
-  groupImage?: string
-  classType?: $Enums.ClassType
-  fileSendingAllowed?: boolean
-  startTime?: string
-  cutoffTime?: string
-  checkInterval?: number
-  permText?: boolean
-  permImage?: boolean
-  permVoice?: boolean
-  permVideo?: boolean
-  permFile?: boolean
-  permSticker?: boolean
-  permGif?: boolean
-  lastMessageText?: string | null
-  lastMessageTimestamp?: Date | string | null
-  autoDeleteMessagesAfter?: number
-  keyExchangeStatus?: $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Date | string | null
-  keyExchangeLastActivity?: Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
-  admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
-  moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
-  blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
-  messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
-  files?: Prisma.FileCreateNestedManyWithoutClassInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
-  reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
-}
-
-export type ConversationUncheckedCreateWithoutFormAssignmentsInput = {
-  id?: string
-  status?: $Enums.ConversationStatus
-  visibility?: $Enums.Visibility
-  themeIndex?: number
-  isGroup?: boolean
-  groupType?: $Enums.GroupType | null
-  groupName?: string | null
-  groupIntro?: string | null
-  groupImage?: string
-  classType?: $Enums.ClassType
-  fileSendingAllowed?: boolean
-  startTime?: string
-  cutoffTime?: string
-  checkInterval?: number
-  permText?: boolean
-  permImage?: boolean
-  permVoice?: boolean
-  permVideo?: boolean
-  permFile?: boolean
-  permSticker?: boolean
-  permGif?: boolean
-  lastMessageText?: string | null
-  lastMessageSenderId?: string | null
-  lastMessageTimestamp?: Date | string | null
-  autoDeleteMessagesAfter?: number
-  keyExchangeStatus?: $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Date | string | null
-  keyExchangeLastActivity?: Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
-  admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
-  moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
-  blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
-  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
-  files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
-  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-}
-
-export type ConversationCreateOrConnectWithoutFormAssignmentsInput = {
-  where: Prisma.ConversationWhereUniqueInput
-  create: Prisma.XOR<Prisma.ConversationCreateWithoutFormAssignmentsInput, Prisma.ConversationUncheckedCreateWithoutFormAssignmentsInput>
-}
-
-export type ConversationUpsertWithoutFormAssignmentsInput = {
-  update: Prisma.XOR<Prisma.ConversationUpdateWithoutFormAssignmentsInput, Prisma.ConversationUncheckedUpdateWithoutFormAssignmentsInput>
-  create: Prisma.XOR<Prisma.ConversationCreateWithoutFormAssignmentsInput, Prisma.ConversationUncheckedCreateWithoutFormAssignmentsInput>
-  where?: Prisma.ConversationWhereInput
-}
-
-export type ConversationUpdateToOneWithWhereWithoutFormAssignmentsInput = {
-  where?: Prisma.ConversationWhereInput
-  data: Prisma.XOR<Prisma.ConversationUpdateWithoutFormAssignmentsInput, Prisma.ConversationUncheckedUpdateWithoutFormAssignmentsInput>
-}
-
-export type ConversationUpdateWithoutFormAssignmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
-  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
-  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  startTime?: Prisma.StringFieldUpdateOperationsInput | string
-  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
-  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
-  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permSticker?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permGif?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastMessageText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  keyExchangeStatus?: Prisma.EnumKeyExchangeStatusFieldUpdateOperationsInput | $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  keyExchangeLastActivity?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
-  admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
-  moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
-  blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
-  messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
-  files?: Prisma.FileUpdateManyWithoutClassNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
-  reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
-}
-
-export type ConversationUncheckedUpdateWithoutFormAssignmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  groupType?: Prisma.NullableEnumGroupTypeFieldUpdateOperationsInput | $Enums.GroupType | null
-  groupName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupIntro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  groupImage?: Prisma.StringFieldUpdateOperationsInput | string
-  classType?: Prisma.EnumClassTypeFieldUpdateOperationsInput | $Enums.ClassType
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  startTime?: Prisma.StringFieldUpdateOperationsInput | string
-  cutoffTime?: Prisma.StringFieldUpdateOperationsInput | string
-  checkInterval?: Prisma.IntFieldUpdateOperationsInput | number
-  permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permFile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permSticker?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  permGif?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastMessageText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageSenderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastMessageTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  keyExchangeStatus?: Prisma.EnumKeyExchangeStatusFieldUpdateOperationsInput | $Enums.KeyExchangeStatus
-  keyExchangeData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  keyExchangeCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  keyExchangeLastActivity?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
-  admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
-  moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
-  blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
-  messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
-  files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
@@ -5384,21 +3889,16 @@ export type ConversationCreateWithoutPermissionRequestsInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -5439,21 +3939,16 @@ export type ConversationUncheckedCreateWithoutPermissionRequestsInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutPermissionRequestsInput = {
@@ -5508,21 +4003,16 @@ export type ConversationUpdateWithoutPermissionRequestsInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -5563,21 +4053,16 @@ export type ConversationUncheckedUpdateWithoutPermissionRequestsInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutQuickLessonsInput = {
@@ -5616,21 +4101,16 @@ export type ConversationCreateWithoutQuickLessonsInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -5671,21 +4151,16 @@ export type ConversationUncheckedCreateWithoutQuickLessonsInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutQuickLessonsInput = {
@@ -5740,21 +4215,16 @@ export type ConversationUpdateWithoutQuickLessonsInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -5795,21 +4265,16 @@ export type ConversationUncheckedUpdateWithoutQuickLessonsInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutReportsInput = {
@@ -5848,21 +4313,16 @@ export type ConversationCreateWithoutReportsInput = {
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutClassInput
   files?: Prisma.FileCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentCreateNestedManyWithoutConversationInput
   lastMessageSender?: Prisma.UserCreateNestedOneWithoutLastMessagesSentInput
 }
 
@@ -5903,21 +4363,16 @@ export type ConversationUncheckedCreateWithoutReportsInput = {
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   admins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutConversationInput
   moderators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutConversationInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedCreateNestedManyWithoutConversationInput
   blockList?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutConversationInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutClassInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutConversationInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutClassInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedCreateNestedManyWithoutClassInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedCreateNestedManyWithoutClassInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutClassInput
   files?: Prisma.FileUncheckedCreateNestedManyWithoutClassInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutConversationInput
   quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
-  formAssignments?: Prisma.FormAssignmentUncheckedCreateNestedManyWithoutConversationInput
 }
 
 export type ConversationCreateOrConnectWithoutReportsInput = {
@@ -5972,21 +4427,16 @@ export type ConversationUpdateWithoutReportsInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
   lastMessageSender?: Prisma.UserUpdateOneWithoutLastMessagesSentNestedInput
 }
 
@@ -6027,21 +4477,16 @@ export type ConversationUncheckedUpdateWithoutReportsInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateManyLastMessageSenderInput = {
@@ -6115,22 +4560,17 @@ export type ConversationUpdateWithoutLastMessageSenderInput = {
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationUncheckedUpdateWithoutLastMessageSenderInput = {
@@ -6169,22 +4609,17 @@ export type ConversationUncheckedUpdateWithoutLastMessageSenderInput = {
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   admins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutConversationNestedInput
   moderators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutConversationNestedInput
-  selectedDays?: Prisma.ConversationSelectedDayUncheckedUpdateManyWithoutConversationNestedInput
   blockList?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutConversationNestedInput
-  unreadEntries?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutClassNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutConversationNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutClassNestedInput
-  alertnessSessions?: Prisma.AlertnessSessionUncheckedUpdateManyWithoutClassNestedInput
-  assignmentSubmissions?: Prisma.AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput
   attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutClassNestedInput
   files?: Prisma.FileUncheckedUpdateManyWithoutClassNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput
   quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutConversationNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
-  formAssignments?: Prisma.FormAssignmentUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationUncheckedUpdateManyWithoutLastMessageSenderInput = {
@@ -6231,44 +4666,34 @@ export type ConversationCountOutputType = {
   participants: number
   admins: number
   moderators: number
-  selectedDays: number
   blockList: number
-  unreadEntries: number
   messages: number
   joinRequests: number
   reminders: number
   sessions: number
-  alertnessSessions: number
-  assignmentSubmissions: number
   attendanceLogs: number
   files: number
   permissionRequests: number
   quickLessons: number
   reports: number
   unreadMessages: number
-  formAssignments: number
 }
 
 export type ConversationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   participants?: boolean | ConversationCountOutputTypeCountParticipantsArgs
   admins?: boolean | ConversationCountOutputTypeCountAdminsArgs
   moderators?: boolean | ConversationCountOutputTypeCountModeratorsArgs
-  selectedDays?: boolean | ConversationCountOutputTypeCountSelectedDaysArgs
   blockList?: boolean | ConversationCountOutputTypeCountBlockListArgs
-  unreadEntries?: boolean | ConversationCountOutputTypeCountUnreadEntriesArgs
   messages?: boolean | ConversationCountOutputTypeCountMessagesArgs
   joinRequests?: boolean | ConversationCountOutputTypeCountJoinRequestsArgs
   reminders?: boolean | ConversationCountOutputTypeCountRemindersArgs
   sessions?: boolean | ConversationCountOutputTypeCountSessionsArgs
-  alertnessSessions?: boolean | ConversationCountOutputTypeCountAlertnessSessionsArgs
-  assignmentSubmissions?: boolean | ConversationCountOutputTypeCountAssignmentSubmissionsArgs
   attendanceLogs?: boolean | ConversationCountOutputTypeCountAttendanceLogsArgs
   files?: boolean | ConversationCountOutputTypeCountFilesArgs
   permissionRequests?: boolean | ConversationCountOutputTypeCountPermissionRequestsArgs
   quickLessons?: boolean | ConversationCountOutputTypeCountQuickLessonsArgs
   reports?: boolean | ConversationCountOutputTypeCountReportsArgs
   unreadMessages?: boolean | ConversationCountOutputTypeCountUnreadMessagesArgs
-  formAssignments?: boolean | ConversationCountOutputTypeCountFormAssignmentsArgs
 }
 
 /**
@@ -6305,22 +4730,8 @@ export type ConversationCountOutputTypeCountModeratorsArgs<ExtArgs extends runti
 /**
  * ConversationCountOutputType without action
  */
-export type ConversationCountOutputTypeCountSelectedDaysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ConversationSelectedDayWhereInput
-}
-
-/**
- * ConversationCountOutputType without action
- */
 export type ConversationCountOutputTypeCountBlockListArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ConversationBlockEntryWhereInput
-}
-
-/**
- * ConversationCountOutputType without action
- */
-export type ConversationCountOutputTypeCountUnreadEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ConversationUnreadWhereInput
 }
 
 /**
@@ -6349,20 +4760,6 @@ export type ConversationCountOutputTypeCountRemindersArgs<ExtArgs extends runtim
  */
 export type ConversationCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SessionWhereInput
-}
-
-/**
- * ConversationCountOutputType without action
- */
-export type ConversationCountOutputTypeCountAlertnessSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AlertnessSessionWhereInput
-}
-
-/**
- * ConversationCountOutputType without action
- */
-export type ConversationCountOutputTypeCountAssignmentSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AssignmentSubmissionWhereInput
 }
 
 /**
@@ -6407,13 +4804,6 @@ export type ConversationCountOutputTypeCountUnreadMessagesArgs<ExtArgs extends r
   where?: Prisma.UnreadMessageWhereInput
 }
 
-/**
- * ConversationCountOutputType without action
- */
-export type ConversationCountOutputTypeCountFormAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FormAssignmentWhereInput
-}
-
 
 export type ConversationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -6452,22 +4842,17 @@ export type ConversationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   participants?: boolean | Prisma.Conversation$participantsArgs<ExtArgs>
   admins?: boolean | Prisma.Conversation$adminsArgs<ExtArgs>
   moderators?: boolean | Prisma.Conversation$moderatorsArgs<ExtArgs>
-  selectedDays?: boolean | Prisma.Conversation$selectedDaysArgs<ExtArgs>
   blockList?: boolean | Prisma.Conversation$blockListArgs<ExtArgs>
-  unreadEntries?: boolean | Prisma.Conversation$unreadEntriesArgs<ExtArgs>
   messages?: boolean | Prisma.Conversation$messagesArgs<ExtArgs>
   joinRequests?: boolean | Prisma.Conversation$joinRequestsArgs<ExtArgs>
   reminders?: boolean | Prisma.Conversation$remindersArgs<ExtArgs>
   sessions?: boolean | Prisma.Conversation$sessionsArgs<ExtArgs>
-  alertnessSessions?: boolean | Prisma.Conversation$alertnessSessionsArgs<ExtArgs>
-  assignmentSubmissions?: boolean | Prisma.Conversation$assignmentSubmissionsArgs<ExtArgs>
   attendanceLogs?: boolean | Prisma.Conversation$attendanceLogsArgs<ExtArgs>
   files?: boolean | Prisma.Conversation$filesArgs<ExtArgs>
   permissionRequests?: boolean | Prisma.Conversation$permissionRequestsArgs<ExtArgs>
   quickLessons?: boolean | Prisma.Conversation$quickLessonsArgs<ExtArgs>
   reports?: boolean | Prisma.Conversation$reportsArgs<ExtArgs>
   unreadMessages?: boolean | Prisma.Conversation$unreadMessagesArgs<ExtArgs>
-  formAssignments?: boolean | Prisma.Conversation$formAssignmentsArgs<ExtArgs>
   lastMessageSender?: boolean | Prisma.Conversation$lastMessageSenderArgs<ExtArgs>
   _count?: boolean | Prisma.ConversationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["conversation"]>
@@ -6515,22 +4900,17 @@ export type ConversationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   participants?: boolean | Prisma.Conversation$participantsArgs<ExtArgs>
   admins?: boolean | Prisma.Conversation$adminsArgs<ExtArgs>
   moderators?: boolean | Prisma.Conversation$moderatorsArgs<ExtArgs>
-  selectedDays?: boolean | Prisma.Conversation$selectedDaysArgs<ExtArgs>
   blockList?: boolean | Prisma.Conversation$blockListArgs<ExtArgs>
-  unreadEntries?: boolean | Prisma.Conversation$unreadEntriesArgs<ExtArgs>
   messages?: boolean | Prisma.Conversation$messagesArgs<ExtArgs>
   joinRequests?: boolean | Prisma.Conversation$joinRequestsArgs<ExtArgs>
   reminders?: boolean | Prisma.Conversation$remindersArgs<ExtArgs>
   sessions?: boolean | Prisma.Conversation$sessionsArgs<ExtArgs>
-  alertnessSessions?: boolean | Prisma.Conversation$alertnessSessionsArgs<ExtArgs>
-  assignmentSubmissions?: boolean | Prisma.Conversation$assignmentSubmissionsArgs<ExtArgs>
   attendanceLogs?: boolean | Prisma.Conversation$attendanceLogsArgs<ExtArgs>
   files?: boolean | Prisma.Conversation$filesArgs<ExtArgs>
   permissionRequests?: boolean | Prisma.Conversation$permissionRequestsArgs<ExtArgs>
   quickLessons?: boolean | Prisma.Conversation$quickLessonsArgs<ExtArgs>
   reports?: boolean | Prisma.Conversation$reportsArgs<ExtArgs>
   unreadMessages?: boolean | Prisma.Conversation$unreadMessagesArgs<ExtArgs>
-  formAssignments?: boolean | Prisma.Conversation$formAssignmentsArgs<ExtArgs>
   lastMessageSender?: boolean | Prisma.Conversation$lastMessageSenderArgs<ExtArgs>
   _count?: boolean | Prisma.ConversationCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -6541,22 +4921,17 @@ export type $ConversationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     participants: Prisma.$ConversationParticipantPayload<ExtArgs>[]
     admins: Prisma.$ConversationAdminPayload<ExtArgs>[]
     moderators: Prisma.$ConversationModeratorPayload<ExtArgs>[]
-    selectedDays: Prisma.$ConversationSelectedDayPayload<ExtArgs>[]
     blockList: Prisma.$ConversationBlockEntryPayload<ExtArgs>[]
-    unreadEntries: Prisma.$ConversationUnreadPayload<ExtArgs>[]
     messages: Prisma.$MessagePayload<ExtArgs>[]
     joinRequests: Prisma.$JoinRequestPayload<ExtArgs>[]
     reminders: Prisma.$ReminderPayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
-    alertnessSessions: Prisma.$AlertnessSessionPayload<ExtArgs>[]
-    assignmentSubmissions: Prisma.$AssignmentSubmissionPayload<ExtArgs>[]
     attendanceLogs: Prisma.$AttendanceLogPayload<ExtArgs>[]
     files: Prisma.$FilePayload<ExtArgs>[]
     permissionRequests: Prisma.$PermissionRequestPayload<ExtArgs>[]
     quickLessons: Prisma.$QuickLessonPayload<ExtArgs>[]
     reports: Prisma.$ReportPayload<ExtArgs>[]
     unreadMessages: Prisma.$UnreadMessagePayload<ExtArgs>[]
-    formAssignments: Prisma.$FormAssignmentPayload<ExtArgs>[]
     lastMessageSender: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -6936,22 +5311,17 @@ export interface Prisma__ConversationClient<T, Null = never, ExtArgs extends run
   participants<T extends Prisma.Conversation$participantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$participantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   admins<T extends Prisma.Conversation$adminsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationAdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   moderators<T extends Prisma.Conversation$moderatorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$moderatorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationModeratorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  selectedDays<T extends Prisma.Conversation$selectedDaysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$selectedDaysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationSelectedDayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   blockList<T extends Prisma.Conversation$blockListArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$blockListArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationBlockEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  unreadEntries<T extends Prisma.Conversation$unreadEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$unreadEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationUnreadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   messages<T extends Prisma.Conversation$messagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   joinRequests<T extends Prisma.Conversation$joinRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$joinRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JoinRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reminders<T extends Prisma.Conversation$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.Conversation$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  alertnessSessions<T extends Prisma.Conversation$alertnessSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$alertnessSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlertnessSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  assignmentSubmissions<T extends Prisma.Conversation$assignmentSubmissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$assignmentSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssignmentSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   attendanceLogs<T extends Prisma.Conversation$attendanceLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$attendanceLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendanceLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   files<T extends Prisma.Conversation$filesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$filesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   permissionRequests<T extends Prisma.Conversation$permissionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$permissionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PermissionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quickLessons<T extends Prisma.Conversation$quickLessonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$quickLessonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuickLessonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reports<T extends Prisma.Conversation$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   unreadMessages<T extends Prisma.Conversation$unreadMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$unreadMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UnreadMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  formAssignments<T extends Prisma.Conversation$formAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$formAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FormAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   lastMessageSender<T extends Prisma.Conversation$lastMessageSenderArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Conversation$lastMessageSenderArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7430,30 +5800,6 @@ export type Conversation$moderatorsArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
- * Conversation.selectedDays
- */
-export type Conversation$selectedDaysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ConversationSelectedDay
-   */
-  select?: Prisma.ConversationSelectedDaySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ConversationSelectedDay
-   */
-  omit?: Prisma.ConversationSelectedDayOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ConversationSelectedDayInclude<ExtArgs> | null
-  where?: Prisma.ConversationSelectedDayWhereInput
-  orderBy?: Prisma.ConversationSelectedDayOrderByWithRelationInput | Prisma.ConversationSelectedDayOrderByWithRelationInput[]
-  cursor?: Prisma.ConversationSelectedDayWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ConversationSelectedDayScalarFieldEnum | Prisma.ConversationSelectedDayScalarFieldEnum[]
-}
-
-/**
  * Conversation.blockList
  */
 export type Conversation$blockListArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7475,30 +5821,6 @@ export type Conversation$blockListArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.ConversationBlockEntryScalarFieldEnum | Prisma.ConversationBlockEntryScalarFieldEnum[]
-}
-
-/**
- * Conversation.unreadEntries
- */
-export type Conversation$unreadEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ConversationUnread
-   */
-  select?: Prisma.ConversationUnreadSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ConversationUnread
-   */
-  omit?: Prisma.ConversationUnreadOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ConversationUnreadInclude<ExtArgs> | null
-  where?: Prisma.ConversationUnreadWhereInput
-  orderBy?: Prisma.ConversationUnreadOrderByWithRelationInput | Prisma.ConversationUnreadOrderByWithRelationInput[]
-  cursor?: Prisma.ConversationUnreadWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ConversationUnreadScalarFieldEnum | Prisma.ConversationUnreadScalarFieldEnum[]
 }
 
 /**
@@ -7595,54 +5917,6 @@ export type Conversation$sessionsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
-}
-
-/**
- * Conversation.alertnessSessions
- */
-export type Conversation$alertnessSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AlertnessSession
-   */
-  select?: Prisma.AlertnessSessionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AlertnessSession
-   */
-  omit?: Prisma.AlertnessSessionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AlertnessSessionInclude<ExtArgs> | null
-  where?: Prisma.AlertnessSessionWhereInput
-  orderBy?: Prisma.AlertnessSessionOrderByWithRelationInput | Prisma.AlertnessSessionOrderByWithRelationInput[]
-  cursor?: Prisma.AlertnessSessionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AlertnessSessionScalarFieldEnum | Prisma.AlertnessSessionScalarFieldEnum[]
-}
-
-/**
- * Conversation.assignmentSubmissions
- */
-export type Conversation$assignmentSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AssignmentSubmission
-   */
-  select?: Prisma.AssignmentSubmissionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AssignmentSubmission
-   */
-  omit?: Prisma.AssignmentSubmissionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AssignmentSubmissionInclude<ExtArgs> | null
-  where?: Prisma.AssignmentSubmissionWhereInput
-  orderBy?: Prisma.AssignmentSubmissionOrderByWithRelationInput | Prisma.AssignmentSubmissionOrderByWithRelationInput[]
-  cursor?: Prisma.AssignmentSubmissionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AssignmentSubmissionScalarFieldEnum | Prisma.AssignmentSubmissionScalarFieldEnum[]
 }
 
 /**
@@ -7787,30 +6061,6 @@ export type Conversation$unreadMessagesArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.UnreadMessageScalarFieldEnum | Prisma.UnreadMessageScalarFieldEnum[]
-}
-
-/**
- * Conversation.formAssignments
- */
-export type Conversation$formAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FormAssignment
-   */
-  select?: Prisma.FormAssignmentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FormAssignment
-   */
-  omit?: Prisma.FormAssignmentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FormAssignmentInclude<ExtArgs> | null
-  where?: Prisma.FormAssignmentWhereInput
-  orderBy?: Prisma.FormAssignmentOrderByWithRelationInput | Prisma.FormAssignmentOrderByWithRelationInput[]
-  cursor?: Prisma.FormAssignmentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FormAssignmentScalarFieldEnum | Prisma.FormAssignmentScalarFieldEnum[]
 }
 
 /**

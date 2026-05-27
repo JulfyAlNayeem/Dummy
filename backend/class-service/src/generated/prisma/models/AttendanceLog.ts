@@ -20,70 +20,112 @@ export type AttendanceLogModel = runtime.Types.Result.DefaultSelection<Prisma.$A
 
 export type AggregateAttendanceLog = {
   _count: AttendanceLogCountAggregateOutputType | null
+  _avg: AttendanceLogAvgAggregateOutputType | null
+  _sum: AttendanceLogSumAggregateOutputType | null
   _min: AttendanceLogMinAggregateOutputType | null
   _max: AttendanceLogMaxAggregateOutputType | null
+}
+
+export type AttendanceLogAvgAggregateOutputType = {
+  duration: number | null
+}
+
+export type AttendanceLogSumAggregateOutputType = {
+  duration: number | null
 }
 
 export type AttendanceLogMinAggregateOutputType = {
   id: string | null
   sessionId: string | null
+  classId: string | null
   userId: string | null
-  conversationId: string | null
-  status: string | null
-  joinedAt: Date | null
+  status: $Enums.AttendanceStatus | null
+  enteredAt: Date | null
   leftAt: Date | null
+  duration: number | null
+  sessionDate: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type AttendanceLogMaxAggregateOutputType = {
   id: string | null
   sessionId: string | null
+  classId: string | null
   userId: string | null
-  conversationId: string | null
-  status: string | null
-  joinedAt: Date | null
+  status: $Enums.AttendanceStatus | null
+  enteredAt: Date | null
   leftAt: Date | null
+  duration: number | null
+  sessionDate: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type AttendanceLogCountAggregateOutputType = {
   id: number
   sessionId: number
+  classId: number
   userId: number
-  conversationId: number
   status: number
-  joinedAt: number
+  enteredAt: number
   leftAt: number
+  duration: number
+  sessionDate: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
 
+export type AttendanceLogAvgAggregateInputType = {
+  duration?: true
+}
+
+export type AttendanceLogSumAggregateInputType = {
+  duration?: true
+}
+
 export type AttendanceLogMinAggregateInputType = {
   id?: true
   sessionId?: true
+  classId?: true
   userId?: true
-  conversationId?: true
   status?: true
-  joinedAt?: true
+  enteredAt?: true
   leftAt?: true
+  duration?: true
+  sessionDate?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type AttendanceLogMaxAggregateInputType = {
   id?: true
   sessionId?: true
+  classId?: true
   userId?: true
-  conversationId?: true
   status?: true
-  joinedAt?: true
+  enteredAt?: true
   leftAt?: true
+  duration?: true
+  sessionDate?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type AttendanceLogCountAggregateInputType = {
   id?: true
   sessionId?: true
+  classId?: true
   userId?: true
-  conversationId?: true
   status?: true
-  joinedAt?: true
+  enteredAt?: true
   leftAt?: true
+  duration?: true
+  sessionDate?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -125,6 +167,18 @@ export type AttendanceLogAggregateArgs<ExtArgs extends runtime.Types.Extensions.
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: AttendanceLogAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: AttendanceLogSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: AttendanceLogMinAggregateInputType
@@ -155,6 +209,8 @@ export type AttendanceLogGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   _count?: AttendanceLogCountAggregateInputType | true
+  _avg?: AttendanceLogAvgAggregateInputType
+  _sum?: AttendanceLogSumAggregateInputType
   _min?: AttendanceLogMinAggregateInputType
   _max?: AttendanceLogMaxAggregateInputType
 }
@@ -162,12 +218,18 @@ export type AttendanceLogGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type AttendanceLogGroupByOutputType = {
   id: string
   sessionId: string
+  classId: string
   userId: string
-  conversationId: string
-  status: string
-  joinedAt: Date
+  status: $Enums.AttendanceStatus
+  enteredAt: Date | null
   leftAt: Date | null
+  duration: number | null
+  sessionDate: string
+  createdAt: Date
+  updatedAt: Date
   _count: AttendanceLogCountAggregateOutputType | null
+  _avg: AttendanceLogAvgAggregateOutputType | null
+  _sum: AttendanceLogSumAggregateOutputType | null
   _min: AttendanceLogMinAggregateOutputType | null
   _max: AttendanceLogMaxAggregateOutputType | null
 }
@@ -193,58 +255,76 @@ export type AttendanceLogWhereInput = {
   NOT?: Prisma.AttendanceLogWhereInput | Prisma.AttendanceLogWhereInput[]
   id?: Prisma.StringFilter<"AttendanceLog"> | string
   sessionId?: Prisma.StringFilter<"AttendanceLog"> | string
+  classId?: Prisma.StringFilter<"AttendanceLog"> | string
   userId?: Prisma.StringFilter<"AttendanceLog"> | string
-  conversationId?: Prisma.StringFilter<"AttendanceLog"> | string
-  status?: Prisma.StringFilter<"AttendanceLog"> | string
-  joinedAt?: Prisma.DateTimeFilter<"AttendanceLog"> | Date | string
+  status?: Prisma.EnumAttendanceStatusFilter<"AttendanceLog"> | $Enums.AttendanceStatus
+  enteredAt?: Prisma.DateTimeNullableFilter<"AttendanceLog"> | Date | string | null
   leftAt?: Prisma.DateTimeNullableFilter<"AttendanceLog"> | Date | string | null
+  duration?: Prisma.IntNullableFilter<"AttendanceLog"> | number | null
+  sessionDate?: Prisma.StringFilter<"AttendanceLog"> | string
+  createdAt?: Prisma.DateTimeFilter<"AttendanceLog"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"AttendanceLog"> | Date | string
   session?: Prisma.XOR<Prisma.SessionScalarRelationFilter, Prisma.SessionWhereInput>
+  class?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
 }
 
 export type AttendanceLogOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
+  classId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  conversationId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  joinedAt?: Prisma.SortOrder
+  enteredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   leftAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  sessionDate?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   session?: Prisma.SessionOrderByWithRelationInput
+  class?: Prisma.ConversationOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
-  conversation?: Prisma.ConversationOrderByWithRelationInput
   _relevance?: Prisma.AttendanceLogOrderByRelevanceInput
 }
 
 export type AttendanceLogWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  sessionId_userId?: Prisma.AttendanceLogSessionIdUserIdCompoundUniqueInput
+  sessionId_userId_sessionDate?: Prisma.AttendanceLogSessionIdUserIdSessionDateCompoundUniqueInput
   AND?: Prisma.AttendanceLogWhereInput | Prisma.AttendanceLogWhereInput[]
   OR?: Prisma.AttendanceLogWhereInput[]
   NOT?: Prisma.AttendanceLogWhereInput | Prisma.AttendanceLogWhereInput[]
   sessionId?: Prisma.StringFilter<"AttendanceLog"> | string
+  classId?: Prisma.StringFilter<"AttendanceLog"> | string
   userId?: Prisma.StringFilter<"AttendanceLog"> | string
-  conversationId?: Prisma.StringFilter<"AttendanceLog"> | string
-  status?: Prisma.StringFilter<"AttendanceLog"> | string
-  joinedAt?: Prisma.DateTimeFilter<"AttendanceLog"> | Date | string
+  status?: Prisma.EnumAttendanceStatusFilter<"AttendanceLog"> | $Enums.AttendanceStatus
+  enteredAt?: Prisma.DateTimeNullableFilter<"AttendanceLog"> | Date | string | null
   leftAt?: Prisma.DateTimeNullableFilter<"AttendanceLog"> | Date | string | null
+  duration?: Prisma.IntNullableFilter<"AttendanceLog"> | number | null
+  sessionDate?: Prisma.StringFilter<"AttendanceLog"> | string
+  createdAt?: Prisma.DateTimeFilter<"AttendanceLog"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"AttendanceLog"> | Date | string
   session?: Prisma.XOR<Prisma.SessionScalarRelationFilter, Prisma.SessionWhereInput>
+  class?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
-}, "id" | "sessionId_userId">
+}, "id" | "sessionId_userId_sessionDate">
 
 export type AttendanceLogOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
+  classId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  conversationId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  joinedAt?: Prisma.SortOrder
+  enteredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   leftAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  sessionDate?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.AttendanceLogCountOrderByAggregateInput
+  _avg?: Prisma.AttendanceLogAvgOrderByAggregateInput
   _max?: Prisma.AttendanceLogMaxOrderByAggregateInput
   _min?: Prisma.AttendanceLogMinOrderByAggregateInput
+  _sum?: Prisma.AttendanceLogSumOrderByAggregateInput
 }
 
 export type AttendanceLogScalarWhereWithAggregatesInput = {
@@ -253,78 +333,110 @@ export type AttendanceLogScalarWhereWithAggregatesInput = {
   NOT?: Prisma.AttendanceLogScalarWhereWithAggregatesInput | Prisma.AttendanceLogScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"AttendanceLog"> | string
   sessionId?: Prisma.StringWithAggregatesFilter<"AttendanceLog"> | string
+  classId?: Prisma.StringWithAggregatesFilter<"AttendanceLog"> | string
   userId?: Prisma.StringWithAggregatesFilter<"AttendanceLog"> | string
-  conversationId?: Prisma.StringWithAggregatesFilter<"AttendanceLog"> | string
-  status?: Prisma.StringWithAggregatesFilter<"AttendanceLog"> | string
-  joinedAt?: Prisma.DateTimeWithAggregatesFilter<"AttendanceLog"> | Date | string
+  status?: Prisma.EnumAttendanceStatusWithAggregatesFilter<"AttendanceLog"> | $Enums.AttendanceStatus
+  enteredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"AttendanceLog"> | Date | string | null
   leftAt?: Prisma.DateTimeNullableWithAggregatesFilter<"AttendanceLog"> | Date | string | null
+  duration?: Prisma.IntNullableWithAggregatesFilter<"AttendanceLog"> | number | null
+  sessionDate?: Prisma.StringWithAggregatesFilter<"AttendanceLog"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"AttendanceLog"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"AttendanceLog"> | Date | string
 }
 
 export type AttendanceLogCreateInput = {
   id?: string
-  status?: string
-  joinedAt?: Date | string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   session: Prisma.SessionCreateNestedOneWithoutAttendanceLogsInput
+  class: Prisma.ConversationCreateNestedOneWithoutAttendanceLogsInput
   user: Prisma.UserCreateNestedOneWithoutAttendanceLogsInput
-  conversation: Prisma.ConversationCreateNestedOneWithoutAttendanceLogsInput
 }
 
 export type AttendanceLogUncheckedCreateInput = {
   id?: string
   sessionId: string
+  classId: string
   userId: string
-  conversationId: string
-  status?: string
-  joinedAt?: Date | string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AttendanceLogUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   session?: Prisma.SessionUpdateOneRequiredWithoutAttendanceLogsNestedInput
+  class?: Prisma.ConversationUpdateOneRequiredWithoutAttendanceLogsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutAttendanceLogsNestedInput
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutAttendanceLogsNestedInput
 }
 
 export type AttendanceLogUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AttendanceLogCreateManyInput = {
   id?: string
   sessionId: string
+  classId: string
   userId: string
-  conversationId: string
-  status?: string
-  joinedAt?: Date | string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AttendanceLogUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AttendanceLogUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AttendanceLogListRelationFilter = {
@@ -343,39 +455,60 @@ export type AttendanceLogOrderByRelevanceInput = {
   search: string
 }
 
-export type AttendanceLogSessionIdUserIdCompoundUniqueInput = {
+export type AttendanceLogSessionIdUserIdSessionDateCompoundUniqueInput = {
   sessionId: string
   userId: string
+  sessionDate: string
 }
 
 export type AttendanceLogCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
+  classId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  conversationId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  joinedAt?: Prisma.SortOrder
+  enteredAt?: Prisma.SortOrder
   leftAt?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
+  sessionDate?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type AttendanceLogAvgOrderByAggregateInput = {
+  duration?: Prisma.SortOrder
 }
 
 export type AttendanceLogMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
+  classId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  conversationId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  joinedAt?: Prisma.SortOrder
+  enteredAt?: Prisma.SortOrder
   leftAt?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
+  sessionDate?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type AttendanceLogMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
+  classId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  conversationId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  joinedAt?: Prisma.SortOrder
+  enteredAt?: Prisma.SortOrder
   leftAt?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
+  sessionDate?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type AttendanceLogSumOrderByAggregateInput = {
+  duration?: Prisma.SortOrder
 }
 
 export type AttendanceLogCreateNestedManyWithoutUserInput = {
@@ -420,45 +553,45 @@ export type AttendanceLogUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.AttendanceLogScalarWhereInput | Prisma.AttendanceLogScalarWhereInput[]
 }
 
-export type AttendanceLogCreateNestedManyWithoutConversationInput = {
-  create?: Prisma.XOR<Prisma.AttendanceLogCreateWithoutConversationInput, Prisma.AttendanceLogUncheckedCreateWithoutConversationInput> | Prisma.AttendanceLogCreateWithoutConversationInput[] | Prisma.AttendanceLogUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.AttendanceLogCreateOrConnectWithoutConversationInput | Prisma.AttendanceLogCreateOrConnectWithoutConversationInput[]
-  createMany?: Prisma.AttendanceLogCreateManyConversationInputEnvelope
+export type AttendanceLogCreateNestedManyWithoutClassInput = {
+  create?: Prisma.XOR<Prisma.AttendanceLogCreateWithoutClassInput, Prisma.AttendanceLogUncheckedCreateWithoutClassInput> | Prisma.AttendanceLogCreateWithoutClassInput[] | Prisma.AttendanceLogUncheckedCreateWithoutClassInput[]
+  connectOrCreate?: Prisma.AttendanceLogCreateOrConnectWithoutClassInput | Prisma.AttendanceLogCreateOrConnectWithoutClassInput[]
+  createMany?: Prisma.AttendanceLogCreateManyClassInputEnvelope
   connect?: Prisma.AttendanceLogWhereUniqueInput | Prisma.AttendanceLogWhereUniqueInput[]
 }
 
-export type AttendanceLogUncheckedCreateNestedManyWithoutConversationInput = {
-  create?: Prisma.XOR<Prisma.AttendanceLogCreateWithoutConversationInput, Prisma.AttendanceLogUncheckedCreateWithoutConversationInput> | Prisma.AttendanceLogCreateWithoutConversationInput[] | Prisma.AttendanceLogUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.AttendanceLogCreateOrConnectWithoutConversationInput | Prisma.AttendanceLogCreateOrConnectWithoutConversationInput[]
-  createMany?: Prisma.AttendanceLogCreateManyConversationInputEnvelope
+export type AttendanceLogUncheckedCreateNestedManyWithoutClassInput = {
+  create?: Prisma.XOR<Prisma.AttendanceLogCreateWithoutClassInput, Prisma.AttendanceLogUncheckedCreateWithoutClassInput> | Prisma.AttendanceLogCreateWithoutClassInput[] | Prisma.AttendanceLogUncheckedCreateWithoutClassInput[]
+  connectOrCreate?: Prisma.AttendanceLogCreateOrConnectWithoutClassInput | Prisma.AttendanceLogCreateOrConnectWithoutClassInput[]
+  createMany?: Prisma.AttendanceLogCreateManyClassInputEnvelope
   connect?: Prisma.AttendanceLogWhereUniqueInput | Prisma.AttendanceLogWhereUniqueInput[]
 }
 
-export type AttendanceLogUpdateManyWithoutConversationNestedInput = {
-  create?: Prisma.XOR<Prisma.AttendanceLogCreateWithoutConversationInput, Prisma.AttendanceLogUncheckedCreateWithoutConversationInput> | Prisma.AttendanceLogCreateWithoutConversationInput[] | Prisma.AttendanceLogUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.AttendanceLogCreateOrConnectWithoutConversationInput | Prisma.AttendanceLogCreateOrConnectWithoutConversationInput[]
-  upsert?: Prisma.AttendanceLogUpsertWithWhereUniqueWithoutConversationInput | Prisma.AttendanceLogUpsertWithWhereUniqueWithoutConversationInput[]
-  createMany?: Prisma.AttendanceLogCreateManyConversationInputEnvelope
+export type AttendanceLogUpdateManyWithoutClassNestedInput = {
+  create?: Prisma.XOR<Prisma.AttendanceLogCreateWithoutClassInput, Prisma.AttendanceLogUncheckedCreateWithoutClassInput> | Prisma.AttendanceLogCreateWithoutClassInput[] | Prisma.AttendanceLogUncheckedCreateWithoutClassInput[]
+  connectOrCreate?: Prisma.AttendanceLogCreateOrConnectWithoutClassInput | Prisma.AttendanceLogCreateOrConnectWithoutClassInput[]
+  upsert?: Prisma.AttendanceLogUpsertWithWhereUniqueWithoutClassInput | Prisma.AttendanceLogUpsertWithWhereUniqueWithoutClassInput[]
+  createMany?: Prisma.AttendanceLogCreateManyClassInputEnvelope
   set?: Prisma.AttendanceLogWhereUniqueInput | Prisma.AttendanceLogWhereUniqueInput[]
   disconnect?: Prisma.AttendanceLogWhereUniqueInput | Prisma.AttendanceLogWhereUniqueInput[]
   delete?: Prisma.AttendanceLogWhereUniqueInput | Prisma.AttendanceLogWhereUniqueInput[]
   connect?: Prisma.AttendanceLogWhereUniqueInput | Prisma.AttendanceLogWhereUniqueInput[]
-  update?: Prisma.AttendanceLogUpdateWithWhereUniqueWithoutConversationInput | Prisma.AttendanceLogUpdateWithWhereUniqueWithoutConversationInput[]
-  updateMany?: Prisma.AttendanceLogUpdateManyWithWhereWithoutConversationInput | Prisma.AttendanceLogUpdateManyWithWhereWithoutConversationInput[]
+  update?: Prisma.AttendanceLogUpdateWithWhereUniqueWithoutClassInput | Prisma.AttendanceLogUpdateWithWhereUniqueWithoutClassInput[]
+  updateMany?: Prisma.AttendanceLogUpdateManyWithWhereWithoutClassInput | Prisma.AttendanceLogUpdateManyWithWhereWithoutClassInput[]
   deleteMany?: Prisma.AttendanceLogScalarWhereInput | Prisma.AttendanceLogScalarWhereInput[]
 }
 
-export type AttendanceLogUncheckedUpdateManyWithoutConversationNestedInput = {
-  create?: Prisma.XOR<Prisma.AttendanceLogCreateWithoutConversationInput, Prisma.AttendanceLogUncheckedCreateWithoutConversationInput> | Prisma.AttendanceLogCreateWithoutConversationInput[] | Prisma.AttendanceLogUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.AttendanceLogCreateOrConnectWithoutConversationInput | Prisma.AttendanceLogCreateOrConnectWithoutConversationInput[]
-  upsert?: Prisma.AttendanceLogUpsertWithWhereUniqueWithoutConversationInput | Prisma.AttendanceLogUpsertWithWhereUniqueWithoutConversationInput[]
-  createMany?: Prisma.AttendanceLogCreateManyConversationInputEnvelope
+export type AttendanceLogUncheckedUpdateManyWithoutClassNestedInput = {
+  create?: Prisma.XOR<Prisma.AttendanceLogCreateWithoutClassInput, Prisma.AttendanceLogUncheckedCreateWithoutClassInput> | Prisma.AttendanceLogCreateWithoutClassInput[] | Prisma.AttendanceLogUncheckedCreateWithoutClassInput[]
+  connectOrCreate?: Prisma.AttendanceLogCreateOrConnectWithoutClassInput | Prisma.AttendanceLogCreateOrConnectWithoutClassInput[]
+  upsert?: Prisma.AttendanceLogUpsertWithWhereUniqueWithoutClassInput | Prisma.AttendanceLogUpsertWithWhereUniqueWithoutClassInput[]
+  createMany?: Prisma.AttendanceLogCreateManyClassInputEnvelope
   set?: Prisma.AttendanceLogWhereUniqueInput | Prisma.AttendanceLogWhereUniqueInput[]
   disconnect?: Prisma.AttendanceLogWhereUniqueInput | Prisma.AttendanceLogWhereUniqueInput[]
   delete?: Prisma.AttendanceLogWhereUniqueInput | Prisma.AttendanceLogWhereUniqueInput[]
   connect?: Prisma.AttendanceLogWhereUniqueInput | Prisma.AttendanceLogWhereUniqueInput[]
-  update?: Prisma.AttendanceLogUpdateWithWhereUniqueWithoutConversationInput | Prisma.AttendanceLogUpdateWithWhereUniqueWithoutConversationInput[]
-  updateMany?: Prisma.AttendanceLogUpdateManyWithWhereWithoutConversationInput | Prisma.AttendanceLogUpdateManyWithWhereWithoutConversationInput[]
+  update?: Prisma.AttendanceLogUpdateWithWhereUniqueWithoutClassInput | Prisma.AttendanceLogUpdateWithWhereUniqueWithoutClassInput[]
+  updateMany?: Prisma.AttendanceLogUpdateManyWithWhereWithoutClassInput | Prisma.AttendanceLogUpdateManyWithWhereWithoutClassInput[]
   deleteMany?: Prisma.AttendanceLogScalarWhereInput | Prisma.AttendanceLogScalarWhereInput[]
 }
 
@@ -504,22 +637,42 @@ export type AttendanceLogUncheckedUpdateManyWithoutSessionNestedInput = {
   deleteMany?: Prisma.AttendanceLogScalarWhereInput | Prisma.AttendanceLogScalarWhereInput[]
 }
 
+export type EnumAttendanceStatusFieldUpdateOperationsInput = {
+  set?: $Enums.AttendanceStatus
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type AttendanceLogCreateWithoutUserInput = {
   id?: string
-  status?: string
-  joinedAt?: Date | string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   session: Prisma.SessionCreateNestedOneWithoutAttendanceLogsInput
-  conversation: Prisma.ConversationCreateNestedOneWithoutAttendanceLogsInput
+  class: Prisma.ConversationCreateNestedOneWithoutAttendanceLogsInput
 }
 
 export type AttendanceLogUncheckedCreateWithoutUserInput = {
   id?: string
   sessionId: string
-  conversationId: string
-  status?: string
-  joinedAt?: Date | string
+  classId: string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AttendanceLogCreateOrConnectWithoutUserInput = {
@@ -554,73 +707,93 @@ export type AttendanceLogScalarWhereInput = {
   NOT?: Prisma.AttendanceLogScalarWhereInput | Prisma.AttendanceLogScalarWhereInput[]
   id?: Prisma.StringFilter<"AttendanceLog"> | string
   sessionId?: Prisma.StringFilter<"AttendanceLog"> | string
+  classId?: Prisma.StringFilter<"AttendanceLog"> | string
   userId?: Prisma.StringFilter<"AttendanceLog"> | string
-  conversationId?: Prisma.StringFilter<"AttendanceLog"> | string
-  status?: Prisma.StringFilter<"AttendanceLog"> | string
-  joinedAt?: Prisma.DateTimeFilter<"AttendanceLog"> | Date | string
+  status?: Prisma.EnumAttendanceStatusFilter<"AttendanceLog"> | $Enums.AttendanceStatus
+  enteredAt?: Prisma.DateTimeNullableFilter<"AttendanceLog"> | Date | string | null
   leftAt?: Prisma.DateTimeNullableFilter<"AttendanceLog"> | Date | string | null
+  duration?: Prisma.IntNullableFilter<"AttendanceLog"> | number | null
+  sessionDate?: Prisma.StringFilter<"AttendanceLog"> | string
+  createdAt?: Prisma.DateTimeFilter<"AttendanceLog"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"AttendanceLog"> | Date | string
 }
 
-export type AttendanceLogCreateWithoutConversationInput = {
+export type AttendanceLogCreateWithoutClassInput = {
   id?: string
-  status?: string
-  joinedAt?: Date | string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   session: Prisma.SessionCreateNestedOneWithoutAttendanceLogsInput
   user: Prisma.UserCreateNestedOneWithoutAttendanceLogsInput
 }
 
-export type AttendanceLogUncheckedCreateWithoutConversationInput = {
+export type AttendanceLogUncheckedCreateWithoutClassInput = {
   id?: string
   sessionId: string
   userId: string
-  status?: string
-  joinedAt?: Date | string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
-export type AttendanceLogCreateOrConnectWithoutConversationInput = {
+export type AttendanceLogCreateOrConnectWithoutClassInput = {
   where: Prisma.AttendanceLogWhereUniqueInput
-  create: Prisma.XOR<Prisma.AttendanceLogCreateWithoutConversationInput, Prisma.AttendanceLogUncheckedCreateWithoutConversationInput>
+  create: Prisma.XOR<Prisma.AttendanceLogCreateWithoutClassInput, Prisma.AttendanceLogUncheckedCreateWithoutClassInput>
 }
 
-export type AttendanceLogCreateManyConversationInputEnvelope = {
-  data: Prisma.AttendanceLogCreateManyConversationInput | Prisma.AttendanceLogCreateManyConversationInput[]
+export type AttendanceLogCreateManyClassInputEnvelope = {
+  data: Prisma.AttendanceLogCreateManyClassInput | Prisma.AttendanceLogCreateManyClassInput[]
   skipDuplicates?: boolean
 }
 
-export type AttendanceLogUpsertWithWhereUniqueWithoutConversationInput = {
+export type AttendanceLogUpsertWithWhereUniqueWithoutClassInput = {
   where: Prisma.AttendanceLogWhereUniqueInput
-  update: Prisma.XOR<Prisma.AttendanceLogUpdateWithoutConversationInput, Prisma.AttendanceLogUncheckedUpdateWithoutConversationInput>
-  create: Prisma.XOR<Prisma.AttendanceLogCreateWithoutConversationInput, Prisma.AttendanceLogUncheckedCreateWithoutConversationInput>
+  update: Prisma.XOR<Prisma.AttendanceLogUpdateWithoutClassInput, Prisma.AttendanceLogUncheckedUpdateWithoutClassInput>
+  create: Prisma.XOR<Prisma.AttendanceLogCreateWithoutClassInput, Prisma.AttendanceLogUncheckedCreateWithoutClassInput>
 }
 
-export type AttendanceLogUpdateWithWhereUniqueWithoutConversationInput = {
+export type AttendanceLogUpdateWithWhereUniqueWithoutClassInput = {
   where: Prisma.AttendanceLogWhereUniqueInput
-  data: Prisma.XOR<Prisma.AttendanceLogUpdateWithoutConversationInput, Prisma.AttendanceLogUncheckedUpdateWithoutConversationInput>
+  data: Prisma.XOR<Prisma.AttendanceLogUpdateWithoutClassInput, Prisma.AttendanceLogUncheckedUpdateWithoutClassInput>
 }
 
-export type AttendanceLogUpdateManyWithWhereWithoutConversationInput = {
+export type AttendanceLogUpdateManyWithWhereWithoutClassInput = {
   where: Prisma.AttendanceLogScalarWhereInput
-  data: Prisma.XOR<Prisma.AttendanceLogUpdateManyMutationInput, Prisma.AttendanceLogUncheckedUpdateManyWithoutConversationInput>
+  data: Prisma.XOR<Prisma.AttendanceLogUpdateManyMutationInput, Prisma.AttendanceLogUncheckedUpdateManyWithoutClassInput>
 }
 
 export type AttendanceLogCreateWithoutSessionInput = {
   id?: string
-  status?: string
-  joinedAt?: Date | string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  class: Prisma.ConversationCreateNestedOneWithoutAttendanceLogsInput
   user: Prisma.UserCreateNestedOneWithoutAttendanceLogsInput
-  conversation: Prisma.ConversationCreateNestedOneWithoutAttendanceLogsInput
 }
 
 export type AttendanceLogUncheckedCreateWithoutSessionInput = {
   id?: string
+  classId: string
   userId: string
-  conversationId: string
-  status?: string
-  joinedAt?: Date | string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AttendanceLogCreateOrConnectWithoutSessionInput = {
@@ -652,109 +825,157 @@ export type AttendanceLogUpdateManyWithWhereWithoutSessionInput = {
 export type AttendanceLogCreateManyUserInput = {
   id?: string
   sessionId: string
-  conversationId: string
-  status?: string
-  joinedAt?: Date | string
+  classId: string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AttendanceLogUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   session?: Prisma.SessionUpdateOneRequiredWithoutAttendanceLogsNestedInput
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutAttendanceLogsNestedInput
+  class?: Prisma.ConversationUpdateOneRequiredWithoutAttendanceLogsNestedInput
 }
 
 export type AttendanceLogUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
-  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AttendanceLogUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
-  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type AttendanceLogCreateManyConversationInput = {
+export type AttendanceLogCreateManyClassInput = {
   id?: string
   sessionId: string
   userId: string
-  status?: string
-  joinedAt?: Date | string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
-export type AttendanceLogUpdateWithoutConversationInput = {
+export type AttendanceLogUpdateWithoutClassInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   session?: Prisma.SessionUpdateOneRequiredWithoutAttendanceLogsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutAttendanceLogsNestedInput
 }
 
-export type AttendanceLogUncheckedUpdateWithoutConversationInput = {
+export type AttendanceLogUncheckedUpdateWithoutClassInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type AttendanceLogUncheckedUpdateManyWithoutConversationInput = {
+export type AttendanceLogUncheckedUpdateManyWithoutClassInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AttendanceLogCreateManySessionInput = {
   id?: string
+  classId: string
   userId: string
-  conversationId: string
-  status?: string
-  joinedAt?: Date | string
+  status?: $Enums.AttendanceStatus
+  enteredAt?: Date | string | null
   leftAt?: Date | string | null
+  duration?: number | null
+  sessionDate: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AttendanceLogUpdateWithoutSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  class?: Prisma.ConversationUpdateOneRequiredWithoutAttendanceLogsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutAttendanceLogsNestedInput
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutAttendanceLogsNestedInput
 }
 
 export type AttendanceLogUncheckedUpdateWithoutSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AttendanceLogUncheckedUpdateManyWithoutSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  enteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sessionDate?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -762,14 +983,18 @@ export type AttendanceLogUncheckedUpdateManyWithoutSessionInput = {
 export type AttendanceLogSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   sessionId?: boolean
+  classId?: boolean
   userId?: boolean
-  conversationId?: boolean
   status?: boolean
-  joinedAt?: boolean
+  enteredAt?: boolean
   leftAt?: boolean
+  duration?: boolean
+  sessionDate?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   session?: boolean | Prisma.SessionDefaultArgs<ExtArgs>
+  class?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["attendanceLog"]>
 
 
@@ -777,35 +1002,43 @@ export type AttendanceLogSelect<ExtArgs extends runtime.Types.Extensions.Interna
 export type AttendanceLogSelectScalar = {
   id?: boolean
   sessionId?: boolean
+  classId?: boolean
   userId?: boolean
-  conversationId?: boolean
   status?: boolean
-  joinedAt?: boolean
+  enteredAt?: boolean
   leftAt?: boolean
+  duration?: boolean
+  sessionDate?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type AttendanceLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionId" | "userId" | "conversationId" | "status" | "joinedAt" | "leftAt", ExtArgs["result"]["attendanceLog"]>
+export type AttendanceLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionId" | "classId" | "userId" | "status" | "enteredAt" | "leftAt" | "duration" | "sessionDate" | "createdAt" | "updatedAt", ExtArgs["result"]["attendanceLog"]>
 export type AttendanceLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   session?: boolean | Prisma.SessionDefaultArgs<ExtArgs>
+  class?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
 }
 
 export type $AttendanceLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AttendanceLog"
   objects: {
     session: Prisma.$SessionPayload<ExtArgs>
+    class: Prisma.$ConversationPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
-    conversation: Prisma.$ConversationPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     sessionId: string
+    classId: string
     userId: string
-    conversationId: string
-    status: string
-    joinedAt: Date
+    status: $Enums.AttendanceStatus
+    enteredAt: Date | null
     leftAt: Date | null
+    duration: number | null
+    sessionDate: string
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["attendanceLog"]>
   composites: {}
 }
@@ -1147,8 +1380,8 @@ readonly fields: AttendanceLogFieldRefs;
 export interface Prisma__AttendanceLogClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   session<T extends Prisma.SessionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SessionDefaultArgs<ExtArgs>>): Prisma.Prisma__SessionClient<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  class<T extends Prisma.ConversationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConversationDefaultArgs<ExtArgs>>): Prisma.Prisma__ConversationClient<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  conversation<T extends Prisma.ConversationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConversationDefaultArgs<ExtArgs>>): Prisma.Prisma__ConversationClient<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1180,11 +1413,15 @@ export interface Prisma__AttendanceLogClient<T, Null = never, ExtArgs extends ru
 export interface AttendanceLogFieldRefs {
   readonly id: Prisma.FieldRef<"AttendanceLog", 'String'>
   readonly sessionId: Prisma.FieldRef<"AttendanceLog", 'String'>
+  readonly classId: Prisma.FieldRef<"AttendanceLog", 'String'>
   readonly userId: Prisma.FieldRef<"AttendanceLog", 'String'>
-  readonly conversationId: Prisma.FieldRef<"AttendanceLog", 'String'>
-  readonly status: Prisma.FieldRef<"AttendanceLog", 'String'>
-  readonly joinedAt: Prisma.FieldRef<"AttendanceLog", 'DateTime'>
+  readonly status: Prisma.FieldRef<"AttendanceLog", 'AttendanceStatus'>
+  readonly enteredAt: Prisma.FieldRef<"AttendanceLog", 'DateTime'>
   readonly leftAt: Prisma.FieldRef<"AttendanceLog", 'DateTime'>
+  readonly duration: Prisma.FieldRef<"AttendanceLog", 'Int'>
+  readonly sessionDate: Prisma.FieldRef<"AttendanceLog", 'String'>
+  readonly createdAt: Prisma.FieldRef<"AttendanceLog", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"AttendanceLog", 'DateTime'>
 }
     
 

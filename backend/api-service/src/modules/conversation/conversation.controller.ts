@@ -270,16 +270,6 @@ export const acceptMessageRequest = async (req: Request, res: Response) => {
 
     await prisma.conversation.update({ where: { id: conversationId }, data: { status: 'accepted' } });
 
-    // Add friends
-    const [userA, userB] = conversation.participants.map((p) => p.userId);
-    await prisma.friendEntry.createMany({
-      data: [
-        { friendListId: (await prisma.friendList.upsert({ where: { userId: userA }, create: { userId: userA }, update: {} })).id, friendId: userB },
-        { friendListId: (await prisma.friendList.upsert({ where: { userId: userB }, create: { userId: userB }, update: {} })).id, friendId: userA },
-      ],
-      skipDuplicates: true,
-    });
-
     const participantIds = conversation.participants.map((p) => p.userId);
     participantIds.forEach((pid) => {
       (req as any).io?.to(pid).emit('messageRequestAccepted', { conversationId, message: 'Message request accepted' });

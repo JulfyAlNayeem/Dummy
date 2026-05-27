@@ -76,7 +76,7 @@ export const createClass = async (req: Request, res: Response): Promise<void> =>
 
 export const getClassDetails = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
     const cls = await prisma.conversation.findUnique({
       where: { id: classId },
       include: {
@@ -97,7 +97,7 @@ export const getClassDetails = async (req: Request, res: Response): Promise<void
 
 export const updateClass = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
     const { className, startTime, cutoffTime, visibility, groupIntro, groupImage } = req.body;
 
     const updated = await prisma.conversation.update({
@@ -127,7 +127,7 @@ export const updateClass = async (req: Request, res: Response): Promise<void> =>
 
 export const deleteClass = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
     await prisma.conversation.delete({ where: { id: classId } });
     res.json({ success: true });
   } catch (error: any) {
@@ -186,7 +186,7 @@ export const getUserClasses = async (req: Request, res: Response): Promise<void>
 export const requestJoinClass = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = (req as any).user.id;
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
 
     const existing = await prisma.joinRequest.findUnique({
       where: { classId_userId: { classId, userId } },
@@ -202,7 +202,7 @@ export const requestJoinClass = async (req: Request, res: Response): Promise<voi
 
 export const getJoinRequests = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
     const requests = await prisma.joinRequest.findMany({
       where: { classId, status: 'pending' },
       include: { user: { select: { id: true, name: true, image: true } } },
@@ -217,7 +217,7 @@ export const getJoinRequests = async (req: Request, res: Response): Promise<void
 export const approveJoinRequest = async (req: Request, res: Response): Promise<void> => {
   try {
     const adminId = (req as any).user.id;
-    const { classId, requestId } = req.params;
+    const { classId, requestId } = req.params as Record<string, string>;
 
     const request = await prisma.joinRequest.update({
       where: { id: requestId },
@@ -239,7 +239,7 @@ export const approveJoinRequest = async (req: Request, res: Response): Promise<v
 export const rejectJoinRequest = async (req: Request, res: Response): Promise<void> => {
   try {
     const adminId = (req as any).user.id;
-    const { requestId } = req.params;
+    const { requestId } = req.params as Record<string, string>;
     await prisma.joinRequest.update({
       where: { id: requestId },
       data: { status: 'rejected', processedAt: new Date(), processedById: adminId },
@@ -255,7 +255,7 @@ export const rejectJoinRequest = async (req: Request, res: Response): Promise<vo
 export const leaveClass = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = (req as any).user.id;
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
     await prisma.conversationParticipant.deleteMany({
       where: { conversationId: classId, userId },
     });
@@ -267,7 +267,7 @@ export const leaveClass = async (req: Request, res: Response): Promise<void> => 
 
 export const addMember = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
     const { userId } = req.body;
     await prisma.conversationParticipant.upsert({
       where: { conversationId_userId: { conversationId: classId, userId } },
@@ -282,7 +282,7 @@ export const addMember = async (req: Request, res: Response): Promise<void> => {
 
 export const removeMember = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId, userId } = req.params;
+    const { classId, userId } = req.params as Record<string, string>;
     await prisma.conversationParticipant.deleteMany({
       where: { conversationId: classId, userId },
     });
@@ -294,7 +294,7 @@ export const removeMember = async (req: Request, res: Response): Promise<void> =
 
 export const addModerator = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId, userId } = req.params;
+    const { classId, userId } = req.params as Record<string, string>;
     await prisma.conversationModerator.upsert({
       where: { conversationId_userId: { conversationId: classId, userId } },
       create: { conversationId: classId, userId },
@@ -308,7 +308,7 @@ export const addModerator = async (req: Request, res: Response): Promise<void> =
 
 export const removeModerator = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId, userId } = req.params;
+    const { classId, userId } = req.params as Record<string, string>;
     await prisma.conversationModerator.deleteMany({
       where: { conversationId: classId, userId },
     });
@@ -320,7 +320,7 @@ export const removeModerator = async (req: Request, res: Response): Promise<void
 
 export const getClassStats = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
     const [memberCount, sessionCount] = await Promise.all([
       prisma.conversationParticipant.count({ where: { conversationId: classId } }),
       prisma.session.count({ where: { classId } }),
@@ -333,7 +333,7 @@ export const getClassStats = async (req: Request, res: Response): Promise<void> 
 
 export const getClassMembers = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { classId } = req.params;
+    const { classId } = req.params as Record<string, string>;
     const members = await prisma.conversationParticipant.findMany({
       where: { conversationId: classId },
       include: { user: { select: { id: true, name: true, image: true, role: true } } },
@@ -341,5 +341,47 @@ export const getClassMembers = async (req: Request, res: Response): Promise<void
     res.json({ members: members.map((m) => m.user) });
   } catch (error: any) {
     res.status(500).json({ message: 'Failed to get members', error: error.message });
+  }
+};
+
+// ─── Class Settings ───────────────────────────────────────────────────────────
+
+export const updateClassSettings = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { classId } = req.params as Record<string, string>;
+    const { classType, fileSendingAllowed, startTime, cutoffTime, checkInterval, selectedDays } = req.body;
+
+    const allowed = ['classType', 'fileSendingAllowed', 'startTime', 'cutoffTime', 'checkInterval', 'selectedDays'];
+    const keys = Object.keys(req.body);
+    if (keys.length === 0 || !keys.every((k) => allowed.includes(k))) {
+      res.status(400).json({ message: 'Invalid settings provided' }); return;
+    }
+
+    const data: any = {};
+    if (classType !== undefined) data.classType = classType;
+    if (fileSendingAllowed !== undefined) data.fileSendingAllowed = fileSendingAllowed;
+    if (startTime !== undefined) data.startTime = startTime;
+    if (cutoffTime !== undefined) data.cutoffTime = cutoffTime;
+    if (checkInterval !== undefined) data.checkInterval = checkInterval;
+
+    const cls = await prisma.conversation.update({
+      where: { id: classId },
+      data,
+      include: { selectedDays: true },
+    });
+
+    // Handle selectedDays if provided (replace all for multi_weekly)
+    if (Array.isArray(selectedDays)) {
+      await prisma.conversationSelectedDay.deleteMany({ where: { conversationId: classId } });
+      if (selectedDays.length > 0) {
+        await prisma.conversationSelectedDay.createMany({
+          data: (selectedDays as number[]).map((day) => ({ conversationId: classId, day })),
+        });
+      }
+    }
+
+    res.json({ message: 'Class settings updated', class: cls });
+  } catch (error: any) {
+    res.status(500).json({ message: 'Failed to update class settings', error: error.message });
   }
 };

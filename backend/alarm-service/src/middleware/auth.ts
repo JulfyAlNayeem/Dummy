@@ -11,7 +11,7 @@ export const requireAuth = (req: Request, res: Response, next: NextFunction): vo
 
 export const requireAdmin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const userId = (req as any).user?.id;
-  const classId = req.params.classId;
+  const classId = req.params.classId as string;
   if (!userId || !classId) { res.status(403).json({ message: 'Forbidden' }); return; }
   const isAdmin = await prisma.conversationAdmin.findUnique({
     where: { conversationId_userId: { conversationId: classId, userId } },

@@ -1,4 +1,4 @@
--- CreateTable
+﻿-- CreateTable
 CREATE TABLE `users` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
@@ -100,11 +100,16 @@ CREATE TABLE `sessions` (
     `classId` VARCHAR(191) NOT NULL,
     `date` VARCHAR(191) NOT NULL,
     `startTime` VARCHAR(191) NOT NULL,
-    `endTime` VARCHAR(191) NULL,
-    `isActive` BOOLEAN NOT NULL DEFAULT false,
+    `type` ENUM('auto', 'manual') NOT NULL DEFAULT 'auto',
+    `createdById` VARCHAR(191) NULL,
+    `status` ENUM('scheduled', 'ongoing', 'completed') NOT NULL DEFAULT 'scheduled',
+    `duration` INTEGER NOT NULL DEFAULT 70,
+    `cutoffTime` VARCHAR(191) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
 
-    UNIQUE INDEX `sessions_classId_date_key`(`classId`, `date`),
+    INDEX `sessions_status_idx`(`status`),
+    UNIQUE INDEX `sessions_classId_date_startTime_key`(`classId`, `date`, `startTime`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -112,23 +117,44 @@ CREATE TABLE `sessions` (
 CREATE TABLE `attendance_logs` (
     `id` VARCHAR(191) NOT NULL,
     `sessionId` VARCHAR(191) NOT NULL,
+    `classId` VARCHAR(191) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
-    `conversationId` VARCHAR(191) NOT NULL,
-    `status` VARCHAR(191) NOT NULL DEFAULT 'present',
-    `joinedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `status` ENUM('present', 'late', 'absent', 'excused') NOT NULL DEFAULT 'absent',
+    `enteredAt` DATETIME(3) NULL,
     `leftAt` DATETIME(3) NULL,
+    `duration` INTEGER NULL,
+    `sessionDate` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
 
-    UNIQUE INDEX `attendance_logs_sessionId_userId_key`(`sessionId`, `userId`),
+    INDEX `attendance_logs_enteredAt_idx`(`enteredAt`),
+    UNIQUE INDEX `attendance_logs_sessionId_userId_sessionDate_key`(`sessionId`, `userId`, `sessionDate`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `_SessionToUser` (
-    `A` VARCHAR(191) NOT NULL,
-    `B` VARCHAR(191) NOT NULL,
+CREATE TABLE `assignment_submissions` (
+    `id` VARCHAR(191) NOT NULL,
+    `classId` VARCHAR(191) NOT NULL,
+    `userId` VARCHAR(191) NOT NULL,
+    `assignmentTitle` VARCHAR(191) NOT NULL,
+    `assignmentDescription` TEXT NOT NULL,
+    `status` ENUM('pending', 'approved', 'rejected') NOT NULL DEFAULT 'pending',
+    `fileUrl` VARCHAR(191) NULL,
+    `fileName` VARCHAR(191) NULL,
+    `fileSize` INTEGER NULL,
+    `fileType` VARCHAR(191) NULL,
+    `mark` INTEGER NULL,
+    `feedback` TEXT NULL,
+    `markedById` VARCHAR(191) NULL,
+    `markedAt` DATETIME(3) NULL,
+    `submittedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
 
-    UNIQUE INDEX `_SessionToUser_AB_unique`(`A`, `B`),
-    INDEX `_SessionToUser_B_index`(`B`)
+    INDEX `assignment_submissions_classId_userId_idx`(`classId`, `userId`),
+    INDEX `assignment_submissions_submittedAt_idx`(`submittedAt`),
+    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
@@ -165,16 +191,23 @@ ALTER TABLE `join_requests` ADD CONSTRAINT `join_requests_processedById_fkey` FO
 ALTER TABLE `sessions` ADD CONSTRAINT `sessions_classId_fkey` FOREIGN KEY (`classId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE `sessions` ADD CONSTRAINT `sessions_createdById_fkey` FOREIGN KEY (`createdById`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `attendance_logs` ADD CONSTRAINT `attendance_logs_sessionId_fkey` FOREIGN KEY (`sessionId`) REFERENCES `sessions`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `attendance_logs` ADD CONSTRAINT `attendance_logs_classId_fkey` FOREIGN KEY (`classId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `attendance_logs` ADD CONSTRAINT `attendance_logs_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `attendance_logs` ADD CONSTRAINT `attendance_logs_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `assignment_submissions` ADD CONSTRAINT `assignment_submissions_classId_fkey` FOREIGN KEY (`classId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `_SessionToUser` ADD CONSTRAINT `_SessionToUser_A_fkey` FOREIGN KEY (`A`) REFERENCES `sessions`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `assignment_submissions` ADD CONSTRAINT `assignment_submissions_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `_SessionToUser` ADD CONSTRAINT `_SessionToUser_B_fkey` FOREIGN KEY (`B`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `assignment_submissions` ADD CONSTRAINT `assignment_submissions_markedById_fkey` FOREIGN KEY (`markedById`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+

@@ -69,6 +69,17 @@ export const alertnessApi = createApi({
         { type: "AlertnessSession", id: `${sessionId}-stats` },
       ],
     }),
+
+    // Delete alertness session
+    deleteAlertnessSession: builder.mutation({
+      query: (sessionId) => ({
+        url: `/session/${sessionId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, sessionId) => [
+        { type: "AlertnessSession", id: sessionId },
+      ],
+    }),
   }),
 });
 
@@ -79,4 +90,5 @@ export const {
   useRespondToAlertnessSessionMutation,
   useGetActiveSessionQuery,
   useGetSessionStatsQuery,
+  useDeleteAlertnessSessionMutation,
 } = alertnessApi;

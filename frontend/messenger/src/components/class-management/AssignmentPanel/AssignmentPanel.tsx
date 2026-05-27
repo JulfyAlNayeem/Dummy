@@ -19,8 +19,8 @@ export default function AssignmentPanel(): JSX.Element {
     skip: !classId,
   })
 
-  const isAdmin = classData?.class.group.admins.some((admin) => admin.id === currentUser?.id)
-  const isModerator = classData?.class.group.moderators.some((mod) => mod.id === currentUser?.id)
+  const isAdmin = classData?.class.admins?.some((admin) => admin.id === currentUser?.id)
+  const isModerator = classData?.class.moderators?.some((mod) => mod.id === currentUser?.id)
   const canManage = isAdmin || isModerator
   return canManage ? (
     <TeacherAssignmentPanel classId={classId} />

@@ -60,33 +60,21 @@ model User {
   updatedAt           DateTime @updatedAt
 
   // Relations
-  deviceTokens              DeviceToken[]
   conversations             ConversationParticipant[]
   sentMessages              Message[]          @relation("MessageSender")
   receivedMessages          Message[]          @relation("MessageReceiver")
   blocksInitiated           Block[]            @relation("Blocker")
   blocksReceived            Block[]            @relation("Blocked")
-  friendList                FriendList?
-  friendshipsRequested      Friendship[]       @relation("FriendRequester")
-  friendshipsReceived       Friendship[]       @relation("FriendRecipient")
   joinRequests              JoinRequest[]      @relation("JoinRequester")
   joinRequestsProcessed     JoinRequest[]      @relation("JoinProcessor")
-  posts                     Post[]
   reminders                 Reminder[]
   unreadCount               UnreadCount?
   userApproval              UserApproval?
   deletionSchedules         UserDeletionSchedule[] @relation("DeletionUser")
   deletionPreventions       UserDeletionSchedule[] @relation("DeletionPreventer")
   adminActivityLogs         AdminActivityLog[]
-  alertnessSessionsStarted  AlertnessSession[] @relation("AlertnessStarter")
-  alertnessResponses        AlertnessResponse[]
-  assignmentSubmissions     AssignmentSubmission[] @relation("SubmissionUser")
-  assignmentMarkers         AssignmentSubmission[] @relation("SubmissionMarker")
   attendanceLogs            AttendanceLog[]
   filesUploaded             File[]
-  formsCreated              Form[]
-  formAssignments           FormAssignment[]   @relation("FormAssigner")
-  formSubmissions           FormSubmission[]
   noticesCreated            Notice[]
   notificationsReceived     Notification[]     @relation("NotificationRecipient")
   notificationsSent         Notification[]     @relation("NotificationSender")
@@ -99,24 +87,15 @@ model User {
   reportReviews             Report[]           @relation("ReportReviewer")
   userApprovalReviews       UserApproval[]     @relation("ApprovalReviewer")
   adminSettings             AdminSettings[]
-  messageReadReceipts       MessageReadBy[]
-  messageDeletions          MessageDeletedBy[]
   conversationAdmins        ConversationAdmin[]
   conversationModerators    ConversationModerator[]
   conversationBlocksBy      ConversationBlockEntry[] @relation("BlockEntryBlocker")
   conversationBlocksOn      ConversationBlockEntry[] @relation("BlockEntryBlocked")
   unreadMessages            UnreadMessage[]
-  conversationUnreads       ConversationUnread[]
   lastMessagesSent          Conversation[]     @relation("LastMessageSender")
   sessions                  Session[]
-  postComments              PostComment[]
-  postCommentReplies        PostCommentReply[]
   noticeLikes               NoticeLike[]
   noticeReads               NoticeRead[]
-  formAssignees             FormAssignee[]
-  friendEntries             FriendEntry[]
-  postReactions             PostReaction[]
-  messageReactions          MessageReaction[]
 
   @@map("users")
 }
@@ -127,16 +106,6 @@ enum UserRole {
   superadmin
   moderator
   teacher
-}
-
-model DeviceToken {
-  id     String @id @default(uuid())
-  userId String
-  token  String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, token])
-  @@map("device_tokens")
 }
 
 // ─── Block ───────────────────────────────────────────────────────────────────
@@ -207,22 +176,17 @@ model Conversation {
   participants          ConversationParticipant[]
   admins                ConversationAdmin[]
   moderators            ConversationModerator[]
-  selectedDays          ConversationSelectedDay[]
   blockList             ConversationBlockEntry[]
-  unreadEntries         ConversationUnread[]
   messages              Message[]
   joinRequests          JoinRequest[]
   reminders             Reminder[]
   sessions              Session[]
-  alertnessSessions     AlertnessSession[]
-  assignmentSubmissions AssignmentSubmission[]
   attendanceLogs        AttendanceLog[]
   files                 File[]
   permissionRequests    PermissionRequest[]
   quickLessons          QuickLesson[]
   reports               Report[]
   unreadMessages        UnreadMessage[]
-  formAssignments       FormAssignment[]
   lastMessageSender     User?    @relation("LastMessageSender", fields: [lastMessageSenderId], references: [id], onDelete: SetNull)
 
   @@index([visibility])
@@ -298,17 +262,6 @@ model ConversationModerator {
   @@map("conversation_moderators")
 }
 
-model ConversationSelectedDay {
-  id             String @id @default(uuid())
-  conversationId String
-  day            Int    // 0=Sunday, 6=Saturday
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-
-  @@unique([conversationId, day])
-  @@map("conversation_selected_days")
-}
-
 model ConversationBlockEntry {
   id             String   @id @default(uuid())
   conversationId String
@@ -322,70 +275,6 @@ model ConversationBlockEntry {
 
   @@unique([conversationId, blockedById, blockedUserId])
   @@map("conversation_block_entries")
-}
-
-model ConversationUnread {
-  id             String @id @default(uuid())
-  conversationId String
-  userId         String
-  count          Int    @default(0)
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([conversationId, userId])
-  @@map("conversation_unreads")
-}
-
-// ─── FriendList ──────────────────────────────────────────────────────────────
-
-model FriendList {
-  id     String @id @default(uuid())
-  userId String @unique
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  friends FriendEntry[]
-
-  @@map("friend_lists")
-}
-
-model FriendEntry {
-  id           String @id @default(uuid())
-  friendListId String
-  friendId     String
-
-  friendList FriendList @relation(fields: [friendListId], references: [id], onDelete: Cascade)
-  friend     User       @relation(fields: [friendId], references: [id], onDelete: Cascade)
-
-  @@unique([friendListId, friendId])
-  @@map("friend_entries")
-}
-
-// ─── Friendship ──────────────────────────────────────────────────────────────
-
-model Friendship {
-  id          String           @id @default(uuid())
-  requesterId String
-  recipientId String
-  status      FriendshipStatus @default(pending)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  requester User @relation("FriendRequester", fields: [requesterId], references: [id], onDelete: Cascade)
-  recipient User @relation("FriendRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
-
-  @@unique([requesterId, recipientId])
-  @@map("friendships")
-}
-
-enum FriendshipStatus {
-  pending
-  accepted
-  declined
 }
 
 // ─── JoinRequest ─────────────────────────────────────────────────────────────
@@ -445,10 +334,6 @@ model Message {
   replyTo      Message?        @relation("MessageReplies", fields: [replyToId], references: [id], onDelete: SetNull)
   replies      Message[]       @relation("MessageReplies")
   media        MessageMedia[]
-  readBy       MessageReadBy[]
-  deletedBy    MessageDeletedBy[]
-  editHistory  MessageEditHistory[]
-  messageReactions MessageReaction[]
 
   @@index([conversationId, createdAt])
   @@index([senderId])
@@ -498,124 +383,6 @@ enum MediaType {
   video
   audio
   file
-}
-
-model MessageReadBy {
-  id        String   @id @default(uuid())
-  messageId String
-  userId    String
-  readAt    DateTime @default(now())
-
-  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([messageId, userId])
-  @@map("message_read_by")
-}
-
-model MessageDeletedBy {
-  id        String @id @default(uuid())
-  messageId String
-  userId    String
-
-  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([messageId, userId])
-  @@map("message_deleted_by")
-}
-
-model MessageEditHistory {
-  id        String   @id @default(uuid())
-  messageId String
-  text      String   @db.Text
-  editedAt  DateTime @default(now())
-
-  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
-
-  @@map("message_edit_history")
-}
-
-model MessageReaction {
-  id        String @id @default(uuid())
-  messageId String
-  userId    String
-  emoji     String
-  username  String
-
-  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([messageId, userId, emoji])
-  @@map("message_reactions")
-}
-
-// ─── Post ────────────────────────────────────────────────────────────────────
-
-model Post {
-  id        String   @id @default(uuid())
-  userId    String
-  content   String   @db.Text
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  reactions PostReaction[]
-  comments  PostComment[]
-
-  @@map("posts")
-}
-
-model PostReaction {
-  id       String       @id @default(uuid())
-  postId   String
-  userId   String
-  type     ReactionType
-
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([postId, userId, type])
-  @@map("post_reactions")
-}
-
-enum ReactionType {
-  like
-  love
-  haha
-  wow
-  sad
-  angry
-}
-
-model PostComment {
-  id     String @id @default(uuid())
-  postId String
-  userId String
-  text   String @db.Text
-
-  createdAt DateTime @default(now())
-
-  post    Post               @relation(fields: [postId], references: [id], onDelete: Cascade)
-  user    User               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  replies PostCommentReply[]
-
-  @@map("post_comments")
-}
-
-model PostCommentReply {
-  id        String @id @default(uuid())
-  commentId String
-  userId    String
-  text      String @db.Text
-
-  createdAt DateTime @default(now())
-
-  comment PostComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
-  user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("post_comment_replies")
 }
 
 // ─── Reminder ────────────────────────────────────────────────────────────────
@@ -755,19 +522,8 @@ model UserApproval {
 
   user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   reviewedBy User?   @relation("ApprovalReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
-  riskFactors UserApprovalRiskFactor[]
 
   @@map("user_approvals")
-}
-
-model UserApprovalRiskFactor {
-  id             String @id @default(uuid())
-  userApprovalId String
-  factor         String
-
-  userApproval UserApproval @relation(fields: [userApprovalId], references: [id], onDelete: Cascade)
-
-  @@map("user_approval_risk_factors")
 }
 
 enum ApprovalStatus {
@@ -891,100 +647,7 @@ model AdminSettings {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  allowedFileTypes AdminAllowedFileType[]
-  blockedWords     AdminBlockedWord[]
-
   @@map("admin_settings")
-}
-
-model AdminAllowedFileType {
-  id              String @id @default(uuid())
-  adminSettingsId String
-  fileType        String
-
-  adminSettings AdminSettings @relation(fields: [adminSettingsId], references: [id], onDelete: Cascade)
-
-  @@map("admin_allowed_file_types")
-}
-
-model AdminBlockedWord {
-  id              String @id @default(uuid())
-  adminSettingsId String
-  word            String
-
-  adminSettings AdminSettings @relation(fields: [adminSettingsId], references: [id], onDelete: Cascade)
-
-  @@map("admin_blocked_words")
-}
-
-// ─── AlertnessSession ────────────────────────────────────────────────────────
-
-model AlertnessSession {
-  id                String   @id @default(uuid())
-  classId           String
-  startedById       String
-  duration          Int      // milliseconds
-  startTime         DateTime @default(now())
-  endTime           DateTime?
-  isActive          Boolean  @default(true)
-  totalParticipants Int      @default(0)
-  responseRate      Float    @default(0)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  class     Conversation        @relation(fields: [classId], references: [id], onDelete: Cascade)
-  startedBy User                @relation("AlertnessStarter", fields: [startedById], references: [id], onDelete: Cascade)
-  responses AlertnessResponse[]
-
-  @@index([classId, startTime])
-  @@index([isActive])
-  @@map("alertness_sessions")
-}
-
-model AlertnessResponse {
-  id                 String   @id @default(uuid())
-  alertnessSessionId String
-  userId             String
-  respondedAt        DateTime @default(now())
-  responseTime       Int?     // ms
-
-  session AlertnessSession @relation(fields: [alertnessSessionId], references: [id], onDelete: Cascade)
-  user    User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([alertnessSessionId, userId])
-  @@map("alertness_responses")
-}
-
-// ─── AssignmentSubmission ────────────────────────────────────────────────────
-
-model AssignmentSubmission {
-  id                     String  @id @default(uuid())
-  classId                String
-  userId                 String
-  assignmentTitle        String
-  assignmentDescription  String  @db.Text
-  status                 String  @default("pending")
-
-  // File (flattened)
-  fileUrl  String? @map("file_url")
-  fileName String? @map("file_name")
-  fileSize Int?    @map("file_size")
-  fileType String? @map("file_type")
-
-  mark       Int?      @db.SmallInt
-  markedById String?
-  markedAt   DateTime?
-  feedback   String?   @db.Text
-  submittedAt DateTime @default(now())
-
-  class    Conversation @relation(fields: [classId], references: [id], onDelete: Cascade)
-  user     User         @relation("SubmissionUser", fields: [userId], references: [id], onDelete: Cascade)
-  markedBy User?        @relation("SubmissionMarker", fields: [markedById], references: [id], onDelete: SetNull)
-
-  @@index([classId, userId])
-  @@index([submittedAt])
-  @@map("assignment_submissions")
 }
 
 // ─── AttendanceLog ───────────────────────────────────────────────────────────
@@ -1045,138 +708,6 @@ model File {
   @@map("files")
 }
 
-// ─── Form ────────────────────────────────────────────────────────────────────
-
-model Form {
-  id         String     @id @default(uuid())
-  name       String     @db.VarChar(200)
-  creatorId  String
-  visibility Visibility @default(private)
-  isArchived Boolean    @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  creator     User             @relation(fields: [creatorId], references: [id], onDelete: Cascade)
-  fields      FormField[]
-  assignments FormAssignment[]
-
-  @@index([creatorId, isArchived])
-  @@index([visibility, isArchived])
-  @@map("forms")
-}
-
-model FormField {
-  id     String        @id @default(uuid())
-  formId String
-  label  String        @db.VarChar(500)
-  type   FormFieldType
-  order  Int
-
-  form    Form             @relation(fields: [formId], references: [id], onDelete: Cascade)
-  answers FormSubmissionAnswer[]
-
-  @@map("form_fields")
-}
-
-enum FormFieldType {
-  yes_no
-  text
-}
-
-model FormAssignment {
-  id             String @id @default(uuid())
-  formId         String
-  conversationId String
-  assignerId     String
-  frequency      FormFrequency
-  startDate      DateTime @default(now())
-  isActive       Boolean  @default(true)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  form         Form             @relation(fields: [formId], references: [id], onDelete: Cascade)
-  conversation Conversation     @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  assigner     User             @relation("FormAssigner", fields: [assignerId], references: [id], onDelete: Cascade)
-  assignees    FormAssignee[]
-  submissions  FormSubmission[]
-
-  @@index([conversationId, isActive])
-  @@index([assignerId])
-  @@index([formId])
-  @@map("form_assignments")
-}
-
-model FormAssignee {
-  id               String @id @default(uuid())
-  formAssignmentId String
-  userId           String
-
-  formAssignment FormAssignment @relation(fields: [formAssignmentId], references: [id], onDelete: Cascade)
-  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([formAssignmentId, userId])
-  @@map("form_assignees")
-}
-
-enum FormFrequency {
-  daily
-  weekly
-  bi_weekly @map("bi-weekly")
-  monthly
-}
-
-model FormSubmission {
-  id           String               @id @default(uuid())
-  assignmentId String
-  submitterId  String
-  dueDate      DateTime
-  status       FormSubmissionStatus  @default(submitted)
-  reviewedAt   DateTime?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  assignment FormAssignment         @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
-  submitter  User                   @relation(fields: [submitterId], references: [id], onDelete: Cascade)
-  answers    FormSubmissionAnswer[]
-
-  @@unique([assignmentId, submitterId, dueDate])
-  @@index([assignmentId, dueDate])
-  @@index([submitterId, status])
-  @@map("form_submissions")
-}
-
-enum FormSubmissionStatus {
-  submitted
-  accepted
-  rejected
-  partially_accepted
-  not_submitted
-}
-
-model FormSubmissionAnswer {
-  id             String       @id @default(uuid())
-  submissionId   String
-  fieldId        String
-  value          String       @db.Text
-  explanation    String       @default("") @db.VarChar(2000)
-  reviewStatus   ReviewStatus @default(pending)
-  reviewNote     String       @default("") @db.VarChar(500)
-
-  submission FormSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
-  field      FormField      @relation(fields: [fieldId], references: [id], onDelete: Cascade)
-
-  @@map("form_submission_answers")
-}
-
-enum ReviewStatus {
-  pending
-  accepted
-  rejected
-}
-
 // ─── Notice ──────────────────────────────────────────────────────────────────
 
 model Notice {
@@ -1194,7 +725,6 @@ model Notice {
   updatedAt DateTime @updatedAt
 
   creator    User          @relation(fields: [creatorId], references: [id], onDelete: Cascade)
-  recipients NoticeRecipient[]
   likes      NoticeLike[]
   readBy     NoticeRead[]
 
@@ -1203,17 +733,6 @@ model Notice {
   @@index([eventType])
   @@index([targetAudience])
   @@map("notices")
-}
-
-model NoticeRecipient {
-  id       String @id @default(uuid())
-  noticeId String
-  userId   String
-
-  notice Notice @relation(fields: [noticeId], references: [id], onDelete: Cascade)
-
-  @@unique([noticeId, userId])
-  @@map("notice_recipients")
 }
 
 model NoticeLike {
@@ -1364,20 +883,8 @@ model QuickLesson {
 
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  parts        QuickLessonPart[]
 
   @@map("quick_lessons")
-}
-
-model QuickLessonPart {
-  id            String @id @default(uuid())
-  quickLessonId String
-  content       String @db.Text
-  order         Int
-
-  quickLesson QuickLesson @relation(fields: [quickLessonId], references: [id], onDelete: Cascade)
-
-  @@map("quick_lesson_parts")
 }
 
 // ─── QuickMessage ────────────────────────────────────────────────────────────

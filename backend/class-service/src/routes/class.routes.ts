@@ -18,6 +18,7 @@ import {
   removeModerator,
   getClassStats,
   getClassMembers,
+  updateClassSettings,
 } from '../controllers/class.controller.js';
 
 const router = Router();
@@ -32,6 +33,7 @@ router.put('/:classId', updateClass);
 router.delete('/:classId', deleteClass);
 router.get('/:classId/stats', getClassStats);
 router.get('/:classId/members', getClassMembers);
+router.put('/:classId/settings', updateClassSettings);
 
 router.post('/:classId/join-request', requestJoinClass);
 router.get('/:classId/join-requests', getJoinRequests);

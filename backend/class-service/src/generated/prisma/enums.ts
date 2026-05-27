@@ -63,3 +63,39 @@ export const UserRole = {
 } as const
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const SessionType = {
+  auto: 'auto',
+  manual: 'manual'
+} as const
+
+export type SessionType = (typeof SessionType)[keyof typeof SessionType]
+
+
+export const SessionStatus = {
+  scheduled: 'scheduled',
+  ongoing: 'ongoing',
+  completed: 'completed'
+} as const
+
+export type SessionStatus = (typeof SessionStatus)[keyof typeof SessionStatus]
+
+
+export const AttendanceStatus = {
+  present: 'present',
+  late: 'late',
+  absent: 'absent',
+  excused: 'excused'
+} as const
+
+export type AttendanceStatus = (typeof AttendanceStatus)[keyof typeof AttendanceStatus]
+
+
+export const AssignmentStatus = {
+  pending: 'pending',
+  approved: 'approved',
+  rejected: 'rejected'
+} as const
+
+export type AssignmentStatus = (typeof AssignmentStatus)[keyof typeof AssignmentStatus]

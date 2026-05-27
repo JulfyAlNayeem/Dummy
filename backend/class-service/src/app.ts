@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import pino from 'pino';
 import classRoutes from './routes/class.routes.js';
 import attendanceRoutes from './routes/attendance.routes.js';
+import assignmentRoutes from './routes/assignment.routes.js';
 import { startSessionCreationScheduler } from './jobs/sessionCreation.js';
 
 const logger = pino({ transport: { target: 'pino-pretty', options: { colorize: true } } });
@@ -29,6 +30,7 @@ app.get('/health', (_req, res) => {
 
 app.use('/api/class-group/classes', classRoutes);
 app.use('/api/class-group/attendance', attendanceRoutes);
+app.use('/api/class-group/assignments', assignmentRoutes);
 
 const startServer = async (): Promise<void> => {
   try {

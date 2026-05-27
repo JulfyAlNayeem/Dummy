@@ -45,8 +45,9 @@ export function scheduleSessionCronForClass(classGroup: ClassGroup): void {
             classId: classGroup.id,
             date: today,
             startTime,
-            endTime: classGroup.cutoffTime,
-            isActive: true,
+            cutoffTime: classGroup.cutoffTime,
+            type: 'auto',
+            status: 'scheduled',
           },
         });
         logger.info({ classId: classGroup.id, date: today }, 'Session created');

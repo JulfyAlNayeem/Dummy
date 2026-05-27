@@ -1,5 +1,5 @@
 // Prisma schema – Class Service
-// Owns: Conversation (groupType=classroom), Session, AttendanceLog, JoinRequest
+// Owns: Conversation (groupType=classroom), Session, AttendanceLog, JoinRequest, AssignmentSubmission
 // Stub: User (read-only)
 
 generator client {
@@ -51,6 +51,30 @@ enum UserRole {
   teacher
 }
 
+enum SessionType {
+  auto
+  manual
+}
+
+enum SessionStatus {
+  scheduled
+  ongoing
+  completed
+}
+
+enum AttendanceStatus {
+  present
+  late
+  absent
+  excused
+}
+
+enum AssignmentStatus {
+  pending
+  approved
+  rejected
+}
+
 // ─── Read-only stubs ─────────────────────────────────────────────────────────
 
 model User {
@@ -59,13 +83,15 @@ model User {
   image String   @default("/images/avatar/default-avatar.svg")
   role  UserRole @default(user)
 
-  participants      ConversationParticipant[]
-  admins            ConversationAdmin[]
-  moderators        ConversationModerator[]
-  joinRequests      JoinRequest[]  @relation("JoinRequester")
-  processedRequests JoinRequest[]  @relation("JoinProcessor")
-  attendanceLogs    AttendanceLog[]
-  sessions          Session[]
+  participants         ConversationParticipant[]
+  admins               ConversationAdmin[]
+  moderators           ConversationModerator[]
+  joinRequests         JoinRequest[]            @relation("JoinRequester")
+  processedRequests    JoinRequest[]            @relation("JoinProcessor")
+  attendanceLogs       AttendanceLog[]
+  createdSessions      Session[]                @relation("SessionCreator")
+  submittedAssignments AssignmentSubmission[]   @relation("SubmittedAssignments")
+  markedAssignments    AssignmentSubmission[]   @relation("MarkedAssignments")
 
   @@map("users")
 }
@@ -99,10 +125,11 @@ model Conversation {
   participants  ConversationParticipant[]
   admins        ConversationAdmin[]
   moderators    ConversationModerator[]
-  selectedDays  ConversationSelectedDay[]
-  joinRequests  JoinRequest[]
-  sessions      Session[]
-  attendanceLogs AttendanceLog[]
+  selectedDays          ConversationSelectedDay[]
+  joinRequests          JoinRequest[]
+  sessions              Session[]
+  attendanceLogs        AttendanceLog[]
+  assignmentSubmissions AssignmentSubmission[]
 
   @@index([visibility])
   @@index([groupType])
@@ -183,37 +210,80 @@ model JoinRequest {
 // ─── Session ─────────────────────────────────────────────────────────────────
 
 model Session {
-  id        String   @id @default(uuid())
-  classId   String
-  date      String
-  startTime String
-  endTime   String?
-  isActive  Boolean  @default(false)
+  id          String        @id @default(uuid())
+  classId     String
+  date        String        // YYYY-MM-DD
+  startTime   String
+  type        SessionType   @default(auto)
+  createdById String?
+  status      SessionStatus @default(scheduled)
+  duration    Int           @default(70)
+  cutoffTime  String?
+
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  class         Conversation    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  conversation   Conversation    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  createdBy      User?           @relation("SessionCreator", fields: [createdById], references: [id], onDelete: SetNull)
   attendanceLogs AttendanceLog[]
-  students       User[]
 
-  @@unique([classId, date])
+  @@unique([classId, date, startTime])
+  @@index([status])
   @@map("sessions")
 }
 
 // ─── AttendanceLog ───────────────────────────────────────────────────────────
 
 model AttendanceLog {
-  id             String   @id @default(uuid())
-  sessionId      String
-  userId         String
-  conversationId String
-  status         String   @default("present")
-  joinedAt       DateTime @default(now())
-  leftAt         DateTime?
+  id          String           @id @default(uuid())
+  sessionId   String
+  classId     String
+  userId      String
+  status      AttendanceStatus @default(absent)
+  enteredAt   DateTime?
+  leftAt      DateTime?
+  duration    Int?             // minutes
+  sessionDate String           // YYYY-MM-DD
 
-  session      Session      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@unique([sessionId, userId])
+  session Session      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  class   Conversation @relation(fields: [classId], references: [id], onDelete: Cascade)
+  user    User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, userId, sessionDate])
+  @@index([enteredAt])
   @@map("attendance_logs")
+}
+
+// ─── AssignmentSubmission ─────────────────────────────────────────────────────
+
+model AssignmentSubmission {
+  id                    String           @id @default(uuid())
+  classId               String
+  userId                String
+  assignmentTitle       String
+  assignmentDescription String           @db.Text
+  status                AssignmentStatus @default(pending)
+  fileUrl               String?
+  fileName              String?
+  fileSize              Int?
+  fileType              String?
+  mark                  Int?
+  feedback              String?          @db.Text
+  markedById            String?
+  markedAt              DateTime?
+  submittedAt           DateTime         @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  class    Conversation @relation(fields: [classId], references: [id], onDelete: Cascade)
+  user     User         @relation("SubmittedAssignments", fields: [userId], references: [id], onDelete: Cascade)
+  markedBy User?        @relation("MarkedAssignments", fields: [markedById], references: [id], onDelete: SetNull)
+
+  @@index([classId, userId])
+  @@index([submittedAt])
+  @@map("assignment_submissions")
 }

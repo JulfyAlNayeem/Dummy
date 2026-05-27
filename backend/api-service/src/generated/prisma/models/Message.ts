@@ -280,10 +280,6 @@ export type MessageWhereInput = {
   replyTo?: Prisma.XOR<Prisma.MessageNullableScalarRelationFilter, Prisma.MessageWhereInput> | null
   replies?: Prisma.MessageListRelationFilter
   media?: Prisma.MessageMediaListRelationFilter
-  readBy?: Prisma.MessageReadByListRelationFilter
-  deletedBy?: Prisma.MessageDeletedByListRelationFilter
-  editHistory?: Prisma.MessageEditHistoryListRelationFilter
-  messageReactions?: Prisma.MessageReactionListRelationFilter
 }
 
 export type MessageOrderByWithRelationInput = {
@@ -310,10 +306,6 @@ export type MessageOrderByWithRelationInput = {
   replyTo?: Prisma.MessageOrderByWithRelationInput
   replies?: Prisma.MessageOrderByRelationAggregateInput
   media?: Prisma.MessageMediaOrderByRelationAggregateInput
-  readBy?: Prisma.MessageReadByOrderByRelationAggregateInput
-  deletedBy?: Prisma.MessageDeletedByOrderByRelationAggregateInput
-  editHistory?: Prisma.MessageEditHistoryOrderByRelationAggregateInput
-  messageReactions?: Prisma.MessageReactionOrderByRelationAggregateInput
   _relevance?: Prisma.MessageOrderByRelevanceInput
 }
 
@@ -344,10 +336,6 @@ export type MessageWhereUniqueInput = Prisma.AtLeast<{
   replyTo?: Prisma.XOR<Prisma.MessageNullableScalarRelationFilter, Prisma.MessageWhereInput> | null
   replies?: Prisma.MessageListRelationFilter
   media?: Prisma.MessageMediaListRelationFilter
-  readBy?: Prisma.MessageReadByListRelationFilter
-  deletedBy?: Prisma.MessageDeletedByListRelationFilter
-  editHistory?: Prisma.MessageEditHistoryListRelationFilter
-  messageReactions?: Prisma.MessageReactionListRelationFilter
 }, "id">
 
 export type MessageOrderByWithAggregationInput = {
@@ -416,10 +404,6 @@ export type MessageCreateInput = {
   replyTo?: Prisma.MessageCreateNestedOneWithoutRepliesInput
   replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
   media?: Prisma.MessageMediaCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateInput = {
@@ -442,10 +426,6 @@ export type MessageUncheckedCreateInput = {
   updatedAt?: Date | string
   replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
   media?: Prisma.MessageMediaUncheckedCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUpdateInput = {
@@ -468,10 +448,6 @@ export type MessageUpdateInput = {
   replyTo?: Prisma.MessageUpdateOneWithoutRepliesNestedInput
   replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
   media?: Prisma.MessageMediaUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateInput = {
@@ -494,10 +470,6 @@ export type MessageUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
   media?: Prisma.MessageMediaUncheckedUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUncheckedUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageCreateManyInput = {
@@ -850,62 +822,6 @@ export type MessageUpdateOneRequiredWithoutMediaNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MessageUpdateToOneWithWhereWithoutMediaInput, Prisma.MessageUpdateWithoutMediaInput>, Prisma.MessageUncheckedUpdateWithoutMediaInput>
 }
 
-export type MessageCreateNestedOneWithoutReadByInput = {
-  create?: Prisma.XOR<Prisma.MessageCreateWithoutReadByInput, Prisma.MessageUncheckedCreateWithoutReadByInput>
-  connectOrCreate?: Prisma.MessageCreateOrConnectWithoutReadByInput
-  connect?: Prisma.MessageWhereUniqueInput
-}
-
-export type MessageUpdateOneRequiredWithoutReadByNestedInput = {
-  create?: Prisma.XOR<Prisma.MessageCreateWithoutReadByInput, Prisma.MessageUncheckedCreateWithoutReadByInput>
-  connectOrCreate?: Prisma.MessageCreateOrConnectWithoutReadByInput
-  upsert?: Prisma.MessageUpsertWithoutReadByInput
-  connect?: Prisma.MessageWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MessageUpdateToOneWithWhereWithoutReadByInput, Prisma.MessageUpdateWithoutReadByInput>, Prisma.MessageUncheckedUpdateWithoutReadByInput>
-}
-
-export type MessageCreateNestedOneWithoutDeletedByInput = {
-  create?: Prisma.XOR<Prisma.MessageCreateWithoutDeletedByInput, Prisma.MessageUncheckedCreateWithoutDeletedByInput>
-  connectOrCreate?: Prisma.MessageCreateOrConnectWithoutDeletedByInput
-  connect?: Prisma.MessageWhereUniqueInput
-}
-
-export type MessageUpdateOneRequiredWithoutDeletedByNestedInput = {
-  create?: Prisma.XOR<Prisma.MessageCreateWithoutDeletedByInput, Prisma.MessageUncheckedCreateWithoutDeletedByInput>
-  connectOrCreate?: Prisma.MessageCreateOrConnectWithoutDeletedByInput
-  upsert?: Prisma.MessageUpsertWithoutDeletedByInput
-  connect?: Prisma.MessageWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MessageUpdateToOneWithWhereWithoutDeletedByInput, Prisma.MessageUpdateWithoutDeletedByInput>, Prisma.MessageUncheckedUpdateWithoutDeletedByInput>
-}
-
-export type MessageCreateNestedOneWithoutEditHistoryInput = {
-  create?: Prisma.XOR<Prisma.MessageCreateWithoutEditHistoryInput, Prisma.MessageUncheckedCreateWithoutEditHistoryInput>
-  connectOrCreate?: Prisma.MessageCreateOrConnectWithoutEditHistoryInput
-  connect?: Prisma.MessageWhereUniqueInput
-}
-
-export type MessageUpdateOneRequiredWithoutEditHistoryNestedInput = {
-  create?: Prisma.XOR<Prisma.MessageCreateWithoutEditHistoryInput, Prisma.MessageUncheckedCreateWithoutEditHistoryInput>
-  connectOrCreate?: Prisma.MessageCreateOrConnectWithoutEditHistoryInput
-  upsert?: Prisma.MessageUpsertWithoutEditHistoryInput
-  connect?: Prisma.MessageWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MessageUpdateToOneWithWhereWithoutEditHistoryInput, Prisma.MessageUpdateWithoutEditHistoryInput>, Prisma.MessageUncheckedUpdateWithoutEditHistoryInput>
-}
-
-export type MessageCreateNestedOneWithoutMessageReactionsInput = {
-  create?: Prisma.XOR<Prisma.MessageCreateWithoutMessageReactionsInput, Prisma.MessageUncheckedCreateWithoutMessageReactionsInput>
-  connectOrCreate?: Prisma.MessageCreateOrConnectWithoutMessageReactionsInput
-  connect?: Prisma.MessageWhereUniqueInput
-}
-
-export type MessageUpdateOneRequiredWithoutMessageReactionsNestedInput = {
-  create?: Prisma.XOR<Prisma.MessageCreateWithoutMessageReactionsInput, Prisma.MessageUncheckedCreateWithoutMessageReactionsInput>
-  connectOrCreate?: Prisma.MessageCreateOrConnectWithoutMessageReactionsInput
-  upsert?: Prisma.MessageUpsertWithoutMessageReactionsInput
-  connect?: Prisma.MessageWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MessageUpdateToOneWithWhereWithoutMessageReactionsInput, Prisma.MessageUpdateWithoutMessageReactionsInput>, Prisma.MessageUncheckedUpdateWithoutMessageReactionsInput>
-}
-
 export type MessageCreateWithoutSenderInput = {
   id?: string
   text?: string | null
@@ -925,10 +841,6 @@ export type MessageCreateWithoutSenderInput = {
   replyTo?: Prisma.MessageCreateNestedOneWithoutRepliesInput
   replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
   media?: Prisma.MessageMediaCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutSenderInput = {
@@ -950,10 +862,6 @@ export type MessageUncheckedCreateWithoutSenderInput = {
   updatedAt?: Date | string
   replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
   media?: Prisma.MessageMediaUncheckedCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutSenderInput = {
@@ -985,10 +893,6 @@ export type MessageCreateWithoutReceiverInput = {
   replyTo?: Prisma.MessageCreateNestedOneWithoutRepliesInput
   replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
   media?: Prisma.MessageMediaCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutReceiverInput = {
@@ -1010,10 +914,6 @@ export type MessageUncheckedCreateWithoutReceiverInput = {
   updatedAt?: Date | string
   replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
   media?: Prisma.MessageMediaUncheckedCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutReceiverInput = {
@@ -1100,10 +1000,6 @@ export type MessageCreateWithoutConversationInput = {
   replyTo?: Prisma.MessageCreateNestedOneWithoutRepliesInput
   replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
   media?: Prisma.MessageMediaCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutConversationInput = {
@@ -1125,10 +1021,6 @@ export type MessageUncheckedCreateWithoutConversationInput = {
   updatedAt?: Date | string
   replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
   media?: Prisma.MessageMediaUncheckedCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutConversationInput = {
@@ -1176,10 +1068,6 @@ export type MessageCreateWithoutRepliesInput = {
   receiver?: Prisma.UserCreateNestedOneWithoutReceivedMessagesInput
   replyTo?: Prisma.MessageCreateNestedOneWithoutRepliesInput
   media?: Prisma.MessageMediaCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutRepliesInput = {
@@ -1201,10 +1089,6 @@ export type MessageUncheckedCreateWithoutRepliesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   media?: Prisma.MessageMediaUncheckedCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutRepliesInput = {
@@ -1231,10 +1115,6 @@ export type MessageCreateWithoutReplyToInput = {
   receiver?: Prisma.UserCreateNestedOneWithoutReceivedMessagesInput
   replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
   media?: Prisma.MessageMediaCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutReplyToInput = {
@@ -1256,10 +1136,6 @@ export type MessageUncheckedCreateWithoutReplyToInput = {
   updatedAt?: Date | string
   replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
   media?: Prisma.MessageMediaUncheckedCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutReplyToInput = {
@@ -1302,10 +1178,6 @@ export type MessageUpdateWithoutRepliesInput = {
   receiver?: Prisma.UserUpdateOneWithoutReceivedMessagesNestedInput
   replyTo?: Prisma.MessageUpdateOneWithoutRepliesNestedInput
   media?: Prisma.MessageMediaUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutRepliesInput = {
@@ -1327,10 +1199,6 @@ export type MessageUncheckedUpdateWithoutRepliesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   media?: Prisma.MessageMediaUncheckedUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUncheckedUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUpsertWithWhereUniqueWithoutReplyToInput = {
@@ -1368,10 +1236,6 @@ export type MessageCreateWithoutMediaInput = {
   receiver?: Prisma.UserCreateNestedOneWithoutReceivedMessagesInput
   replyTo?: Prisma.MessageCreateNestedOneWithoutRepliesInput
   replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
-  readBy?: Prisma.MessageReadByCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutMediaInput = {
@@ -1393,10 +1257,6 @@ export type MessageUncheckedCreateWithoutMediaInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
-  readBy?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutMediaInput = {
@@ -1434,10 +1294,6 @@ export type MessageUpdateWithoutMediaInput = {
   receiver?: Prisma.UserUpdateOneWithoutReceivedMessagesNestedInput
   replyTo?: Prisma.MessageUpdateOneWithoutRepliesNestedInput
   replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
-  readBy?: Prisma.MessageReadByUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutMediaInput = {
@@ -1459,474 +1315,6 @@ export type MessageUncheckedUpdateWithoutMediaInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
-  readBy?: Prisma.MessageReadByUncheckedUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUncheckedUpdateManyWithoutMessageNestedInput
-}
-
-export type MessageCreateWithoutReadByInput = {
-  id?: string
-  text?: string | null
-  isEncrypted?: boolean
-  isBackendEncrypted?: boolean
-  messageType?: $Enums.MessageType
-  htmlEmoji?: string | null
-  emojiType?: $Enums.EmojiType | null
-  status?: $Enums.MessageStatus
-  edited?: boolean
-  scheduledDeletionTime?: Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversation: Prisma.ConversationCreateNestedOneWithoutMessagesInput
-  sender: Prisma.UserCreateNestedOneWithoutSentMessagesInput
-  receiver?: Prisma.UserCreateNestedOneWithoutReceivedMessagesInput
-  replyTo?: Prisma.MessageCreateNestedOneWithoutRepliesInput
-  replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
-  media?: Prisma.MessageMediaCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionCreateNestedManyWithoutMessageInput
-}
-
-export type MessageUncheckedCreateWithoutReadByInput = {
-  id?: string
-  conversationId: string
-  senderId: string
-  receiverId?: string | null
-  text?: string | null
-  isEncrypted?: boolean
-  isBackendEncrypted?: boolean
-  messageType?: $Enums.MessageType
-  htmlEmoji?: string | null
-  emojiType?: $Enums.EmojiType | null
-  replyToId?: string | null
-  status?: $Enums.MessageStatus
-  edited?: boolean
-  scheduledDeletionTime?: Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
-  media?: Prisma.MessageMediaUncheckedCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionUncheckedCreateNestedManyWithoutMessageInput
-}
-
-export type MessageCreateOrConnectWithoutReadByInput = {
-  where: Prisma.MessageWhereUniqueInput
-  create: Prisma.XOR<Prisma.MessageCreateWithoutReadByInput, Prisma.MessageUncheckedCreateWithoutReadByInput>
-}
-
-export type MessageUpsertWithoutReadByInput = {
-  update: Prisma.XOR<Prisma.MessageUpdateWithoutReadByInput, Prisma.MessageUncheckedUpdateWithoutReadByInput>
-  create: Prisma.XOR<Prisma.MessageCreateWithoutReadByInput, Prisma.MessageUncheckedCreateWithoutReadByInput>
-  where?: Prisma.MessageWhereInput
-}
-
-export type MessageUpdateToOneWithWhereWithoutReadByInput = {
-  where?: Prisma.MessageWhereInput
-  data: Prisma.XOR<Prisma.MessageUpdateWithoutReadByInput, Prisma.MessageUncheckedUpdateWithoutReadByInput>
-}
-
-export type MessageUpdateWithoutReadByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isBackendEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  messageType?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-  htmlEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emojiType?: Prisma.NullableEnumEmojiTypeFieldUpdateOperationsInput | $Enums.EmojiType | null
-  status?: Prisma.EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
-  edited?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduledDeletionTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutMessagesNestedInput
-  sender?: Prisma.UserUpdateOneRequiredWithoutSentMessagesNestedInput
-  receiver?: Prisma.UserUpdateOneWithoutReceivedMessagesNestedInput
-  replyTo?: Prisma.MessageUpdateOneWithoutRepliesNestedInput
-  replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
-  media?: Prisma.MessageMediaUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUpdateManyWithoutMessageNestedInput
-}
-
-export type MessageUncheckedUpdateWithoutReadByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  senderId?: Prisma.StringFieldUpdateOperationsInput | string
-  receiverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isBackendEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  messageType?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-  htmlEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emojiType?: Prisma.NullableEnumEmojiTypeFieldUpdateOperationsInput | $Enums.EmojiType | null
-  replyToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
-  edited?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduledDeletionTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
-  media?: Prisma.MessageMediaUncheckedUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUncheckedUpdateManyWithoutMessageNestedInput
-}
-
-export type MessageCreateWithoutDeletedByInput = {
-  id?: string
-  text?: string | null
-  isEncrypted?: boolean
-  isBackendEncrypted?: boolean
-  messageType?: $Enums.MessageType
-  htmlEmoji?: string | null
-  emojiType?: $Enums.EmojiType | null
-  status?: $Enums.MessageStatus
-  edited?: boolean
-  scheduledDeletionTime?: Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversation: Prisma.ConversationCreateNestedOneWithoutMessagesInput
-  sender: Prisma.UserCreateNestedOneWithoutSentMessagesInput
-  receiver?: Prisma.UserCreateNestedOneWithoutReceivedMessagesInput
-  replyTo?: Prisma.MessageCreateNestedOneWithoutRepliesInput
-  replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
-  media?: Prisma.MessageMediaCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionCreateNestedManyWithoutMessageInput
-}
-
-export type MessageUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  conversationId: string
-  senderId: string
-  receiverId?: string | null
-  text?: string | null
-  isEncrypted?: boolean
-  isBackendEncrypted?: boolean
-  messageType?: $Enums.MessageType
-  htmlEmoji?: string | null
-  emojiType?: $Enums.EmojiType | null
-  replyToId?: string | null
-  status?: $Enums.MessageStatus
-  edited?: boolean
-  scheduledDeletionTime?: Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
-  media?: Prisma.MessageMediaUncheckedCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionUncheckedCreateNestedManyWithoutMessageInput
-}
-
-export type MessageCreateOrConnectWithoutDeletedByInput = {
-  where: Prisma.MessageWhereUniqueInput
-  create: Prisma.XOR<Prisma.MessageCreateWithoutDeletedByInput, Prisma.MessageUncheckedCreateWithoutDeletedByInput>
-}
-
-export type MessageUpsertWithoutDeletedByInput = {
-  update: Prisma.XOR<Prisma.MessageUpdateWithoutDeletedByInput, Prisma.MessageUncheckedUpdateWithoutDeletedByInput>
-  create: Prisma.XOR<Prisma.MessageCreateWithoutDeletedByInput, Prisma.MessageUncheckedCreateWithoutDeletedByInput>
-  where?: Prisma.MessageWhereInput
-}
-
-export type MessageUpdateToOneWithWhereWithoutDeletedByInput = {
-  where?: Prisma.MessageWhereInput
-  data: Prisma.XOR<Prisma.MessageUpdateWithoutDeletedByInput, Prisma.MessageUncheckedUpdateWithoutDeletedByInput>
-}
-
-export type MessageUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isBackendEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  messageType?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-  htmlEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emojiType?: Prisma.NullableEnumEmojiTypeFieldUpdateOperationsInput | $Enums.EmojiType | null
-  status?: Prisma.EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
-  edited?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduledDeletionTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutMessagesNestedInput
-  sender?: Prisma.UserUpdateOneRequiredWithoutSentMessagesNestedInput
-  receiver?: Prisma.UserUpdateOneWithoutReceivedMessagesNestedInput
-  replyTo?: Prisma.MessageUpdateOneWithoutRepliesNestedInput
-  replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
-  media?: Prisma.MessageMediaUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUpdateManyWithoutMessageNestedInput
-}
-
-export type MessageUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  senderId?: Prisma.StringFieldUpdateOperationsInput | string
-  receiverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isBackendEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  messageType?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-  htmlEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emojiType?: Prisma.NullableEnumEmojiTypeFieldUpdateOperationsInput | $Enums.EmojiType | null
-  replyToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
-  edited?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduledDeletionTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
-  media?: Prisma.MessageMediaUncheckedUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUncheckedUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUncheckedUpdateManyWithoutMessageNestedInput
-}
-
-export type MessageCreateWithoutEditHistoryInput = {
-  id?: string
-  text?: string | null
-  isEncrypted?: boolean
-  isBackendEncrypted?: boolean
-  messageType?: $Enums.MessageType
-  htmlEmoji?: string | null
-  emojiType?: $Enums.EmojiType | null
-  status?: $Enums.MessageStatus
-  edited?: boolean
-  scheduledDeletionTime?: Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversation: Prisma.ConversationCreateNestedOneWithoutMessagesInput
-  sender: Prisma.UserCreateNestedOneWithoutSentMessagesInput
-  receiver?: Prisma.UserCreateNestedOneWithoutReceivedMessagesInput
-  replyTo?: Prisma.MessageCreateNestedOneWithoutRepliesInput
-  replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
-  media?: Prisma.MessageMediaCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionCreateNestedManyWithoutMessageInput
-}
-
-export type MessageUncheckedCreateWithoutEditHistoryInput = {
-  id?: string
-  conversationId: string
-  senderId: string
-  receiverId?: string | null
-  text?: string | null
-  isEncrypted?: boolean
-  isBackendEncrypted?: boolean
-  messageType?: $Enums.MessageType
-  htmlEmoji?: string | null
-  emojiType?: $Enums.EmojiType | null
-  replyToId?: string | null
-  status?: $Enums.MessageStatus
-  edited?: boolean
-  scheduledDeletionTime?: Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
-  media?: Prisma.MessageMediaUncheckedCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutMessageInput
-  messageReactions?: Prisma.MessageReactionUncheckedCreateNestedManyWithoutMessageInput
-}
-
-export type MessageCreateOrConnectWithoutEditHistoryInput = {
-  where: Prisma.MessageWhereUniqueInput
-  create: Prisma.XOR<Prisma.MessageCreateWithoutEditHistoryInput, Prisma.MessageUncheckedCreateWithoutEditHistoryInput>
-}
-
-export type MessageUpsertWithoutEditHistoryInput = {
-  update: Prisma.XOR<Prisma.MessageUpdateWithoutEditHistoryInput, Prisma.MessageUncheckedUpdateWithoutEditHistoryInput>
-  create: Prisma.XOR<Prisma.MessageCreateWithoutEditHistoryInput, Prisma.MessageUncheckedCreateWithoutEditHistoryInput>
-  where?: Prisma.MessageWhereInput
-}
-
-export type MessageUpdateToOneWithWhereWithoutEditHistoryInput = {
-  where?: Prisma.MessageWhereInput
-  data: Prisma.XOR<Prisma.MessageUpdateWithoutEditHistoryInput, Prisma.MessageUncheckedUpdateWithoutEditHistoryInput>
-}
-
-export type MessageUpdateWithoutEditHistoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isBackendEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  messageType?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-  htmlEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emojiType?: Prisma.NullableEnumEmojiTypeFieldUpdateOperationsInput | $Enums.EmojiType | null
-  status?: Prisma.EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
-  edited?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduledDeletionTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutMessagesNestedInput
-  sender?: Prisma.UserUpdateOneRequiredWithoutSentMessagesNestedInput
-  receiver?: Prisma.UserUpdateOneWithoutReceivedMessagesNestedInput
-  replyTo?: Prisma.MessageUpdateOneWithoutRepliesNestedInput
-  replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
-  media?: Prisma.MessageMediaUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUpdateManyWithoutMessageNestedInput
-}
-
-export type MessageUncheckedUpdateWithoutEditHistoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  senderId?: Prisma.StringFieldUpdateOperationsInput | string
-  receiverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isBackendEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  messageType?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-  htmlEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emojiType?: Prisma.NullableEnumEmojiTypeFieldUpdateOperationsInput | $Enums.EmojiType | null
-  replyToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
-  edited?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduledDeletionTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
-  media?: Prisma.MessageMediaUncheckedUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUncheckedUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUncheckedUpdateManyWithoutMessageNestedInput
-}
-
-export type MessageCreateWithoutMessageReactionsInput = {
-  id?: string
-  text?: string | null
-  isEncrypted?: boolean
-  isBackendEncrypted?: boolean
-  messageType?: $Enums.MessageType
-  htmlEmoji?: string | null
-  emojiType?: $Enums.EmojiType | null
-  status?: $Enums.MessageStatus
-  edited?: boolean
-  scheduledDeletionTime?: Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversation: Prisma.ConversationCreateNestedOneWithoutMessagesInput
-  sender: Prisma.UserCreateNestedOneWithoutSentMessagesInput
-  receiver?: Prisma.UserCreateNestedOneWithoutReceivedMessagesInput
-  replyTo?: Prisma.MessageCreateNestedOneWithoutRepliesInput
-  replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
-  media?: Prisma.MessageMediaCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryCreateNestedManyWithoutMessageInput
-}
-
-export type MessageUncheckedCreateWithoutMessageReactionsInput = {
-  id?: string
-  conversationId: string
-  senderId: string
-  receiverId?: string | null
-  text?: string | null
-  isEncrypted?: boolean
-  isBackendEncrypted?: boolean
-  messageType?: $Enums.MessageType
-  htmlEmoji?: string | null
-  emojiType?: $Enums.EmojiType | null
-  replyToId?: string | null
-  status?: $Enums.MessageStatus
-  edited?: boolean
-  scheduledDeletionTime?: Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
-  media?: Prisma.MessageMediaUncheckedCreateNestedManyWithoutMessageInput
-  readBy?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutMessageInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutMessageInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedCreateNestedManyWithoutMessageInput
-}
-
-export type MessageCreateOrConnectWithoutMessageReactionsInput = {
-  where: Prisma.MessageWhereUniqueInput
-  create: Prisma.XOR<Prisma.MessageCreateWithoutMessageReactionsInput, Prisma.MessageUncheckedCreateWithoutMessageReactionsInput>
-}
-
-export type MessageUpsertWithoutMessageReactionsInput = {
-  update: Prisma.XOR<Prisma.MessageUpdateWithoutMessageReactionsInput, Prisma.MessageUncheckedUpdateWithoutMessageReactionsInput>
-  create: Prisma.XOR<Prisma.MessageCreateWithoutMessageReactionsInput, Prisma.MessageUncheckedCreateWithoutMessageReactionsInput>
-  where?: Prisma.MessageWhereInput
-}
-
-export type MessageUpdateToOneWithWhereWithoutMessageReactionsInput = {
-  where?: Prisma.MessageWhereInput
-  data: Prisma.XOR<Prisma.MessageUpdateWithoutMessageReactionsInput, Prisma.MessageUncheckedUpdateWithoutMessageReactionsInput>
-}
-
-export type MessageUpdateWithoutMessageReactionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isBackendEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  messageType?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-  htmlEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emojiType?: Prisma.NullableEnumEmojiTypeFieldUpdateOperationsInput | $Enums.EmojiType | null
-  status?: Prisma.EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
-  edited?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduledDeletionTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutMessagesNestedInput
-  sender?: Prisma.UserUpdateOneRequiredWithoutSentMessagesNestedInput
-  receiver?: Prisma.UserUpdateOneWithoutReceivedMessagesNestedInput
-  replyTo?: Prisma.MessageUpdateOneWithoutRepliesNestedInput
-  replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
-  media?: Prisma.MessageMediaUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUpdateManyWithoutMessageNestedInput
-}
-
-export type MessageUncheckedUpdateWithoutMessageReactionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
-  senderId?: Prisma.StringFieldUpdateOperationsInput | string
-  receiverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isBackendEncrypted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  messageType?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-  htmlEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emojiType?: Prisma.NullableEnumEmojiTypeFieldUpdateOperationsInput | $Enums.EmojiType | null
-  replyToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
-  edited?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduledDeletionTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reactions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
-  media?: Prisma.MessageMediaUncheckedUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUncheckedUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageCreateManySenderInput = {
@@ -1986,10 +1374,6 @@ export type MessageUpdateWithoutSenderInput = {
   replyTo?: Prisma.MessageUpdateOneWithoutRepliesNestedInput
   replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
   media?: Prisma.MessageMediaUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutSenderInput = {
@@ -2011,10 +1395,6 @@ export type MessageUncheckedUpdateWithoutSenderInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
   media?: Prisma.MessageMediaUncheckedUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUncheckedUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateManyWithoutSenderInput = {
@@ -2055,10 +1435,6 @@ export type MessageUpdateWithoutReceiverInput = {
   replyTo?: Prisma.MessageUpdateOneWithoutRepliesNestedInput
   replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
   media?: Prisma.MessageMediaUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutReceiverInput = {
@@ -2080,10 +1456,6 @@ export type MessageUncheckedUpdateWithoutReceiverInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
   media?: Prisma.MessageMediaUncheckedUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUncheckedUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateManyWithoutReceiverInput = {
@@ -2143,10 +1515,6 @@ export type MessageUpdateWithoutConversationInput = {
   replyTo?: Prisma.MessageUpdateOneWithoutRepliesNestedInput
   replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
   media?: Prisma.MessageMediaUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutConversationInput = {
@@ -2168,10 +1536,6 @@ export type MessageUncheckedUpdateWithoutConversationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
   media?: Prisma.MessageMediaUncheckedUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUncheckedUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateManyWithoutConversationInput = {
@@ -2231,10 +1595,6 @@ export type MessageUpdateWithoutReplyToInput = {
   receiver?: Prisma.UserUpdateOneWithoutReceivedMessagesNestedInput
   replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
   media?: Prisma.MessageMediaUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutReplyToInput = {
@@ -2256,10 +1616,6 @@ export type MessageUncheckedUpdateWithoutReplyToInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
   media?: Prisma.MessageMediaUncheckedUpdateManyWithoutMessageNestedInput
-  readBy?: Prisma.MessageReadByUncheckedUpdateManyWithoutMessageNestedInput
-  deletedBy?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutMessageNestedInput
-  editHistory?: Prisma.MessageEditHistoryUncheckedUpdateManyWithoutMessageNestedInput
-  messageReactions?: Prisma.MessageReactionUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateManyWithoutReplyToInput = {
@@ -2289,19 +1645,11 @@ export type MessageUncheckedUpdateManyWithoutReplyToInput = {
 export type MessageCountOutputType = {
   replies: number
   media: number
-  readBy: number
-  deletedBy: number
-  editHistory: number
-  messageReactions: number
 }
 
 export type MessageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   replies?: boolean | MessageCountOutputTypeCountRepliesArgs
   media?: boolean | MessageCountOutputTypeCountMediaArgs
-  readBy?: boolean | MessageCountOutputTypeCountReadByArgs
-  deletedBy?: boolean | MessageCountOutputTypeCountDeletedByArgs
-  editHistory?: boolean | MessageCountOutputTypeCountEditHistoryArgs
-  messageReactions?: boolean | MessageCountOutputTypeCountMessageReactionsArgs
 }
 
 /**
@@ -2326,34 +1674,6 @@ export type MessageCountOutputTypeCountRepliesArgs<ExtArgs extends runtime.Types
  */
 export type MessageCountOutputTypeCountMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MessageMediaWhereInput
-}
-
-/**
- * MessageCountOutputType without action
- */
-export type MessageCountOutputTypeCountReadByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MessageReadByWhereInput
-}
-
-/**
- * MessageCountOutputType without action
- */
-export type MessageCountOutputTypeCountDeletedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MessageDeletedByWhereInput
-}
-
-/**
- * MessageCountOutputType without action
- */
-export type MessageCountOutputTypeCountEditHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MessageEditHistoryWhereInput
-}
-
-/**
- * MessageCountOutputType without action
- */
-export type MessageCountOutputTypeCountMessageReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MessageReactionWhereInput
 }
 
 
@@ -2381,10 +1701,6 @@ export type MessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   replyTo?: boolean | Prisma.Message$replyToArgs<ExtArgs>
   replies?: boolean | Prisma.Message$repliesArgs<ExtArgs>
   media?: boolean | Prisma.Message$mediaArgs<ExtArgs>
-  readBy?: boolean | Prisma.Message$readByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.Message$deletedByArgs<ExtArgs>
-  editHistory?: boolean | Prisma.Message$editHistoryArgs<ExtArgs>
-  messageReactions?: boolean | Prisma.Message$messageReactionsArgs<ExtArgs>
   _count?: boolean | Prisma.MessageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["message"]>
 
@@ -2418,10 +1734,6 @@ export type MessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   replyTo?: boolean | Prisma.Message$replyToArgs<ExtArgs>
   replies?: boolean | Prisma.Message$repliesArgs<ExtArgs>
   media?: boolean | Prisma.Message$mediaArgs<ExtArgs>
-  readBy?: boolean | Prisma.Message$readByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.Message$deletedByArgs<ExtArgs>
-  editHistory?: boolean | Prisma.Message$editHistoryArgs<ExtArgs>
-  messageReactions?: boolean | Prisma.Message$messageReactionsArgs<ExtArgs>
   _count?: boolean | Prisma.MessageCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -2434,10 +1746,6 @@ export type $MessagePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     replyTo: Prisma.$MessagePayload<ExtArgs> | null
     replies: Prisma.$MessagePayload<ExtArgs>[]
     media: Prisma.$MessageMediaPayload<ExtArgs>[]
-    readBy: Prisma.$MessageReadByPayload<ExtArgs>[]
-    deletedBy: Prisma.$MessageDeletedByPayload<ExtArgs>[]
-    editHistory: Prisma.$MessageEditHistoryPayload<ExtArgs>[]
-    messageReactions: Prisma.$MessageReactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2803,10 +2111,6 @@ export interface Prisma__MessageClient<T, Null = never, ExtArgs extends runtime.
   replyTo<T extends Prisma.Message$replyToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Message$replyToArgs<ExtArgs>>): Prisma.Prisma__MessageClient<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   replies<T extends Prisma.Message$repliesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Message$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   media<T extends Prisma.Message$mediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Message$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  readBy<T extends Prisma.Message$readByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Message$readByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageReadByPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  deletedBy<T extends Prisma.Message$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Message$deletedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageDeletedByPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  editHistory<T extends Prisma.Message$editHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Message$editHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageEditHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  messageReactions<T extends Prisma.Message$messageReactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Message$messageReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3279,102 +2583,6 @@ export type Message$mediaArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.MessageMediaScalarFieldEnum | Prisma.MessageMediaScalarFieldEnum[]
-}
-
-/**
- * Message.readBy
- */
-export type Message$readByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the MessageReadBy
-   */
-  select?: Prisma.MessageReadBySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the MessageReadBy
-   */
-  omit?: Prisma.MessageReadByOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MessageReadByInclude<ExtArgs> | null
-  where?: Prisma.MessageReadByWhereInput
-  orderBy?: Prisma.MessageReadByOrderByWithRelationInput | Prisma.MessageReadByOrderByWithRelationInput[]
-  cursor?: Prisma.MessageReadByWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MessageReadByScalarFieldEnum | Prisma.MessageReadByScalarFieldEnum[]
-}
-
-/**
- * Message.deletedBy
- */
-export type Message$deletedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the MessageDeletedBy
-   */
-  select?: Prisma.MessageDeletedBySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the MessageDeletedBy
-   */
-  omit?: Prisma.MessageDeletedByOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MessageDeletedByInclude<ExtArgs> | null
-  where?: Prisma.MessageDeletedByWhereInput
-  orderBy?: Prisma.MessageDeletedByOrderByWithRelationInput | Prisma.MessageDeletedByOrderByWithRelationInput[]
-  cursor?: Prisma.MessageDeletedByWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MessageDeletedByScalarFieldEnum | Prisma.MessageDeletedByScalarFieldEnum[]
-}
-
-/**
- * Message.editHistory
- */
-export type Message$editHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the MessageEditHistory
-   */
-  select?: Prisma.MessageEditHistorySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the MessageEditHistory
-   */
-  omit?: Prisma.MessageEditHistoryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MessageEditHistoryInclude<ExtArgs> | null
-  where?: Prisma.MessageEditHistoryWhereInput
-  orderBy?: Prisma.MessageEditHistoryOrderByWithRelationInput | Prisma.MessageEditHistoryOrderByWithRelationInput[]
-  cursor?: Prisma.MessageEditHistoryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MessageEditHistoryScalarFieldEnum | Prisma.MessageEditHistoryScalarFieldEnum[]
-}
-
-/**
- * Message.messageReactions
- */
-export type Message$messageReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the MessageReaction
-   */
-  select?: Prisma.MessageReactionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the MessageReaction
-   */
-  omit?: Prisma.MessageReactionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MessageReactionInclude<ExtArgs> | null
-  where?: Prisma.MessageReactionWhereInput
-  orderBy?: Prisma.MessageReactionOrderByWithRelationInput | Prisma.MessageReactionOrderByWithRelationInput[]
-  cursor?: Prisma.MessageReactionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MessageReactionScalarFieldEnum | Prisma.MessageReactionScalarFieldEnum[]
 }
 
 /**

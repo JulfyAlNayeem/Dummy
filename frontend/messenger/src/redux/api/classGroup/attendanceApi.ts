@@ -58,7 +58,7 @@ export const attendanceApi = createApi({
       ],
     }),
     getSessionAttendance: builder.query({
-      query: (sessionId) => `/session/${sessionId}`,
+      query: (sessionId) => `/session/${sessionId}/logs`,
       providesTags: (result, error, sessionId) => [
         { type: "Attendance", id: sessionId },
       ],
@@ -129,7 +129,7 @@ export const attendanceApi = createApi({
       ],
     }),
     getAttendanceOverview: builder.query({
-      query: (classId) => `/${classId}/attendance-overview`,
+      query: (classId) => `/${classId}/overview`,
       transformResponse: (response) => ({
         attendance: response.attendance,
         analytics: response.analytics,

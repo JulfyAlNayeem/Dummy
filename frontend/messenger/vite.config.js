@@ -27,9 +27,9 @@ export default defineConfig({
         target: ALARM_URL,
         changeOrigin: true,
       },
-      // class-group/assignments → form-service
+      // class-group/assignments → class-service
       '/api/class-group/assignments': {
-        target: FORM_URL,
+        target: CLASS_URL,
         changeOrigin: true,
       },
       // class-group/* → class-service (classes, attendance)

@@ -42,16 +42,18 @@ export type AssignmentSubmissionMinAggregateOutputType = {
   userId: string | null
   assignmentTitle: string | null
   assignmentDescription: string | null
-  status: string | null
+  status: $Enums.AssignmentStatus | null
   fileUrl: string | null
   fileName: string | null
   fileSize: number | null
   fileType: string | null
   mark: number | null
+  feedback: string | null
   markedById: string | null
   markedAt: Date | null
-  feedback: string | null
   submittedAt: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type AssignmentSubmissionMaxAggregateOutputType = {
@@ -60,16 +62,18 @@ export type AssignmentSubmissionMaxAggregateOutputType = {
   userId: string | null
   assignmentTitle: string | null
   assignmentDescription: string | null
-  status: string | null
+  status: $Enums.AssignmentStatus | null
   fileUrl: string | null
   fileName: string | null
   fileSize: number | null
   fileType: string | null
   mark: number | null
+  feedback: string | null
   markedById: string | null
   markedAt: Date | null
-  feedback: string | null
   submittedAt: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type AssignmentSubmissionCountAggregateOutputType = {
@@ -84,10 +88,12 @@ export type AssignmentSubmissionCountAggregateOutputType = {
   fileSize: number
   fileType: number
   mark: number
+  feedback: number
   markedById: number
   markedAt: number
-  feedback: number
   submittedAt: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -114,10 +120,12 @@ export type AssignmentSubmissionMinAggregateInputType = {
   fileSize?: true
   fileType?: true
   mark?: true
+  feedback?: true
   markedById?: true
   markedAt?: true
-  feedback?: true
   submittedAt?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type AssignmentSubmissionMaxAggregateInputType = {
@@ -132,10 +140,12 @@ export type AssignmentSubmissionMaxAggregateInputType = {
   fileSize?: true
   fileType?: true
   mark?: true
+  feedback?: true
   markedById?: true
   markedAt?: true
-  feedback?: true
   submittedAt?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type AssignmentSubmissionCountAggregateInputType = {
@@ -150,10 +160,12 @@ export type AssignmentSubmissionCountAggregateInputType = {
   fileSize?: true
   fileType?: true
   mark?: true
+  feedback?: true
   markedById?: true
   markedAt?: true
-  feedback?: true
   submittedAt?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -249,16 +261,18 @@ export type AssignmentSubmissionGroupByOutputType = {
   userId: string
   assignmentTitle: string
   assignmentDescription: string
-  status: string
+  status: $Enums.AssignmentStatus
   fileUrl: string | null
   fileName: string | null
   fileSize: number | null
   fileType: string | null
   mark: number | null
+  feedback: string | null
   markedById: string | null
   markedAt: Date | null
-  feedback: string | null
   submittedAt: Date
+  createdAt: Date
+  updatedAt: Date
   _count: AssignmentSubmissionCountAggregateOutputType | null
   _avg: AssignmentSubmissionAvgAggregateOutputType | null
   _sum: AssignmentSubmissionSumAggregateOutputType | null
@@ -290,16 +304,18 @@ export type AssignmentSubmissionWhereInput = {
   userId?: Prisma.StringFilter<"AssignmentSubmission"> | string
   assignmentTitle?: Prisma.StringFilter<"AssignmentSubmission"> | string
   assignmentDescription?: Prisma.StringFilter<"AssignmentSubmission"> | string
-  status?: Prisma.StringFilter<"AssignmentSubmission"> | string
+  status?: Prisma.EnumAssignmentStatusFilter<"AssignmentSubmission"> | $Enums.AssignmentStatus
   fileUrl?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   fileName?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   fileSize?: Prisma.IntNullableFilter<"AssignmentSubmission"> | number | null
   fileType?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   mark?: Prisma.IntNullableFilter<"AssignmentSubmission"> | number | null
+  feedback?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   markedById?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   markedAt?: Prisma.DateTimeNullableFilter<"AssignmentSubmission"> | Date | string | null
-  feedback?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   submittedAt?: Prisma.DateTimeFilter<"AssignmentSubmission"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"AssignmentSubmission"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"AssignmentSubmission"> | Date | string
   class?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   markedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -317,10 +333,12 @@ export type AssignmentSubmissionOrderByWithRelationInput = {
   fileSize?: Prisma.SortOrderInput | Prisma.SortOrder
   fileType?: Prisma.SortOrderInput | Prisma.SortOrder
   mark?: Prisma.SortOrderInput | Prisma.SortOrder
+  feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   markedById?: Prisma.SortOrderInput | Prisma.SortOrder
   markedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   class?: Prisma.ConversationOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   markedBy?: Prisma.UserOrderByWithRelationInput
@@ -336,16 +354,18 @@ export type AssignmentSubmissionWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"AssignmentSubmission"> | string
   assignmentTitle?: Prisma.StringFilter<"AssignmentSubmission"> | string
   assignmentDescription?: Prisma.StringFilter<"AssignmentSubmission"> | string
-  status?: Prisma.StringFilter<"AssignmentSubmission"> | string
+  status?: Prisma.EnumAssignmentStatusFilter<"AssignmentSubmission"> | $Enums.AssignmentStatus
   fileUrl?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   fileName?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   fileSize?: Prisma.IntNullableFilter<"AssignmentSubmission"> | number | null
   fileType?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   mark?: Prisma.IntNullableFilter<"AssignmentSubmission"> | number | null
+  feedback?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   markedById?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   markedAt?: Prisma.DateTimeNullableFilter<"AssignmentSubmission"> | Date | string | null
-  feedback?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   submittedAt?: Prisma.DateTimeFilter<"AssignmentSubmission"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"AssignmentSubmission"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"AssignmentSubmission"> | Date | string
   class?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   markedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -363,10 +383,12 @@ export type AssignmentSubmissionOrderByWithAggregationInput = {
   fileSize?: Prisma.SortOrderInput | Prisma.SortOrder
   fileType?: Prisma.SortOrderInput | Prisma.SortOrder
   mark?: Prisma.SortOrderInput | Prisma.SortOrder
+  feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   markedById?: Prisma.SortOrderInput | Prisma.SortOrder
   markedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.AssignmentSubmissionCountOrderByAggregateInput
   _avg?: Prisma.AssignmentSubmissionAvgOrderByAggregateInput
   _max?: Prisma.AssignmentSubmissionMaxOrderByAggregateInput
@@ -383,34 +405,38 @@ export type AssignmentSubmissionScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringWithAggregatesFilter<"AssignmentSubmission"> | string
   assignmentTitle?: Prisma.StringWithAggregatesFilter<"AssignmentSubmission"> | string
   assignmentDescription?: Prisma.StringWithAggregatesFilter<"AssignmentSubmission"> | string
-  status?: Prisma.StringWithAggregatesFilter<"AssignmentSubmission"> | string
+  status?: Prisma.EnumAssignmentStatusWithAggregatesFilter<"AssignmentSubmission"> | $Enums.AssignmentStatus
   fileUrl?: Prisma.StringNullableWithAggregatesFilter<"AssignmentSubmission"> | string | null
   fileName?: Prisma.StringNullableWithAggregatesFilter<"AssignmentSubmission"> | string | null
   fileSize?: Prisma.IntNullableWithAggregatesFilter<"AssignmentSubmission"> | number | null
   fileType?: Prisma.StringNullableWithAggregatesFilter<"AssignmentSubmission"> | string | null
   mark?: Prisma.IntNullableWithAggregatesFilter<"AssignmentSubmission"> | number | null
+  feedback?: Prisma.StringNullableWithAggregatesFilter<"AssignmentSubmission"> | string | null
   markedById?: Prisma.StringNullableWithAggregatesFilter<"AssignmentSubmission"> | string | null
   markedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"AssignmentSubmission"> | Date | string | null
-  feedback?: Prisma.StringNullableWithAggregatesFilter<"AssignmentSubmission"> | string | null
   submittedAt?: Prisma.DateTimeWithAggregatesFilter<"AssignmentSubmission"> | Date | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"AssignmentSubmission"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"AssignmentSubmission"> | Date | string
 }
 
 export type AssignmentSubmissionCreateInput = {
   id?: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
-  markedAt?: Date | string | null
   feedback?: string | null
+  markedAt?: Date | string | null
   submittedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   class: Prisma.ConversationCreateNestedOneWithoutAssignmentSubmissionsInput
-  user: Prisma.UserCreateNestedOneWithoutAssignmentSubmissionsInput
-  markedBy?: Prisma.UserCreateNestedOneWithoutAssignmentMarkersInput
+  user: Prisma.UserCreateNestedOneWithoutSubmittedAssignmentsInput
+  markedBy?: Prisma.UserCreateNestedOneWithoutMarkedAssignmentsInput
 }
 
 export type AssignmentSubmissionUncheckedCreateInput = {
@@ -419,34 +445,38 @@ export type AssignmentSubmissionUncheckedCreateInput = {
   userId: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
+  feedback?: string | null
   markedById?: string | null
   markedAt?: Date | string | null
-  feedback?: string | null
   submittedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AssignmentSubmissionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   class?: Prisma.ConversationUpdateOneRequiredWithoutAssignmentSubmissionsNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutAssignmentSubmissionsNestedInput
-  markedBy?: Prisma.UserUpdateOneWithoutAssignmentMarkersNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutSubmittedAssignmentsNestedInput
+  markedBy?: Prisma.UserUpdateOneWithoutMarkedAssignmentsNestedInput
 }
 
 export type AssignmentSubmissionUncheckedUpdateInput = {
@@ -455,16 +485,18 @@ export type AssignmentSubmissionUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AssignmentSubmissionCreateManyInput = {
@@ -473,31 +505,35 @@ export type AssignmentSubmissionCreateManyInput = {
   userId: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
+  feedback?: string | null
   markedById?: string | null
   markedAt?: Date | string | null
-  feedback?: string | null
   submittedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AssignmentSubmissionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AssignmentSubmissionUncheckedUpdateManyInput = {
@@ -506,16 +542,18 @@ export type AssignmentSubmissionUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AssignmentSubmissionListRelationFilter = {
@@ -546,10 +584,12 @@ export type AssignmentSubmissionCountOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
   fileType?: Prisma.SortOrder
   mark?: Prisma.SortOrder
+  feedback?: Prisma.SortOrder
   markedById?: Prisma.SortOrder
   markedAt?: Prisma.SortOrder
-  feedback?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type AssignmentSubmissionAvgOrderByAggregateInput = {
@@ -569,10 +609,12 @@ export type AssignmentSubmissionMaxOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
   fileType?: Prisma.SortOrder
   mark?: Prisma.SortOrder
+  feedback?: Prisma.SortOrder
   markedById?: Prisma.SortOrder
   markedAt?: Prisma.SortOrder
-  feedback?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type AssignmentSubmissionMinOrderByAggregateInput = {
@@ -587,10 +629,12 @@ export type AssignmentSubmissionMinOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
   fileType?: Prisma.SortOrder
   mark?: Prisma.SortOrder
+  feedback?: Prisma.SortOrder
   markedById?: Prisma.SortOrder
   markedAt?: Prisma.SortOrder
-  feedback?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type AssignmentSubmissionSumOrderByAggregateInput = {
@@ -724,21 +768,27 @@ export type AssignmentSubmissionUncheckedUpdateManyWithoutClassNestedInput = {
   deleteMany?: Prisma.AssignmentSubmissionScalarWhereInput | Prisma.AssignmentSubmissionScalarWhereInput[]
 }
 
+export type EnumAssignmentStatusFieldUpdateOperationsInput = {
+  set?: $Enums.AssignmentStatus
+}
+
 export type AssignmentSubmissionCreateWithoutUserInput = {
   id?: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
-  markedAt?: Date | string | null
   feedback?: string | null
+  markedAt?: Date | string | null
   submittedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   class: Prisma.ConversationCreateNestedOneWithoutAssignmentSubmissionsInput
-  markedBy?: Prisma.UserCreateNestedOneWithoutAssignmentMarkersInput
+  markedBy?: Prisma.UserCreateNestedOneWithoutMarkedAssignmentsInput
 }
 
 export type AssignmentSubmissionUncheckedCreateWithoutUserInput = {
@@ -746,16 +796,18 @@ export type AssignmentSubmissionUncheckedCreateWithoutUserInput = {
   classId: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
+  feedback?: string | null
   markedById?: string | null
   markedAt?: Date | string | null
-  feedback?: string | null
   submittedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AssignmentSubmissionCreateOrConnectWithoutUserInput = {
@@ -772,17 +824,19 @@ export type AssignmentSubmissionCreateWithoutMarkedByInput = {
   id?: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
-  markedAt?: Date | string | null
   feedback?: string | null
+  markedAt?: Date | string | null
   submittedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   class: Prisma.ConversationCreateNestedOneWithoutAssignmentSubmissionsInput
-  user: Prisma.UserCreateNestedOneWithoutAssignmentSubmissionsInput
+  user: Prisma.UserCreateNestedOneWithoutSubmittedAssignmentsInput
 }
 
 export type AssignmentSubmissionUncheckedCreateWithoutMarkedByInput = {
@@ -791,15 +845,17 @@ export type AssignmentSubmissionUncheckedCreateWithoutMarkedByInput = {
   userId: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
-  markedAt?: Date | string | null
   feedback?: string | null
+  markedAt?: Date | string | null
   submittedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AssignmentSubmissionCreateOrConnectWithoutMarkedByInput = {
@@ -837,16 +893,18 @@ export type AssignmentSubmissionScalarWhereInput = {
   userId?: Prisma.StringFilter<"AssignmentSubmission"> | string
   assignmentTitle?: Prisma.StringFilter<"AssignmentSubmission"> | string
   assignmentDescription?: Prisma.StringFilter<"AssignmentSubmission"> | string
-  status?: Prisma.StringFilter<"AssignmentSubmission"> | string
+  status?: Prisma.EnumAssignmentStatusFilter<"AssignmentSubmission"> | $Enums.AssignmentStatus
   fileUrl?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   fileName?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   fileSize?: Prisma.IntNullableFilter<"AssignmentSubmission"> | number | null
   fileType?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   mark?: Prisma.IntNullableFilter<"AssignmentSubmission"> | number | null
+  feedback?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   markedById?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   markedAt?: Prisma.DateTimeNullableFilter<"AssignmentSubmission"> | Date | string | null
-  feedback?: Prisma.StringNullableFilter<"AssignmentSubmission"> | string | null
   submittedAt?: Prisma.DateTimeFilter<"AssignmentSubmission"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"AssignmentSubmission"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"AssignmentSubmission"> | Date | string
 }
 
 export type AssignmentSubmissionUpsertWithWhereUniqueWithoutMarkedByInput = {
@@ -869,17 +927,19 @@ export type AssignmentSubmissionCreateWithoutClassInput = {
   id?: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
-  markedAt?: Date | string | null
   feedback?: string | null
+  markedAt?: Date | string | null
   submittedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutAssignmentSubmissionsInput
-  markedBy?: Prisma.UserCreateNestedOneWithoutAssignmentMarkersInput
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutSubmittedAssignmentsInput
+  markedBy?: Prisma.UserCreateNestedOneWithoutMarkedAssignmentsInput
 }
 
 export type AssignmentSubmissionUncheckedCreateWithoutClassInput = {
@@ -887,16 +947,18 @@ export type AssignmentSubmissionUncheckedCreateWithoutClassInput = {
   userId: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
+  feedback?: string | null
   markedById?: string | null
   markedAt?: Date | string | null
-  feedback?: string | null
   submittedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AssignmentSubmissionCreateOrConnectWithoutClassInput = {
@@ -930,16 +992,18 @@ export type AssignmentSubmissionCreateManyUserInput = {
   classId: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
+  feedback?: string | null
   markedById?: string | null
   markedAt?: Date | string | null
-  feedback?: string | null
   submittedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AssignmentSubmissionCreateManyMarkedByInput = {
@@ -948,32 +1012,36 @@ export type AssignmentSubmissionCreateManyMarkedByInput = {
   userId: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
-  markedAt?: Date | string | null
   feedback?: string | null
+  markedAt?: Date | string | null
   submittedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AssignmentSubmissionUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   class?: Prisma.ConversationUpdateOneRequiredWithoutAssignmentSubmissionsNestedInput
-  markedBy?: Prisma.UserUpdateOneWithoutAssignmentMarkersNestedInput
+  markedBy?: Prisma.UserUpdateOneWithoutMarkedAssignmentsNestedInput
 }
 
 export type AssignmentSubmissionUncheckedUpdateWithoutUserInput = {
@@ -981,16 +1049,18 @@ export type AssignmentSubmissionUncheckedUpdateWithoutUserInput = {
   classId?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AssignmentSubmissionUncheckedUpdateManyWithoutUserInput = {
@@ -998,33 +1068,37 @@ export type AssignmentSubmissionUncheckedUpdateManyWithoutUserInput = {
   classId?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AssignmentSubmissionUpdateWithoutMarkedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   class?: Prisma.ConversationUpdateOneRequiredWithoutAssignmentSubmissionsNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutAssignmentSubmissionsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutSubmittedAssignmentsNestedInput
 }
 
 export type AssignmentSubmissionUncheckedUpdateWithoutMarkedByInput = {
@@ -1033,15 +1107,17 @@ export type AssignmentSubmissionUncheckedUpdateWithoutMarkedByInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AssignmentSubmissionUncheckedUpdateManyWithoutMarkedByInput = {
@@ -1050,15 +1126,17 @@ export type AssignmentSubmissionUncheckedUpdateManyWithoutMarkedByInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AssignmentSubmissionCreateManyClassInput = {
@@ -1066,33 +1144,37 @@ export type AssignmentSubmissionCreateManyClassInput = {
   userId: string
   assignmentTitle: string
   assignmentDescription: string
-  status?: string
+  status?: $Enums.AssignmentStatus
   fileUrl?: string | null
   fileName?: string | null
   fileSize?: number | null
   fileType?: string | null
   mark?: number | null
+  feedback?: string | null
   markedById?: string | null
   markedAt?: Date | string | null
-  feedback?: string | null
   submittedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AssignmentSubmissionUpdateWithoutClassInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutAssignmentSubmissionsNestedInput
-  markedBy?: Prisma.UserUpdateOneWithoutAssignmentMarkersNestedInput
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutSubmittedAssignmentsNestedInput
+  markedBy?: Prisma.UserUpdateOneWithoutMarkedAssignmentsNestedInput
 }
 
 export type AssignmentSubmissionUncheckedUpdateWithoutClassInput = {
@@ -1100,16 +1182,18 @@ export type AssignmentSubmissionUncheckedUpdateWithoutClassInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AssignmentSubmissionUncheckedUpdateManyWithoutClassInput = {
@@ -1117,16 +1201,18 @@ export type AssignmentSubmissionUncheckedUpdateManyWithoutClassInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentTitle?: Prisma.StringFieldUpdateOperationsInput | string
   assignmentDescription?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mark?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   markedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -1143,10 +1229,12 @@ export type AssignmentSubmissionSelect<ExtArgs extends runtime.Types.Extensions.
   fileSize?: boolean
   fileType?: boolean
   mark?: boolean
+  feedback?: boolean
   markedById?: boolean
   markedAt?: boolean
-  feedback?: boolean
   submittedAt?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   class?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   markedBy?: boolean | Prisma.AssignmentSubmission$markedByArgs<ExtArgs>
@@ -1166,13 +1254,15 @@ export type AssignmentSubmissionSelectScalar = {
   fileSize?: boolean
   fileType?: boolean
   mark?: boolean
+  feedback?: boolean
   markedById?: boolean
   markedAt?: boolean
-  feedback?: boolean
   submittedAt?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type AssignmentSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "classId" | "userId" | "assignmentTitle" | "assignmentDescription" | "status" | "fileUrl" | "fileName" | "fileSize" | "fileType" | "mark" | "markedById" | "markedAt" | "feedback" | "submittedAt", ExtArgs["result"]["assignmentSubmission"]>
+export type AssignmentSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "classId" | "userId" | "assignmentTitle" | "assignmentDescription" | "status" | "fileUrl" | "fileName" | "fileSize" | "fileType" | "mark" | "feedback" | "markedById" | "markedAt" | "submittedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["assignmentSubmission"]>
 export type AssignmentSubmissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   class?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1192,16 +1282,18 @@ export type $AssignmentSubmissionPayload<ExtArgs extends runtime.Types.Extension
     userId: string
     assignmentTitle: string
     assignmentDescription: string
-    status: string
+    status: $Enums.AssignmentStatus
     fileUrl: string | null
     fileName: string | null
     fileSize: number | null
     fileType: string | null
     mark: number | null
+    feedback: string | null
     markedById: string | null
     markedAt: Date | null
-    feedback: string | null
     submittedAt: Date
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["assignmentSubmission"]>
   composites: {}
 }
@@ -1579,16 +1671,18 @@ export interface AssignmentSubmissionFieldRefs {
   readonly userId: Prisma.FieldRef<"AssignmentSubmission", 'String'>
   readonly assignmentTitle: Prisma.FieldRef<"AssignmentSubmission", 'String'>
   readonly assignmentDescription: Prisma.FieldRef<"AssignmentSubmission", 'String'>
-  readonly status: Prisma.FieldRef<"AssignmentSubmission", 'String'>
+  readonly status: Prisma.FieldRef<"AssignmentSubmission", 'AssignmentStatus'>
   readonly fileUrl: Prisma.FieldRef<"AssignmentSubmission", 'String'>
   readonly fileName: Prisma.FieldRef<"AssignmentSubmission", 'String'>
   readonly fileSize: Prisma.FieldRef<"AssignmentSubmission", 'Int'>
   readonly fileType: Prisma.FieldRef<"AssignmentSubmission", 'String'>
   readonly mark: Prisma.FieldRef<"AssignmentSubmission", 'Int'>
+  readonly feedback: Prisma.FieldRef<"AssignmentSubmission", 'String'>
   readonly markedById: Prisma.FieldRef<"AssignmentSubmission", 'String'>
   readonly markedAt: Prisma.FieldRef<"AssignmentSubmission", 'DateTime'>
-  readonly feedback: Prisma.FieldRef<"AssignmentSubmission", 'String'>
   readonly submittedAt: Prisma.FieldRef<"AssignmentSubmission", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"AssignmentSubmission", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"AssignmentSubmission", 'DateTime'>
 }
     
 

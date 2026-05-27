@@ -15,7 +15,7 @@ export const classApi = createApi({
     // Create a new class
     createClass: builder.mutation({
       query: (classData) => ({
-        url: "/create",
+        url: "/",
         method: "POST",
         body: classData,
       }),
@@ -24,13 +24,13 @@ export const classApi = createApi({
 
     searchClasses: builder.query({
       query: ({ query, page, limit }) => ({
-        url: "/search-classes", // Matches your backend search endpoint
+        url: "/search",
         params: { query, page, limit },
       }),
     }),
     // Get user's classes
     getUserClasses: builder.query({
-      query: () => "/list",
+      query: () => "/my",
       providesTags: ["Class-List"],
     }),
 
@@ -95,9 +95,8 @@ export const classApi = createApi({
     // Add moderator
     addModerator: builder.mutation({
       query: ({ classId, userId }) => ({
-        url: `/${classId}/add-moderator`,
-        method: "PUT",
-        body: { userId },
+        url: `/${classId}/moderators/${userId}`,
+        method: "POST",
       }),
       invalidatesTags: (result, error, { classId }) => [
         { type: "Class", id: classId },
@@ -108,9 +107,8 @@ export const classApi = createApi({
     // Remove moderator
     removeModerator: builder.mutation({
       query: ({ classId, userId }) => ({
-        url: `/${classId}/remove-moderator`,
-        method: "PUT",
-        body: { userId },
+        url: `/${classId}/moderators/${userId}`,
+        method: "DELETE",
       }),
       invalidatesTags: (result, error, { classId }) => [
         { type: "Class", id: classId },
@@ -121,8 +119,8 @@ export const classApi = createApi({
     // Add member
     addMember: builder.mutation({
       query: ({ classId, userId }) => ({
-        url: `/${classId}/add-member`,
-        method: "PUT",
+        url: `/${classId}/members`,
+        method: "POST",
         body: { userId },
       }),
       invalidatesTags: (result, error, { classId }) => [
@@ -135,9 +133,8 @@ export const classApi = createApi({
     // Remove member
     removeMember: builder.mutation({
       query: ({ classId, userId }) => ({
-        url: `/${classId}/remove-member`,
+        url: `/${classId}/members/${userId}`,
         method: "DELETE",
-        body: { userId },
       }),
       invalidatesTags: (result, error, { classId }) => [
         { type: "Class", id: classId },
@@ -148,7 +145,7 @@ export const classApi = createApi({
     // Request to join class
     requestJoinClass: builder.mutation({
       query: (classId) => ({
-        url: `/${classId}/request-join`,
+        url: `/${classId}/join-request`,
         method: "POST",
       }),
       invalidatesTags: ["JoinRequest"],
@@ -156,7 +153,7 @@ export const classApi = createApi({
 
     // Get join requests
     getJoinRequests: builder.query({
-      query: (classId) => `/${classId}/requests`,
+      query: (classId) => `/${classId}/join-requests`,
       providesTags: (result, error, classId) => [
         { type: "JoinRequest", id: classId },
       ],
@@ -164,9 +161,9 @@ export const classApi = createApi({
 
     // Approve join request
     approveJoinRequest: builder.mutation({
-      query: ({ classId, userId }) => ({
-        url: `/${classId}/approve/${userId}`,
-        method: "PUT",
+      query: ({ classId, requestId }) => ({
+        url: `/${classId}/join-requests/${requestId}/approve`,
+        method: "POST",
       }),
       invalidatesTags: (result, error, { classId }) => [
         { type: "JoinRequest", id: classId },
@@ -178,9 +175,9 @@ export const classApi = createApi({
 
     // Reject join request
     rejectJoinRequest: builder.mutation({
-      query: ({ classId, userId }) => ({
-        url: `/${classId}/reject/${userId}`,
-        method: "PUT",
+      query: ({ classId, requestId }) => ({
+        url: `/${classId}/join-requests/${requestId}/reject`,
+        method: "POST",
       }),
       invalidatesTags: (result, error, { classId }) => [
         { type: "JoinRequest", id: classId },

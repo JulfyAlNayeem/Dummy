@@ -84,3 +84,8 @@ export type Session = Prisma.SessionModel
  * 
  */
 export type AttendanceLog = Prisma.AttendanceLogModel
+/**
+ * Model AssignmentSubmission
+ * 
+ */
+export type AssignmentSubmission = Prisma.AssignmentSubmissionModel

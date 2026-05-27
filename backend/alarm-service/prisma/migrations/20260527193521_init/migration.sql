@@ -1,4 +1,4 @@
--- CreateTable
+﻿-- CreateTable
 CREATE TABLE `users` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
@@ -79,3 +79,4 @@ ALTER TABLE `alertness_responses` ADD CONSTRAINT `alertness_responses_sessionId_
 
 -- AddForeignKey
 ALTER TABLE `alertness_responses` ADD CONSTRAINT `alertness_responses_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+

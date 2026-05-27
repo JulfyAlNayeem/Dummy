@@ -66,15 +66,6 @@ export const KeyExchangeStatus = {
 export type KeyExchangeStatus = (typeof KeyExchangeStatus)[keyof typeof KeyExchangeStatus]
 
 
-export const FriendshipStatus = {
-  pending: 'pending',
-  accepted: 'accepted',
-  declined: 'declined'
-} as const
-
-export type FriendshipStatus = (typeof FriendshipStatus)[keyof typeof FriendshipStatus]
-
-
 export const JoinRequestStatus = {
   pending: 'pending',
   approved: 'approved',
@@ -123,18 +114,6 @@ export const MediaType = {
 } as const
 
 export type MediaType = (typeof MediaType)[keyof typeof MediaType]
-
-
-export const ReactionType = {
-  like: 'like',
-  love: 'love',
-  haha: 'haha',
-  wow: 'wow',
-  sad: 'sad',
-  angry: 'angry'
-} as const
-
-export type ReactionType = (typeof ReactionType)[keyof typeof ReactionType]
 
 
 export const RepeatType = {
@@ -221,44 +200,6 @@ export const AttendanceStatus = {
 } as const
 
 export type AttendanceStatus = (typeof AttendanceStatus)[keyof typeof AttendanceStatus]
-
-
-export const FormFieldType = {
-  yes_no: 'yes_no',
-  text: 'text'
-} as const
-
-export type FormFieldType = (typeof FormFieldType)[keyof typeof FormFieldType]
-
-
-export const FormFrequency = {
-  daily: 'daily',
-  weekly: 'weekly',
-  bi_weekly: 'bi_weekly',
-  monthly: 'monthly'
-} as const
-
-export type FormFrequency = (typeof FormFrequency)[keyof typeof FormFrequency]
-
-
-export const FormSubmissionStatus = {
-  submitted: 'submitted',
-  accepted: 'accepted',
-  rejected: 'rejected',
-  partially_accepted: 'partially_accepted',
-  not_submitted: 'not_submitted'
-} as const
-
-export type FormSubmissionStatus = (typeof FormSubmissionStatus)[keyof typeof FormSubmissionStatus]
-
-
-export const ReviewStatus = {
-  pending: 'pending',
-  accepted: 'accepted',
-  rejected: 'rejected'
-} as const
-
-export type ReviewStatus = (typeof ReviewStatus)[keyof typeof ReviewStatus]
 
 
 export const NoticeAudience = {

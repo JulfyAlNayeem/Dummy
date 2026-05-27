@@ -19,9 +19,9 @@ export default function JoinRequestsPanel({ classId }: { classId: string }): JSX
   const [approveRequest, { isLoading: isApproving }]: any = useApproveJoinRequestMutation()
   const [rejectRequest, { isLoading: isRejecting }]: any = useRejectJoinRequestMutation()
 
-  const handleApprove = async (userId: string): Promise<void> => {
+  const handleApprove = async (requestId: string): Promise<void> => {
     try {
-      await approveRequest({ classId, userId }).unwrap()
+      await approveRequest({ classId, requestId }).unwrap()
       dispatch(
         addToast({
           title: "Success",
@@ -40,9 +40,9 @@ export default function JoinRequestsPanel({ classId }: { classId: string }): JSX
     }
   }
 
-  const handleReject = async (userId: string): Promise<void> => {
+  const handleReject = async (requestId: string): Promise<void> => {
     try {
-      await rejectRequest({ classId, userId }).unwrap()
+      await rejectRequest({ classId, requestId }).unwrap()
       dispatch(
         addToast({
           title: "Success",
@@ -113,12 +113,12 @@ export default function JoinRequestsPanel({ classId }: { classId: string }): JSX
               <div key={request.id} className="flex items-center justify-between p-4 border rounded-lg">
                 <div className="flex items-center space-x-3">
                   <Avatar>
-                    <AvatarImage src={request.userId.image || "/placeholder.svg"} />
-                    <AvatarFallback>{request.userId.name.charAt(0).toUpperCase()}</AvatarFallback>
+                    <AvatarImage src={request.user?.image || "/placeholder.svg"} />
+                    <AvatarFallback>{request.user?.name?.charAt(0).toUpperCase()}</AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-medium">{request.userId.name}</p>
-                    <p className="text-sm text-muted-foreground">{request.userId.email}</p>
+                    <p className="font-medium">{request.user?.name}</p>
+                    <p className="text-sm text-muted-foreground">{request.user?.email}</p>
                     <p className="text-xs text-muted-foreground">
                       Requested {new Date(request.requestedAt).toLocaleDateString()}
                     </p>
@@ -127,7 +127,7 @@ export default function JoinRequestsPanel({ classId }: { classId: string }): JSX
                 <div className="flex space-x-2">
                   <Button
                     size="sm"
-                    onClick={() => handleApprove(request.userId.id)}
+                    onClick={() => handleApprove(request.id)}
                     disabled={isApproving}
                     className="bg-green-600 hover:bg-green-700"
                   >
@@ -137,7 +137,7 @@ export default function JoinRequestsPanel({ classId }: { classId: string }): JSX
                   <Button
                     size="sm"
                     variant="outline"
-                    onClick={() => handleReject(request.userId.id)}
+                    onClick={() => handleReject(request.id)}
                     disabled={isRejecting}
                     className="border-red-200 text-red-600 hover:bg-red-50"
                   >

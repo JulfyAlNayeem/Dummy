@@ -59,7 +59,8 @@ export const ModelName = {
   ConversationSelectedDay: 'ConversationSelectedDay',
   JoinRequest: 'JoinRequest',
   Session: 'Session',
-  AttendanceLog: 'AttendanceLog'
+  AttendanceLog: 'AttendanceLog',
+  AssignmentSubmission: 'AssignmentSubmission'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -170,9 +171,13 @@ export const SessionScalarFieldEnum = {
   classId: 'classId',
   date: 'date',
   startTime: 'startTime',
-  endTime: 'endTime',
-  isActive: 'isActive',
-  createdAt: 'createdAt'
+  type: 'type',
+  createdById: 'createdById',
+  status: 'status',
+  duration: 'duration',
+  cutoffTime: 'cutoffTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -181,14 +186,41 @@ export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeo
 export const AttendanceLogScalarFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
+  classId: 'classId',
   userId: 'userId',
-  conversationId: 'conversationId',
   status: 'status',
-  joinedAt: 'joinedAt',
-  leftAt: 'leftAt'
+  enteredAt: 'enteredAt',
+  leftAt: 'leftAt',
+  duration: 'duration',
+  sessionDate: 'sessionDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type AttendanceLogScalarFieldEnum = (typeof AttendanceLogScalarFieldEnum)[keyof typeof AttendanceLogScalarFieldEnum]
+
+
+export const AssignmentSubmissionScalarFieldEnum = {
+  id: 'id',
+  classId: 'classId',
+  userId: 'userId',
+  assignmentTitle: 'assignmentTitle',
+  assignmentDescription: 'assignmentDescription',
+  status: 'status',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  fileType: 'fileType',
+  mark: 'mark',
+  feedback: 'feedback',
+  markedById: 'markedById',
+  markedAt: 'markedAt',
+  submittedAt: 'submittedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssignmentSubmissionScalarFieldEnum = (typeof AssignmentSubmissionScalarFieldEnum)[keyof typeof AssignmentSubmissionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -278,7 +310,8 @@ export const SessionOrderByRelevanceFieldEnum = {
   classId: 'classId',
   date: 'date',
   startTime: 'startTime',
-  endTime: 'endTime'
+  createdById: 'createdById',
+  cutoffTime: 'cutoffTime'
 } as const
 
 export type SessionOrderByRelevanceFieldEnum = (typeof SessionOrderByRelevanceFieldEnum)[keyof typeof SessionOrderByRelevanceFieldEnum]
@@ -287,10 +320,26 @@ export type SessionOrderByRelevanceFieldEnum = (typeof SessionOrderByRelevanceFi
 export const AttendanceLogOrderByRelevanceFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
+  classId: 'classId',
   userId: 'userId',
-  conversationId: 'conversationId',
-  status: 'status'
+  sessionDate: 'sessionDate'
 } as const
 
 export type AttendanceLogOrderByRelevanceFieldEnum = (typeof AttendanceLogOrderByRelevanceFieldEnum)[keyof typeof AttendanceLogOrderByRelevanceFieldEnum]
+
+
+export const AssignmentSubmissionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  classId: 'classId',
+  userId: 'userId',
+  assignmentTitle: 'assignmentTitle',
+  assignmentDescription: 'assignmentDescription',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  fileType: 'fileType',
+  feedback: 'feedback',
+  markedById: 'markedById'
+} as const
+
+export type AssignmentSubmissionOrderByRelevanceFieldEnum = (typeof AssignmentSubmissionOrderByRelevanceFieldEnum)[keyof typeof AssignmentSubmissionOrderByRelevanceFieldEnum]
 
