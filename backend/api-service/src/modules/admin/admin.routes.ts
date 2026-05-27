@@ -34,7 +34,7 @@ router.post('/approvals/:approvalId/reject', requireAdmin, rejectUser);
 
 // Settings
 router.get('/settings', requireAdmin, getAdminSettings);
-router.put('/settings', requireSuperAdmin, updateAdminSettings);
+router.put('/settings', requireAdmin, updateAdminSettings);
 
 // Logs
 router.get('/logs', requireAdmin, getActivityLogs);

@@ -9,6 +9,7 @@ import { useConversation } from "@/redux/slices/conversationSlice";
 import { Textarea } from "../ui/textarea";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 
 export default function LessonSplitter({ themeIndex }: { themeIndex?: number }): JSX.Element {

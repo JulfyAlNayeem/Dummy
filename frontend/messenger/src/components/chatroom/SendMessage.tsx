@@ -19,6 +19,7 @@ import { encryptMessage as encryptMessageV1 } from '@/utils/messageEncryptionV1'
 import { storeOwnMessagePlaintext, hasKeys } from '@/utils/messageEncryptionHelperFuction';
 import { verifyKeyOnServer } from '@/utils/socketEncryptionUtils';
 import { encryptText as smteEncryptText, encryptFiles as smteEncryptFiles, isSmteAvailable } from '@/utils/smteEncryption';
+import { cn } from '@/lib/utils';
 
 const SendMessage = forwardRef(
   (
