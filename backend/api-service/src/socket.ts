@@ -16,6 +16,7 @@ import { ConversationGateway } from './modules/conversation/index.js';
 import { UserGateway } from './modules/user/index.js';
 import { SMTEGateway } from './modules/smte/index.js';
 import { EncryptionGateway } from './modules/encryption/encryption.gateway.js';
+import { MessageGateway } from './modules/message/index.js';
 
 /**
  * Initialize Socket.IO server with modular gateway architecture
@@ -52,6 +53,7 @@ export const initializeSocketServer = async (server: HttpServer, _redis: RedisCl
   // Register all gateways
   gatewayManager.register(UserGateway);           // User presence
   gatewayManager.register(ConversationGateway);    // Conversation management
+  gatewayManager.register(MessageGateway);         // Messaging (send/edit/delete/react/read…)
   gatewayManager.register(EncryptionGateway);      // End-to-end encryption
   gatewayManager.register(SMTEGateway);            // Transport encryption
 
