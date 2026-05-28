@@ -135,33 +135,74 @@ const conversationSlice = createSlice({
       }
 
       const oldId = clientTempId || messageId;
-      
-      // CRITICAL: Preserve plainText from optimistic message BEFORE deleting it
-      let existingPlainText = null;
-      if (oldId && state.byConversationId[conversationId].messages[oldId]) {
-        existingPlainText = state.byConversationId[conversationId].messages[oldId].plainText;
-        
-        // Preserve failed messages unless updating with a server-confirmed message
-        if (
-          state.byConversationId[conversationId].messages[oldId].status ===
-            "fail" &&
-          (!message || !message.id)
-        ) {
-          if (message) {
-            state.byConversationId[conversationId].messages[oldId] = {
-              ...state.byConversationId[conversationId].messages[oldId],
-              ...message,
-              // Preserve plainText even when updating failed message
-              plainText: message.plainText || existingPlainText,
-              conversation: conversationId,
-              createdAt:
-                message.createdAt ||
-                state.byConversationId[conversationId].messages[oldId]
-                  .createdAt,
-            };
-          }
-          return;
+      const oldMessage = oldId
+        ? state.byConversationId[conversationId].messages[oldId]
+        : null;
+
+      // Allow explicit delete through updateMessage({ message: null })
+      if (message === null) {
+        if (oldId && oldMessage) {
+          delete state.byConversationId[conversationId].messages[oldId];
+          state.byConversationId[conversationId].sortedIds =
+            state.byConversationId[conversationId].sortedIds.filter(
+              (id) => id !== oldId
+            );
         }
+        return;
+      }
+
+      if (!message) {
+        return;
+      }
+
+      const newId = message.id || oldId;
+      if (!newId) {
+        console.warn("No valid ID for message update:", message);
+        return;
+      }
+
+      const hasRenderableContent =
+        !!message.text?.trim() ||
+        message.media?.length > 0 ||
+        message.voice ||
+        message.call ||
+        message.img;
+
+      const isPartialPatch =
+        !hasRenderableContent &&
+        !!(
+          message.status ||
+          message.readBy ||
+          message.reactions ||
+          message.deletedBy ||
+          message.edited ||
+          message.updatedAt
+        );
+
+      const existingAtNewId =
+        state.byConversationId[conversationId].messages[newId];
+      const baseMessage = existingAtNewId || oldMessage || {};
+
+      // For existing messages, allow status/read/reaction-only patches
+      if (!baseMessage.id && !hasRenderableContent && !isPartialPatch) {
+        console.warn("Invalid message:", message);
+        return;
+      }
+
+      const resolvedCreatedAt =
+        message.createdAt || baseMessage.createdAt || new Date().toISOString();
+
+      state.byConversationId[conversationId].messages[newId] = {
+        ...baseMessage,
+        ...message,
+        plainText: message.plainText || baseMessage.plainText,
+        conversation: conversationId,
+        conversationId,
+        createdAt: resolvedCreatedAt,
+      };
+
+      // Replace optimistic message id with server id (only when ids differ)
+      if (oldId && oldId !== newId && oldMessage) {
         delete state.byConversationId[conversationId].messages[oldId];
         state.byConversationId[conversationId].sortedIds =
           state.byConversationId[conversationId].sortedIds.filter(
@@ -169,52 +210,19 @@ const conversationSlice = createSlice({
           );
       }
 
-      if (message) {
-        const newId = message.id || clientTempId;
-        if (!newId) {
-          console.warn("No valid ID for message update:", message);
-          return;
-        }
-
-        const isValid =
-          message.status === "fail" ||
-          ((message.text?.trim() ||
-            message.media?.length > 0 ||
-            message.voice ||
-            message.call ||
-            message.img) &&
-            !message.deletedBy?.includes(state.user?.id));
-        if (!isValid) {
-          console.warn("Invalid message:", message);
-          return;
-        }
-
-        // Use existingPlainText captured before deletion
-        // ALSO check if the message already exists with plainText and preserve it
-        const alreadyExistingPlainText = state.byConversationId[conversationId].messages[newId]?.plainText;
-        
-        state.byConversationId[conversationId].messages[newId] = {
-          ...state.byConversationId[conversationId].messages[newId],
-          ...message,
-          // Preserve plainText: use new plainText > existing in same message > existing from optimistic message
-          plainText: message.plainText || alreadyExistingPlainText || existingPlainText,
-          conversation: conversationId,
-          createdAt: message.createdAt || new Date().toISOString(),
-        };
-        
-        if (!state.byConversationId[conversationId].sortedIds.includes(newId)) {
-          state.byConversationId[conversationId].sortedIds.push(newId);
-        }
-        state.byConversationId[conversationId].sortedIds.sort(
-          (a, b) =>
-            new Date(
-              state.byConversationId[conversationId].messages[a].createdAt
-            ) -
-            new Date(
-              state.byConversationId[conversationId].messages[b].createdAt
-            )
-        );
+      if (!state.byConversationId[conversationId].sortedIds.includes(newId)) {
+        state.byConversationId[conversationId].sortedIds.push(newId);
       }
+
+      state.byConversationId[conversationId].sortedIds.sort(
+        (a, b) =>
+          new Date(
+            state.byConversationId[conversationId].messages[a].createdAt
+          ) -
+          new Date(
+            state.byConversationId[conversationId].messages[b].createdAt
+          )
+      );
     },
     updateMessageReaction(state, action) {
       const { conversationId, messageId, clientTempId, reactions } =
