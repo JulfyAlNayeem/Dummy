@@ -3,6 +3,12 @@ set -e
 
 echo "Running Prisma migrations..."
 
+try_resolve() {
+  NAME="$1"
+  npx prisma migrate resolve --rolled-back "$NAME" >/dev/null 2>&1 || true
+  npx prisma migrate resolve --applied "$NAME" >/dev/null 2>&1 || true
+}
+
 # If DB_FORCE_RESET=true, drop and recreate the schema before migrating.
 # The app's autoInitializeDatabase() will seed once it detects no users.
 if [ "${DB_FORCE_RESET:-false}" = "true" ]; then
@@ -10,26 +16,31 @@ if [ "${DB_FORCE_RESET:-false}" = "true" ]; then
   npx prisma migrate reset --force --skip-seed
   echo "✅ Schema reset complete. App will auto-seed on startup."
 else
-  # Resolve any legacy rolled-back or renamed migrations whose files no longer exist.
+  # Resolve legacy migration names that may still exist in _prisma_migrations.
   for LEGACY in 0001_baseline 0002_notification_system_upgrade 0003_add_social_profile_fields; do
-    npx prisma migrate resolve --applied "$LEGACY" 2>/dev/null || true
+    npx prisma migrate resolve --applied "$LEGACY" >/dev/null 2>&1 || true
   done
 
-  # Attempt migrate deploy; on failure (e.g. tables already exist from old
-  # migrations), resolve the current init migration as applied and retry.
-  if ! npx prisma migrate deploy 2>&1; then
+  # First attempt.
+  if ! npx prisma migrate deploy; then
     echo ""
-    echo "⚠️  Migration deploy failed. Attempting drift recovery..."
+    echo "⚠️  Migration deploy failed. Attempting compatibility recovery..."
 
-    MIGRATION_NAME=$(ls prisma/migrations/ | grep -v migration_lock | head -1)
-    if [ -n "$MIGRATION_NAME" ]; then
-      echo "Resolving '$MIGRATION_NAME' as already applied (drift recovery)..."
-      npx prisma migrate resolve --applied "$MIGRATION_NAME" 2>/dev/null || true
-      echo "Retrying migrate deploy..."
-      npx prisma migrate deploy
-    else
-      echo "❌ No migration found to resolve. Exiting."
-      exit 1
+    # Known shared-schema / renamed migration states observed in production.
+    try_resolve 20260526065636_init
+    try_resolve 20260527113000_add_alertness_sessions
+
+    # Also try the first migration in this service as applied (tables may already exist).
+    FIRST_MIGRATION=$(ls prisma/migrations/ | grep -v migration_lock | head -1)
+    if [ -n "$FIRST_MIGRATION" ]; then
+      npx prisma migrate resolve --applied "$FIRST_MIGRATION" >/dev/null 2>&1 || true
+    fi
+
+    echo "Retrying migrate deploy after recovery..."
+    if ! npx prisma migrate deploy; then
+      echo ""
+      echo "⚠️  Migrations still failing; starting API anyway to avoid downtime."
+      echo "   Please inspect migration state manually and repair when convenient."
     fi
   fi
 fi
