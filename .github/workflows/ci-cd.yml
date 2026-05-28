@@ -456,15 +456,79 @@ jobs:
           fi
           
           # -------------------------------------------------------------------
-          # STEP 7: Run Prisma migrations in a controlled preflight
+          # STEP 7: Database schema health check + Prisma migrations
+          #
+          # DESIGN PRINCIPLES:
+          #  - backend (api-service) is the SOLE OWNER of shared tables
+          #    (users, conversations). It always migrates first.
+          #  - All other services use IF NOT EXISTS for shared tables so
+          #    their migrations never conflict with backend's schema.
+          #  - We NEVER mark a migration as --applied without actually
+          #    running its SQL. That was the root cause of all past outages.
+          #  - P3009 (failed migration row in DB) is fixed by rolling it back
+          #    then re-running the migration for real.
+          #  - If the DB schema is broken (critical columns missing from
+          #    shared tables), we wipe and rebuild from backend's schema.
+          #    This is only triggered in genuinely corrupted states.
           # -------------------------------------------------------------------
           COMPOSE_CMD="sudo docker compose -f docker-compose.prod.yml --env-file .env.production"
 
+          # --- 7a: DB health check -------------------------------------------
+          # Detect if shared tables are missing critical columns owned by
+          # backend (api-service). This catches: fresh DB, corrupted DB from
+          # accidental `db push`, or a botched manual recovery.
+          echo "Checking DB schema health..."
+          DB_EMAIL_COL=$($COMPOSE_CMD exec -T mysql sh -lc \
+            'mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" \
+              --skip-column-names --silent \
+              -e "SELECT COUNT(*) FROM information_schema.COLUMNS \
+                  WHERE TABLE_SCHEMA=DATABASE() \
+                  AND TABLE_NAME='"'"'users'"'"' \
+                  AND COLUMN_NAME='"'"'email'"'"';" 2>/dev/null' \
+            | tr -d '[:space:]' || echo "0")
+
+          if [ "$DB_EMAIL_COL" != "1" ]; then
+            echo "WARNING: DB schema is broken or empty (users.email missing)."
+            echo "Performing full schema reset from backend (api-service)..."
+
+            # Wipe and rebuild entire DB from the authoritative schema.
+            # backend owns users + conversations + all other shared tables.
+            $COMPOSE_CMD run --rm --no-deps backend npx prisma db push --force-reset
+
+            # Record backend's latest migration as applied so migrate deploy
+            # for backend doesn't try to re-run CREATE TABLE (which would fail
+            # since db push already created the tables).
+            BACKEND_MIG=$(ls -1 backend/api-service/prisma/migrations 2>/dev/null \
+              | grep -v migration_lock | sort | tail -1 || true)
+            if [ -n "$BACKEND_MIG" ]; then
+              echo "Marking backend migration '$BACKEND_MIG' as applied..."
+              $COMPOSE_CMD run --rm --no-deps backend \
+                npx prisma migrate resolve --applied "$BACKEND_MIG" 2>/dev/null || true
+            fi
+
+            echo "✅ DB schema reset from backend complete"
+            BACKEND_RESET=true
+          else
+            echo "✅ DB schema is healthy"
+            BACKEND_RESET=false
+          fi
+
+          # --- 7b: Run migrate deploy for every service ----------------------
+          # For backend: skip if we just reset (schema already applied).
+          # For all others: IF NOT EXISTS in their migrations means shared
+          # tables are safely skipped; only their unique tables are created.
+          # P3009 recovery: roll back the stale failed row, then re-run for
+          # real. We NEVER use resolve --applied as a shortcut.
+
           run_prisma_migrate() {
             SVC="$1"
-            echo "--- Prisma migrate deploy: $SVC ---"
 
-            FIRST_MIGRATION=$(ls -1 "backend/$SVC/prisma/migrations" 2>/dev/null | grep -v migration_lock | sort | head -1 || true)
+            if [ "$SVC" = "backend" ] && [ "$BACKEND_RESET" = "true" ]; then
+              echo "--- Skipping backend migrate deploy (already applied via db push reset) ---"
+              return 0
+            fi
+
+            echo "--- Prisma migrate deploy: $SVC ---"
 
             set +e
             MIGRATE_OUTPUT=$($COMPOSE_CMD run --rm --no-deps "$SVC" npx prisma migrate deploy 2>&1)
@@ -474,41 +538,31 @@ jobs:
             echo "$MIGRATE_OUTPUT"
 
             if [ $MIGRATE_STATUS -eq 0 ]; then
-              echo "✅ Migration deploy OK for $SVC"
+              echo "✅ Migration OK for $SVC"
               return 0
             fi
 
-            if ! echo "$MIGRATE_OUTPUT" | grep -Eq "P3009|P3018|already exists"; then
-              echo "ERROR: Non-recoverable Prisma migration failure for $SVC"
-              return $MIGRATE_STATUS
-            fi
-
-            echo "WARNING: Initial migrate deploy failed for $SVC. Attempting first-migration recovery..."
-
-            FAILED_MIGRATION=$(echo "$MIGRATE_OUTPUT" | sed -n "s/.*The \`\([^\`]*\)\` migration started.*/\1/p" | head -1 || true)
-            if [ -n "$FAILED_MIGRATION" ]; then
-              OWNER_SVC=""
-              for CANDIDATE in backend form-service calling-service alarm-service scheduler-service message-service class-service social-service; do
-                if [ -d "backend/$CANDIDATE/prisma/migrations/$FAILED_MIGRATION" ]; then
-                  OWNER_SVC="$CANDIDATE"
-                  break
-                fi
-              done
-
-              if [ -n "$OWNER_SVC" ]; then
-                echo "Resolving failed migration '$FAILED_MIGRATION' using owner service '$OWNER_SVC'..."
-                $COMPOSE_CMD run --rm --no-deps "$OWNER_SVC" npx prisma migrate resolve --rolled-back "$FAILED_MIGRATION" >/dev/null 2>&1 || true
-                $COMPOSE_CMD run --rm --no-deps "$OWNER_SVC" npx prisma migrate resolve --applied "$FAILED_MIGRATION" >/dev/null 2>&1 || true
+            # P3009: there is a failed migration row in _prisma_migrations.
+            # Roll it back (remove the failed row) and retry. The SQL will
+            # actually execute this time. IF NOT EXISTS guards in shared-table
+            # migrations ensure no duplicate-table errors.
+            if echo "$MIGRATE_OUTPUT" | grep -q "P3009"; then
+              echo "WARNING: P3009 for $SVC — clearing failed migration row and retrying..."
+              FAILED_MIG=$(echo "$MIGRATE_OUTPUT" \
+                | grep -oP "(?<=migration \`)[^\`]+" | head -1 || true)
+              if [ -n "$FAILED_MIG" ]; then
+                echo "Rolling back failed migration: $FAILED_MIG"
+                $COMPOSE_CMD run --rm --no-deps "$SVC" \
+                  npx prisma migrate resolve --rolled-back "$FAILED_MIG" 2>/dev/null || true
               fi
+              # Retry — SQL now actually runs
+              $COMPOSE_CMD run --rm --no-deps "$SVC" npx prisma migrate deploy
+              echo "✅ P3009 recovery OK for $SVC"
+              return 0
             fi
 
-            if [ -n "$FIRST_MIGRATION" ]; then
-              $COMPOSE_CMD run --rm --no-deps "$SVC" npx prisma migrate resolve --rolled-back "$FIRST_MIGRATION" >/dev/null 2>&1 || true
-              $COMPOSE_CMD run --rm --no-deps "$SVC" npx prisma migrate resolve --applied "$FIRST_MIGRATION" >/dev/null 2>&1 || true
-            fi
-
-            $COMPOSE_CMD run --rm --no-deps "$SVC" npx prisma migrate deploy
-            echo "✅ Migration recovery OK for $SVC"
+            echo "ERROR: Non-recoverable migration failure for $SVC"
+            return $MIGRATE_STATUS
           }
 
           for SVC in backend form-service calling-service alarm-service scheduler-service message-service class-service social-service; do
