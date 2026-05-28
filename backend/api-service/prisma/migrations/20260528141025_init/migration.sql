@@ -7,7 +7,7 @@ CREATE TABLE `users` (
     `gender` VARCHAR(191) NOT NULL,
     `image` VARCHAR(191) NOT NULL DEFAULT '/images/avatar/default-avatar.png',
     `bio` VARCHAR(150) NULL,
-    `role` ENUM('user', 'admin', 'superadmin', 'moderator', 'teacher') NOT NULL DEFAULT 'user',
+    `role` ENUM('user', 'admin', 'superadmin', 'moderator', 'teacher', 'developer') NOT NULL DEFAULT 'user',
     `is_active` BOOLEAN NOT NULL DEFAULT false,
     `last_seen` DATETIME(3) NULL,
     `themeIndex` INTEGER NOT NULL DEFAULT 0,
@@ -33,16 +33,6 @@ CREATE TABLE `users` (
 
     UNIQUE INDEX `users_name_key`(`name`),
     UNIQUE INDEX `users_email_key`(`email`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `device_tokens` (
-    `id` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `token` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `device_tokens_userId_token_key`(`userId`, `token`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -131,16 +121,6 @@ CREATE TABLE `conversation_moderators` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `conversation_selected_days` (
-    `id` VARCHAR(191) NOT NULL,
-    `conversationId` VARCHAR(191) NOT NULL,
-    `day` INTEGER NOT NULL,
-
-    UNIQUE INDEX `conversation_selected_days_conversationId_day_key`(`conversationId`, `day`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `conversation_block_entries` (
     `id` VARCHAR(191) NOT NULL,
     `conversationId` VARCHAR(191) NOT NULL,
@@ -153,47 +133,12 @@ CREATE TABLE `conversation_block_entries` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `conversation_unreads` (
+CREATE TABLE `conversation_selected_days` (
     `id` VARCHAR(191) NOT NULL,
     `conversationId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `count` INTEGER NOT NULL DEFAULT 0,
+    `day` INTEGER NOT NULL,
 
-    UNIQUE INDEX `conversation_unreads_conversationId_userId_key`(`conversationId`, `userId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `friend_lists` (
-    `id` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-
-    UNIQUE INDEX `friend_lists_userId_key`(`userId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `friend_entries` (
-    `id` VARCHAR(191) NOT NULL,
-    `friendListId` VARCHAR(191) NOT NULL,
-    `friendId` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `friend_entries_friendListId_friendId_key`(`friendListId`, `friendId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `friendships` (
-    `id` VARCHAR(191) NOT NULL,
-    `requesterId` VARCHAR(191) NOT NULL,
-    `recipientId` VARCHAR(191) NOT NULL,
-    `status` ENUM('pending', 'accepted', 'declined') NOT NULL DEFAULT 'pending',
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-
-    UNIQUE INDEX `friendships_requesterId_recipientId_key`(`requesterId`, `recipientId`),
+    UNIQUE INDEX `conversation_selected_days_conversationId_day_key`(`conversationId`, `day`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -250,93 +195,6 @@ CREATE TABLE `message_media` (
     `type` ENUM('image', 'video', 'audio', 'file') NULL,
     `filename` VARCHAR(191) NULL,
     `size` INTEGER NULL,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `message_read_by` (
-    `id` VARCHAR(191) NOT NULL,
-    `messageId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `readAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-
-    UNIQUE INDEX `message_read_by_messageId_userId_key`(`messageId`, `userId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `message_deleted_by` (
-    `id` VARCHAR(191) NOT NULL,
-    `messageId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `message_deleted_by_messageId_userId_key`(`messageId`, `userId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `message_edit_history` (
-    `id` VARCHAR(191) NOT NULL,
-    `messageId` VARCHAR(191) NOT NULL,
-    `text` TEXT NOT NULL,
-    `editedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `message_reactions` (
-    `id` VARCHAR(191) NOT NULL,
-    `messageId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `emoji` VARCHAR(191) NOT NULL,
-    `username` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `message_reactions_messageId_userId_emoji_key`(`messageId`, `userId`, `emoji`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `posts` (
-    `id` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `content` TEXT NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `post_reactions` (
-    `id` VARCHAR(191) NOT NULL,
-    `postId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `type` ENUM('like', 'love', 'haha', 'wow', 'sad', 'angry') NOT NULL,
-
-    UNIQUE INDEX `post_reactions_postId_userId_type_key`(`postId`, `userId`, `type`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `post_comments` (
-    `id` VARCHAR(191) NOT NULL,
-    `postId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `text` TEXT NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `post_comment_replies` (
-    `id` VARCHAR(191) NOT NULL,
-    `commentId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `text` TEXT NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -435,15 +293,6 @@ CREATE TABLE `user_approvals` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `user_approval_risk_factors` (
-    `id` VARCHAR(191) NOT NULL,
-    `userApprovalId` VARCHAR(191) NOT NULL,
-    `factor` VARCHAR(191) NOT NULL,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `user_deletion_schedules` (
     `id` VARCHAR(191) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
@@ -516,7 +365,7 @@ CREATE TABLE `admin_settings` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `admin_allowed_file_types` (
+CREATE TABLE `admin_settings_allowed_file_types` (
     `id` VARCHAR(191) NOT NULL,
     `adminSettingsId` VARCHAR(191) NOT NULL,
     `fileType` VARCHAR(191) NOT NULL,
@@ -525,65 +374,11 @@ CREATE TABLE `admin_allowed_file_types` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `admin_blocked_words` (
+CREATE TABLE `admin_settings_blocked_words` (
     `id` VARCHAR(191) NOT NULL,
     `adminSettingsId` VARCHAR(191) NOT NULL,
     `word` VARCHAR(191) NOT NULL,
 
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `alertness_sessions` (
-    `id` VARCHAR(191) NOT NULL,
-    `classId` VARCHAR(191) NOT NULL,
-    `startedById` VARCHAR(191) NOT NULL,
-    `duration` INTEGER NOT NULL,
-    `startTime` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `endTime` DATETIME(3) NULL,
-    `isActive` BOOLEAN NOT NULL DEFAULT true,
-    `totalParticipants` INTEGER NOT NULL DEFAULT 0,
-    `responseRate` DOUBLE NOT NULL DEFAULT 0,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-
-    INDEX `alertness_sessions_classId_startTime_idx`(`classId`, `startTime`),
-    INDEX `alertness_sessions_isActive_idx`(`isActive`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `alertness_responses` (
-    `id` VARCHAR(191) NOT NULL,
-    `alertnessSessionId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `respondedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `responseTime` INTEGER NULL,
-
-    UNIQUE INDEX `alertness_responses_alertnessSessionId_userId_key`(`alertnessSessionId`, `userId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `assignment_submissions` (
-    `id` VARCHAR(191) NOT NULL,
-    `classId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-    `assignmentTitle` VARCHAR(191) NOT NULL,
-    `assignmentDescription` TEXT NOT NULL,
-    `status` VARCHAR(191) NOT NULL DEFAULT 'pending',
-    `file_url` VARCHAR(191) NULL,
-    `file_name` VARCHAR(191) NULL,
-    `file_size` INTEGER NULL,
-    `file_type` VARCHAR(191) NULL,
-    `mark` SMALLINT NULL,
-    `markedById` VARCHAR(191) NULL,
-    `markedAt` DATETIME(3) NULL,
-    `feedback` TEXT NULL,
-    `submittedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-
-    INDEX `assignment_submissions_classId_userId_idx`(`classId`, `userId`),
-    INDEX `assignment_submissions_submittedAt_idx`(`submittedAt`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -628,90 +423,6 @@ CREATE TABLE `files` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `forms` (
-    `id` VARCHAR(191) NOT NULL,
-    `name` VARCHAR(200) NOT NULL,
-    `creatorId` VARCHAR(191) NOT NULL,
-    `visibility` ENUM('public', 'private') NOT NULL DEFAULT 'private',
-    `isArchived` BOOLEAN NOT NULL DEFAULT false,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-
-    INDEX `forms_creatorId_isArchived_idx`(`creatorId`, `isArchived`),
-    INDEX `forms_visibility_isArchived_idx`(`visibility`, `isArchived`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `form_fields` (
-    `id` VARCHAR(191) NOT NULL,
-    `formId` VARCHAR(191) NOT NULL,
-    `label` VARCHAR(500) NOT NULL,
-    `type` ENUM('yes_no', 'text') NOT NULL,
-    `order` INTEGER NOT NULL,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `form_assignments` (
-    `id` VARCHAR(191) NOT NULL,
-    `formId` VARCHAR(191) NOT NULL,
-    `conversationId` VARCHAR(191) NOT NULL,
-    `assignerId` VARCHAR(191) NOT NULL,
-    `frequency` ENUM('daily', 'weekly', 'bi-weekly', 'monthly') NOT NULL,
-    `startDate` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `isActive` BOOLEAN NOT NULL DEFAULT true,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-
-    INDEX `form_assignments_conversationId_isActive_idx`(`conversationId`, `isActive`),
-    INDEX `form_assignments_assignerId_idx`(`assignerId`),
-    INDEX `form_assignments_formId_idx`(`formId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `form_assignees` (
-    `id` VARCHAR(191) NOT NULL,
-    `formAssignmentId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `form_assignees_formAssignmentId_userId_key`(`formAssignmentId`, `userId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `form_submissions` (
-    `id` VARCHAR(191) NOT NULL,
-    `assignmentId` VARCHAR(191) NOT NULL,
-    `submitterId` VARCHAR(191) NOT NULL,
-    `dueDate` DATETIME(3) NOT NULL,
-    `status` ENUM('submitted', 'accepted', 'rejected', 'partially_accepted', 'not_submitted') NOT NULL DEFAULT 'submitted',
-    `reviewedAt` DATETIME(3) NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-
-    INDEX `form_submissions_assignmentId_dueDate_idx`(`assignmentId`, `dueDate`),
-    INDEX `form_submissions_submitterId_status_idx`(`submitterId`, `status`),
-    UNIQUE INDEX `form_submissions_assignmentId_submitterId_dueDate_key`(`assignmentId`, `submitterId`, `dueDate`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `form_submission_answers` (
-    `id` VARCHAR(191) NOT NULL,
-    `submissionId` VARCHAR(191) NOT NULL,
-    `fieldId` VARCHAR(191) NOT NULL,
-    `value` TEXT NOT NULL,
-    `explanation` VARCHAR(2000) NOT NULL DEFAULT '',
-    `reviewStatus` ENUM('pending', 'accepted', 'rejected') NOT NULL DEFAULT 'pending',
-    `reviewNote` VARCHAR(500) NOT NULL DEFAULT '',
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `notices` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191) NOT NULL,
@@ -733,16 +444,6 @@ CREATE TABLE `notices` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `notice_recipients` (
-    `id` VARCHAR(191) NOT NULL,
-    `noticeId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `notice_recipients_noticeId_userId_key`(`noticeId`, `userId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `notice_likes` (
     `id` VARCHAR(191) NOT NULL,
     `noticeId` VARCHAR(191) NOT NULL,
@@ -759,6 +460,16 @@ CREATE TABLE `notice_reads` (
     `userId` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `notice_reads_noticeId_userId_key`(`noticeId`, `userId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `notice_recipients` (
+    `id` VARCHAR(191) NOT NULL,
+    `noticeId` VARCHAR(191) NOT NULL,
+    `userId` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `notice_recipients_noticeId_userId_key`(`noticeId`, `userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -817,7 +528,7 @@ CREATE TABLE `quick_lesson_parts` (
     `id` VARCHAR(191) NOT NULL,
     `quickLessonId` VARCHAR(191) NOT NULL,
     `content` TEXT NOT NULL,
-    `order` INTEGER NOT NULL,
+    `order` INTEGER NOT NULL DEFAULT 0,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -838,9 +549,10 @@ CREATE TABLE `quick_messages` (
 CREATE TABLE `reports` (
     `id` VARCHAR(191) NOT NULL,
     `reporterId` VARCHAR(191) NOT NULL,
-    `reportedUserId` VARCHAR(191) NOT NULL,
-    `conversationId` VARCHAR(191) NOT NULL,
-    `reason` ENUM('spam', 'harassment', 'hate_speech', 'violence', 'nudity', 'false_info', 'impersonation', 'other') NOT NULL,
+    `reportedUserId` VARCHAR(191) NULL,
+    `conversationId` VARCHAR(191) NULL,
+    `reportType` ENUM('user_report', 'bug_report') NOT NULL DEFAULT 'user_report',
+    `reason` ENUM('spam', 'harassment', 'hate_speech', 'violence', 'nudity', 'false_info', 'impersonation', 'other', 'ui_bug', 'crash', 'performance', 'data_loss', 'security_issue', 'feature_request') NOT NULL,
     `details` VARCHAR(2000) NOT NULL DEFAULT '',
     `status` ENUM('pending', 'reviewed', 'resolved', 'dismissed') NOT NULL DEFAULT 'pending',
     `reviewedById` VARCHAR(191) NULL,
@@ -853,6 +565,7 @@ CREATE TABLE `reports` (
     INDEX `reports_reporterId_conversationId_idx`(`reporterId`, `conversationId`),
     INDEX `reports_reportedUserId_idx`(`reportedUserId`),
     INDEX `reports_status_idx`(`status`),
+    INDEX `reports_reportType_idx`(`reportType`),
     INDEX `reports_createdAt_idx`(`createdAt`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -867,9 +580,6 @@ CREATE TABLE `site_security_messages` (
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- AddForeignKey
-ALTER TABLE `device_tokens` ADD CONSTRAINT `device_tokens_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `blocks` ADD CONSTRAINT `blocks_blockerId_fkey` FOREIGN KEY (`blockerId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -899,9 +609,6 @@ ALTER TABLE `conversation_moderators` ADD CONSTRAINT `conversation_moderators_co
 ALTER TABLE `conversation_moderators` ADD CONSTRAINT `conversation_moderators_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `conversation_selected_days` ADD CONSTRAINT `conversation_selected_days_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE `conversation_block_entries` ADD CONSTRAINT `conversation_block_entries_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -911,25 +618,7 @@ ALTER TABLE `conversation_block_entries` ADD CONSTRAINT `conversation_block_entr
 ALTER TABLE `conversation_block_entries` ADD CONSTRAINT `conversation_block_entries_blockedUserId_fkey` FOREIGN KEY (`blockedUserId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `conversation_unreads` ADD CONSTRAINT `conversation_unreads_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `conversation_unreads` ADD CONSTRAINT `conversation_unreads_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `friend_lists` ADD CONSTRAINT `friend_lists_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `friend_entries` ADD CONSTRAINT `friend_entries_friendListId_fkey` FOREIGN KEY (`friendListId`) REFERENCES `friend_lists`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `friend_entries` ADD CONSTRAINT `friend_entries_friendId_fkey` FOREIGN KEY (`friendId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `friendships` ADD CONSTRAINT `friendships_requesterId_fkey` FOREIGN KEY (`requesterId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `friendships` ADD CONSTRAINT `friendships_recipientId_fkey` FOREIGN KEY (`recipientId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `conversation_selected_days` ADD CONSTRAINT `conversation_selected_days_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `join_requests` ADD CONSTRAINT `join_requests_classId_fkey` FOREIGN KEY (`classId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -954,48 +643,6 @@ ALTER TABLE `messages` ADD CONSTRAINT `messages_replyToId_fkey` FOREIGN KEY (`re
 
 -- AddForeignKey
 ALTER TABLE `message_media` ADD CONSTRAINT `message_media_messageId_fkey` FOREIGN KEY (`messageId`) REFERENCES `messages`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `message_read_by` ADD CONSTRAINT `message_read_by_messageId_fkey` FOREIGN KEY (`messageId`) REFERENCES `messages`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `message_read_by` ADD CONSTRAINT `message_read_by_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `message_deleted_by` ADD CONSTRAINT `message_deleted_by_messageId_fkey` FOREIGN KEY (`messageId`) REFERENCES `messages`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `message_deleted_by` ADD CONSTRAINT `message_deleted_by_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `message_edit_history` ADD CONSTRAINT `message_edit_history_messageId_fkey` FOREIGN KEY (`messageId`) REFERENCES `messages`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `message_reactions` ADD CONSTRAINT `message_reactions_messageId_fkey` FOREIGN KEY (`messageId`) REFERENCES `messages`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `message_reactions` ADD CONSTRAINT `message_reactions_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `posts` ADD CONSTRAINT `posts_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `post_reactions` ADD CONSTRAINT `post_reactions_postId_fkey` FOREIGN KEY (`postId`) REFERENCES `posts`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `post_reactions` ADD CONSTRAINT `post_reactions_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `post_comments` ADD CONSTRAINT `post_comments_postId_fkey` FOREIGN KEY (`postId`) REFERENCES `posts`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `post_comments` ADD CONSTRAINT `post_comments_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `post_comment_replies` ADD CONSTRAINT `post_comment_replies_commentId_fkey` FOREIGN KEY (`commentId`) REFERENCES `post_comments`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `post_comment_replies` ADD CONSTRAINT `post_comment_replies_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `reminders` ADD CONSTRAINT `reminders_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -1028,9 +675,6 @@ ALTER TABLE `user_approvals` ADD CONSTRAINT `user_approvals_userId_fkey` FOREIGN
 ALTER TABLE `user_approvals` ADD CONSTRAINT `user_approvals_reviewedById_fkey` FOREIGN KEY (`reviewedById`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `user_approval_risk_factors` ADD CONSTRAINT `user_approval_risk_factors_userApprovalId_fkey` FOREIGN KEY (`userApprovalId`) REFERENCES `user_approvals`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE `user_deletion_schedules` ADD CONSTRAINT `user_deletion_schedules_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -1043,31 +687,10 @@ ALTER TABLE `admin_activity_logs` ADD CONSTRAINT `admin_activity_logs_adminId_fk
 ALTER TABLE `admin_settings` ADD CONSTRAINT `admin_settings_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `admin_allowed_file_types` ADD CONSTRAINT `admin_allowed_file_types_adminSettingsId_fkey` FOREIGN KEY (`adminSettingsId`) REFERENCES `admin_settings`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `admin_settings_allowed_file_types` ADD CONSTRAINT `admin_settings_allowed_file_types_adminSettingsId_fkey` FOREIGN KEY (`adminSettingsId`) REFERENCES `admin_settings`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `admin_blocked_words` ADD CONSTRAINT `admin_blocked_words_adminSettingsId_fkey` FOREIGN KEY (`adminSettingsId`) REFERENCES `admin_settings`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `alertness_sessions` ADD CONSTRAINT `alertness_sessions_classId_fkey` FOREIGN KEY (`classId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `alertness_sessions` ADD CONSTRAINT `alertness_sessions_startedById_fkey` FOREIGN KEY (`startedById`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `alertness_responses` ADD CONSTRAINT `alertness_responses_alertnessSessionId_fkey` FOREIGN KEY (`alertnessSessionId`) REFERENCES `alertness_sessions`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `alertness_responses` ADD CONSTRAINT `alertness_responses_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `assignment_submissions` ADD CONSTRAINT `assignment_submissions_classId_fkey` FOREIGN KEY (`classId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `assignment_submissions` ADD CONSTRAINT `assignment_submissions_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `assignment_submissions` ADD CONSTRAINT `assignment_submissions_markedById_fkey` FOREIGN KEY (`markedById`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `admin_settings_blocked_words` ADD CONSTRAINT `admin_settings_blocked_words_adminSettingsId_fkey` FOREIGN KEY (`adminSettingsId`) REFERENCES `admin_settings`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `attendance_logs` ADD CONSTRAINT `attendance_logs_sessionId_fkey` FOREIGN KEY (`sessionId`) REFERENCES `sessions`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -1085,43 +708,7 @@ ALTER TABLE `files` ADD CONSTRAINT `files_uploadedById_fkey` FOREIGN KEY (`uploa
 ALTER TABLE `files` ADD CONSTRAINT `files_classId_fkey` FOREIGN KEY (`classId`) REFERENCES `conversations`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `forms` ADD CONSTRAINT `forms_creatorId_fkey` FOREIGN KEY (`creatorId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `form_fields` ADD CONSTRAINT `form_fields_formId_fkey` FOREIGN KEY (`formId`) REFERENCES `forms`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `form_assignments` ADD CONSTRAINT `form_assignments_formId_fkey` FOREIGN KEY (`formId`) REFERENCES `forms`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `form_assignments` ADD CONSTRAINT `form_assignments_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `form_assignments` ADD CONSTRAINT `form_assignments_assignerId_fkey` FOREIGN KEY (`assignerId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `form_assignees` ADD CONSTRAINT `form_assignees_formAssignmentId_fkey` FOREIGN KEY (`formAssignmentId`) REFERENCES `form_assignments`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `form_assignees` ADD CONSTRAINT `form_assignees_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `form_submissions` ADD CONSTRAINT `form_submissions_assignmentId_fkey` FOREIGN KEY (`assignmentId`) REFERENCES `form_assignments`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `form_submissions` ADD CONSTRAINT `form_submissions_submitterId_fkey` FOREIGN KEY (`submitterId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `form_submission_answers` ADD CONSTRAINT `form_submission_answers_submissionId_fkey` FOREIGN KEY (`submissionId`) REFERENCES `form_submissions`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `form_submission_answers` ADD CONSTRAINT `form_submission_answers_fieldId_fkey` FOREIGN KEY (`fieldId`) REFERENCES `form_fields`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE `notices` ADD CONSTRAINT `notices_creatorId_fkey` FOREIGN KEY (`creatorId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `notice_recipients` ADD CONSTRAINT `notice_recipients_noticeId_fkey` FOREIGN KEY (`noticeId`) REFERENCES `notices`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `notice_likes` ADD CONSTRAINT `notice_likes_noticeId_fkey` FOREIGN KEY (`noticeId`) REFERENCES `notices`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -1134,6 +721,12 @@ ALTER TABLE `notice_reads` ADD CONSTRAINT `notice_reads_noticeId_fkey` FOREIGN K
 
 -- AddForeignKey
 ALTER TABLE `notice_reads` ADD CONSTRAINT `notice_reads_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `notice_recipients` ADD CONSTRAINT `notice_recipients_noticeId_fkey` FOREIGN KEY (`noticeId`) REFERENCES `notices`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `notice_recipients` ADD CONSTRAINT `notice_recipients_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `notifications` ADD CONSTRAINT `notifications_recipientId_fkey` FOREIGN KEY (`recipientId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -1166,10 +759,10 @@ ALTER TABLE `quick_messages` ADD CONSTRAINT `quick_messages_userId_fkey` FOREIGN
 ALTER TABLE `reports` ADD CONSTRAINT `reports_reporterId_fkey` FOREIGN KEY (`reporterId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `reports` ADD CONSTRAINT `reports_reportedUserId_fkey` FOREIGN KEY (`reportedUserId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `reports` ADD CONSTRAINT `reports_reportedUserId_fkey` FOREIGN KEY (`reportedUserId`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `reports` ADD CONSTRAINT `reports_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `reports` ADD CONSTRAINT `reports_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `conversations`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `reports` ADD CONSTRAINT `reports_reviewedById_fkey` FOREIGN KEY (`reviewedById`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
