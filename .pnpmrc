@@ -1,5 +1,5 @@
 shared-workspace-lockfile=true
-onlyBuiltDependencies=@prisma/engines,esbuild,mediasoup,sharp
+onlyBuiltDependencies=@prisma/engines,esbuild,mediasoup,prisma,sharp
 minimum-release-age=0
 network-timeout=300000
 fetch-retries=5

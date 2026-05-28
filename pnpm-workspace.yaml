@@ -15,10 +15,8 @@ onlyBuiltDependencies:
   - "@prisma/engines"
   - esbuild
   - mediasoup
-  - sharp
-
-ignoredBuiltDependencies:
   - prisma
+  - sharp
 
 # Disable minimum release age security policy (allow recently published packages)
 pnpm:

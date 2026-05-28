@@ -25,6 +25,6 @@
   "author": "julfyalnayeem",
   "license": "UNLICENSED",
   "pnpm": {
-    "onlyBuiltDependencies": ["@prisma/engines", "esbuild", "mediasoup", "sharp"]
+    "onlyBuiltDependencies": ["@prisma/engines", "esbuild", "mediasoup", "prisma", "sharp"]
   }
 }
