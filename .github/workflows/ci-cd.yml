@@ -487,6 +487,9 @@ jobs:
                   AND COLUMN_NAME='"'"'email'"'"';" 2>/dev/null' \
             | tr -d '[:space:]' || echo "0")
 
+          BACKEND_MIG=$(ls -1 backend/api-service/prisma/migrations 2>/dev/null \
+            | grep -v migration_lock | sort | tail -1 || true)
+
           if [ "$DB_EMAIL_COL" != "1" ]; then
             echo "WARNING: DB schema is broken or empty (users.email missing)."
             echo "Performing full schema reset from backend (api-service)..."
@@ -495,13 +498,10 @@ jobs:
             # backend owns users + conversations + all other shared tables.
             $COMPOSE_CMD run --rm --no-deps backend npx prisma db push --force-reset
 
-            # Record backend's latest migration as applied so migrate deploy
-            # for backend doesn't try to re-run CREATE TABLE (which would fail
-            # since db push already created the tables).
-            BACKEND_MIG=$(ls -1 backend/api-service/prisma/migrations 2>/dev/null \
-              | grep -v migration_lock | sort | tail -1 || true)
+            # Baseline: record backend's migration as applied so migrate deploy
+            # for backend doesn't see P3005 (non-empty DB with no history).
             if [ -n "$BACKEND_MIG" ]; then
-              echo "Marking backend migration '$BACKEND_MIG' as applied..."
+              echo "Baselining backend migration '$BACKEND_MIG'..."
               $COMPOSE_CMD run --rm --no-deps backend \
                 npx prisma migrate resolve --applied "$BACKEND_MIG" 2>/dev/null || true
             fi
@@ -509,8 +509,30 @@ jobs:
             echo "✅ DB schema reset from backend complete"
             BACKEND_RESET=true
           else
-            echo "✅ DB schema is healthy"
-            BACKEND_RESET=false
+            # DB schema is healthy. But check if backend migration is missing
+            # from _prisma_migrations (happens after manual db push bypasses
+            # migration history). P3005 occurs when schema exists but history
+            # is empty — we baseline to fix it without touching data.
+            BACKEND_MIG_COUNT="0"
+            if [ -n "$BACKEND_MIG" ]; then
+              BACKEND_MIG_COUNT=$($COMPOSE_CMD exec -T mysql sh -lc \
+                "mysql -u\"\$MYSQL_USER\" -p\"\$MYSQL_PASSWORD\" \"\$MYSQL_DATABASE\" \
+                  --skip-column-names --silent \
+                  -e \"SELECT COUNT(*) FROM _prisma_migrations \
+                       WHERE migration_name = '$BACKEND_MIG';\" 2>/dev/null" \
+                | tr -d '[:space:]' || echo "0")
+            fi
+
+            if [ "$BACKEND_MIG_COUNT" = "0" ] && [ -n "$BACKEND_MIG" ]; then
+              echo "WARNING: DB schema exists but migration '$BACKEND_MIG' missing from history (P3005 risk)."
+              echo "Baselining backend migration without touching data..."
+              $COMPOSE_CMD run --rm --no-deps backend \
+                npx prisma migrate resolve --applied "$BACKEND_MIG" 2>/dev/null || true
+              BACKEND_RESET=true
+            else
+              echo "✅ DB schema is healthy and migration history is consistent"
+              BACKEND_RESET=false
+            fi
           fi
 
           # --- 7b: Run migrate deploy for every service ----------------------
