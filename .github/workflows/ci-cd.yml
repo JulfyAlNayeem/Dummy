@@ -496,14 +496,14 @@ jobs:
 
             # Wipe and rebuild entire DB from the authoritative schema.
             # backend owns users + conversations + all other shared tables.
-            $COMPOSE_CMD run --rm --no-deps backend npx prisma db push --force-reset
+            $COMPOSE_CMD run --rm --no-deps --entrypoint sh backend -lc "npx prisma db push --force-reset"
 
             # Baseline: record backend's migration as applied so migrate deploy
             # for backend doesn't see P3005 (non-empty DB with no history).
             if [ -n "$BACKEND_MIG" ]; then
               echo "Baselining backend migration '$BACKEND_MIG'..."
-              $COMPOSE_CMD run --rm --no-deps backend \
-                npx prisma migrate resolve --applied "$BACKEND_MIG" 2>/dev/null || true
+              $COMPOSE_CMD run --rm --no-deps --entrypoint sh backend -lc \
+                "npx prisma migrate resolve --applied $BACKEND_MIG" 2>/dev/null || true
             fi
 
             echo "✅ DB schema reset from backend complete"
@@ -526,8 +526,8 @@ jobs:
             if [ "$BACKEND_MIG_COUNT" = "0" ] && [ -n "$BACKEND_MIG" ]; then
               echo "WARNING: DB schema exists but migration '$BACKEND_MIG' missing from history (P3005 risk)."
               echo "Baselining backend migration without touching data..."
-              $COMPOSE_CMD run --rm --no-deps backend \
-                npx prisma migrate resolve --applied "$BACKEND_MIG" 2>/dev/null || true
+              $COMPOSE_CMD run --rm --no-deps --entrypoint sh backend -lc \
+                "npx prisma migrate resolve --applied $BACKEND_MIG" 2>/dev/null || true
               BACKEND_RESET=true
             else
               echo "✅ DB schema is healthy and migration history is consistent"
@@ -553,7 +553,7 @@ jobs:
             echo "--- Prisma migrate deploy: $SVC ---"
 
             set +e
-            MIGRATE_OUTPUT=$($COMPOSE_CMD run --rm --no-deps "$SVC" npx prisma migrate deploy 2>&1)
+            MIGRATE_OUTPUT=$($COMPOSE_CMD run --rm --no-deps --entrypoint sh "$SVC" -lc "npx prisma migrate deploy" 2>&1)
             MIGRATE_STATUS=$?
             set -e
 
@@ -574,11 +574,11 @@ jobs:
                 | grep -oP "(?<=migration \`)[^\`]+" | head -1 || true)
               if [ -n "$FAILED_MIG" ]; then
                 echo "Rolling back failed migration: $FAILED_MIG"
-                $COMPOSE_CMD run --rm --no-deps "$SVC" \
-                  npx prisma migrate resolve --rolled-back "$FAILED_MIG" 2>/dev/null || true
+                $COMPOSE_CMD run --rm --no-deps --entrypoint sh "$SVC" -lc \
+                  "npx prisma migrate resolve --rolled-back $FAILED_MIG" 2>/dev/null || true
               fi
               # Retry — SQL now actually runs
-              $COMPOSE_CMD run --rm --no-deps "$SVC" npx prisma migrate deploy
+              $COMPOSE_CMD run --rm --no-deps --entrypoint sh "$SVC" -lc "npx prisma migrate deploy"
               echo "✅ P3009 recovery OK for $SVC"
               return 0
             fi
