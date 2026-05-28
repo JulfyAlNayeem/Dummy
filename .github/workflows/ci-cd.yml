@@ -1,22 +1,16 @@
 # =============================================================================
 # CI/CD Pipeline for Dummy Project
 # =============================================================================
-# This workflow automates testing, building, and deploying the application.
-# 
-# TRIGGER: Runs on push/PR to 'main' or 'develop' branches
-# 
 # WORKFLOW STAGES:
-# 1. TEST     - Validates code quality (Prisma, build)
-# 2. BUILD    - Creates Docker images and pushes to Docker Hub (main branch only)
-# 3. DEPLOY   - Deploys to VPS server via SSH (main branch only)
+# 1. test-backend      - Validates api-service Prisma + TypeScript build
+# 2. test-frontend     - Vite builds for messenger + social (parallel)
+# 3. test-microservices- Prisma validate/generate for all 6 microservices
+# 4. build-*           - 10 Docker images built IN PARALLEL (one job each)
+# 5. deploy-production - SSH deploy to VPS (after all builds succeed)
 #
-# REQUIRED GITHUB SECRETS:
-# - DOCKERHUB_USERNAME  : Your Docker Hub username
-# - DOCKERHUB_TOKEN     : Docker Hub access token (not password)
-# - VPS_HOST            : VPS server IP address
-# - VPS_USER            : SSH username (e.g., root or deploy user)
-# - VPS_SSH_KEY         : Private SSH key for authentication
-# - VPS_PORT            : SSH port (usually 22)
+# WHY PARALLEL BUILDS:
+#   Old: 10 images built sequentially in ONE job → ~12 min serial wait
+#   New: 10 images built in parallel jobs       → ~3-4 min wall-clock time
 # =============================================================================
 
 name: CI/CD Pipeline
@@ -32,119 +26,170 @@ env:
 
 jobs:
   # ===========================================================================
-  # JOB 1: TEST
+  # JOB 1a: TEST BACKEND (api-service)
   # ===========================================================================
-  test:
-    name: Test
+  test-backend:
+    name: Test - Backend (api-service)
     runs-on: ubuntu-latest
-   
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-node@v4
       with:
         node-version: '24.x'
-    
+
     - name: Install pnpm
       run: npm install -g pnpm
 
-    - name: Root - Install workspace dependencies
-      run: pnpm install --frozen-lockfile --ignore-scripts
+    - name: Cache pnpm store
+      uses: actions/cache@v4
+      with:
+        path: ~/.local/share/pnpm/store
+        key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: pnpm-${{ runner.os }}-
 
-    # =========================================================================
-    # BACKEND (api-service) TESTING
-    # =========================================================================
-    - name: Backend - Validate Prisma schema
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile --ignore-scripts --filter dummyprojectbackend
+
+    - name: Validate & generate Prisma client
       env:
         DATABASE_URL: mysql://user:password@localhost:3306/dummy
-      run: cd backend/api-service && npx prisma validate
-    
-    - name: Backend - Generate Prisma client
-      env:
-        DATABASE_URL: mysql://user:password@localhost:3306/dummy
-      run: cd backend/api-service && npx prisma generate
-    
-    - name: Backend - Build application
+      run: cd backend/api-service && npx prisma validate && npx prisma generate
+
+    - name: Build TypeScript
       env:
         DATABASE_URL: mysql://dummy:dummy@localhost:3306/dummy
       run: cd backend/api-service && pnpm run build
 
-    # =========================================================================
-    # FRONTEND TESTING
-    # =========================================================================
-    - name: Frontend - Run linter
-      run: echo "Linter passed - skipping for now"
-    
-    - name: Frontend - Run tests
-      run: echo "Tests passed - skipping for now"
-      
-    - name: Frontend - Test build (messenger)
+  # ===========================================================================
+  # JOB 1b: TEST FRONTEND (both apps in parallel steps)
+  # ===========================================================================
+  test-frontend:
+    name: Test - Frontend builds
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '24.x'
+
+    - name: Install pnpm
+      run: npm install -g pnpm
+
+    - name: Cache pnpm store
+      uses: actions/cache@v4
+      with:
+        path: ~/.local/share/pnpm/store
+        key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: pnpm-${{ runner.os }}-
+
+    - name: Install dependencies (messenger)
+      run: pnpm install --frozen-lockfile --ignore-scripts --filter alfajr
+
+    - name: Install dependencies (social)
+      run: pnpm install --frozen-lockfile --ignore-scripts --filter alfajr-social
+
+    - name: Build messenger
       run: pnpm --filter alfajr run build
-    
-    - name: Frontend - Test build (social)
+
+    - name: Build social
       run: pnpm --filter alfajr-social run build
 
-    # =========================================================================
-    # MICROSERVICES VALIDATION
-    # =========================================================================
-    - name: Microservices - Validate & generate Prisma clients
+  # ===========================================================================
+  # JOB 1c: TEST MICROSERVICES (prisma validate + generate)
+  # ===========================================================================
+  test-microservices:
+    name: Test - Microservices Prisma
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '24.x'
+
+    - name: Install pnpm
+      run: npm install -g pnpm
+
+    - name: Cache pnpm store
+      uses: actions/cache@v4
+      with:
+        path: ~/.local/share/pnpm/store
+        key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: pnpm-${{ runner.os }}-
+
+    - name: Install all workspace dependencies
+      run: pnpm install --frozen-lockfile --ignore-scripts
+
+    - name: Validate & generate all microservice Prisma clients
       env:
         DATABASE_URL: mysql://user:password@localhost:3306/dummy
       run: |
-        for SVC in message-service class-service form-service alarm-service social-service scheduler-service; do
-          echo "--- Validating $SVC Prisma schema ---"
-          cd backend/$SVC
-          npx prisma validate
-          npx prisma generate
-          cd ../..
+        for SVC in message-service class-service form-service alarm-service social-service scheduler-service calling-service; do
+          echo "--- $SVC ---"
+          cd backend/$SVC && npx prisma validate && npx prisma generate && cd ../..
         done
 
   # ===========================================================================
-  # JOB 2: BUILD DOCKER IMAGES
+  # JOB 2: BUILD DOCKER IMAGES — ALL IN PARALLEL
+  # Each service gets its own job so they run simultaneously.
   # ===========================================================================
-  build:
-    name: Build Docker Images
+  build-api:
+    name: Build - api-service
     runs-on: ubuntu-latest
-    needs: test
+    needs: [test-backend, test-frontend, test-microservices]
     if: github.ref == 'refs/heads/main'
-   
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v3
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-
-    - name: Build and push api-service image
-      uses: docker/build-push-action@v5
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v5
       with:
         context: .
         file: ./backend/api-service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-backend:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-    
-    - name: Build and push frontend-messenger image
-      uses: docker/build-push-action@v5
+        cache-from: type=gha,scope=api-service
+        cache-to: type=gha,mode=max,scope=api-service
+
+  build-messenger:
+    name: Build - frontend-messenger
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend, test-microservices]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v5
       with:
         context: .
         file: ./frontend/messenger/Dockerfile-production
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-messenger:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-    
-    - name: Build and push frontend-social image
-      uses: docker/build-push-action@v5
+        cache-from: type=gha,scope=messenger
+        cache-to: type=gha,mode=max,scope=messenger
+
+  build-social-frontend:
+    name: Build - frontend-social
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend, test-microservices]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v5
       with:
         context: .
         file: ./frontend/social/Dockerfile-production
@@ -153,89 +198,174 @@ jobs:
         build-args: |
           VITE_BASE_PATH=/
           VITE_API_URL=/api
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-    
-    - name: Build and push calling-service image
-      uses: docker/build-push-action@v5
+        cache-from: type=gha,scope=social-frontend
+        cache-to: type=gha,mode=max,scope=social-frontend
+
+  build-calling:
+    name: Build - calling-service
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend, test-microservices]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v5
       with:
         context: .
         file: ./backend/calling-service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-calling:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-from: type=gha,scope=calling-service
+        cache-to: type=gha,mode=max,scope=calling-service
 
-    - name: Build and push message-service image
-      uses: docker/build-push-action@v5
+  build-message:
+    name: Build - message-service
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend, test-microservices]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v5
       with:
         context: .
         file: ./backend/message-service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-message:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-from: type=gha,scope=message-service
+        cache-to: type=gha,mode=max,scope=message-service
 
-    - name: Build and push class-service image
-      uses: docker/build-push-action@v5
+  build-class:
+    name: Build - class-service
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend, test-microservices]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v5
       with:
         context: .
         file: ./backend/class-service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-class:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-from: type=gha,scope=class-service
+        cache-to: type=gha,mode=max,scope=class-service
 
-    - name: Build and push form-service image
-      uses: docker/build-push-action@v5
+  build-form:
+    name: Build - form-service
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend, test-microservices]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v5
       with:
         context: .
         file: ./backend/form-service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-form:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-from: type=gha,scope=form-service
+        cache-to: type=gha,mode=max,scope=form-service
 
-    - name: Build and push alarm-service image
-      uses: docker/build-push-action@v5
+  build-alarm:
+    name: Build - alarm-service
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend, test-microservices]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v5
       with:
         context: .
         file: ./backend/alarm-service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-alarm:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-from: type=gha,scope=alarm-service
+        cache-to: type=gha,mode=max,scope=alarm-service
 
-    - name: Build and push social-service image
-      uses: docker/build-push-action@v5
+  build-social:
+    name: Build - social-service
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend, test-microservices]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v5
       with:
         context: .
         file: ./backend/social-service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-social:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-from: type=gha,scope=social-service
+        cache-to: type=gha,mode=max,scope=social-service
 
-    - name: Build and push scheduler-service image
-      uses: docker/build-push-action@v5
+  build-scheduler:
+    name: Build - scheduler-service
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend, test-microservices]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v5
       with:
         context: .
         file: ./backend/scheduler-service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-scheduler:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-        
-    - name: Upload build completion status
-      run: echo "Docker images built and pushed successfully"
+        cache-from: type=gha,scope=scheduler-service
+        cache-to: type=gha,mode=max,scope=scheduler-service
 
   # ===========================================================================
   # JOB 3: DEPLOY TO PRODUCTION VPS
+  # Waits for ALL parallel build jobs to succeed before deploying.
   # ===========================================================================
   deploy-production:
     name: Deploy to Production
     runs-on: ubuntu-latest
-    needs: build
+    needs:
+      - build-api
+      - build-messenger
+      - build-social-frontend
+      - build-calling
+      - build-message
+      - build-class
+      - build-form
+      - build-alarm
+      - build-social
+      - build-scheduler
     if: github.ref == 'refs/heads/main'
     
     steps:
