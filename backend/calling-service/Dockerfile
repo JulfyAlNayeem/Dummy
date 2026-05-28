@@ -39,10 +39,13 @@ ARG DATABASE_URL="mysql://dummy:dummy@localhost:3306/dummy"
 # Generate Prisma client
 RUN npx prisma generate
 
+COPY backend/calling-service/docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x ./docker-entrypoint.sh
+
 EXPOSE 3003
 # Expose mediasoup RTP ports
 EXPOSE 10000-10100/udp
 EXPOSE 10000-10100/tcp
 
 # Use tsx to run directly (avoids Node.js ESM extensionless import issues with Prisma 7)
-CMD ["sh", "-c", "npx tsx src/app.ts"]
+CMD ["sh", "./docker-entrypoint.sh"]

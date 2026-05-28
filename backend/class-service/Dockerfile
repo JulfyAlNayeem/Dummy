@@ -15,5 +15,7 @@ COPY backend/class-service/ ./backend/class-service/
 WORKDIR /app/backend/class-service
 ARG DATABASE_URL="mysql://dummy:dummy@localhost:3306/dummy"
 RUN npx prisma generate
+COPY backend/class-service/docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x ./docker-entrypoint.sh
 EXPOSE 3005
-CMD ["sh", "-c", "npx tsx src/app.ts"]
+CMD ["sh", "./docker-entrypoint.sh"]

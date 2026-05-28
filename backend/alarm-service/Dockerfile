@@ -14,5 +14,7 @@ COPY backend/alarm-service/ ./backend/alarm-service/
 WORKDIR /app/backend/alarm-service
 ARG DATABASE_URL="mysql://dummy:dummy@localhost:3306/dummy"
 RUN npx prisma generate
+COPY backend/alarm-service/docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x ./docker-entrypoint.sh
 EXPOSE 3007
-CMD ["sh", "-c", "npx tsx src/app.ts"]
+CMD ["sh", "./docker-entrypoint.sh"]
