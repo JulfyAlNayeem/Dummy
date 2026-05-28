@@ -447,14 +447,7 @@ jobs:
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | sudo docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin || exit 1
           
           # -------------------------------------------------------------------
-          # STEP 6: Clean up Docker disk space (safer)
-          # -------------------------------------------------------------------
-          echo "Cleaning up Docker resources (safer)..."
-          sudo docker image prune -f || true
-          sudo docker builder prune -af || true
-          
-          # -------------------------------------------------------------------
-          # STEP 7: Pull new images from Docker Hub
+          # STEP 6: Pull new images from Docker Hub
           # -------------------------------------------------------------------
           echo "Pulling latest Docker images from Docker Hub..."
           if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production pull backend frontend-messenger frontend-social calling-service message-service class-service form-service alarm-service social-service scheduler-service; then
@@ -463,44 +456,77 @@ jobs:
           fi
           
           # -------------------------------------------------------------------
-          # STEP 8: Update frontend container
+          # STEP 7: Run Prisma migrations in a controlled preflight
           # -------------------------------------------------------------------
-          echo "Updating frontend container..."
-          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production up -d --no-build frontend-messenger frontend-social; then
-            echo "ERROR: Failed to start frontend containers"
-            exit 1
-          fi
-          
-          # -------------------------------------------------------------------
-          # STEP 10: Update backend container
-          # -------------------------------------------------------------------
-          echo "Updating backend container..."
-          sudo docker compose -f docker-compose.prod.yml --env-file .env.production stop backend || true
-          sudo docker compose -f docker-compose.prod.yml --env-file .env.production rm -f backend || true
-          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production up -d --no-build backend; then
-            echo "ERROR: Failed to start backend container"
-            sudo docker compose -f docker-compose.prod.yml --env-file .env.production logs --tail 50 backend
-            exit 1
-          fi
-          
-          # -------------------------------------------------------------------
-          # STEP 11: Update all microservices (stop all, then start all in parallel)
-          # -------------------------------------------------------------------
-          echo "Stopping all microservices..."
-          sudo docker compose -f docker-compose.prod.yml --env-file .env.production \
-            stop calling-service message-service class-service form-service alarm-service social-service scheduler-service || true
-          sudo docker compose -f docker-compose.prod.yml --env-file .env.production \
-            rm -f calling-service message-service class-service form-service alarm-service social-service scheduler-service || true
+          COMPOSE_CMD="sudo docker compose -f docker-compose.prod.yml --env-file .env.production"
 
-          echo "Starting all microservices in parallel..."
+          run_prisma_migrate() {
+            SVC="$1"
+            echo "--- Prisma migrate deploy: $SVC ---"
+
+            FIRST_MIGRATION=$(ls -1 "backend/$SVC/prisma/migrations" 2>/dev/null | grep -v migration_lock | sort | head -1 || true)
+
+            set +e
+            MIGRATE_OUTPUT=$($COMPOSE_CMD run --rm --no-deps "$SVC" npx prisma migrate deploy 2>&1)
+            MIGRATE_STATUS=$?
+            set -e
+
+            echo "$MIGRATE_OUTPUT"
+
+            if [ $MIGRATE_STATUS -eq 0 ]; then
+              echo "✅ Migration deploy OK for $SVC"
+              return 0
+            fi
+
+            if ! echo "$MIGRATE_OUTPUT" | grep -Eq "P3009|P3018|already exists"; then
+              echo "ERROR: Non-recoverable Prisma migration failure for $SVC"
+              return $MIGRATE_STATUS
+            fi
+
+            echo "WARNING: Initial migrate deploy failed for $SVC. Attempting first-migration recovery..."
+
+            FAILED_MIGRATION=$(echo "$MIGRATE_OUTPUT" | sed -n "s/.*The \`\([^\`]*\)\` migration started.*/\1/p" | head -1 || true)
+            if [ -n "$FAILED_MIGRATION" ]; then
+              OWNER_SVC=""
+              for CANDIDATE in backend form-service calling-service alarm-service scheduler-service message-service class-service social-service; do
+                if [ -d "backend/$CANDIDATE/prisma/migrations/$FAILED_MIGRATION" ]; then
+                  OWNER_SVC="$CANDIDATE"
+                  break
+                fi
+              done
+
+              if [ -n "$OWNER_SVC" ]; then
+                echo "Resolving failed migration '$FAILED_MIGRATION' using owner service '$OWNER_SVC'..."
+                $COMPOSE_CMD run --rm --no-deps "$OWNER_SVC" npx prisma migrate resolve --rolled-back "$FAILED_MIGRATION" >/dev/null 2>&1 || true
+                $COMPOSE_CMD run --rm --no-deps "$OWNER_SVC" npx prisma migrate resolve --applied "$FAILED_MIGRATION" >/dev/null 2>&1 || true
+              fi
+            fi
+
+            if [ -n "$FIRST_MIGRATION" ]; then
+              $COMPOSE_CMD run --rm --no-deps "$SVC" npx prisma migrate resolve --rolled-back "$FIRST_MIGRATION" >/dev/null 2>&1 || true
+              $COMPOSE_CMD run --rm --no-deps "$SVC" npx prisma migrate resolve --applied "$FIRST_MIGRATION" >/dev/null 2>&1 || true
+            fi
+
+            $COMPOSE_CMD run --rm --no-deps "$SVC" npx prisma migrate deploy
+            echo "✅ Migration recovery OK for $SVC"
+          }
+
+          for SVC in backend form-service calling-service alarm-service scheduler-service message-service class-service social-service; do
+            run_prisma_migrate "$SVC"
+          done
+
+          # -------------------------------------------------------------------
+          # STEP 8: Update app containers in a single pass
+          # -------------------------------------------------------------------
+          echo "Updating backend, frontends, and microservices in one command..."
           if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production \
-            up -d --no-build calling-service message-service class-service form-service alarm-service social-service scheduler-service; then
-            echo "ERROR: Failed to start one or more microservices"
+            up -d --no-build backend frontend-messenger frontend-social calling-service message-service class-service form-service alarm-service social-service scheduler-service; then
+            echo "ERROR: Failed to update one or more app services"
             exit 1
           fi
           
           # -------------------------------------------------------------------
-          # STEP 12: Wait for backend readiness
+          # STEP 9: Wait for backend readiness
           # -------------------------------------------------------------------
           echo "Waiting for backend readiness..."
           RETRIES=30
@@ -519,7 +545,7 @@ jobs:
           fi
           
           # -------------------------------------------------------------------
-          # STEP 12b: Recreate nginx-proxy AFTER all services are healthy
+          # STEP 10: Recreate nginx-proxy AFTER all services are healthy
           # -------------------------------------------------------------------
           # nginx resolves upstream DNS at startup. If recreated before services
           # restart it caches stale IPs → 502. Recreating last ensures correct
@@ -535,7 +561,7 @@ jobs:
           sudo docker image prune -f || true
           
           # -------------------------------------------------------------------
-          # STEP 13: Verify containers are running
+          # STEP 11: Verify containers are running
           # -------------------------------------------------------------------
           echo "Verifying deployment..."
           echo "Current container status:"

@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `image` VARCHAR(191) NOT NULL DEFAULT '/images/avatar/default-avatar.png',
