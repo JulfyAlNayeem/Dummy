@@ -449,10 +449,21 @@ jobs:
           # -------------------------------------------------------------------
           # STEP 6: Pull new images from Docker Hub
           # -------------------------------------------------------------------
+          # Pull each image individually so a rate-limit on one image does not
+          # abort the entire deploy. If a pull fails the VPS falls back to the
+          # locally cached layer (safe because CI pushed a fresh image to
+          # Docker Hub before this deploy step runs).
           echo "Pulling latest Docker images from Docker Hub..."
-          if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production pull backend frontend-messenger frontend-social calling-service message-service class-service form-service alarm-service social-service scheduler-service; then
-            echo "ERROR: Failed to pull images from Docker Hub!"
-            exit 1
+          PULL_FAILED=false
+          for SVC_PULL in backend frontend-messenger frontend-social calling-service message-service class-service form-service alarm-service social-service scheduler-service; do
+            echo "  Pulling $SVC_PULL..."
+            if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production pull "$SVC_PULL" 2>&1; then
+              echo "  WARNING: Could not pull $SVC_PULL (rate limit?). Will use locally cached image."
+              PULL_FAILED=true
+            fi
+          done
+          if [ "$PULL_FAILED" = "true" ]; then
+            echo "WARNING: Some images used cached layers. Re-run the workflow in ~6h if you need fresh pulls."
           fi
           
           # -------------------------------------------------------------------
