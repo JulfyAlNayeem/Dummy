@@ -484,28 +484,31 @@ jobs:
           # -------------------------------------------------------------------
           COMPOSE_CMD="sudo docker compose -f docker-compose.prod.yml --env-file .env.production"
 
-          # --- 7a: Clear stale failed migration rows -------------------------
-          # Any row in _prisma_migrations with failed_at IS NOT NULL causes
-          # P3009 for ALL services until resolved. We delete them here directly
-          # in MySQL — this is more reliable than `prisma migrate resolve`
-          # because it doesn't depend on which service image runs the command.
+          # --- 7a: Clear stale unresolved migration rows ---------------------
+          # Prisma raises P3009 for any row that looks unresolved:
+          #   finished_at IS NULL AND rolled_back_at IS NULL.
+          # failed_at is not a reliable discriminator here, so we clear the
+          # unresolved rows directly in MySQL before running migrate deploy.
           # After deletion, migrate deploy re-runs the SQL for real.
           FAILED_ROWS=$($COMPOSE_CMD exec -T mysql sh -lc \
             'mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" \
               --skip-column-names --silent \
               -e "SELECT migration_name FROM _prisma_migrations \
-                  WHERE failed_at IS NOT NULL;" 2>/dev/null' \
+                  WHERE finished_at IS NULL \
+                    AND rolled_back_at IS NULL;" 2>/dev/null' \
             | tr -d '\r' || true)
 
           if [ -n "$FAILED_ROWS" ]; then
-            echo "WARNING: Found stale failed migration rows: $(echo $FAILED_ROWS | tr '\n' ' ')"
-            echo "Deleting failed rows from _prisma_migrations so they can be re-run..."
+            echo "WARNING: Found stale unresolved migration rows: $(echo $FAILED_ROWS | tr '\n' ' ')"
+            echo "Deleting unresolved rows from _prisma_migrations so they can be re-run..."
             $COMPOSE_CMD exec -T mysql sh -lc \
               'mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" \
-                -e "DELETE FROM _prisma_migrations WHERE failed_at IS NOT NULL;" 2>/dev/null'
-            echo "✅ Stale failed migration rows cleared"
+                -e "DELETE FROM _prisma_migrations \
+                    WHERE finished_at IS NULL \
+                      AND rolled_back_at IS NULL;" 2>/dev/null'
+            echo "✅ Stale unresolved migration rows cleared"
           else
-            echo "✅ No stale failed migration rows"
+            echo "✅ No stale unresolved migration rows"
           fi
 
           # --- 7b: DB health check -------------------------------------------
@@ -574,8 +577,8 @@ jobs:
           # For backend: skip if we just reset (schema already applied).
           # For all others: IF NOT EXISTS in their migrations means shared
           # tables are safely skipped; only their unique tables are created.
-          # P3009 recovery: roll back the stale failed row, then re-run for
-          # real. We NEVER use resolve --applied as a shortcut.
+          # By this point any stale unresolved rows are already purged, so any
+          # remaining failure is a real migration problem we should surface.
 
           run_prisma_migrate() {
             SVC="$1"
