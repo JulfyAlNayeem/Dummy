@@ -9,6 +9,7 @@ import pino from 'pino';
 import { connectRedis } from './config/redis.js';
 import { initializeSocketServer } from './socket/index.js';
 import messageRoutes from './routes/message.routes.js';
+import { messageCleanupJob } from './jobs/messageCleanup.js';
 
 const logger = pino({
   transport: { target: 'pino-pretty', options: { colorize: true } },
@@ -43,6 +44,9 @@ const startServer = async (): Promise<void> => {
     app.set('io', io);
     (globalThis as any).io = io;
     logger.info('Socket.IO server initialized');
+
+    messageCleanupJob.start();
+    logger.info('Message cleanup cron started');
 
     server.listen(PORT, () => {
       logger.info(`message-service running on port ${PORT}`);

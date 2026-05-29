@@ -61,8 +61,6 @@ model User {
 
   // Relations
   conversations             ConversationParticipant[]
-  sentMessages              Message[]          @relation("MessageSender")
-  receivedMessages          Message[]          @relation("MessageReceiver")
   blocksInitiated           Block[]            @relation("Blocker")
   blocksReceived            Block[]            @relation("Blocked")
   joinRequests              JoinRequest[]      @relation("JoinRequester")
@@ -179,7 +177,6 @@ model Conversation {
   admins                ConversationAdmin[]
   moderators            ConversationModerator[]
   blockList             ConversationBlockEntry[]
-  messages              Message[]
   joinRequests          JoinRequest[]
   reminders             Reminder[]
   sessions              Session[]
@@ -318,85 +315,6 @@ enum JoinRequestStatus {
   pending
   approved
   rejected
-}
-
-// ─── Message ─────────────────────────────────────────────────────────────────
-
-model Message {
-  id               String      @id @default(uuid())
-  conversationId   String
-  senderId         String
-  receiverId       String?
-  text             String?     @db.Text
-  isEncrypted      Boolean     @default(false)
-  isBackendEncrypted Boolean   @default(false)
-  messageType      MessageType @default(text)
-  htmlEmoji        String?     @db.Text
-  emojiType        EmojiType?
-  replyToId        String?
-  status           MessageStatus @default(sent)
-  edited           Boolean     @default(false)
-  scheduledDeletionTime DateTime?
-  reactions        Json?       // Map of reactions
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  conversation Conversation    @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  sender       User            @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
-  receiver     User?           @relation("MessageReceiver", fields: [receiverId], references: [id], onDelete: SetNull)
-  replyTo      Message?        @relation("MessageReplies", fields: [replyToId], references: [id], onDelete: SetNull)
-  replies      Message[]       @relation("MessageReplies")
-  media        MessageMedia[]
-
-  @@index([conversationId, createdAt])
-  @@index([senderId])
-  @@index([messageType])
-  @@index([emojiType])
-  @@index([scheduledDeletionTime])
-  @@map("messages")
-}
-
-enum MessageType {
-  text
-  image
-  video
-  audio
-  file
-  system
-  reply
-  mixed
-}
-
-enum EmojiType {
-  custom
-  standard
-}
-
-enum MessageStatus {
-  sent
-  delivered
-  read
-}
-
-model MessageMedia {
-  id        String    @id @default(uuid())
-  messageId String
-  url       String?
-  type      MediaType?
-  filename  String?
-  size      Int?
-
-  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
-
-  @@map("message_media")
-}
-
-enum MediaType {
-  image
-  video
-  audio
-  file
 }
 
 // ─── Reminder ────────────────────────────────────────────────────────────────

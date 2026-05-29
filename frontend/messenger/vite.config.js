@@ -69,6 +69,12 @@ export default defineConfig({
         changeOrigin: true,
         ws: true,
       },
+      // Message Socket.IO → message-service
+      '/message-socket': {
+        target: MESSAGE_URL,
+        changeOrigin: true,
+        ws: true,
+      },
       // Calling service REST API
       '/calling-api': {
         target: CALLING_URL,

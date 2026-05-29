@@ -1,11 +1,12 @@
 import crypto from 'crypto';
-import { getRedisClient } from '../config/redisClient.js';
-import logger from '../common/utils/logger.js';
+import pino from 'pino';
+import { getRedisClient } from '../config/redis.js';
+
+const logger = pino({ transport: { target: 'pino-pretty', options: { colorize: true } } });
 
 const REDIS_PREFIX = 'smte';
 const MAX_KEYS = 2;
 const KEY_LENGTH = 32;
-const IV_LENGTH = 12;
 const ALGORITHM = 'aes-256-gcm';
 
 function redisKey(conversationId: string): string {
@@ -23,7 +24,7 @@ export async function getOrCreateTransportKeys(conversationId: string) {
 
   if (!raw || !raw.keys) {
     const firstKey = generateKey();
-    await redis.hSet(key, { keys: JSON.stringify([firstKey]), version: '1' });
+    await redis.hSet(key, 'keys', JSON.stringify([firstKey]), 'version', '1');
     logger.info({ conversationId }, 'SMTE: created initial transport key');
     return { keys: [firstKey], version: 1 };
   }
@@ -49,35 +50,9 @@ export async function rotateTransportKey(conversationId: string) {
   if (keys.length > MAX_KEYS) keys.length = MAX_KEYS;
   version += 1;
 
-  await redis.hSet(key, { keys: JSON.stringify(keys), version: String(version) });
+  await redis.hSet(key, 'keys', JSON.stringify(keys), 'version', String(version));
   logger.info({ conversationId, version }, 'SMTE: transport key rotated');
   return { keys, version };
-}
-
-export async function rotateAllTransportKeys() {
-  const redis = getRedisClient();
-  const conversationIds: string[] = [];
-  let cursor = '0';
-
-  do {
-    const result = await redis.scan(cursor, { MATCH: `${REDIS_PREFIX}:*`, COUNT: 200 });
-    cursor = result.cursor.toString();
-    for (const k of result.keys) {
-      conversationIds.push(k.replace(`${REDIS_PREFIX}:`, ''));
-    }
-  } while (cursor !== '0');
-
-  let rotated = 0;
-  for (const cid of conversationIds) {
-    try {
-      await rotateTransportKey(cid);
-      rotated++;
-    } catch (err) {
-      logger.error({ conversationId: cid, error: err }, 'SMTE: failed to rotate key');
-    }
-  }
-
-  return { rotated, total: conversationIds.length };
 }
 
 export async function decryptTransportText(encryptedPayload: string, conversationId: string): Promise<string> {
@@ -104,31 +79,6 @@ export async function decryptTransportText(encryptedPayload: string, conversatio
   }
 
   throw new Error('SMTE: text decryption failed with all available keys');
-}
-
-export async function decryptTransportFile(
-  envelope: { iv: string; authTag: string; data: string },
-  conversationId: string
-): Promise<Buffer> {
-  const iv = Buffer.from(envelope.iv, 'base64');
-  const authTag = Buffer.from(envelope.authTag, 'base64');
-  const ciphertext = Buffer.from(envelope.data, 'base64');
-  const { keys } = await getOrCreateTransportKeys(conversationId);
-
-  for (const k of keys) {
-    try {
-      const keyBuf = Buffer.from(k, 'base64');
-      const decipher = crypto.createDecipheriv(ALGORITHM, keyBuf, iv);
-      decipher.setAuthTag(authTag);
-      let plain = decipher.update(ciphertext);
-      plain = Buffer.concat([plain, decipher.final()]);
-      return plain;
-    } catch {
-      continue;
-    }
-  }
-
-  throw new Error('SMTE: file decryption failed with all available keys');
 }
 
 export function isSMTEEncrypted(text: string): boolean {

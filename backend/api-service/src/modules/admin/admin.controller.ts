@@ -53,16 +53,18 @@ export const getDashboardStats = async (req: Request, res: Response): Promise<vo
       prisma.conversation.count({
         where: { updatedAt: { gte: twentyFourHoursAgo } },
       }),
-      prisma.message.count(),
+      prisma.$queryRaw<Array<{ total: bigint | number }>>`SELECT COUNT(*) AS total FROM messages`,
       prisma.user.count({ where: { isActive: false } }),
       prisma.user.count({ where: { createdAt: { gte: todayStart } } }),
     ]);
+
+    const totalMessagesCount = Number((totalMessages?.[0] as any)?.total ?? 0);
 
     res.status(200).json({
       totalUsers,
       pendingApprovals,
       activeConversations,
-      totalMessages,
+      totalMessages: totalMessagesCount,
       suspendedUsers,
       todayRegistrations,
       systemHealth: 'healthy',

@@ -194,6 +194,7 @@ services:
       REDIS_URL: redis://redis:6379
       ACCESS_TOKEN_SECRET: s3cr3tAcc3ssT0k3nK3y
       ORIGIN_URL: http://localhost:3002
+      MESSAGE_SOCKET_PATH: /message-socket
     depends_on:
       mysql:
         condition: service_healthy

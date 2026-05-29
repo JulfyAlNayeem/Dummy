@@ -39,6 +39,114 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }): JSX.Elem
   const [logoutMutation]: any = useLogoutMutation();
 
   const socket = useRef(null);
+  const messageSocketRef = useRef(null);
+
+  const MESSAGE_EVENTS = useMemo(
+    () => new Set([
+      'sendMessage',
+      'message:send',
+      'sendEmoji',
+      'message:sendEmoji',
+      'typing',
+      'message:typing',
+      'messageRead',
+      'message:read',
+      'messageDelivered',
+      'message:delivered',
+      'deleteMessage',
+      'message:delete',
+      'replyMessage',
+      'message:reply',
+      'editMessage',
+      'message:edit',
+      'addReaction',
+      'message:react',
+      'removeReaction',
+      'message:unreact',
+      'receiveMessage',
+      'sendMessageSuccess',
+      'sendMessageError',
+      'messagesRead',
+      'messagesDelivered',
+      'messageDeleted',
+      'deleteMessageError',
+      'replyReceiveMessage',
+      'replyMessageSuccess',
+      'replyMessageError',
+      'messageEdited',
+      'message:edited',
+      'editMessageSuccess',
+      'editMessageError',
+      'reactionsUpdated',
+      'reactionSuccess',
+      'reactionError',
+      'unreactionSuccess',
+      'unreactionError',
+      'message:joinRoom',
+      'joinRoom',
+      'leaveRoom',
+      'refreshConversationRooms',
+      'conversationRoomsRefreshed',
+    ]),
+    []
+  );
+
+  const createSocketBridge = useCallback((apiSocket, msgSocket) => {
+    if (!apiSocket) return null;
+    if (!msgSocket) return apiSocket;
+
+    const routeToMessage = (eventName) => MESSAGE_EVENTS.has(eventName);
+    const baseEmit = apiSocket.emit.bind(apiSocket);
+    const baseOn = apiSocket.on.bind(apiSocket);
+    const baseOff = apiSocket.off.bind(apiSocket);
+    const baseOnce = apiSocket.once.bind(apiSocket);
+
+    return {
+      emit(eventName, ...args) {
+        if (routeToMessage(eventName)) {
+          return msgSocket.emit(eventName, ...args);
+        }
+        return baseEmit(eventName, ...args);
+      },
+      on(eventName, ...args) {
+        if (routeToMessage(eventName)) {
+          msgSocket.on(eventName, ...args);
+          return this;
+        }
+        return baseOn(eventName, ...args);
+      },
+      off(eventName, ...args) {
+        if (routeToMessage(eventName)) {
+          msgSocket.off(eventName, ...args);
+          return this;
+        }
+        return baseOff(eventName, ...args);
+      },
+      once(eventName, ...args) {
+        if (routeToMessage(eventName)) {
+          msgSocket.once(eventName, ...args);
+          return this;
+        }
+        return baseOnce(eventName, ...args);
+      },
+      connect() {
+        apiSocket.connect();
+        msgSocket.connect();
+        return this;
+      },
+      disconnect() {
+        apiSocket.disconnect();
+        msgSocket.disconnect();
+        return this;
+      },
+      get id() {
+        return apiSocket.id;
+      },
+      get connected() {
+        return apiSocket.connected;
+      },
+    };
+  }, [MESSAGE_EVENTS]);
   const registerUser = useCallback(
     async (userData) => {
       try {
@@ -65,7 +173,7 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }): JSX.Elem
       // Vite proxy (dev) and nginx (prod) will forward /socket.io to backend
       const socketUrl = window.location.origin;
       
-      socket.current = io(socketUrl, {
+      const apiSocket = io(socketUrl, {
         withCredentials: true, // Cookies will be sent automatically
         path: '/socket.io',
         reconnection: true,
@@ -75,43 +183,61 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }): JSX.Elem
         timeout: 20000,
         transports: ['websocket', 'polling'],
       });
+
+      const messageSocket = io(socketUrl, {
+        withCredentials: true,
+        path: '/message-socket',
+        reconnection: true,
+        reconnectionDelay: 1000,
+        reconnectionDelayMax: 5000,
+        reconnectionAttempts: 10,
+        timeout: 20000,
+        transports: ['websocket', 'polling'],
+      });
+
+      messageSocketRef.current = messageSocket;
+      socket.current = createSocketBridge(apiSocket, messageSocket);
       
       // Add debugging listeners
-      socket.current.on('connect', () => {
-        console.log('✅ Socket connected:', socket.current.id);
+      apiSocket.on('connect', () => {
+        console.log('✅ Socket connected:', apiSocket.id);
         // Rejoin rooms after reconnection
-        socket.current.emit("userOnline", currentUser.id);
-        socket.current.emit("join", `user_${currentUser.id}`);
+        apiSocket.emit("userOnline", currentUser.id);
+        apiSocket.emit("join", `user_${currentUser.id}`);
       });
-      socket.current.on('disconnect', (reason) => {
+      apiSocket.on('disconnect', (reason) => {
         console.log('⚠️  Socket disconnected:', reason);
         if (reason === 'io server disconnect') {
           // Server disconnected, try to reconnect
-          socket.current.connect();
+          apiSocket.connect();
         }
       });
-      socket.current.on('reconnect', (attemptNumber) => {
+      apiSocket.on('reconnect', (attemptNumber) => {
         console.log('🔄 Socket reconnected after', attemptNumber, 'attempts');
         // Re-emit user online and rejoin rooms
-        socket.current.emit("userOnline", currentUser.id);
-        socket.current.emit("join", `user_${currentUser.id}`);
+        apiSocket.emit("userOnline", currentUser.id);
+        apiSocket.emit("join", `user_${currentUser.id}`);
       });
-      socket.current.on('reconnect_attempt', (attemptNumber) => {
+      apiSocket.on('reconnect_attempt', (attemptNumber) => {
         console.log('🔄 Reconnection attempt:', attemptNumber);
       });
-      socket.current.on('reconnect_error', (error) => {
+      apiSocket.on('reconnect_error', (error) => {
         console.error('❌ Reconnection error:', error.message);
       });
-      socket.current.on('reconnect_failed', () => {
+      apiSocket.on('reconnect_failed', () => {
         console.error('❌ Reconnection failed after all attempts');
       });
-      socket.current.on('connect_error', (error) => {
+      apiSocket.on('connect_error', (error) => {
         console.error('❌ Socket connection error:', error.message || error);
       });
+
+      messageSocket.on('connect_error', (error) => {
+        console.error('❌ Message socket connection error:', error.message || error);
+      });
       
-      socket.current.emit("userOnline", currentUser.id);
-      socket.current.emit("join", `user_${currentUser.id}`); // Join user-specific room
-      socket.current.on("loggedUsersUpdate", (loggedUsers) => {
+      apiSocket.emit("userOnline", currentUser.id);
+      apiSocket.emit("join", `user_${currentUser.id}`); // Join user-specific room
+      apiSocket.on("loggedUsersUpdate", (loggedUsers) => {
         if (currentUser) {
           // Filter out any null/undefined values from the logged users array
           const validUsers = (loggedUsers || []).filter(u => u && u.id);
@@ -119,7 +245,7 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }): JSX.Elem
         }
       });
     },
-    []
+    [createSocketBridge]
   );
 
   const loginUser = useCallback(
@@ -269,6 +395,10 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }): JSX.Elem
         socket.current.off("loggedUsersUpdate");
         socket.current.disconnect();
         socket.current = null;
+      }
+      if (messageSocketRef.current) {
+        messageSocketRef.current.disconnect();
+        messageSocketRef.current = null;
       }
     };
   }, [fetchUserInfo]);
