@@ -14,26 +14,6 @@ CREATE TABLE IF NOT EXISTS `conversations` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `conversation_participants` (
-    `id` VARCHAR(191) NOT NULL,
-    `conversationId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `conversation_participants_conversationId_userId_key`(`conversationId`, `userId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `conversation_admins` (
-    `id` VARCHAR(191) NOT NULL,
-    `conversationId` VARCHAR(191) NOT NULL,
-    `userId` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `conversation_admins_conversationId_userId_key`(`conversationId`, `userId`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `alertness_sessions` (
     `id` VARCHAR(191) NOT NULL,
     `classId` VARCHAR(191) NOT NULL,
@@ -61,12 +41,6 @@ CREATE TABLE `alertness_responses` (
     UNIQUE INDEX `alertness_responses_sessionId_userId_key`(`sessionId`, `userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- AddForeignKey
-ALTER TABLE `conversation_participants` ADD CONSTRAINT `conversation_participants_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `conversation_admins` ADD CONSTRAINT `conversation_admins_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `alertness_sessions` ADD CONSTRAINT `alertness_sessions_classId_fkey` FOREIGN KEY (`classId`) REFERENCES `conversations`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
