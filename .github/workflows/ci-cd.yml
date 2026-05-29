@@ -126,7 +126,7 @@ jobs:
       env:
         DATABASE_URL: mysql://user:password@localhost:3306/dummy
       run: |
-        for SVC in message-service class-service form-service alarm-service social-service scheduler-service calling-service; do
+        for SVC in message-service conversation-service form-service alarm-service social-service scheduler-service calling-service; do
           echo "--- $SVC ---"
           cd backend/$SVC && npx prisma validate && npx prisma generate && cd ../..
         done
@@ -244,7 +244,7 @@ jobs:
         cache-to: type=gha,mode=max,scope=message-service
 
   build-class:
-    name: Build - class-service
+    name: Build - conversation-service
     runs-on: ubuntu-latest
     needs: [test-backend, test-frontend, test-microservices]
     if: github.ref == 'refs/heads/main'
@@ -258,11 +258,11 @@ jobs:
     - uses: docker/build-push-action@v5
       with:
         context: .
-        file: ./backend/class-service/Dockerfile
+        file: ./backend/conversation-service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-class:latest
-        cache-from: type=gha,scope=class-service
-        cache-to: type=gha,mode=max,scope=class-service
+        cache-from: type=gha,scope=conversation-service
+        cache-to: type=gha,mode=max,scope=conversation-service
 
   build-form:
     name: Build - form-service
@@ -455,7 +455,7 @@ jobs:
           # Docker Hub before this deploy step runs).
           echo "Pulling latest Docker images from Docker Hub..."
           PULL_FAILED=false
-          for SVC_PULL in backend frontend-messenger frontend-social calling-service message-service class-service form-service alarm-service social-service scheduler-service; do
+          for SVC_PULL in backend frontend-messenger frontend-social calling-service message-service conversation-service form-service alarm-service social-service scheduler-service; do
             echo "  Pulling $SVC_PULL..."
             if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production pull "$SVC_PULL" 2>&1; then
               echo "  WARNING: Could not pull $SVC_PULL (rate limit?). Will use locally cached image."
@@ -606,7 +606,7 @@ jobs:
             return $MIGRATE_STATUS
           }
 
-          for SVC in backend form-service calling-service alarm-service scheduler-service message-service class-service social-service; do
+          for SVC in backend form-service calling-service alarm-service scheduler-service message-service conversation-service social-service; do
             run_prisma_migrate "$SVC"
           done
 
@@ -615,7 +615,7 @@ jobs:
           # -------------------------------------------------------------------
           echo "Updating backend, frontends, and microservices in one command..."
           if ! sudo docker compose -f docker-compose.prod.yml --env-file .env.production \
-            up -d --no-build backend frontend-messenger frontend-social calling-service message-service class-service form-service alarm-service social-service scheduler-service; then
+            up -d --no-build backend frontend-messenger frontend-social calling-service message-service conversation-service form-service alarm-service social-service scheduler-service; then
             echo "ERROR: Failed to update one or more app services"
             exit 1
           fi
@@ -690,7 +690,7 @@ jobs:
           
           # Verify all microservices are running
           DEPLOY_FAILED=false
-          for SVC_NAME in calling-service message-service class-service form-service alarm-service social-service scheduler-service; do
+          for SVC_NAME in calling-service message-service conversation-service form-service alarm-service social-service scheduler-service; do
             STATUS=$(sudo docker ps --filter "name=$SVC_NAME" --format "{{.Status}}" 2>/dev/null || echo "")
             echo "$SVC_NAME status: ${STATUS:-NOT RUNNING}"
             if [ -z "$STATUS" ]; then

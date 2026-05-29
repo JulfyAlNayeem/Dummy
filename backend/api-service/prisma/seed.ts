@@ -280,12 +280,7 @@ const SAMPLE_CONVERSATIONS = [
       intro: "Learn the basics of programming with Python",
       admins: [], // Will be filled with user IDs
       moderators: [], // Will be filled with user IDs
-      classType: "weekly",
       fileSendingAllowed: true,
-      startTime: "09:00",
-      cutoffTime: "09:15",
-      checkInterval: 15,
-      selectedDays: [1, 3, 5], // Monday, Wednesday, Friday
     },
   },
   {
@@ -300,12 +295,7 @@ const SAMPLE_CONVERSATIONS = [
       intro: "Advanced calculus concepts and applications",
       admins: [], // Will be filled with user IDs
       moderators: [], // Will be filled with user IDs
-      classType: "multi-weekly",
       fileSendingAllowed: true,
-      startTime: "10:00",
-      cutoffTime: "10:15",
-      checkInterval: 15,
-      selectedDays: [2, 4], // Tuesday, Thursday
     },
   },
   {
@@ -319,11 +309,7 @@ const SAMPLE_CONVERSATIONS = [
       name: "ENG301 - Shakespeare Studies",
       intro: "Explore the works of William Shakespeare",
       admins: [], // Will be filled with user IDs
-      classType: "regular",
       fileSendingAllowed: true,
-      startTime: "14:00",
-      cutoffTime: "14:15",
-      checkInterval: 15,
     },
   },
 ];
@@ -496,7 +482,6 @@ const createConversations = async (users: any[]) => {
       groupType: "group",
       groupName: "Study Group Alpha",
       groupIntro: "Advanced Computer Science Study Group",
-      fileSendingAllowed: true,
       participants: {
         create: [
           { userId: teachers[0]?.id },
@@ -519,11 +504,6 @@ const createConversations = async (users: any[]) => {
       groupType: "classroom",
       groupName: "CS101 - Introduction to Programming",
       groupIntro: "Learn basics of programming",
-      classType: "weekly",
-      fileSendingAllowed: true,
-      startTime: "09:00",
-      cutoffTime: "09:15",
-      checkInterval: 15,
       participants: {
         create: [
           { userId: teachers[0]?.id },
@@ -555,9 +535,13 @@ const createMessages = async (users: any[], conversations: any[]) => {
     });
     if (!parts.length) continue;
 
+    if (!(prisma as any).message?.create) {
+      continue;
+    }
+
     for (let i = 0; i < SAMPLE_MESSAGES.length; i++) {
       const senderId = parts[i % parts.length].userId;
-      const msg = await prisma.message.create({
+      const msg = await (prisma as any).message.create({
         data: {
           conversationId: conv.id,
           senderId,
@@ -584,93 +568,23 @@ const createFriendships = async (_users: any[]) => {
 
 // --- Create join requests ---
 const createJoinRequests = async (users: any[], conversations: any[]) => {
-  console.log("📋 Creating join requests...");
-  const students = users.filter((u) => u.role === "user");
-  const teachers = users.filter((u) => u.role === "teacher");
-
-  // Get classroom conversation
-  const classroom = conversations.find((c) => c.groupType === "classroom");
-  if (classroom && students.length > 2) {
-    try {
-      await prisma.joinRequest.upsert({
-        where: ({ classId_userId: { classId: classroom.id, userId: students[2].id } } as any),
-        update: { status: "approved" },
-        create: ({
-          userId: students[2].id,
-          classId: classroom.id,
-          status: "approved",
-          processedById: teachers[0]?.id || users[0].id,
-        } as any),
-      });
-    } catch (e) {}
-  }
-
-  console.log("✅ Created join requests");
+  void users;
+  void conversations;
+  console.log("⏭️  Skipping join requests (handled by conversation-service)");
 };
 
 // --- Create sessions ---
 const createSessions = async (conversations: any[]) => {
-  console.log("📅 Creating classroom sessions...");
-  const classrooms = conversations.filter((c) => c.groupType === "classroom");
-
-  const formatDate = (d: Date) => d.toISOString().slice(0, 10); // YYYY-MM-DD
-
-  for (const classroom of classrooms) {
-    try {
-      const now = new Date();
-      await prisma.session.create({
-        data: {
-          classId: classroom.id,
-          // Session model expects date and startTime as strings
-          date: formatDate(now),
-          startTime: classroom.startTime || "09:00",
-          type: "auto",
-          createdById: undefined,
-          status: "completed",
-          duration: 60,
-          cutoffTime: classroom.cutoffTime || "09:15",
-        } as any,
-      });
-    } catch (e) {}
-  }
-
-  console.log("✅ Created sessions");
+  void conversations;
+  console.log("⏭️  Skipping classroom sessions (handled by conversation-service)");
 };
 
 // --- Create attendance logs ---
 const createAttendanceLogs = async (users: any[], conversations: any[], sessions?: any[]) => {
-  console.log("✏️  Creating attendance logs...");
-  const students = users.filter((u) => u.role === "user");
-  const classrooms = conversations.filter((c) => c.groupType === "classroom");
-
-  for (const classroom of classrooms) {
-    const participants = await prisma.conversationParticipant.findMany({
-      where: { conversationId: classroom.id },
-      take: 3,
-    });
-
-    for (const participant of participants) {
-      if (students.some((s) => s.id === participant.userId)) {
-        try {
-          // find a session for this classroom (use provided sessions if available)
-          const session = (sessions || []).find((ss: any) => ss.classId === classroom.id);
-          if (!session) continue;
-          await prisma.attendanceLog.create({
-            data: {
-              sessionId: session.id,
-              classId: classroom.id,
-              userId: participant.userId,
-              status: (Math.random() > 0.3 ? "present" : "absent") as any,
-              enteredAt: new Date(),
-              sessionDate: session.date || new Date().toISOString().slice(0, 10),
-            } as any,
-          });
-        } catch (e) {}
-      }
-    }
-  }
-
-  console.log("✅ Created attendance logs");
+  void users;
+  void conversations;
+  void sessions;
+  console.log("⏭️  Skipping attendance logs (handled by conversation-service)");
 };
 
 // --- Create assignment submissions ---
@@ -687,28 +601,9 @@ const createAlertnessSessions = async (_users: any[], _conversations: any[]) => 
 
 // --- Create quick lessons ---
 const createQuickLessons = async (users: any[], conversations: any[]) => {
-  console.log("📚 Creating quick lessons...");
-  const teachers = users.filter((u) => u.role === "teacher");
-
-  for (const lesson of SAMPLE_QUICK_LESSONS) {
-    try {
-      const created = await prisma.quickLesson.create({
-        data: {
-          conversationId: conversations[2]?.id || conversations[0].id,
-          userId: teachers[0]?.id || users[0].id,
-          lessonName: lesson.lessonName,
-          parts: {
-            create: lesson.lessonParts.map((part, idx) => ({
-              content: part,
-              order: idx + 1,
-            })),
-          },
-        },
-      });
-    } catch (e) {}
-  }
-
-  console.log("✅ Created quick lessons");
+  void users;
+  void conversations;
+  console.log("⏭️  Skipping quick lessons (handled by conversation-service)");
 };
 
 // --- Create notifications ---
@@ -871,10 +766,8 @@ const seed = async () => {
     await createFriendships(users);
     await createJoinRequests(users, conversations);
     
-    // Get sessions for attendance logs
-    const sessions = await prisma.session.findMany({ take: 10 });
     await createSessions(conversations);
-    await createAttendanceLogs(users, conversations, sessions);
+    await createAttendanceLogs(users, conversations);
     
     // Create classroom-related data
     await createAssignmentSubmissions(users, conversations);

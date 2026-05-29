@@ -6,7 +6,7 @@ import path from 'path';
 const BACKEND_URL = process.env.VITE_BACKEND_URL || 'http://localhost:3001';
 const CALLING_URL = process.env.VITE_CALLING_SERVICE_URL || 'http://localhost:3003';
 const MESSAGE_URL = process.env.VITE_MESSAGE_SERVICE_URL || 'http://localhost:3004';
-const CLASS_URL = process.env.VITE_CLASS_SERVICE_URL || 'http://localhost:3005';
+const CONVERSATION_URL = process.env.VITE_CONVERSATION_SERVICE_URL || 'http://localhost:3005';
 const FORM_URL = process.env.VITE_FORM_SERVICE_URL || 'http://localhost:3006';
 const ALARM_URL = process.env.VITE_ALARM_SERVICE_URL || 'http://localhost:3007';
 const SOCIAL_URL = process.env.VITE_SOCIAL_SERVICE_URL || 'http://localhost:3008';
@@ -27,12 +27,12 @@ export default defineConfig({
         target: ALARM_URL,
         changeOrigin: true,
       },
-      // class-group/assignments → class-service
+      // class-group/assignments → conversation-service
       '/api/class-group/assignments': {
         target: CLASS_URL,
         changeOrigin: true,
       },
-      // class-group/* → class-service (classes, attendance)
+      // class-group/* → conversation-service (classes, attendance)
       '/api/class-group': {
         target: CLASS_URL,
         changeOrigin: true,

@@ -416,40 +416,27 @@ export type UserWhereInput = {
   blockDuration?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  conversations?: Prisma.ConversationParticipantListRelationFilter
-  sentMessages?: Prisma.MessageListRelationFilter
-  receivedMessages?: Prisma.MessageListRelationFilter
   blocksInitiated?: Prisma.BlockListRelationFilter
   blocksReceived?: Prisma.BlockListRelationFilter
-  joinRequests?: Prisma.JoinRequestListRelationFilter
-  joinRequestsProcessed?: Prisma.JoinRequestListRelationFilter
   reminders?: Prisma.ReminderListRelationFilter
   unreadCount?: Prisma.XOR<Prisma.UnreadCountNullableScalarRelationFilter, Prisma.UnreadCountWhereInput> | null
   userApproval?: Prisma.XOR<Prisma.UserApprovalNullableScalarRelationFilter, Prisma.UserApprovalWhereInput> | null
   deletionSchedules?: Prisma.UserDeletionScheduleListRelationFilter
   deletionPreventions?: Prisma.UserDeletionScheduleListRelationFilter
   adminActivityLogs?: Prisma.AdminActivityLogListRelationFilter
-  attendanceLogs?: Prisma.AttendanceLogListRelationFilter
   filesUploaded?: Prisma.FileListRelationFilter
   noticesCreated?: Prisma.NoticeListRelationFilter
   notificationsReceived?: Prisma.NotificationListRelationFilter
   notificationsSent?: Prisma.NotificationListRelationFilter
   permissionRequests?: Prisma.PermissionRequestListRelationFilter
   permissionReviews?: Prisma.PermissionRequestListRelationFilter
-  quickLessons?: Prisma.QuickLessonListRelationFilter
   quickMessages?: Prisma.QuickMessageListRelationFilter
   reportsSubmitted?: Prisma.ReportListRelationFilter
   reportsReceived?: Prisma.ReportListRelationFilter
   reportReviews?: Prisma.ReportListRelationFilter
   userApprovalReviews?: Prisma.UserApprovalListRelationFilter
   adminSettings?: Prisma.AdminSettingsListRelationFilter
-  conversationAdmins?: Prisma.ConversationAdminListRelationFilter
-  conversationModerators?: Prisma.ConversationModeratorListRelationFilter
-  conversationBlocksBy?: Prisma.ConversationBlockEntryListRelationFilter
-  conversationBlocksOn?: Prisma.ConversationBlockEntryListRelationFilter
   unreadMessages?: Prisma.UnreadMessageListRelationFilter
-  lastMessagesSent?: Prisma.ConversationListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
   noticeLikes?: Prisma.NoticeLikeListRelationFilter
   noticeReads?: Prisma.NoticeReadListRelationFilter
   noticeRecipients?: Prisma.NoticeRecipientListRelationFilter
@@ -486,40 +473,27 @@ export type UserOrderByWithRelationInput = {
   blockDuration?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  conversations?: Prisma.ConversationParticipantOrderByRelationAggregateInput
-  sentMessages?: Prisma.MessageOrderByRelationAggregateInput
-  receivedMessages?: Prisma.MessageOrderByRelationAggregateInput
   blocksInitiated?: Prisma.BlockOrderByRelationAggregateInput
   blocksReceived?: Prisma.BlockOrderByRelationAggregateInput
-  joinRequests?: Prisma.JoinRequestOrderByRelationAggregateInput
-  joinRequestsProcessed?: Prisma.JoinRequestOrderByRelationAggregateInput
   reminders?: Prisma.ReminderOrderByRelationAggregateInput
   unreadCount?: Prisma.UnreadCountOrderByWithRelationInput
   userApproval?: Prisma.UserApprovalOrderByWithRelationInput
   deletionSchedules?: Prisma.UserDeletionScheduleOrderByRelationAggregateInput
   deletionPreventions?: Prisma.UserDeletionScheduleOrderByRelationAggregateInput
   adminActivityLogs?: Prisma.AdminActivityLogOrderByRelationAggregateInput
-  attendanceLogs?: Prisma.AttendanceLogOrderByRelationAggregateInput
   filesUploaded?: Prisma.FileOrderByRelationAggregateInput
   noticesCreated?: Prisma.NoticeOrderByRelationAggregateInput
   notificationsReceived?: Prisma.NotificationOrderByRelationAggregateInput
   notificationsSent?: Prisma.NotificationOrderByRelationAggregateInput
   permissionRequests?: Prisma.PermissionRequestOrderByRelationAggregateInput
   permissionReviews?: Prisma.PermissionRequestOrderByRelationAggregateInput
-  quickLessons?: Prisma.QuickLessonOrderByRelationAggregateInput
   quickMessages?: Prisma.QuickMessageOrderByRelationAggregateInput
   reportsSubmitted?: Prisma.ReportOrderByRelationAggregateInput
   reportsReceived?: Prisma.ReportOrderByRelationAggregateInput
   reportReviews?: Prisma.ReportOrderByRelationAggregateInput
   userApprovalReviews?: Prisma.UserApprovalOrderByRelationAggregateInput
   adminSettings?: Prisma.AdminSettingsOrderByRelationAggregateInput
-  conversationAdmins?: Prisma.ConversationAdminOrderByRelationAggregateInput
-  conversationModerators?: Prisma.ConversationModeratorOrderByRelationAggregateInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryOrderByRelationAggregateInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryOrderByRelationAggregateInput
   unreadMessages?: Prisma.UnreadMessageOrderByRelationAggregateInput
-  lastMessagesSent?: Prisma.ConversationOrderByRelationAggregateInput
-  sessions?: Prisma.SessionOrderByRelationAggregateInput
   noticeLikes?: Prisma.NoticeLikeOrderByRelationAggregateInput
   noticeReads?: Prisma.NoticeReadOrderByRelationAggregateInput
   noticeRecipients?: Prisma.NoticeRecipientOrderByRelationAggregateInput
@@ -560,40 +534,27 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   blockDuration?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  conversations?: Prisma.ConversationParticipantListRelationFilter
-  sentMessages?: Prisma.MessageListRelationFilter
-  receivedMessages?: Prisma.MessageListRelationFilter
   blocksInitiated?: Prisma.BlockListRelationFilter
   blocksReceived?: Prisma.BlockListRelationFilter
-  joinRequests?: Prisma.JoinRequestListRelationFilter
-  joinRequestsProcessed?: Prisma.JoinRequestListRelationFilter
   reminders?: Prisma.ReminderListRelationFilter
   unreadCount?: Prisma.XOR<Prisma.UnreadCountNullableScalarRelationFilter, Prisma.UnreadCountWhereInput> | null
   userApproval?: Prisma.XOR<Prisma.UserApprovalNullableScalarRelationFilter, Prisma.UserApprovalWhereInput> | null
   deletionSchedules?: Prisma.UserDeletionScheduleListRelationFilter
   deletionPreventions?: Prisma.UserDeletionScheduleListRelationFilter
   adminActivityLogs?: Prisma.AdminActivityLogListRelationFilter
-  attendanceLogs?: Prisma.AttendanceLogListRelationFilter
   filesUploaded?: Prisma.FileListRelationFilter
   noticesCreated?: Prisma.NoticeListRelationFilter
   notificationsReceived?: Prisma.NotificationListRelationFilter
   notificationsSent?: Prisma.NotificationListRelationFilter
   permissionRequests?: Prisma.PermissionRequestListRelationFilter
   permissionReviews?: Prisma.PermissionRequestListRelationFilter
-  quickLessons?: Prisma.QuickLessonListRelationFilter
   quickMessages?: Prisma.QuickMessageListRelationFilter
   reportsSubmitted?: Prisma.ReportListRelationFilter
   reportsReceived?: Prisma.ReportListRelationFilter
   reportReviews?: Prisma.ReportListRelationFilter
   userApprovalReviews?: Prisma.UserApprovalListRelationFilter
   adminSettings?: Prisma.AdminSettingsListRelationFilter
-  conversationAdmins?: Prisma.ConversationAdminListRelationFilter
-  conversationModerators?: Prisma.ConversationModeratorListRelationFilter
-  conversationBlocksBy?: Prisma.ConversationBlockEntryListRelationFilter
-  conversationBlocksOn?: Prisma.ConversationBlockEntryListRelationFilter
   unreadMessages?: Prisma.UnreadMessageListRelationFilter
-  lastMessagesSent?: Prisma.ConversationListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
   noticeLikes?: Prisma.NoticeLikeListRelationFilter
   noticeReads?: Prisma.NoticeReadListRelationFilter
   noticeRecipients?: Prisma.NoticeRecipientListRelationFilter
@@ -704,40 +665,27 @@ export type UserCreateInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -774,40 +722,27 @@ export type UserUncheckedCreateInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -844,40 +779,27 @@ export type UserUpdateInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -914,40 +836,27 @@ export type UserUncheckedUpdateInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -1239,152 +1148,6 @@ export type UserUpdateOneRequiredWithoutBlocksReceivedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBlocksReceivedInput, Prisma.UserUpdateWithoutBlocksReceivedInput>, Prisma.UserUncheckedUpdateWithoutBlocksReceivedInput>
 }
 
-export type UserCreateNestedOneWithoutLastMessagesSentInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutLastMessagesSentInput, Prisma.UserUncheckedCreateWithoutLastMessagesSentInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLastMessagesSentInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneWithoutLastMessagesSentNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutLastMessagesSentInput, Prisma.UserUncheckedCreateWithoutLastMessagesSentInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLastMessagesSentInput
-  upsert?: Prisma.UserUpsertWithoutLastMessagesSentInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLastMessagesSentInput, Prisma.UserUpdateWithoutLastMessagesSentInput>, Prisma.UserUncheckedUpdateWithoutLastMessagesSentInput>
-}
-
-export type UserCreateNestedOneWithoutConversationsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationsInput, Prisma.UserUncheckedCreateWithoutConversationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutConversationsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationsInput, Prisma.UserUncheckedCreateWithoutConversationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationsInput
-  upsert?: Prisma.UserUpsertWithoutConversationsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutConversationsInput, Prisma.UserUpdateWithoutConversationsInput>, Prisma.UserUncheckedUpdateWithoutConversationsInput>
-}
-
-export type UserCreateNestedOneWithoutConversationAdminsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationAdminsInput, Prisma.UserUncheckedCreateWithoutConversationAdminsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationAdminsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutConversationAdminsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationAdminsInput, Prisma.UserUncheckedCreateWithoutConversationAdminsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationAdminsInput
-  upsert?: Prisma.UserUpsertWithoutConversationAdminsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutConversationAdminsInput, Prisma.UserUpdateWithoutConversationAdminsInput>, Prisma.UserUncheckedUpdateWithoutConversationAdminsInput>
-}
-
-export type UserCreateNestedOneWithoutConversationModeratorsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationModeratorsInput, Prisma.UserUncheckedCreateWithoutConversationModeratorsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationModeratorsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutConversationModeratorsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationModeratorsInput, Prisma.UserUncheckedCreateWithoutConversationModeratorsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationModeratorsInput
-  upsert?: Prisma.UserUpsertWithoutConversationModeratorsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutConversationModeratorsInput, Prisma.UserUpdateWithoutConversationModeratorsInput>, Prisma.UserUncheckedUpdateWithoutConversationModeratorsInput>
-}
-
-export type UserCreateNestedOneWithoutConversationBlocksByInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationBlocksByInput, Prisma.UserUncheckedCreateWithoutConversationBlocksByInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationBlocksByInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserCreateNestedOneWithoutConversationBlocksOnInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationBlocksOnInput, Prisma.UserUncheckedCreateWithoutConversationBlocksOnInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationBlocksOnInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutConversationBlocksByNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationBlocksByInput, Prisma.UserUncheckedCreateWithoutConversationBlocksByInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationBlocksByInput
-  upsert?: Prisma.UserUpsertWithoutConversationBlocksByInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutConversationBlocksByInput, Prisma.UserUpdateWithoutConversationBlocksByInput>, Prisma.UserUncheckedUpdateWithoutConversationBlocksByInput>
-}
-
-export type UserUpdateOneRequiredWithoutConversationBlocksOnNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationBlocksOnInput, Prisma.UserUncheckedCreateWithoutConversationBlocksOnInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationBlocksOnInput
-  upsert?: Prisma.UserUpsertWithoutConversationBlocksOnInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutConversationBlocksOnInput, Prisma.UserUpdateWithoutConversationBlocksOnInput>, Prisma.UserUncheckedUpdateWithoutConversationBlocksOnInput>
-}
-
-export type UserCreateNestedOneWithoutJoinRequestsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutJoinRequestsInput, Prisma.UserUncheckedCreateWithoutJoinRequestsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJoinRequestsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserCreateNestedOneWithoutJoinRequestsProcessedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutJoinRequestsProcessedInput, Prisma.UserUncheckedCreateWithoutJoinRequestsProcessedInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJoinRequestsProcessedInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutJoinRequestsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutJoinRequestsInput, Prisma.UserUncheckedCreateWithoutJoinRequestsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJoinRequestsInput
-  upsert?: Prisma.UserUpsertWithoutJoinRequestsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJoinRequestsInput, Prisma.UserUpdateWithoutJoinRequestsInput>, Prisma.UserUncheckedUpdateWithoutJoinRequestsInput>
-}
-
-export type UserUpdateOneWithoutJoinRequestsProcessedNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutJoinRequestsProcessedInput, Prisma.UserUncheckedCreateWithoutJoinRequestsProcessedInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJoinRequestsProcessedInput
-  upsert?: Prisma.UserUpsertWithoutJoinRequestsProcessedInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJoinRequestsProcessedInput, Prisma.UserUpdateWithoutJoinRequestsProcessedInput>, Prisma.UserUncheckedUpdateWithoutJoinRequestsProcessedInput>
-}
-
-export type UserCreateNestedOneWithoutSentMessagesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSentMessagesInput, Prisma.UserUncheckedCreateWithoutSentMessagesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSentMessagesInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserCreateNestedOneWithoutReceivedMessagesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutReceivedMessagesInput, Prisma.UserUncheckedCreateWithoutReceivedMessagesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReceivedMessagesInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutSentMessagesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSentMessagesInput, Prisma.UserUncheckedCreateWithoutSentMessagesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSentMessagesInput
-  upsert?: Prisma.UserUpsertWithoutSentMessagesInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSentMessagesInput, Prisma.UserUpdateWithoutSentMessagesInput>, Prisma.UserUncheckedUpdateWithoutSentMessagesInput>
-}
-
-export type UserUpdateOneWithoutReceivedMessagesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutReceivedMessagesInput, Prisma.UserUncheckedCreateWithoutReceivedMessagesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReceivedMessagesInput
-  upsert?: Prisma.UserUpsertWithoutReceivedMessagesInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReceivedMessagesInput, Prisma.UserUpdateWithoutReceivedMessagesInput>, Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput>
-}
-
 export type UserCreateNestedOneWithoutRemindersInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutRemindersInput, Prisma.UserUncheckedCreateWithoutRemindersInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutRemindersInput
@@ -1397,22 +1160,6 @@ export type UserUpdateOneRequiredWithoutRemindersNestedInput = {
   upsert?: Prisma.UserUpsertWithoutRemindersInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRemindersInput, Prisma.UserUpdateWithoutRemindersInput>, Prisma.UserUncheckedUpdateWithoutRemindersInput>
-}
-
-export type UserCreateNestedOneWithoutSessionsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneWithoutSessionsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
-  upsert?: Prisma.UserUpsertWithoutSessionsInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
 export type UserCreateNestedOneWithoutUnreadCountInput = {
@@ -1529,20 +1276,6 @@ export type UserUpdateOneRequiredWithoutAdminSettingsNestedInput = {
   upsert?: Prisma.UserUpsertWithoutAdminSettingsInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAdminSettingsInput, Prisma.UserUpdateWithoutAdminSettingsInput>, Prisma.UserUncheckedUpdateWithoutAdminSettingsInput>
-}
-
-export type UserCreateNestedOneWithoutAttendanceLogsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAttendanceLogsInput, Prisma.UserUncheckedCreateWithoutAttendanceLogsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAttendanceLogsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutAttendanceLogsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAttendanceLogsInput, Prisma.UserUncheckedCreateWithoutAttendanceLogsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAttendanceLogsInput
-  upsert?: Prisma.UserUpsertWithoutAttendanceLogsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAttendanceLogsInput, Prisma.UserUpdateWithoutAttendanceLogsInput>, Prisma.UserUncheckedUpdateWithoutAttendanceLogsInput>
 }
 
 export type UserCreateNestedOneWithoutFilesUploadedInput = {
@@ -1675,20 +1408,6 @@ export type UserUpdateOneWithoutPermissionReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPermissionReviewsInput, Prisma.UserUpdateWithoutPermissionReviewsInput>, Prisma.UserUncheckedUpdateWithoutPermissionReviewsInput>
 }
 
-export type UserCreateNestedOneWithoutQuickLessonsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutQuickLessonsInput, Prisma.UserUncheckedCreateWithoutQuickLessonsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutQuickLessonsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutQuickLessonsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutQuickLessonsInput, Prisma.UserUncheckedCreateWithoutQuickLessonsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutQuickLessonsInput
-  upsert?: Prisma.UserUpsertWithoutQuickLessonsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutQuickLessonsInput, Prisma.UserUpdateWithoutQuickLessonsInput>, Prisma.UserUncheckedUpdateWithoutQuickLessonsInput>
-}
-
 export type UserCreateNestedOneWithoutQuickMessagesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutQuickMessagesInput, Prisma.UserUncheckedCreateWithoutQuickMessagesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutQuickMessagesInput
@@ -1780,39 +1499,26 @@ export type UserCreateWithoutBlocksInitiatedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -1849,39 +1555,26 @@ export type UserUncheckedCreateWithoutBlocksInitiatedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -1923,39 +1616,26 @@ export type UserCreateWithoutBlocksReceivedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -1992,39 +1672,26 @@ export type UserUncheckedCreateWithoutBlocksReceivedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -2077,39 +1744,26 @@ export type UserUpdateWithoutBlocksInitiatedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -2146,39 +1800,26 @@ export type UserUncheckedUpdateWithoutBlocksInitiatedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -2226,39 +1867,26 @@ export type UserUpdateWithoutBlocksReceivedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -2295,2959 +1923,26 @@ export type UserUncheckedUpdateWithoutBlocksReceivedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutLastMessagesSentInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutLastMessagesSentInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutLastMessagesSentInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutLastMessagesSentInput, Prisma.UserUncheckedCreateWithoutLastMessagesSentInput>
-}
-
-export type UserUpsertWithoutLastMessagesSentInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutLastMessagesSentInput, Prisma.UserUncheckedUpdateWithoutLastMessagesSentInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutLastMessagesSentInput, Prisma.UserUncheckedCreateWithoutLastMessagesSentInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutLastMessagesSentInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutLastMessagesSentInput, Prisma.UserUncheckedUpdateWithoutLastMessagesSentInput>
-}
-
-export type UserUpdateWithoutLastMessagesSentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutLastMessagesSentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutConversationsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutConversationsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutConversationsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsInput, Prisma.UserUncheckedCreateWithoutConversationsInput>
-}
-
-export type UserUpsertWithoutConversationsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutConversationsInput, Prisma.UserUncheckedUpdateWithoutConversationsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsInput, Prisma.UserUncheckedCreateWithoutConversationsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutConversationsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutConversationsInput, Prisma.UserUncheckedUpdateWithoutConversationsInput>
-}
-
-export type UserUpdateWithoutConversationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutConversationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutConversationAdminsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutConversationAdminsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutConversationAdminsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationAdminsInput, Prisma.UserUncheckedCreateWithoutConversationAdminsInput>
-}
-
-export type UserUpsertWithoutConversationAdminsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutConversationAdminsInput, Prisma.UserUncheckedUpdateWithoutConversationAdminsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationAdminsInput, Prisma.UserUncheckedCreateWithoutConversationAdminsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutConversationAdminsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutConversationAdminsInput, Prisma.UserUncheckedUpdateWithoutConversationAdminsInput>
-}
-
-export type UserUpdateWithoutConversationAdminsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutConversationAdminsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutConversationModeratorsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutConversationModeratorsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutConversationModeratorsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationModeratorsInput, Prisma.UserUncheckedCreateWithoutConversationModeratorsInput>
-}
-
-export type UserUpsertWithoutConversationModeratorsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutConversationModeratorsInput, Prisma.UserUncheckedUpdateWithoutConversationModeratorsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationModeratorsInput, Prisma.UserUncheckedCreateWithoutConversationModeratorsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutConversationModeratorsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutConversationModeratorsInput, Prisma.UserUncheckedUpdateWithoutConversationModeratorsInput>
-}
-
-export type UserUpdateWithoutConversationModeratorsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutConversationModeratorsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutConversationBlocksByInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutConversationBlocksByInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutConversationBlocksByInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationBlocksByInput, Prisma.UserUncheckedCreateWithoutConversationBlocksByInput>
-}
-
-export type UserCreateWithoutConversationBlocksOnInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutConversationBlocksOnInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutConversationBlocksOnInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationBlocksOnInput, Prisma.UserUncheckedCreateWithoutConversationBlocksOnInput>
-}
-
-export type UserUpsertWithoutConversationBlocksByInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutConversationBlocksByInput, Prisma.UserUncheckedUpdateWithoutConversationBlocksByInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationBlocksByInput, Prisma.UserUncheckedCreateWithoutConversationBlocksByInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutConversationBlocksByInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutConversationBlocksByInput, Prisma.UserUncheckedUpdateWithoutConversationBlocksByInput>
-}
-
-export type UserUpdateWithoutConversationBlocksByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutConversationBlocksByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserUpsertWithoutConversationBlocksOnInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutConversationBlocksOnInput, Prisma.UserUncheckedUpdateWithoutConversationBlocksOnInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationBlocksOnInput, Prisma.UserUncheckedCreateWithoutConversationBlocksOnInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutConversationBlocksOnInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutConversationBlocksOnInput, Prisma.UserUncheckedUpdateWithoutConversationBlocksOnInput>
-}
-
-export type UserUpdateWithoutConversationBlocksOnInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutConversationBlocksOnInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutJoinRequestsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutJoinRequestsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutJoinRequestsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutJoinRequestsInput, Prisma.UserUncheckedCreateWithoutJoinRequestsInput>
-}
-
-export type UserCreateWithoutJoinRequestsProcessedInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutJoinRequestsProcessedInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutJoinRequestsProcessedInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutJoinRequestsProcessedInput, Prisma.UserUncheckedCreateWithoutJoinRequestsProcessedInput>
-}
-
-export type UserUpsertWithoutJoinRequestsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutJoinRequestsInput, Prisma.UserUncheckedUpdateWithoutJoinRequestsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutJoinRequestsInput, Prisma.UserUncheckedCreateWithoutJoinRequestsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutJoinRequestsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutJoinRequestsInput, Prisma.UserUncheckedUpdateWithoutJoinRequestsInput>
-}
-
-export type UserUpdateWithoutJoinRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutJoinRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserUpsertWithoutJoinRequestsProcessedInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutJoinRequestsProcessedInput, Prisma.UserUncheckedUpdateWithoutJoinRequestsProcessedInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutJoinRequestsProcessedInput, Prisma.UserUncheckedCreateWithoutJoinRequestsProcessedInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutJoinRequestsProcessedInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutJoinRequestsProcessedInput, Prisma.UserUncheckedUpdateWithoutJoinRequestsProcessedInput>
-}
-
-export type UserUpdateWithoutJoinRequestsProcessedInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutJoinRequestsProcessedInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutSentMessagesInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutSentMessagesInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutSentMessagesInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutSentMessagesInput, Prisma.UserUncheckedCreateWithoutSentMessagesInput>
-}
-
-export type UserCreateWithoutReceivedMessagesInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutReceivedMessagesInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutReceivedMessagesInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutReceivedMessagesInput, Prisma.UserUncheckedCreateWithoutReceivedMessagesInput>
-}
-
-export type UserUpsertWithoutSentMessagesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutSentMessagesInput, Prisma.UserUncheckedUpdateWithoutSentMessagesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutSentMessagesInput, Prisma.UserUncheckedCreateWithoutSentMessagesInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutSentMessagesInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutSentMessagesInput, Prisma.UserUncheckedUpdateWithoutSentMessagesInput>
-}
-
-export type UserUpdateWithoutSentMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutSentMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserUpsertWithoutReceivedMessagesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutReceivedMessagesInput, Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutReceivedMessagesInput, Prisma.UserUncheckedCreateWithoutReceivedMessagesInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutReceivedMessagesInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutReceivedMessagesInput, Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput>
-}
-
-export type UserUpdateWithoutReceivedMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -5284,39 +1979,26 @@ export type UserCreateWithoutRemindersInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -5353,39 +2035,26 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -5438,39 +2107,26 @@ export type UserUpdateWithoutRemindersInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -5507,331 +2163,26 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutSessionsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutSessionsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutSessionsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
-}
-
-export type UserUpsertWithoutSessionsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutSessionsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
-}
-
-export type UserUpdateWithoutSessionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutSessionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -5868,39 +2219,26 @@ export type UserCreateWithoutUnreadCountInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -5937,39 +2275,26 @@ export type UserUncheckedCreateWithoutUnreadCountInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -6022,39 +2347,26 @@ export type UserUpdateWithoutUnreadCountInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -6091,39 +2403,26 @@ export type UserUncheckedUpdateWithoutUnreadCountInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -6160,39 +2459,26 @@ export type UserCreateWithoutUnreadMessagesInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -6229,39 +2515,26 @@ export type UserUncheckedCreateWithoutUnreadMessagesInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -6314,39 +2587,26 @@ export type UserUpdateWithoutUnreadMessagesInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -6383,39 +2643,26 @@ export type UserUncheckedUpdateWithoutUnreadMessagesInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -6452,39 +2699,26 @@ export type UserCreateWithoutUserApprovalInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -6521,39 +2755,26 @@ export type UserUncheckedCreateWithoutUserApprovalInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -6595,39 +2816,26 @@ export type UserCreateWithoutUserApprovalReviewsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -6664,39 +2872,26 @@ export type UserUncheckedCreateWithoutUserApprovalReviewsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -6749,39 +2944,26 @@ export type UserUpdateWithoutUserApprovalInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -6818,39 +3000,26 @@ export type UserUncheckedUpdateWithoutUserApprovalInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -6898,39 +3067,26 @@ export type UserUpdateWithoutUserApprovalReviewsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -6967,39 +3123,26 @@ export type UserUncheckedUpdateWithoutUserApprovalReviewsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -7036,39 +3179,26 @@ export type UserCreateWithoutDeletionSchedulesInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -7105,39 +3235,26 @@ export type UserUncheckedCreateWithoutDeletionSchedulesInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -7179,39 +3296,26 @@ export type UserCreateWithoutDeletionPreventionsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -7248,39 +3352,26 @@ export type UserUncheckedCreateWithoutDeletionPreventionsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -7333,39 +3424,26 @@ export type UserUpdateWithoutDeletionSchedulesInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -7402,39 +3480,26 @@ export type UserUncheckedUpdateWithoutDeletionSchedulesInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -7482,39 +3547,26 @@ export type UserUpdateWithoutDeletionPreventionsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -7551,39 +3603,26 @@ export type UserUncheckedUpdateWithoutDeletionPreventionsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -7620,39 +3659,26 @@ export type UserCreateWithoutAdminActivityLogsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -7689,39 +3715,26 @@ export type UserUncheckedCreateWithoutAdminActivityLogsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -7774,39 +3787,26 @@ export type UserUpdateWithoutAdminActivityLogsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -7843,39 +3843,26 @@ export type UserUncheckedUpdateWithoutAdminActivityLogsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -7912,39 +3899,26 @@ export type UserCreateWithoutAdminSettingsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -7981,39 +3955,26 @@ export type UserUncheckedCreateWithoutAdminSettingsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -8066,39 +4027,26 @@ export type UserUpdateWithoutAdminSettingsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -8135,305 +4083,8 @@ export type UserUncheckedUpdateWithoutAdminSettingsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutAttendanceLogsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutAttendanceLogsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutAttendanceLogsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAttendanceLogsInput, Prisma.UserUncheckedCreateWithoutAttendanceLogsInput>
-}
-
-export type UserUpsertWithoutAttendanceLogsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAttendanceLogsInput, Prisma.UserUncheckedUpdateWithoutAttendanceLogsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAttendanceLogsInput, Prisma.UserUncheckedCreateWithoutAttendanceLogsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutAttendanceLogsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAttendanceLogsInput, Prisma.UserUncheckedUpdateWithoutAttendanceLogsInput>
-}
-
-export type UserUpdateWithoutAttendanceLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutAttendanceLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
@@ -8446,20 +4097,12 @@ export type UserUncheckedUpdateWithoutAttendanceLogsInput = {
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -8496,39 +4139,26 @@ export type UserCreateWithoutFilesUploadedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -8565,39 +4195,26 @@ export type UserUncheckedCreateWithoutFilesUploadedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -8650,39 +4267,26 @@ export type UserUpdateWithoutFilesUploadedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -8719,39 +4323,26 @@ export type UserUncheckedUpdateWithoutFilesUploadedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -8788,39 +4379,26 @@ export type UserCreateWithoutNoticesCreatedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -8857,39 +4435,26 @@ export type UserUncheckedCreateWithoutNoticesCreatedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -8942,39 +4507,26 @@ export type UserUpdateWithoutNoticesCreatedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -9011,39 +4563,26 @@ export type UserUncheckedUpdateWithoutNoticesCreatedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -9080,40 +4619,27 @@ export type UserCreateWithoutNoticeLikesInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
@@ -9149,40 +4675,27 @@ export type UserUncheckedCreateWithoutNoticeLikesInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
@@ -9234,40 +4747,27 @@ export type UserUpdateWithoutNoticeLikesInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
@@ -9303,40 +4803,27 @@ export type UserUncheckedUpdateWithoutNoticeLikesInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -9372,40 +4859,27 @@ export type UserCreateWithoutNoticeReadsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
 }
@@ -9441,40 +4915,27 @@ export type UserUncheckedCreateWithoutNoticeReadsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
 }
@@ -9526,40 +4987,27 @@ export type UserUpdateWithoutNoticeReadsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
 }
@@ -9595,40 +5043,27 @@ export type UserUncheckedUpdateWithoutNoticeReadsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -9664,40 +5099,27 @@ export type UserCreateWithoutNoticeRecipientsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
 }
@@ -9733,40 +5155,27 @@ export type UserUncheckedCreateWithoutNoticeRecipientsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
 }
@@ -9818,40 +5227,27 @@ export type UserUpdateWithoutNoticeRecipientsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
 }
@@ -9887,40 +5283,27 @@ export type UserUncheckedUpdateWithoutNoticeRecipientsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -9956,39 +5339,26 @@ export type UserCreateWithoutNotificationsReceivedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -10025,39 +5395,26 @@ export type UserUncheckedCreateWithoutNotificationsReceivedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -10099,39 +5456,26 @@ export type UserCreateWithoutNotificationsSentInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -10168,39 +5512,26 @@ export type UserUncheckedCreateWithoutNotificationsSentInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -10253,39 +5584,26 @@ export type UserUpdateWithoutNotificationsReceivedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -10322,39 +5640,26 @@ export type UserUncheckedUpdateWithoutNotificationsReceivedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -10402,39 +5707,26 @@ export type UserUpdateWithoutNotificationsSentInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -10471,39 +5763,26 @@ export type UserUncheckedUpdateWithoutNotificationsSentInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -10540,39 +5819,26 @@ export type UserCreateWithoutPermissionRequestsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -10609,39 +5875,26 @@ export type UserUncheckedCreateWithoutPermissionRequestsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -10683,39 +5936,26 @@ export type UserCreateWithoutPermissionReviewsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -10752,39 +5992,26 @@ export type UserUncheckedCreateWithoutPermissionReviewsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -10837,39 +6064,26 @@ export type UserUpdateWithoutPermissionRequestsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -10906,39 +6120,26 @@ export type UserUncheckedUpdateWithoutPermissionRequestsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -10986,39 +6187,26 @@ export type UserUpdateWithoutPermissionReviewsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -11055,331 +6243,26 @@ export type UserUncheckedUpdateWithoutPermissionReviewsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutQuickLessonsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutQuickLessonsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  gender: string
-  image?: string
-  bio?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  lastSeen?: Date | string | null
-  themeIndex?: number
-  fileSendingAllowed?: boolean
-  coverImage?: string | null
-  website?: string | null
-  location?: string | null
-  notifNewMessage?: boolean | null
-  notifMention?: boolean | null
-  notifSound?: boolean | null
-  twoFactorEnabled?: boolean
-  twoFactorSecret?: string | null
-  isEmailVerified?: boolean
-  emailVerificationToken?: string | null
-  passwordResetToken?: string | null
-  passwordResetExpires?: Date | string | null
-  refreshToken?: string | null
-  blockedAt?: Date | string | null
-  blockReason?: string | null
-  blockDuration?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
-  userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
-  filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
-  noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
-  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
-  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
-  reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
-  reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
-  adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
-  noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
-  noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
-  noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutQuickLessonsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutQuickLessonsInput, Prisma.UserUncheckedCreateWithoutQuickLessonsInput>
-}
-
-export type UserUpsertWithoutQuickLessonsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutQuickLessonsInput, Prisma.UserUncheckedUpdateWithoutQuickLessonsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutQuickLessonsInput, Prisma.UserUncheckedCreateWithoutQuickLessonsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutQuickLessonsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutQuickLessonsInput, Prisma.UserUncheckedUpdateWithoutQuickLessonsInput>
-}
-
-export type UserUpdateWithoutQuickLessonsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
-  noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
-  noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
-  noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutQuickLessonsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  themeIndex?: Prisma.IntFieldUpdateOperationsInput | number
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notifNewMessage?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifMention?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  notifSound?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blockReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
-  userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
-  deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
-  deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
-  adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
-  filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
-  noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
-  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
-  permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
-  reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
-  reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
-  userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
-  adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
-  unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -11416,39 +6299,26 @@ export type UserCreateWithoutQuickMessagesInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -11485,39 +6355,26 @@ export type UserUncheckedCreateWithoutQuickMessagesInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -11570,39 +6427,26 @@ export type UserUpdateWithoutQuickMessagesInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -11639,39 +6483,26 @@ export type UserUncheckedUpdateWithoutQuickMessagesInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -11708,39 +6539,26 @@ export type UserCreateWithoutReportsSubmittedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -11777,39 +6595,26 @@ export type UserUncheckedCreateWithoutReportsSubmittedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -11851,39 +6656,26 @@ export type UserCreateWithoutReportsReceivedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportReviews?: Prisma.ReportCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -11920,39 +6712,26 @@ export type UserUncheckedCreateWithoutReportsReceivedInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportReviews?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewedByInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -11994,39 +6773,26 @@ export type UserCreateWithoutReportReviewsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
   userApprovalReviews?: Prisma.UserApprovalCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientCreateNestedManyWithoutUserInput
@@ -12063,39 +6829,26 @@ export type UserUncheckedCreateWithoutReportReviewsInput = {
   blockDuration?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   blocksInitiated?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blocksReceived?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUserInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutProcessedByInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   unreadCount?: Prisma.UnreadCountUncheckedCreateNestedOneWithoutUserInput
   userApproval?: Prisma.UserApprovalUncheckedCreateNestedOneWithoutUserInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutUserInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedCreateNestedManyWithoutPreventedByInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedCreateNestedManyWithoutAdminInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedCreateNestedManyWithoutUserInput
   filesUploaded?: Prisma.FileUncheckedCreateNestedManyWithoutUploadedByInput
   noticesCreated?: Prisma.NoticeUncheckedCreateNestedManyWithoutCreatorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   permissionRequests?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutRequesterInput
   permissionReviews?: Prisma.PermissionRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  quickLessons?: Prisma.QuickLessonUncheckedCreateNestedManyWithoutUserInput
   quickMessages?: Prisma.QuickMessageUncheckedCreateNestedManyWithoutUserInput
   reportsSubmitted?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportsReceived?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedCreateNestedManyWithoutReviewedByInput
   adminSettings?: Prisma.AdminSettingsUncheckedCreateNestedManyWithoutUpdatedByInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedCreateNestedManyWithoutUserInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedCreateNestedManyWithoutUserInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedByInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedCreateNestedManyWithoutBlockedUserInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutUserInput
-  lastMessagesSent?: Prisma.ConversationUncheckedCreateNestedManyWithoutLastMessageSenderInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutCreatedByInput
   noticeLikes?: Prisma.NoticeLikeUncheckedCreateNestedManyWithoutUserInput
   noticeReads?: Prisma.NoticeReadUncheckedCreateNestedManyWithoutUserInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedCreateNestedManyWithoutUserInput
@@ -12148,39 +6901,26 @@ export type UserUpdateWithoutReportsSubmittedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -12217,39 +6957,26 @@ export type UserUncheckedUpdateWithoutReportsSubmittedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -12297,39 +7024,26 @@ export type UserUpdateWithoutReportsReceivedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportReviews?: Prisma.ReportUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -12366,39 +7080,26 @@ export type UserUncheckedUpdateWithoutReportsReceivedInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportReviews?: Prisma.ReportUncheckedUpdateManyWithoutReviewedByNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -12446,39 +7147,26 @@ export type UserUpdateWithoutReportReviewsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
   userApprovalReviews?: Prisma.UserApprovalUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUpdateManyWithoutUserNestedInput
@@ -12515,39 +7203,26 @@ export type UserUncheckedUpdateWithoutReportReviewsInput = {
   blockDuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversations?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   blocksInitiated?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blocksReceived?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUserNestedInput
-  joinRequestsProcessed?: Prisma.JoinRequestUncheckedUpdateManyWithoutProcessedByNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   unreadCount?: Prisma.UnreadCountUncheckedUpdateOneWithoutUserNestedInput
   userApproval?: Prisma.UserApprovalUncheckedUpdateOneWithoutUserNestedInput
   deletionSchedules?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutUserNestedInput
   deletionPreventions?: Prisma.UserDeletionScheduleUncheckedUpdateManyWithoutPreventedByNestedInput
   adminActivityLogs?: Prisma.AdminActivityLogUncheckedUpdateManyWithoutAdminNestedInput
-  attendanceLogs?: Prisma.AttendanceLogUncheckedUpdateManyWithoutUserNestedInput
   filesUploaded?: Prisma.FileUncheckedUpdateManyWithoutUploadedByNestedInput
   noticesCreated?: Prisma.NoticeUncheckedUpdateManyWithoutCreatorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   permissionRequests?: Prisma.PermissionRequestUncheckedUpdateManyWithoutRequesterNestedInput
   permissionReviews?: Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  quickLessons?: Prisma.QuickLessonUncheckedUpdateManyWithoutUserNestedInput
   quickMessages?: Prisma.QuickMessageUncheckedUpdateManyWithoutUserNestedInput
   reportsSubmitted?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportsReceived?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
   userApprovalReviews?: Prisma.UserApprovalUncheckedUpdateManyWithoutReviewedByNestedInput
   adminSettings?: Prisma.AdminSettingsUncheckedUpdateManyWithoutUpdatedByNestedInput
-  conversationAdmins?: Prisma.ConversationAdminUncheckedUpdateManyWithoutUserNestedInput
-  conversationModerators?: Prisma.ConversationModeratorUncheckedUpdateManyWithoutUserNestedInput
-  conversationBlocksBy?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedByNestedInput
-  conversationBlocksOn?: Prisma.ConversationBlockEntryUncheckedUpdateManyWithoutBlockedUserNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutUserNestedInput
-  lastMessagesSent?: Prisma.ConversationUncheckedUpdateManyWithoutLastMessageSenderNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutCreatedByNestedInput
   noticeLikes?: Prisma.NoticeLikeUncheckedUpdateManyWithoutUserNestedInput
   noticeReads?: Prisma.NoticeReadUncheckedUpdateManyWithoutUserNestedInput
   noticeRecipients?: Prisma.NoticeRecipientUncheckedUpdateManyWithoutUserNestedInput
@@ -12559,76 +7234,50 @@ export type UserUncheckedUpdateWithoutReportReviewsInput = {
  */
 
 export type UserCountOutputType = {
-  conversations: number
-  sentMessages: number
-  receivedMessages: number
   blocksInitiated: number
   blocksReceived: number
-  joinRequests: number
-  joinRequestsProcessed: number
   reminders: number
   deletionSchedules: number
   deletionPreventions: number
   adminActivityLogs: number
-  attendanceLogs: number
   filesUploaded: number
   noticesCreated: number
   notificationsReceived: number
   notificationsSent: number
   permissionRequests: number
   permissionReviews: number
-  quickLessons: number
   quickMessages: number
   reportsSubmitted: number
   reportsReceived: number
   reportReviews: number
   userApprovalReviews: number
   adminSettings: number
-  conversationAdmins: number
-  conversationModerators: number
-  conversationBlocksBy: number
-  conversationBlocksOn: number
   unreadMessages: number
-  lastMessagesSent: number
-  sessions: number
   noticeLikes: number
   noticeReads: number
   noticeRecipients: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  conversations?: boolean | UserCountOutputTypeCountConversationsArgs
-  sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
-  receivedMessages?: boolean | UserCountOutputTypeCountReceivedMessagesArgs
   blocksInitiated?: boolean | UserCountOutputTypeCountBlocksInitiatedArgs
   blocksReceived?: boolean | UserCountOutputTypeCountBlocksReceivedArgs
-  joinRequests?: boolean | UserCountOutputTypeCountJoinRequestsArgs
-  joinRequestsProcessed?: boolean | UserCountOutputTypeCountJoinRequestsProcessedArgs
   reminders?: boolean | UserCountOutputTypeCountRemindersArgs
   deletionSchedules?: boolean | UserCountOutputTypeCountDeletionSchedulesArgs
   deletionPreventions?: boolean | UserCountOutputTypeCountDeletionPreventionsArgs
   adminActivityLogs?: boolean | UserCountOutputTypeCountAdminActivityLogsArgs
-  attendanceLogs?: boolean | UserCountOutputTypeCountAttendanceLogsArgs
   filesUploaded?: boolean | UserCountOutputTypeCountFilesUploadedArgs
   noticesCreated?: boolean | UserCountOutputTypeCountNoticesCreatedArgs
   notificationsReceived?: boolean | UserCountOutputTypeCountNotificationsReceivedArgs
   notificationsSent?: boolean | UserCountOutputTypeCountNotificationsSentArgs
   permissionRequests?: boolean | UserCountOutputTypeCountPermissionRequestsArgs
   permissionReviews?: boolean | UserCountOutputTypeCountPermissionReviewsArgs
-  quickLessons?: boolean | UserCountOutputTypeCountQuickLessonsArgs
   quickMessages?: boolean | UserCountOutputTypeCountQuickMessagesArgs
   reportsSubmitted?: boolean | UserCountOutputTypeCountReportsSubmittedArgs
   reportsReceived?: boolean | UserCountOutputTypeCountReportsReceivedArgs
   reportReviews?: boolean | UserCountOutputTypeCountReportReviewsArgs
   userApprovalReviews?: boolean | UserCountOutputTypeCountUserApprovalReviewsArgs
   adminSettings?: boolean | UserCountOutputTypeCountAdminSettingsArgs
-  conversationAdmins?: boolean | UserCountOutputTypeCountConversationAdminsArgs
-  conversationModerators?: boolean | UserCountOutputTypeCountConversationModeratorsArgs
-  conversationBlocksBy?: boolean | UserCountOutputTypeCountConversationBlocksByArgs
-  conversationBlocksOn?: boolean | UserCountOutputTypeCountConversationBlocksOnArgs
   unreadMessages?: boolean | UserCountOutputTypeCountUnreadMessagesArgs
-  lastMessagesSent?: boolean | UserCountOutputTypeCountLastMessagesSentArgs
-  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   noticeLikes?: boolean | UserCountOutputTypeCountNoticeLikesArgs
   noticeReads?: boolean | UserCountOutputTypeCountNoticeReadsArgs
   noticeRecipients?: boolean | UserCountOutputTypeCountNoticeRecipientsArgs
@@ -12647,27 +7296,6 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountConversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ConversationParticipantWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountSentMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MessageWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountReceivedMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MessageWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountBlocksInitiatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BlockWhereInput
 }
@@ -12677,20 +7305,6 @@ export type UserCountOutputTypeCountBlocksInitiatedArgs<ExtArgs extends runtime.
  */
 export type UserCountOutputTypeCountBlocksReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BlockWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountJoinRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.JoinRequestWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountJoinRequestsProcessedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.JoinRequestWhereInput
 }
 
 /**
@@ -12719,13 +7333,6 @@ export type UserCountOutputTypeCountDeletionPreventionsArgs<ExtArgs extends runt
  */
 export type UserCountOutputTypeCountAdminActivityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AdminActivityLogWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountAttendanceLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AttendanceLogWhereInput
 }
 
 /**
@@ -12773,13 +7380,6 @@ export type UserCountOutputTypeCountPermissionReviewsArgs<ExtArgs extends runtim
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountQuickLessonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.QuickLessonWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountQuickMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.QuickMessageWhereInput
 }
@@ -12822,50 +7422,8 @@ export type UserCountOutputTypeCountAdminSettingsArgs<ExtArgs extends runtime.Ty
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountConversationAdminsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ConversationAdminWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountConversationModeratorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ConversationModeratorWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountConversationBlocksByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ConversationBlockEntryWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountConversationBlocksOnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ConversationBlockEntryWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountUnreadMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UnreadMessageWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountLastMessagesSentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ConversationWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SessionWhereInput
 }
 
 /**
@@ -12921,40 +7479,27 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   blockDuration?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  conversations?: boolean | Prisma.User$conversationsArgs<ExtArgs>
-  sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
-  receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>
   blocksInitiated?: boolean | Prisma.User$blocksInitiatedArgs<ExtArgs>
   blocksReceived?: boolean | Prisma.User$blocksReceivedArgs<ExtArgs>
-  joinRequests?: boolean | Prisma.User$joinRequestsArgs<ExtArgs>
-  joinRequestsProcessed?: boolean | Prisma.User$joinRequestsProcessedArgs<ExtArgs>
   reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
   unreadCount?: boolean | Prisma.User$unreadCountArgs<ExtArgs>
   userApproval?: boolean | Prisma.User$userApprovalArgs<ExtArgs>
   deletionSchedules?: boolean | Prisma.User$deletionSchedulesArgs<ExtArgs>
   deletionPreventions?: boolean | Prisma.User$deletionPreventionsArgs<ExtArgs>
   adminActivityLogs?: boolean | Prisma.User$adminActivityLogsArgs<ExtArgs>
-  attendanceLogs?: boolean | Prisma.User$attendanceLogsArgs<ExtArgs>
   filesUploaded?: boolean | Prisma.User$filesUploadedArgs<ExtArgs>
   noticesCreated?: boolean | Prisma.User$noticesCreatedArgs<ExtArgs>
   notificationsReceived?: boolean | Prisma.User$notificationsReceivedArgs<ExtArgs>
   notificationsSent?: boolean | Prisma.User$notificationsSentArgs<ExtArgs>
   permissionRequests?: boolean | Prisma.User$permissionRequestsArgs<ExtArgs>
   permissionReviews?: boolean | Prisma.User$permissionReviewsArgs<ExtArgs>
-  quickLessons?: boolean | Prisma.User$quickLessonsArgs<ExtArgs>
   quickMessages?: boolean | Prisma.User$quickMessagesArgs<ExtArgs>
   reportsSubmitted?: boolean | Prisma.User$reportsSubmittedArgs<ExtArgs>
   reportsReceived?: boolean | Prisma.User$reportsReceivedArgs<ExtArgs>
   reportReviews?: boolean | Prisma.User$reportReviewsArgs<ExtArgs>
   userApprovalReviews?: boolean | Prisma.User$userApprovalReviewsArgs<ExtArgs>
   adminSettings?: boolean | Prisma.User$adminSettingsArgs<ExtArgs>
-  conversationAdmins?: boolean | Prisma.User$conversationAdminsArgs<ExtArgs>
-  conversationModerators?: boolean | Prisma.User$conversationModeratorsArgs<ExtArgs>
-  conversationBlocksBy?: boolean | Prisma.User$conversationBlocksByArgs<ExtArgs>
-  conversationBlocksOn?: boolean | Prisma.User$conversationBlocksOnArgs<ExtArgs>
   unreadMessages?: boolean | Prisma.User$unreadMessagesArgs<ExtArgs>
-  lastMessagesSent?: boolean | Prisma.User$lastMessagesSentArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   noticeLikes?: boolean | Prisma.User$noticeLikesArgs<ExtArgs>
   noticeReads?: boolean | Prisma.User$noticeReadsArgs<ExtArgs>
   noticeRecipients?: boolean | Prisma.User$noticeRecipientsArgs<ExtArgs>
@@ -12998,40 +7543,27 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "gender" | "image" | "bio" | "role" | "isActive" | "lastSeen" | "themeIndex" | "fileSendingAllowed" | "coverImage" | "website" | "location" | "notifNewMessage" | "notifMention" | "notifSound" | "twoFactorEnabled" | "twoFactorSecret" | "isEmailVerified" | "emailVerificationToken" | "passwordResetToken" | "passwordResetExpires" | "refreshToken" | "blockedAt" | "blockReason" | "blockDuration" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  conversations?: boolean | Prisma.User$conversationsArgs<ExtArgs>
-  sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
-  receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>
   blocksInitiated?: boolean | Prisma.User$blocksInitiatedArgs<ExtArgs>
   blocksReceived?: boolean | Prisma.User$blocksReceivedArgs<ExtArgs>
-  joinRequests?: boolean | Prisma.User$joinRequestsArgs<ExtArgs>
-  joinRequestsProcessed?: boolean | Prisma.User$joinRequestsProcessedArgs<ExtArgs>
   reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
   unreadCount?: boolean | Prisma.User$unreadCountArgs<ExtArgs>
   userApproval?: boolean | Prisma.User$userApprovalArgs<ExtArgs>
   deletionSchedules?: boolean | Prisma.User$deletionSchedulesArgs<ExtArgs>
   deletionPreventions?: boolean | Prisma.User$deletionPreventionsArgs<ExtArgs>
   adminActivityLogs?: boolean | Prisma.User$adminActivityLogsArgs<ExtArgs>
-  attendanceLogs?: boolean | Prisma.User$attendanceLogsArgs<ExtArgs>
   filesUploaded?: boolean | Prisma.User$filesUploadedArgs<ExtArgs>
   noticesCreated?: boolean | Prisma.User$noticesCreatedArgs<ExtArgs>
   notificationsReceived?: boolean | Prisma.User$notificationsReceivedArgs<ExtArgs>
   notificationsSent?: boolean | Prisma.User$notificationsSentArgs<ExtArgs>
   permissionRequests?: boolean | Prisma.User$permissionRequestsArgs<ExtArgs>
   permissionReviews?: boolean | Prisma.User$permissionReviewsArgs<ExtArgs>
-  quickLessons?: boolean | Prisma.User$quickLessonsArgs<ExtArgs>
   quickMessages?: boolean | Prisma.User$quickMessagesArgs<ExtArgs>
   reportsSubmitted?: boolean | Prisma.User$reportsSubmittedArgs<ExtArgs>
   reportsReceived?: boolean | Prisma.User$reportsReceivedArgs<ExtArgs>
   reportReviews?: boolean | Prisma.User$reportReviewsArgs<ExtArgs>
   userApprovalReviews?: boolean | Prisma.User$userApprovalReviewsArgs<ExtArgs>
   adminSettings?: boolean | Prisma.User$adminSettingsArgs<ExtArgs>
-  conversationAdmins?: boolean | Prisma.User$conversationAdminsArgs<ExtArgs>
-  conversationModerators?: boolean | Prisma.User$conversationModeratorsArgs<ExtArgs>
-  conversationBlocksBy?: boolean | Prisma.User$conversationBlocksByArgs<ExtArgs>
-  conversationBlocksOn?: boolean | Prisma.User$conversationBlocksOnArgs<ExtArgs>
   unreadMessages?: boolean | Prisma.User$unreadMessagesArgs<ExtArgs>
-  lastMessagesSent?: boolean | Prisma.User$lastMessagesSentArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   noticeLikes?: boolean | Prisma.User$noticeLikesArgs<ExtArgs>
   noticeReads?: boolean | Prisma.User$noticeReadsArgs<ExtArgs>
   noticeRecipients?: boolean | Prisma.User$noticeRecipientsArgs<ExtArgs>
@@ -13041,40 +7573,27 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    conversations: Prisma.$ConversationParticipantPayload<ExtArgs>[]
-    sentMessages: Prisma.$MessagePayload<ExtArgs>[]
-    receivedMessages: Prisma.$MessagePayload<ExtArgs>[]
     blocksInitiated: Prisma.$BlockPayload<ExtArgs>[]
     blocksReceived: Prisma.$BlockPayload<ExtArgs>[]
-    joinRequests: Prisma.$JoinRequestPayload<ExtArgs>[]
-    joinRequestsProcessed: Prisma.$JoinRequestPayload<ExtArgs>[]
     reminders: Prisma.$ReminderPayload<ExtArgs>[]
     unreadCount: Prisma.$UnreadCountPayload<ExtArgs> | null
     userApproval: Prisma.$UserApprovalPayload<ExtArgs> | null
     deletionSchedules: Prisma.$UserDeletionSchedulePayload<ExtArgs>[]
     deletionPreventions: Prisma.$UserDeletionSchedulePayload<ExtArgs>[]
     adminActivityLogs: Prisma.$AdminActivityLogPayload<ExtArgs>[]
-    attendanceLogs: Prisma.$AttendanceLogPayload<ExtArgs>[]
     filesUploaded: Prisma.$FilePayload<ExtArgs>[]
     noticesCreated: Prisma.$NoticePayload<ExtArgs>[]
     notificationsReceived: Prisma.$NotificationPayload<ExtArgs>[]
     notificationsSent: Prisma.$NotificationPayload<ExtArgs>[]
     permissionRequests: Prisma.$PermissionRequestPayload<ExtArgs>[]
     permissionReviews: Prisma.$PermissionRequestPayload<ExtArgs>[]
-    quickLessons: Prisma.$QuickLessonPayload<ExtArgs>[]
     quickMessages: Prisma.$QuickMessagePayload<ExtArgs>[]
     reportsSubmitted: Prisma.$ReportPayload<ExtArgs>[]
     reportsReceived: Prisma.$ReportPayload<ExtArgs>[]
     reportReviews: Prisma.$ReportPayload<ExtArgs>[]
     userApprovalReviews: Prisma.$UserApprovalPayload<ExtArgs>[]
     adminSettings: Prisma.$AdminSettingsPayload<ExtArgs>[]
-    conversationAdmins: Prisma.$ConversationAdminPayload<ExtArgs>[]
-    conversationModerators: Prisma.$ConversationModeratorPayload<ExtArgs>[]
-    conversationBlocksBy: Prisma.$ConversationBlockEntryPayload<ExtArgs>[]
-    conversationBlocksOn: Prisma.$ConversationBlockEntryPayload<ExtArgs>[]
     unreadMessages: Prisma.$UnreadMessagePayload<ExtArgs>[]
-    lastMessagesSent: Prisma.$ConversationPayload<ExtArgs>[]
-    sessions: Prisma.$SessionPayload<ExtArgs>[]
     noticeLikes: Prisma.$NoticeLikePayload<ExtArgs>[]
     noticeReads: Prisma.$NoticeReadPayload<ExtArgs>[]
     noticeRecipients: Prisma.$NoticeRecipientPayload<ExtArgs>[]
@@ -13450,40 +7969,27 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  conversations<T extends Prisma.User$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  sentMessages<T extends Prisma.User$sentMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  receivedMessages<T extends Prisma.User$receivedMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$receivedMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   blocksInitiated<T extends Prisma.User$blocksInitiatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$blocksInitiatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   blocksReceived<T extends Prisma.User$blocksReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$blocksReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  joinRequests<T extends Prisma.User$joinRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$joinRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JoinRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  joinRequestsProcessed<T extends Prisma.User$joinRequestsProcessedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$joinRequestsProcessedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JoinRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reminders<T extends Prisma.User$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   unreadCount<T extends Prisma.User$unreadCountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$unreadCountArgs<ExtArgs>>): Prisma.Prisma__UnreadCountClient<runtime.Types.Result.GetResult<Prisma.$UnreadCountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   userApproval<T extends Prisma.User$userApprovalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userApprovalArgs<ExtArgs>>): Prisma.Prisma__UserApprovalClient<runtime.Types.Result.GetResult<Prisma.$UserApprovalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   deletionSchedules<T extends Prisma.User$deletionSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deletionSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserDeletionSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deletionPreventions<T extends Prisma.User$deletionPreventionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deletionPreventionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserDeletionSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   adminActivityLogs<T extends Prisma.User$adminActivityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$adminActivityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  attendanceLogs<T extends Prisma.User$attendanceLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$attendanceLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendanceLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   filesUploaded<T extends Prisma.User$filesUploadedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$filesUploadedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   noticesCreated<T extends Prisma.User$noticesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$noticesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NoticePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notificationsReceived<T extends Prisma.User$notificationsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notificationsSent<T extends Prisma.User$notificationsSentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsSentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   permissionRequests<T extends Prisma.User$permissionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$permissionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PermissionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   permissionReviews<T extends Prisma.User$permissionReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$permissionReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PermissionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  quickLessons<T extends Prisma.User$quickLessonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$quickLessonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuickLessonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quickMessages<T extends Prisma.User$quickMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$quickMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuickMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reportsSubmitted<T extends Prisma.User$reportsSubmittedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportsSubmittedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reportsReceived<T extends Prisma.User$reportsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reportReviews<T extends Prisma.User$reportReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userApprovalReviews<T extends Prisma.User$userApprovalReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userApprovalReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   adminSettings<T extends Prisma.User$adminSettingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$adminSettingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  conversationAdmins<T extends Prisma.User$conversationAdminsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$conversationAdminsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationAdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  conversationModerators<T extends Prisma.User$conversationModeratorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$conversationModeratorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationModeratorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  conversationBlocksBy<T extends Prisma.User$conversationBlocksByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$conversationBlocksByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationBlockEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  conversationBlocksOn<T extends Prisma.User$conversationBlocksOnArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$conversationBlocksOnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationBlockEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   unreadMessages<T extends Prisma.User$unreadMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$unreadMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UnreadMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  lastMessagesSent<T extends Prisma.User$lastMessagesSentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$lastMessagesSentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   noticeLikes<T extends Prisma.User$noticeLikesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$noticeLikesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NoticeLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   noticeReads<T extends Prisma.User$noticeReadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$noticeReadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NoticeReadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   noticeRecipients<T extends Prisma.User$noticeRecipientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$noticeRecipientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NoticeRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -13889,78 +8395,6 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.conversations
- */
-export type User$conversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ConversationParticipant
-   */
-  select?: Prisma.ConversationParticipantSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ConversationParticipant
-   */
-  omit?: Prisma.ConversationParticipantOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ConversationParticipantInclude<ExtArgs> | null
-  where?: Prisma.ConversationParticipantWhereInput
-  orderBy?: Prisma.ConversationParticipantOrderByWithRelationInput | Prisma.ConversationParticipantOrderByWithRelationInput[]
-  cursor?: Prisma.ConversationParticipantWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ConversationParticipantScalarFieldEnum | Prisma.ConversationParticipantScalarFieldEnum[]
-}
-
-/**
- * User.sentMessages
- */
-export type User$sentMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Message
-   */
-  select?: Prisma.MessageSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Message
-   */
-  omit?: Prisma.MessageOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MessageInclude<ExtArgs> | null
-  where?: Prisma.MessageWhereInput
-  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
-  cursor?: Prisma.MessageWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
-}
-
-/**
- * User.receivedMessages
- */
-export type User$receivedMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Message
-   */
-  select?: Prisma.MessageSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Message
-   */
-  omit?: Prisma.MessageOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MessageInclude<ExtArgs> | null
-  where?: Prisma.MessageWhereInput
-  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
-  cursor?: Prisma.MessageWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
-}
-
-/**
  * User.blocksInitiated
  */
 export type User$blocksInitiatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -14006,54 +8440,6 @@ export type User$blocksReceivedArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.BlockScalarFieldEnum | Prisma.BlockScalarFieldEnum[]
-}
-
-/**
- * User.joinRequests
- */
-export type User$joinRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the JoinRequest
-   */
-  select?: Prisma.JoinRequestSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the JoinRequest
-   */
-  omit?: Prisma.JoinRequestOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.JoinRequestInclude<ExtArgs> | null
-  where?: Prisma.JoinRequestWhereInput
-  orderBy?: Prisma.JoinRequestOrderByWithRelationInput | Prisma.JoinRequestOrderByWithRelationInput[]
-  cursor?: Prisma.JoinRequestWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.JoinRequestScalarFieldEnum | Prisma.JoinRequestScalarFieldEnum[]
-}
-
-/**
- * User.joinRequestsProcessed
- */
-export type User$joinRequestsProcessedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the JoinRequest
-   */
-  select?: Prisma.JoinRequestSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the JoinRequest
-   */
-  omit?: Prisma.JoinRequestOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.JoinRequestInclude<ExtArgs> | null
-  where?: Prisma.JoinRequestWhereInput
-  orderBy?: Prisma.JoinRequestOrderByWithRelationInput | Prisma.JoinRequestOrderByWithRelationInput[]
-  cursor?: Prisma.JoinRequestWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.JoinRequestScalarFieldEnum | Prisma.JoinRequestScalarFieldEnum[]
 }
 
 /**
@@ -14188,30 +8574,6 @@ export type User$adminActivityLogsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.AdminActivityLogScalarFieldEnum | Prisma.AdminActivityLogScalarFieldEnum[]
-}
-
-/**
- * User.attendanceLogs
- */
-export type User$attendanceLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AttendanceLog
-   */
-  select?: Prisma.AttendanceLogSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AttendanceLog
-   */
-  omit?: Prisma.AttendanceLogOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AttendanceLogInclude<ExtArgs> | null
-  where?: Prisma.AttendanceLogWhereInput
-  orderBy?: Prisma.AttendanceLogOrderByWithRelationInput | Prisma.AttendanceLogOrderByWithRelationInput[]
-  cursor?: Prisma.AttendanceLogWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AttendanceLogScalarFieldEnum | Prisma.AttendanceLogScalarFieldEnum[]
 }
 
 /**
@@ -14359,30 +8721,6 @@ export type User$permissionReviewsArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * User.quickLessons
- */
-export type User$quickLessonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the QuickLesson
-   */
-  select?: Prisma.QuickLessonSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the QuickLesson
-   */
-  omit?: Prisma.QuickLessonOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.QuickLessonInclude<ExtArgs> | null
-  where?: Prisma.QuickLessonWhereInput
-  orderBy?: Prisma.QuickLessonOrderByWithRelationInput | Prisma.QuickLessonOrderByWithRelationInput[]
-  cursor?: Prisma.QuickLessonWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.QuickLessonScalarFieldEnum | Prisma.QuickLessonScalarFieldEnum[]
-}
-
-/**
  * User.quickMessages
  */
 export type User$quickMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -14527,102 +8865,6 @@ export type User$adminSettingsArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * User.conversationAdmins
- */
-export type User$conversationAdminsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ConversationAdmin
-   */
-  select?: Prisma.ConversationAdminSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ConversationAdmin
-   */
-  omit?: Prisma.ConversationAdminOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ConversationAdminInclude<ExtArgs> | null
-  where?: Prisma.ConversationAdminWhereInput
-  orderBy?: Prisma.ConversationAdminOrderByWithRelationInput | Prisma.ConversationAdminOrderByWithRelationInput[]
-  cursor?: Prisma.ConversationAdminWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ConversationAdminScalarFieldEnum | Prisma.ConversationAdminScalarFieldEnum[]
-}
-
-/**
- * User.conversationModerators
- */
-export type User$conversationModeratorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ConversationModerator
-   */
-  select?: Prisma.ConversationModeratorSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ConversationModerator
-   */
-  omit?: Prisma.ConversationModeratorOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ConversationModeratorInclude<ExtArgs> | null
-  where?: Prisma.ConversationModeratorWhereInput
-  orderBy?: Prisma.ConversationModeratorOrderByWithRelationInput | Prisma.ConversationModeratorOrderByWithRelationInput[]
-  cursor?: Prisma.ConversationModeratorWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ConversationModeratorScalarFieldEnum | Prisma.ConversationModeratorScalarFieldEnum[]
-}
-
-/**
- * User.conversationBlocksBy
- */
-export type User$conversationBlocksByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ConversationBlockEntry
-   */
-  select?: Prisma.ConversationBlockEntrySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ConversationBlockEntry
-   */
-  omit?: Prisma.ConversationBlockEntryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ConversationBlockEntryInclude<ExtArgs> | null
-  where?: Prisma.ConversationBlockEntryWhereInput
-  orderBy?: Prisma.ConversationBlockEntryOrderByWithRelationInput | Prisma.ConversationBlockEntryOrderByWithRelationInput[]
-  cursor?: Prisma.ConversationBlockEntryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ConversationBlockEntryScalarFieldEnum | Prisma.ConversationBlockEntryScalarFieldEnum[]
-}
-
-/**
- * User.conversationBlocksOn
- */
-export type User$conversationBlocksOnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ConversationBlockEntry
-   */
-  select?: Prisma.ConversationBlockEntrySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ConversationBlockEntry
-   */
-  omit?: Prisma.ConversationBlockEntryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ConversationBlockEntryInclude<ExtArgs> | null
-  where?: Prisma.ConversationBlockEntryWhereInput
-  orderBy?: Prisma.ConversationBlockEntryOrderByWithRelationInput | Prisma.ConversationBlockEntryOrderByWithRelationInput[]
-  cursor?: Prisma.ConversationBlockEntryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ConversationBlockEntryScalarFieldEnum | Prisma.ConversationBlockEntryScalarFieldEnum[]
-}
-
-/**
  * User.unreadMessages
  */
 export type User$unreadMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -14644,54 +8886,6 @@ export type User$unreadMessagesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.UnreadMessageScalarFieldEnum | Prisma.UnreadMessageScalarFieldEnum[]
-}
-
-/**
- * User.lastMessagesSent
- */
-export type User$lastMessagesSentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Conversation
-   */
-  select?: Prisma.ConversationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Conversation
-   */
-  omit?: Prisma.ConversationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ConversationInclude<ExtArgs> | null
-  where?: Prisma.ConversationWhereInput
-  orderBy?: Prisma.ConversationOrderByWithRelationInput | Prisma.ConversationOrderByWithRelationInput[]
-  cursor?: Prisma.ConversationWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
-}
-
-/**
- * User.sessions
- */
-export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Session
-   */
-  select?: Prisma.SessionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Session
-   */
-  omit?: Prisma.SessionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SessionInclude<ExtArgs> | null
-  where?: Prisma.SessionWhereInput
-  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
-  cursor?: Prisma.SessionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
 }
 
 /**

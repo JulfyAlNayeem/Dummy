@@ -28,60 +28,10 @@ export type User = Prisma.UserModel
  */
 export type Block = Prisma.BlockModel
 /**
- * Model Conversation
- * 
- */
-export type Conversation = Prisma.ConversationModel
-/**
- * Model ConversationParticipant
- * 
- */
-export type ConversationParticipant = Prisma.ConversationParticipantModel
-/**
- * Model ConversationAdmin
- * 
- */
-export type ConversationAdmin = Prisma.ConversationAdminModel
-/**
- * Model ConversationModerator
- * 
- */
-export type ConversationModerator = Prisma.ConversationModeratorModel
-/**
- * Model ConversationBlockEntry
- * 
- */
-export type ConversationBlockEntry = Prisma.ConversationBlockEntryModel
-/**
- * Model ConversationSelectedDay
- * 
- */
-export type ConversationSelectedDay = Prisma.ConversationSelectedDayModel
-/**
- * Model JoinRequest
- * 
- */
-export type JoinRequest = Prisma.JoinRequestModel
-/**
- * Model Message
- * 
- */
-export type Message = Prisma.MessageModel
-/**
- * Model MessageMedia
- * 
- */
-export type MessageMedia = Prisma.MessageMediaModel
-/**
  * Model Reminder
  * 
  */
 export type Reminder = Prisma.ReminderModel
-/**
- * Model Session
- * 
- */
-export type Session = Prisma.SessionModel
 /**
  * Model UnreadCount
  * 
@@ -123,11 +73,6 @@ export type AdminSettingsAllowedFileType = Prisma.AdminSettingsAllowedFileTypeMo
  */
 export type AdminSettingsBlockedWord = Prisma.AdminSettingsBlockedWordModel
 /**
- * Model AttendanceLog
- * 
- */
-export type AttendanceLog = Prisma.AttendanceLogModel
-/**
  * Model File
  * 
  */
@@ -162,16 +107,6 @@ export type Notification = Prisma.NotificationModel
  * 
  */
 export type PermissionRequest = Prisma.PermissionRequestModel
-/**
- * Model QuickLesson
- * 
- */
-export type QuickLesson = Prisma.QuickLessonModel
-/**
- * Model QuickLessonPart
- * 
- */
-export type QuickLessonPart = Prisma.QuickLessonPartModel
 /**
  * Model QuickMessage
  * 

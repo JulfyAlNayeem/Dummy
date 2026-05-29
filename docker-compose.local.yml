@@ -106,7 +106,7 @@ services:
       VITE_BACKEND_URL: http://backend:3001
       VITE_CALLING_SERVICE_URL: http://calling-service:3003
       VITE_MESSAGE_SERVICE_URL: http://message-service:3004
-      VITE_CLASS_SERVICE_URL: http://class-service:3005
+      VITE_CONVERSATION_SERVICE_URL: http://conversation-service:3005
       VITE_FORM_SERVICE_URL: http://form-service:3006
       VITE_ALARM_SERVICE_URL: http://alarm-service:3007
       VITE_SOCIAL_SERVICE_URL: http://social-service:3008
@@ -204,17 +204,17 @@ services:
       - dummy-network
 
   # Class Microservice (classroom management + session crons)
-  class-service:
+  conversation-service:
     build:
       context: .
-      dockerfile: backend/class-service/Dockerfile
-    container_name: class-service
+      dockerfile: backend/conversation-service/Dockerfile
+    container_name: conversation-service
     restart: always
     ports:
       - "3005:3005"
     volumes:
-      - ./backend/class-service/src:/app/backend/class-service/src
-      - ./backend/class-service/prisma:/app/backend/class-service/prisma
+      - ./backend/conversation-service/src:/app/backend/conversation-service/src
+      - ./backend/conversation-service/prisma:/app/backend/conversation-service/prisma
     environment:
       NODE_ENV: development
       PORT: 3005

@@ -21,102 +21,6 @@ export const UserRole = {
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 
-export const ConversationStatus = {
-  pending: 'pending',
-  accepted: 'accepted',
-  rejected: 'rejected'
-} as const
-
-export type ConversationStatus = (typeof ConversationStatus)[keyof typeof ConversationStatus]
-
-
-export const Visibility = {
-  public: 'public',
-  private: 'private'
-} as const
-
-export type Visibility = (typeof Visibility)[keyof typeof Visibility]
-
-
-export const GroupType = {
-  group: 'group',
-  classroom: 'classroom'
-} as const
-
-export type GroupType = (typeof GroupType)[keyof typeof GroupType]
-
-
-export const ClassType = {
-  regular: 'regular',
-  weekly: 'weekly',
-  multi_weekly: 'multi_weekly',
-  monthly: 'monthly',
-  exam: 'exam'
-} as const
-
-export type ClassType = (typeof ClassType)[keyof typeof ClassType]
-
-
-export const KeyExchangeStatus = {
-  none: 'none',
-  pending: 'pending',
-  partial: 'partial',
-  complete: 'complete'
-} as const
-
-export type KeyExchangeStatus = (typeof KeyExchangeStatus)[keyof typeof KeyExchangeStatus]
-
-
-export const JoinRequestStatus = {
-  pending: 'pending',
-  approved: 'approved',
-  rejected: 'rejected'
-} as const
-
-export type JoinRequestStatus = (typeof JoinRequestStatus)[keyof typeof JoinRequestStatus]
-
-
-export const MessageType = {
-  text: 'text',
-  image: 'image',
-  video: 'video',
-  audio: 'audio',
-  file: 'file',
-  system: 'system',
-  reply: 'reply',
-  mixed: 'mixed'
-} as const
-
-export type MessageType = (typeof MessageType)[keyof typeof MessageType]
-
-
-export const EmojiType = {
-  custom: 'custom',
-  standard: 'standard'
-} as const
-
-export type EmojiType = (typeof EmojiType)[keyof typeof EmojiType]
-
-
-export const MessageStatus = {
-  sent: 'sent',
-  delivered: 'delivered',
-  read: 'read'
-} as const
-
-export type MessageStatus = (typeof MessageStatus)[keyof typeof MessageStatus]
-
-
-export const MediaType = {
-  image: 'image',
-  video: 'video',
-  audio: 'audio',
-  file: 'file'
-} as const
-
-export type MediaType = (typeof MediaType)[keyof typeof MediaType]
-
-
 export const RepeatType = {
   one_time: 'one_time',
   daily: 'daily',
@@ -133,23 +37,6 @@ export const ReminderVisible = {
 } as const
 
 export type ReminderVisible = (typeof ReminderVisible)[keyof typeof ReminderVisible]
-
-
-export const SessionType = {
-  auto: 'auto',
-  manual: 'manual'
-} as const
-
-export type SessionType = (typeof SessionType)[keyof typeof SessionType]
-
-
-export const SessionStatus = {
-  scheduled: 'scheduled',
-  ongoing: 'ongoing',
-  completed: 'completed'
-} as const
-
-export type SessionStatus = (typeof SessionStatus)[keyof typeof SessionStatus]
 
 
 export const ApprovalStatus = {
@@ -191,16 +78,6 @@ export const LogSeverity = {
 } as const
 
 export type LogSeverity = (typeof LogSeverity)[keyof typeof LogSeverity]
-
-
-export const AttendanceStatus = {
-  present: 'present',
-  late: 'late',
-  absent: 'absent',
-  excused: 'excused'
-} as const
-
-export type AttendanceStatus = (typeof AttendanceStatus)[keyof typeof AttendanceStatus]
 
 
 export const NoticeAudience = {

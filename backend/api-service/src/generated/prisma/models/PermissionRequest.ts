@@ -230,7 +230,6 @@ export type PermissionRequestWhereInput = {
   reviewNote?: Prisma.StringFilter<"PermissionRequest"> | string
   createdAt?: Prisma.DateTimeFilter<"PermissionRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PermissionRequest"> | Date | string
-  conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
   requester?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
@@ -247,7 +246,6 @@ export type PermissionRequestOrderByWithRelationInput = {
   reviewNote?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  conversation?: Prisma.ConversationOrderByWithRelationInput
   requester?: Prisma.UserOrderByWithRelationInput
   reviewedBy?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.PermissionRequestOrderByRelevanceInput
@@ -268,7 +266,6 @@ export type PermissionRequestWhereUniqueInput = Prisma.AtLeast<{
   reviewNote?: Prisma.StringFilter<"PermissionRequest"> | string
   createdAt?: Prisma.DateTimeFilter<"PermissionRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PermissionRequest"> | Date | string
-  conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
   requester?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
@@ -309,6 +306,7 @@ export type PermissionRequestScalarWhereWithAggregatesInput = {
 
 export type PermissionRequestCreateInput = {
   id?: string
+  conversationId: string
   permissionType: $Enums.PermissionType
   reason?: string
   status?: $Enums.PermissionReqStatus
@@ -316,7 +314,6 @@ export type PermissionRequestCreateInput = {
   reviewNote?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversation: Prisma.ConversationCreateNestedOneWithoutPermissionRequestsInput
   requester: Prisma.UserCreateNestedOneWithoutPermissionRequestsInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutPermissionReviewsInput
 }
@@ -337,6 +334,7 @@ export type PermissionRequestUncheckedCreateInput = {
 
 export type PermissionRequestUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
   permissionType?: Prisma.EnumPermissionTypeFieldUpdateOperationsInput | $Enums.PermissionType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumPermissionReqStatusFieldUpdateOperationsInput | $Enums.PermissionReqStatus
@@ -344,7 +342,6 @@ export type PermissionRequestUpdateInput = {
   reviewNote?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutPermissionRequestsNestedInput
   requester?: Prisma.UserUpdateOneRequiredWithoutPermissionRequestsNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutPermissionReviewsNestedInput
 }
@@ -379,6 +376,7 @@ export type PermissionRequestCreateManyInput = {
 
 export type PermissionRequestUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
   permissionType?: Prisma.EnumPermissionTypeFieldUpdateOperationsInput | $Enums.PermissionType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumPermissionReqStatusFieldUpdateOperationsInput | $Enums.PermissionReqStatus
@@ -544,48 +542,6 @@ export type PermissionRequestUncheckedUpdateManyWithoutReviewedByNestedInput = {
   deleteMany?: Prisma.PermissionRequestScalarWhereInput | Prisma.PermissionRequestScalarWhereInput[]
 }
 
-export type PermissionRequestCreateNestedManyWithoutConversationInput = {
-  create?: Prisma.XOR<Prisma.PermissionRequestCreateWithoutConversationInput, Prisma.PermissionRequestUncheckedCreateWithoutConversationInput> | Prisma.PermissionRequestCreateWithoutConversationInput[] | Prisma.PermissionRequestUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.PermissionRequestCreateOrConnectWithoutConversationInput | Prisma.PermissionRequestCreateOrConnectWithoutConversationInput[]
-  createMany?: Prisma.PermissionRequestCreateManyConversationInputEnvelope
-  connect?: Prisma.PermissionRequestWhereUniqueInput | Prisma.PermissionRequestWhereUniqueInput[]
-}
-
-export type PermissionRequestUncheckedCreateNestedManyWithoutConversationInput = {
-  create?: Prisma.XOR<Prisma.PermissionRequestCreateWithoutConversationInput, Prisma.PermissionRequestUncheckedCreateWithoutConversationInput> | Prisma.PermissionRequestCreateWithoutConversationInput[] | Prisma.PermissionRequestUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.PermissionRequestCreateOrConnectWithoutConversationInput | Prisma.PermissionRequestCreateOrConnectWithoutConversationInput[]
-  createMany?: Prisma.PermissionRequestCreateManyConversationInputEnvelope
-  connect?: Prisma.PermissionRequestWhereUniqueInput | Prisma.PermissionRequestWhereUniqueInput[]
-}
-
-export type PermissionRequestUpdateManyWithoutConversationNestedInput = {
-  create?: Prisma.XOR<Prisma.PermissionRequestCreateWithoutConversationInput, Prisma.PermissionRequestUncheckedCreateWithoutConversationInput> | Prisma.PermissionRequestCreateWithoutConversationInput[] | Prisma.PermissionRequestUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.PermissionRequestCreateOrConnectWithoutConversationInput | Prisma.PermissionRequestCreateOrConnectWithoutConversationInput[]
-  upsert?: Prisma.PermissionRequestUpsertWithWhereUniqueWithoutConversationInput | Prisma.PermissionRequestUpsertWithWhereUniqueWithoutConversationInput[]
-  createMany?: Prisma.PermissionRequestCreateManyConversationInputEnvelope
-  set?: Prisma.PermissionRequestWhereUniqueInput | Prisma.PermissionRequestWhereUniqueInput[]
-  disconnect?: Prisma.PermissionRequestWhereUniqueInput | Prisma.PermissionRequestWhereUniqueInput[]
-  delete?: Prisma.PermissionRequestWhereUniqueInput | Prisma.PermissionRequestWhereUniqueInput[]
-  connect?: Prisma.PermissionRequestWhereUniqueInput | Prisma.PermissionRequestWhereUniqueInput[]
-  update?: Prisma.PermissionRequestUpdateWithWhereUniqueWithoutConversationInput | Prisma.PermissionRequestUpdateWithWhereUniqueWithoutConversationInput[]
-  updateMany?: Prisma.PermissionRequestUpdateManyWithWhereWithoutConversationInput | Prisma.PermissionRequestUpdateManyWithWhereWithoutConversationInput[]
-  deleteMany?: Prisma.PermissionRequestScalarWhereInput | Prisma.PermissionRequestScalarWhereInput[]
-}
-
-export type PermissionRequestUncheckedUpdateManyWithoutConversationNestedInput = {
-  create?: Prisma.XOR<Prisma.PermissionRequestCreateWithoutConversationInput, Prisma.PermissionRequestUncheckedCreateWithoutConversationInput> | Prisma.PermissionRequestCreateWithoutConversationInput[] | Prisma.PermissionRequestUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.PermissionRequestCreateOrConnectWithoutConversationInput | Prisma.PermissionRequestCreateOrConnectWithoutConversationInput[]
-  upsert?: Prisma.PermissionRequestUpsertWithWhereUniqueWithoutConversationInput | Prisma.PermissionRequestUpsertWithWhereUniqueWithoutConversationInput[]
-  createMany?: Prisma.PermissionRequestCreateManyConversationInputEnvelope
-  set?: Prisma.PermissionRequestWhereUniqueInput | Prisma.PermissionRequestWhereUniqueInput[]
-  disconnect?: Prisma.PermissionRequestWhereUniqueInput | Prisma.PermissionRequestWhereUniqueInput[]
-  delete?: Prisma.PermissionRequestWhereUniqueInput | Prisma.PermissionRequestWhereUniqueInput[]
-  connect?: Prisma.PermissionRequestWhereUniqueInput | Prisma.PermissionRequestWhereUniqueInput[]
-  update?: Prisma.PermissionRequestUpdateWithWhereUniqueWithoutConversationInput | Prisma.PermissionRequestUpdateWithWhereUniqueWithoutConversationInput[]
-  updateMany?: Prisma.PermissionRequestUpdateManyWithWhereWithoutConversationInput | Prisma.PermissionRequestUpdateManyWithWhereWithoutConversationInput[]
-  deleteMany?: Prisma.PermissionRequestScalarWhereInput | Prisma.PermissionRequestScalarWhereInput[]
-}
-
 export type EnumPermissionTypeFieldUpdateOperationsInput = {
   set?: $Enums.PermissionType
 }
@@ -596,6 +552,7 @@ export type EnumPermissionReqStatusFieldUpdateOperationsInput = {
 
 export type PermissionRequestCreateWithoutRequesterInput = {
   id?: string
+  conversationId: string
   permissionType: $Enums.PermissionType
   reason?: string
   status?: $Enums.PermissionReqStatus
@@ -603,7 +560,6 @@ export type PermissionRequestCreateWithoutRequesterInput = {
   reviewNote?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversation: Prisma.ConversationCreateNestedOneWithoutPermissionRequestsInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutPermissionReviewsInput
 }
 
@@ -632,6 +588,7 @@ export type PermissionRequestCreateManyRequesterInputEnvelope = {
 
 export type PermissionRequestCreateWithoutReviewedByInput = {
   id?: string
+  conversationId: string
   permissionType: $Enums.PermissionType
   reason?: string
   status?: $Enums.PermissionReqStatus
@@ -639,7 +596,6 @@ export type PermissionRequestCreateWithoutReviewedByInput = {
   reviewNote?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  conversation: Prisma.ConversationCreateNestedOneWithoutPermissionRequestsInput
   requester: Prisma.UserCreateNestedOneWithoutPermissionRequestsInput
 }
 
@@ -715,58 +671,6 @@ export type PermissionRequestUpdateManyWithWhereWithoutReviewedByInput = {
   data: Prisma.XOR<Prisma.PermissionRequestUpdateManyMutationInput, Prisma.PermissionRequestUncheckedUpdateManyWithoutReviewedByInput>
 }
 
-export type PermissionRequestCreateWithoutConversationInput = {
-  id?: string
-  permissionType: $Enums.PermissionType
-  reason?: string
-  status?: $Enums.PermissionReqStatus
-  reviewedAt?: Date | string | null
-  reviewNote?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  requester: Prisma.UserCreateNestedOneWithoutPermissionRequestsInput
-  reviewedBy?: Prisma.UserCreateNestedOneWithoutPermissionReviewsInput
-}
-
-export type PermissionRequestUncheckedCreateWithoutConversationInput = {
-  id?: string
-  requesterId: string
-  permissionType: $Enums.PermissionType
-  reason?: string
-  status?: $Enums.PermissionReqStatus
-  reviewedById?: string | null
-  reviewedAt?: Date | string | null
-  reviewNote?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type PermissionRequestCreateOrConnectWithoutConversationInput = {
-  where: Prisma.PermissionRequestWhereUniqueInput
-  create: Prisma.XOR<Prisma.PermissionRequestCreateWithoutConversationInput, Prisma.PermissionRequestUncheckedCreateWithoutConversationInput>
-}
-
-export type PermissionRequestCreateManyConversationInputEnvelope = {
-  data: Prisma.PermissionRequestCreateManyConversationInput | Prisma.PermissionRequestCreateManyConversationInput[]
-  skipDuplicates?: boolean
-}
-
-export type PermissionRequestUpsertWithWhereUniqueWithoutConversationInput = {
-  where: Prisma.PermissionRequestWhereUniqueInput
-  update: Prisma.XOR<Prisma.PermissionRequestUpdateWithoutConversationInput, Prisma.PermissionRequestUncheckedUpdateWithoutConversationInput>
-  create: Prisma.XOR<Prisma.PermissionRequestCreateWithoutConversationInput, Prisma.PermissionRequestUncheckedCreateWithoutConversationInput>
-}
-
-export type PermissionRequestUpdateWithWhereUniqueWithoutConversationInput = {
-  where: Prisma.PermissionRequestWhereUniqueInput
-  data: Prisma.XOR<Prisma.PermissionRequestUpdateWithoutConversationInput, Prisma.PermissionRequestUncheckedUpdateWithoutConversationInput>
-}
-
-export type PermissionRequestUpdateManyWithWhereWithoutConversationInput = {
-  where: Prisma.PermissionRequestScalarWhereInput
-  data: Prisma.XOR<Prisma.PermissionRequestUpdateManyMutationInput, Prisma.PermissionRequestUncheckedUpdateManyWithoutConversationInput>
-}
-
 export type PermissionRequestCreateManyRequesterInput = {
   id?: string
   conversationId: string
@@ -795,6 +699,7 @@ export type PermissionRequestCreateManyReviewedByInput = {
 
 export type PermissionRequestUpdateWithoutRequesterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
   permissionType?: Prisma.EnumPermissionTypeFieldUpdateOperationsInput | $Enums.PermissionType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumPermissionReqStatusFieldUpdateOperationsInput | $Enums.PermissionReqStatus
@@ -802,7 +707,6 @@ export type PermissionRequestUpdateWithoutRequesterInput = {
   reviewNote?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutPermissionRequestsNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutPermissionReviewsNestedInput
 }
 
@@ -834,6 +738,7 @@ export type PermissionRequestUncheckedUpdateManyWithoutRequesterInput = {
 
 export type PermissionRequestUpdateWithoutReviewedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
   permissionType?: Prisma.EnumPermissionTypeFieldUpdateOperationsInput | $Enums.PermissionType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumPermissionReqStatusFieldUpdateOperationsInput | $Enums.PermissionReqStatus
@@ -841,7 +746,6 @@ export type PermissionRequestUpdateWithoutReviewedByInput = {
   reviewNote?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutPermissionRequestsNestedInput
   requester?: Prisma.UserUpdateOneRequiredWithoutPermissionRequestsNestedInput
 }
 
@@ -871,58 +775,6 @@ export type PermissionRequestUncheckedUpdateManyWithoutReviewedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type PermissionRequestCreateManyConversationInput = {
-  id?: string
-  requesterId: string
-  permissionType: $Enums.PermissionType
-  reason?: string
-  status?: $Enums.PermissionReqStatus
-  reviewedById?: string | null
-  reviewedAt?: Date | string | null
-  reviewNote?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type PermissionRequestUpdateWithoutConversationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  permissionType?: Prisma.EnumPermissionTypeFieldUpdateOperationsInput | $Enums.PermissionType
-  reason?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumPermissionReqStatusFieldUpdateOperationsInput | $Enums.PermissionReqStatus
-  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewNote?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  requester?: Prisma.UserUpdateOneRequiredWithoutPermissionRequestsNestedInput
-  reviewedBy?: Prisma.UserUpdateOneWithoutPermissionReviewsNestedInput
-}
-
-export type PermissionRequestUncheckedUpdateWithoutConversationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  requesterId?: Prisma.StringFieldUpdateOperationsInput | string
-  permissionType?: Prisma.EnumPermissionTypeFieldUpdateOperationsInput | $Enums.PermissionType
-  reason?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumPermissionReqStatusFieldUpdateOperationsInput | $Enums.PermissionReqStatus
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewNote?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type PermissionRequestUncheckedUpdateManyWithoutConversationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  requesterId?: Prisma.StringFieldUpdateOperationsInput | string
-  permissionType?: Prisma.EnumPermissionTypeFieldUpdateOperationsInput | $Enums.PermissionType
-  reason?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumPermissionReqStatusFieldUpdateOperationsInput | $Enums.PermissionReqStatus
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  reviewNote?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 
 
 export type PermissionRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -937,7 +789,6 @@ export type PermissionRequestSelect<ExtArgs extends runtime.Types.Extensions.Int
   reviewNote?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.PermissionRequest$reviewedByArgs<ExtArgs>
 }, ExtArgs["result"]["permissionRequest"]>
@@ -960,7 +811,6 @@ export type PermissionRequestSelectScalar = {
 
 export type PermissionRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "conversationId" | "requesterId" | "permissionType" | "reason" | "status" | "reviewedById" | "reviewedAt" | "reviewNote" | "createdAt" | "updatedAt", ExtArgs["result"]["permissionRequest"]>
 export type PermissionRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.PermissionRequest$reviewedByArgs<ExtArgs>
 }
@@ -968,7 +818,6 @@ export type PermissionRequestInclude<ExtArgs extends runtime.Types.Extensions.In
 export type $PermissionRequestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PermissionRequest"
   objects: {
-    conversation: Prisma.$ConversationPayload<ExtArgs>
     requester: Prisma.$UserPayload<ExtArgs>
     reviewedBy: Prisma.$UserPayload<ExtArgs> | null
   }
@@ -1324,7 +1173,6 @@ readonly fields: PermissionRequestFieldRefs;
  */
 export interface Prisma__PermissionRequestClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  conversation<T extends Prisma.ConversationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConversationDefaultArgs<ExtArgs>>): Prisma.Prisma__ConversationClient<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   requester<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reviewedBy<T extends Prisma.PermissionRequest$reviewedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PermissionRequest$reviewedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**

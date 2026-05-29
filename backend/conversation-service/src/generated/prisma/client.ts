@@ -45,102 +45,57 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
- * Model Block
+ * Model Conversation
  * 
  */
-export type Block = Prisma.BlockModel
+export type Conversation = Prisma.ConversationModel
 /**
- * Model Reminder
+ * Model ClassProfile
  * 
  */
-export type Reminder = Prisma.ReminderModel
+export type ClassProfile = Prisma.ClassProfileModel
 /**
- * Model UnreadCount
+ * Model ConversationParticipant
  * 
  */
-export type UnreadCount = Prisma.UnreadCountModel
+export type ConversationParticipant = Prisma.ConversationParticipantModel
 /**
- * Model UnreadMessage
+ * Model ConversationAdmin
  * 
  */
-export type UnreadMessage = Prisma.UnreadMessageModel
+export type ConversationAdmin = Prisma.ConversationAdminModel
 /**
- * Model UserApproval
+ * Model ConversationModerator
  * 
  */
-export type UserApproval = Prisma.UserApprovalModel
+export type ConversationModerator = Prisma.ConversationModeratorModel
 /**
- * Model UserDeletionSchedule
+ * Model ConversationSelectedDay
  * 
  */
-export type UserDeletionSchedule = Prisma.UserDeletionScheduleModel
+export type ConversationSelectedDay = Prisma.ConversationSelectedDayModel
 /**
- * Model AdminActivityLog
+ * Model JoinRequest
  * 
  */
-export type AdminActivityLog = Prisma.AdminActivityLogModel
+export type JoinRequest = Prisma.JoinRequestModel
 /**
- * Model AdminSettings
+ * Model Session
  * 
  */
-export type AdminSettings = Prisma.AdminSettingsModel
+export type Session = Prisma.SessionModel
 /**
- * Model AdminSettingsAllowedFileType
+ * Model AlertnessSession
  * 
  */
-export type AdminSettingsAllowedFileType = Prisma.AdminSettingsAllowedFileTypeModel
+export type AlertnessSession = Prisma.AlertnessSessionModel
 /**
- * Model AdminSettingsBlockedWord
+ * Model AttendanceLog
  * 
  */
-export type AdminSettingsBlockedWord = Prisma.AdminSettingsBlockedWordModel
+export type AttendanceLog = Prisma.AttendanceLogModel
 /**
- * Model File
+ * Model AssignmentSubmission
  * 
  */
-export type File = Prisma.FileModel
-/**
- * Model Notice
- * 
- */
-export type Notice = Prisma.NoticeModel
-/**
- * Model NoticeLike
- * 
- */
-export type NoticeLike = Prisma.NoticeLikeModel
-/**
- * Model NoticeRead
- * 
- */
-export type NoticeRead = Prisma.NoticeReadModel
-/**
- * Model NoticeRecipient
- * 
- */
-export type NoticeRecipient = Prisma.NoticeRecipientModel
-/**
- * Model Notification
- * 
- */
-export type Notification = Prisma.NotificationModel
-/**
- * Model PermissionRequest
- * 
- */
-export type PermissionRequest = Prisma.PermissionRequestModel
-/**
- * Model QuickMessage
- * 
- */
-export type QuickMessage = Prisma.QuickMessageModel
-/**
- * Model Report
- * 
- */
-export type Report = Prisma.ReportModel
-/**
- * Model SiteSecurityMessage
- * 
- */
-export type SiteSecurityMessage = Prisma.SiteSecurityMessageModel
+export type AssignmentSubmission = Prisma.AssignmentSubmissionModel

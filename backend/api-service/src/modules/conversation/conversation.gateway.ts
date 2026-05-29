@@ -1,6 +1,5 @@
 import { Server, Socket } from 'socket.io';
 import logger from '../../common/utils/logger.js';
-import prisma from '../../config/database.js';
 import { resetUnreadRequestCount } from './conversation.controller.js';
 
 export class ConversationGateway {
@@ -35,41 +34,6 @@ export class ConversationGateway {
       image: (socket as any).user?.image,
     };
     this.activeUsers.get(conversationId)!.set(userId, userData);
-
-    // Auto-attendance for classrooms
-    try {
-      const conversation = await prisma.conversation.findUnique({
-        where: { id: conversationId },
-        include: { admins: true },
-      });
-
-      if (conversation?.isGroup && conversation?.groupType === 'classroom') {
-        const admins: Array<{ userId: string }> = (conversation as any).admins || [];
-        const isAdmin = admins.some((a) => a.userId === userId);
-        if (!isAdmin) {
-          const today = new Date().toISOString().split('T')[0];
-          const activeSession = await prisma.session.findFirst({
-            where: { classId: conversationId, date: today, status: { in: ['scheduled', 'ongoing'] } },
-          });
-
-          if (activeSession) {
-            const existing = await prisma.attendanceLog.findFirst({
-              where: { sessionId: activeSession.id, userId, sessionDate: today },
-            });
-            if (!existing) {
-              await prisma.attendanceLog.create({
-                data: { sessionId: activeSession.id, classId: conversationId, userId, sessionDate: today, enteredAt: new Date(), status: 'present' },
-              });
-              logger.info({ userId, conversationId }, 'Auto-attendance marked');
-            } else if (existing.status === 'absent') {
-              await prisma.attendanceLog.update({ where: { id: existing.id }, data: { status: 'present', enteredAt: new Date() } });
-            }
-          }
-        }
-      }
-    } catch (error) {
-      logger.error({ error, userId, conversationId }, 'Error auto-marking attendance');
-    }
 
     const activeUsersMap = this.activeUsers.get(conversationId) ?? new Map();
     const activeUsersList = Array.from(activeUsersMap.values());

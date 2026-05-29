@@ -60,38 +60,27 @@ model User {
   updatedAt           DateTime @updatedAt
 
   // Relations
-  conversations             ConversationParticipant[]
   blocksInitiated           Block[]            @relation("Blocker")
   blocksReceived            Block[]            @relation("Blocked")
-  joinRequests              JoinRequest[]      @relation("JoinRequester")
-  joinRequestsProcessed     JoinRequest[]      @relation("JoinProcessor")
   reminders                 Reminder[]
   unreadCount               UnreadCount?
   userApproval              UserApproval?
   deletionSchedules         UserDeletionSchedule[] @relation("DeletionUser")
   deletionPreventions       UserDeletionSchedule[] @relation("DeletionPreventer")
   adminActivityLogs         AdminActivityLog[]
-  attendanceLogs            AttendanceLog[]
   filesUploaded             File[]
   noticesCreated            Notice[]
   notificationsReceived     Notification[]     @relation("NotificationRecipient")
   notificationsSent         Notification[]     @relation("NotificationSender")
   permissionRequests        PermissionRequest[] @relation("PermissionRequester")
   permissionReviews         PermissionRequest[] @relation("PermissionReviewer")
-  quickLessons              QuickLesson[]
   quickMessages             QuickMessage[]
   reportsSubmitted          Report[]           @relation("Reporter")
   reportsReceived           Report[]           @relation("ReportedUser")
   reportReviews             Report[]           @relation("ReportReviewer")
   userApprovalReviews       UserApproval[]     @relation("ApprovalReviewer")
   adminSettings             AdminSettings[]
-  conversationAdmins        ConversationAdmin[]
-  conversationModerators    ConversationModerator[]
-  conversationBlocksBy      ConversationBlockEntry[] @relation("BlockEntryBlocker")
-  conversationBlocksOn      ConversationBlockEntry[] @relation("BlockEntryBlocked")
   unreadMessages            UnreadMessage[]
-  lastMessagesSent          Conversation[]     @relation("LastMessageSender")
-  sessions                  Session[]
   noticeLikes               NoticeLike[]
   noticeReads               NoticeRead[]
   noticeRecipients          NoticeRecipient[]
@@ -124,199 +113,6 @@ model Block {
   @@map("blocks")
 }
 
-// ─── Conversation ────────────────────────────────────────────────────────────
-
-model Conversation {
-  id         String             @id @default(uuid())
-  status     ConversationStatus @default(pending)
-  visibility Visibility         @default(public)
-  themeIndex Int                @default(0)
-
-  // Group settings (flattened from embedded document)
-  isGroup              Boolean  @default(false) @map("is_group")
-  groupType            GroupType? @map("group_type")
-  groupName            String?  @map("group_name")
-  groupIntro           String?  @map("group_intro") @db.Text
-  groupImage           String   @default("/images/cover/default-cover.jpg") @map("group_image")
-  classType            ClassType @default(regular) @map("class_type")
-  fileSendingAllowed   Boolean  @default(false) @map("file_sending_allowed")
-  startTime            String   @default("09:00") @map("start_time")
-  cutoffTime           String   @default("09:15") @map("cutoff_time")
-  checkInterval        Int      @default(15) @map("check_interval")
-
-  // Message permissions (flattened)
-  permText     Boolean @default(true) @map("perm_text")
-  permImage    Boolean @default(true) @map("perm_image")
-  permVoice    Boolean @default(false) @map("perm_voice")
-  permVideo    Boolean @default(false) @map("perm_video")
-  permFile     Boolean @default(false) @map("perm_file")
-  permSticker  Boolean @default(true) @map("perm_sticker")
-  permGif      Boolean @default(true) @map("perm_gif")
-
-  // Last message (flattened)
-  lastMessageText      String?  @map("last_message_text") @db.Text
-  lastMessageSenderId  String?  @map("last_message_sender_id")
-  lastMessageTimestamp  DateTime? @map("last_message_timestamp")
-
-  autoDeleteMessagesAfter Int @default(24) @map("auto_delete_messages_after")
-
-  // Key exchange
-  keyExchangeStatus    KeyExchangeStatus @default(none) @map("key_exchange_status")
-  keyExchangeData      Json?    @map("key_exchange_data")
-  keyExchangeCreatedAt DateTime? @map("key_exchange_created_at")
-  keyExchangeLastActivity DateTime? @map("key_exchange_last_activity")
-
-  v1Keys              Json?    @map("v1_keys")
-  smteKeyVersion      Int      @default(0) @map("smte_key_version")
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  participants          ConversationParticipant[]
-  admins                ConversationAdmin[]
-  moderators            ConversationModerator[]
-  blockList             ConversationBlockEntry[]
-  joinRequests          JoinRequest[]
-  reminders             Reminder[]
-  sessions              Session[]
-  attendanceLogs        AttendanceLog[]
-  files                 File[]
-  permissionRequests    PermissionRequest[]
-  quickLessons          QuickLesson[]
-  reports               Report[]
-  unreadMessages        UnreadMessage[]
-  selectedDays          ConversationSelectedDay[]
-  lastMessageSender     User?    @relation("LastMessageSender", fields: [lastMessageSenderId], references: [id], onDelete: SetNull)
-
-  @@index([visibility])
-  @@index([groupType])
-  @@map("conversations")
-}
-
-enum ConversationStatus {
-  pending
-  accepted
-  rejected
-}
-
-enum Visibility {
-  public
-  private
-}
-
-enum GroupType {
-  group
-  classroom
-}
-
-enum ClassType {
-  regular
-  weekly
-  multi_weekly @map("multi-weekly")
-  monthly
-  exam
-}
-
-enum KeyExchangeStatus {
-  none
-  pending
-  partial
-  complete
-}
-
-model ConversationParticipant {
-  id             String @id @default(uuid())
-  conversationId String
-  userId         String
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([conversationId, userId])
-  @@index([userId])
-  @@map("conversation_participants")
-}
-
-model ConversationAdmin {
-  id             String @id @default(uuid())
-  conversationId String
-  userId         String
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([conversationId, userId])
-  @@map("conversation_admins")
-}
-
-model ConversationModerator {
-  id             String @id @default(uuid())
-  conversationId String
-  userId         String
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([conversationId, userId])
-  @@map("conversation_moderators")
-}
-
-model ConversationBlockEntry {
-  id             String   @id @default(uuid())
-  conversationId String
-  blockedById    String
-  blockedUserId  String
-  blockedAt      DateTime @default(now())
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  blockedBy    User         @relation("BlockEntryBlocker", fields: [blockedById], references: [id], onDelete: Cascade)
-  blockedUser  User         @relation("BlockEntryBlocked", fields: [blockedUserId], references: [id], onDelete: Cascade)
-
-  @@unique([conversationId, blockedById, blockedUserId])
-  @@map("conversation_block_entries")
-}
-
-model ConversationSelectedDay {
-  id             String @id @default(uuid())
-  conversationId String
-  day            Int    // 0=Sunday, 1=Monday, ... 6=Saturday
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-
-  @@unique([conversationId, day])
-  @@map("conversation_selected_days")
-}
-
-// ─── JoinRequest ─────────────────────────────────────────────────────────────
-
-model JoinRequest {
-  id            String            @id @default(uuid())
-  classId       String
-  userId        String
-  status        JoinRequestStatus @default(pending)
-  requestedAt   DateTime          @default(now())
-  processedAt   DateTime?
-  processedById String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  class       Conversation @relation(fields: [classId], references: [id], onDelete: Cascade)
-  user        User         @relation("JoinRequester", fields: [userId], references: [id], onDelete: Cascade)
-  processedBy User?        @relation("JoinProcessor", fields: [processedById], references: [id], onDelete: SetNull)
-
-  @@unique([classId, userId])
-  @@index([status])
-  @@map("join_requests")
-}
-
-enum JoinRequestStatus {
-  pending
-  approved
-  rejected
-}
-
 // ─── Reminder ────────────────────────────────────────────────────────────────
 
 model Reminder {
@@ -336,7 +132,6 @@ model Reminder {
   updatedAt DateTime @updatedAt
 
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 
   @@index([datetime, notified, enabled])
   @@index([userId, datetime])
@@ -354,42 +149,6 @@ enum RepeatType {
 enum ReminderVisible {
   creator
   both
-}
-
-// ─── Session ─────────────────────────────────────────────────────────────────
-
-model Session {
-  id          String        @id @default(uuid())
-  classId     String
-  date        String        // YYYY-MM-DD
-  startTime   String
-  type        SessionType   @default(auto)
-  createdById String?
-  status      SessionStatus @default(scheduled)
-  duration    Int           @default(70)
-  cutoffTime  String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  class          Conversation    @relation(fields: [classId], references: [id], onDelete: Cascade)
-  createdBy      User?           @relation(fields: [createdById], references: [id], onDelete: SetNull)
-  attendanceLogs AttendanceLog[]
-
-  @@unique([classId, date, startTime])
-  @@index([status])
-  @@map("sessions")
-}
-
-enum SessionType {
-  auto
-  manual
-}
-
-enum SessionStatus {
-  scheduled
-  ongoing
-  completed
 }
 
 // ─── UnreadCount ─────────────────────────────────────────────────────────────
@@ -418,7 +177,6 @@ model UnreadMessage {
   count          Int    @default(0)
 
   unreadCount  UnreadCount  @relation(fields: [unreadCountId], references: [id], onDelete: Cascade)
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade, map: "unread_message_user_fk")
 
   @@unique([unreadCountId, conversationId])
@@ -605,38 +363,6 @@ model AdminSettingsBlockedWord {
   @@map("admin_settings_blocked_words")
 }
 
-// ─── AttendanceLog ───────────────────────────────────────────────────────────
-
-model AttendanceLog {
-  id          String           @id @default(uuid())
-  sessionId   String
-  classId     String
-  userId      String
-  status      AttendanceStatus @default(absent)
-  enteredAt   DateTime?
-  leftAt      DateTime?
-  duration    Int?             // minutes
-  sessionDate String           // YYYY-MM-DD
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  session Session      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  class   Conversation @relation(fields: [classId], references: [id], onDelete: Cascade)
-  user    User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([sessionId, userId, sessionDate])
-  @@index([enteredAt])
-  @@map("attendance_logs")
-}
-
-enum AttendanceStatus {
-  present
-  late
-  absent
-  excused
-}
-
 // ─── File ────────────────────────────────────────────────────────────────────
 
 model File {
@@ -655,7 +381,6 @@ model File {
   updatedAt DateTime @updatedAt
 
   uploadedBy User          @relation(fields: [uploadedById], references: [id], onDelete: Cascade)
-  class      Conversation? @relation(fields: [classId], references: [id], onDelete: SetNull)
 
   @@index([uploadedById])
   @@index([classId])
@@ -813,7 +538,6 @@ model PermissionRequest {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   requester    User         @relation("PermissionRequester", fields: [requesterId], references: [id], onDelete: Cascade)
   reviewedBy   User?        @relation("PermissionReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
 
@@ -836,35 +560,6 @@ enum PermissionReqStatus {
   pending
   approved
   rejected
-}
-
-// ─── QuickLesson ─────────────────────────────────────────────────────────────
-
-model QuickLesson {
-  id             String @id @default(uuid())
-  userId         String
-  conversationId String
-  lessonName     String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  parts        QuickLessonPart[]
-
-  @@map("quick_lessons")
-}
-
-model QuickLessonPart {
-  id            String @id @default(uuid())
-  quickLessonId String
-  content       String @db.Text
-  order         Int    @default(0)
-
-  quickLesson QuickLesson @relation(fields: [quickLessonId], references: [id], onDelete: Cascade)
-
-  @@map("quick_lesson_parts")
 }
 
 // ─── QuickMessage ────────────────────────────────────────────────────────────
@@ -904,7 +599,6 @@ model Report {
 
   reporter     User          @relation("Reporter", fields: [reporterId], references: [id], onDelete: Cascade)
   reportedUser User?         @relation("ReportedUser", fields: [reportedUserId], references: [id], onDelete: SetNull)
-  conversation Conversation? @relation(fields: [conversationId], references: [id], onDelete: SetNull)
   reviewedBy   User?         @relation("ReportReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
 
   @@index([reporterId, conversationId])

@@ -53,17 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Block: 'Block',
-  Conversation: 'Conversation',
-  ConversationParticipant: 'ConversationParticipant',
-  ConversationAdmin: 'ConversationAdmin',
-  ConversationModerator: 'ConversationModerator',
-  ConversationBlockEntry: 'ConversationBlockEntry',
-  ConversationSelectedDay: 'ConversationSelectedDay',
-  JoinRequest: 'JoinRequest',
-  Message: 'Message',
-  MessageMedia: 'MessageMedia',
   Reminder: 'Reminder',
-  Session: 'Session',
   UnreadCount: 'UnreadCount',
   UnreadMessage: 'UnreadMessage',
   UserApproval: 'UserApproval',
@@ -72,7 +62,6 @@ export const ModelName = {
   AdminSettings: 'AdminSettings',
   AdminSettingsAllowedFileType: 'AdminSettingsAllowedFileType',
   AdminSettingsBlockedWord: 'AdminSettingsBlockedWord',
-  AttendanceLog: 'AttendanceLog',
   File: 'File',
   Notice: 'Notice',
   NoticeLike: 'NoticeLike',
@@ -80,8 +69,6 @@ export const ModelName = {
   NoticeRecipient: 'NoticeRecipient',
   Notification: 'Notification',
   PermissionRequest: 'PermissionRequest',
-  QuickLesson: 'QuickLesson',
-  QuickLessonPart: 'QuickLessonPart',
   QuickMessage: 'QuickMessage',
   Report: 'Report',
   SiteSecurityMessage: 'SiteSecurityMessage'
@@ -150,142 +137,6 @@ export const BlockScalarFieldEnum = {
 export type BlockScalarFieldEnum = (typeof BlockScalarFieldEnum)[keyof typeof BlockScalarFieldEnum]
 
 
-export const ConversationScalarFieldEnum = {
-  id: 'id',
-  status: 'status',
-  visibility: 'visibility',
-  themeIndex: 'themeIndex',
-  isGroup: 'isGroup',
-  groupType: 'groupType',
-  groupName: 'groupName',
-  groupIntro: 'groupIntro',
-  groupImage: 'groupImage',
-  classType: 'classType',
-  fileSendingAllowed: 'fileSendingAllowed',
-  startTime: 'startTime',
-  cutoffTime: 'cutoffTime',
-  checkInterval: 'checkInterval',
-  permText: 'permText',
-  permImage: 'permImage',
-  permVoice: 'permVoice',
-  permVideo: 'permVideo',
-  permFile: 'permFile',
-  permSticker: 'permSticker',
-  permGif: 'permGif',
-  lastMessageText: 'lastMessageText',
-  lastMessageSenderId: 'lastMessageSenderId',
-  lastMessageTimestamp: 'lastMessageTimestamp',
-  autoDeleteMessagesAfter: 'autoDeleteMessagesAfter',
-  keyExchangeStatus: 'keyExchangeStatus',
-  keyExchangeData: 'keyExchangeData',
-  keyExchangeCreatedAt: 'keyExchangeCreatedAt',
-  keyExchangeLastActivity: 'keyExchangeLastActivity',
-  v1Keys: 'v1Keys',
-  smteKeyVersion: 'smteKeyVersion',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
-
-
-export const ConversationParticipantScalarFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId',
-  userId: 'userId'
-} as const
-
-export type ConversationParticipantScalarFieldEnum = (typeof ConversationParticipantScalarFieldEnum)[keyof typeof ConversationParticipantScalarFieldEnum]
-
-
-export const ConversationAdminScalarFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId',
-  userId: 'userId'
-} as const
-
-export type ConversationAdminScalarFieldEnum = (typeof ConversationAdminScalarFieldEnum)[keyof typeof ConversationAdminScalarFieldEnum]
-
-
-export const ConversationModeratorScalarFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId',
-  userId: 'userId'
-} as const
-
-export type ConversationModeratorScalarFieldEnum = (typeof ConversationModeratorScalarFieldEnum)[keyof typeof ConversationModeratorScalarFieldEnum]
-
-
-export const ConversationBlockEntryScalarFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId',
-  blockedById: 'blockedById',
-  blockedUserId: 'blockedUserId',
-  blockedAt: 'blockedAt'
-} as const
-
-export type ConversationBlockEntryScalarFieldEnum = (typeof ConversationBlockEntryScalarFieldEnum)[keyof typeof ConversationBlockEntryScalarFieldEnum]
-
-
-export const ConversationSelectedDayScalarFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId',
-  day: 'day'
-} as const
-
-export type ConversationSelectedDayScalarFieldEnum = (typeof ConversationSelectedDayScalarFieldEnum)[keyof typeof ConversationSelectedDayScalarFieldEnum]
-
-
-export const JoinRequestScalarFieldEnum = {
-  id: 'id',
-  classId: 'classId',
-  userId: 'userId',
-  status: 'status',
-  requestedAt: 'requestedAt',
-  processedAt: 'processedAt',
-  processedById: 'processedById',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type JoinRequestScalarFieldEnum = (typeof JoinRequestScalarFieldEnum)[keyof typeof JoinRequestScalarFieldEnum]
-
-
-export const MessageScalarFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId',
-  senderId: 'senderId',
-  receiverId: 'receiverId',
-  text: 'text',
-  isEncrypted: 'isEncrypted',
-  isBackendEncrypted: 'isBackendEncrypted',
-  messageType: 'messageType',
-  htmlEmoji: 'htmlEmoji',
-  emojiType: 'emojiType',
-  replyToId: 'replyToId',
-  status: 'status',
-  edited: 'edited',
-  scheduledDeletionTime: 'scheduledDeletionTime',
-  reactions: 'reactions',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
-
-
-export const MessageMediaScalarFieldEnum = {
-  id: 'id',
-  messageId: 'messageId',
-  url: 'url',
-  type: 'type',
-  filename: 'filename',
-  size: 'size'
-} as const
-
-export type MessageMediaScalarFieldEnum = (typeof MessageMediaScalarFieldEnum)[keyof typeof MessageMediaScalarFieldEnum]
-
-
 export const ReminderScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -303,23 +154,6 @@ export const ReminderScalarFieldEnum = {
 } as const
 
 export type ReminderScalarFieldEnum = (typeof ReminderScalarFieldEnum)[keyof typeof ReminderScalarFieldEnum]
-
-
-export const SessionScalarFieldEnum = {
-  id: 'id',
-  classId: 'classId',
-  date: 'date',
-  startTime: 'startTime',
-  type: 'type',
-  createdById: 'createdById',
-  status: 'status',
-  duration: 'duration',
-  cutoffTime: 'cutoffTime',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
 export const UnreadCountScalarFieldEnum = {
@@ -459,23 +293,6 @@ export const AdminSettingsBlockedWordScalarFieldEnum = {
 export type AdminSettingsBlockedWordScalarFieldEnum = (typeof AdminSettingsBlockedWordScalarFieldEnum)[keyof typeof AdminSettingsBlockedWordScalarFieldEnum]
 
 
-export const AttendanceLogScalarFieldEnum = {
-  id: 'id',
-  sessionId: 'sessionId',
-  classId: 'classId',
-  userId: 'userId',
-  status: 'status',
-  enteredAt: 'enteredAt',
-  leftAt: 'leftAt',
-  duration: 'duration',
-  sessionDate: 'sessionDate',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type AttendanceLogScalarFieldEnum = (typeof AttendanceLogScalarFieldEnum)[keyof typeof AttendanceLogScalarFieldEnum]
-
-
 export const FileScalarFieldEnum = {
   id: 'id',
   filename: 'filename',
@@ -570,28 +387,6 @@ export const PermissionRequestScalarFieldEnum = {
 } as const
 
 export type PermissionRequestScalarFieldEnum = (typeof PermissionRequestScalarFieldEnum)[keyof typeof PermissionRequestScalarFieldEnum]
-
-
-export const QuickLessonScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  conversationId: 'conversationId',
-  lessonName: 'lessonName',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type QuickLessonScalarFieldEnum = (typeof QuickLessonScalarFieldEnum)[keyof typeof QuickLessonScalarFieldEnum]
-
-
-export const QuickLessonPartScalarFieldEnum = {
-  id: 'id',
-  quickLessonId: 'quickLessonId',
-  content: 'content',
-  order: 'order'
-} as const
-
-export type QuickLessonPartScalarFieldEnum = (typeof QuickLessonPartScalarFieldEnum)[keyof typeof QuickLessonPartScalarFieldEnum]
 
 
 export const QuickMessageScalarFieldEnum = {
@@ -692,115 +487,6 @@ export const BlockOrderByRelevanceFieldEnum = {
 export type BlockOrderByRelevanceFieldEnum = (typeof BlockOrderByRelevanceFieldEnum)[keyof typeof BlockOrderByRelevanceFieldEnum]
 
 
-export const JsonNullValueFilter = {
-  DbNull: DbNull,
-  JsonNull: JsonNull,
-  AnyNull: AnyNull
-} as const
-
-export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-export const QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-} as const
-
-export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const ConversationOrderByRelevanceFieldEnum = {
-  id: 'id',
-  groupName: 'groupName',
-  groupIntro: 'groupIntro',
-  groupImage: 'groupImage',
-  startTime: 'startTime',
-  cutoffTime: 'cutoffTime',
-  lastMessageText: 'lastMessageText',
-  lastMessageSenderId: 'lastMessageSenderId'
-} as const
-
-export type ConversationOrderByRelevanceFieldEnum = (typeof ConversationOrderByRelevanceFieldEnum)[keyof typeof ConversationOrderByRelevanceFieldEnum]
-
-
-export const ConversationParticipantOrderByRelevanceFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId',
-  userId: 'userId'
-} as const
-
-export type ConversationParticipantOrderByRelevanceFieldEnum = (typeof ConversationParticipantOrderByRelevanceFieldEnum)[keyof typeof ConversationParticipantOrderByRelevanceFieldEnum]
-
-
-export const ConversationAdminOrderByRelevanceFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId',
-  userId: 'userId'
-} as const
-
-export type ConversationAdminOrderByRelevanceFieldEnum = (typeof ConversationAdminOrderByRelevanceFieldEnum)[keyof typeof ConversationAdminOrderByRelevanceFieldEnum]
-
-
-export const ConversationModeratorOrderByRelevanceFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId',
-  userId: 'userId'
-} as const
-
-export type ConversationModeratorOrderByRelevanceFieldEnum = (typeof ConversationModeratorOrderByRelevanceFieldEnum)[keyof typeof ConversationModeratorOrderByRelevanceFieldEnum]
-
-
-export const ConversationBlockEntryOrderByRelevanceFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId',
-  blockedById: 'blockedById',
-  blockedUserId: 'blockedUserId'
-} as const
-
-export type ConversationBlockEntryOrderByRelevanceFieldEnum = (typeof ConversationBlockEntryOrderByRelevanceFieldEnum)[keyof typeof ConversationBlockEntryOrderByRelevanceFieldEnum]
-
-
-export const ConversationSelectedDayOrderByRelevanceFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId'
-} as const
-
-export type ConversationSelectedDayOrderByRelevanceFieldEnum = (typeof ConversationSelectedDayOrderByRelevanceFieldEnum)[keyof typeof ConversationSelectedDayOrderByRelevanceFieldEnum]
-
-
-export const JoinRequestOrderByRelevanceFieldEnum = {
-  id: 'id',
-  classId: 'classId',
-  userId: 'userId',
-  processedById: 'processedById'
-} as const
-
-export type JoinRequestOrderByRelevanceFieldEnum = (typeof JoinRequestOrderByRelevanceFieldEnum)[keyof typeof JoinRequestOrderByRelevanceFieldEnum]
-
-
-export const MessageOrderByRelevanceFieldEnum = {
-  id: 'id',
-  conversationId: 'conversationId',
-  senderId: 'senderId',
-  receiverId: 'receiverId',
-  text: 'text',
-  htmlEmoji: 'htmlEmoji',
-  replyToId: 'replyToId'
-} as const
-
-export type MessageOrderByRelevanceFieldEnum = (typeof MessageOrderByRelevanceFieldEnum)[keyof typeof MessageOrderByRelevanceFieldEnum]
-
-
-export const MessageMediaOrderByRelevanceFieldEnum = {
-  id: 'id',
-  messageId: 'messageId',
-  url: 'url',
-  filename: 'filename'
-} as const
-
-export type MessageMediaOrderByRelevanceFieldEnum = (typeof MessageMediaOrderByRelevanceFieldEnum)[keyof typeof MessageMediaOrderByRelevanceFieldEnum]
-
-
 export const ReminderOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -810,18 +496,6 @@ export const ReminderOrderByRelevanceFieldEnum = {
 } as const
 
 export type ReminderOrderByRelevanceFieldEnum = (typeof ReminderOrderByRelevanceFieldEnum)[keyof typeof ReminderOrderByRelevanceFieldEnum]
-
-
-export const SessionOrderByRelevanceFieldEnum = {
-  id: 'id',
-  classId: 'classId',
-  date: 'date',
-  startTime: 'startTime',
-  createdById: 'createdById',
-  cutoffTime: 'cutoffTime'
-} as const
-
-export type SessionOrderByRelevanceFieldEnum = (typeof SessionOrderByRelevanceFieldEnum)[keyof typeof SessionOrderByRelevanceFieldEnum]
 
 
 export const UnreadCountOrderByRelevanceFieldEnum = {
@@ -866,6 +540,23 @@ export const UserDeletionScheduleOrderByRelevanceFieldEnum = {
 export type UserDeletionScheduleOrderByRelevanceFieldEnum = (typeof UserDeletionScheduleOrderByRelevanceFieldEnum)[keyof typeof UserDeletionScheduleOrderByRelevanceFieldEnum]
 
 
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
 export const AdminActivityLogOrderByRelevanceFieldEnum = {
   id: 'id',
   adminId: 'adminId',
@@ -901,17 +592,6 @@ export const AdminSettingsBlockedWordOrderByRelevanceFieldEnum = {
 } as const
 
 export type AdminSettingsBlockedWordOrderByRelevanceFieldEnum = (typeof AdminSettingsBlockedWordOrderByRelevanceFieldEnum)[keyof typeof AdminSettingsBlockedWordOrderByRelevanceFieldEnum]
-
-
-export const AttendanceLogOrderByRelevanceFieldEnum = {
-  id: 'id',
-  sessionId: 'sessionId',
-  classId: 'classId',
-  userId: 'userId',
-  sessionDate: 'sessionDate'
-} as const
-
-export type AttendanceLogOrderByRelevanceFieldEnum = (typeof AttendanceLogOrderByRelevanceFieldEnum)[keyof typeof AttendanceLogOrderByRelevanceFieldEnum]
 
 
 export const FileOrderByRelevanceFieldEnum = {
@@ -987,25 +667,6 @@ export const PermissionRequestOrderByRelevanceFieldEnum = {
 } as const
 
 export type PermissionRequestOrderByRelevanceFieldEnum = (typeof PermissionRequestOrderByRelevanceFieldEnum)[keyof typeof PermissionRequestOrderByRelevanceFieldEnum]
-
-
-export const QuickLessonOrderByRelevanceFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  conversationId: 'conversationId',
-  lessonName: 'lessonName'
-} as const
-
-export type QuickLessonOrderByRelevanceFieldEnum = (typeof QuickLessonOrderByRelevanceFieldEnum)[keyof typeof QuickLessonOrderByRelevanceFieldEnum]
-
-
-export const QuickLessonPartOrderByRelevanceFieldEnum = {
-  id: 'id',
-  quickLessonId: 'quickLessonId',
-  content: 'content'
-} as const
-
-export type QuickLessonPartOrderByRelevanceFieldEnum = (typeof QuickLessonPartOrderByRelevanceFieldEnum)[keyof typeof QuickLessonPartOrderByRelevanceFieldEnum]
 
 
 export const QuickMessageOrderByRelevanceFieldEnum = {

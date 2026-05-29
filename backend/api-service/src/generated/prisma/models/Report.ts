@@ -256,7 +256,6 @@ export type ReportWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Report"> | Date | string
   reporter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reportedUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  conversation?: Prisma.XOR<Prisma.ConversationNullableScalarRelationFilter, Prisma.ConversationWhereInput> | null
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
@@ -277,7 +276,6 @@ export type ReportOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   reporter?: Prisma.UserOrderByWithRelationInput
   reportedUser?: Prisma.UserOrderByWithRelationInput
-  conversation?: Prisma.ConversationOrderByWithRelationInput
   reviewedBy?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.ReportOrderByRelevanceInput
 }
@@ -302,7 +300,6 @@ export type ReportWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Report"> | Date | string
   reporter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reportedUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  conversation?: Prisma.XOR<Prisma.ConversationNullableScalarRelationFilter, Prisma.ConversationWhereInput> | null
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
@@ -348,6 +345,7 @@ export type ReportScalarWhereWithAggregatesInput = {
 
 export type ReportCreateInput = {
   id?: string
+  conversationId?: string | null
   reportType?: $Enums.ReportType
   reason: $Enums.ReportReason
   details?: string
@@ -359,7 +357,6 @@ export type ReportCreateInput = {
   updatedAt?: Date | string
   reporter: Prisma.UserCreateNestedOneWithoutReportsSubmittedInput
   reportedUser?: Prisma.UserCreateNestedOneWithoutReportsReceivedInput
-  conversation?: Prisma.ConversationCreateNestedOneWithoutReportsInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReportReviewsInput
 }
 
@@ -382,6 +379,7 @@ export type ReportUncheckedCreateInput = {
 
 export type ReportUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reportType?: Prisma.EnumReportTypeFieldUpdateOperationsInput | $Enums.ReportType
   reason?: Prisma.EnumReportReasonFieldUpdateOperationsInput | $Enums.ReportReason
   details?: Prisma.StringFieldUpdateOperationsInput | string
@@ -393,7 +391,6 @@ export type ReportUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportsSubmittedNestedInput
   reportedUser?: Prisma.UserUpdateOneWithoutReportsReceivedNestedInput
-  conversation?: Prisma.ConversationUpdateOneWithoutReportsNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutReportReviewsNestedInput
 }
 
@@ -433,6 +430,7 @@ export type ReportCreateManyInput = {
 
 export type ReportUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reportType?: Prisma.EnumReportTypeFieldUpdateOperationsInput | $Enums.ReportType
   reason?: Prisma.EnumReportReasonFieldUpdateOperationsInput | $Enums.ReportReason
   details?: Prisma.StringFieldUpdateOperationsInput | string
@@ -654,48 +652,6 @@ export type ReportUncheckedUpdateManyWithoutReviewedByNestedInput = {
   deleteMany?: Prisma.ReportScalarWhereInput | Prisma.ReportScalarWhereInput[]
 }
 
-export type ReportCreateNestedManyWithoutConversationInput = {
-  create?: Prisma.XOR<Prisma.ReportCreateWithoutConversationInput, Prisma.ReportUncheckedCreateWithoutConversationInput> | Prisma.ReportCreateWithoutConversationInput[] | Prisma.ReportUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.ReportCreateOrConnectWithoutConversationInput | Prisma.ReportCreateOrConnectWithoutConversationInput[]
-  createMany?: Prisma.ReportCreateManyConversationInputEnvelope
-  connect?: Prisma.ReportWhereUniqueInput | Prisma.ReportWhereUniqueInput[]
-}
-
-export type ReportUncheckedCreateNestedManyWithoutConversationInput = {
-  create?: Prisma.XOR<Prisma.ReportCreateWithoutConversationInput, Prisma.ReportUncheckedCreateWithoutConversationInput> | Prisma.ReportCreateWithoutConversationInput[] | Prisma.ReportUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.ReportCreateOrConnectWithoutConversationInput | Prisma.ReportCreateOrConnectWithoutConversationInput[]
-  createMany?: Prisma.ReportCreateManyConversationInputEnvelope
-  connect?: Prisma.ReportWhereUniqueInput | Prisma.ReportWhereUniqueInput[]
-}
-
-export type ReportUpdateManyWithoutConversationNestedInput = {
-  create?: Prisma.XOR<Prisma.ReportCreateWithoutConversationInput, Prisma.ReportUncheckedCreateWithoutConversationInput> | Prisma.ReportCreateWithoutConversationInput[] | Prisma.ReportUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.ReportCreateOrConnectWithoutConversationInput | Prisma.ReportCreateOrConnectWithoutConversationInput[]
-  upsert?: Prisma.ReportUpsertWithWhereUniqueWithoutConversationInput | Prisma.ReportUpsertWithWhereUniqueWithoutConversationInput[]
-  createMany?: Prisma.ReportCreateManyConversationInputEnvelope
-  set?: Prisma.ReportWhereUniqueInput | Prisma.ReportWhereUniqueInput[]
-  disconnect?: Prisma.ReportWhereUniqueInput | Prisma.ReportWhereUniqueInput[]
-  delete?: Prisma.ReportWhereUniqueInput | Prisma.ReportWhereUniqueInput[]
-  connect?: Prisma.ReportWhereUniqueInput | Prisma.ReportWhereUniqueInput[]
-  update?: Prisma.ReportUpdateWithWhereUniqueWithoutConversationInput | Prisma.ReportUpdateWithWhereUniqueWithoutConversationInput[]
-  updateMany?: Prisma.ReportUpdateManyWithWhereWithoutConversationInput | Prisma.ReportUpdateManyWithWhereWithoutConversationInput[]
-  deleteMany?: Prisma.ReportScalarWhereInput | Prisma.ReportScalarWhereInput[]
-}
-
-export type ReportUncheckedUpdateManyWithoutConversationNestedInput = {
-  create?: Prisma.XOR<Prisma.ReportCreateWithoutConversationInput, Prisma.ReportUncheckedCreateWithoutConversationInput> | Prisma.ReportCreateWithoutConversationInput[] | Prisma.ReportUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.ReportCreateOrConnectWithoutConversationInput | Prisma.ReportCreateOrConnectWithoutConversationInput[]
-  upsert?: Prisma.ReportUpsertWithWhereUniqueWithoutConversationInput | Prisma.ReportUpsertWithWhereUniqueWithoutConversationInput[]
-  createMany?: Prisma.ReportCreateManyConversationInputEnvelope
-  set?: Prisma.ReportWhereUniqueInput | Prisma.ReportWhereUniqueInput[]
-  disconnect?: Prisma.ReportWhereUniqueInput | Prisma.ReportWhereUniqueInput[]
-  delete?: Prisma.ReportWhereUniqueInput | Prisma.ReportWhereUniqueInput[]
-  connect?: Prisma.ReportWhereUniqueInput | Prisma.ReportWhereUniqueInput[]
-  update?: Prisma.ReportUpdateWithWhereUniqueWithoutConversationInput | Prisma.ReportUpdateWithWhereUniqueWithoutConversationInput[]
-  updateMany?: Prisma.ReportUpdateManyWithWhereWithoutConversationInput | Prisma.ReportUpdateManyWithWhereWithoutConversationInput[]
-  deleteMany?: Prisma.ReportScalarWhereInput | Prisma.ReportScalarWhereInput[]
-}
-
 export type EnumReportTypeFieldUpdateOperationsInput = {
   set?: $Enums.ReportType
 }
@@ -714,6 +670,7 @@ export type EnumReportActionFieldUpdateOperationsInput = {
 
 export type ReportCreateWithoutReporterInput = {
   id?: string
+  conversationId?: string | null
   reportType?: $Enums.ReportType
   reason: $Enums.ReportReason
   details?: string
@@ -724,7 +681,6 @@ export type ReportCreateWithoutReporterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   reportedUser?: Prisma.UserCreateNestedOneWithoutReportsReceivedInput
-  conversation?: Prisma.ConversationCreateNestedOneWithoutReportsInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReportReviewsInput
 }
 
@@ -756,6 +712,7 @@ export type ReportCreateManyReporterInputEnvelope = {
 
 export type ReportCreateWithoutReportedUserInput = {
   id?: string
+  conversationId?: string | null
   reportType?: $Enums.ReportType
   reason: $Enums.ReportReason
   details?: string
@@ -766,7 +723,6 @@ export type ReportCreateWithoutReportedUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   reporter: Prisma.UserCreateNestedOneWithoutReportsSubmittedInput
-  conversation?: Prisma.ConversationCreateNestedOneWithoutReportsInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReportReviewsInput
 }
 
@@ -798,6 +754,7 @@ export type ReportCreateManyReportedUserInputEnvelope = {
 
 export type ReportCreateWithoutReviewedByInput = {
   id?: string
+  conversationId?: string | null
   reportType?: $Enums.ReportType
   reason: $Enums.ReportReason
   details?: string
@@ -809,7 +766,6 @@ export type ReportCreateWithoutReviewedByInput = {
   updatedAt?: Date | string
   reporter: Prisma.UserCreateNestedOneWithoutReportsSubmittedInput
   reportedUser?: Prisma.UserCreateNestedOneWithoutReportsReceivedInput
-  conversation?: Prisma.ConversationCreateNestedOneWithoutReportsInput
 }
 
 export type ReportUncheckedCreateWithoutReviewedByInput = {
@@ -906,64 +862,6 @@ export type ReportUpdateManyWithWhereWithoutReviewedByInput = {
   data: Prisma.XOR<Prisma.ReportUpdateManyMutationInput, Prisma.ReportUncheckedUpdateManyWithoutReviewedByInput>
 }
 
-export type ReportCreateWithoutConversationInput = {
-  id?: string
-  reportType?: $Enums.ReportType
-  reason: $Enums.ReportReason
-  details?: string
-  status?: $Enums.ReportStatus
-  reviewedAt?: Date | string | null
-  resolution?: string
-  actionTaken?: $Enums.ReportAction
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  reporter: Prisma.UserCreateNestedOneWithoutReportsSubmittedInput
-  reportedUser?: Prisma.UserCreateNestedOneWithoutReportsReceivedInput
-  reviewedBy?: Prisma.UserCreateNestedOneWithoutReportReviewsInput
-}
-
-export type ReportUncheckedCreateWithoutConversationInput = {
-  id?: string
-  reporterId: string
-  reportedUserId?: string | null
-  reportType?: $Enums.ReportType
-  reason: $Enums.ReportReason
-  details?: string
-  status?: $Enums.ReportStatus
-  reviewedById?: string | null
-  reviewedAt?: Date | string | null
-  resolution?: string
-  actionTaken?: $Enums.ReportAction
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type ReportCreateOrConnectWithoutConversationInput = {
-  where: Prisma.ReportWhereUniqueInput
-  create: Prisma.XOR<Prisma.ReportCreateWithoutConversationInput, Prisma.ReportUncheckedCreateWithoutConversationInput>
-}
-
-export type ReportCreateManyConversationInputEnvelope = {
-  data: Prisma.ReportCreateManyConversationInput | Prisma.ReportCreateManyConversationInput[]
-  skipDuplicates?: boolean
-}
-
-export type ReportUpsertWithWhereUniqueWithoutConversationInput = {
-  where: Prisma.ReportWhereUniqueInput
-  update: Prisma.XOR<Prisma.ReportUpdateWithoutConversationInput, Prisma.ReportUncheckedUpdateWithoutConversationInput>
-  create: Prisma.XOR<Prisma.ReportCreateWithoutConversationInput, Prisma.ReportUncheckedCreateWithoutConversationInput>
-}
-
-export type ReportUpdateWithWhereUniqueWithoutConversationInput = {
-  where: Prisma.ReportWhereUniqueInput
-  data: Prisma.XOR<Prisma.ReportUpdateWithoutConversationInput, Prisma.ReportUncheckedUpdateWithoutConversationInput>
-}
-
-export type ReportUpdateManyWithWhereWithoutConversationInput = {
-  where: Prisma.ReportScalarWhereInput
-  data: Prisma.XOR<Prisma.ReportUpdateManyMutationInput, Prisma.ReportUncheckedUpdateManyWithoutConversationInput>
-}
-
 export type ReportCreateManyReporterInput = {
   id?: string
   reportedUserId?: string | null
@@ -1014,6 +912,7 @@ export type ReportCreateManyReviewedByInput = {
 
 export type ReportUpdateWithoutReporterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reportType?: Prisma.EnumReportTypeFieldUpdateOperationsInput | $Enums.ReportType
   reason?: Prisma.EnumReportReasonFieldUpdateOperationsInput | $Enums.ReportReason
   details?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1024,7 +923,6 @@ export type ReportUpdateWithoutReporterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reportedUser?: Prisma.UserUpdateOneWithoutReportsReceivedNestedInput
-  conversation?: Prisma.ConversationUpdateOneWithoutReportsNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutReportReviewsNestedInput
 }
 
@@ -1062,6 +960,7 @@ export type ReportUncheckedUpdateManyWithoutReporterInput = {
 
 export type ReportUpdateWithoutReportedUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reportType?: Prisma.EnumReportTypeFieldUpdateOperationsInput | $Enums.ReportType
   reason?: Prisma.EnumReportReasonFieldUpdateOperationsInput | $Enums.ReportReason
   details?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1072,7 +971,6 @@ export type ReportUpdateWithoutReportedUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportsSubmittedNestedInput
-  conversation?: Prisma.ConversationUpdateOneWithoutReportsNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutReportReviewsNestedInput
 }
 
@@ -1110,6 +1008,7 @@ export type ReportUncheckedUpdateManyWithoutReportedUserInput = {
 
 export type ReportUpdateWithoutReviewedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reportType?: Prisma.EnumReportTypeFieldUpdateOperationsInput | $Enums.ReportType
   reason?: Prisma.EnumReportReasonFieldUpdateOperationsInput | $Enums.ReportReason
   details?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1121,7 +1020,6 @@ export type ReportUpdateWithoutReviewedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportsSubmittedNestedInput
   reportedUser?: Prisma.UserUpdateOneWithoutReportsReceivedNestedInput
-  conversation?: Prisma.ConversationUpdateOneWithoutReportsNestedInput
 }
 
 export type ReportUncheckedUpdateWithoutReviewedByInput = {
@@ -1156,70 +1054,6 @@ export type ReportUncheckedUpdateManyWithoutReviewedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ReportCreateManyConversationInput = {
-  id?: string
-  reporterId: string
-  reportedUserId?: string | null
-  reportType?: $Enums.ReportType
-  reason: $Enums.ReportReason
-  details?: string
-  status?: $Enums.ReportStatus
-  reviewedById?: string | null
-  reviewedAt?: Date | string | null
-  resolution?: string
-  actionTaken?: $Enums.ReportAction
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type ReportUpdateWithoutConversationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  reportType?: Prisma.EnumReportTypeFieldUpdateOperationsInput | $Enums.ReportType
-  reason?: Prisma.EnumReportReasonFieldUpdateOperationsInput | $Enums.ReportReason
-  details?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus
-  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  resolution?: Prisma.StringFieldUpdateOperationsInput | string
-  actionTaken?: Prisma.EnumReportActionFieldUpdateOperationsInput | $Enums.ReportAction
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  reporter?: Prisma.UserUpdateOneRequiredWithoutReportsSubmittedNestedInput
-  reportedUser?: Prisma.UserUpdateOneWithoutReportsReceivedNestedInput
-  reviewedBy?: Prisma.UserUpdateOneWithoutReportReviewsNestedInput
-}
-
-export type ReportUncheckedUpdateWithoutConversationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  reporterId?: Prisma.StringFieldUpdateOperationsInput | string
-  reportedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reportType?: Prisma.EnumReportTypeFieldUpdateOperationsInput | $Enums.ReportType
-  reason?: Prisma.EnumReportReasonFieldUpdateOperationsInput | $Enums.ReportReason
-  details?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  resolution?: Prisma.StringFieldUpdateOperationsInput | string
-  actionTaken?: Prisma.EnumReportActionFieldUpdateOperationsInput | $Enums.ReportAction
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type ReportUncheckedUpdateManyWithoutConversationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  reporterId?: Prisma.StringFieldUpdateOperationsInput | string
-  reportedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reportType?: Prisma.EnumReportTypeFieldUpdateOperationsInput | $Enums.ReportType
-  reason?: Prisma.EnumReportReasonFieldUpdateOperationsInput | $Enums.ReportReason
-  details?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  resolution?: Prisma.StringFieldUpdateOperationsInput | string
-  actionTaken?: Prisma.EnumReportActionFieldUpdateOperationsInput | $Enums.ReportAction
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 
 
 export type ReportSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1239,7 +1073,6 @@ export type ReportSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reportedUser?: boolean | Prisma.Report$reportedUserArgs<ExtArgs>
-  conversation?: boolean | Prisma.Report$conversationArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.Report$reviewedByArgs<ExtArgs>
 }, ExtArgs["result"]["report"]>
 
@@ -1266,7 +1099,6 @@ export type ReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type ReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reportedUser?: boolean | Prisma.Report$reportedUserArgs<ExtArgs>
-  conversation?: boolean | Prisma.Report$conversationArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.Report$reviewedByArgs<ExtArgs>
 }
 
@@ -1275,7 +1107,6 @@ export type $ReportPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     reporter: Prisma.$UserPayload<ExtArgs>
     reportedUser: Prisma.$UserPayload<ExtArgs> | null
-    conversation: Prisma.$ConversationPayload<ExtArgs> | null
     reviewedBy: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1635,7 +1466,6 @@ export interface Prisma__ReportClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   reporter<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reportedUser<T extends Prisma.Report$reportedUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Report$reportedUserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  conversation<T extends Prisma.Report$conversationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Report$conversationArgs<ExtArgs>>): Prisma.Prisma__ConversationClient<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   reviewedBy<T extends Prisma.Report$reviewedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Report$reviewedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2039,25 +1869,6 @@ export type Report$reportedUserArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
-}
-
-/**
- * Report.conversation
- */
-export type Report$conversationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Conversation
-   */
-  select?: Prisma.ConversationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Conversation
-   */
-  omit?: Prisma.ConversationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ConversationInclude<ExtArgs> | null
-  where?: Prisma.ConversationWhereInput
 }
 
 /**

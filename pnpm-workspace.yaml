@@ -4,7 +4,7 @@ packages:
   - frontend/social
   - backend/calling-service
   - backend/message-service
-  - backend/class-service
+  - backend/conversation-service
   - backend/form-service
   - backend/alarm-service
   - backend/social-service

@@ -71,19 +71,8 @@ export const requireAuth = async (req: Request, res: Response, next: NextFunctio
 
 export const requireConversationAdmin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    let classId = req.params.classId as string | undefined;
+    const classId = req.params.classId as string | undefined;
     const userId = (req as any).user.id;
-
-    if (!classId && req.params?.sessionId) {
-      const session = await prisma.session.findUnique({
-        where: { id: req.params.sessionId as string },
-      });
-      if (!session) {
-        res.status(404).json({ message: 'Session not found.' });
-        return;
-      }
-      classId = session.classId;
-    }
 
     if (!classId) {
       res.status(400).json({ message: 'classId is required.' });

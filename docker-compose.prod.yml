@@ -137,7 +137,7 @@ services:
       - backend
       - calling-service
       - message-service
-      - class-service
+      - conversation-service
       - form-service
       - alarm-service
       - social-service
@@ -203,12 +203,12 @@ services:
       - dummy-network
 
   # Class Microservice (Production)
-  class-service:
+  conversation-service:
     build:
       context: .
-      dockerfile: backend/class-service/Dockerfile
+      dockerfile: backend/conversation-service/Dockerfile
     image: ${DOCKERHUB_USERNAME}/dummy-class:latest
-    container_name: class-service
+    container_name: conversation-service
     restart: always
     expose:
       - "3005"

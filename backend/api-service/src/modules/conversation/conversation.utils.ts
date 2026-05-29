@@ -19,6 +19,7 @@ function flattenParticipant(p: any) {
  */
 export function formatConversationDetail(conversation: any, userId: string) {
   const participants = (conversation.participants ?? []).map(flattenParticipant);
+  const classProfile = conversation.classProfile ?? {};
 
   // Build the `group` object the frontend expects
   const group = {
@@ -37,11 +38,11 @@ export function formatConversationDetail(conversation: any, userId: string) {
       name: m.user?.name ?? '',
       image: m.user?.image ?? '',
     })),
-    classType: conversation.classType === 'multi_weekly' ? 'multi-weekly' : (conversation.classType ?? 'regular'),
-    fileSendingAllowed: conversation.fileSendingAllowed ?? false,
-    startTime: conversation.startTime ?? '09:00',
-    cutoffTime: conversation.cutoffTime ?? '09:15',
-    checkInterval: conversation.checkInterval ?? 15,
+    classType: classProfile.classType === 'multi_weekly' ? 'multi-weekly' : (classProfile.classType ?? 'regular'),
+    fileSendingAllowed: classProfile.fileSendingAllowed ?? false,
+    startTime: classProfile.startTime ?? '09:00',
+    cutoffTime: classProfile.cutoffTime ?? '09:15',
+    checkInterval: classProfile.checkInterval ?? 15,
     selectedDays: (conversation.selectedDays ?? []).map((d: any) => d.day ?? d),
     participants: participants,
   };

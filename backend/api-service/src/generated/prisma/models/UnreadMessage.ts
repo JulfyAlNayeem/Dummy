@@ -217,7 +217,6 @@ export type UnreadMessageWhereInput = {
   userId?: Prisma.StringFilter<"UnreadMessage"> | string
   count?: Prisma.IntFilter<"UnreadMessage"> | number
   unreadCount?: Prisma.XOR<Prisma.UnreadCountScalarRelationFilter, Prisma.UnreadCountWhereInput>
-  conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -228,7 +227,6 @@ export type UnreadMessageOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   count?: Prisma.SortOrder
   unreadCount?: Prisma.UnreadCountOrderByWithRelationInput
-  conversation?: Prisma.ConversationOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.UnreadMessageOrderByRelevanceInput
 }
@@ -244,7 +242,6 @@ export type UnreadMessageWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"UnreadMessage"> | string
   count?: Prisma.IntFilter<"UnreadMessage"> | number
   unreadCount?: Prisma.XOR<Prisma.UnreadCountScalarRelationFilter, Prisma.UnreadCountWhereInput>
-  conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "unreadCountId_conversationId">
 
@@ -274,9 +271,9 @@ export type UnreadMessageScalarWhereWithAggregatesInput = {
 
 export type UnreadMessageCreateInput = {
   id?: string
+  conversationId: string
   count?: number
   unreadCount: Prisma.UnreadCountCreateNestedOneWithoutUnreadMessagesInput
-  conversation: Prisma.ConversationCreateNestedOneWithoutUnreadMessagesInput
   user: Prisma.UserCreateNestedOneWithoutUnreadMessagesInput
 }
 
@@ -290,9 +287,9 @@ export type UnreadMessageUncheckedCreateInput = {
 
 export type UnreadMessageUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
   count?: Prisma.IntFieldUpdateOperationsInput | number
   unreadCount?: Prisma.UnreadCountUpdateOneRequiredWithoutUnreadMessagesNestedInput
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutUnreadMessagesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutUnreadMessagesNestedInput
 }
 
@@ -314,6 +311,7 @@ export type UnreadMessageCreateManyInput = {
 
 export type UnreadMessageUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
   count?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -420,48 +418,6 @@ export type UnreadMessageUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.UnreadMessageScalarWhereInput | Prisma.UnreadMessageScalarWhereInput[]
 }
 
-export type UnreadMessageCreateNestedManyWithoutConversationInput = {
-  create?: Prisma.XOR<Prisma.UnreadMessageCreateWithoutConversationInput, Prisma.UnreadMessageUncheckedCreateWithoutConversationInput> | Prisma.UnreadMessageCreateWithoutConversationInput[] | Prisma.UnreadMessageUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.UnreadMessageCreateOrConnectWithoutConversationInput | Prisma.UnreadMessageCreateOrConnectWithoutConversationInput[]
-  createMany?: Prisma.UnreadMessageCreateManyConversationInputEnvelope
-  connect?: Prisma.UnreadMessageWhereUniqueInput | Prisma.UnreadMessageWhereUniqueInput[]
-}
-
-export type UnreadMessageUncheckedCreateNestedManyWithoutConversationInput = {
-  create?: Prisma.XOR<Prisma.UnreadMessageCreateWithoutConversationInput, Prisma.UnreadMessageUncheckedCreateWithoutConversationInput> | Prisma.UnreadMessageCreateWithoutConversationInput[] | Prisma.UnreadMessageUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.UnreadMessageCreateOrConnectWithoutConversationInput | Prisma.UnreadMessageCreateOrConnectWithoutConversationInput[]
-  createMany?: Prisma.UnreadMessageCreateManyConversationInputEnvelope
-  connect?: Prisma.UnreadMessageWhereUniqueInput | Prisma.UnreadMessageWhereUniqueInput[]
-}
-
-export type UnreadMessageUpdateManyWithoutConversationNestedInput = {
-  create?: Prisma.XOR<Prisma.UnreadMessageCreateWithoutConversationInput, Prisma.UnreadMessageUncheckedCreateWithoutConversationInput> | Prisma.UnreadMessageCreateWithoutConversationInput[] | Prisma.UnreadMessageUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.UnreadMessageCreateOrConnectWithoutConversationInput | Prisma.UnreadMessageCreateOrConnectWithoutConversationInput[]
-  upsert?: Prisma.UnreadMessageUpsertWithWhereUniqueWithoutConversationInput | Prisma.UnreadMessageUpsertWithWhereUniqueWithoutConversationInput[]
-  createMany?: Prisma.UnreadMessageCreateManyConversationInputEnvelope
-  set?: Prisma.UnreadMessageWhereUniqueInput | Prisma.UnreadMessageWhereUniqueInput[]
-  disconnect?: Prisma.UnreadMessageWhereUniqueInput | Prisma.UnreadMessageWhereUniqueInput[]
-  delete?: Prisma.UnreadMessageWhereUniqueInput | Prisma.UnreadMessageWhereUniqueInput[]
-  connect?: Prisma.UnreadMessageWhereUniqueInput | Prisma.UnreadMessageWhereUniqueInput[]
-  update?: Prisma.UnreadMessageUpdateWithWhereUniqueWithoutConversationInput | Prisma.UnreadMessageUpdateWithWhereUniqueWithoutConversationInput[]
-  updateMany?: Prisma.UnreadMessageUpdateManyWithWhereWithoutConversationInput | Prisma.UnreadMessageUpdateManyWithWhereWithoutConversationInput[]
-  deleteMany?: Prisma.UnreadMessageScalarWhereInput | Prisma.UnreadMessageScalarWhereInput[]
-}
-
-export type UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput = {
-  create?: Prisma.XOR<Prisma.UnreadMessageCreateWithoutConversationInput, Prisma.UnreadMessageUncheckedCreateWithoutConversationInput> | Prisma.UnreadMessageCreateWithoutConversationInput[] | Prisma.UnreadMessageUncheckedCreateWithoutConversationInput[]
-  connectOrCreate?: Prisma.UnreadMessageCreateOrConnectWithoutConversationInput | Prisma.UnreadMessageCreateOrConnectWithoutConversationInput[]
-  upsert?: Prisma.UnreadMessageUpsertWithWhereUniqueWithoutConversationInput | Prisma.UnreadMessageUpsertWithWhereUniqueWithoutConversationInput[]
-  createMany?: Prisma.UnreadMessageCreateManyConversationInputEnvelope
-  set?: Prisma.UnreadMessageWhereUniqueInput | Prisma.UnreadMessageWhereUniqueInput[]
-  disconnect?: Prisma.UnreadMessageWhereUniqueInput | Prisma.UnreadMessageWhereUniqueInput[]
-  delete?: Prisma.UnreadMessageWhereUniqueInput | Prisma.UnreadMessageWhereUniqueInput[]
-  connect?: Prisma.UnreadMessageWhereUniqueInput | Prisma.UnreadMessageWhereUniqueInput[]
-  update?: Prisma.UnreadMessageUpdateWithWhereUniqueWithoutConversationInput | Prisma.UnreadMessageUpdateWithWhereUniqueWithoutConversationInput[]
-  updateMany?: Prisma.UnreadMessageUpdateManyWithWhereWithoutConversationInput | Prisma.UnreadMessageUpdateManyWithWhereWithoutConversationInput[]
-  deleteMany?: Prisma.UnreadMessageScalarWhereInput | Prisma.UnreadMessageScalarWhereInput[]
-}
-
 export type UnreadMessageCreateNestedManyWithoutUnreadCountInput = {
   create?: Prisma.XOR<Prisma.UnreadMessageCreateWithoutUnreadCountInput, Prisma.UnreadMessageUncheckedCreateWithoutUnreadCountInput> | Prisma.UnreadMessageCreateWithoutUnreadCountInput[] | Prisma.UnreadMessageUncheckedCreateWithoutUnreadCountInput[]
   connectOrCreate?: Prisma.UnreadMessageCreateOrConnectWithoutUnreadCountInput | Prisma.UnreadMessageCreateOrConnectWithoutUnreadCountInput[]
@@ -506,9 +462,9 @@ export type UnreadMessageUncheckedUpdateManyWithoutUnreadCountNestedInput = {
 
 export type UnreadMessageCreateWithoutUserInput = {
   id?: string
+  conversationId: string
   count?: number
   unreadCount: Prisma.UnreadCountCreateNestedOneWithoutUnreadMessagesInput
-  conversation: Prisma.ConversationCreateNestedOneWithoutUnreadMessagesInput
 }
 
 export type UnreadMessageUncheckedCreateWithoutUserInput = {
@@ -555,50 +511,10 @@ export type UnreadMessageScalarWhereInput = {
   count?: Prisma.IntFilter<"UnreadMessage"> | number
 }
 
-export type UnreadMessageCreateWithoutConversationInput = {
-  id?: string
-  count?: number
-  unreadCount: Prisma.UnreadCountCreateNestedOneWithoutUnreadMessagesInput
-  user: Prisma.UserCreateNestedOneWithoutUnreadMessagesInput
-}
-
-export type UnreadMessageUncheckedCreateWithoutConversationInput = {
-  id?: string
-  unreadCountId: string
-  userId: string
-  count?: number
-}
-
-export type UnreadMessageCreateOrConnectWithoutConversationInput = {
-  where: Prisma.UnreadMessageWhereUniqueInput
-  create: Prisma.XOR<Prisma.UnreadMessageCreateWithoutConversationInput, Prisma.UnreadMessageUncheckedCreateWithoutConversationInput>
-}
-
-export type UnreadMessageCreateManyConversationInputEnvelope = {
-  data: Prisma.UnreadMessageCreateManyConversationInput | Prisma.UnreadMessageCreateManyConversationInput[]
-  skipDuplicates?: boolean
-}
-
-export type UnreadMessageUpsertWithWhereUniqueWithoutConversationInput = {
-  where: Prisma.UnreadMessageWhereUniqueInput
-  update: Prisma.XOR<Prisma.UnreadMessageUpdateWithoutConversationInput, Prisma.UnreadMessageUncheckedUpdateWithoutConversationInput>
-  create: Prisma.XOR<Prisma.UnreadMessageCreateWithoutConversationInput, Prisma.UnreadMessageUncheckedCreateWithoutConversationInput>
-}
-
-export type UnreadMessageUpdateWithWhereUniqueWithoutConversationInput = {
-  where: Prisma.UnreadMessageWhereUniqueInput
-  data: Prisma.XOR<Prisma.UnreadMessageUpdateWithoutConversationInput, Prisma.UnreadMessageUncheckedUpdateWithoutConversationInput>
-}
-
-export type UnreadMessageUpdateManyWithWhereWithoutConversationInput = {
-  where: Prisma.UnreadMessageScalarWhereInput
-  data: Prisma.XOR<Prisma.UnreadMessageUpdateManyMutationInput, Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationInput>
-}
-
 export type UnreadMessageCreateWithoutUnreadCountInput = {
   id?: string
+  conversationId: string
   count?: number
-  conversation: Prisma.ConversationCreateNestedOneWithoutUnreadMessagesInput
   user: Prisma.UserCreateNestedOneWithoutUnreadMessagesInput
 }
 
@@ -644,9 +560,9 @@ export type UnreadMessageCreateManyUserInput = {
 
 export type UnreadMessageUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
   count?: Prisma.IntFieldUpdateOperationsInput | number
   unreadCount?: Prisma.UnreadCountUpdateOneRequiredWithoutUnreadMessagesNestedInput
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutUnreadMessagesNestedInput
 }
 
 export type UnreadMessageUncheckedUpdateWithoutUserInput = {
@@ -663,34 +579,6 @@ export type UnreadMessageUncheckedUpdateManyWithoutUserInput = {
   count?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type UnreadMessageCreateManyConversationInput = {
-  id?: string
-  unreadCountId: string
-  userId: string
-  count?: number
-}
-
-export type UnreadMessageUpdateWithoutConversationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.IntFieldUpdateOperationsInput | number
-  unreadCount?: Prisma.UnreadCountUpdateOneRequiredWithoutUnreadMessagesNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutUnreadMessagesNestedInput
-}
-
-export type UnreadMessageUncheckedUpdateWithoutConversationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  unreadCountId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.IntFieldUpdateOperationsInput | number
-}
-
-export type UnreadMessageUncheckedUpdateManyWithoutConversationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  unreadCountId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.IntFieldUpdateOperationsInput | number
-}
-
 export type UnreadMessageCreateManyUnreadCountInput = {
   id?: string
   conversationId: string
@@ -700,8 +588,8 @@ export type UnreadMessageCreateManyUnreadCountInput = {
 
 export type UnreadMessageUpdateWithoutUnreadCountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  conversationId?: Prisma.StringFieldUpdateOperationsInput | string
   count?: Prisma.IntFieldUpdateOperationsInput | number
-  conversation?: Prisma.ConversationUpdateOneRequiredWithoutUnreadMessagesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutUnreadMessagesNestedInput
 }
 
@@ -728,7 +616,6 @@ export type UnreadMessageSelect<ExtArgs extends runtime.Types.Extensions.Interna
   userId?: boolean
   count?: boolean
   unreadCount?: boolean | Prisma.UnreadCountDefaultArgs<ExtArgs>
-  conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unreadMessage"]>
 
@@ -745,7 +632,6 @@ export type UnreadMessageSelectScalar = {
 export type UnreadMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "unreadCountId" | "conversationId" | "userId" | "count", ExtArgs["result"]["unreadMessage"]>
 export type UnreadMessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   unreadCount?: boolean | Prisma.UnreadCountDefaultArgs<ExtArgs>
-  conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
@@ -753,7 +639,6 @@ export type $UnreadMessagePayload<ExtArgs extends runtime.Types.Extensions.Inter
   name: "UnreadMessage"
   objects: {
     unreadCount: Prisma.$UnreadCountPayload<ExtArgs>
-    conversation: Prisma.$ConversationPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1103,7 +988,6 @@ readonly fields: UnreadMessageFieldRefs;
 export interface Prisma__UnreadMessageClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   unreadCount<T extends Prisma.UnreadCountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnreadCountDefaultArgs<ExtArgs>>): Prisma.Prisma__UnreadCountClient<runtime.Types.Result.GetResult<Prisma.$UnreadCountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  conversation<T extends Prisma.ConversationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConversationDefaultArgs<ExtArgs>>): Prisma.Prisma__ConversationClient<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
