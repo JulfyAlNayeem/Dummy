@@ -484,7 +484,31 @@ jobs:
           # -------------------------------------------------------------------
           COMPOSE_CMD="sudo docker compose -f docker-compose.prod.yml --env-file .env.production"
 
-          # --- 7a: DB health check -------------------------------------------
+          # --- 7a: Clear stale failed migration rows -------------------------
+          # Any row in _prisma_migrations with failed_at IS NOT NULL causes
+          # P3009 for ALL services until resolved. We delete them here directly
+          # in MySQL — this is more reliable than `prisma migrate resolve`
+          # because it doesn't depend on which service image runs the command.
+          # After deletion, migrate deploy re-runs the SQL for real.
+          FAILED_ROWS=$($COMPOSE_CMD exec -T mysql sh -lc \
+            'mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" \
+              --skip-column-names --silent \
+              -e "SELECT migration_name FROM _prisma_migrations \
+                  WHERE failed_at IS NOT NULL;" 2>/dev/null' \
+            | tr -d '\r' || true)
+
+          if [ -n "$FAILED_ROWS" ]; then
+            echo "WARNING: Found stale failed migration rows: $(echo $FAILED_ROWS | tr '\n' ' ')"
+            echo "Deleting failed rows from _prisma_migrations so they can be re-run..."
+            $COMPOSE_CMD exec -T mysql sh -lc \
+              'mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" \
+                -e "DELETE FROM _prisma_migrations WHERE failed_at IS NOT NULL;" 2>/dev/null'
+            echo "✅ Stale failed migration rows cleared"
+          else
+            echo "✅ No stale failed migration rows"
+          fi
+
+          # --- 7b: DB health check -------------------------------------------
           # Detect if shared tables are missing critical columns owned by
           # backend (api-service). This catches: fresh DB, corrupted DB from
           # accidental `db push`, or a botched manual recovery.
@@ -575,26 +599,7 @@ jobs:
               return 0
             fi
 
-            # P3009: there is a failed migration row in _prisma_migrations.
-            # Roll it back (remove the failed row) and retry. The SQL will
-            # actually execute this time. IF NOT EXISTS guards in shared-table
-            # migrations ensure no duplicate-table errors.
-            if echo "$MIGRATE_OUTPUT" | grep -q "P3009"; then
-              echo "WARNING: P3009 for $SVC — clearing failed migration row and retrying..."
-              FAILED_MIG=$(echo "$MIGRATE_OUTPUT" \
-                | grep -oP "(?<=migration \`)[^\`]+" | head -1 || true)
-              if [ -n "$FAILED_MIG" ]; then
-                echo "Rolling back failed migration: $FAILED_MIG"
-                $COMPOSE_CMD run --rm --no-deps --entrypoint sh "$SVC" -lc \
-                  "npx prisma migrate resolve --rolled-back $FAILED_MIG" 2>/dev/null || true
-              fi
-              # Retry — SQL now actually runs
-              $COMPOSE_CMD run --rm --no-deps --entrypoint sh "$SVC" -lc "npx prisma migrate deploy"
-              echo "✅ P3009 recovery OK for $SVC"
-              return 0
-            fi
-
-            echo "ERROR: Non-recoverable migration failure for $SVC"
+            echo "ERROR: Non-recoverable migration failure for $SVC (exit $MIGRATE_STATUS)"
             return $MIGRATE_STATUS
           }
 
