@@ -77,6 +77,38 @@ export const getAllUsers = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
+export const getUserById = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userId = req.params.userId as string;
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        gender: true,
+        image: true,
+        bio: true,
+        role: true,
+        isActive: true,
+        lastSeen: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    if (!user) {
+      res.status(404).json({ success: false, message: 'User not found' });
+      return;
+    }
+
+    res.status(200).json({ user });
+  } catch (error: any) {
+    console.error('getUserById error:', error);
+    res.status(500).json({ message: 'Failed to fetch user', error: error.message });
+  }
+};
+
 // ─── Create User ─────────────────────────────────────────────────────────────
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {

@@ -5,6 +5,15 @@ import { paginationMeta } from '../../common/utils/pagination.util.js';
 import { getIo } from '../../config/socket.js';
 import { notificationService } from '../notification/notification.service.js';
 
+const sendServiceError = (res: Response, err: any, fallback: string): void => {
+  const status = Number(err?.code);
+  if (status >= 400 && status < 600) {
+    res.status(status).json({ message: err?.message || fallback });
+    return;
+  }
+  res.status(500).json({ message: err?.message ?? fallback });
+};
+
 export class PostController {
 
   async createPost(req: Request, res: Response): Promise<void> {
@@ -33,7 +42,7 @@ export class PostController {
 
       res.status(201).json({ post: formatPost(post) });
     } catch (err: any) {
-      res.status(500).json({ message: err.message ?? 'Failed to create post' });
+      sendServiceError(res, err, 'Failed to create post');
     }
   }
 
@@ -44,7 +53,7 @@ export class PostController {
       if (!post) { res.status(404).json({ message: 'Post not found or not accessible' }); return; }
       res.json({ post: formatPost(post) });
     } catch (err: any) {
-      res.status(500).json({ message: 'Failed to fetch post' });
+      sendServiceError(res, err, 'Failed to fetch post');
     }
   }
 
@@ -65,7 +74,7 @@ export class PostController {
       getIo()?.emit('social:postUpdated', formatPost(updated));
       res.json({ post: formatPost(updated) });
     } catch (err: any) {
-      res.status(500).json({ message: err.message ?? 'Failed to edit post' });
+      sendServiceError(res, err, 'Failed to edit post');
     }
   }
 
@@ -76,7 +85,7 @@ export class PostController {
       getIo()?.emit('social:postDeleted', { postId: req.params.postId });
       res.json({ success: true });
     } catch (err: any) {
-      res.status(500).json({ message: err.message ?? 'Failed to delete post' });
+      sendServiceError(res, err, 'Failed to delete post');
     }
   }
 
@@ -97,7 +106,7 @@ export class PostController {
 
       res.status(201).json({ share });
     } catch (err: any) {
-      res.status(500).json({ message: err.message ?? 'Failed to share post' });
+      sendServiceError(res, err, 'Failed to share post');
     }
   }
 

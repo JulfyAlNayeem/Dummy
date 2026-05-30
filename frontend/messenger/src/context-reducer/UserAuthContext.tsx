@@ -87,6 +87,13 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }): JSX.Elem
       'leaveRoom',
       'refreshConversationRooms',
       'conversationRoomsRefreshed',
+      'encryption:exchange-key',
+      'encryption:regenerate-key',
+      'encryption:fetch-keys',
+      'encryption:verify-key',
+      'encryption:key-generated',
+      'encryption:key-exchanged',
+      'encryption:key-updated',
     ]),
     []
   );

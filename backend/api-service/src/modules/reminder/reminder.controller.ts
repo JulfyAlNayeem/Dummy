@@ -47,6 +47,9 @@ function getNextDatetime(current: Date, repeat: string): Date {
   return next;
 }
 
+const hasConversationModels = (): boolean =>
+  Boolean((prisma as any).conversation && (prisma as any).conversationParticipant);
+
 export const createReminder = async (req: Request, res: Response) => {
   try {
     const userId = (req as any).user.id;
@@ -61,21 +64,23 @@ export const createReminder = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'datetime must be a valid future date' });
     }
 
-    // Verify conversation exists and user is participant
-    const conversation = await prisma.conversation.findUnique({
-      where: { id: conversationId },
-    });
+    // Validate ownership only when conversation models are available in this service.
+    if (hasConversationModels()) {
+      const conversation = await (prisma as any).conversation.findUnique({
+        where: { id: conversationId },
+      });
 
-    if (!conversation) {
-      return res.status(404).json({ message: 'Conversation not found' });
-    }
+      if (!conversation) {
+        return res.status(404).json({ message: 'Conversation not found' });
+      }
 
-    const participant = await prisma.conversationParticipant.findUnique({
-      where: { conversationId_userId: { conversationId, userId } },
-    });
+      const participant = await (prisma as any).conversationParticipant.findUnique({
+        where: { conversationId_userId: { conversationId, userId } },
+      });
 
-    if (!participant) {
-      return res.status(403).json({ message: 'You are not a participant of this conversation' });
+      if (!participant) {
+        return res.status(403).json({ message: 'You are not a participant of this conversation' });
+      }
     }
 
     let repeatValue = 'one_time';
@@ -127,13 +132,14 @@ export const getConversationReminders = async (req: Request, res: Response) => {
     const userId = (req as any).user.id;
     const conversationId = req.params.conversationId as string;
 
-    // Verify participant
-    const participant = await prisma.conversationParticipant.findUnique({
-      where: { conversationId_userId: { conversationId, userId } },
-    });
+    if (hasConversationModels()) {
+      const participant = await (prisma as any).conversationParticipant.findUnique({
+        where: { conversationId_userId: { conversationId, userId } },
+      });
 
-    if (!participant) {
-      return res.status(403).json({ message: 'You are not a participant of this conversation' });
+      if (!participant) {
+        return res.status(403).json({ message: 'You are not a participant of this conversation' });
+      }
     }
 
     const reminders = await prisma.reminder.findMany({
@@ -168,11 +174,7 @@ export const getUserReminders = async (req: Request, res: Response) => {
       where.notified = false;
     }
 
-    const reminders = await prisma.reminder.findMany({
-      where,
-      include: { conversation: true },
-      orderBy: { datetime: 'asc' },
-    });
+    const reminders = await prisma.reminder.findMany({ where, orderBy: { datetime: 'asc' } });
 
     res.json({
       success: true,
@@ -189,10 +191,7 @@ export const getReminderById = async (req: Request, res: Response) => {
     const userId = (req as any).user.id;
     const id = req.params.id as string;
 
-    const reminder = await prisma.reminder.findFirst({
-      where: { id, userId },
-      include: { conversation: true },
-    });
+    const reminder = await prisma.reminder.findFirst({ where: { id, userId } });
 
     if (!reminder) {
       return res.status(404).json({ message: 'Reminder not found' });
@@ -377,7 +376,6 @@ export const getUpcomingReminders = async (req: Request, res: Response) => {
         notified: false,
         datetime: { gte: now, lte: next24h },
       },
-      include: { conversation: true },
       orderBy: { datetime: 'asc' },
     });
 
@@ -397,22 +395,22 @@ export const getMissedReminders = async (req: Request, res: Response) => {
     const userId = (req as any).user.id;
     const now = new Date();
 
-    // Find conversations user participates in
-    const participations = await prisma.conversationParticipant.findMany({
-      where: { userId },
-      select: { conversationId: true },
-    });
-
-    const conversationIds = participations.map((p: any) => p.conversationId);
+    let conversationIds: string[] = [];
+    if (hasConversationModels()) {
+      const participations = await (prisma as any).conversationParticipant.findMany({
+        where: { userId },
+        select: { conversationId: true },
+      });
+      conversationIds = participations.map((p: any) => p.conversationId);
+    }
 
     const reminders = await prisma.reminder.findMany({
       where: {
-        conversationId: { in: conversationIds },
+        ...(conversationIds.length > 0 ? { conversationId: { in: conversationIds } } : { userId }),
         enabled: true,
         notified: false,
         datetime: { lt: now },
       },
-      include: { conversation: true },
       orderBy: { datetime: 'desc' },
     });
 

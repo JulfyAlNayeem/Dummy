@@ -63,7 +63,6 @@ model User {
   blocksInitiated           Block[]            @relation("Blocker")
   blocksReceived            Block[]            @relation("Blocked")
   reminders                 Reminder[]
-  unreadCount               UnreadCount?
   userApproval              UserApproval?
   deletionSchedules         UserDeletionSchedule[] @relation("DeletionUser")
   deletionPreventions       UserDeletionSchedule[] @relation("DeletionPreventer")
@@ -80,7 +79,6 @@ model User {
   reportReviews             Report[]           @relation("ReportReviewer")
   userApprovalReviews       UserApproval[]     @relation("ApprovalReviewer")
   adminSettings             AdminSettings[]
-  unreadMessages            UnreadMessage[]
   noticeLikes               NoticeLike[]
   noticeReads               NoticeRead[]
   noticeRecipients          NoticeRecipient[]
@@ -151,39 +149,8 @@ enum ReminderVisible {
   both
 }
 
-// ─── UnreadCount ─────────────────────────────────────────────────────────────
 
-model UnreadCount {
-  id                       String @id @default(uuid())
-  userId                   String @unique
-  unreadFriendRequestCount Int    @default(0)
-  unreadGroupRequestCount  Int    @default(0)
-  unreadClassRequestCount  Int    @default(0)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  unreadMessages UnreadMessage[]
-
-  @@map("unread_counts")
-}
-
-model UnreadMessage {
-  id             String @id @default(uuid())
-  unreadCountId  String
-  conversationId String
-  userId         String
-  count          Int    @default(0)
-
-  unreadCount  UnreadCount  @relation(fields: [unreadCountId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade, map: "unread_message_user_fk")
-
-  @@unique([unreadCountId, conversationId])
-  @@index([conversationId])
-  @@index([userId])
-  @@map("unread_messages")
-}
 
 // ─── UserApproval ────────────────────────────────────────────────────────────
 

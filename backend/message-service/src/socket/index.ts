@@ -6,6 +6,7 @@ import pino from 'pino';
 import prisma from '../config/database.js';
 import { decryptMessage, encryptMessage, isBackendEncrypted } from '../services/encryptionService.js';
 import { decryptTransportText, isSMTEEncrypted } from '../services/smteService.js';
+import { registerEncryptionHandlers } from './encryption.handlers.js';
 
 const logger = pino({ transport: { target: 'pino-pretty', options: { colorize: true } } });
 
@@ -101,6 +102,58 @@ async function encryptIfNeeded(text?: string, conversationId?: string): Promise<
   return { text, encrypted: false };
 }
 
+async function emitConversationSignals(io: Server, conversationId: string, senderId: string, payload: any): Promise<void> {
+  const participants = await prisma.conversationParticipant.findMany({
+    where: { conversationId },
+    select: { userId: true },
+  });
+
+  const conv = await (prisma as any).conversation.findUnique({
+    where: { id: conversationId },
+    include: {
+      participants: {
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              image: true,
+              isOnline: true,
+              lastSeen: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  const conversationPayload = conv
+    ? {
+        ...conv,
+        participants: Array.isArray(conv.participants)
+          ? conv.participants.map((p: any) => ({
+              ...(p.user || { id: p.userId }),
+              role: p.role,
+              joinedAt: p.joinedAt,
+              nickname: p.nickname,
+            }))
+          : [],
+      }
+    : { id: conversationId };
+
+  for (const row of participants) {
+    const uid = row.userId;
+    io.to(uid).emit('conversation_updated', conversationPayload);
+    io.to(`user_${uid}`).emit('conversation_updated', conversationPayload);
+
+    if (uid !== senderId) {
+      io.to(uid).emit('newMessageNotification', payload);
+      io.to(`user_${uid}`).emit('newMessageNotification', payload);
+    }
+  }
+}
+
 export const initializeSocketServer = async (server: HttpServer, redis: any): Promise<Server> => {
   const allowedOrigins = (process.env.ORIGIN_URL || 'http://localhost:3002').split(',').map((s) => s.trim());
   const socketPath = process.env.MESSAGE_SOCKET_PATH || '/message-socket';
@@ -170,6 +223,8 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
       socket.join(`conv:${convId}`);
       socket.join(convId);
     });
+
+    registerEncryptionHandlers(io, socket);
 
     socket.on('message:typing', ({ conversationId, isTyping }: any) => {
       socket.to(`conv:${conversationId}`).emit('message:typing', {
@@ -257,6 +312,11 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
         const responseMsg = formatMessage({ ...message, text: await tryDecryptText(enc.text) }, clientTempId);
         io.to(`conv:${convId}`).emit('receiveMessage', responseMsg);
         io.to(convId).emit('receiveMessage', responseMsg);
+        await emitConversationSignals(io, convId, senderId, {
+          conversationId: convId,
+          senderId,
+          message: responseMsg,
+        });
         socket.emit('sendMessageSuccess', { message: responseMsg, conversationId: convId });
       } catch (err: any) {
         logger.error({ err }, 'sendMessage socket handler error');
@@ -305,6 +365,11 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
         const responseMsg = formatMessage(message, clientTempId);
         io.to(`conv:${conversationId}`).emit('receiveMessage', responseMsg);
         io.to(conversationId).emit('receiveMessage', responseMsg);
+        await emitConversationSignals(io, conversationId, senderId, {
+          conversationId,
+          senderId,
+          message: responseMsg,
+        });
         socket.emit('sendMessageSuccess', { message: responseMsg, conversationId });
       } catch (err: any) {
         logger.error({ err }, 'sendEmoji socket handler error');
@@ -424,6 +489,13 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
 
         io.to(convId).emit('messageDeleted', { messageId, userId: uid, hardDelete });
         io.to(`conv:${convId}`).emit('messageDeleted', { messageId, userId: uid, hardDelete });
+        await emitConversationSignals(io, convId, uid, {
+          conversationId: convId,
+          senderId: uid,
+          messageId,
+          deleted: true,
+          hardDelete,
+        });
       } catch (err: any) {
         logger.error({ err }, 'deleteMessage socket handler error');
         socket.emit('deleteMessageError', { message: err.message || 'Server error' });
@@ -482,6 +554,11 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
         io.to(conversationId).emit('message:reply', responseMsg);
         io.to(`conv:${conversationId}`).emit('replyReceiveMessage', responseMsg);
         io.to(`conv:${conversationId}`).emit('message:reply', responseMsg);
+        await emitConversationSignals(io, conversationId, userId, {
+          conversationId,
+          senderId: userId,
+          message: responseMsg,
+        });
         socket.emit('replyMessageSuccess', { message: responseMsg, conversationId, clientTempId });
       } catch (err: any) {
         logger.error({ err }, 'replyMessage socket handler error');
@@ -548,6 +625,11 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
         io.to(convId).emit('message:edited', responseMsg);
         io.to(`conv:${convId}`).emit('messageEdited', responseMsg);
         io.to(`conv:${convId}`).emit('message:edited', responseMsg);
+        await emitConversationSignals(io, convId, userId, {
+          conversationId: convId,
+          senderId: userId,
+          message: responseMsg,
+        });
         socket.emit('editMessageSuccess', { message: responseMsg, clientTempId });
       } catch (err: any) {
         logger.error({ err }, 'editMessage socket handler error');
@@ -558,7 +640,8 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
     socket.on('message:edit', (data: any) => socket.emit('editMessage', data));
 
     socket.on('addReaction', async (data: any) => {
-      const { messageId, reaction, clientTempId } = data ?? {};
+      const { messageId, reaction: reactionRaw, emoji, clientTempId } = data ?? {};
+      const reaction = reactionRaw ?? emoji;
       const username = (socket as any).user?.name;
 
       if (!messageId || !reaction) {
@@ -582,9 +665,12 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
         await prisma.message.update({ where: { id: messageId }, data: { reactions: reactions as any } });
 
         const convId = message.conversationId;
-        io.to(convId).emit('reactionsUpdated', { messageId, reactions, conversationId: convId });
-        io.to(`conv:${convId}`).emit('reactionsUpdated', { messageId, reactions, conversationId: convId });
-        socket.emit('reactionSuccess', { messageId, reaction, clientTempId });
+        const payload = { messageId, reactions, conversationId: convId, clientTempId };
+        io.to(convId).emit('reactionsUpdated', payload);
+        io.to(`conv:${convId}`).emit('reactionsUpdated', payload);
+        io.to(convId).emit('reactionUpdate', payload);
+        io.to(`conv:${convId}`).emit('reactionUpdate', payload);
+        socket.emit('reactionSuccess', { messageId, reactions, reaction, clientTempId });
       } catch (err: any) {
         logger.error({ err }, 'addReaction socket handler error');
         socket.emit('reactionError', { message: err.message || 'Server error', clientTempId });
@@ -597,6 +683,7 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
       const { messageId, reaction, clientTempId } = data ?? {};
       if (!messageId) {
         socket.emit('unreactionError', { message: 'Missing messageId', clientTempId });
+        socket.emit('reactionError', { message: 'Missing messageId', clientTempId });
         return;
       }
 
@@ -607,6 +694,7 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
         });
         if (!message) {
           socket.emit('unreactionError', { message: 'Message not found', clientTempId });
+          socket.emit('reactionError', { message: 'Message not found', clientTempId });
           return;
         }
 
@@ -616,12 +704,17 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
         await prisma.message.update({ where: { id: messageId }, data: { reactions: reactions as any } });
 
         const convId = message.conversationId;
-        io.to(convId).emit('reactionsUpdated', { messageId, reactions, conversationId: convId });
-        io.to(`conv:${convId}`).emit('reactionsUpdated', { messageId, reactions, conversationId: convId });
-        socket.emit('unreactionSuccess', { messageId, reaction, clientTempId });
+        const payload = { messageId, reactions, conversationId: convId, clientTempId };
+        io.to(convId).emit('reactionsUpdated', payload);
+        io.to(`conv:${convId}`).emit('reactionsUpdated', payload);
+        io.to(convId).emit('reactionUpdate', payload);
+        io.to(`conv:${convId}`).emit('reactionUpdate', payload);
+        socket.emit('unreactionSuccess', { messageId, reaction, reactions, clientTempId });
+        socket.emit('reactionSuccess', { messageId, reaction, reactions, clientTempId });
       } catch (err: any) {
         logger.error({ err }, 'removeReaction socket handler error');
         socket.emit('unreactionError', { message: err.message || 'Server error', clientTempId });
+        socket.emit('reactionError', { message: err.message || 'Server error', clientTempId });
       }
     });
 

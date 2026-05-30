@@ -15,13 +15,10 @@ datasource db {
 // ─── Read-only stubs ─────────────────────────────────────────────────────────
 
 model User {
-  id                 String  @id @default(uuid())
-  name               String
-  image              String  @default("/images/avatar/default-avatar.svg")
-  fileSendingAllowed Boolean @default(false)
+  id String @id
 
-  sentMessages     Message[]  @relation("MessageSender")
-  receivedMessages Message[]  @relation("MessageReceiver")
+  sentMessages     Message[]          @relation("MessageSender")
+  receivedMessages Message[]          @relation("MessageReceiver")
   readReceipts     MessageReadBy[]
   deletions        MessageDeletedBy[]
   reactions        MessageReaction[]
@@ -41,10 +38,10 @@ model Conversation {
   smteKeyVersion          Int     @default(0)
   v1Keys                  Json?
 
-  messages              Message[]
-  participants          ConversationParticipant[]
-  unreadMessages        UnreadMessage[]
-  conversationUnreads   ConversationUnread[]
+  messages            Message[]
+  participants        ConversationParticipant[]
+  unreadMessages      UnreadMessage[]
+  conversationUnreads ConversationUnread[]
 
   @@map("conversations")
 }
@@ -83,15 +80,15 @@ model Message {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  conversation  Conversation        @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  sender        User                @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
-  receiver      User?               @relation("MessageReceiver", fields: [receiverId], references: [id], onDelete: SetNull)
-  replyTo       Message?            @relation("MessageReplies", fields: [replyToId], references: [id], onDelete: SetNull)
-  replies       Message[]           @relation("MessageReplies")
-  media         MessageMedia[]
-  readBy        MessageReadBy[]
-  deletedBy     MessageDeletedBy[]
-  editHistory   MessageEditHistory[]
+  conversation     Conversation         @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender           User                 @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver         User?                @relation("MessageReceiver", fields: [receiverId], references: [id], onDelete: SetNull)
+  replyTo          Message?             @relation("MessageReplies", fields: [replyToId], references: [id], onDelete: SetNull)
+  replies          Message[]            @relation("MessageReplies")
+  media            MessageMedia[]
+  readBy           MessageReadBy[]
+  deletedBy        MessageDeletedBy[]
+  editHistory      MessageEditHistory[]
   messageReactions MessageReaction[]
 
   @@index([conversationId, createdAt])
@@ -190,6 +187,19 @@ model MessageReaction {
 
   @@unique([messageId, userId])
   @@map("message_reactions")
+}
+
+model UnreadCount {
+  id                       String          @id @default(uuid())
+  userId                   String          @unique
+  unreadFriendRequestCount Int             @default(0)
+  unreadGroupRequestCount  Int             @default(0)
+  unreadClassRequestCount  Int             @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("unread_counts")
 }
 
 model UnreadMessage {

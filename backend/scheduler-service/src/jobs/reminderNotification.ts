@@ -41,18 +41,22 @@ export const startReminderJob = (): void => {
           if (reminder.repeat !== 'one_time') {
             const nextDatetime = calculateNextDatetime(reminder.datetime, reminder.repeat);
             if (nextDatetime) {
+              const recurrenceData: any = {
+                title: reminder.title,
+                note: reminder.note,
+                datetime: nextDatetime,
+                repeat: reminder.repeat,
+                userId: reminder.userId,
+                conversationId: reminder.conversationId,
+                enabled: true,
+                notified: false,
+              };
+              if (reminder.visibleTo !== null) {
+                recurrenceData.visibleTo = reminder.visibleTo;
+              }
+
               await prisma.reminder.create({
-                data: {
-                  title: reminder.title,
-                  note: reminder.note,
-                  datetime: nextDatetime,
-                  repeat: reminder.repeat,
-                  userId: reminder.userId,
-                  conversationId: reminder.conversationId,
-                  visibleTo: reminder.visibleTo,
-                  enabled: true,
-                  notified: false,
-                },
+                data: recurrenceData,
               });
             }
           }

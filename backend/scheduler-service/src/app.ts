@@ -27,7 +27,7 @@ app.post('/jobs/reminder/run', async (_req, res) => {
 
 const startServer = async (): Promise<void> => {
   try {
-    logger.info('Prisma client ready (lazy MySQL connection)');
+    logger.info('Scheduler service booting');
 
     await connectRedis();
     logger.info('Connected to Redis');

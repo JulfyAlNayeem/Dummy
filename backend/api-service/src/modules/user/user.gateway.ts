@@ -1,5 +1,6 @@
 import { Server, Socket } from 'socket.io';
 import logger from '../../common/utils/logger.js';
+import { resetUnreadRequests } from '../../common/utils/unread-count.js';
 
 export const onlineUsers = new Map<string, { socketIds: Set<string>; userData: any }>();
 
@@ -12,12 +13,62 @@ export class UserGateway {
 
   handleConnection(socket: Socket) {
     const userId = (socket as any).user?.id;
-    if (userId) this.handleUserOnline(socket, userId);
+    if (userId) {
+      this.handleUserOnline(socket, userId);
+      socket.join(userId);
+      socket.join(`user_${userId}`);
+    }
 
     socket.on('userOnline', (uid: string) => this.handleUserOnline(socket, uid));
     socket.on('user:online', (uid: string) => this.handleUserOnline(socket, uid));
     socket.on('user:getStatus', (data: any) => this.handleGetUserStatus(socket, data));
     socket.on('user:status', (data: any) => this.handleGetUserStatus(socket, data));
+    socket.on('join', (room: string) => this.handleJoinRoom(socket, room));
+    socket.on('join_conversations_room', () => this.handleJoinConversationsRoom(socket));
+    socket.on('leave_conversations_room', () => this.handleLeaveConversationsRoom(socket));
+    socket.on('subscribeToGlobalMessages', () => this.handleJoinConversationsRoom(socket));
+    socket.on('reset_unread_request', (type: 'friend' | 'group' | 'classroom') =>
+      this.handleResetUnreadRequest(socket, type)
+    );
+  }
+
+  handleJoinRoom(socket: Socket, room: string) {
+    if (!room || typeof room !== 'string') return;
+    socket.join(room);
+  }
+
+  handleJoinConversationsRoom(socket: Socket) {
+    const userId = (socket as any).user?.id;
+    if (!userId) return;
+    socket.join(`conversations:${userId}`);
+    socket.join(userId);
+    socket.join(`user_${userId}`);
+  }
+
+  handleLeaveConversationsRoom(socket: Socket) {
+    const userId = (socket as any).user?.id;
+    if (!userId) return;
+    socket.leave(`conversations:${userId}`);
+  }
+
+  async handleResetUnreadRequest(socket: Socket, type: 'friend' | 'group' | 'classroom') {
+    const userId = (socket as any).user?.id;
+    if (!userId || !type) return;
+
+    try {
+      const unreadCount = await resetUnreadRequests(userId, type);
+      const counts = {
+        unreadFriendRequestCount: unreadCount.unreadFriendRequestCount,
+        unreadGroupRequestCount: unreadCount.unreadGroupRequestCount,
+        unreadClassRequestCount: unreadCount.unreadClassRequestCount,
+      };
+
+      this.io.to(userId).emit('unread_counts_updated', counts);
+      this.io.to(`user_${userId}`).emit('unread_counts_updated', counts);
+      socket.emit('unread_counts_updated', counts);
+    } catch (error) {
+      logger.error({ error, userId, type }, 'Failed to reset unread request count');
+    }
   }
 
   handleUserOnline(socket: Socket, userId?: string) {

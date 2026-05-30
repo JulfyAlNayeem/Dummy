@@ -1,26 +1,26 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
 const MOVED_MESSAGE = 'Quick lesson endpoints moved to conversation-service.';
 
 const moved = (res: Response) =>
-  res.status(410).json({
+  res.status(501).json({
     success: false,
     message: MOVED_MESSAGE,
     service: 'conversation-service',
   });
 
-export const getQuickLessons = async (_req: Request, res: Response): Promise<void> => {
+export const getQuickLessons = async (_req: any, res: Response): Promise<void> => {
   moved(res);
 };
 
-export const addQuickLesson = async (_req: Request, res: Response): Promise<void> => {
+export const addQuickLesson = async (_req: any, res: Response): Promise<void> => {
   moved(res);
 };
 
-export const editQuickLesson = async (_req: Request, res: Response): Promise<void> => {
+export const editQuickLesson = async (_req: any, res: Response): Promise<void> => {
   moved(res);
 };
 
-export const deleteQuickLesson = async (_req: Request, res: Response): Promise<void> => {
+export const deleteQuickLesson = async (_req: any, res: Response): Promise<void> => {
   moved(res);
 };

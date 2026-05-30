@@ -29,12 +29,14 @@ router.post('/users/:userId/unsuspend', requireAdmin, unsuspendUser);
 
 // Approvals
 router.get('/approvals/pending', requireAdmin, getPendingApprovals);
+router.get('/approvals', requireAdmin, getPendingApprovals);
 router.post('/approvals/:approvalId/approve', requireAdmin, approveUser);
 router.post('/approvals/:approvalId/reject', requireAdmin, rejectUser);
 
 // Settings
 router.get('/settings', requireAdmin, getAdminSettings);
 router.put('/settings', requireAdmin, updateAdminSettings);
+router.patch('/settings', requireAdmin, updateAdminSettings);
 
 // Logs
 router.get('/logs', requireAdmin, getActivityLogs);

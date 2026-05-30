@@ -1,37 +1,166 @@
 import { Request, Response } from 'express';
 import prisma from '../../config/database.js';
 
-const MOVED_MESSAGE = 'Conversation domain moved to conversation-service.';
+const CONVERSATION_SERVICE_BASE =
+  process.env.CONVERSATION_SERVICE_URL || 'http://conversation-service:3005';
 
-const moved = (res: Response) =>
-  res.status(410).json({
-    success: false,
-    message: MOVED_MESSAGE,
-    service: 'conversation-service',
-  });
+const toOutgoingHeaders = (req: Request): Headers => {
+  const headers = new Headers();
+  const incomingAuth = req.headers.authorization;
+  const incomingCookie = req.headers.cookie;
+  const incomingType = req.headers['content-type'];
 
-export const createConversation = async (_req: Request, res: Response) => moved(res);
-export const getAllConversations = async (_req: Request, res: Response) => moved(res);
-export const searchGroups = async (_req: Request, res: Response) => moved(res);
-export const createGroup = async (_req: Request, res: Response) => moved(res);
-export const getConversationById = async (_req: Request, res: Response) => moved(res);
-export const acceptMessageRequest = async (_req: Request, res: Response) => moved(res);
-export const updateConversationThemeIndex = async (_req: Request, res: Response) => moved(res);
-export const deleteConversation = async (_req: Request, res: Response) => moved(res);
-export const updateDisappearingMessages = async (_req: Request, res: Response) => moved(res);
-export const getDisappearingMessages = async (_req: Request, res: Response) => moved(res);
-export const getPendingConversationRequests = async (_req: Request, res: Response) => moved(res);
-export const getGroupJoinRequests = async (_req: Request, res: Response) => moved(res);
-export const updateGroupImage = async (_req: Request, res: Response) => moved(res);
-export const leaveConversation = async (_req: Request, res: Response) => moved(res);
-export const getUnreadRequestCounts = async (_req: Request, res: Response) => moved(res);
+  if (incomingAuth) headers.set('authorization', incomingAuth);
+  if (incomingCookie) headers.set('cookie', incomingCookie);
+  if (typeof incomingType === 'string') headers.set('content-type', incomingType);
 
-export const resetUnreadRequestCount = async (userId: string, requestType: string) => {
-  const fieldMap: Record<string, string> = {
+  return headers;
+};
+
+const hasBody = (method: string): boolean => !['GET', 'HEAD'].includes(method.toUpperCase());
+
+const forwardToConversationService = async (
+  req: Request,
+  res: Response,
+  targetPath?: string
+): Promise<void> => {
+  try {
+    const path = targetPath || req.originalUrl;
+    const url = `${CONVERSATION_SERVICE_BASE}${path}`;
+
+    const response = await fetch(url, {
+      method: req.method,
+      headers: toOutgoingHeaders(req),
+      body: hasBody(req.method) ? JSON.stringify(req.body ?? {}) : undefined,
+    });
+
+    const contentType = response.headers.get('content-type') || '';
+    const payloadText = await response.text();
+
+    if (contentType.includes('application/json')) {
+      try {
+        const payload = payloadText ? JSON.parse(payloadText) : {};
+        res.status(response.status).json(payload);
+        return;
+      } catch {
+        // Fall through to text response when upstream JSON is malformed.
+      }
+    }
+
+    res.status(response.status).send(payloadText);
+  } catch (error: any) {
+    res.status(502).json({
+      success: false,
+      message: 'Failed to reach conversation-service',
+      error: error?.message,
+    });
+  }
+};
+
+export const createConversation = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, '/api/conversations');
+};
+
+export const getAllConversations = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, `/api/conversations/${req.params.userId}`);
+};
+
+export const searchGroups = async (req: Request, res: Response): Promise<void> => {
+  const query = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+  await forwardToConversationService(req, res, `/api/conversations/search-groups${query}`);
+};
+
+export const createGroup = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, '/api/conversations/create-group');
+};
+
+export const getConversationById = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, `/api/conversations/chat/${req.params.chatId}`);
+};
+
+export const acceptMessageRequest = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(
+    req,
+    res,
+    `/api/conversations/update-message-request-status/${req.params.conversationId}`
+  );
+};
+
+export const conversationRequestAction = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(
+    req,
+    res,
+    `/api/conversations/requests/${req.params.requestId}/${req.params.action}`
+  );
+};
+
+export const exchangeConversationKey = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, `/api/conversations/${req.params.conversationId}/key-exchange`);
+};
+
+export const getConversationKeys = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, `/api/conversations/${req.params.conversationId}/keys`);
+};
+
+export const getParticipantKey = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(
+    req,
+    res,
+    `/api/conversations/${req.params.conversationId}/keys/${req.params.userId}`
+  );
+};
+
+export const rotateConversationKey = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, `/api/conversations/${req.params.conversationId}/key-rotate`);
+};
+
+export const updateConversationThemeIndex = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, `/api/conversations/${req.params.id}/theme-index`);
+};
+
+export const deleteConversation = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, `/api/conversations/conversation/${req.params.id}`);
+};
+
+export const updateDisappearingMessages = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, `/api/conversations/${req.params.id}/disappearing-messages`);
+};
+
+export const getDisappearingMessages = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, `/api/conversations/${req.params.id}/disappearing-messages`);
+};
+
+export const getPendingConversationRequests = async (req: Request, res: Response): Promise<void> => {
+  const query = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+  await forwardToConversationService(req, res, `/api/conversations/pending${query}`);
+};
+
+export const getGroupJoinRequests = async (req: Request, res: Response): Promise<void> => {
+  const query = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+  await forwardToConversationService(req, res, `/api/conversations/groups${query}`);
+};
+
+export const updateGroupImage = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, `/api/conversations/${req.params.conversationId}/image`);
+};
+
+export const leaveConversation = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, `/api/conversations/leave/${req.params.id}`);
+};
+
+export const getUnreadRequestCounts = async (req: Request, res: Response): Promise<void> => {
+  await forwardToConversationService(req, res, '/api/conversations/get-unread-request-count');
+};
+
+export const resetUnreadRequestCount = async (
+  userId: string,
+  requestType: 'friend' | 'group' | 'classroom'
+) => {
+  const fieldMap = {
     friend: 'unreadFriendRequestCount',
     group: 'unreadGroupRequestCount',
     classroom: 'unreadClassRequestCount',
-  };
+  } as const;
 
   const fieldName = fieldMap[requestType];
   if (!fieldName) {

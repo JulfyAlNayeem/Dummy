@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { isLogin } from '../../middlewares/auth.middleware.js';
 import {
-  getQuickLessons,
   addQuickLesson,
-  editQuickLesson,
   deleteQuickLesson,
+  editQuickLesson,
+  getQuickLessons,
 } from './quickLesson.controller.js';
 
 const router = Router();

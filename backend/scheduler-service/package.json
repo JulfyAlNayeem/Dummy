@@ -7,9 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/app.js",
-    "dev": "tsx watch src/app.ts",
-    "prisma:generate": "prisma generate",
-    "prisma:push": "prisma db push"
+    "dev": "tsx watch src/app.ts"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.14.0",
@@ -35,7 +33,6 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.15.0",
     "@types/node-cron": "^3.0.11",
-    "prisma": "^7.4.0",
     "tsx": "^4.19.0",
     "typescript": "^5.9.3"
   }

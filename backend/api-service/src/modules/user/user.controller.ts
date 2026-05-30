@@ -440,22 +440,27 @@ export const unblockUser = async (req: Request, res: Response) => {
   try {
     const userId = req.params.userId as string;
     const blockerId = (req as any).user.id;
+    const hasConversationBlockModels = Boolean((prisma as any).conversationBlockEntry && (prisma as any).conversation);
 
     const deletedGlobal = await prisma.block.deleteMany({ where: { blockerId, blockedId: userId } });
-    await prisma.conversationBlockEntry.deleteMany({
-      where: { blockedById: blockerId, blockedUserId: userId },
-    });
+    if ((prisma as any).conversationBlockEntry) {
+      await (prisma as any).conversationBlockEntry.deleteMany({
+        where: { blockedById: blockerId, blockedUserId: userId },
+      });
+    }
 
-    const conv = await prisma.conversation.findFirst({
-      where: {
-        AND: [
-          { participants: { some: { userId: blockerId } } },
-          { participants: { some: { userId } } },
-        ],
-        isGroup: false,
-      },
-      include: { blockList: true },
-    });
+    const conv = hasConversationBlockModels
+      ? await (prisma as any).conversation.findFirst({
+          where: {
+            AND: [
+              { participants: { some: { userId: blockerId } } },
+              { participants: { some: { userId } } },
+            ],
+            isGroup: false,
+          },
+          include: { blockList: true },
+        })
+      : null;
 
     const conversation = conv ? {
       ...conv,

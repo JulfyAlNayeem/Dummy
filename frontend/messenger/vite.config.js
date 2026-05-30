@@ -8,7 +8,7 @@ const CALLING_URL = process.env.VITE_CALLING_SERVICE_URL || 'http://localhost:30
 const MESSAGE_URL = process.env.VITE_MESSAGE_SERVICE_URL || 'http://localhost:3004';
 const CONVERSATION_URL = process.env.VITE_CONVERSATION_SERVICE_URL || 'http://localhost:3005';
 const FORM_URL = process.env.VITE_FORM_SERVICE_URL || 'http://localhost:3006';
-const ALARM_URL = process.env.VITE_ALARM_SERVICE_URL || 'http://localhost:3007';
+const ALARM_URL = process.env.VITE_ALARM_SERVICE_URL || 'http://localhost:3001';
 const SOCIAL_URL = process.env.VITE_SOCIAL_SERVICE_URL || 'http://localhost:3008';
 
 export default defineConfig({
@@ -22,19 +22,19 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
-      // class-group/alertness → alarm-service
+      // class-group/alertness → api-service
       '/api/class-group/alertness': {
         target: ALARM_URL,
         changeOrigin: true,
       },
       // class-group/assignments → conversation-service
       '/api/class-group/assignments': {
-        target: CLASS_URL,
+        target: CONVERSATION_URL,
         changeOrigin: true,
       },
       // class-group/* → conversation-service (classes, attendance)
       '/api/class-group': {
-        target: CLASS_URL,
+        target: CONVERSATION_URL,
         changeOrigin: true,
       },
       // messages → message-service
@@ -42,12 +42,22 @@ export default defineConfig({
         target: MESSAGE_URL,
         changeOrigin: true,
       },
+      // conversation key exchange endpoints → conversation-service
+      '^/api/conversations/[^/]+/(key-exchange|keys|key-rotate)(/.*)?$': {
+        target: CONVERSATION_URL,
+        changeOrigin: true,
+      },
+      // legacy conversation-keys prefix → conversation-service
+      '/api/conversation-keys': {
+        target: CONVERSATION_URL,
+        changeOrigin: true,
+      },
       // forms → form-service
       '/api/forms': {
         target: FORM_URL,
         changeOrigin: true,
       },
-      // alarm → alarm-service
+      // alarm → api-service
       '/api/alarm': {
         target: ALARM_URL,
         changeOrigin: true,

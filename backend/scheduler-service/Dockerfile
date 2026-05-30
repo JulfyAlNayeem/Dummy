@@ -15,7 +15,6 @@ RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
 COPY backend/scheduler-service/ ./backend/scheduler-service/
 WORKDIR /app/backend/scheduler-service
 ARG DATABASE_URL="mysql://dummy:dummy@localhost:3306/dummy"
-RUN npx prisma generate
 RUN mkdir -p /app/backups
 COPY backend/scheduler-service/docker-entrypoint.sh ./docker-entrypoint.sh
 RUN chmod +x ./docker-entrypoint.sh

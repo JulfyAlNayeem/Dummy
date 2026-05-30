@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { isLogin } from '../../middlewares/auth.middleware.js';
 import {
-  getQuickMessages,
   addQuickMessage,
-  editQuickMessage,
   deleteQuickMessage,
+  editQuickMessage,
+  getQuickMessages,
 } from './quickMessage.controller.js';
 
 const router = Router();

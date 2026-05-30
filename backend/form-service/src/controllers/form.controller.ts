@@ -287,25 +287,66 @@ export const getAssignmentsByConversation = async (req: Request, res: Response):
   }
 };
 
+export const getAssignmentsByConversationQuery = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const conversationId = req.query.conversationId as string | undefined;
+    if (!conversationId) {
+      res.status(400).json({ message: 'conversationId query is required' });
+      return;
+    }
+
+    (req.params as any).conversationId = conversationId;
+    await getAssignmentsByConversation(req, res);
+  } catch (error: any) {
+    res.status(500).json({ message: 'Failed to get assignments', error: error.message });
+  }
+};
+
 export const getMyAssignments = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = (req as any).user.id;
 
-    const assigneeRecords = await prisma.formAssignee.findMany({
-      where: { userId },
-      include: {
-        assignment: {
-          include: {
-            form: { include: { fields: { orderBy: { order: 'asc' } } } },
-            assignedBy: { select: { id: true, name: true } },
-          },
-        },
-      },
-    });
+    // DB compatibility: support both camelCase and snake_case column variants.
+    let linkedAssignments: Array<{ assignmentId: string }> = [];
 
-    const assignments = assigneeRecords
-      .filter((r: any) => r.assignment?.isActive)
-      .map((r: any) => r.assignment);
+    try {
+      linkedAssignments = await prisma.$queryRaw<Array<{ assignmentId: string }>>`
+        SELECT assignmentId
+        FROM form_assignees
+        WHERE userId = ${userId}
+      `;
+    } catch {
+      linkedAssignments = await prisma.$queryRaw<Array<{ assignmentId: string }>>`
+        SELECT assignment_id AS assignmentId
+        FROM form_assignees
+        WHERE user_id = ${userId}
+      `;
+    }
+
+    const assignmentIds = Array.from(
+      new Set(
+        linkedAssignments
+          .map((row) => row.assignmentId)
+          .filter((id): id is string => typeof id === 'string' && id.length > 0)
+      )
+    );
+
+    if (assignmentIds.length === 0) {
+      res.json({ assignments: [] });
+      return;
+    }
+
+    const assignments = await prisma.formAssignment.findMany({
+      where: {
+        id: { in: assignmentIds },
+        isActive: true,
+      },
+      include: {
+        form: { include: { fields: { orderBy: { order: 'asc' } } } },
+        assignedBy: { select: { id: true, name: true } },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
 
     res.json({ assignments });
   } catch (error: any) {

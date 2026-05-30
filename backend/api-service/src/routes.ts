@@ -14,10 +14,10 @@ import { notificationRoutes } from './modules/notification/index.js';
 import { fileRoutes } from './modules/file/index.js';
 import { noticeRoutes } from './modules/notice/index.js';
 import { siteSecurityRoutes } from './modules/siteSecurity/index.js';
-import { conversationKeyRoutes } from './modules/conversationKey/index.js';
 import { reportRoutes } from './modules/report/index.js';
 import { permissionRoutes } from './modules/permission/index.js';
 import { reminderRoutes } from './modules/reminder/index.js';
+import { alertnessRoutes } from './modules/alertness/index.js';
 
 const apiRoute = Router();
 
@@ -25,7 +25,6 @@ const apiRoute = Router();
 apiRoute.use('/auth', authRoutes);
 apiRoute.use('/user', userRoutes);
 apiRoute.use('/conversations', conversationRoutes);
-apiRoute.use('/conversations', conversationKeyRoutes);
 apiRoute.use('/quick-messages', quickMessageRoutes);
 apiRoute.use('/quick-lessons', quickLessonRoutes);
 apiRoute.use('/admin', adminRoutes);
@@ -33,9 +32,10 @@ apiRoute.use('/admin/user-management', adminUserRoutes);
 apiRoute.use('/notices', noticeRoutes);
 apiRoute.use('/notifications', notificationRoutes);
 apiRoute.use('/class-group/files', fileRoutes);
+apiRoute.use('/alarm', alertnessRoutes);
+apiRoute.use('/class-group/alertness', alertnessRoutes);
 apiRoute.use('/reminders', reminderRoutes);
 apiRoute.use('/site-security', siteSecurityRoutes);
-apiRoute.use('/conversation-keys', conversationKeyRoutes);
 apiRoute.use('/reports', reportRoutes);
 apiRoute.use('/permissions', permissionRoutes);
 

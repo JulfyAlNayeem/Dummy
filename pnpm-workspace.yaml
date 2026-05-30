@@ -6,7 +6,6 @@ packages:
   - backend/message-service
   - backend/conversation-service
   - backend/form-service
-  - backend/alarm-service
   - backend/social-service
   - backend/scheduler-service
 

@@ -3,6 +3,7 @@ import { isLogin } from '../../middlewares/auth.middleware.js';
 import { requireAdmin, requireSuperAdmin } from '../../middlewares/adminAuth.js';
 import {
   getAllUsers,
+  getUserById,
   createUser,
   updateUser,
   deleteUser,
@@ -19,8 +20,11 @@ const router = Router();
 
 router.use(isLogin);
 
+router.get('/', requireAdmin, getAllUsers);
 router.get('/users', requireAdmin, getAllUsers);
 router.post('/create', requireAdmin, createUser);
+router.get('/:userId', requireAdmin, getUserById);
+router.patch('/:userId', requireAdmin, updateUser);
 router.put('/:userId', requireAdmin, updateUser);
 router.delete('/:userId', requireSuperAdmin, deleteUser);
 router.post('/:userId/block', requireAdmin, blockUser);

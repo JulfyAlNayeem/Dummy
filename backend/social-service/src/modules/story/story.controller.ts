@@ -2,6 +2,15 @@ import { Request, Response } from 'express';
 import { storyService } from './story.service.js';
 import { notificationService } from '../notification/notification.service.js';
 
+const sendServiceError = (res: Response, err: any, fallback: string): void => {
+  const status = Number(err?.code);
+  if (status >= 400 && status < 600) {
+    res.status(status).json({ message: err?.message || fallback });
+    return;
+  }
+  res.status(500).json({ message: err?.message ?? fallback });
+};
+
 export class StoryController {
 
   async createStory(req: Request, res: Response): Promise<void> {
@@ -10,7 +19,7 @@ export class StoryController {
       const story = await storyService.createStory((req as any).user.id, { mediaUrl, mediaType, caption });
       res.status(201).json({ story });
     } catch (err: any) {
-      res.status(500).json({ message: err.message ?? 'Failed to create story' });
+      sendServiceError(res, err, 'Failed to create story');
     }
   }
 
@@ -51,7 +60,7 @@ export class StoryController {
 
       res.json(result);
     } catch (err: any) {
-      res.status(500).json({ message: err.message ?? 'Failed to view story' });
+      sendServiceError(res, err, 'Failed to view story');
     }
   }
 
@@ -60,7 +69,7 @@ export class StoryController {
       await storyService.deleteStory(req.params.storyId, (req as any).user.id);
       res.json({ success: true });
     } catch (err: any) {
-      res.status(500).json({ message: err.message ?? 'Failed to delete story' });
+      sendServiceError(res, err, 'Failed to delete story');
     }
   }
 }

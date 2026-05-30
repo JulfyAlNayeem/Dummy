@@ -595,8 +595,8 @@ const createAssignmentSubmissions = async (_users: any[], _conversations: any[])
 
 // --- Create alertness sessions ---
 const createAlertnessSessions = async (_users: any[], _conversations: any[]) => {
-  // AlertnessSession/Response models live in alarm-service, not api-service — skip
-  console.log("⏭️  Skipping alertness sessions (handled by alarm-service)");
+  // AlertnessSession/Response are owned by conversation-service; api-service only proxies endpoints
+  console.log("⏭️  Skipping alertness sessions (owned by conversation-service)");
 };
 
 // --- Create quick lessons ---

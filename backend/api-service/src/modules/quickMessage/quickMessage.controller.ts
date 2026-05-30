@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
 import prisma from '../../config/database.js';
 
-// GET /  — list quick messages for the logged-in user
-export const getQuickMessages = async (req: Request, res: Response): Promise<void> => {
+export const getQuickMessages = async (req: any, res: Response): Promise<void> => {
   try {
-    const userId = (req as any).user.id;
-
+    const userId = req.user.id;
     const quickMessages = await prisma.quickMessage.findMany({
       where: { userId },
       orderBy: { createdAt: 'desc' },
@@ -18,10 +16,9 @@ export const getQuickMessages = async (req: Request, res: Response): Promise<voi
   }
 };
 
-// POST /  — create a new quick message
-export const addQuickMessage = async (req: Request, res: Response): Promise<void> => {
+export const addQuickMessage = async (req: any, res: Response): Promise<void> => {
   try {
-    const userId = (req as any).user.id;
+    const userId = req.user.id;
     const { title, message } = req.body;
 
     if (!title || !message) {
@@ -40,15 +37,13 @@ export const addQuickMessage = async (req: Request, res: Response): Promise<void
   }
 };
 
-// PUT /:id  — update an existing quick message
-export const editQuickMessage = async (req: Request, res: Response): Promise<void> => {
+export const editQuickMessage = async (req: any, res: Response): Promise<void> => {
   try {
-    const userId = (req as any).user.id;
-    const id = req.params.id as string;
+    const userId = req.user.id;
+    const { id } = req.params;
     const { title, message } = req.body;
 
     const existing = await prisma.quickMessage.findUnique({ where: { id } });
-
     if (!existing || existing.userId !== userId) {
       res.status(404).json({ success: false, message: 'Quick message not found' });
       return;
@@ -57,8 +52,8 @@ export const editQuickMessage = async (req: Request, res: Response): Promise<voi
     const updated = await prisma.quickMessage.update({
       where: { id },
       data: {
-        ...(title !== undefined && { title }),
-        ...(message !== undefined && { message }),
+        ...(title !== undefined ? { title } : {}),
+        ...(message !== undefined ? { message } : {}),
       },
     });
 
@@ -69,21 +64,18 @@ export const editQuickMessage = async (req: Request, res: Response): Promise<voi
   }
 };
 
-// DELETE /:id  — delete a quick message
-export const deleteQuickMessage = async (req: Request, res: Response): Promise<void> => {
+export const deleteQuickMessage = async (req: any, res: Response): Promise<void> => {
   try {
-    const userId = (req as any).user.id;
-    const id = req.params.id as string;
+    const userId = req.user.id;
+    const { id } = req.params;
 
     const existing = await prisma.quickMessage.findUnique({ where: { id } });
-
     if (!existing || existing.userId !== userId) {
       res.status(404).json({ success: false, message: 'Quick message not found' });
       return;
     }
 
     await prisma.quickMessage.delete({ where: { id } });
-
     res.status(200).json({ message: 'Quick message deleted' });
   } catch (error: any) {
     console.error('deleteQuickMessage error:', error);
