@@ -139,7 +139,6 @@ services:
       - message-service
       - conversation-service
       - form-service
-      - alarm-service
       - social-service
     networks:
       - dummy-network
@@ -202,7 +201,7 @@ services:
     networks:
       - dummy-network
 
-  # Class Microservice (Production)
+  # Conversation Microservice (Production)
   conversation-service:
     build:
       context: .
@@ -247,32 +246,6 @@ services:
       ORIGIN_URL: ${ORIGIN_URL}
     depends_on:
       mysql:
-        condition: service_healthy
-    networks:
-      - dummy-network
-
-  # Alarm Microservice (Production)
-  alarm-service:
-    build:
-      context: .
-      dockerfile: backend/alarm-service/Dockerfile
-    image: ${DOCKERHUB_USERNAME}/dummy-alarm:latest
-    container_name: alarm-service
-    restart: always
-    expose:
-      - "3007"
-    env_file:
-      - .env.production
-    environment:
-      NODE_ENV: production
-      PORT: 3007
-      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
-      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
-      ORIGIN_URL: ${ORIGIN_URL}
-    depends_on:
-      mysql:
-        condition: service_healthy
-      redis:
         condition: service_healthy
     networks:
       - dummy-network

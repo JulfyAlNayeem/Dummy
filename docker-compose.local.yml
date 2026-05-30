@@ -108,7 +108,7 @@ services:
       VITE_MESSAGE_SERVICE_URL: http://message-service:3004
       VITE_CONVERSATION_SERVICE_URL: http://conversation-service:3005
       VITE_FORM_SERVICE_URL: http://form-service:3006
-      VITE_ALARM_SERVICE_URL: http://alarm-service:3007
+      VITE_ALARM_SERVICE_URL: http://backend:3001
       VITE_SOCIAL_SERVICE_URL: http://social-service:3008
     depends_on:
       - backend
@@ -203,7 +203,7 @@ services:
     networks:
       - dummy-network
 
-  # Class Microservice (classroom management + session crons)
+  # Conversation Microservice (classroom management + session crons)
   conversation-service:
     build:
       context: .
@@ -254,33 +254,6 @@ services:
     networks:
       - dummy-network
 
-  # Alarm Microservice (alertness checks + Socket.IO)
-  alarm-service:
-    build:
-      context: .
-      dockerfile: backend/alarm-service/Dockerfile
-    container_name: alarm-service
-    restart: always
-    ports:
-      - "3007:3007"
-    volumes:
-      - ./backend/alarm-service/src:/app/backend/alarm-service/src
-      - ./backend/alarm-service/prisma:/app/backend/alarm-service/prisma
-    environment:
-      NODE_ENV: development
-      PORT: 3007
-      DATABASE_URL: "mysql://dummyuser313:9Rob0cO%291x9%28cZ%5D0S.H%3F@mysql:3306/dummy"
-      REDIS_URL: redis://redis:6379
-      ACCESS_TOKEN_SECRET: s3cr3tAcc3ssT0k3nK3y
-      ORIGIN_URL: http://localhost:3002
-    depends_on:
-      mysql:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    networks:
-      - dummy-network
-
   # Social Microservice (posts, comments, reactions)
   social-service:
     build:
@@ -320,7 +293,6 @@ services:
       - "3009:3009"
     volumes:
       - ./backend/scheduler-service/src:/app/backend/scheduler-service/src
-      - ./backend/scheduler-service/prisma:/app/backend/scheduler-service/prisma
       - ./backups:/app/backups
     environment:
       NODE_ENV: development
