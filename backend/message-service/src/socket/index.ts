@@ -103,54 +103,27 @@ async function encryptIfNeeded(text?: string, conversationId?: string): Promise<
 }
 
 async function emitConversationSignals(io: Server, conversationId: string, senderId: string, payload: any): Promise<void> {
-  const participants = await prisma.conversationParticipant.findMany({
-    where: { conversationId },
-    select: { userId: true },
-  });
+  try {
+    const participants = await prisma.conversationParticipant.findMany({
+      where: { conversationId },
+      select: { userId: true },
+    });
 
-  const conv = await (prisma as any).conversation.findUnique({
-    where: { id: conversationId },
-    include: {
-      participants: {
-        include: {
-          user: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              image: true,
-              isOnline: true,
-              lastSeen: true,
-            },
-          },
-        },
-      },
-    },
-  });
+    // Minimal payload — client will refetch full conversation data on receipt
+    const conversationPayload = { id: conversationId, _id: conversationId };
 
-  const conversationPayload = conv
-    ? {
-        ...conv,
-        participants: Array.isArray(conv.participants)
-          ? conv.participants.map((p: any) => ({
-              ...(p.user || { id: p.userId }),
-              role: p.role,
-              joinedAt: p.joinedAt,
-              nickname: p.nickname,
-            }))
-          : [],
+    for (const row of participants) {
+      const uid = row.userId;
+      io.to(uid).emit('conversation_updated', conversationPayload);
+      io.to(`user_${uid}`).emit('conversation_updated', conversationPayload);
+
+      if (uid !== senderId) {
+        io.to(uid).emit('newMessageNotification', payload);
+        io.to(`user_${uid}`).emit('newMessageNotification', payload);
       }
-    : { id: conversationId };
-
-  for (const row of participants) {
-    const uid = row.userId;
-    io.to(uid).emit('conversation_updated', conversationPayload);
-    io.to(`user_${uid}`).emit('conversation_updated', conversationPayload);
-
-    if (uid !== senderId) {
-      io.to(uid).emit('newMessageNotification', payload);
-      io.to(`user_${uid}`).emit('newMessageNotification', payload);
     }
+  } catch (err) {
+    logger.error({ err }, 'emitConversationSignals error');
   }
 }
 
@@ -273,6 +246,11 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
               } as any,
             });
             convId = newConv.id;
+
+            // Make the receiver's sockets join the new conversation rooms immediately
+            io.to(`user_${receiver}`).socketsJoin(`conv:${convId}`);
+            io.to(`user_${receiver}`).socketsJoin(convId);
+            io.to(`user_${receiver}`).emit('newConversation', { id: convId, _id: convId, senderId });
           }
         }
 

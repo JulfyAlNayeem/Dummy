@@ -140,6 +140,11 @@ export const getGroupJoinRequests = async (req: Request, res: Response): Promise
   await forwardToConversationService(req, res, `/api/conversations/groups${query}`);
 };
 
+export const getClassJoinRequests = async (req: Request, res: Response): Promise<void> => {
+  const query = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+  await forwardToConversationService(req, res, `/api/conversations/classes${query}`);
+};
+
 export const updateGroupImage = async (req: Request, res: Response): Promise<void> => {
   await forwardToConversationService(req, res, `/api/conversations/${req.params.conversationId}/image`);
 };

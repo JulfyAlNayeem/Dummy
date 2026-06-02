@@ -43,9 +43,9 @@ services:
   backend:
     build:
       context: .
-      dockerfile: backend/api-service/Dockerfile
+      dockerfile: backend/root-service/Dockerfile
     image: ${DOCKERHUB_USERNAME}/dummy-backend:latest
-    container_name: api-service
+    container_name: root-service
     restart: always
     env_file:
       - .env.production
@@ -62,7 +62,7 @@ services:
       ORIGIN_URL: ${ORIGIN_URL}
       COOKIE_DOMAIN: ${COOKIE_DOMAIN}
     volumes:
-      - backend_uploads:/app/backend/api-service/uploads
+      - backend_uploads:/app/backend/root-service/uploads
     depends_on:
       mysql:
         condition: service_healthy

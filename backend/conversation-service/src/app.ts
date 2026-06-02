@@ -9,6 +9,7 @@ import pino from 'pino';
 import classRoutes from './routes/class.routes.js';
 import attendanceRoutes from './routes/attendance.routes.js';
 import assignmentRoutes from './routes/assignment.routes.js';
+import conversationRoutes from './routes/conversation.routes.js';
 import conversationKeyRoutes from './routes/conversationKey.routes.js';
 import { startSessionCreationScheduler } from './jobs/sessionCreation.js';
 import { initializeSocketServer } from './socket.js';
@@ -33,7 +34,8 @@ app.get('/health', (_req, res) => {
 app.use('/api/class-group/classes', classRoutes);
 app.use('/api/class-group/attendance', attendanceRoutes);
 app.use('/api/class-group/assignments', assignmentRoutes);
-app.use('/api/conversations', conversationKeyRoutes);
+app.use('/api/conversations', conversationRoutes);       // conversation CRUD
+app.use('/api/conversations', conversationKeyRoutes);    // key exchange (fallback)
 app.use('/api/conversation-keys', conversationKeyRoutes);
 
 const startServer = async (): Promise<void> => {

@@ -63,6 +63,11 @@ export type MessageEditHistory = Prisma.MessageEditHistoryModel
  */
 export type MessageReaction = Prisma.MessageReactionModel
 /**
+ * Model UnreadCount
+ * 
+ */
+export type UnreadCount = Prisma.UnreadCountModel
+/**
  * Model UnreadMessage
  * 
  */

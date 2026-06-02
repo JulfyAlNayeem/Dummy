@@ -393,6 +393,7 @@ export const ModelName = {
   MessageDeletedBy: 'MessageDeletedBy',
   MessageEditHistory: 'MessageEditHistory',
   MessageReaction: 'MessageReaction',
+  UnreadCount: 'UnreadCount',
   UnreadMessage: 'UnreadMessage',
   ConversationUnread: 'ConversationUnread'
 } as const
@@ -410,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "conversation" | "conversationParticipant" | "message" | "messageMedia" | "messageReadBy" | "messageDeletedBy" | "messageEditHistory" | "messageReaction" | "unreadMessage" | "conversationUnread"
+    modelProps: "user" | "conversation" | "conversationParticipant" | "message" | "messageMedia" | "messageReadBy" | "messageDeletedBy" | "messageEditHistory" | "messageReaction" | "unreadCount" | "unreadMessage" | "conversationUnread"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1008,6 +1009,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UnreadCount: {
+      payload: Prisma.$UnreadCountPayload<ExtArgs>
+      fields: Prisma.UnreadCountFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UnreadCountFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnreadCountPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UnreadCountFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnreadCountPayload>
+        }
+        findFirst: {
+          args: Prisma.UnreadCountFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnreadCountPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UnreadCountFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnreadCountPayload>
+        }
+        findMany: {
+          args: Prisma.UnreadCountFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnreadCountPayload>[]
+        }
+        create: {
+          args: Prisma.UnreadCountCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnreadCountPayload>
+        }
+        createMany: {
+          args: Prisma.UnreadCountCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.UnreadCountDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnreadCountPayload>
+        }
+        update: {
+          args: Prisma.UnreadCountUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnreadCountPayload>
+        }
+        deleteMany: {
+          args: Prisma.UnreadCountDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UnreadCountUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.UnreadCountUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnreadCountPayload>
+        }
+        aggregate: {
+          args: Prisma.UnreadCountAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUnreadCount>
+        }
+        groupBy: {
+          args: Prisma.UnreadCountGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UnreadCountGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UnreadCountCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UnreadCountCountAggregateOutputType> | number
+        }
+      }
+    }
     UnreadMessage: {
       payload: Prisma.$UnreadMessagePayload<ExtArgs>
       fields: Prisma.UnreadMessageFieldRefs
@@ -1182,8 +1249,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  image: 'image',
-  fileSendingAllowed: 'fileSendingAllowed'
+  image: 'image'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1287,6 +1353,19 @@ export const MessageReactionScalarFieldEnum = {
 } as const
 
 export type MessageReactionScalarFieldEnum = (typeof MessageReactionScalarFieldEnum)[keyof typeof MessageReactionScalarFieldEnum]
+
+
+export const UnreadCountScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  unreadFriendRequestCount: 'unreadFriendRequestCount',
+  unreadGroupRequestCount: 'unreadGroupRequestCount',
+  unreadClassRequestCount: 'unreadClassRequestCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UnreadCountScalarFieldEnum = (typeof UnreadCountScalarFieldEnum)[keyof typeof UnreadCountScalarFieldEnum]
 
 
 export const UnreadMessageScalarFieldEnum = {
@@ -1435,6 +1514,14 @@ export const MessageReactionOrderByRelevanceFieldEnum = {
 export type MessageReactionOrderByRelevanceFieldEnum = (typeof MessageReactionOrderByRelevanceFieldEnum)[keyof typeof MessageReactionOrderByRelevanceFieldEnum]
 
 
+export const UnreadCountOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+} as const
+
+export type UnreadCountOrderByRelevanceFieldEnum = (typeof UnreadCountOrderByRelevanceFieldEnum)[keyof typeof UnreadCountOrderByRelevanceFieldEnum]
+
+
 export const UnreadMessageOrderByRelevanceFieldEnum = {
   id: 'id',
   conversationId: 'conversationId',
@@ -1468,16 +1555,16 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
 
 
 /**
- * Reference to a field of type 'Boolean'
+ * Reference to a field of type 'Int'
  */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
 /**
- * Reference to a field of type 'Int'
+ * Reference to a field of type 'Boolean'
  */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1640,6 +1727,7 @@ export type GlobalOmitConfig = {
   messageDeletedBy?: Prisma.MessageDeletedByOmit
   messageEditHistory?: Prisma.MessageEditHistoryOmit
   messageReaction?: Prisma.MessageReactionOmit
+  unreadCount?: Prisma.UnreadCountOmit
   unreadMessage?: Prisma.UnreadMessageOmit
   conversationUnread?: Prisma.ConversationUnreadOmit
 }

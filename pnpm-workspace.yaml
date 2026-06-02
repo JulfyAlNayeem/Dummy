@@ -1,5 +1,5 @@
 packages:
-  - backend/api-service
+  - backend/root-service
   - frontend/messenger
   - frontend/social
   - backend/calling-service

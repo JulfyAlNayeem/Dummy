@@ -58,15 +58,15 @@ services:
   backend:
     build:
       context: .
-      dockerfile: backend/api-service/Dockerfile
-    container_name: api-service
+      dockerfile: backend/root-service/Dockerfile
+    container_name: root-service
     restart: always
     ports:
       - "3001:3001"
     volumes:
-      - ./backend/api-service/src:/app/backend/api-service/src
-      - ./backend/api-service/prisma:/app/backend/api-service/prisma
-      - ./backend/api-service/uploads:/app/backend/api-service/uploads
+      - ./backend/root-service/src:/app/backend/root-service/src
+      - ./backend/root-service/prisma:/app/backend/root-service/prisma
+      - ./backend/root-service/uploads:/app/backend/root-service/uploads
     environment:
       NODE_ENV: development
       PORT: 3001

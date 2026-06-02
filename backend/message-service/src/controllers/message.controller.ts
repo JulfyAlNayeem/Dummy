@@ -43,7 +43,10 @@ export const sendMessage = async (req: Request, res: Response): Promise<void> =>
       const existing = await prisma.conversation.findFirst({
         where: {
           isGroup: false,
-          participants: { every: { userId: { in: [userId, receiver] } } },
+          AND: [
+            { participants: { some: { userId } } },
+            { participants: { some: { userId: receiver } } },
+          ],
         } as any,
       });
       convId = existing?.id;
@@ -103,8 +106,22 @@ export const sendMessage = async (req: Request, res: Response): Promise<void> =>
 
     // Emit via socket
     const io = (req as any).app.get('io');
+    const formatted = formatMessage(message);
     if (io) {
-      io.to(`conv:${convId}`).emit('message:new', formatMessage(message));
+      io.to(`conv:${convId}`).emit('message:new', formatted);
+      // Also notify all participants via their personal rooms
+      const participants = await prisma.conversationParticipant.findMany({
+        where: { conversationId: convId },
+        select: { userId: true },
+      });
+      for (const { userId: uid } of participants) {
+        io.to(`user_${uid}`).emit('conversation_updated', { id: convId, _id: convId });
+        io.to(uid).emit('conversation_updated', { id: convId, _id: convId });
+        if (uid !== userId) {
+          io.to(`user_${uid}`).emit('newMessageNotification', { conversationId: convId, senderId: userId, message: formatted });
+          io.to(uid).emit('newMessageNotification', { conversationId: convId, senderId: userId, message: formatted });
+        }
+      }
     }
 
     // Update conversation last message
@@ -315,5 +332,121 @@ export const addReaction = async (req: Request, res: Response): Promise<void> =>
     res.json({ success: true });
   } catch (error: any) {
     res.status(500).json({ message: 'Failed to add reaction', error: error.message });
+  }
+};
+
+// ─── sendEmoji ────────────────────────────────────────────────────────────────
+
+export const sendEmoji = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userId = (req as any).user?.id;
+    const conversationId = req.params.conversationId || req.body.conversationId;
+    const { text, htmlEmoji, emojiType, receiver, clientTempId } = req.body;
+
+    if (!conversationId && !receiver) {
+      res.status(400).json({ message: 'conversationId or receiver required' });
+      return;
+    }
+
+    let convId = conversationId;
+    if (!convId && receiver) {
+      const existing = await prisma.conversation.findFirst({
+        where: { isGroup: false, AND: [{ participants: { some: { userId } } }, { participants: { some: { userId: receiver } } }] },
+      } as any);
+      convId = existing?.id;
+      if (!convId) {
+        const newConv = await prisma.conversation.create({ data: { isGroup: false, participants: { create: [{ userId }, { userId: receiver }] } } } as any);
+        convId = newConv.id;
+      }
+    }
+
+    const message = await prisma.message.create({
+      data: {
+        conversationId: convId,
+        senderId: userId,
+        receiverId: receiver || null,
+        text: text || null,
+        htmlEmoji: htmlEmoji || null,
+        emojiType: emojiType || null,
+        isBackendEncrypted: false,
+        messageType: 'text',
+        scheduledDeletionTime: new Date(Date.now() + 24 * 60 * 60 * 1000),
+      } as any,
+      include: { sender: { select: { id: true, name: true, image: true } }, media: true },
+    });
+
+    const io = (req as any).app.get('io');
+    const formatted = formatMessage(message);
+    if (io) {
+      io.to(`conv:${convId}`).emit('receiveMessage', formatted);
+      const participants = await prisma.conversationParticipant.findMany({ where: { conversationId: convId }, select: { userId: true } });
+      for (const { userId: uid } of participants) {
+        io.to(`user_${uid}`).emit('conversation_updated', { id: convId, _id: convId });
+        if (uid !== userId) {
+          io.to(`user_${uid}`).emit('newMessageNotification', { conversationId: convId, senderId: userId, message: formatted });
+        }
+      }
+    }
+
+    res.status(201).json({ message: formatted, clientTempId });
+  } catch (error: any) {
+    res.status(500).json({ message: 'Failed to send emoji', error: error.message });
+  }
+};
+
+// ─── replyMessage ─────────────────────────────────────────────────────────────
+
+export const replyMessage = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userId = (req as any).user?.id;
+    const { conversationId, messageId } = req.params;
+    const { text, clientTempId } = req.body;
+    const files: Express.Multer.File[] = (req as any).files || [];
+
+    const original = await prisma.message.findUnique({ where: { id: messageId } });
+    if (!original) { res.status(404).json({ message: 'Original message not found' }); return; }
+
+    let encryptedText: string | null = null;
+    let backendEncrypted = false;
+    if (text) {
+      try {
+        encryptedText = await encryptMessage(text);
+        backendEncrypted = true;
+      } catch {
+        encryptedText = text;
+      }
+    }
+
+    const messageType = files.length > 0 ? (files.length > 1 ? 'mixed' : mimeToMediaType(files[0].mimetype)) : 'text';
+    const message = await prisma.message.create({
+      data: {
+        conversationId,
+        senderId: userId,
+        text: encryptedText,
+        isBackendEncrypted: backendEncrypted,
+        messageType: messageType as any,
+        replyToId: messageId,
+        scheduledDeletionTime: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        ...(files.length > 0 && {
+          media: { create: files.map((f) => ({ url: `/uploads/${f.filename}`, type: mimeToMediaType(f.mimetype) as any, filename: f.originalname, size: f.size })) },
+        }),
+      } as any,
+      include: { sender: { select: { id: true, name: true, image: true } }, media: true, replyTo: { include: { sender: { select: { id: true, name: true } }, media: true } } },
+    });
+
+    const io = (req as any).app.get('io');
+    const formatted = formatMessage(message);
+    if (io) {
+      io.to(`conv:${conversationId}`).emit('receiveMessage', formatted);
+      const participants = await prisma.conversationParticipant.findMany({ where: { conversationId }, select: { userId: true } });
+      for (const { userId: uid } of participants) {
+        io.to(`user_${uid}`).emit('conversation_updated', { id: conversationId, _id: conversationId });
+        if (uid !== userId) io.to(`user_${uid}`).emit('newMessageNotification', { conversationId, senderId: userId, message: formatted });
+      }
+    }
+
+    res.status(201).json({ message: formatted, clientTempId });
+  } catch (error: any) {
+    res.status(500).json({ message: 'Failed to send reply', error: error.message });
   }
 };

@@ -7,6 +7,7 @@ import {
   deleteConversation,
   exchangeConversationKey,
   getAllConversations,
+  getClassJoinRequests,
   getConversationById,
   getConversationKeys,
   getDisappearingMessages,
@@ -47,6 +48,7 @@ router.delete('/conversation/:id', deleteConversation);
 router.post('/leave/:id', leaveConversation);
 router.get('/pending', getPendingConversationRequests);
 router.get('/groups', getGroupJoinRequests);
+router.get('/classes', getClassJoinRequests);
 router.post('/reports/conversation/:conversationId', reportConversation);
 router.get('/:userId', getAllConversations);
 

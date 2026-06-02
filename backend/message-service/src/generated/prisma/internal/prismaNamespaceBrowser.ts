@@ -60,6 +60,7 @@ export const ModelName = {
   MessageDeletedBy: 'MessageDeletedBy',
   MessageEditHistory: 'MessageEditHistory',
   MessageReaction: 'MessageReaction',
+  UnreadCount: 'UnreadCount',
   UnreadMessage: 'UnreadMessage',
   ConversationUnread: 'ConversationUnread'
 } as const
@@ -83,8 +84,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  image: 'image',
-  fileSendingAllowed: 'fileSendingAllowed'
+  image: 'image'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -188,6 +188,19 @@ export const MessageReactionScalarFieldEnum = {
 } as const
 
 export type MessageReactionScalarFieldEnum = (typeof MessageReactionScalarFieldEnum)[keyof typeof MessageReactionScalarFieldEnum]
+
+
+export const UnreadCountScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  unreadFriendRequestCount: 'unreadFriendRequestCount',
+  unreadGroupRequestCount: 'unreadGroupRequestCount',
+  unreadClassRequestCount: 'unreadClassRequestCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UnreadCountScalarFieldEnum = (typeof UnreadCountScalarFieldEnum)[keyof typeof UnreadCountScalarFieldEnum]
 
 
 export const UnreadMessageScalarFieldEnum = {
@@ -334,6 +347,14 @@ export const MessageReactionOrderByRelevanceFieldEnum = {
 } as const
 
 export type MessageReactionOrderByRelevanceFieldEnum = (typeof MessageReactionOrderByRelevanceFieldEnum)[keyof typeof MessageReactionOrderByRelevanceFieldEnum]
+
+
+export const UnreadCountOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+} as const
+
+export type UnreadCountOrderByRelevanceFieldEnum = (typeof UnreadCountOrderByRelevanceFieldEnum)[keyof typeof UnreadCountOrderByRelevanceFieldEnum]
 
 
 export const UnreadMessageOrderByRelevanceFieldEnum = {

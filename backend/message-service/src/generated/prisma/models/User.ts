@@ -28,21 +28,18 @@ export type UserMinAggregateOutputType = {
   id: string | null
   name: string | null
   image: string | null
-  fileSendingAllowed: boolean | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: string | null
   name: string | null
   image: string | null
-  fileSendingAllowed: boolean | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   name: number
   image: number
-  fileSendingAllowed: number
   _all: number
 }
 
@@ -51,21 +48,18 @@ export type UserMinAggregateInputType = {
   id?: true
   name?: true
   image?: true
-  fileSendingAllowed?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   name?: true
   image?: true
-  fileSendingAllowed?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   name?: true
   image?: true
-  fileSendingAllowed?: true
   _all?: true
 }
 
@@ -145,7 +139,6 @@ export type UserGroupByOutputType = {
   id: string
   name: string
   image: string
-  fileSendingAllowed: boolean
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -173,7 +166,6 @@ export type UserWhereInput = {
   id?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
   image?: Prisma.StringFilter<"User"> | string
-  fileSendingAllowed?: Prisma.BoolFilter<"User"> | boolean
   sentMessages?: Prisma.MessageListRelationFilter
   receivedMessages?: Prisma.MessageListRelationFilter
   readReceipts?: Prisma.MessageReadByListRelationFilter
@@ -185,7 +177,6 @@ export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   image?: Prisma.SortOrder
-  fileSendingAllowed?: Prisma.SortOrder
   sentMessages?: Prisma.MessageOrderByRelationAggregateInput
   receivedMessages?: Prisma.MessageOrderByRelationAggregateInput
   readReceipts?: Prisma.MessageReadByOrderByRelationAggregateInput
@@ -201,7 +192,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
   image?: Prisma.StringFilter<"User"> | string
-  fileSendingAllowed?: Prisma.BoolFilter<"User"> | boolean
   sentMessages?: Prisma.MessageListRelationFilter
   receivedMessages?: Prisma.MessageListRelationFilter
   readReceipts?: Prisma.MessageReadByListRelationFilter
@@ -213,7 +203,6 @@ export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   image?: Prisma.SortOrder
-  fileSendingAllowed?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -226,14 +215,12 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   image?: Prisma.StringWithAggregatesFilter<"User"> | string
-  fileSendingAllowed?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
 }
 
 export type UserCreateInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   readReceipts?: Prisma.MessageReadByCreateNestedManyWithoutUserInput
@@ -242,10 +229,9 @@ export type UserCreateInput = {
 }
 
 export type UserUncheckedCreateInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   readReceipts?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutUserInput
@@ -257,7 +243,6 @@ export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   readReceipts?: Prisma.MessageReadByUpdateManyWithoutUserNestedInput
@@ -269,7 +254,6 @@ export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   readReceipts?: Prisma.MessageReadByUncheckedUpdateManyWithoutUserNestedInput
@@ -278,24 +262,21 @@ export type UserUncheckedUpdateInput = {
 }
 
 export type UserCreateManyInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
 }
 
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserOrderByRelevanceInput = {
@@ -308,21 +289,18 @@ export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   image?: Prisma.SortOrder
-  fileSendingAllowed?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   image?: Prisma.SortOrder
-  fileSendingAllowed?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   image?: Prisma.SortOrder
-  fileSendingAllowed?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -337,10 +315,6 @@ export type UserNullableScalarRelationFilter = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
 }
 
 export type UserCreateNestedOneWithoutSentMessagesInput = {
@@ -416,10 +390,9 @@ export type UserUpdateOneRequiredWithoutReactionsNestedInput = {
 }
 
 export type UserCreateWithoutSentMessagesInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   readReceipts?: Prisma.MessageReadByCreateNestedManyWithoutUserInput
   deletions?: Prisma.MessageDeletedByCreateNestedManyWithoutUserInput
@@ -427,10 +400,9 @@ export type UserCreateWithoutSentMessagesInput = {
 }
 
 export type UserUncheckedCreateWithoutSentMessagesInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   readReceipts?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutUserInput
   deletions?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutUserInput
@@ -443,10 +415,9 @@ export type UserCreateOrConnectWithoutSentMessagesInput = {
 }
 
 export type UserCreateWithoutReceivedMessagesInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   readReceipts?: Prisma.MessageReadByCreateNestedManyWithoutUserInput
   deletions?: Prisma.MessageDeletedByCreateNestedManyWithoutUserInput
@@ -454,10 +425,9 @@ export type UserCreateWithoutReceivedMessagesInput = {
 }
 
 export type UserUncheckedCreateWithoutReceivedMessagesInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   readReceipts?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutUserInput
   deletions?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutUserInput
@@ -484,7 +454,6 @@ export type UserUpdateWithoutSentMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   readReceipts?: Prisma.MessageReadByUpdateManyWithoutUserNestedInput
   deletions?: Prisma.MessageDeletedByUpdateManyWithoutUserNestedInput
@@ -495,7 +464,6 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   readReceipts?: Prisma.MessageReadByUncheckedUpdateManyWithoutUserNestedInput
   deletions?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutUserNestedInput
@@ -517,7 +485,6 @@ export type UserUpdateWithoutReceivedMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   readReceipts?: Prisma.MessageReadByUpdateManyWithoutUserNestedInput
   deletions?: Prisma.MessageDeletedByUpdateManyWithoutUserNestedInput
@@ -528,7 +495,6 @@ export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   readReceipts?: Prisma.MessageReadByUncheckedUpdateManyWithoutUserNestedInput
   deletions?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutUserNestedInput
@@ -536,10 +502,9 @@ export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
 }
 
 export type UserCreateWithoutReadReceiptsInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   deletions?: Prisma.MessageDeletedByCreateNestedManyWithoutUserInput
@@ -547,10 +512,9 @@ export type UserCreateWithoutReadReceiptsInput = {
 }
 
 export type UserUncheckedCreateWithoutReadReceiptsInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   deletions?: Prisma.MessageDeletedByUncheckedCreateNestedManyWithoutUserInput
@@ -577,7 +541,6 @@ export type UserUpdateWithoutReadReceiptsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   deletions?: Prisma.MessageDeletedByUpdateManyWithoutUserNestedInput
@@ -588,7 +551,6 @@ export type UserUncheckedUpdateWithoutReadReceiptsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   deletions?: Prisma.MessageDeletedByUncheckedUpdateManyWithoutUserNestedInput
@@ -596,10 +558,9 @@ export type UserUncheckedUpdateWithoutReadReceiptsInput = {
 }
 
 export type UserCreateWithoutDeletionsInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   readReceipts?: Prisma.MessageReadByCreateNestedManyWithoutUserInput
@@ -607,10 +568,9 @@ export type UserCreateWithoutDeletionsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletionsInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   readReceipts?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutUserInput
@@ -637,7 +597,6 @@ export type UserUpdateWithoutDeletionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   readReceipts?: Prisma.MessageReadByUpdateManyWithoutUserNestedInput
@@ -648,7 +607,6 @@ export type UserUncheckedUpdateWithoutDeletionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   readReceipts?: Prisma.MessageReadByUncheckedUpdateManyWithoutUserNestedInput
@@ -656,10 +614,9 @@ export type UserUncheckedUpdateWithoutDeletionsInput = {
 }
 
 export type UserCreateWithoutReactionsInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
   readReceipts?: Prisma.MessageReadByCreateNestedManyWithoutUserInput
@@ -667,10 +624,9 @@ export type UserCreateWithoutReactionsInput = {
 }
 
 export type UserUncheckedCreateWithoutReactionsInput = {
-  id?: string
-  name: string
+  id: string
+  name?: string
   image?: string
-  fileSendingAllowed?: boolean
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
   readReceipts?: Prisma.MessageReadByUncheckedCreateNestedManyWithoutUserInput
@@ -697,7 +653,6 @@ export type UserUpdateWithoutReactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
   readReceipts?: Prisma.MessageReadByUpdateManyWithoutUserNestedInput
@@ -708,7 +663,6 @@ export type UserUncheckedUpdateWithoutReactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
   readReceipts?: Prisma.MessageReadByUncheckedUpdateManyWithoutUserNestedInput
@@ -786,7 +740,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   name?: boolean
   image?: boolean
-  fileSendingAllowed?: boolean
   sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
   receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>
   readReceipts?: boolean | Prisma.User$readReceiptsArgs<ExtArgs>
@@ -801,10 +754,9 @@ export type UserSelectScalar = {
   id?: boolean
   name?: boolean
   image?: boolean
-  fileSendingAllowed?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "image" | "fileSendingAllowed", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "image", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
   receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>
@@ -827,7 +779,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     name: string
     image: string
-    fileSendingAllowed: boolean
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1205,7 +1156,6 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly image: Prisma.FieldRef<"User", 'String'>
-  readonly fileSendingAllowed: Prisma.FieldRef<"User", 'Boolean'>
 }
     
 

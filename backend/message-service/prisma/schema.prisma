@@ -15,7 +15,9 @@ datasource db {
 // ─── Read-only stubs ─────────────────────────────────────────────────────────
 
 model User {
-  id String @id
+  id    String @id
+  name  String @default("")
+  image String @default("/images/avatar/default-avatar.svg")
 
   sentMessages     Message[]          @relation("MessageSender")
   receivedMessages Message[]          @relation("MessageReceiver")

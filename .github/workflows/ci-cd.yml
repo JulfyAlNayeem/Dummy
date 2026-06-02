@@ -2,7 +2,7 @@
 # CI/CD Pipeline for Dummy Project
 # =============================================================================
 # WORKFLOW STAGES:
-# 1. test-backend      - Validates api-service Prisma + TypeScript build
+# 1. test-backend      - Validates root-service Prisma + TypeScript build
 # 2. test-frontend     - Vite builds for messenger + social (parallel)
 # 3. test-microservices- Prisma validate/generate for all 6 microservices
 # 4. build-*           - 10 Docker images built IN PARALLEL (one job each)
@@ -33,10 +33,10 @@ env:
 
 jobs:
   # ===========================================================================
-  # JOB 1a: TEST BACKEND (api-service)
+  # JOB 1a: TEST BACKEND (root-service)
   # ===========================================================================
   test-backend:
-    name: Test - Backend (api-service)
+    name: Test - Backend (root-service)
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -62,12 +62,12 @@ jobs:
     - name: Validate & generate Prisma client
       env:
         DATABASE_URL: mysql://user:password@localhost:3306/dummy
-      run: cd backend/api-service && npx prisma validate && npx prisma generate
+      run: cd backend/root-service && npx prisma validate && npx prisma generate
 
     - name: Build TypeScript
       env:
         DATABASE_URL: mysql://dummy:dummy@localhost:3306/dummy
-      run: cd backend/api-service && pnpm run build
+      run: cd backend/root-service && pnpm run build
 
   # ===========================================================================
   # JOB 1b: TEST FRONTEND (both apps in parallel steps)
@@ -143,7 +143,7 @@ jobs:
   # Each service gets its own job so they run simultaneously.
   # ===========================================================================
   build-api:
-    name: Build - api-service
+    name: Build - root-service
     runs-on: ubuntu-latest
     needs: [test-backend, test-frontend, test-microservices]
     if: github.ref == 'refs/heads/main'
@@ -157,11 +157,11 @@ jobs:
     - uses: docker/build-push-action@v5
       with:
         context: .
-        file: ./backend/api-service/Dockerfile
+        file: ./backend/root-service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/dummy-backend:latest
-        cache-from: type=gha,scope=api-service
-        cache-to: type=gha,mode=max,scope=api-service
+        cache-from: type=gha,scope=root-service
+        cache-to: type=gha,mode=max,scope=root-service
 
   build-messenger:
     name: Build - frontend-messenger
@@ -415,9 +415,9 @@ jobs:
           # STEP 3: Ensure uploads directory exists with correct permissions
           # -------------------------------------------------------------------
           echo "Setting up uploads directory..."
-          sudo mkdir -p ./backend/api-service/uploads/images
-          sudo chown -R 1000:1000 ./backend/api-service/uploads
-          sudo chmod -R 755 ./backend/api-service/uploads
+          sudo mkdir -p ./backend/root-service/uploads/images
+          sudo chown -R 1000:1000 ./backend/root-service/uploads
+          sudo chmod -R 755 ./backend/root-service/uploads
           
           # -------------------------------------------------------------------
           # STEP 4: Update Docker Hub username in environment file
@@ -455,7 +455,7 @@ jobs:
           # STEP 7: Database schema health check + Prisma migrations
           #
           # DESIGN PRINCIPLES:
-          #  - backend (api-service) is the SOLE OWNER of shared tables
+          #  - backend (root-service) is the SOLE OWNER of shared tables
           #    (users, conversations). It always migrates first.
           #  - All other services use IF NOT EXISTS for shared tables so
           #    their migrations never conflict with backend's schema.
@@ -498,7 +498,7 @@ jobs:
 
           # --- 7b: DB health check -------------------------------------------
           # Detect if shared tables are missing critical columns owned by
-          # backend (api-service). This catches: fresh DB, corrupted DB from
+          # backend (root-service). This catches: fresh DB, corrupted DB from
           # accidental `db push`, or a botched manual recovery.
           echo "Checking DB schema health..."
           DB_EMAIL_COL=$($COMPOSE_CMD exec -T mysql sh -lc \
@@ -510,12 +510,12 @@ jobs:
                   AND COLUMN_NAME='"'"'email'"'"';" 2>/dev/null' \
             | tr -d '[:space:]' || echo "0")
 
-          BACKEND_MIG=$(ls -1 backend/api-service/prisma/migrations 2>/dev/null \
+          BACKEND_MIG=$(ls -1 backend/root-service/prisma/migrations 2>/dev/null \
             | grep -v migration_lock | sort | tail -1 || true)
 
           if [ "$DB_EMAIL_COL" != "1" ]; then
             echo "WARNING: DB schema is broken or empty (users.email missing)."
-            echo "Performing full schema reset from backend (api-service)..."
+            echo "Performing full schema reset from backend (root-service)..."
 
             # Wipe and rebuild entire DB from the authoritative schema.
             # backend owns users + conversations + all other shared tables.
@@ -647,13 +647,13 @@ jobs:
           echo "Current container status:"
           sudo docker ps -a | grep dummy || true
           
-          BACKEND_STATUS=$(sudo docker ps --filter "name=api-service" --format "{{.Status}}" 2>/dev/null || echo "")
+          BACKEND_STATUS=$(sudo docker ps --filter "name=root-service" --format "{{.Status}}" 2>/dev/null || echo "")
           MESSENGER_STATUS=$(sudo docker ps --filter "name=dummy-messenger-prod" --format "{{.Status}}" 2>/dev/null || echo "")
           SOCIAL_FE_STATUS=$(sudo docker ps --filter "name=dummy-social-frontend-prod" --format "{{.Status}}" 2>/dev/null || echo "")
           
           if [ -z "$BACKEND_STATUS" ]; then
-            echo "ERROR: Backend (api-service) container is not running!"
-            sudo docker logs api-service --tail 100 2>&1 || true
+            echo "ERROR: Backend (root-service) container is not running!"
+            sudo docker logs root-service --tail 100 2>&1 || true
             exit 1
           fi
           
@@ -669,7 +669,7 @@ jobs:
             exit 1
           fi
           
-          echo "Backend (api-service) status: $BACKEND_STATUS"
+          echo "Backend (root-service) status: $BACKEND_STATUS"
           echo "Messenger frontend status: $MESSENGER_STATUS"
           echo "Social frontend status: $SOCIAL_FE_STATUS"
           

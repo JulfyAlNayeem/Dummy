@@ -6,12 +6,12 @@ import crypto from 'crypto';
 import { sendEmail } from '../../common/utils/email.service.js';
 
 // Generate JWT tokens
-const generateTokens = (id: string) => {
-  const accessToken = jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET!, {
+const generateTokens = (id: string, role: string) => {
+  const accessToken = jwt.sign({ id, role }, process.env.ACCESS_TOKEN_SECRET!, {
     expiresIn: '15m',
   });
 
-  const refreshToken = jwt.sign({ id }, process.env.REFRESH_TOKEN_SECRET!, {
+  const refreshToken = jwt.sign({ id, role }, process.env.REFRESH_TOKEN_SECRET!, {
     expiresIn: '7d',
   });
 
@@ -98,7 +98,7 @@ export const login = async (req: Request, res: Response) => {
     }
 
     // Generate tokens
-    const { accessToken, refreshToken } = generateTokens(user.id);
+    const { accessToken, refreshToken } = generateTokens(user.id, user.role);
 
     // Save refresh token to user
     await prisma.user.update({
@@ -186,7 +186,7 @@ export const refreshToken = async (req: Request, res: Response) => {
     }
 
     // Generate new tokens
-    const { accessToken, refreshToken: newRefreshToken } = generateTokens(user.id);
+    const { accessToken, refreshToken: newRefreshToken } = generateTokens(user.id, user.role);
 
     // Update refresh token
     await prisma.user.update({
