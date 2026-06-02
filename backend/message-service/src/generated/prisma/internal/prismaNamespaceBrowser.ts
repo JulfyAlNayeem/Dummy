@@ -92,6 +92,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const ConversationScalarFieldEnum = {
   id: 'id',
+  isGroup: 'isGroup',
   autoDeleteMessagesAfter: 'autoDeleteMessagesAfter',
   permText: 'permText',
   permImage: 'permImage',
@@ -100,7 +101,9 @@ export const ConversationScalarFieldEnum = {
   permFile: 'permFile',
   fileSendingAllowed: 'fileSendingAllowed',
   smteKeyVersion: 'smteKeyVersion',
-  v1Keys: 'v1Keys'
+  v1Keys: 'v1Keys',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]

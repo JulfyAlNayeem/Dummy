@@ -28,7 +28,9 @@ function mimeToMediaType(mime: string) {
 export const sendMessage = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = (req as any).user?.id;
-    const conversationId = req.params.conversationId || req.body.conversationId;
+    const rawConversationId = req.params.conversationId || req.body.conversationId;
+    // Treat literal "new" (frontend placeholder for unsaved chats) as no ID
+    const conversationId = (rawConversationId && rawConversationId !== 'new') ? rawConversationId : undefined;
     const { text, receiver, clientTempId } = req.body;
     const files: Express.Multer.File[] = (req as any).files || [];
 

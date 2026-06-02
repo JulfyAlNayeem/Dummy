@@ -149,11 +149,38 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
 
   // Auth middleware
   io.use((socket, next) => {
-    const token =
-      socket.handshake.auth?.token ||
-      socket.handshake.headers?.cookie?.match(/accessToken=([^;]+)/)?.[1];
+    let token: string | null = null;
 
-    if (!token) return next(new Error('Unauthorized'));
+    // 1. Try cookie header (parsed properly)
+    const rawCookie = socket.handshake.headers?.cookie;
+    if (rawCookie) {
+      // Use simple split parse to avoid needing the cookie package
+      const pairs = rawCookie.split(';');
+      for (const pair of pairs) {
+        const idx = pair.indexOf('=');
+        if (idx === -1) continue;
+        const key = pair.slice(0, idx).trim();
+        if (key === 'accessToken') {
+          token = decodeURIComponent(pair.slice(idx + 1).trim());
+          break;
+        }
+      }
+    }
+
+    // 2. Fallback: auth object (e.g. passed explicitly by client)
+    if (!token && socket.handshake.auth?.token) {
+      token = socket.handshake.auth.token as string;
+    }
+
+    // 3. Fallback: query string token
+    if (!token && socket.handshake.query?.token) {
+      token = socket.handshake.query.token as string;
+    }
+
+    if (!token) {
+      logger.warn({ id: socket.id, hasCookie: !!rawCookie }, 'socket auth: no token found');
+      return next(new Error('Unauthorized'));
+    }
 
     try {
       const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET || 'secret') as any;
@@ -227,6 +254,7 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
       try {
         let convId: string | undefined = conversationId;
         if (!convId && receiver) {
+          // Find existing DM conversation between both users
           const existing = await (prisma as any).conversation.findFirst({
             where: {
               isGroup: false,
@@ -239,18 +267,59 @@ export const initializeSocketServer = async (server: HttpServer, redis: any): Pr
           convId = existing?.id;
 
           if (!convId) {
-            const newConv = await (prisma as any).conversation.create({
-              data: {
-                isGroup: false,
-                participants: { create: [{ userId: senderId }, { userId: receiver }] },
-              } as any,
-            });
-            convId = newConv.id;
+            // Truly new conversation
+            try {
+              const newConv = await (prisma as any).conversation.create({
+                data: {
+                  isGroup: false,
+                  participants: { create: [{ userId: senderId }, { userId: receiver }] },
+                } as any,
+              });
+              convId = newConv.id;
 
-            // Make the receiver's sockets join the new conversation rooms immediately
-            io.to(`user_${receiver}`).socketsJoin(`conv:${convId}`);
-            io.to(`user_${receiver}`).socketsJoin(convId);
-            io.to(`user_${receiver}`).emit('newConversation', { id: convId, _id: convId, senderId });
+              io.to(`user_${receiver}`).socketsJoin(`conv:${convId}`);
+              io.to(`user_${receiver}`).socketsJoin(convId);
+              io.to(`user_${receiver}`).emit('newConversation', { id: convId, _id: convId, senderId });
+            } catch (createErr: any) {
+              if (createErr?.code === 'P2002') {
+                // Race condition or orphaned partial data — find conversation where sender
+                // is already a participant (even without receiver) and upsert the receiver
+                const orphan = await (prisma as any).conversation.findFirst({
+                  where: {
+                    isGroup: false,
+                    participants: { some: { userId: senderId } },
+                    NOT: { participants: { some: { userId: receiver } } },
+                  },
+                  select: { id: true },
+                });
+                if (orphan?.id) {
+                  await (prisma as any).conversationParticipant.upsert({
+                    where: { conversationId_userId: { conversationId: orphan.id, userId: receiver } },
+                    create: { conversationId: orphan.id, userId: receiver },
+                    update: {},
+                  });
+                  convId = orphan.id;
+                } else {
+                  // Both participants exist, just find the conversation
+                  const retry = await (prisma as any).conversation.findFirst({
+                    where: {
+                      isGroup: false,
+                      AND: [
+                        { participants: { some: { userId: senderId } } },
+                        { participants: { some: { userId: receiver } } },
+                      ],
+                    },
+                  });
+                  if (retry?.id) {
+                    convId = retry.id;
+                  } else {
+                    throw createErr;
+                  }
+                }
+              } else {
+                throw createErr;
+              }
+            }
           }
         }
 

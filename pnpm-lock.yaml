@@ -8,136 +8,6 @@ importers:
 
   .: {}
 
-  backend/api-service:
-    dependencies:
-      '@prisma/adapter-mariadb':
-        specifier: ^7.4.0
-        version: 7.4.0
-      '@prisma/client':
-        specifier: ^7.4.0
-        version: 7.4.0(prisma@7.4.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(typescript@5.9.3)
-      '@socket.io/redis-adapter':
-        specifier: ^8.3.0
-        version: 8.3.0(socket.io-adapter@2.5.5)
-      bcryptjs:
-        specifier: ^3.0.3
-        version: 3.0.3
-      compression:
-        specifier: ^1.8.1
-        version: 1.8.1
-      connect-redis:
-        specifier: ^9.0.0
-        version: 9.0.0(express-session@1.19.0)(redis@5.10.0)
-      cookie:
-        specifier: ^1.1.1
-        version: 1.1.1
-      cookie-parser:
-        specifier: ^1.4.7
-        version: 1.4.7
-      cors:
-        specifier: ^2.8.6
-        version: 2.8.6
-      dayjs:
-        specifier: ^1.11.19
-        version: 1.11.19
-      dotenv:
-        specifier: ^17.3.1
-        version: 17.3.1
-      express:
-        specifier: ^5.2.1
-        version: 5.2.1
-      express-rate-limit:
-        specifier: ^8.2.1
-        version: 8.2.1(express@5.2.1)
-      express-session:
-        specifier: ^1.19.0
-        version: 1.19.0
-      express-validator:
-        specifier: ^7.3.1
-        version: 7.3.1
-      helmet:
-        specifier: ^8.1.0
-        version: 8.1.0
-      jsonwebtoken:
-        specifier: ^9.0.3
-        version: 9.0.3
-      mariadb:
-        specifier: ^3.4.5
-        version: 3.4.5
-      multer:
-        specifier: ^2.0.2
-        version: 2.1.1
-      node-cron:
-        specifier: ^4.2.1
-        version: 4.2.1
-      pino:
-        specifier: ^10.3.1
-        version: 10.3.1
-      pino-http:
-        specifier: ^11.0.0
-        version: 11.0.0
-      pino-pretty:
-        specifier: ^13.1.3
-        version: 13.1.3
-      redis:
-        specifier: ^5.10.0
-        version: 5.10.0
-      socket.io:
-        specifier: ^4.8.3
-        version: 4.8.3
-      uuid:
-        specifier: ^13.0.0
-        version: 13.0.0
-    devDependencies:
-      '@types/bcryptjs':
-        specifier: ^2.4.6
-        version: 2.4.6
-      '@types/compression':
-        specifier: ^1.8.1
-        version: 1.8.1
-      '@types/cookie':
-        specifier: ^0.6.0
-        version: 0.6.0
-      '@types/cookie-parser':
-        specifier: ^1.4.10
-        version: 1.4.10(@types/express@5.0.6)
-      '@types/cors':
-        specifier: ^2.8.19
-        version: 2.8.19
-      '@types/express':
-        specifier: ^5.0.6
-        version: 5.0.6
-      '@types/express-session':
-        specifier: ^1.18.2
-        version: 1.18.2
-      '@types/jsonwebtoken':
-        specifier: ^9.0.10
-        version: 9.0.10
-      '@types/multer':
-        specifier: ^2.0.0
-        version: 2.1.0
-      '@types/node':
-        specifier: ^25.2.3
-        version: 25.2.3
-      '@types/uuid':
-        specifier: ^10.0.0
-        version: 10.0.0
-      nodemon:
-        specifier: ^3.1.11
-        version: 3.1.11
-      prisma:
-        specifier: ^7.4.0
-        version: 7.4.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@types/node@25.2.3)(typescript@5.9.3)
-      tsx:
-        specifier: ^4.21.0
-        version: 4.21.0
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
-
   backend/calling-service:
     dependencies:
       '@prisma/adapter-mariadb':
@@ -437,6 +307,136 @@ importers:
         version: 7.4.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       tsx:
         specifier: ^4.19.0
+        version: 4.21.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  backend/root-service:
+    dependencies:
+      '@prisma/adapter-mariadb':
+        specifier: ^7.4.0
+        version: 7.4.0
+      '@prisma/client':
+        specifier: ^7.4.0
+        version: 7.4.0(prisma@7.4.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(typescript@5.9.3)
+      '@socket.io/redis-adapter':
+        specifier: ^8.3.0
+        version: 8.3.0(socket.io-adapter@2.5.5)
+      bcryptjs:
+        specifier: ^3.0.3
+        version: 3.0.3
+      compression:
+        specifier: ^1.8.1
+        version: 1.8.1
+      connect-redis:
+        specifier: ^9.0.0
+        version: 9.0.0(express-session@1.19.0)(redis@5.10.0)
+      cookie:
+        specifier: ^1.1.1
+        version: 1.1.1
+      cookie-parser:
+        specifier: ^1.4.7
+        version: 1.4.7
+      cors:
+        specifier: ^2.8.6
+        version: 2.8.6
+      dayjs:
+        specifier: ^1.11.19
+        version: 1.11.19
+      dotenv:
+        specifier: ^17.3.1
+        version: 17.3.1
+      express:
+        specifier: ^5.2.1
+        version: 5.2.1
+      express-rate-limit:
+        specifier: ^8.2.1
+        version: 8.2.1(express@5.2.1)
+      express-session:
+        specifier: ^1.19.0
+        version: 1.19.0
+      express-validator:
+        specifier: ^7.3.1
+        version: 7.3.1
+      helmet:
+        specifier: ^8.1.0
+        version: 8.1.0
+      jsonwebtoken:
+        specifier: ^9.0.3
+        version: 9.0.3
+      mariadb:
+        specifier: ^3.4.5
+        version: 3.4.5
+      multer:
+        specifier: ^2.0.2
+        version: 2.1.1
+      node-cron:
+        specifier: ^4.2.1
+        version: 4.2.1
+      pino:
+        specifier: ^10.3.1
+        version: 10.3.1
+      pino-http:
+        specifier: ^11.0.0
+        version: 11.0.0
+      pino-pretty:
+        specifier: ^13.1.3
+        version: 13.1.3
+      redis:
+        specifier: ^5.10.0
+        version: 5.10.0
+      socket.io:
+        specifier: ^4.8.3
+        version: 4.8.3
+      uuid:
+        specifier: ^13.0.0
+        version: 13.0.0
+    devDependencies:
+      '@types/bcryptjs':
+        specifier: ^2.4.6
+        version: 2.4.6
+      '@types/compression':
+        specifier: ^1.8.1
+        version: 1.8.1
+      '@types/cookie':
+        specifier: ^0.6.0
+        version: 0.6.0
+      '@types/cookie-parser':
+        specifier: ^1.4.10
+        version: 1.4.10(@types/express@5.0.6)
+      '@types/cors':
+        specifier: ^2.8.19
+        version: 2.8.19
+      '@types/express':
+        specifier: ^5.0.6
+        version: 5.0.6
+      '@types/express-session':
+        specifier: ^1.18.2
+        version: 1.18.2
+      '@types/jsonwebtoken':
+        specifier: ^9.0.10
+        version: 9.0.10
+      '@types/multer':
+        specifier: ^2.0.0
+        version: 2.1.0
+      '@types/node':
+        specifier: ^25.2.3
+        version: 25.2.3
+      '@types/uuid':
+        specifier: ^10.0.0
+        version: 10.0.0
+      nodemon:
+        specifier: ^3.1.11
+        version: 3.1.11
+      prisma:
+        specifier: ^7.4.0
+        version: 7.4.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@types/node@25.2.3)(typescript@5.9.3)
+      tsx:
+        specifier: ^4.21.0
         version: 4.21.0
       typescript:
         specifier: ^5.9.3

@@ -63,15 +63,27 @@ export const startSessionCreationScheduler = async (): Promise<void> => {
   try {
     const classes = await prisma.conversation.findMany({
       where: { groupType: 'classroom' },
-      include: { selectedDays: true, classProfile: true },
+      include: { selectedDays: true },
     });
 
+    // Fetch class profiles separately — table may not exist in all environments
+    let profileMap: Record<string, any> = {};
+    try {
+      const profiles = await prisma.classProfile.findMany({
+        where: { conversationId: { in: classes.map((c) => c.id) } },
+      });
+      for (const p of profiles) profileMap[p.conversationId] = p;
+    } catch {
+      logger.warn('class_profiles table not available; sessions will use defaults');
+    }
+
     for (const cls of classes) {
+      const profile = profileMap[cls.id];
       scheduleSessionCronForClass({
         id: cls.id,
-        startTime: cls.classProfile?.startTime ?? null,
-        cutoffTime: cls.classProfile?.cutoffTime ?? null,
-        classType: cls.classProfile?.classType ?? null,
+        startTime: profile?.startTime ?? null,
+        cutoffTime: profile?.cutoffTime ?? null,
+        classType: profile?.classType ?? null,
         selectedDayNumbers: cls.selectedDays.map((d) => d.day),
       });
     }

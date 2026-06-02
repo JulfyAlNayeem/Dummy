@@ -179,6 +179,7 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }): JSX.Elem
       // In both dev and production, connect to same origin
       // Vite proxy (dev) and nginx (prod) will forward /socket.io to backend
       const socketUrl = window.location.origin;
+      const messageToken = sessionStorage.getItem('msg_token') || undefined;
       
       const apiSocket = io(socketUrl, {
         withCredentials: true, // Cookies will be sent automatically
@@ -194,6 +195,7 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }): JSX.Elem
       const messageSocket = io(socketUrl, {
         withCredentials: true,
         path: '/message-socket',
+        auth: messageToken ? { token: messageToken } : {},
         reconnection: true,
         reconnectionDelay: 1000,
         reconnectionDelayMax: 5000,
@@ -262,6 +264,7 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }): JSX.Elem
         // Dispatch setCredentials to update Redux state
         // Tokens are now stored in HTTP-only cookies by the backend (more secure)
         if (data && data.user) {
+          if (data.access) sessionStorage.setItem('msg_token', data.access);
           dispatch(setCredentials({ user: data.user, isAuthenticated: true }));
           initializeSocket(data.user);
         }
@@ -290,6 +293,7 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }): JSX.Elem
         throw error;
       } finally {
         // Cookies are cleared by the backend
+        sessionStorage.removeItem('msg_token');
         if (socket.current) {
           socket.current.disconnect();
           socket.current = null;

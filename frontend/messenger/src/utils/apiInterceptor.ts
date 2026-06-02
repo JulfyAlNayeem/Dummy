@@ -34,6 +34,10 @@ apiInterceptor.interceptors.response.use(
 
         if (response.status === 200) {
           // Cookies are automatically updated by the browser
+          // Update the sessionStorage token used by message socket auth
+          if (response.data?.access) {
+            sessionStorage.setItem('msg_token', response.data.access);
+          }
           // Retry the original request
           return apiInterceptor(originalRequest);
         }

@@ -29,16 +29,19 @@ model User {
 }
 
 model Conversation {
-  id                      String  @id @default(uuid())
-  autoDeleteMessagesAfter Int     @default(24)
-  permText                Boolean @default(true)
-  permImage               Boolean @default(true)
-  permVoice               Boolean @default(false)
-  permVideo               Boolean @default(false)
-  permFile                Boolean @default(false)
-  fileSendingAllowed      Boolean @default(false)
-  smteKeyVersion          Int     @default(0)
-  v1Keys                  Json?
+  id                      String   @id @default(uuid())
+  isGroup                 Boolean  @default(false) @map("is_group")
+  autoDeleteMessagesAfter Int      @default(24) @map("auto_delete_messages_after")
+  permText                Boolean  @default(true) @map("perm_text")
+  permImage               Boolean  @default(true) @map("perm_image")
+  permVoice               Boolean  @default(false) @map("perm_voice")
+  permVideo               Boolean  @default(false) @map("perm_video")
+  permFile                Boolean  @default(false) @map("perm_file")
+  fileSendingAllowed      Boolean  @default(false) @map("file_sending_allowed")
+  smteKeyVersion          Int      @default(0) @map("smte_key_version")
+  v1Keys                  Json?    @map("v1_keys")
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
 
   messages            Message[]
   participants        ConversationParticipant[]

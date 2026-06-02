@@ -1,7 +1,3 @@
-// Prisma schema - Class Service
-// Owns: ClassProfile, Session, AttendanceLog, JoinRequest, AlertnessSession, AssignmentSubmission
-// Stubs: User + core conversation aggregate tables
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -11,7 +7,1227 @@ datasource db {
   provider = "mysql"
 }
 
-// ─── Enums ───────────────────────────────────────────────────────────────────
+model User {
+  id                                                                         String                       @id @default(uuid())
+  name                                                                       String                       @unique
+  email                                                                      String                       @unique
+  password                                                                   String
+  gender                                                                     String
+  image                                                                      String                       @default("/images/avatar/default-avatar.svg")
+  bio                                                                        String?                      @db.VarChar(150)
+  role                                                                       UserRole                     @default(user)
+  is_active                                                                  Boolean                      @default(false)
+  last_seen                                                                  DateTime?
+  themeIndex                                                                 Int                          @default(0)
+  fileSendingAllowed                                                         Boolean                      @default(false)
+  notif_new_message                                                          Boolean?
+  notif_mention                                                              Boolean?
+  notif_sound                                                                Boolean?
+  two_factor_enabled                                                         Boolean                      @default(false)
+  two_factor_secret                                                          String?
+  is_email_verified                                                          Boolean                      @default(false)
+  email_verification_token                                                   String?
+  password_reset_token                                                       String?
+  password_reset_expires                                                     DateTime?
+  refresh_token                                                              String?                      @db.Text
+  blocked_at                                                                 DateTime?
+  block_reason                                                               String?
+  block_duration                                                             String?
+  createdAt                                                                  DateTime                     @default(now())
+  updatedAt                                                                  DateTime
+  cover_image                                                                String?
+  website                                                                    String?
+  location                                                                   String?
+  admin_activity_logs                                                        admin_activity_logs[]
+  admin_settings                                                             admin_settings[]
+  alertness_responses                                                        alertness_responses[]
+  alertnessSessions                                                          AlertnessSession[]           @relation("AlertnessSessionStarter")
+  markedAssignments                                                          AssignmentSubmission[]       @relation("MarkedAssignments")
+  submittedAssignments                                                       AssignmentSubmission[]       @relation("SubmittedAssignments")
+  attendanceLogs                                                             AttendanceLog[]
+  blocks_blocks_blockedIdTousers                                             blocks[]                     @relation("blocks_blockedIdTousers")
+  blocks_blocks_blockerIdTousers                                             blocks[]                     @relation("blocks_blockerIdTousers")
+  bookmarks                                                                  bookmarks[]
+  admins                                                                     ConversationAdmin[]
+  conversation_block_entries_conversation_block_entries_blockedByIdTousers   conversation_block_entries[] @relation("conversation_block_entries_blockedByIdTousers")
+  conversation_block_entries_conversation_block_entries_blockedUserIdTousers conversation_block_entries[] @relation("conversation_block_entries_blockedUserIdTousers")
+  moderators                                                                 ConversationModerator[]
+  participants                                                               ConversationParticipant[]
+  conversation_unreads                                                       conversation_unreads[]
+  conversations                                                              Conversation[]
+  device_tokens                                                              device_tokens[]
+  files                                                                      files[]
+  form_assignees                                                             form_assignees[]
+  form_assignments                                                           form_assignments[]
+  form_submissions                                                           form_submissions[]
+  forms                                                                      forms[]
+  friend_entries                                                             friend_entries[]
+  friend_lists                                                               friend_lists?
+  friendships_friendships_recipientIdTousers                                 friendships[]                @relation("friendships_recipientIdTousers")
+  friendships_friendships_requesterIdTousers                                 friendships[]                @relation("friendships_requesterIdTousers")
+  processedRequests                                                          JoinRequest[]                @relation("JoinProcessor")
+  joinRequests                                                               JoinRequest[]                @relation("JoinRequester")
+  message_deleted_by                                                         message_deleted_by[]
+  message_reactions                                                          message_reactions[]
+  message_read_by                                                            message_read_by[]
+  messages_messages_receiverIdTousers                                        messages[]                   @relation("messages_receiverIdTousers")
+  messages_messages_senderIdTousers                                          messages[]                   @relation("messages_senderIdTousers")
+  notice_likes                                                               notice_likes[]
+  notice_reads                                                               notice_reads[]
+  notices                                                                    notices[]
+  notifications_notifications_recipientIdTousers                             notifications[]              @relation("notifications_recipientIdTousers")
+  notifications_notifications_senderIdTousers                                notifications[]              @relation("notifications_senderIdTousers")
+  page_likes                                                                 page_likes[]
+  pages                                                                      pages[]
+  permission_requests_permission_requests_requesterIdTousers                 permission_requests[]        @relation("permission_requests_requesterIdTousers")
+  permission_requests_permission_requests_reviewedByIdTousers                permission_requests[]        @relation("permission_requests_reviewedByIdTousers")
+  post_comment_reactions                                                     post_comment_reactions[]
+  post_comment_replies                                                       post_comment_replies[]
+  post_comments                                                              post_comments[]
+  post_mentions                                                              post_mentions[]
+  post_reactions                                                             post_reactions[]
+  post_shares                                                                post_shares[]
+  posts                                                                      posts[]
+  quick_lessons                                                              quick_lessons[]
+  quick_messages                                                             quick_messages[]
+  reminders                                                                  reminders[]
+  reports_reports_reportedUserIdTousers                                      reports[]                    @relation("reports_reportedUserIdTousers")
+  reports_reports_reporterIdTousers                                          reports[]                    @relation("reports_reporterIdTousers")
+  reports_reports_reviewedByIdTousers                                        reports[]                    @relation("reports_reviewedByIdTousers")
+  createdSessions                                                            Session[]                    @relation("SessionCreator")
+  social_notifications_social_notifications_receiverIdTousers                social_notifications[]       @relation("social_notifications_receiverIdTousers")
+  social_notifications_social_notifications_senderIdTousers                  social_notifications[]       @relation("social_notifications_senderIdTousers")
+  stories                                                                    stories[]
+  story_views                                                                story_views[]
+  unread_counts                                                              unread_counts?
+  unread_messages                                                            unread_messages[]
+  user_approvals_user_approvals_reviewedByIdTousers                          user_approvals[]             @relation("user_approvals_reviewedByIdTousers")
+  user_approvals_user_approvals_userIdTousers                                user_approvals?              @relation("user_approvals_userIdTousers")
+  user_deletion_schedules_user_deletion_schedules_preventedByIdTousers       user_deletion_schedules[]    @relation("user_deletion_schedules_preventedByIdTousers")
+  user_deletion_schedules_user_deletion_schedules_userIdTousers              user_deletion_schedules[]    @relation("user_deletion_schedules_userIdTousers")
+
+  @@map("users")
+}
+
+model Conversation {
+  id                         String                            @id @default(uuid())
+  status                     ConversationStatus                @default(pending)
+  visibility                 Visibility                        @default(public)
+  themeIndex                 Int                               @default(0)
+  isGroup                    Boolean                           @default(false) @map("is_group")
+  groupType                  GroupType?                        @map("group_type")
+  groupName                  String?                           @map("group_name")
+  groupIntro                 String?                           @map("group_intro") @db.Text
+  groupImage                 String                            @default("/images/cover/default-cover.jpg") @map("group_image")
+  class_type                 conversations_class_type          @default(regular)
+  file_sending_allowed       Boolean                           @default(false)
+  start_time                 String                            @default("09:00")
+  cutoff_time                String                            @default("09:15")
+  check_interval             Int                               @default(15)
+  permText                   Boolean                           @default(true) @map("perm_text")
+  permImage                  Boolean                           @default(true) @map("perm_image")
+  permVoice                  Boolean                           @default(false) @map("perm_voice")
+  permVideo                  Boolean                           @default(false) @map("perm_video")
+  permFile                   Boolean                           @default(false) @map("perm_file")
+  perm_sticker               Boolean                           @default(true)
+  perm_gif                   Boolean                           @default(true)
+  last_message_text          String?                           @db.Text
+  last_message_sender_id     String?
+  last_message_timestamp     DateTime?
+  auto_delete_messages_after Int                               @default(24)
+  key_exchange_status        conversations_key_exchange_status @default(none)
+  key_exchange_data          Json?
+  key_exchange_created_at    DateTime?
+  key_exchange_last_activity DateTime?
+  v1_keys                    Json?
+  smte_key_version           Int                               @default(0)
+  createdAt                  DateTime                          @default(now())
+  updatedAt                  DateTime                          @updatedAt
+  alertnessSessions          AlertnessSession[]
+  assignmentSubmissions      AssignmentSubmission[]
+  attendanceLogs             AttendanceLog[]
+  admins                     ConversationAdmin[]
+  conversation_block_entries conversation_block_entries[]
+  moderators                 ConversationModerator[]
+  participants               ConversationParticipant[]
+  selectedDays               ConversationSelectedDay[]
+  conversation_unreads       conversation_unreads[]
+  users                      User?                             @relation(fields: [last_message_sender_id], references: [id])
+  files                      files[]
+  form_assignments           form_assignments[]
+  joinRequests               JoinRequest[]
+  messages                   messages[]
+  permission_requests        permission_requests[]
+  quick_lessons              quick_lessons[]
+  reminders                  reminders[]
+  reports                    reports[]
+  sessions                   Session[]
+  unread_messages            unread_messages[]
+
+  @@index([visibility])
+  @@index([groupType])
+  @@index([last_message_sender_id], map: "conversations_last_message_sender_id_fkey")
+  @@map("conversations")
+}
+
+model ClassProfile {
+  id                 String    @id @default(uuid())
+  conversationId     String    @unique
+  classType          ClassType @default(regular) @map("class_type")
+  fileSendingAllowed Boolean   @default(false) @map("file_sending_allowed")
+  startTime          String    @default("09:00") @map("start_time")
+  cutoffTime         String    @default("09:15") @map("cutoff_time")
+  checkInterval      Int       @default(15) @map("check_interval")
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @default(now()) @updatedAt
+
+  @@map("class_profiles")
+}
+
+model ConversationParticipant {
+  id             String       @id @default(uuid())
+  conversationId String
+  userId         String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@index([userId])
+  @@map("conversation_participants")
+}
+
+model ConversationAdmin {
+  id             String       @id @default(uuid())
+  conversationId String
+  userId         String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@index([userId], map: "conversation_admins_userId_fkey")
+  @@map("conversation_admins")
+}
+
+model ConversationModerator {
+  id             String       @id @default(uuid())
+  conversationId String
+  userId         String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@index([userId], map: "conversation_moderators_userId_fkey")
+  @@map("conversation_moderators")
+}
+
+model ConversationSelectedDay {
+  id             String       @id @default(uuid())
+  conversationId String
+  day            Int
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, day])
+  @@map("conversation_selected_days")
+}
+
+model JoinRequest {
+  id            String            @id @default(uuid())
+  classId       String
+  userId        String
+  status        JoinRequestStatus @default(pending)
+  requestedAt   DateTime          @default(now())
+  processedAt   DateTime?
+  processedById String?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  class         Conversation      @relation(fields: [classId], references: [id], onDelete: Cascade)
+  processedBy   User?             @relation("JoinProcessor", fields: [processedById], references: [id])
+  user          User              @relation("JoinRequester", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([classId, userId])
+  @@index([status])
+  @@index([processedById], map: "join_requests_processedById_fkey")
+  @@index([userId], map: "join_requests_userId_fkey")
+  @@map("join_requests")
+}
+
+model Session {
+  id             String          @id @default(uuid())
+  classId        String
+  date           String
+  startTime      String
+  type           SessionType     @default(auto)
+  createdById    String?
+  status         SessionStatus   @default(scheduled)
+  duration       Int             @default(70)
+  cutoffTime     String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  attendanceLogs AttendanceLog[]
+  conversation   Conversation    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  createdBy      User?           @relation("SessionCreator", fields: [createdById], references: [id])
+
+  @@unique([classId, date, startTime])
+  @@index([status])
+  @@index([createdById], map: "sessions_createdById_fkey")
+  @@map("sessions")
+}
+
+model AlertnessSession {
+  id                  String                @id @default(uuid())
+  classId             String
+  startedById         String
+  duration            Int
+  startTime           DateTime              @default(now())
+  endTime             DateTime?
+  isActive            Boolean               @default(true)
+  totalParticipants   Int                   @default(0)
+  responseRate        Float                 @default(0)
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  alertness_responses alertness_responses[]
+  class               Conversation          @relation(fields: [classId], references: [id], onDelete: Cascade)
+  startedBy           User                  @relation("AlertnessSessionStarter", fields: [startedById], references: [id], onDelete: Cascade)
+
+  @@index([classId, startTime])
+  @@index([isActive])
+  @@index([startedById], map: "alertness_sessions_startedById_fkey")
+  @@map("alertness_sessions")
+}
+
+model AttendanceLog {
+  id          String           @id @default(uuid())
+  sessionId   String
+  classId     String
+  userId      String
+  status      AttendanceStatus @default(absent)
+  enteredAt   DateTime?
+  leftAt      DateTime?
+  duration    Int?
+  sessionDate String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  class       Conversation     @relation(fields: [classId], references: [id], onDelete: Cascade)
+  session     Session          @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, userId, sessionDate])
+  @@index([enteredAt])
+  @@index([classId], map: "attendance_logs_classId_fkey")
+  @@index([userId], map: "attendance_logs_userId_fkey")
+  @@map("attendance_logs")
+}
+
+model AssignmentSubmission {
+  id                    String       @id @default(uuid())
+  classId               String
+  userId                String
+  assignmentTitle       String
+  assignmentDescription String       @db.Text
+  status                String       @default("pending")
+  file_url              String?
+  file_name             String?
+  file_size             Int?
+  file_type             String?
+  mark                  Int?         @db.SmallInt
+  markedById            String?
+  markedAt              DateTime?
+  feedback              String?      @db.Text
+  submittedAt           DateTime     @default(now())
+  class                 Conversation @relation(fields: [classId], references: [id], onDelete: Cascade)
+  markedBy              User?        @relation("MarkedAssignments", fields: [markedById], references: [id])
+  user                  User         @relation("SubmittedAssignments", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([classId, userId])
+  @@index([submittedAt])
+  @@index([markedById], map: "assignment_submissions_markedById_fkey")
+  @@index([userId], map: "assignment_submissions_userId_fkey")
+  @@map("assignment_submissions")
+}
+
+model admin_activity_logs {
+  id         String                         @id
+  adminId    String
+  action     String
+  targetType admin_activity_logs_targetType
+  targetId   String?
+  details    Json?
+  user_agent String?
+  severity   admin_activity_logs_severity   @default(low)
+  createdAt  DateTime                       @default(now())
+  updatedAt  DateTime
+  users      User                           @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId], map: "admin_activity_logs_adminId_fkey")
+}
+
+model admin_allowed_file_types {
+  id              String         @id
+  adminSettingsId String
+  fileType        String
+  admin_settings  admin_settings @relation(fields: [adminSettingsId], references: [id], onDelete: Cascade)
+
+  @@index([adminSettingsId], map: "admin_allowed_file_types_adminSettingsId_fkey")
+}
+
+model admin_blocked_words {
+  id              String         @id
+  adminSettingsId String
+  word            String
+  admin_settings  admin_settings @relation(fields: [adminSettingsId], references: [id], onDelete: Cascade)
+
+  @@index([adminSettingsId], map: "admin_blocked_words_adminSettingsId_fkey")
+}
+
+model admin_settings {
+  id                               String                     @id
+  feat_voice_messages              Boolean                    @default(true)
+  feat_sms_notif                   Boolean                    @default(true)
+  feat_image_sharing               Boolean                    @default(true)
+  feat_video_sharing               Boolean                    @default(true)
+  feat_file_sharing                Boolean                    @default(true)
+  feat_voice_calling               Boolean                    @default(true)
+  feat_video_calling               Boolean                    @default(true)
+  feat_group_creation              Boolean                    @default(true)
+  feat_user_registration           Boolean                    @default(true)
+  sec_require_admin_approval       Boolean                    @default(true)
+  sec_auto_approve_after_hours     Int                        @default(24)
+  sec_max_file_size_mb             Int                        @default(50)
+  sec_message_encryption           Boolean                    @default(true)
+  sec_two_factor_required          Boolean                    @default(false)
+  sec_session_timeout_minutes      Int                        @default(60)
+  mod_auto_moderate                Boolean                    @default(false)
+  mod_max_message_length           Int                        @default(1000)
+  mod_spam_detection               Boolean                    @default(true)
+  mod_image_content_filter         Boolean                    @default(false)
+  rl_messages_per_minute           Int                        @default(30)
+  rl_files_per_hour                Int                        @default(10)
+  rl_friend_requests_per_day       Int                        @default(20)
+  rl_group_creation_per_day        Int                        @default(5)
+  notif_admin_email_alerts         Boolean                    @default(true)
+  notif_new_user_notifications     Boolean                    @default(true)
+  notif_suspicious_activity_alerts Boolean                    @default(true)
+  notif_system_maintenance_mode    Boolean                    @default(false)
+  updatedById                      String
+  createdAt                        DateTime                   @default(now())
+  updatedAt                        DateTime
+  admin_allowed_file_types         admin_allowed_file_types[]
+  admin_blocked_words              admin_blocked_words[]
+  users                            User                       @relation(fields: [updatedById], references: [id], onDelete: Cascade)
+
+  @@index([updatedById], map: "admin_settings_updatedById_fkey")
+}
+
+model alertness_responses {
+  id                 String           @id
+  alertnessSessionId String
+  userId             String
+  respondedAt        DateTime         @default(now())
+  responseTime       Int?
+  alertness_sessions AlertnessSession @relation(fields: [alertnessSessionId], references: [id], onDelete: Cascade)
+  users              User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([alertnessSessionId, userId])
+  @@index([userId], map: "alertness_responses_userId_fkey")
+}
+
+model blocks {
+  id                            String   @id
+  blockerId                     String
+  blockedId                     String
+  createdAt                     DateTime @default(now())
+  updatedAt                     DateTime
+  users_blocks_blockedIdTousers User     @relation("blocks_blockedIdTousers", fields: [blockedId], references: [id], onDelete: Cascade)
+  users_blocks_blockerIdTousers User     @relation("blocks_blockerIdTousers", fields: [blockerId], references: [id], onDelete: Cascade)
+
+  @@unique([blockerId, blockedId])
+  @@index([blockedId], map: "blocks_blockedId_fkey")
+}
+
+model bookmarks {
+  id        String   @id
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+  posts     posts    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  users     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
+  @@index([postId], map: "bookmarks_postId_fkey")
+  @@index([userId, createdAt])
+}
+
+model conversation_block_entries {
+  id                                                    String       @id
+  conversationId                                        String
+  blockedById                                           String
+  blockedUserId                                         String
+  blockedAt                                             DateTime     @default(now())
+  users_conversation_block_entries_blockedByIdTousers   User         @relation("conversation_block_entries_blockedByIdTousers", fields: [blockedById], references: [id], onDelete: Cascade)
+  users_conversation_block_entries_blockedUserIdTousers User         @relation("conversation_block_entries_blockedUserIdTousers", fields: [blockedUserId], references: [id], onDelete: Cascade)
+  conversations                                         Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, blockedById, blockedUserId])
+  @@index([blockedById], map: "conversation_block_entries_blockedById_fkey")
+  @@index([blockedUserId], map: "conversation_block_entries_blockedUserId_fkey")
+}
+
+model conversation_unreads {
+  id             String       @id
+  conversationId String
+  userId         String
+  count          Int          @default(0)
+  conversations  Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  users          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@index([userId], map: "conversation_unreads_userId_fkey")
+}
+
+model device_tokens {
+  id     String @id
+  userId String
+  token  String
+  users  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, token])
+}
+
+model files {
+  id            String        @id
+  filename      String
+  originalName  String
+  mimetype      String
+  size          Int
+  path          String
+  uploadedById  String
+  classId       String?
+  description   String?       @db.Text
+  isPublic      Boolean       @default(false)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime
+  conversations Conversation? @relation(fields: [classId], references: [id])
+  users         User          @relation(fields: [uploadedById], references: [id], onDelete: Cascade)
+
+  @@index([classId])
+  @@index([createdAt])
+  @@index([uploadedById])
+}
+
+model follows {
+  id          String   @id
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+
+  @@unique([followerId, followingId])
+  @@index([followingId])
+}
+
+model form_assignees {
+  id               String           @id
+  formAssignmentId String
+  userId           String
+  form_assignments form_assignments @relation(fields: [formAssignmentId], references: [id], onDelete: Cascade)
+  users            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([formAssignmentId, userId])
+  @@index([userId], map: "form_assignees_userId_fkey")
+}
+
+model form_assignments {
+  id               String                     @id
+  formId           String
+  conversationId   String
+  assignerId       String
+  frequency        form_assignments_frequency
+  startDate        DateTime                   @default(now())
+  isActive         Boolean                    @default(true)
+  createdAt        DateTime                   @default(now())
+  updatedAt        DateTime
+  form_assignees   form_assignees[]
+  users            User                       @relation(fields: [assignerId], references: [id], onDelete: Cascade)
+  conversations    Conversation               @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  forms            forms                      @relation(fields: [formId], references: [id], onDelete: Cascade)
+  form_submissions form_submissions[]
+
+  @@index([assignerId])
+  @@index([conversationId, isActive])
+  @@index([formId])
+}
+
+model form_fields {
+  id                      String                    @id
+  formId                  String
+  label                   String                    @db.VarChar(500)
+  type                    form_fields_type
+  order                   Int
+  forms                   forms                     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  form_submission_answers form_submission_answers[]
+
+  @@index([formId], map: "form_fields_formId_fkey")
+}
+
+model form_submission_answers {
+  id               String                               @id
+  submissionId     String
+  fieldId          String
+  value            String                               @db.Text
+  explanation      String                               @default("") @db.VarChar(2000)
+  reviewStatus     form_submission_answers_reviewStatus @default(pending)
+  reviewNote       String                               @default("") @db.VarChar(500)
+  form_fields      form_fields                          @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+  form_submissions form_submissions                     @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@index([fieldId], map: "form_submission_answers_fieldId_fkey")
+  @@index([submissionId], map: "form_submission_answers_submissionId_fkey")
+}
+
+model form_submissions {
+  id                      String                    @id
+  assignmentId            String
+  submitterId             String
+  dueDate                 DateTime
+  status                  form_submissions_status   @default(submitted)
+  reviewedAt              DateTime?
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime
+  form_submission_answers form_submission_answers[]
+  form_assignments        form_assignments          @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  users                   User                      @relation(fields: [submitterId], references: [id], onDelete: Cascade)
+
+  @@unique([assignmentId, submitterId, dueDate])
+  @@index([assignmentId, dueDate])
+  @@index([submitterId, status])
+}
+
+model forms {
+  id               String             @id
+  name             String             @db.VarChar(200)
+  creatorId        String
+  visibility       forms_visibility   @default(private)
+  isArchived       Boolean            @default(false)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime
+  form_assignments form_assignments[]
+  form_fields      form_fields[]
+  users            User               @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@index([creatorId, isArchived])
+  @@index([visibility, isArchived])
+}
+
+model friend_entries {
+  id           String       @id
+  friendListId String
+  friendId     String
+  users        User         @relation(fields: [friendId], references: [id], onDelete: Cascade)
+  friend_lists friend_lists @relation(fields: [friendListId], references: [id], onDelete: Cascade)
+
+  @@unique([friendListId, friendId])
+  @@index([friendId], map: "friend_entries_friendId_fkey")
+}
+
+model friend_lists {
+  id             String           @id
+  userId         String           @unique
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime
+  friend_entries friend_entries[]
+  users          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model friendships {
+  id                                   String             @id
+  requesterId                          String
+  recipientId                          String
+  status                               friendships_status @default(pending)
+  createdAt                            DateTime           @default(now())
+  updatedAt                            DateTime
+  users_friendships_recipientIdTousers User               @relation("friendships_recipientIdTousers", fields: [recipientId], references: [id], onDelete: Cascade)
+  users_friendships_requesterIdTousers User               @relation("friendships_requesterIdTousers", fields: [requesterId], references: [id], onDelete: Cascade)
+
+  @@unique([requesterId, recipientId])
+  @@index([recipientId], map: "friendships_recipientId_fkey")
+}
+
+model hashtags {
+  id            String          @id
+  name          String          @unique
+  postCount     Int             @default(0)
+  createdAt     DateTime        @default(now())
+  post_hashtags post_hashtags[]
+}
+
+model message_deleted_by {
+  id        String   @id
+  messageId String
+  userId    String
+  messages  messages @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  users     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId])
+  @@index([userId], map: "message_deleted_by_userId_fkey")
+}
+
+model message_edit_history {
+  id        String   @id
+  messageId String
+  text      String   @db.Text
+  editedAt  DateTime @default(now())
+  messages  messages @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@index([messageId], map: "message_edit_history_messageId_fkey")
+}
+
+model message_media {
+  id        String              @id
+  messageId String
+  url       String?
+  type      message_media_type?
+  filename  String?
+  size      Int?
+  messages  messages            @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@index([messageId], map: "message_media_messageId_fkey")
+}
+
+model message_reactions {
+  id        String   @id
+  messageId String
+  userId    String
+  emoji     String
+  username  String
+  messages  messages @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  users     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId, emoji])
+  @@index([userId], map: "message_reactions_userId_fkey")
+}
+
+model message_read_by {
+  id        String   @id
+  messageId String
+  userId    String
+  readAt    DateTime @default(now())
+  messages  messages @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  users     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId])
+  @@index([userId], map: "message_read_by_userId_fkey")
+}
+
+model messages {
+  id                               String                 @id
+  conversationId                   String
+  senderId                         String
+  receiverId                       String?
+  text                             String?                @db.Text
+  isEncrypted                      Boolean                @default(false)
+  isBackendEncrypted               Boolean                @default(false)
+  messageType                      messages_messageType   @default(text)
+  htmlEmoji                        String?                @db.Text
+  emojiType                        messages_emojiType?
+  replyToId                        String?
+  status                           messages_status        @default(sent)
+  edited                           Boolean                @default(false)
+  scheduledDeletionTime            DateTime?
+  reactions                        Json?
+  createdAt                        DateTime               @default(now())
+  updatedAt                        DateTime
+  message_deleted_by               message_deleted_by[]
+  message_edit_history             message_edit_history[]
+  message_media                    message_media[]
+  message_reactions                message_reactions[]
+  message_read_by                  message_read_by[]
+  conversations                    Conversation           @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  users_messages_receiverIdTousers User?                  @relation("messages_receiverIdTousers", fields: [receiverId], references: [id])
+  messages                         messages?              @relation("messagesTomessages", fields: [replyToId], references: [id])
+  other_messages                   messages[]             @relation("messagesTomessages")
+  users_messages_senderIdTousers   User                   @relation("messages_senderIdTousers", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, createdAt])
+  @@index([emojiType])
+  @@index([messageType])
+  @@index([receiverId], map: "messages_receiverId_fkey")
+  @@index([replyToId], map: "messages_replyToId_fkey")
+  @@index([scheduledDeletionTime])
+  @@index([senderId])
+}
+
+model notice_likes {
+  id       String  @id
+  noticeId String
+  userId   String
+  notices  notices @relation(fields: [noticeId], references: [id], onDelete: Cascade)
+  users    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([noticeId, userId])
+  @@index([userId], map: "notice_likes_userId_fkey")
+}
+
+model notice_reads {
+  id       String  @id
+  noticeId String
+  userId   String
+  notices  notices @relation(fields: [noticeId], references: [id], onDelete: Cascade)
+  users    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([noticeId, userId])
+  @@index([userId], map: "notice_reads_userId_fkey")
+}
+
+model notice_recipients {
+  id       String  @id
+  noticeId String
+  userId   String
+  notices  notices @relation(fields: [noticeId], references: [id], onDelete: Cascade)
+
+  @@unique([noticeId, userId])
+}
+
+model notices {
+  id                String                 @id
+  title             String
+  content           String                 @db.Text
+  targetAudience    notices_targetAudience
+  eventType         notices_eventType      @default(general)
+  creatorId         String
+  isActive          Boolean                @default(true)
+  eventDate         DateTime?
+  location          String?
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime
+  notice_likes      notice_likes[]
+  notice_reads      notice_reads[]
+  notice_recipients notice_recipients[]
+  users             User                   @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@index([createdAt])
+  @@index([creatorId])
+  @@index([eventType])
+  @@index([targetAudience])
+}
+
+model notifications {
+  id                                     String             @id
+  recipientId                            String
+  senderId                               String?
+  type                                   notifications_type
+  title                                  String
+  message                                String             @db.Text
+  data                                   Json?
+  isRead                                 Boolean            @default(false)
+  readAt                                 DateTime?
+  createdAt                              DateTime           @default(now())
+  updatedAt                              DateTime
+  users_notifications_recipientIdTousers User               @relation("notifications_recipientIdTousers", fields: [recipientId], references: [id], onDelete: Cascade)
+  users_notifications_senderIdTousers    User?              @relation("notifications_senderIdTousers", fields: [senderId], references: [id])
+
+  @@index([createdAt])
+  @@index([recipientId, isRead])
+  @@index([senderId], map: "notifications_senderId_fkey")
+}
+
+model page_likes {
+  id        String   @id
+  pageId    String
+  userId    String
+  createdAt DateTime @default(now())
+  pages     pages    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  users     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([pageId, userId])
+  @@index([userId], map: "page_likes_userId_fkey")
+}
+
+model page_posts {
+  id        String   @id
+  pageId    String
+  content   String   @db.Text
+  mediaUrls Json?
+  isEdited  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  pages     pages    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@index([pageId, createdAt])
+}
+
+model pages {
+  id          String       @id
+  ownerId     String
+  name        String
+  slug        String       @unique
+  description String?      @db.Text
+  avatar      String?
+  coverImage  String?
+  category    String?
+  isVerified  Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+  page_likes  page_likes[]
+  page_posts  page_posts[]
+  users       User         @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@index([name])
+  @@index([ownerId], map: "pages_ownerId_fkey")
+}
+
+model permission_requests {
+  id                                            String                             @id
+  conversationId                                String
+  requesterId                                   String
+  permissionType                                permission_requests_permissionType
+  reason                                        String                             @default("") @db.VarChar(500)
+  status                                        permission_requests_status         @default(pending)
+  reviewedById                                  String?
+  reviewedAt                                    DateTime?
+  reviewNote                                    String                             @default("") @db.VarChar(500)
+  createdAt                                     DateTime                           @default(now())
+  updatedAt                                     DateTime
+  conversations                                 Conversation                       @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  users_permission_requests_requesterIdTousers  User                               @relation("permission_requests_requesterIdTousers", fields: [requesterId], references: [id], onDelete: Cascade)
+  users_permission_requests_reviewedByIdTousers User?                              @relation("permission_requests_reviewedByIdTousers", fields: [reviewedById], references: [id])
+
+  @@index([conversationId, requesterId, status])
+  @@index([requesterId], map: "permission_requests_requesterId_fkey")
+  @@index([reviewedById], map: "permission_requests_reviewedById_fkey")
+  @@index([status, createdAt])
+}
+
+model post_comment_reactions {
+  id            String        @id
+  commentId     String
+  userId        String
+  type          String
+  createdAt     DateTime      @default(now())
+  post_comments post_comments @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  users         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([commentId, userId])
+  @@index([userId], map: "post_comment_reactions_userId_fkey")
+}
+
+model post_comment_replies {
+  id            String        @id
+  commentId     String
+  userId        String
+  text          String        @db.Text
+  createdAt     DateTime      @default(now())
+  isEdited      Boolean       @default(false)
+  updatedAt     DateTime      @default(now())
+  post_comments post_comments @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  users         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([commentId], map: "post_comment_replies_commentId_fkey")
+  @@index([userId], map: "post_comment_replies_userId_fkey")
+}
+
+model post_comments {
+  id                     String                   @id
+  postId                 String
+  userId                 String
+  text                   String                   @db.Text
+  createdAt              DateTime                 @default(now())
+  isEdited               Boolean                  @default(false)
+  updatedAt              DateTime                 @default(now())
+  post_comment_reactions post_comment_reactions[]
+  post_comment_replies   post_comment_replies[]
+  posts                  posts                    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  users                  User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([postId], map: "post_comments_postId_fkey")
+  @@index([userId], map: "post_comments_userId_fkey")
+}
+
+model post_hashtags {
+  postId    String
+  hashtagId String
+  hashtags  hashtags @relation(fields: [hashtagId], references: [id], onDelete: Cascade)
+  posts     posts    @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@id([postId, hashtagId])
+  @@index([hashtagId], map: "post_hashtags_hashtagId_fkey")
+}
+
+model post_mentions {
+  postId String
+  userId String
+  posts  posts  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  users  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([postId, userId])
+  @@index([userId], map: "post_mentions_userId_fkey")
+}
+
+model post_reactions {
+  id        String              @id
+  postId    String
+  userId    String
+  type      post_reactions_type
+  createdAt DateTime            @default(now())
+  posts     posts               @relation(fields: [postId], references: [id], onDelete: Cascade)
+  users     User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+  @@unique([postId, userId, type])
+  @@index([userId], map: "post_reactions_userId_fkey")
+}
+
+model post_shares {
+  id         String                 @id
+  postId     String
+  userId     String
+  content    String?                @db.Text
+  visibility post_shares_visibility @default(PUBLIC)
+  createdAt  DateTime               @default(now())
+  posts      posts                  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  users      User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+  @@index([userId, createdAt])
+}
+
+model posts {
+  id             String           @id
+  userId         String
+  content        String           @db.Text
+  mediaUrls      Json?
+  visibility     posts_visibility @default(PUBLIC)
+  isEdited       Boolean          @default(false)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime
+  bookmarks      bookmarks[]
+  post_comments  post_comments[]
+  post_hashtags  post_hashtags[]
+  post_mentions  post_mentions[]
+  post_reactions post_reactions[]
+  post_shares    post_shares[]
+  users          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "posts_userId_fkey")
+}
+
+model quick_lesson_parts {
+  id            String        @id
+  quickLessonId String
+  content       String        @db.Text
+  order         Int
+  quick_lessons quick_lessons @relation(fields: [quickLessonId], references: [id], onDelete: Cascade)
+
+  @@index([quickLessonId], map: "quick_lesson_parts_quickLessonId_fkey")
+}
+
+model quick_lessons {
+  id                 String               @id
+  userId             String
+  conversationId     String
+  lessonName         String
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime
+  quick_lesson_parts quick_lesson_parts[]
+  conversations      Conversation         @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  users              User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId], map: "quick_lessons_conversationId_fkey")
+  @@index([userId], map: "quick_lessons_userId_fkey")
+}
+
+model quick_messages {
+  id        String   @id
+  userId    String
+  title     String
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  users     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "quick_messages_userId_fkey")
+}
+
+model reminders {
+  id             String              @id
+  userId         String
+  conversationId String
+  title          String
+  note           String?             @db.Text
+  datetime       DateTime
+  repeat         reminders_repeat    @default(one_time)
+  enabled        Boolean             @default(true)
+  notified       Boolean             @default(false)
+  notifiedAt     DateTime?
+  visibleTo      reminders_visibleTo @default(creator)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime
+  conversations  Conversation        @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  users          User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, datetime])
+  @@index([datetime, notified, enabled])
+  @@index([userId, datetime])
+}
+
+model reports {
+  id                                  String              @id
+  reporterId                          String
+  reportedUserId                      String
+  conversationId                      String
+  reason                              reports_reason
+  details                             String              @default("") @db.VarChar(2000)
+  status                              reports_status      @default(pending)
+  reviewedById                        String?
+  reviewedAt                          DateTime?
+  resolution                          String              @default("") @db.VarChar(500)
+  actionTaken                         reports_actionTaken @default(none)
+  createdAt                           DateTime            @default(now())
+  updatedAt                           DateTime
+  conversations                       Conversation        @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  users_reports_reportedUserIdTousers User                @relation("reports_reportedUserIdTousers", fields: [reportedUserId], references: [id], onDelete: Cascade)
+  users_reports_reporterIdTousers     User                @relation("reports_reporterIdTousers", fields: [reporterId], references: [id], onDelete: Cascade)
+  users_reports_reviewedByIdTousers   User?               @relation("reports_reviewedByIdTousers", fields: [reviewedById], references: [id])
+
+  @@index([conversationId], map: "reports_conversationId_fkey")
+  @@index([createdAt])
+  @@index([reportedUserId])
+  @@index([reporterId, conversationId])
+  @@index([reviewedById], map: "reports_reviewedById_fkey")
+  @@index([status])
+}
+
+model site_security_messages {
+  id          String   @id
+  goodMessage String   @db.Text
+  badMessage  String   @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+}
+
+model social_notifications {
+  id                                           String                    @id
+  receiverId                                   String
+  senderId                                     String?
+  type                                         social_notifications_type
+  entityId                                     String?
+  entityType                                   String?
+  message                                      String
+  isRead                                       Boolean                   @default(false)
+  createdAt                                    DateTime                  @default(now())
+  users_social_notifications_receiverIdTousers User                      @relation("social_notifications_receiverIdTousers", fields: [receiverId], references: [id], onDelete: Cascade)
+  users_social_notifications_senderIdTousers   User?                     @relation("social_notifications_senderIdTousers", fields: [senderId], references: [id])
+
+  @@index([receiverId, createdAt])
+  @@index([receiverId, isRead])
+  @@index([senderId], map: "social_notifications_senderId_fkey")
+}
+
+model stories {
+  id          String        @id
+  userId      String
+  mediaUrl    String
+  mediaType   String
+  caption     String?
+  expiresAt   DateTime
+  createdAt   DateTime      @default(now())
+  users       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  story_views story_views[]
+
+  @@index([userId, expiresAt])
+}
+
+model story_views {
+  id        String   @id
+  storyId   String
+  userId    String
+  createdAt DateTime @default(now())
+  stories   stories  @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  users     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([storyId, userId])
+  @@index([userId], map: "story_views_userId_fkey")
+}
+
+model unread_counts {
+  id                       String            @id
+  userId                   String            @unique
+  unreadFriendRequestCount Int               @default(0)
+  unreadGroupRequestCount  Int               @default(0)
+  unreadClassRequestCount  Int               @default(0)
+  createdAt                DateTime          @default(now())
+  updatedAt                DateTime
+  users                    User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  unread_messages          unread_messages[]
+}
+
+model unread_messages {
+  id             String        @id
+  unreadCountId  String
+  conversationId String
+  userId         String
+  count          Int           @default(0)
+  users          User          @relation(fields: [userId], references: [id], onDelete: Cascade, map: "unread_message_user_fk")
+  conversations  Conversation  @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  unread_counts  unread_counts @relation(fields: [unreadCountId], references: [id], onDelete: Cascade)
+
+  @@unique([unreadCountId, conversationId])
+  @@index([conversationId])
+  @@index([userId])
+}
+
+model user_approval_risk_factors {
+  id             String         @id
+  userApprovalId String
+  factor         String
+  user_approvals user_approvals @relation(fields: [userApprovalId], references: [id], onDelete: Cascade)
+
+  @@index([userApprovalId], map: "user_approval_risk_factors_userApprovalId_fkey")
+}
+
+model user_approvals {
+  id                                       String                       @id
+  userId                                   String                       @unique
+  status                                   user_approvals_status        @default(pending)
+  requestedAt                              DateTime                     @default(now())
+  reviewedAt                               DateTime?
+  reviewedById                             String?
+  rejectionReason                          String?                      @db.Text
+  approvalNotes                            String?                      @db.Text
+  user_agent                               String?
+  registration_source                      String?
+  email_verified                           Boolean                      @default(false)
+  phone_verified                           Boolean                      @default(false)
+  riskScore                                Int                          @default(0)
+  autoApproved                             Boolean                      @default(false)
+  expiresAt                                DateTime?
+  createdAt                                DateTime                     @default(now())
+  updatedAt                                DateTime
+  user_approval_risk_factors               user_approval_risk_factors[]
+  users_user_approvals_reviewedByIdTousers User?                        @relation("user_approvals_reviewedByIdTousers", fields: [reviewedById], references: [id])
+  users_user_approvals_userIdTousers       User                         @relation("user_approvals_userIdTousers", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([reviewedById], map: "user_approvals_reviewedById_fkey")
+}
+
+model user_deletion_schedules {
+  id                                                 String                         @id
+  userId                                             String
+  scheduledFor                                       DateTime
+  reason                                             String                         @default("Inactive for 7+ months")
+  status                                             user_deletion_schedules_status @default(scheduled)
+  preventedById                                      String?
+  preventedAt                                        DateTime?
+  preventionReason                                   String?                        @db.Text
+  lastActivity                                       DateTime?
+  notificationSent                                   Boolean                        @default(false)
+  finalWarningSent                                   Boolean                        @default(false)
+  createdAt                                          DateTime                       @default(now())
+  updatedAt                                          DateTime
+  users_user_deletion_schedules_preventedByIdTousers User?                          @relation("user_deletion_schedules_preventedByIdTousers", fields: [preventedById], references: [id])
+  users_user_deletion_schedules_userIdTousers        User                           @relation("user_deletion_schedules_userIdTousers", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([preventedById], map: "user_deletion_schedules_preventedById_fkey")
+  @@index([userId], map: "user_deletion_schedules_userId_fkey")
+}
 
 enum ClassType {
   regular
@@ -69,260 +1285,242 @@ enum AttendanceStatus {
   excused
 }
 
-enum AssignmentStatus {
+enum user_approvals_status {
+  pending
+  approved
+  rejected
+  suspended
+}
+
+enum admin_activity_logs_targetType {
+  user
+  conversation
+  message
+  settings
+  system
+}
+
+enum form_fields_type {
+  yes_no
+  text
+}
+
+enum forms_visibility {
+  public
+  private
+}
+
+enum friendships_status {
+  pending
+  accepted
+  declined
+}
+
+enum message_media_type {
+  image
+  video
+  audio
+  file
+}
+
+enum notices_targetAudience {
+  all
+  user
+  admin
+  superadmin
+  moderator
+  teacher
+}
+
+enum notifications_type {
+  assignment
+  grade
+  class_invite
+  join_request
+  message
+  system
+  notice
+  friend_request
+  friend_accept
+  like
+  mention
+  comment
+  admin_alert
+  role_change
+  account_action
+  reminder
+  attendance
+  form
+  permission
+  report
+}
+
+enum permission_requests_permissionType {
+  text
+  image
+  voice
+  video
+  file
+  sticker
+  gif
+}
+
+enum post_reactions_type {
+  like
+  love
+  haha
+  wow
+  sad
+  angry
+}
+
+enum social_notifications_type {
+  FOLLOW
+  POST_REACTION
+  POST_COMMENT
+  COMMENT_REPLY
+  COMMENT_REACTION
+  POST_SHARE
+  PAGE_LIKE
+  MENTION
+  STORY_VIEW
+}
+
+enum form_assignments_frequency {
+  daily
+  weekly
+  bi_weekly @map("bi-weekly")
+  monthly
+}
+
+enum form_submissions_status {
+  submitted
+  accepted
+  rejected
+  partially_accepted
+  not_submitted
+}
+
+enum notices_eventType {
+  general
+  holiday
+  exam
+  meeting
+  special
+  announcement
+}
+
+enum post_shares_visibility {
+  PUBLIC
+  FOLLOWERS
+  FRIENDS
+  ONLY_ME
+}
+
+enum posts_visibility {
+  PUBLIC
+  FOLLOWERS
+  FRIENDS
+  ONLY_ME
+}
+
+enum reports_reason {
+  spam
+  harassment
+  hate_speech
+  violence
+  nudity
+  false_info
+  impersonation
+  other
+}
+
+enum user_deletion_schedules_status {
+  scheduled
+  prevented
+  deleted
+  cancelled
+}
+
+enum form_submission_answers_reviewStatus {
+  pending
+  accepted
+  rejected
+}
+
+enum permission_requests_status {
   pending
   approved
   rejected
 }
 
-// ─── Read-only stubs ─────────────────────────────────────────────────────────
-
-model User {
-  id    String   @id @default(uuid())
-  name  String
-  image String   @default("/images/avatar/default-avatar.svg")
-  role  UserRole @default(user)
-
-  participants         ConversationParticipant[]
-  admins               ConversationAdmin[]
-  moderators           ConversationModerator[]
-  joinRequests         JoinRequest[]             @relation("JoinRequester")
-  processedRequests    JoinRequest[]             @relation("JoinProcessor")
-  attendanceLogs       AttendanceLog[]
-  createdSessions      Session[]                 @relation("SessionCreator")
-  alertnessSessions    AlertnessSession[]        @relation("AlertnessSessionStarter")
-  submittedAssignments AssignmentSubmission[]    @relation("SubmittedAssignments")
-  markedAssignments    AssignmentSubmission[]    @relation("MarkedAssignments")
-
-  @@map("users")
+enum reminders_repeat {
+  one_time @map("one-time")
+  daily
+  weekly
+  monthly
 }
 
-// ─── Conversation (classroom) ─────────────────────────────────────────────────
-
-model Conversation {
-  id                 String             @id @default(uuid())
-  status             ConversationStatus @default(pending)
-  visibility         Visibility         @default(public)
-  isGroup            Boolean            @default(false) @map("is_group")
-  groupType          GroupType?         @map("group_type")
-  groupName          String?            @map("group_name")
-  groupIntro         String?            @map("group_intro") @db.Text
-  groupImage         String             @default("/images/cover/default-cover.jpg") @map("group_image")
-
-  permText  Boolean @default(true) @map("perm_text")
-  permImage Boolean @default(true) @map("perm_image")
-  permVoice Boolean @default(false) @map("perm_voice")
-  permVideo Boolean @default(false) @map("perm_video")
-  permFile  Boolean @default(false) @map("perm_file")
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  participants          ConversationParticipant[]
-  admins                ConversationAdmin[]
-  moderators            ConversationModerator[]
-  selectedDays          ConversationSelectedDay[]
-  classProfile          ClassProfile?
-  joinRequests          JoinRequest[]
-  sessions              Session[]
-  alertnessSessions     AlertnessSession[]
-  attendanceLogs        AttendanceLog[]
-  assignmentSubmissions AssignmentSubmission[]
-
-  @@index([visibility])
-  @@index([groupType])
-  @@map("conversations")
+enum reports_status {
+  pending
+  reviewed
+  resolved
+  dismissed
 }
 
-model ClassProfile {
-  id                 String    @id @default(uuid())
-  conversationId     String    @unique
-  classType          ClassType @default(regular) @map("class_type")
-  fileSendingAllowed Boolean   @default(false) @map("file_sending_allowed")
-  startTime          String    @default("09:00") @map("start_time")
-  cutoffTime         String    @default("09:15") @map("cutoff_time")
-  checkInterval      Int       @default(15) @map("check_interval")
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-
-  @@map("class_profiles")
+enum admin_activity_logs_severity {
+  low
+  medium
+  high
+  critical
 }
 
-model ConversationParticipant {
-  id             String @id @default(uuid())
-  conversationId String
-  userId         String
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([conversationId, userId])
-  @@index([userId])
-  @@map("conversation_participants")
+enum messages_messageType {
+  text
+  image
+  video
+  audio
+  file
+  system
+  reply
+  mixed
 }
 
-model ConversationAdmin {
-  id             String @id @default(uuid())
-  conversationId String
-  userId         String
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([conversationId, userId])
-  @@map("conversation_admins")
+enum conversations_class_type {
+  regular
+  weekly
+  multi_weekly @map("multi-weekly")
+  monthly
+  exam
 }
 
-model ConversationModerator {
-  id             String @id @default(uuid())
-  conversationId String
-  userId         String
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([conversationId, userId])
-  @@map("conversation_moderators")
+enum messages_emojiType {
+  custom
+  standard
 }
 
-model ConversationSelectedDay {
-  id             String @id @default(uuid())
-  conversationId String
-  day            Int
-
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-
-  @@unique([conversationId, day])
-  @@map("conversation_selected_days")
+enum reminders_visibleTo {
+  creator
+  both
 }
 
-// ─── JoinRequest ─────────────────────────────────────────────────────────────
-
-model JoinRequest {
-  id            String            @id @default(uuid())
-  classId       String
-  userId        String
-  status        JoinRequestStatus @default(pending)
-  requestedAt   DateTime          @default(now())
-  processedAt   DateTime?
-  processedById String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  class       Conversation @relation(fields: [classId], references: [id], onDelete: Cascade)
-  user        User         @relation("JoinRequester", fields: [userId], references: [id], onDelete: Cascade)
-  processedBy User?        @relation("JoinProcessor", fields: [processedById], references: [id], onDelete: SetNull)
-
-  @@unique([classId, userId])
-  @@index([status])
-  @@map("join_requests")
+enum reports_actionTaken {
+  none
+  warning
+  temporary_ban
+  permanent_ban
+  content_removed
 }
 
-// ─── Session ─────────────────────────────────────────────────────────────────
-
-model Session {
-  id          String        @id @default(uuid())
-  classId     String
-  date        String // YYYY-MM-DD
-  startTime   String
-  type        SessionType   @default(auto)
-  createdById String?
-  status      SessionStatus @default(scheduled)
-  duration    Int           @default(70)
-  cutoffTime  String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  conversation   Conversation    @relation(fields: [classId], references: [id], onDelete: Cascade)
-  createdBy      User?           @relation("SessionCreator", fields: [createdById], references: [id], onDelete: SetNull)
-  attendanceLogs AttendanceLog[]
-
-  @@unique([classId, date, startTime])
-  @@index([status])
-  @@map("sessions")
+enum messages_status {
+  sent
+  delivered
+  read
 }
 
-// ─── AlertnessSession ───────────────────────────────────────────────────────
-
-model AlertnessSession {
-  id                String   @id @default(uuid())
-  classId           String
-  startedById       String?
-  duration          Int
-  startTime         DateTime
-  endTime           DateTime?
-  isActive          Boolean  @default(true)
-  totalParticipants Int      @default(0)
-  responseRate      Float    @default(0)
-  responses         Json?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  class     Conversation @relation(fields: [classId], references: [id], onDelete: Cascade)
-  startedBy User?        @relation("AlertnessSessionStarter", fields: [startedById], references: [id], onDelete: SetNull)
-
-  @@index([classId, startTime])
-  @@index([isActive])
-  @@map("alertness_sessions")
-}
-
-// ─── AttendanceLog ───────────────────────────────────────────────────────────
-
-model AttendanceLog {
-  id          String           @id @default(uuid())
-  sessionId   String
-  classId     String
-  userId      String
-  status      AttendanceStatus @default(absent)
-  enteredAt   DateTime?
-  leftAt      DateTime?
-  duration    Int? // minutes
-  sessionDate String // YYYY-MM-DD
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  session Session      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  class   Conversation @relation(fields: [classId], references: [id], onDelete: Cascade)
-  user    User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([sessionId, userId, sessionDate])
-  @@index([enteredAt])
-  @@map("attendance_logs")
-}
-
-// ─── AssignmentSubmission ─────────────────────────────────────────────────────
-
-model AssignmentSubmission {
-  id                    String           @id @default(uuid())
-  classId               String
-  userId                String
-  assignmentTitle       String
-  assignmentDescription String           @db.Text
-  status                AssignmentStatus @default(pending)
-  fileUrl               String?
-  fileName              String?
-  fileSize              Int?
-  fileType              String?
-  mark                  Int?
-  feedback              String?          @db.Text
-  markedById            String?
-  markedAt              DateTime?
-  submittedAt           DateTime         @default(now())
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  class    Conversation @relation(fields: [classId], references: [id], onDelete: Cascade)
-  user     User         @relation("SubmittedAssignments", fields: [userId], references: [id], onDelete: Cascade)
-  markedBy User?        @relation("MarkedAssignments", fields: [markedById], references: [id], onDelete: SetNull)
-
-  @@index([classId, userId])
-  @@index([submittedAt])
-  @@map("assignment_submissions")
+enum conversations_key_exchange_status {
+  none
+  pending
+  partial
+  complete
 }

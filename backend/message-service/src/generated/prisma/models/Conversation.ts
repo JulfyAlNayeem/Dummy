@@ -38,6 +38,7 @@ export type ConversationSumAggregateOutputType = {
 
 export type ConversationMinAggregateOutputType = {
   id: string | null
+  isGroup: boolean | null
   autoDeleteMessagesAfter: number | null
   permText: boolean | null
   permImage: boolean | null
@@ -46,10 +47,13 @@ export type ConversationMinAggregateOutputType = {
   permFile: boolean | null
   fileSendingAllowed: boolean | null
   smteKeyVersion: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ConversationMaxAggregateOutputType = {
   id: string | null
+  isGroup: boolean | null
   autoDeleteMessagesAfter: number | null
   permText: boolean | null
   permImage: boolean | null
@@ -58,10 +62,13 @@ export type ConversationMaxAggregateOutputType = {
   permFile: boolean | null
   fileSendingAllowed: boolean | null
   smteKeyVersion: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ConversationCountAggregateOutputType = {
   id: number
+  isGroup: number
   autoDeleteMessagesAfter: number
   permText: number
   permImage: number
@@ -71,6 +78,8 @@ export type ConversationCountAggregateOutputType = {
   fileSendingAllowed: number
   smteKeyVersion: number
   v1Keys: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -87,6 +96,7 @@ export type ConversationSumAggregateInputType = {
 
 export type ConversationMinAggregateInputType = {
   id?: true
+  isGroup?: true
   autoDeleteMessagesAfter?: true
   permText?: true
   permImage?: true
@@ -95,10 +105,13 @@ export type ConversationMinAggregateInputType = {
   permFile?: true
   fileSendingAllowed?: true
   smteKeyVersion?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ConversationMaxAggregateInputType = {
   id?: true
+  isGroup?: true
   autoDeleteMessagesAfter?: true
   permText?: true
   permImage?: true
@@ -107,10 +120,13 @@ export type ConversationMaxAggregateInputType = {
   permFile?: true
   fileSendingAllowed?: true
   smteKeyVersion?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ConversationCountAggregateInputType = {
   id?: true
+  isGroup?: true
   autoDeleteMessagesAfter?: true
   permText?: true
   permImage?: true
@@ -120,6 +136,8 @@ export type ConversationCountAggregateInputType = {
   fileSendingAllowed?: true
   smteKeyVersion?: true
   v1Keys?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -211,6 +229,7 @@ export type ConversationGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 
 export type ConversationGroupByOutputType = {
   id: string
+  isGroup: boolean
   autoDeleteMessagesAfter: number
   permText: boolean
   permImage: boolean
@@ -220,6 +239,8 @@ export type ConversationGroupByOutputType = {
   fileSendingAllowed: boolean
   smteKeyVersion: number
   v1Keys: runtime.JsonValue | null
+  createdAt: Date
+  updatedAt: Date
   _count: ConversationCountAggregateOutputType | null
   _avg: ConversationAvgAggregateOutputType | null
   _sum: ConversationSumAggregateOutputType | null
@@ -247,6 +268,7 @@ export type ConversationWhereInput = {
   OR?: Prisma.ConversationWhereInput[]
   NOT?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
   id?: Prisma.StringFilter<"Conversation"> | string
+  isGroup?: Prisma.BoolFilter<"Conversation"> | boolean
   autoDeleteMessagesAfter?: Prisma.IntFilter<"Conversation"> | number
   permText?: Prisma.BoolFilter<"Conversation"> | boolean
   permImage?: Prisma.BoolFilter<"Conversation"> | boolean
@@ -256,6 +278,8 @@ export type ConversationWhereInput = {
   fileSendingAllowed?: Prisma.BoolFilter<"Conversation"> | boolean
   smteKeyVersion?: Prisma.IntFilter<"Conversation"> | number
   v1Keys?: Prisma.JsonNullableFilter<"Conversation">
+  createdAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
   messages?: Prisma.MessageListRelationFilter
   participants?: Prisma.ConversationParticipantListRelationFilter
   unreadMessages?: Prisma.UnreadMessageListRelationFilter
@@ -264,6 +288,7 @@ export type ConversationWhereInput = {
 
 export type ConversationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  isGroup?: Prisma.SortOrder
   autoDeleteMessagesAfter?: Prisma.SortOrder
   permText?: Prisma.SortOrder
   permImage?: Prisma.SortOrder
@@ -273,6 +298,8 @@ export type ConversationOrderByWithRelationInput = {
   fileSendingAllowed?: Prisma.SortOrder
   smteKeyVersion?: Prisma.SortOrder
   v1Keys?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   messages?: Prisma.MessageOrderByRelationAggregateInput
   participants?: Prisma.ConversationParticipantOrderByRelationAggregateInput
   unreadMessages?: Prisma.UnreadMessageOrderByRelationAggregateInput
@@ -285,6 +312,7 @@ export type ConversationWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
   OR?: Prisma.ConversationWhereInput[]
   NOT?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
+  isGroup?: Prisma.BoolFilter<"Conversation"> | boolean
   autoDeleteMessagesAfter?: Prisma.IntFilter<"Conversation"> | number
   permText?: Prisma.BoolFilter<"Conversation"> | boolean
   permImage?: Prisma.BoolFilter<"Conversation"> | boolean
@@ -294,6 +322,8 @@ export type ConversationWhereUniqueInput = Prisma.AtLeast<{
   fileSendingAllowed?: Prisma.BoolFilter<"Conversation"> | boolean
   smteKeyVersion?: Prisma.IntFilter<"Conversation"> | number
   v1Keys?: Prisma.JsonNullableFilter<"Conversation">
+  createdAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
   messages?: Prisma.MessageListRelationFilter
   participants?: Prisma.ConversationParticipantListRelationFilter
   unreadMessages?: Prisma.UnreadMessageListRelationFilter
@@ -302,6 +332,7 @@ export type ConversationWhereUniqueInput = Prisma.AtLeast<{
 
 export type ConversationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  isGroup?: Prisma.SortOrder
   autoDeleteMessagesAfter?: Prisma.SortOrder
   permText?: Prisma.SortOrder
   permImage?: Prisma.SortOrder
@@ -311,6 +342,8 @@ export type ConversationOrderByWithAggregationInput = {
   fileSendingAllowed?: Prisma.SortOrder
   smteKeyVersion?: Prisma.SortOrder
   v1Keys?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.ConversationCountOrderByAggregateInput
   _avg?: Prisma.ConversationAvgOrderByAggregateInput
   _max?: Prisma.ConversationMaxOrderByAggregateInput
@@ -323,6 +356,7 @@ export type ConversationScalarWhereWithAggregatesInput = {
   OR?: Prisma.ConversationScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ConversationScalarWhereWithAggregatesInput | Prisma.ConversationScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Conversation"> | string
+  isGroup?: Prisma.BoolWithAggregatesFilter<"Conversation"> | boolean
   autoDeleteMessagesAfter?: Prisma.IntWithAggregatesFilter<"Conversation"> | number
   permText?: Prisma.BoolWithAggregatesFilter<"Conversation"> | boolean
   permImage?: Prisma.BoolWithAggregatesFilter<"Conversation"> | boolean
@@ -332,10 +366,13 @@ export type ConversationScalarWhereWithAggregatesInput = {
   fileSendingAllowed?: Prisma.BoolWithAggregatesFilter<"Conversation"> | boolean
   smteKeyVersion?: Prisma.IntWithAggregatesFilter<"Conversation"> | number
   v1Keys?: Prisma.JsonNullableWithAggregatesFilter<"Conversation">
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Conversation"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Conversation"> | Date | string
 }
 
 export type ConversationCreateInput = {
   id?: string
+  isGroup?: boolean
   autoDeleteMessagesAfter?: number
   permText?: boolean
   permImage?: boolean
@@ -345,6 +382,8 @@ export type ConversationCreateInput = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
@@ -353,6 +392,7 @@ export type ConversationCreateInput = {
 
 export type ConversationUncheckedCreateInput = {
   id?: string
+  isGroup?: boolean
   autoDeleteMessagesAfter?: number
   permText?: boolean
   permImage?: boolean
@@ -362,6 +402,8 @@ export type ConversationUncheckedCreateInput = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
@@ -370,6 +412,7 @@ export type ConversationUncheckedCreateInput = {
 
 export type ConversationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -379,6 +422,8 @@ export type ConversationUpdateInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
@@ -387,6 +432,7 @@ export type ConversationUpdateInput = {
 
 export type ConversationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -396,6 +442,8 @@ export type ConversationUncheckedUpdateInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
@@ -404,6 +452,7 @@ export type ConversationUncheckedUpdateInput = {
 
 export type ConversationCreateManyInput = {
   id?: string
+  isGroup?: boolean
   autoDeleteMessagesAfter?: number
   permText?: boolean
   permImage?: boolean
@@ -413,10 +462,13 @@ export type ConversationCreateManyInput = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ConversationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -426,10 +478,13 @@ export type ConversationUpdateManyMutationInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConversationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -439,6 +494,8 @@ export type ConversationUncheckedUpdateManyInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConversationOrderByRelevanceInput = {
@@ -449,6 +506,7 @@ export type ConversationOrderByRelevanceInput = {
 
 export type ConversationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  isGroup?: Prisma.SortOrder
   autoDeleteMessagesAfter?: Prisma.SortOrder
   permText?: Prisma.SortOrder
   permImage?: Prisma.SortOrder
@@ -458,6 +516,8 @@ export type ConversationCountOrderByAggregateInput = {
   fileSendingAllowed?: Prisma.SortOrder
   smteKeyVersion?: Prisma.SortOrder
   v1Keys?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ConversationAvgOrderByAggregateInput = {
@@ -467,6 +527,7 @@ export type ConversationAvgOrderByAggregateInput = {
 
 export type ConversationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  isGroup?: Prisma.SortOrder
   autoDeleteMessagesAfter?: Prisma.SortOrder
   permText?: Prisma.SortOrder
   permImage?: Prisma.SortOrder
@@ -475,10 +536,13 @@ export type ConversationMaxOrderByAggregateInput = {
   permFile?: Prisma.SortOrder
   fileSendingAllowed?: Prisma.SortOrder
   smteKeyVersion?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ConversationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  isGroup?: Prisma.SortOrder
   autoDeleteMessagesAfter?: Prisma.SortOrder
   permText?: Prisma.SortOrder
   permImage?: Prisma.SortOrder
@@ -487,6 +551,8 @@ export type ConversationMinOrderByAggregateInput = {
   permFile?: Prisma.SortOrder
   fileSendingAllowed?: Prisma.SortOrder
   smteKeyVersion?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ConversationSumOrderByAggregateInput = {
@@ -499,6 +565,10 @@ export type ConversationScalarRelationFilter = {
   isNot?: Prisma.ConversationWhereInput
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -507,8 +577,8 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type ConversationCreateNestedOneWithoutParticipantsInput = {
@@ -569,6 +639,7 @@ export type ConversationUpdateOneRequiredWithoutConversationUnreadsNestedInput =
 
 export type ConversationCreateWithoutParticipantsInput = {
   id?: string
+  isGroup?: boolean
   autoDeleteMessagesAfter?: number
   permText?: boolean
   permImage?: boolean
@@ -578,6 +649,8 @@ export type ConversationCreateWithoutParticipantsInput = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
   conversationUnreads?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
@@ -585,6 +658,7 @@ export type ConversationCreateWithoutParticipantsInput = {
 
 export type ConversationUncheckedCreateWithoutParticipantsInput = {
   id?: string
+  isGroup?: boolean
   autoDeleteMessagesAfter?: number
   permText?: boolean
   permImage?: boolean
@@ -594,6 +668,8 @@ export type ConversationUncheckedCreateWithoutParticipantsInput = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
   conversationUnreads?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
@@ -617,6 +693,7 @@ export type ConversationUpdateToOneWithWhereWithoutParticipantsInput = {
 
 export type ConversationUpdateWithoutParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -626,6 +703,8 @@ export type ConversationUpdateWithoutParticipantsInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
   conversationUnreads?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
@@ -633,6 +712,7 @@ export type ConversationUpdateWithoutParticipantsInput = {
 
 export type ConversationUncheckedUpdateWithoutParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -642,6 +722,8 @@ export type ConversationUncheckedUpdateWithoutParticipantsInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
   conversationUnreads?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
@@ -649,6 +731,7 @@ export type ConversationUncheckedUpdateWithoutParticipantsInput = {
 
 export type ConversationCreateWithoutMessagesInput = {
   id?: string
+  isGroup?: boolean
   autoDeleteMessagesAfter?: number
   permText?: boolean
   permImage?: boolean
@@ -658,6 +741,8 @@ export type ConversationCreateWithoutMessagesInput = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
   conversationUnreads?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
@@ -665,6 +750,7 @@ export type ConversationCreateWithoutMessagesInput = {
 
 export type ConversationUncheckedCreateWithoutMessagesInput = {
   id?: string
+  isGroup?: boolean
   autoDeleteMessagesAfter?: number
   permText?: boolean
   permImage?: boolean
@@ -674,6 +760,8 @@ export type ConversationUncheckedCreateWithoutMessagesInput = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
   conversationUnreads?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
@@ -697,6 +785,7 @@ export type ConversationUpdateToOneWithWhereWithoutMessagesInput = {
 
 export type ConversationUpdateWithoutMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -706,6 +795,8 @@ export type ConversationUpdateWithoutMessagesInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
   conversationUnreads?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
@@ -713,6 +804,7 @@ export type ConversationUpdateWithoutMessagesInput = {
 
 export type ConversationUncheckedUpdateWithoutMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -722,6 +814,8 @@ export type ConversationUncheckedUpdateWithoutMessagesInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
   conversationUnreads?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
@@ -729,6 +823,7 @@ export type ConversationUncheckedUpdateWithoutMessagesInput = {
 
 export type ConversationCreateWithoutUnreadMessagesInput = {
   id?: string
+  isGroup?: boolean
   autoDeleteMessagesAfter?: number
   permText?: boolean
   permImage?: boolean
@@ -738,6 +833,8 @@ export type ConversationCreateWithoutUnreadMessagesInput = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   conversationUnreads?: Prisma.ConversationUnreadCreateNestedManyWithoutConversationInput
@@ -745,6 +842,7 @@ export type ConversationCreateWithoutUnreadMessagesInput = {
 
 export type ConversationUncheckedCreateWithoutUnreadMessagesInput = {
   id?: string
+  isGroup?: boolean
   autoDeleteMessagesAfter?: number
   permText?: boolean
   permImage?: boolean
@@ -754,6 +852,8 @@ export type ConversationUncheckedCreateWithoutUnreadMessagesInput = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   conversationUnreads?: Prisma.ConversationUnreadUncheckedCreateNestedManyWithoutConversationInput
@@ -777,6 +877,7 @@ export type ConversationUpdateToOneWithWhereWithoutUnreadMessagesInput = {
 
 export type ConversationUpdateWithoutUnreadMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -786,6 +887,8 @@ export type ConversationUpdateWithoutUnreadMessagesInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   conversationUnreads?: Prisma.ConversationUnreadUpdateManyWithoutConversationNestedInput
@@ -793,6 +896,7 @@ export type ConversationUpdateWithoutUnreadMessagesInput = {
 
 export type ConversationUncheckedUpdateWithoutUnreadMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -802,6 +906,8 @@ export type ConversationUncheckedUpdateWithoutUnreadMessagesInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   conversationUnreads?: Prisma.ConversationUnreadUncheckedUpdateManyWithoutConversationNestedInput
@@ -809,6 +915,7 @@ export type ConversationUncheckedUpdateWithoutUnreadMessagesInput = {
 
 export type ConversationCreateWithoutConversationUnreadsInput = {
   id?: string
+  isGroup?: boolean
   autoDeleteMessagesAfter?: number
   permText?: boolean
   permImage?: boolean
@@ -818,6 +925,8 @@ export type ConversationCreateWithoutConversationUnreadsInput = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageCreateNestedManyWithoutConversationInput
   participants?: Prisma.ConversationParticipantCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageCreateNestedManyWithoutConversationInput
@@ -825,6 +934,7 @@ export type ConversationCreateWithoutConversationUnreadsInput = {
 
 export type ConversationUncheckedCreateWithoutConversationUnreadsInput = {
   id?: string
+  isGroup?: boolean
   autoDeleteMessagesAfter?: number
   permText?: boolean
   permImage?: boolean
@@ -834,6 +944,8 @@ export type ConversationUncheckedCreateWithoutConversationUnreadsInput = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
   participants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
   unreadMessages?: Prisma.UnreadMessageUncheckedCreateNestedManyWithoutConversationInput
@@ -857,6 +969,7 @@ export type ConversationUpdateToOneWithWhereWithoutConversationUnreadsInput = {
 
 export type ConversationUpdateWithoutConversationUnreadsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -866,6 +979,8 @@ export type ConversationUpdateWithoutConversationUnreadsInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUpdateManyWithoutConversationNestedInput
   participants?: Prisma.ConversationParticipantUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUpdateManyWithoutConversationNestedInput
@@ -873,6 +988,7 @@ export type ConversationUpdateWithoutConversationUnreadsInput = {
 
 export type ConversationUncheckedUpdateWithoutConversationUnreadsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  isGroup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoDeleteMessagesAfter?: Prisma.IntFieldUpdateOperationsInput | number
   permText?: Prisma.BoolFieldUpdateOperationsInput | boolean
   permImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -882,6 +998,8 @@ export type ConversationUncheckedUpdateWithoutConversationUnreadsInput = {
   fileSendingAllowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smteKeyVersion?: Prisma.IntFieldUpdateOperationsInput | number
   v1Keys?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
   participants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
   unreadMessages?: Prisma.UnreadMessageUncheckedUpdateManyWithoutConversationNestedInput
@@ -947,6 +1065,7 @@ export type ConversationCountOutputTypeCountConversationUnreadsArgs<ExtArgs exte
 
 export type ConversationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  isGroup?: boolean
   autoDeleteMessagesAfter?: boolean
   permText?: boolean
   permImage?: boolean
@@ -956,6 +1075,8 @@ export type ConversationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   fileSendingAllowed?: boolean
   smteKeyVersion?: boolean
   v1Keys?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   messages?: boolean | Prisma.Conversation$messagesArgs<ExtArgs>
   participants?: boolean | Prisma.Conversation$participantsArgs<ExtArgs>
   unreadMessages?: boolean | Prisma.Conversation$unreadMessagesArgs<ExtArgs>
@@ -967,6 +1088,7 @@ export type ConversationSelect<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type ConversationSelectScalar = {
   id?: boolean
+  isGroup?: boolean
   autoDeleteMessagesAfter?: boolean
   permText?: boolean
   permImage?: boolean
@@ -976,9 +1098,11 @@ export type ConversationSelectScalar = {
   fileSendingAllowed?: boolean
   smteKeyVersion?: boolean
   v1Keys?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type ConversationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "autoDeleteMessagesAfter" | "permText" | "permImage" | "permVoice" | "permVideo" | "permFile" | "fileSendingAllowed" | "smteKeyVersion" | "v1Keys", ExtArgs["result"]["conversation"]>
+export type ConversationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "isGroup" | "autoDeleteMessagesAfter" | "permText" | "permImage" | "permVoice" | "permVideo" | "permFile" | "fileSendingAllowed" | "smteKeyVersion" | "v1Keys" | "createdAt" | "updatedAt", ExtArgs["result"]["conversation"]>
 export type ConversationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   messages?: boolean | Prisma.Conversation$messagesArgs<ExtArgs>
   participants?: boolean | Prisma.Conversation$participantsArgs<ExtArgs>
@@ -997,6 +1121,7 @@ export type $ConversationPayload<ExtArgs extends runtime.Types.Extensions.Intern
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    isGroup: boolean
     autoDeleteMessagesAfter: number
     permText: boolean
     permImage: boolean
@@ -1006,6 +1131,8 @@ export type $ConversationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     fileSendingAllowed: boolean
     smteKeyVersion: number
     v1Keys: runtime.JsonValue | null
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["conversation"]>
   composites: {}
 }
@@ -1380,6 +1507,7 @@ export interface Prisma__ConversationClient<T, Null = never, ExtArgs extends run
  */
 export interface ConversationFieldRefs {
   readonly id: Prisma.FieldRef<"Conversation", 'String'>
+  readonly isGroup: Prisma.FieldRef<"Conversation", 'Boolean'>
   readonly autoDeleteMessagesAfter: Prisma.FieldRef<"Conversation", 'Int'>
   readonly permText: Prisma.FieldRef<"Conversation", 'Boolean'>
   readonly permImage: Prisma.FieldRef<"Conversation", 'Boolean'>
@@ -1389,6 +1517,8 @@ export interface ConversationFieldRefs {
   readonly fileSendingAllowed: Prisma.FieldRef<"Conversation", 'Boolean'>
   readonly smteKeyVersion: Prisma.FieldRef<"Conversation", 'Int'>
   readonly v1Keys: Prisma.FieldRef<"Conversation", 'Json'>
+  readonly createdAt: Prisma.FieldRef<"Conversation", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Conversation", 'DateTime'>
 }
     
 
@@ -1607,7 +1737,7 @@ export type ConversationCreateArgs<ExtArgs extends runtime.Types.Extensions.Inte
   /**
    * The data needed to create a Conversation.
    */
-  data?: Prisma.XOR<Prisma.ConversationCreateInput, Prisma.ConversationUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.ConversationCreateInput, Prisma.ConversationUncheckedCreateInput>
 }
 
 /**
