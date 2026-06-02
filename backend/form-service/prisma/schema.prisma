@@ -33,7 +33,6 @@ enum SubmissionStatus {
 model User {
   id   String @id @default(uuid())
   name String
-
   formsCreated    Form[]
   formAssignments FormAssignment[] @relation("FormAssigner")
   formSubmissions FormSubmission[]
@@ -78,7 +77,7 @@ model FormField {
 
   form Form @relation(fields: [formId], references: [id], onDelete: Cascade)
 
-  @@map("form_fields")
+  @@map("taskform_fields")
 }
 
 model FormAssignment {
@@ -100,7 +99,7 @@ model FormAssignment {
   assignees    FormAssignee[]
   submissions  FormSubmission[]
 
-  @@map("form_assignments")
+  @@map("taskform_assignments")
 }
 
 model FormAssignee {
@@ -112,7 +111,7 @@ model FormAssignee {
   user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([assignmentId, userId])
-  @@map("form_assignees")
+  @@map("taskform_assignees")
 }
 
 model FormSubmission {
@@ -131,5 +130,5 @@ model FormSubmission {
   submittedBy User           @relation(fields: [submittedById], references: [id], onDelete: Cascade)
 
   @@unique([assignmentId, submittedById, dueDate])
-  @@map("form_submissions")
+  @@map("taskform_submissions")
 }
