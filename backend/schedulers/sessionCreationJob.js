@@ -1,7 +1,7 @@
 import cron from "node-cron";
-import Session from "../models/sessionModel.js";
-import AttendanceLog from "../models/attendanceLogModel.js";
-import Conversation from "../models/conversationModel.js";
+import Session from "../src/common/models/sessionModel.js";
+import AttendanceLog from "../src/modules/attendance/models/attendanceLogModel.js";
+import Conversation from "../src/common/models/conversationModel.js";
 import moment from "moment";
 
 export function scheduleSessionCronForClass(classGroup) {

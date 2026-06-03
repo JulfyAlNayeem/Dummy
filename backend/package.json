@@ -17,9 +17,6 @@
     "dev": "nodemon app",
     "start": "node app.js",
     "seed": "node scripts/seed.js",
-    "prisma:validate": "npx prisma validate",
-    "prisma:generate": "npx prisma generate",
-    "prisma:push": "npx prisma db push",
     "build": "echo \"No build step required for backend (server runs directly)\""
   },
   "author": "",
@@ -27,7 +24,6 @@
   "description": "",
   "dependencies": {
     "@noble/post-quantum": "^0.4.1",
-    "@prisma/client": "6.19.0",
     "@socket.io/redis-adapter": "^8.3.0",
     "bcryptjs": "^3.0.3",
     "body-parser": "^1.20.3",
@@ -65,7 +61,6 @@
   },
   "devDependencies": {
     "cross-env": "^10.0.0",
-    "nodemon": "^3.1.10",
-    "prisma": "^6.19.0"
+    "nodemon": "^3.1.10"
   }
 }

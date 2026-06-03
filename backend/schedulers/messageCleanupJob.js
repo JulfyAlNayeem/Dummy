@@ -1,8 +1,8 @@
 import cron from "node-cron";
 import path from "path";
 import { promises as fsPromises } from "fs";
-import Message from "../models/messageModel.js";
-import { io } from "../app.js";
+import Message from "../src/common/models/messageModel.js";
+// import { io } from "../app.js";
 
 // Run every 5 minutes
 const messageCleanupJob = cron.schedule("*/5 * * * *", async () => {
@@ -36,11 +36,11 @@ const messageCleanupJob = cron.schedule("*/5 * * * *", async () => {
       }
 
       // Emit messageDeleted event with hardDelete: true
-      io.to(msg.conversation.toString()).emit("messageDeleted", {
-        messageId: msg._id.toString(),
-        userId: msg.sender.toString(), // Use the original sender as the userId
-        hardDelete: true,
-      });
+      // io.to(msg.conversation.toString()).emit("messageDeleted", {
+      //   messageId: msg._id.toString(),
+      //   userId: msg.sender.toString(), // Use the original sender as the userId
+      //   hardDelete: true,
+      // });
     }
 
     // Delete messages from DB

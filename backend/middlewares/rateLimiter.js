@@ -6,6 +6,11 @@ windowMs: 15 * 60 * 1000,
 max: 300, 
 standardHeaders: true,
 legacyHeaders: false,
+// Trust proxy - required when behind Nginx
+validate: {
+  trustProxy: true,
+  xForwardedForHeader: 'X-Forwarded-For',
+},
 });
 
 

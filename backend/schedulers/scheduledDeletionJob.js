@@ -1,6 +1,6 @@
 import cron from "node-cron";
-import User from "../models/userModel.js";
-import UserDeletionSchedule from "../models/userDeletionScheduleModel.js";
+import User from "../src/common/models/userModel.js";
+import UserDeletionSchedule from "../src/common/models/userDeletionScheduleModel.js";
 
 // Automatically schedule users for deletion based on inactivity
 const scheduleInactiveUsersForDeletion = async () => {

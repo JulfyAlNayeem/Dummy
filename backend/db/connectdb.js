@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import logger from "../utils/logger.js";
+import logger from "../src/common/utils/logger.js";
 
 const DB_OPTIONS = {
   dbName: process.env.DB_NAME,

@@ -7,7 +7,7 @@
 
 import crypto from 'crypto';
 import { getRedisClient } from '../config/redisClient.js';
-import logger from '../utils/logger.js';
+import logger from '../src/common/utils/logger.js';
 
 const REDIS_KEY_PREFIX = 'backend_encryption_keys';
 const REDIS_CURRENT_KEY_INDEX = 'backend_encryption_current_index';
@@ -299,6 +299,84 @@ export async function getEncryptionStats() {
   }
 }
 
+// ── Binary file encryption (at-rest) ─────────────────────────────────────────
+// Format: BENC (4 bytes magic) + salt (16) + iv (16) + authTag (16) + ciphertext
+const FILE_MAGIC = Buffer.from('BENC'); // 4 bytes
+
+/**
+ * Encrypt a binary buffer for at-rest file storage.
+ * @param {Buffer} plainBuffer - raw file bytes
+ * @returns {Promise<Buffer>} - encrypted buffer with BENC header
+ */
+export async function encryptBuffer(plainBuffer) {
+  if (!Buffer.isBuffer(plainBuffer)) {
+    throw new Error('encryptBuffer: expected a Buffer');
+  }
+
+  const keyBase64 = await getCurrentEncryptionKey();
+  const key = Buffer.from(keyBase64, 'base64');
+  const salt = crypto.randomBytes(SALT_LENGTH);
+  const iv = crypto.randomBytes(IV_LENGTH);
+
+  const cipher = crypto.createCipheriv(ALGORITHM, key, iv);
+  const encrypted = Buffer.concat([cipher.update(plainBuffer), cipher.final()]);
+  const authTag = cipher.getAuthTag(); // 16 bytes
+
+  // BENC + salt + iv + authTag + ciphertext
+  return Buffer.concat([FILE_MAGIC, salt, iv, authTag, encrypted]);
+}
+
+/**
+ * Decrypt a BENC-encrypted buffer.
+ * Tries all rotating keys for backward compatibility.
+ * @param {Buffer} encryptedBuffer - buffer starting with BENC header
+ * @returns {Promise<Buffer>} - decrypted raw file bytes
+ */
+export async function decryptBuffer(encryptedBuffer) {
+  if (!Buffer.isBuffer(encryptedBuffer) || encryptedBuffer.length < 52) {
+    throw new Error('decryptBuffer: invalid or too-short buffer');
+  }
+
+  // Verify magic header
+  const magic = encryptedBuffer.subarray(0, 4);
+  if (!magic.equals(FILE_MAGIC)) {
+    throw new Error('decryptBuffer: missing BENC magic header');
+  }
+
+  const salt = encryptedBuffer.subarray(4, 4 + SALT_LENGTH);
+  const iv = encryptedBuffer.subarray(20, 20 + IV_LENGTH);
+  const authTag = encryptedBuffer.subarray(36, 36 + AUTH_TAG_LENGTH);
+  const ciphertext = encryptedBuffer.subarray(52);
+
+  const keys = await getAllEncryptionKeys();
+  let lastError = null;
+
+  for (let i = 0; i < keys.length; i++) {
+    try {
+      const key = Buffer.from(keys[i], 'base64');
+      const decipher = crypto.createDecipheriv(ALGORITHM, key, iv);
+      decipher.setAuthTag(authTag);
+      const decrypted = Buffer.concat([decipher.update(ciphertext), decipher.final()]);
+      return decrypted;
+    } catch (err) {
+      lastError = err;
+      continue;
+    }
+  }
+
+  throw new Error('decryptBuffer: failed with all available keys');
+}
+
+/**
+ * Check if a buffer is BENC-encrypted (starts with magic bytes).
+ * @param {Buffer} buf
+ * @returns {boolean}
+ */
+export function isEncryptedFile(buf) {
+  if (!Buffer.isBuffer(buf) || buf.length < 4) return false;
+  return buf.subarray(0, 4).equals(FILE_MAGIC);
+}
+
 export default {
   initializeEncryptionKeys,
   getCurrentEncryptionKey,
@@ -307,5 +385,8 @@ export default {
   encryptMessage,
   decryptMessage,
   isBackendEncrypted,
-  getEncryptionStats
+  getEncryptionStats,
+  encryptBuffer,
+  decryptBuffer,
+  isEncryptedFile,
 };

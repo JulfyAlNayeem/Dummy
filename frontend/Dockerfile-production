@@ -1,54 +1,51 @@
 # Frontend Dockerfile for Production
-# ====================================
-# Multi-stage build for optimized production image
+# Build stage
+FROM node:24-alpine AS build
 
-# Stage 1: Build the React application
-FROM node:18-alpine AS build
+# Accept build arguments
+ARG VITE_API_URL=/api
 
 WORKDIR /app
 
 # Install pnpm
 RUN npm install -g pnpm
 
-# Copy workspace files from root
-COPY pnpm-lock.yaml* pnpm-workspace.yaml* ./
-COPY frontend/package.json ./frontend/
+# Copy workspace files
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .pnpmrc* ./
+COPY frontend/messenger/package.json ./frontend/messenger/
 
 # Install dependencies for frontend workspace only
-RUN if [ -f pnpm-lock.yaml ]; then \
-      pnpm install --frozen-lockfile --filter alfajr; \
-    else \
-      pnpm install --filter alfajr; \
-    fi
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
+    pnpm install --frozen-lockfile --filter alfajr --ignore-scripts
+
+# Rebuild esbuild binary (needed by vite build)
+RUN pnpm --filter alfajr rebuild esbuild
 
 # Copy frontend source code
-COPY frontend/ ./frontend/
+COPY frontend/messenger/ ./frontend/messenger/
 
-# Set working directory to frontend
-WORKDIR /app/frontend
+# Set working directory to messenger
+WORKDIR /app/frontend/messenger
 
-# Set build-time environment variables
-# This will be overridden by the actual VPS IP during deployment
-ARG VITE_BASE_URL=http://localhost:3001/
-ENV VITE_BASE_URL=${VITE_BASE_URL}
+# Create .env file with VITE_API_URL for build
+RUN echo "VITE_API_URL=${VITE_API_URL}" > .env
 
-# Build the application
+# Build application
 RUN pnpm run build
 
 # Verify build output
-RUN ls -la dist/ || ls -la build/ || echo "Build output not found"
+RUN if [ -d dist ]; then ls -la dist; else echo "ERROR: build output not found (dist/)" >&2; exit 1; fi
 
-# Stage 2: Serve with Nginx
+# Production stage
 FROM nginx:alpine
 
 # Copy built assets from build stage
-# Vite outputs to 'dist' folder by default
-COPY --from=build /app/frontend/dist /usr/share/nginx/html
+COPY --from=build /app/frontend/messenger/dist /usr/share/nginx/html
 
-# Copy custom nginx configuration
-COPY --from=build /app/frontend/nginx.conf /etc/nginx/conf.d/default.conf
+# Copy nginx configuration
+COPY --from=build /app/frontend/messenger/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
+# Expose port
 EXPOSE 80
 
 # Start nginx

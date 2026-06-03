@@ -1,5 +1,5 @@
-# Backend Dockerfile for Monorepo
-FROM node:20
+# Backend Dockerfile for Monorepo (Node 20 standardized)
+FROM node:20-alpine
 
 WORKDIR /app/backend
 
@@ -15,8 +15,10 @@ RUN pnpm install
 # Copy backend source code
 COPY backend/ ./
 
-# Generate Prisma client
-RUN npx prisma generate || true
+# Create uploads directory with proper permissions
+RUN mkdir -p /app/backend/uploads && chmod 777 /app/backend/uploads
+
+
 
 EXPOSE 3001
 CMD ["node", "app.js"]

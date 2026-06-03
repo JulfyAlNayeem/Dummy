@@ -5,7 +5,8 @@
 
 import cron from 'node-cron';
 import { rotateEncryptionKeys, getEncryptionStats } from '../services/backendEncryptionService.js';
-import logger from '../utils/logger.js';
+import { rotateAllTransportKeys } from '../services/smteService.js';
+import logger from '../src/common/utils/logger.js';
 
 /**
  * Start the encryption key rotation cron job
@@ -23,14 +24,24 @@ export function startEncryptionKeyRotation() {
       const beforeStats = await getEncryptionStats();
       logger.info({ beforeStats }, '📊 Encryption stats before rotation');
       
-      // Rotate keys
+      // Rotate backend storage keys
       const result = await rotateEncryptionKeys();
+      
+      // Rotate SMTE transport keys for all conversations
+      let smteResult = { rotated: 0, total: 0 };
+      try {
+        smteResult = await rotateAllTransportKeys();
+        logger.info({ smteResult }, '✅ SMTE transport key rotation completed');
+      } catch (smteError) {
+        logger.error({ error: smteError }, '❌ SMTE transport key rotation failed');
+      }
       
       // Get stats after rotation
       const afterStats = await getEncryptionStats();
       
       logger.info({
         result,
+        smteResult,
         beforeStats,
         afterStats,
         rotatedAt: new Date().toISOString()

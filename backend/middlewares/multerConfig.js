@@ -2,14 +2,90 @@ import multer from "multer";
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import fs from "fs";
+import { sanitizeFilename } from "../src/common/services/fileValidation.js";
 
-// Ensure uploads directory exists
-const uploadDir = path.join(process.cwd(), "uploads");
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
+// Ensure uploads directories exist
+const uploadsDir = path.join(process.cwd(), "uploads");
+const imagesDir = path.join(uploadsDir, "images");
+const documentsDir = path.join(uploadsDir, "documents");
 
-// Configure Multer storage
+[uploadsDir, imagesDir, documentsDir].forEach(dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+});
+
+// Configure Multer storage for images
+const imageStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/images/");
+  },
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    const sanitized = sanitizeFilename(path.basename(file.originalname, ext));
+    cb(null, `${uuidv4()}-${sanitized}${ext}`);
+  },
+});
+
+// Configure Multer storage for documents
+const documentStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/documents/");
+  },
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    const sanitized = sanitizeFilename(path.basename(file.originalname, ext));
+    cb(null, `${uuidv4()}-${sanitized}${ext}`);
+  },
+});
+
+// File filter for images
+const imageFileFilter = (req, file, cb) => {
+  const allowedTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/webp",
+  ];
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error("Only image files (JPEG, PNG, GIF, WebP) are allowed"), false);
+  }
+};
+
+// File filter for documents
+const documentFileFilter = (req, file, cb) => {
+  const allowedTypes = [
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.ms-excel",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "text/plain",
+  ];
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error("Only document files (PDF, DOC, DOCX, XLS, XLSX, TXT) are allowed"), false);
+  }
+};
+
+// Initialize Multer for images (10MB limit)
+export const uploadImage = multer({
+  storage: imageStorage,
+  fileFilter: imageFileFilter,
+  limits: { fileSize: 10 * 1024 * 1024 },
+});
+
+// Initialize Multer for documents (50MB limit)
+export const uploadDocument = multer({
+  storage: documentStorage,
+  fileFilter: documentFileFilter,
+  limits: { fileSize: 50 * 1024 * 1024 },
+});
+
+// Legacy storage for backward compatibility
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/"); // Folder for uploaded files
@@ -19,7 +95,7 @@ const storage = multer.diskStorage({
   },
 });
 
-// File filter to allow specific mime types
+// Legacy file filter
 const fileFilter = (req, file, cb) => {
   const allowedTypes = [
     "image/jpeg",
@@ -38,7 +114,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Initialize Multer
+// Legacy upload (10MB limit)
 const upload = multer({
   storage,
   fileFilter,

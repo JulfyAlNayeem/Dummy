@@ -1,6 +1,6 @@
-import User from "../models/userModel.js"
-import UserDeletionSchedule from "../models/userDeletionScheduleModel.js"
-import AdminActivityLog from "../models/adminActivityLogModel.js"
+import User from "../src/common/models/userModel.js"
+import UserDeletionSchedule from "../src/modules/user/models/userDeletionScheduleModel.js"
+import AdminActivityLog from "../src/modules/admin/models/adminActivityLogModel.js"
 import cron from "node-cron"
 
 // Check for inactive users and schedule them for deletion

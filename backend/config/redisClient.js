@@ -1,5 +1,5 @@
 import { createClient } from "redis";
-import logger from "../utils/logger.js"; // Assuming logger is in utils/logger.js
+import logger from "../src/common/utils/logger.js"; // Assuming logger is in utils/logger.js
 
 // Initialize Redis client
 const redisClient = createClient({

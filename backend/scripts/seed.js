@@ -1,16 +1,21 @@
 /**
- * User Seed Script
- * Seeds one user for every role: superadmin, admin, moderator, teacher, developer, user
+ * Seed Script
+ * - Seeds one user per role
+ * - Creates default admin settings
+ * - Creates site security message
+ * - Exports autoInitializeDatabase() for use in server startup
  *
- * Usage:
- *   node scripts/seed.js
+ * Usage: node scripts/seed.js
  */
 
 import "dotenv/config";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import User from "../src/common/models/userModel.js";
+import AdminSettings from "../src/modules/admin/models/adminSettingsModel.js";
 import SiteSecurityMessage from "../src/modules/siteSecurity/models/siteSecurityMessageModel.js";
+
+// ─── DB helpers (only used when running the script directly) ─────────────────
 
 const connectDatabase = async () => {
   await mongoose.connect(process.env.DATABASE_URL, {
@@ -27,9 +32,10 @@ const disconnectDatabase = async () => {
   console.log("🔌 Disconnected from database");
 };
 
-// One user per role
-const SEED_USERS =  [
-   // Superadmin
+// ─── Seed data ────────────────────────────────────────────────────────────────
+
+const SEED_USERS = [
+  // Superadmin
   {
     name: "Super Admin",
     email: "superadmin@chatapp.com",
@@ -129,7 +135,20 @@ const SEED_USERS =  [
     fileSendingAllowed: true,
     notification_settings: { new_message: true, mention: true, sound: true },
   },
-  // Students
+  // Developer
+  {
+    name: "Dev User",
+    email: "developer@chatapp.com",
+    password: "Dev@123!",
+    gender: "male",
+    role: "developer",
+    is_active: true,
+    bio: "Platform Developer",
+    themeIndex: 0,
+    fileSendingAllowed: true,
+    notification_settings: { new_message: true, mention: true, sound: true },
+  },
+  // Students (role: user)
   {
     name: "Ahmed Chen",
     email: "ahmed.chen@student.edu",
@@ -228,6 +247,86 @@ const SEED_USERS =  [
   },
 ];
 
+// ─── Seeder functions ─────────────────────────────────────────────────────────
+
+const seedUsers = async () => {
+  console.log("👥 Seeding users...");
+  const saltRounds = 10;
+  const createdUsers = [];
+
+  for (const userData of SEED_USERS) {
+    const existing = await User.findOne({ email: userData.email });
+    if (existing) {
+      console.log(`⚠️  Skipping [${userData.role}] — already exists: ${userData.email}`);
+      createdUsers.push(existing);
+      continue;
+    }
+    const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
+    const user = await User.create({ ...userData, password: hashedPassword });
+    console.log(`   ✅ Created [${user.role}]: ${user.email}`);
+    createdUsers.push(user);
+  }
+
+  return createdUsers;
+};
+
+const seedAdminSettings = async (adminUserId) => {
+  console.log("⚙️  Seeding admin settings...");
+
+  const existing = await AdminSettings.findOne();
+  if (existing) {
+    console.log("⚠️  Skipping — admin settings already exist");
+    return existing;
+  }
+
+  const adminSettings = new AdminSettings({
+    features: {
+      voice_messages: true,
+      sms_notifications: true,
+      image_sharing: true,
+      video_sharing: true,
+      file_sharing: true,
+      voice_calling: true,
+      video_calling: true,
+      group_creation: true,
+      user_registration: true,
+    },
+    security: {
+      require_admin_approval: true,
+      auto_approve_after_hours: 24,
+      max_file_size_mb: 50,
+      allowed_file_types: ["jpg", "jpeg", "png", "gif", "pdf", "doc", "docx", "mp3", "mp4", "webp", "svg"],
+      message_encryption: true,
+      two_factor_required: false,
+      session_timeout_minutes: 60,
+    },
+    moderation: {
+      auto_moderate_messages: false,
+      blocked_words: ["spam", "inappropriate", "banned"],
+      max_message_length: 5000,
+      spam_detection: true,
+      image_content_filter: false,
+    },
+    rate_limits: {
+      messages_per_minute: 30,
+      files_per_hour: 10,
+      friend_requests_per_day: 20,
+      group_creation_per_day: 5,
+    },
+    notifications: {
+      admin_email_alerts: true,
+      new_user_notifications: true,
+      suspicious_activity_alerts: true,
+      system_maintenance_mode: false,
+    },
+    updated_by: adminUserId,
+  });
+
+  await adminSettings.save();
+  console.log("   ✅ Admin settings created");
+  return adminSettings;
+};
+
 const seedSiteSecurityMessage = async () => {
   console.log("🔐 Seeding site security message...");
 
@@ -241,44 +340,60 @@ const seedSiteSecurityMessage = async () => {
     goodMessage: "assalam",
     badMessage: "goodmorning",
   });
-  console.log("   ✅ Created site security message (good: 'assalam', bad: 'goodmorning')");
+  console.log("   ✅ Site security message created (good: 'assalam', bad: 'goodmorning')");
   return doc;
 };
 
-const seedUsers = async () => {
-  console.log("👥 Seeding users...");
+// ─── Core init logic (shared by direct run and autoInitializeDatabase) ────────
 
-  const saltRounds = 10;
-  const createdUsers = [];
+const runAllSeeders = async () => {
+  const users = await seedUsers();
+  const superadmin = users.find((u) => u.role === "superadmin");
+  await seedAdminSettings(superadmin._id);
+  await seedSiteSecurityMessage();
+  return users;
+};
 
-  for (const userData of SEED_USERS) {
-    // Skip if user with this email already exists
-    const existing = await User.findOne({ email: userData.email });
-    if (existing) {
-      console.log(`⚠️  Skipping [${userData.role}] — already exists: ${userData.email}`);
-      createdUsers.push(existing);
-      continue;
+// ─── Exported for server.js startup ──────────────────────────────────────────
+
+export const autoInitializeDatabase = async () => {
+  try {
+    const isConnected = mongoose.connection.readyState === 1;
+    if (!isConnected) {
+      await connectDatabase();
     }
 
-    const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
-    const user = await User.create({ ...userData, password: hashedPassword });
-    console.log(`   ✅ Created [${user.role}]: ${user.email}`);
-    createdUsers.push(user);
-  }
+    const usersExist = (await User.countDocuments()) > 0;
+    if (usersExist) {
+      console.log("✅ Database already initialized — skipping seed");
+      return;
+    }
 
-  return createdUsers;
+    console.log("📭 Empty database detected — auto-seeding...\n");
+    await runAllSeeders();
+    console.log("🎉 Auto-initialization complete!\n");
+  } catch (error) {
+    console.error("❌ Auto-initialization error:", error.message);
+    // Don't crash the server — just log and continue
+  }
 };
+
+// ─── Direct run via `node scripts/seed.js` ───────────────────────────────────
 
 const seed = async () => {
   console.log("\n" + "=".repeat(60));
-  console.log("🌱 User Seed Script");
+  console.log("🌱 Seed Script");
   console.log("=".repeat(60) + "\n");
 
   try {
     await connectDatabase();
 
-    const users = await seedUsers();
-    await seedSiteSecurityMessage();
+    const usersExist = (await User.countDocuments()) > 0;
+    if (usersExist) {
+      console.log("ℹ️  Users already exist — running seeders with skip logic...\n");
+    }
+
+    await runAllSeeders();
 
     console.log("\n" + "=".repeat(60));
     console.log("🎉 Seeding complete!");
@@ -288,6 +403,7 @@ const seed = async () => {
     console.log("   admin       → admin.ahmed@chatapp.com      / Admin@123!");
     console.log("   moderator   → mod.ali@chatapp.com          / Mod@123!");
     console.log("   teacher     → dr.johnson@university.edu    / Teacher@123!");
+    console.log("   developer   → developer@chatapp.com        / Dev@123!");
     console.log("   user        → ahmed.chen@student.edu       / Student@123!");
     console.log("\n🔐 Site Security:");
     console.log("   Good message: 'assalam'     (allows access)");
