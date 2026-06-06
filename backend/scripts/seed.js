@@ -414,7 +414,7 @@ const seed = async () => {
     console.error(error.stack);
     process.exit(1);
   } finally {
-    await disconnectDatabase();
+    // await disconnectDatabase();
   }
 };
 

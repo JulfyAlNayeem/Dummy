@@ -1,47 +1,53 @@
+
+
+import jwt from "jsonwebtoken";
 import SiteSecurityMessage from "./models/siteSecurityMessageModel.js";
 
-// Create a new SiteSecurityMessage
+
+// JWT secret just for signing — keep this in .env
+const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret";
+
+const COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: false,          // HTTP, not HTTPS
+  sameSite: "lax",
+  maxAge: 24 * 60 * 60 * 1000, // 1 day
+};
+
+// ─── Admin: Create security message ──────────────────────────────────────────
 export const createSiteSecurityMessage = async (req, res) => {
   try {
     const { goodMessage, badMessage } = req.body;
 
-    // Validate required fields
     if (!goodMessage || !badMessage) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        message: 'Both goodMessage and badMessage are required' 
+        message: "Both goodMessage and badMessage are required",
       });
     }
 
-    // Create new SiteSecurityMessage document
-    const newMessage = new SiteSecurityMessage({
-      goodMessage,
-      badMessage
-    });
-
-    // Save to database
+    const newMessage = new SiteSecurityMessage({ goodMessage, badMessage });
     const savedMessage = await newMessage.save();
 
     res.status(201).json({
       success: true,
-      message: 'Site security message created successfully',
-      data: savedMessage
+      message: "Site security message created successfully",
+      data: savedMessage,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error creating site security message',
-      error: error.message
+      message: "Error creating site security message",
+      error: error.message,
     });
   }
 };
 
-// Verify site security messages
+// ─── User: Verify pin ─────────────────────────────────────────────────────────
 export const verifySiteSecurityMessage = async (req, res) => {
   try {
     const { message } = req.body;
 
-    // Validate input field
     if (!message) {
       return res.status(400).json({
         success: false,
@@ -49,65 +55,77 @@ export const verifySiteSecurityMessage = async (req, res) => {
       });
     }
 
-    // Find matching security message in database
-    const storedMessage = await SiteSecurityMessage.findOne({
-      $or: [{ goodMessage: message }, { badMessage: message }],
-    });
+    // Always pull the latest record from DB (admin controls this)
+    const record = await SiteSecurityMessage.findOne().sort({ createdAt: -1 });
 
-    let isGoodMessage = false;
-    let messageType = "unknown";
-    let messageData = {};
+    let matched = false;
+    let messageType = null;
 
-    // Check if message exists in database
-    if (storedMessage) {
-      // Use database message
-      isGoodMessage = storedMessage.goodMessage === message;
-      messageType = isGoodMessage ? "good" : "bad";
-      messageData = {
-        id: storedMessage._id,
-        verifiedAt: new Date(),
-      };
-    } else {
-      // No custom messages in database - use default behavior
-      const normalizedMessage = message.toLowerCase().trim();
-
-      if (normalizedMessage === "assalam") {
-        isGoodMessage = true;
+    if (record) {
+      if (record.goodMessage === message) {
+        matched = true;
         messageType = "good";
-        messageData = {
-          messageType: "good",
-          verifiedAt: new Date(),
-          isDefault: true, // Indicates this used default logic
-        };
-      } else if (normalizedMessage === "goodmorning") {
-        isGoodMessage = false;
+      } else if (record.badMessage === message) {
+        matched = true;
         messageType = "bad";
-        messageData = {
-          messageType: "bad",
-          verifiedAt: new Date(),
-          isDefault: true,
-        };
-      } else {
-        // Unknown message when no custom messages are set
-        return res.status(401).json({
-          success: false,
-          message: "Invalid pin. Please enter 'valid pin'.",
-        });
+      }
+    } else {
+      // No DB record yet — use seed defaults as fallback
+      const normalized = message.toLowerCase().trim();
+      if (normalized === "assalam") {
+        matched = true;
+        messageType = "good";
+      } else if (normalized === "goodmorning") {
+        matched = true;
+        messageType = "bad";
       }
     }
 
-    // If verification successful
-    res.status(200).json({
+    if (!matched) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid pin. Please try again.",
+      });
+    }
+
+    // Sign token and set cookie
+    const token = jwt.sign({ verified: true }, JWT_SECRET, { expiresIn: "1d" });
+    res.cookie("site_verified", token, COOKIE_OPTIONS);
+
+    return res.status(200).json({
       success: true,
       message: "Security Pin verified successfully",
-      data: messageData,
+      data: {
+        messageType,
+        verifiedAt: new Date(),
+      },
     });
   } catch (error) {
+    console.error("Verify site security error:", error);
     res.status(500).json({
       success: false,
       message: "Error verifying security Pin",
       error: error.message,
     });
+  }
+};
+
+// ─── Check if already verified (reads cookie) ────────────────────────────────
+export const checkSiteVerification = async (req, res) => {
+  try {
+    const token = req.cookies?.site_verified;
+
+    if (!token) {
+      return res.status(200).json({ verified: false });
+    }
+
+    jwt.verify(token, JWT_SECRET);
+    return res.status(200).json({ verified: true });
+
+  } catch {
+    // Expired or tampered token
+    res.clearCookie("site_verified");
+    return res.status(200).json({ verified: false });
   }
 };
 
