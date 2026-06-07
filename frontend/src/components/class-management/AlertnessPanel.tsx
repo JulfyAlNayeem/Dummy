@@ -35,8 +35,8 @@ export default function AlertnessPanelSocket(): JSX.Element {
   const {
     data: sessionStatsData,
     isLoading: statsLoading,
-  }: any = useGetSessionStatsQuery(selectedSession?.id, { 
-    skip: !selectedSession?.id 
+  }: any = useGetSessionStatsQuery(selectedSession?._id, { 
+    skip: !selectedSession?._id 
   });
 
   const sessions: any[] = sessionsData?.sessions || [];
@@ -216,7 +216,7 @@ export default function AlertnessPanelSocket(): JSX.Element {
                           .sort((a, b) => a.responseTime - b.responseTime)
                           .map((response, index) => (
                             <tr
-                              key={response.userId.id || response.userId}
+                              key={response.userId._id || response.userId}
                               className="border-b border-gray-600 dark:border-gray-300"
                             >
                               <td className="py-3 px-4 text-gray-400 dark:text-gray-600">{index + 1}</td>
@@ -284,7 +284,7 @@ export default function AlertnessPanelSocket(): JSX.Element {
             ) : (
               <div className="space-y-4">
                 {sessions.slice(0, 10).map((session) => (
-                  <div key={session.id} className="border border-gray-600 dark:border-gray-300 rounded-lg p-4">
+                  <div key={session._id} className="border border-gray-600 dark:border-gray-300 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <Badge

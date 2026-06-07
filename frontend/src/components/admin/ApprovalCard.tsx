@@ -26,7 +26,7 @@ export function ApprovalCard({ approval, onApprove, onReject }: ApprovalCardProp
   const handleApprove = async (): Promise<void> => {
     setIsApproving(true)
     try {
-      await onApprove({ approvalId: approval.id, notes: approveNotes })
+      await onApprove({ approvalId: approval._id, notes: approveNotes })
       setApproveNotes('')
     } finally {
       setIsApproving(false)
@@ -36,7 +36,7 @@ export function ApprovalCard({ approval, onApprove, onReject }: ApprovalCardProp
   const handleReject = async (): Promise<void> => {
     setIsRejecting(true)
     try {
-      await onReject({ approvalId: approval.id, reason: rejectReason })
+      await onReject({ approvalId: approval._id, reason: rejectReason })
       setRejectReason('')
     } finally {
       setIsRejecting(false)

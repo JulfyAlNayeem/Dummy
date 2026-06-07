@@ -29,8 +29,8 @@ export default function ClassDashboard(): JSX.Element {
   }: any = useGetClassDetailsQuery(classId, {
     skip: !classId,
   })
-  const isAdmin = classData?.class.admins?.some((admin) => admin.id === currentUser?.id)
-  const isModerator = classData?.class.moderators?.some((mod) => mod.id === currentUser?.id)
+  const isAdmin = classData?.class.admins?.some((admin) => admin._id === currentUser?._id)
+  const isModerator = classData?.class.moderators?.some((mod) => mod._id === currentUser?._id)
   const canManage = isAdmin || isModerator
 
   useEffect(() => {

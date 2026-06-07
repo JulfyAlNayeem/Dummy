@@ -33,8 +33,8 @@ const ProfilePictureUploader = ({ selectedTab, setSelectedTab, isOpenPopup, setI
                             { id: "from-computer", label: "From Computer" },
                         ].map((tab) => (
                             <TabsTrigger
-                                key={tab.id}
-                                value={tab.id}
+                                key={tab._id}
+                                value={tab._id}
                                 className="px-4 py-2 rounded-md text-sm font-medium transition-all data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:bg-gray-600"
                             >
                                 {tab.label}

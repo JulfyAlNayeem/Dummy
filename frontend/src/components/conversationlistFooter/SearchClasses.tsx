@@ -67,7 +67,7 @@ const SearchClasses = ({ searchQuery, setSearchQuery, themeIndex }: any): JSX.El
 
       setAllClasses((prev) => {
         const newClasses = searchResult.conversations.filter(
-          (newClass) => !prev.some((existing) => existing.id === newClass.id)
+          (newClass) => !prev.some((existing) => existing._id === newClass._id)
         );
         console.log('Merging classes:', { prev, newClasses, page });
         return page === 1 ? newClasses : [...prev, ...newClasses];
@@ -143,7 +143,7 @@ const SearchClasses = ({ searchQuery, setSearchQuery, themeIndex }: any): JSX.El
             <div className="space-y-2">
               {localSearchResults.map((cls, index) => (
                 <div
-                  key={cls.id}
+                  key={cls._id}
                   className={cn(
                     'flex items-center gap-3 p-3 rounded-lg',
                     'hover:bg-black/20 transition-colors cursor-pointer',
@@ -153,7 +153,7 @@ const SearchClasses = ({ searchQuery, setSearchQuery, themeIndex }: any): JSX.El
                   style={{ animationDuration: '0.2s', animationDelay: `${index * 0.05}s`, animationFillMode: 'backwards' }}
                   onClick={() => {
                     if (cls.alreadyMember) {
-                      navigate(`/e2ee/t2/${cls.id}`);
+                      navigate(`/e2ee/t2/${cls._id}`);
                     }
                   }}
                 >
@@ -172,7 +172,7 @@ const SearchClasses = ({ searchQuery, setSearchQuery, themeIndex }: any): JSX.El
                     className="bg-sky-600"
                     onClick={(e) => {
                       e.stopPropagation();
-                      navigate(`/e2ee/t2/${cls.id}`);
+                      navigate(`/e2ee/t2/${cls._id}`);
                     }}
                   >
                     Enter Class
@@ -212,7 +212,7 @@ const SearchClasses = ({ searchQuery, setSearchQuery, themeIndex }: any): JSX.El
               ) : (
                 allClasses.map((cls, index) => (
                   <div
-                    key={cls.id}
+                    key={cls._id}
                     className={cn(
                       'flex items-center gap-3 p-3 rounded-lg',
                       'hover:bg-black/20 transition-colors cursor-pointer',
@@ -222,7 +222,7 @@ const SearchClasses = ({ searchQuery, setSearchQuery, themeIndex }: any): JSX.El
                     style={{ animationDuration: '0.2s', animationDelay: `${index * 0.05}s`, animationFillMode: 'backwards' }}
                     onClick={() => {
                       if (cls.alreadyMember) {
-                        navigate(`/e2ee/t2/${cls.id}`);
+                        navigate(`/e2ee/t2/${cls._id}`);
                       }
                     }}
                   >
@@ -236,7 +236,7 @@ const SearchClasses = ({ searchQuery, setSearchQuery, themeIndex }: any): JSX.El
                       </div>
                       <p className="text-xs text-gray-400 truncate">{cls.groupType || 'N/A'}</p>
                     </div>
-                    {cls.hasPendingRequest || pendingRequests.has(cls.id) ? (
+                    {cls.hasPendingRequest || pendingRequests.has(cls._id) ? (
                       <Badge size="sm" className="bg-gray-600 py-2 text-[11px]">
                         Request Pending
                       </Badge>
@@ -246,7 +246,7 @@ const SearchClasses = ({ searchQuery, setSearchQuery, themeIndex }: any): JSX.El
                         className="bg-sky-600"
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleJoinRequest(cls.id, cls.name);
+                          handleJoinRequest(cls._id, cls.name);
                         }}
                       >
                         Request To Join

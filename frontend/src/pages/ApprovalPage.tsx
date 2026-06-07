@@ -152,7 +152,7 @@ export default function Approvals(): JSX.Element {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {filteredApprovals.map((approval) => (
                 <ApprovalCard
-                  key={approval.id}
+                  key={approval._id}
                   approval={approval}
                   onApprove={handleApprove}
                   onReject={handleReject}

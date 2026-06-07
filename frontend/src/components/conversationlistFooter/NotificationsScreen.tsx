@@ -148,12 +148,12 @@ const NotificationScreen = (): JSX.Element => {
     const handleUpdateNotice = (data) => {
       if (data.targetAudience === "all" || data.targetAudience === user.role) {
         setNotices((prev) =>
-          prev.map((n) => (n.id === data.id ? { ...n, ...data } : n))
+          prev.map((n) => (n._id === data._id ? { ...n, ...data } : n))
         );
       }
     };
     const handleDeleteNotice = (data) => {
-      setNotices((prev) => prev.filter((n) => n.id !== data.noticeId));
+      setNotices((prev) => prev.filter((n) => n._id !== data.noticeId));
     };
 
     // General notification events (from notification service)
@@ -207,13 +207,13 @@ const NotificationScreen = (): JSX.Element => {
     const noticeItems = activeTab === "all" || activeTab === "notices"
       ? notices.map((n) => ({
           _type: "notice",
-          id: `notice-${n.id}`,
-          rawId: n.id,
+          id: `notice-${n._id}`,
+          rawId: n._id,
           type: "notice",
           title: n.title,
           message: n.content,
           sender: n.creator,
-          isRead: n.readBy?.includes(user?.id),
+          isRead: n.readBy?.includes(user?._id),
           createdAt: n.createdAt,
           eventType: n.eventType,
           likes: n.likes || [],
@@ -227,8 +227,8 @@ const NotificationScreen = (): JSX.Element => {
       .filter((n) => activeTab === "notices" ? false : true) // exclude from notices tab
       .map((n) => ({
         _type: "notification",
-        id: `notif-${n.id}`,
-        rawId: n.id,
+        id: `notif-${n._id}`,
+        rawId: n._id,
         type: n.type,
         title: n.title,
         message: n.message,
@@ -249,7 +249,7 @@ const NotificationScreen = (): JSX.Element => {
 
   const totalUnread =
     (unreadCountData?.count || 0) +
-    notices.filter((n) => !n.readBy?.includes(user?.id)).length;
+    notices.filter((n) => !n.readBy?.includes(user?._id)).length;
 
   // ─── Handlers ───────────────────────────────────────────────────────────
   const handleMarkAllRead = async () => {
@@ -266,7 +266,7 @@ const NotificationScreen = (): JSX.Element => {
       if (!item.isRead) {
         await markAsRead(item.rawId);
         setNotifications((prev) =>
-          prev.map((n) => (n.id === item.rawId ? { ...n, isRead: true } : n))
+          prev.map((n) => (n._id === item.rawId ? { ...n, isRead: true } : n))
         );
       }
     }
@@ -276,7 +276,7 @@ const NotificationScreen = (): JSX.Element => {
     e.stopPropagation();
     if (item._type === "notification") {
       await deleteNotification(item.rawId);
-      setNotifications((prev) => prev.filter((n) => n.id !== item.rawId));
+      setNotifications((prev) => prev.filter((n) => n._id !== item.rawId));
     }
   };
 
@@ -403,7 +403,7 @@ const NotificationScreen = (): JSX.Element => {
 
           return (
             <div
-              key={item.id}
+              key={item._id}
               onClick={() => handleItemClick(item)}
               className={`flex items-start gap-3 px-3 py-3 rounded-lg cursor-pointer transition-colors group ${
                 isUnread
@@ -439,7 +439,7 @@ const NotificationScreen = (): JSX.Element => {
                           e.stopPropagation();
                           markAsRead(item.rawId);
                           setNotifications((prev) =>
-                            prev.map((n) => (n.id === item.rawId ? { ...n, isRead: true } : n))
+                            prev.map((n) => (n._id === item.rawId ? { ...n, isRead: true } : n))
                           );
                         }}
                         className="p-1 rounded-full hover:bg-gray-700 dark:hover:bg-gray-200"
@@ -533,16 +533,16 @@ const NotificationScreen = (): JSX.Element => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => handleLike(selectedNotice.id)}
+                  onClick={() => handleLike(selectedNotice._id)}
                   className={`flex items-center gap-1.5 ${
-                    selectedNotice.likes?.includes(user?.id)
+                    selectedNotice.likes?.includes(user?._id)
                       ? "text-red-500"
                       : "text-gray-400"
                   }`}
                 >
                   <Heart
                     className={`w-4 h-4 ${
-                      selectedNotice.likes?.includes(user?.id) ? "fill-red-500" : ""
+                      selectedNotice.likes?.includes(user?._id) ? "fill-red-500" : ""
                     }`}
                   />
                   <span className="text-xs">{selectedNotice.likes?.length || 0}</span>

@@ -181,12 +181,12 @@ export function getOtherParticipantId(conversation: any, currentUserId: any): an
     : [];
 
   const otherParticipant = participants.find(p => {
-    const participantId = typeof p === 'object' ? p.id : p;
+    const participantId = typeof p === 'object' ? p._id : p;
     return participantId !== currentUserId;
   });
 
   return otherParticipant 
-    ? (typeof otherParticipant === 'object' ? otherParticipant.id : otherParticipant)
+    ? (typeof otherParticipant === 'object' ? otherParticipant._id : otherParticipant)
     : null;
 }
 

@@ -28,7 +28,7 @@ const SubmissionReviewer = ({ assignment, onClose }: any): JSX.Element => {
 
   // Fetch submissions for this assignment
   const { data: submissionsData, isLoading }: any = useGetSubmissionsQuery({
-    assignmentId: assignment.id,
+    assignmentId: assignment._id,
   });
 
   const submissions = submissionsData?.submissions || [];
@@ -72,9 +72,9 @@ const SubmissionReviewer = ({ assignment, onClose }: any): JSX.Element => {
         ) : (
           submissions.map((sub) => (
             <button
-              key={sub.id}
+              key={sub._id}
               className="w-full flex items-center justify-between bg-gray-800/60 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors text-left"
-              onClick={() => setSelectedSubmissionId(sub.id)}
+              onClick={() => setSelectedSubmissionId(sub._id)}
             >
               <div className="flex items-center gap-3 flex-1 min-w-0">
                 <User className="h-4 w-4 text-gray-400 flex-shrink-0" />
@@ -183,14 +183,14 @@ const SubmissionDetail = ({ submissionId, assignment, onBack, onClose }: any): J
       <div className="flex-1 overflow-y-auto p-6 space-y-4">
         {submission.answers?.map((answer, index) => {
           const field = fields.find(
-            (f) => f.id === answer.fieldId
+            (f) => f._id === answer.fieldId
           );
           const currentReview = reviews[answer.fieldId];
           const existingStatus = answer.reviewStatus;
 
           return (
             <div
-              key={answer.id || index}
+              key={answer._id || index}
               className="bg-gray-800/60 rounded-lg p-4 border border-gray-700/50 space-y-3"
             >
               {/* Question */}

@@ -17,7 +17,7 @@ export default function ReminderModal({ open, reminder, onClose, onDismiss }: an
 
         <div className="flex justify-end gap-2 mt-4">
           <Button variant="ghost" onClick={onClose}>Close</Button>
-          <Button onClick={() => { onDismiss(reminder.id); }}>Dismiss</Button>
+          <Button onClick={() => { onDismiss(reminder._id); }}>Dismiss</Button>
         </div>
       </div>
     </div>

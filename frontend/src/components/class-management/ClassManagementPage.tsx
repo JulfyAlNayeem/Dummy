@@ -86,7 +86,7 @@ export default function ClassManagementPage(): JSX.Element {
           <Button variant="outline" onClick={handleBackToClasses}>
             ← Back to Classes
           </Button>
-          <ClassDashboard classId={selectedClass.id} />
+          <ClassDashboard classId={selectedClass._id} />
         </div>
       ) : (
         <Tabs defaultValue="classes" className="space-y-4">
@@ -118,7 +118,7 @@ export default function ClassManagementPage(): JSX.Element {
               ) : (
                 userClasses.map((classItem) => (
                   <Card
-                    key={classItem.id}
+                    key={classItem._id}
                     className="cursor-pointer hover:shadow-md transition-shadow"
                     onClick={() => handleClassSelect(classItem)}
                   >
@@ -137,9 +137,9 @@ export default function ClassManagementPage(): JSX.Element {
                         </div>
                         <div className="flex items-center gap-1">
                           <Settings className="h-4 w-4" />
-                          {classItem.group.admins.some((admin) => admin.id === currentUser?.id)
+                          {classItem.group.admins.some((admin) => admin._id === currentUser?._id)
                             ? "Admin"
-                            : classItem.group.moderators.some((mod) => mod.id === currentUser?.id)
+                            : classItem.group.moderators.some((mod) => mod._id === currentUser?._id)
                               ? "Moderator"
                               : "Member"}
                         </div>

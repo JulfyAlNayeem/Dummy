@@ -30,7 +30,7 @@ export default function GlobalRemindersProvider(): JSX.Element {
 
     const onTriggered = (data) => {
       // If event includes userId, ensure it's for this user
-      if (data.userId && data.userId.toString() !== user.id.toString()) return;
+      if (data.userId && data.userId.toString() !== user._id.toString()) return;
 
       setSelectedReminder(data);
 
@@ -70,7 +70,7 @@ export default function GlobalRemindersProvider(): JSX.Element {
                 variant="outline"
                 onClick={async () => {
                   try {
-                    const id = selectedReminder.id || selectedReminder.id;
+                    const id = selectedReminder._id || selectedReminder._id;
                     await markReminderNotified(id).unwrap();
                     toast({ title: 'Reminder dismissed' });
                     setSelectedReminder(null);

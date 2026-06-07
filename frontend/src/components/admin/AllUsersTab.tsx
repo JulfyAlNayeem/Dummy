@@ -161,7 +161,7 @@ export default function AllUsersTab(): JSX.Element {
           </TableHeader>
           <TableBody>
             {usersData?.users?.map((user) => (
-              <TableRow key={user.id} className="border-gray-600 dark:border-gray-400 hover:bg-gray-900/70 dark:hover:bg-gray-300/70">
+              <TableRow key={user._id} className="border-gray-600 dark:border-gray-400 hover:bg-gray-900/70 dark:hover:bg-gray-300/70">
                 <TableCell>
                   <div className="font-medium text-white dark:text-gray-900">{user.name}</div>
                   <div className="text-sm text-gray-300 dark:text-gray-600">{user.gender}</div>

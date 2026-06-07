@@ -187,7 +187,7 @@ export default function FormsPage(): JSX.Element {
             ) : (
               assignments.map((assignment: any) => (
                 <AssignmentRow
-                  key={assignment.id}
+                  key={assignment._id}
                   assignment={assignment}
                   onFill={() => handleFillForm(assignment)}
                   onCalendar={() => handleCalendar(assignment)}
@@ -216,9 +216,9 @@ export default function FormsPage(): JSX.Element {
             ) : (
               myForms.map((form: any) => (
                 <FormRow
-                  key={form.id}
+                  key={form._id}
                   form={form}
-                  onArchive={() => handleArchive(form.id)}
+                  onArchive={() => handleArchive(form._id)}
                 />
               ))
             )}
@@ -244,7 +244,7 @@ export default function FormsPage(): JSX.Element {
               </div>
             ) : (
               publicForms.map((form: any) => (
-                <FormRow key={form.id} form={form} showCreator />
+                <FormRow key={form._id} form={form} showCreator />
               ))
             )}
           </TabsContent>

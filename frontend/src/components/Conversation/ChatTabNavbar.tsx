@@ -33,7 +33,7 @@ const ChatTabNavbar = ({
   const callActions: any = useCall();
 
   // Get profile image and display name — must be above call handlers
-  const otherParticipant = !isGroup ? participants?.find((p) => p.id !== user.id) : null;
+  const otherParticipant = !isGroup ? participants?.find((p) => p._id !== user._id) : null;
   const profileImage = newParticipant?.image || (isGroup ? group?.image : otherParticipant?.image) || defaultProfileImage;
   const displayName = newParticipant?.name || (isGroup ? group?.name : otherParticipant?.name) || 'Unknown';
 
@@ -41,10 +41,10 @@ const ChatTabNavbar = ({
   const handleAudioCall = async () => {
     try {
       if (isGroup) {
-        const pIds = participants?.map(p => p.id || p) || [];
+        const pIds = participants?.map(p => p._id || p) || [];
         await callActions?.initiateGroupCall(convId, 'audio', pIds);
       } else {
-        const calleeId = otherParticipant?.id;
+        const calleeId = otherParticipant?._id;
         if (!calleeId) return;
         await callActions?.initiateCall(calleeId, 'audio', convId);
       }
@@ -56,10 +56,10 @@ const ChatTabNavbar = ({
   const handleVideoCall = async () => {
     try {
       if (isGroup) {
-        const pIds = participants?.map(p => p.id || p) || [];
+        const pIds = participants?.map(p => p._id || p) || [];
         await callActions?.initiateGroupCall(convId, 'video', pIds);
       } else {
-        const calleeId = otherParticipant?.id;
+        const calleeId = otherParticipant?._id;
         if (!calleeId) return;
         await callActions?.initiateCall(calleeId, 'video', convId);
       }
@@ -69,19 +69,19 @@ const ChatTabNavbar = ({
   };
 
   useEffect(() => {
-    if (!user?.id || !convId || !isGroup) return;
+    if (!user?._id || !convId || !isGroup) return;
 
     // Note: joinRoom is already emitted in useSocketHandlers.js
-    // socket.emit('joinRoom', convId, user.id);
+    // socket.emit('joinRoom', convId, user._id);
     socket.on('activeUsersUpdate', (users) => {
       setActiveUsers(users); // Update state with active users
     });
 
     return () => {
-      socket.emit('leaveRoom', convId, user.id);
+      socket.emit('leaveRoom', convId, user._id);
       socket.off('activeUsersUpdate');
     };
-  }, [user?.id, convId]); // Re-run if user.id or convId changes
+  }, [user?._id, convId]); // Re-run if user._id or convId changes
 
   const generatePath = (path, params) => {
   return Object.entries(params).reduce(

@@ -51,7 +51,7 @@ export default function StudentAssignmentList({
         <div className="space-y-4">
           {assignments?.map((assignment) => (
             <div
-              key={assignment.id}
+              key={assignment._id}
               className="border border-gray-600 dark:border-gray-300 bg-gray-700 dark:bg-white p-4 rounded-md flex justify-between items-start gap-4"
             >
               <div className="flex-1 min-w-0">
@@ -59,8 +59,8 @@ export default function StudentAssignmentList({
                   {assignment.assignmentTitle || "Untitled Assignment"}
                 </h3>
                 <div className="mt-2">
-                  <p className={`text-sm text-[#eff0f3] dark:text-[#1a2332] opacity-70 break-words ${expandedDescriptions[assignment.id] ? "" : "truncate"}`}>
-                    Description: {expandedDescriptions[assignment.id]
+                  <p className={`text-sm text-[#eff0f3] dark:text-[#1a2332] opacity-70 break-words ${expandedDescriptions[assignment._id] ? "" : "truncate"}`}>
+                    Description: {expandedDescriptions[assignment._id]
                       ? assignment.assignmentDescription || "No description"
                       : `${(assignment.assignmentDescription || "No description").slice(0, 100)}${(assignment.assignmentDescription?.length > 100) ? "..." : ""}`}
                   </p>
@@ -68,10 +68,10 @@ export default function StudentAssignmentList({
                     <Button
                       variant="link"
                       size="sm"
-                      onClick={() => toggleDescription(assignment.id)}
+                      onClick={() => toggleDescription(assignment._id)}
                       className="text-blue-400 dark:text-blue-600 p-0 h-auto"
                     >
-                      {expandedDescriptions[assignment.id] ? "See Less" : "See More"}
+                      {expandedDescriptions[assignment._id] ? "See Less" : "See More"}
                     </Button>
                   )}
                 </div>
@@ -85,8 +85,8 @@ export default function StudentAssignmentList({
                 )}
                 {assignment.feedback && (
                   <div className="mt-2">
-                    <p className={`text-sm text-[#eff0f3] dark:text-[#1a2332] opacity-70 break-words ${expandedFeedbacks[assignment.id] ? "" : "truncate"}`}>
-                      Feedback: {expandedFeedbacks[assignment.id]
+                    <p className={`text-sm text-[#eff0f3] dark:text-[#1a2332] opacity-70 break-words ${expandedFeedbacks[assignment._id] ? "" : "truncate"}`}>
+                      Feedback: {expandedFeedbacks[assignment._id]
                         ? assignment.feedback
                         : `${assignment.feedback.slice(0, 100)}${assignment.feedback.length > 100 ? "..." : ""}`}
                     </p>
@@ -94,10 +94,10 @@ export default function StudentAssignmentList({
                       <Button
                         variant="link"
                         size="sm"
-                        onClick={() => toggleFeedback(assignment.id)}
+                        onClick={() => toggleFeedback(assignment._id)}
                         className="text-blue-400 dark:text-blue-600 p-0 h-auto"
                       >
-                        {expandedFeedbacks[assignment.id] ? "See Less" : "See More"}
+                        {expandedFeedbacks[assignment._id] ? "See Less" : "See More"}
                       </Button>
                     )}
                   </div>
@@ -115,7 +115,7 @@ export default function StudentAssignmentList({
                   </Button>
                 ) : (
                   <>
-                    {!assignment.mark && assignment.userId.id === userId && (
+                    {!assignment.mark && assignment.userId._id === userId && (
                       <>
                         <Button
                           onClick={() => openUpdateDialog(assignment)}
@@ -126,13 +126,13 @@ export default function StudentAssignmentList({
                           Update
                         </Button>
                         <Button
-                          onClick={() => handleDeleteAssignment(assignment.id)}
+                          onClick={() => handleDeleteAssignment(assignment._id)}
                           variant="destructive"
                           size="sm"
-                          disabled={deletingIds.has(assignment.id)}
+                          disabled={deletingIds.has(assignment._id)}
                           className="bg-red-600 dark:bg-red-600 text-white hover:bg-red-700 dark:hover:bg-red-700 disabled:opacity-50"
                         >
-                          {deletingIds.has(assignment.id) ? "Deleting..." : "Delete"}
+                          {deletingIds.has(assignment._id) ? "Deleting..." : "Delete"}
                         </Button>
                       </>
                     )}

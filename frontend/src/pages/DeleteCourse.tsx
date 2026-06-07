@@ -24,7 +24,7 @@ const CourseList = (): JSX.Element => {
     axios.delete(`http://127.0.0.1:8000/course/delete/${courseId}/`)
       .then(response => {
         console.log(response.data.msg);
-        setCourses(prevCourses => prevCourses.filter(course => course.id !== courseId));
+        setCourses(prevCourses => prevCourses.filter(course => course._id !== courseId));
       })
       .catch((error: any) => {
         console.error('There was an error deleting the course!', error);

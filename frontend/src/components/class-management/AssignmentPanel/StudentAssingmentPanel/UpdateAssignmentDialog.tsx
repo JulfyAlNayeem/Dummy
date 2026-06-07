@@ -47,7 +47,7 @@ export default function UpdateAssignmentDialog({
 
     try {
       await updateAssignment({
-        id: selectedAssignment.id,
+        id: selectedAssignment._id,
         updateData: updateAssignmentData,
         classId,
       }).unwrap();

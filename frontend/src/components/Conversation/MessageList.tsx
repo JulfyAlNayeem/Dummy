@@ -37,7 +37,7 @@ const MessageList = ({ messages, user, participant, themeIndex, isGroup, setPrev
     // Assume socket is available in context or props
     socket.emit('sendMessage', {
       conversationId,
-      sender: user.id,
+      sender: user._id,
       receiver: message.receiver,
       text: message.text,
       media: message.media,
@@ -51,21 +51,21 @@ const MessageList = ({ messages, user, participant, themeIndex, isGroup, setPrev
   return (
     <>
       {messages.map((msg) => {
-        const senderId = typeof msg.sender === 'object' && msg.sender.id ? msg.sender.id : msg.sender;
-        const isOwnMessage = String(senderId) === String(user.id);
+        const senderId = typeof msg.sender === 'object' && msg.sender._id ? msg.sender._id : msg.sender;
+        const isOwnMessage = String(senderId) === String(user._id);
         const sender = isOwnMessage
           ? user
           : Array.isArray(participant)
-          ? participant.find((p) => p.id === senderId) || { name: 'Unknown', image: defaultProfileImage }
+          ? participant.find((p) => p._id === senderId) || { name: 'Unknown', image: defaultProfileImage }
           : { name: 'Unknown', image: defaultProfileImage };
 
         return (
           <div
-            key={msg.id + msg.clientTempId}
+            key={msg._id + msg.clientTempId}
             className={`flex mb-0.5 w-full relative ${isOwnMessage ? 'items-end justify-end' : 'items-start justify-start'} mt-10 animate__animated animate__fadeInUp animate__faster`}
           >
             <div className="max-w-[70%]">
-              {activeMessageId === (msg.id || msg.clientTempId) && !isOwnMessage && (
+              {activeMessageId === (msg._id || msg.clientTempId) && !isOwnMessage && (
                 <MessageHeader sender={sender} msg={msg} themeIndex={themeIndex} isOwnMessage={isOwnMessage} />
               )}
               <div className={`flex ${isOwnMessage ? 'justify-end items-end' : null} gap-2 relative`}>
@@ -74,15 +74,15 @@ const MessageList = ({ messages, user, participant, themeIndex, isGroup, setPrev
                     isOwnMessage={isOwnMessage}
                     sender={sender}
                     currentUser={user}
-                    setActiveMessageId={() => toggleActiveMessageId(msg.id || msg.clientTempId)}
+                    setActiveMessageId={() => toggleActiveMessageId(msg._id || msg.clientTempId)}
                     message={msg}
                   />
                 )}
-                {isEditing && currentMessageId === (msg.id || msg.clientTempId) ? (
+                {isEditing && currentMessageId === (msg._id || msg.clientTempId) ? (
                   <EditInput
                     originalText={msg.text}
                     onSave={(newText) => {
-                      console.log(`Editing message ${msg.id || msg.clientTempId}: ${newText}`);
+                      console.log(`Editing message ${msg._id || msg.clientTempId}: ${newText}`);
                       setIsEditing(false);
                     }}
                     onCancel={() => setIsEditing(false)}
@@ -94,8 +94,8 @@ const MessageList = ({ messages, user, participant, themeIndex, isGroup, setPrev
                     themeIndex={themeIndex}
                     linkify={linkify}
                     onImageClick={(index, images) => setPreviewImage(images[index].img)}
-                    buttonRef={(el) => (buttonRefs.current[msg.id || msg.clientTempId] = el)}
-                    openDialog={() => openDialog(msg.id || msg.clientTempId, msg.text || '')}
+                    buttonRef={(el) => (buttonRefs.current[msg._id || msg.clientTempId] = el)}
+                    openDialog={() => openDialog(msg._id || msg.clientTempId, msg.text || '')}
                     retryMessage={() => retryMessage(msg.clientTempId)}
                     removeMessage={() => dispatch(removeMessage({ conversationId, messageId: msg.clientTempId }))}
                     isGroup ={isGroup}
@@ -106,12 +106,12 @@ const MessageList = ({ messages, user, participant, themeIndex, isGroup, setPrev
                     isOwnMessage={isOwnMessage}
                     sender={sender}
                     currentUser={user}
-                    setActiveMessageId={() => toggleActiveMessageId(msg.id || msg.clientTempId)}
+                    setActiveMessageId={() => toggleActiveMessageId(msg._id || msg.clientTempId)}
                     message={msg}
                   />
                 )}
               </div>
-              {activeMessageId === (msg.id || msg.clientTempId) && isOwnMessage && (
+              {activeMessageId === (msg._id || msg.clientTempId) && isOwnMessage && (
                 <MessageHeader sender={sender} msg={msg} themeIndex={themeIndex} isOwnMessage={isOwnMessage} />
               )}
             </div>

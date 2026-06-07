@@ -184,7 +184,7 @@ const ConversationReminders = ({ conversationId }: { conversationId: string }): 
   };
 
   const handleEditReminder = (reminder: any): void => {
-    setEditingId(reminder.id);
+    setEditingId(reminder._id);
     setReminderTitle(reminder.title);
     const [date, time] = reminder.datetime.split('T');
     setReminderDate(date);

@@ -64,7 +64,7 @@ const SignIn = (): JSX.Element => {
       } else {
         // Fetch user's latest conversation for desktop
         try {
-          const conversationsResponse = await fetch(`${BASE_URL}conversations/${response.user.id}`, {
+          const conversationsResponse = await fetch(`${BASE_URL}conversations/${response.user._id}`, {
             credentials: 'include', // This sends cookies
             headers: {
               'Content-Type': 'application/json'
@@ -74,7 +74,7 @@ const SignIn = (): JSX.Element => {
           
           // Redirect to first conversation if exists
           if (conversations && conversations.length > 0) {
-            navigate(`/e2ee/t/${conversations[0].id}`, { replace: true });
+            navigate(`/e2ee/t/${conversations[0]._id}`, { replace: true });
           } else {
             // No conversations, go to empty chat state
             navigate('/e2ee/t/empty', { replace: true });

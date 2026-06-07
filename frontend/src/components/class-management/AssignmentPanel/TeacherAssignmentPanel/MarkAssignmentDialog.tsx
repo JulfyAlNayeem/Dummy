@@ -37,7 +37,7 @@ export default function MarkAssignmentDialog({
     try {
       await markAssignment({
         classId,
-        submissionId: selectedSubmission.id,
+        submissionId: selectedSubmission._id,
         markData: markingData,
       }).unwrap();
       toast.success(

@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
-const BACKEND_URL = process.env.VITE_BACKEND_URL || 'http://localhost:3001';
+const BACKEND_URL = 'http://localhost:3001';
 
 export default defineConfig({
   server: {
@@ -55,20 +55,11 @@ export default defineConfig({
         changeOrigin: true,
         ws: true,
       },
-      '/message-socket': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-        ws: true,
-      },
+  
       '/calling-api': {
         target: BACKEND_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/calling-api/, ''),
-      },
-      '/calling-socket': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-        ws: true,
       },
     },
   },

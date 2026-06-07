@@ -32,7 +32,7 @@ const CalendarStatus = ({ assignment, onClose }: any): JSX.Element => {
   const endDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(lastDay).padStart(2, "0")}`;
 
   const { data, isLoading }: any = useGetCalendarStatusQuery({
-    assignmentId: assignment.id,
+    assignmentId: assignment._id,
     startDate,
     endDate,
   });

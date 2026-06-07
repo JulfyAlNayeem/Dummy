@@ -16,7 +16,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function StudentAssignmentPanelPage(): JSX.Element {
   const { classId } = useParams<{ classId: string }>();
   const currentUser: any = useSelector(selectCurrentUser);
-  const userId = currentUser?.id;
+  const userId = currentUser?._id;
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [limit] = useState<number>(10);

@@ -36,7 +36,7 @@ export default function AlertnessSessionControls({ setIsModalOpen, classId, them
 
       if (remaining > 0) {
         dispatch(setActiveSession({
-          id: session.id,
+          id: session._id,
           duration: session.duration,
           startTime: session.startTime,
           isActive: session.isActive,
@@ -177,7 +177,7 @@ export default function AlertnessSessionControls({ setIsModalOpen, classId, them
                 size="sm"
                 variant="destructive"
                 onClick={() => {
-                  toast.dismiss(t.id);
+                  toast.dismiss(t._id);
                   handleEndSession();
                 }}
                 className="w-full"

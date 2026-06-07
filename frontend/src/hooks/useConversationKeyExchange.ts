@@ -22,7 +22,7 @@ export function useConversationKeyExchange(conversationId: any, receiver: any, c
    * Initialize key exchange for a conversation
    */
   const initializeKeyExchange = useCallback(async () => {
-    if (!conversationId || !user?.id) {
+    if (!conversationId || !user?._id) {
       return { success: false, reason: 'missing_params' };
     }
 
@@ -42,7 +42,7 @@ export function useConversationKeyExchange(conversationId: any, receiver: any, c
       let otherUserId = receiver;
       
       if (conversation) {
-        otherUserId = getOtherParticipantId(conversation, user.id);
+        otherUserId = getOtherParticipantId(conversation, user._id);
       }
 
       if (!otherUserId) {
@@ -54,7 +54,7 @@ export function useConversationKeyExchange(conversationId: any, receiver: any, c
       
       const result = await handleConversationKeyExchange(
         conversationId,
-        user.id,
+        user._id,
         otherUserId,
         exchangeKeyMutation
       );
@@ -74,7 +74,7 @@ export function useConversationKeyExchange(conversationId: any, receiver: any, c
         error: error.message 
       };
     }
-  }, [conversationId, user?.id, receiver, conversation, exchangeKeyMutation]);
+  }, [conversationId, user?._id, receiver, conversation, exchangeKeyMutation]);
 
   /**
    * Auto-initialize key exchange when conversation is ready

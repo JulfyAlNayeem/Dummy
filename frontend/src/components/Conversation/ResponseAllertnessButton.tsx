@@ -162,7 +162,7 @@ const ResponseAllertnessButton = ({ messagesContainerRef }: { messagesContainerR
   const handleRespondToSession = () => {
     if (!socket || isResponding) return;
     setIsResponding(true);
-    socket.emit('respondToAlertnessSession', { classId: convId, userId: user?.id });
+    socket.emit('respondToAlertnessSession', { classId: convId, userId: user?._id });
     setShowActiveSession(false);
     setIsResponding(false);
     toast(
@@ -170,7 +170,7 @@ const ResponseAllertnessButton = ({ messagesContainerRef }: { messagesContainerR
         <div className="font-bold">Response Recorded!</div>
         <div>Your alertness response has been recorded</div>
       </div>,
-      { id: `response-recorded-${convId}-${user?.id}` }
+      { id: `response-recorded-${convId}-${user?._id}` }
     );
   };
 

@@ -52,7 +52,7 @@ const ChatTab = (): JSX.Element => {
     allConversations = [],
   } = conversationState;
   
-  const sender = user?.id;
+  const sender = user?._id;
   const receiver = userId;
   const messagesContainerRef = useRef(null);
   const chatContainerRef = useRef(null);
@@ -67,9 +67,9 @@ const ChatTab = (): JSX.Element => {
   const showConversationList = !isMobile;
 
   // Fetch conversation by ID or get all conversations if convId is 'empty'
-  const querySkipped = !convId || convId === 'empty' || !user?.id;
+  const querySkipped = !convId || convId === 'empty' || !user?._id;
   const { data: rawConversation, isError: conversationError, isLoading: isConversationLoading } = useFetchConversationByIdQuery(
-    { chatId: convId, userId: user?.id },
+    { chatId: convId, userId: user?._id },
     { skip: querySkipped }
   );
   // RTK Query keeps stale `data` when a query is skipped. On the /t/:userId
@@ -79,12 +79,12 @@ const ChatTab = (): JSX.Element => {
   const conversation = querySkipped ? undefined : rawConversation;
 
   const { data: conversationsList, isError: conversationsListError, isLoading: isConversationsListLoading } = useGetAllConversationsQuery(
-    user?.id,
-    { skip: convId !== 'empty' || !user?.id }
+    user?._id,
+    { skip: convId !== 'empty' || !user?._id }
   );
 
   // Early return if user is not authenticated
-  if (!user || !user.id) {
+  if (!user || !user._id) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900">
         <div className="text-center">
@@ -121,10 +121,10 @@ const ChatTab = (): JSX.Element => {
 
       // Look up existing conversation with the new user
       const existing = allConversations.find(
-        (c) => !c.is_group && c.participants?.some((p) => p.id === userId)
+        (c) => !c.is_group && c.participants?.some((p) => p._id === userId)
       );
       if (existing) {
-        dispatch(setConversationId(existing.id));
+        dispatch(setConversationId(existing._id));
         dispatch(setConversationStatus(existing.status));
       } else {
         dispatch(setConversationId(null));
@@ -146,10 +146,10 @@ const ChatTab = (): JSX.Element => {
 
       // Check if a conversation with this user already exists
       const existing = allConversations.find(
-        (c) => !c.is_group && c.participants?.some((p) => p.id === userId)
+        (c) => !c.is_group && c.participants?.some((p) => p._id === userId)
       );
       if (existing) {
-        dispatch(setConversationId(existing.id));
+        dispatch(setConversationId(existing._id));
         dispatch(setConversationStatus(existing.status));
       } else {
         dispatch(setConversationId(null));
@@ -163,13 +163,13 @@ const ChatTab = (): JSX.Element => {
   useEffect(() => {
     if (!userId || convId || conversationId) return;
     const existing = allConversations.find(
-      (c) => !c.is_group && c.participants?.some((p) => p.id === userId)
+      (c) => !c.is_group && c.participants?.some((p) => p._id === userId)
     );
     if (existing) {
-      dispatch(setConversationId(existing.id));
+      dispatch(setConversationId(existing._id));
       dispatch(setConversationStatus(existing.status));
       if (socket) {
-        socket.emit('joinNewConversation', existing.id);
+        socket.emit('joinNewConversation', existing._id);
       }
     }
   }, [allConversations, userId, convId, conversationId, dispatch, socket]);
@@ -195,7 +195,7 @@ const ChatTab = (): JSX.Element => {
       dispatch(setConversationStatus(conversation.status));
       dispatch(setBlockList(conversation.blockList));
       if (!conversation.group.is_group) {
-        dispatch(setParticipant(conversation.participants.find((p) => p.id !== user.id) || {}));
+        dispatch(setParticipant(conversation.participants.find((p) => p._id !== user._id) || {}));
       }
       setConversationNotFoundError('');
     }
@@ -208,7 +208,7 @@ const ChatTab = (): JSX.Element => {
     if (convId === 'empty' && conversationsList) {
       if (conversationsList.length > 0) {
         // Navigate to the first conversation
-        navigate(`/e2ee/t/${conversationsList[0].id}`, { replace: true });
+        navigate(`/e2ee/t/${conversationsList[0]._id}`, { replace: true });
       }
       // If no conversations, stay on empty state (don't navigate)
     }
@@ -236,10 +236,10 @@ const ChatTab = (): JSX.Element => {
   // Auto-fetch encryption keys when conversation loads
   useEffect(() => {
     const autoFetchKeys = async () => {
-      if (conversationId && conversationId !== 'new' && user?.id) {
+      if (conversationId && conversationId !== 'new' && user?._id) {
         try {
           console.log('🔑 Auto-fetching encryption keys for conversation:', conversationId);
-          const keys = await fetchConversationKeys(conversationId, user.id);
+          const keys = await fetchConversationKeys(conversationId, user._id);
           console.log(`✅ Auto-fetched ${keys?.length || 0} participant keys`);
         } catch (error) {
           console.error('❌ Failed to auto-fetch encryption keys:', error);
@@ -248,7 +248,7 @@ const ChatTab = (): JSX.Element => {
     };
 
     autoFetchKeys();
-  }, [conversationId, user?.id]);
+  }, [conversationId, user?._id]);
 
   const styles = {
     container: {
@@ -321,8 +321,8 @@ const ChatTab = (): JSX.Element => {
             conversationStatus === 'pending' &&
             // Only show request card for the recipient (not the user who sent the first message)
             (conversation.lastMessageSenderId
-              ? conversation.lastMessageSenderId !== user?.id
-              : user?.id === conversation?.participants[1]?.id)
+              ? conversation.lastMessageSenderId !== user?._id
+              : user?._id === conversation?.participants[1]?._id)
             ? (
               <MessengeRequestCard messagesContainerRef={messagesContainerRef} />
             ) : (
@@ -349,7 +349,7 @@ const ChatTab = (): JSX.Element => {
               {/* Show footer for existing conversations OR new chat (userId route) */}
               {(conversationId || userId) && (
                 !isGroup && blockList.length !== 0 ? (
-                  blockList[0]?.blockedBy === user.id ? (
+                  blockList[0]?.blockedBy === user._id ? (
                     <UnblockButton />
                   ) : (
                     <p className="text-gray-300 text-xs w-full mb-15 text-center">
@@ -371,7 +371,7 @@ const ChatTab = (): JSX.Element => {
                     }}
                     conversationId={conversationId}
                     sender={sender}
-                    receiver={userId || participant?.id}
+                    receiver={userId || participant?._id}
                     setReceiver={(receiverId) => dispatch(setReceiver(receiverId))}
                     setConversationStatus={(status) => dispatch(setConversationStatus(status))}
                     setIsGroup={(isGroup) => dispatch(setIsGroup(isGroup))}

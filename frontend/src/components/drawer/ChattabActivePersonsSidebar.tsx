@@ -39,7 +39,7 @@ export default function ChattabActivePersonsSidebar({activeUsers}: { activeUsers
               {activeUsers?.length > 0 ? (
                 activeUsers.map((activeUser, index) => (
                   <div
-                    key={activeUser.id || index}
+                    key={activeUser._id || index}
                     className="flex items-center flex-col justify-center  gap-1 text-xs hover:bg-gray-700/20 p-2 rounded animate__animated animate__pulse animate__faster"
                   >
                     <div className="w-12 h-12 flex items-center justify-center relative">

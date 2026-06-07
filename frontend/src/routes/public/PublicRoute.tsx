@@ -7,8 +7,8 @@ import { useCheckSiteVerificationQuery } from '@/redux/api/securityApi';
 
 const PublicRoute = ({ children }: any): JSX.Element => {
     const { user }: any = useUserAuth();
-    const { data: conversations, isLoading }: any = useGetAllConversationsQuery(user?.id, { 
-    skip: !user?.id 
+    const { data: conversations, isLoading }: any = useGetAllConversationsQuery(user?._id, { 
+    skip: !user?._id 
   });
   
   // Check site verification against server cookie (not localStorage)
@@ -23,7 +23,7 @@ const PublicRoute = ({ children }: any): JSX.Element => {
     }
     
     // Redirect to first conversation if exists
-    const firstConvId = conversations?.[0]?.id;
+    const firstConvId = conversations?.[0]?._id;
     if (firstConvId) {
       return <Navigate to={`/e2ee/t/${firstConvId}`} replace />;
     }

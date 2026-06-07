@@ -64,7 +64,7 @@ class ReminderScheduler {
       if ('Notification' in window && Notification.permission === 'granted') {
         const notification = new Notification(`⏰ Reminder: ${reminder.title}`, {
           body: reminder.note || 'Time for your reminder!',
-          tag: `reminder-${reminder.id}`,
+          tag: `reminder-${reminder._id}`,
           requireInteraction: true
         });
         notification.onclick = () => { window.focus(); notification.close(); };
@@ -80,7 +80,7 @@ class ReminderScheduler {
     const key = `missed_reminders_${conversationId}`;
     let missed = [];
     try { missed = JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) { missed = []; }
-    if (!missed.find(m => m.id === reminder.id)) {
+    if (!missed.find(m => m._id === reminder._id)) {
       missed.push({ ...reminder, missedBy: Math.floor(minutesPassed), missedAt: new Date().toISOString() });
       localStorage.setItem(key, JSON.stringify(missed));
     }

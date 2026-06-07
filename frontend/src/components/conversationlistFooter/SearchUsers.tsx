@@ -31,11 +31,11 @@ const SearchUsers = ({ searchQuery, themeIndex, setActiveScreen }: any): JSX.Ele
       })
       .map((participant) => {
         const conversation = oneToOneConversations.find((conv) =>
-          conv.participants.some((p) => p.id === participant.id)
+          conv.participants.some((p) => p._id === participant._id)
         );
         return {
           ...participant,
-          conversationId: conversation?.id || null,
+          conversationId: conversation?._id || null,
         };
       })
       .filter((participant) => !!participant.conversationId);
@@ -47,12 +47,12 @@ const SearchUsers = ({ searchQuery, themeIndex, setActiveScreen }: any): JSX.Ele
     { query: debouncedQuery, page, limit },
     { skip: shouldSkipServerSearch }
   );
-
+console.log(searchResult?.users, 'searchResult');
   useEffect(() => {
     if (searchResult?.users) {
       setAllUsers((prev) => {
         const newUsers = searchResult.users.filter(
-          (newUser) => !prev.some((existing) => existing.id === newUser.id)
+          (newUser) => !prev.some((existing) => existing._id === newUser._id)
         );
         return page === 1 ? newUsers : [...prev, ...newUsers];
       });
@@ -103,7 +103,7 @@ const SearchUsers = ({ searchQuery, themeIndex, setActiveScreen }: any): JSX.Ele
             <div className="space-y-2">
               {localSearchResults.map((user, index) => (
                 <div
-                  key={user.id}
+                  key={user._id}
                   className={cn(
                     'flex items-center gap-3 p-1 rounded-lg',
                     'hover:bg-black/20 transition-colors cursor-pointer',
@@ -151,7 +151,7 @@ const SearchUsers = ({ searchQuery, themeIndex, setActiveScreen }: any): JSX.Ele
               ) : (
                 allUsers.map((user, index) => (
                   <div
-                    key={user.id}
+                    key={user._id}
                     className={cn(
                       'flex items-center gap-3 p-1 rounded-lg',
                       'hover:bg-black/20 transition-colors cursor-pointer',
@@ -159,7 +159,7 @@ const SearchUsers = ({ searchQuery, themeIndex, setActiveScreen }: any): JSX.Ele
                       'border-transparent'
                     )}
                     onClick={() => {
-                      navigate(`/t/${user.id}`);
+                      navigate(`/t/${user._id}`);
                       setActiveScreen("chats");
                     }}
                   >

@@ -37,13 +37,13 @@ export function useDecryptMessage(encryptedMessage: any, conversationId: any, se
       setIsLoading(true);
       try {
         // Ensure we have the sender's public key
-        await getOrFetchParticipantKey(conversationId, senderUserId, user?.id);
+        await getOrFetchParticipantKey(conversationId, senderUserId, user?._id);
         
         // Parse the encrypted payload
         const payload = JSON.parse(encryptedMessage);
         
         // Decrypt using the consistent API
-        const result = await decryptMessage(conversationId, payload, senderUserId, user?.id);
+        const result = await decryptMessage(conversationId, payload, senderUserId, user?._id);
         setMessage(result);
       } catch (error) {
         console.error('Decryption failed:', error);
@@ -54,7 +54,7 @@ export function useDecryptMessage(encryptedMessage: any, conversationId: any, se
     };
 
     decrypt();
-  }, [encryptedMessage, conversationId, senderUserId, user?.id]);
+  }, [encryptedMessage, conversationId, senderUserId, user?._id]);
 
   return { message, isLoading };
 }

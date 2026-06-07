@@ -50,7 +50,7 @@ const MessageCards = ({
     if (!socket) return;
 
     socket.on("reactionUpdate", ({ messageId, reactions, clientTempId }) => {
-      if (messageId === (msg.id || msg.clientTempId) || clientTempId === msg.clientTempId) {
+      if (messageId === (msg._id || msg.clientTempId) || clientTempId === msg.clientTempId) {
         dispatch(updateMessageReaction({
           conversationId,
           messageId,
@@ -61,7 +61,7 @@ const MessageCards = ({
     });
 
     socket.on("reactionSuccess", ({ messageId, reactions, clientTempId }) => {
-      if (messageId === (msg.id || msg.clientTempId) || clientTempId === msg.clientTempId) {
+      if (messageId === (msg._id || msg.clientTempId) || clientTempId === msg.clientTempId) {
         dispatch(updateMessageReaction({
           conversationId,
           messageId,
@@ -76,7 +76,7 @@ const MessageCards = ({
       // Revert optimistic update in Redux
       dispatch(updateMessageReaction({
         conversationId,
-        messageId: msg.id,
+        messageId: msg._id,
         clientTempId: msg.clientTempId,
         reactions: msg.reactions || {},
       }));
@@ -87,7 +87,7 @@ const MessageCards = ({
       socket.off("reactionSuccess");
       socket.off("reactionError");
     };
-  }, [socket, msg.id, msg.clientTempId, conversationId, dispatch, msg.reactions]);
+  }, [socket, msg._id, msg.clientTempId, conversationId, dispatch, msg.reactions]);
 
   const handleLongPressStart = (e) => {
     e.preventDefault();
@@ -110,12 +110,12 @@ const MessageCards = ({
     }
   };
   const handleReaction = (emoji) => {
-    const messageId = msg.id || msg.clientTempId;
+    const messageId = msg._id || msg.clientTempId;
     const currentReactions = messageReactions || {};
 
-    if (currentReactions[user.id] === emoji) {
+    if (currentReactions[user._id] === emoji) {
       // Optimistically remove reaction
-      const { [user.id]: _, ...otherReactions } = currentReactions;
+      const { [user._id]: _, ...otherReactions } = currentReactions;
       dispatch(updateMessageReaction({
         conversationId,
         messageId,
@@ -126,14 +126,14 @@ const MessageCards = ({
       socket.emit("removeReaction", {
         conversationId,
         messageId,
-        userId: user.id,
+        userId: user._id,
         clientTempId: msg.clientTempId,
       });
     } else {
       // Optimistically add reaction
       const updatedReactions = {
         ...currentReactions,
-        [user.id]: emoji,
+        [user._id]: emoji,
       };
       dispatch(updateMessageReaction({
         conversationId,
@@ -145,7 +145,7 @@ const MessageCards = ({
       socket.emit("addReaction", {
         conversationId,
         messageId,
-        userId: user.id,
+        userId: user._id,
         emoji,
         clientTempId: msg.clientTempId,
       });
@@ -155,12 +155,12 @@ const MessageCards = ({
   };
 
   const handleRemoveReaction = (clickedUserId) => {
-    if (clickedUserId !== user.id) return;
+    if (clickedUserId !== user._id) return;
 
-    const messageId = msg.id || msg.clientTempId;
+    const messageId = msg._id || msg.clientTempId;
     const currentReactions = messageReactions || {};
 
-    const { [user.id]: _, ...otherReactions } = currentReactions;
+    const { [user._id]: _, ...otherReactions } = currentReactions;
     dispatch(updateMessageReaction({
       conversationId,
       messageId,
@@ -171,7 +171,7 @@ const MessageCards = ({
     socket.emit("removeReaction", {
       conversationId,
       messageId,
-      userId: user.id,
+      userId: user._id,
       clientTempId: msg.clientTempId,
     });
   };
@@ -192,7 +192,7 @@ const MessageCards = ({
 
   return (
     <div className="max-w-[90%] relative ">
-      {activeMessageId === (msg.id || msg.clientTempId) && !isOwnMessage && (
+      {activeMessageId === (msg._id || msg.clientTempId) && !isOwnMessage && (
         <MessageHeader
           sender={sender}
           msg={msg}
@@ -206,7 +206,7 @@ const MessageCards = ({
             isOwnMessage={isOwnMessage}
             sender={sender}
             currentUser={user}
-            setActiveMessageId={() => toggleActiveMessageId(msg.id || msg.clientTempId)}
+            setActiveMessageId={() => toggleActiveMessageId(msg._id || msg.clientTempId)}
             message={msg}
             setIsStatusVisible={setIsStatusVisible}
           />
@@ -225,7 +225,7 @@ const MessageCards = ({
             <ReplyCard
               themeIndex={themeIndex}
               isOwnMessage={isOwnMessage}
-              replyTo={sender.id === msg.replyTo.sender?.id ? "yourself" : "someone"}
+              replyTo={sender._id === msg.replyTo.sender?._id ? "yourself" : "someone"}
               replyType={msg.replyTo.messageType}
               repliedMessage={
                 msg.replyTo.messageType === "text"
@@ -267,7 +267,7 @@ const MessageCards = ({
                       : themeReceiverMessage(themeIndex, "rounded-r-xl rounded-b-xl")
                     : themeSenderMessage(themeIndex, "rounded-l-xl rounded-t-xl")
                     } relative ${msg.emojiType === "custom" || msg.replyTo || msg.media?.length ? "p-0" : "p-3"} w-fit text-base max-w-[100%] relative`)}>
-                    <TextMessageCard text={msg.text} plainText={msg.plainText} senderId={sender?.id} messageId={msg.id || msg.messageId} />
+                    <TextMessageCard text={msg.text} plainText={msg.plainText} senderId={sender?._id} messageId={msg._id || msg.messageId} />
                   </div>
                 )}
                 {msg.media?.length > 0 && msg.media.some(media => media.type === "image") && (
@@ -368,7 +368,7 @@ const MessageCards = ({
             isOwnMessage={isOwnMessage}
             sender={sender}
             currentUser={user}
-            setActiveMessageId={() => toggleActiveMessageId(msg.id || msg.clientTempId)}
+            setActiveMessageId={() => toggleActiveMessageId(msg._id || msg.clientTempId)}
             message={msg}
             setIsStatusVisible={setIsStatusVisible}
           />
@@ -413,7 +413,7 @@ const MessageCards = ({
           )}
         </div>
       )}
-      {activeMessageId === (msg.id || msg.clientTempId) && isOwnMessage && (
+      {activeMessageId === (msg._id || msg.clientTempId) && isOwnMessage && (
         <MessageHeader
           sender={sender}
           msg={msg}
@@ -425,9 +425,9 @@ const MessageCards = ({
         open={isBottomSheetOpen}
         onOpenChange={setIsBottomSheetOpen}
         reactions={messageReactions}
-        userId={user.id}
+        userId={user._id}
         onRemoveReaction={handleRemoveReaction}
-        messageId={msg.id || msg.clientTempId}
+        messageId={msg._id || msg.clientTempId}
       />
     </div>
   );

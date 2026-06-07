@@ -87,7 +87,7 @@ const SendMessage = forwardRef(
 
     const startTyping = (): void => {
       if (!isTypingRef.current && socket && conversationId && conversationId !== 'new') {
-        socket.emit('typing', { conversationId, userId: user.id, isTyping: true });
+        socket.emit('typing', { conversationId, userId: user._id, isTyping: true });
         isTypingRef.current = true;
       }
 
@@ -102,7 +102,7 @@ const SendMessage = forwardRef(
 
     const stopTyping = (): void => {
       if (isTypingRef.current && socket && conversationId && conversationId !== 'new') {
-        socket.emit('typing', { conversationId, userId: user.id, isTyping: false });
+        socket.emit('typing', { conversationId, userId: user._id, isTyping: false });
         isTypingRef.current = false;
       }
 
@@ -119,7 +119,7 @@ const SendMessage = forwardRef(
       const tempMessageId = `temp-edit-${Date.now()}`;
       const optimisticMessage = createOptimisticMessage(
         conversationId,
-        user.id,
+        user._id,
         receiver,
         "text",
         inputValue.trim(),
@@ -131,7 +131,7 @@ const SendMessage = forwardRef(
       );
       // keep plain text locally while edit is processed
       optimisticMessage.plainText = inputValue.trim();
-      optimisticMessage.id = editingMessage.messageId;
+      optimisticMessage._id = editingMessage.messageId;
       optimisticMessage.edited = true;
       optimisticMessage.editHistory = [
         ...(Array.isArray(editingMessage.editHistory) ? editingMessage.editHistory : []),
@@ -145,7 +145,7 @@ const SendMessage = forwardRef(
         // If editing text-only, try to encrypt the new text
         let encryptedPayload = inputValue.trim();
         try {
-          const enc = await encryptMessage(conversationId, inputValue.trim(), user.id, receiver);
+          const enc = await encryptMessage(conversationId, inputValue.trim(), user._id, receiver);
           // send only the encryption metadata (ciphertext, iv, salt)
           encryptedPayload = JSON.stringify(enc);
         } catch (e) {
@@ -254,7 +254,7 @@ const SendMessage = forwardRef(
       let encryptedReplyText = inputValue.trim() ? inputValue.trim() : '';
       if (!hasFiles && encryptedReplyText) {
         try {
-          const enc = await encryptMessage(conversationId, encryptedReplyText, user.id, receiver);
+          const enc = await encryptMessage(conversationId, encryptedReplyText, user._id, receiver);
           // send only the encryption metadata
           encryptedReplyText = JSON.stringify(enc);
         } catch (e) {
@@ -264,7 +264,7 @@ const SendMessage = forwardRef(
 
       const optimisticMessage = createReplyMessage(
         conversationId,
-        user.id,
+        user._id,
         receiver,
         replyTo,
         encryptedReplyText ? encryptedReplyText : (inputValue.trim() ? inputValue : null),
@@ -460,7 +460,7 @@ const SendMessage = forwardRef(
       }
 
       // Check if user has encryption keys and they're verified on server
-      if (conversationId && hasKeys(conversationId, user.id)) {
+      if (conversationId && hasKeys(conversationId, user._id)) {
         // Verify key on server before allowing message send
         if (socket) {
           try {
@@ -511,7 +511,7 @@ const SendMessage = forwardRef(
         }
         optimisticMessage = createMediaMessage(
           conversationId,
-          user.id,
+          user._id,
           receiver,
           media,
           inputValue.trim() ? inputValue : null,
@@ -548,7 +548,7 @@ const SendMessage = forwardRef(
             console.log('🔐 Encrypted with V1 method');
           } else {
             // ECDH encryption returns {ciphertext, iv, salt}
-            const enc = await encryptMessageECDH(conversationId, textMessage, user.id, receiver);
+            const enc = await encryptMessageECDH(conversationId, textMessage, user._id, receiver);
             // send only the encryption metadata (remove plaintext from payload)
             const { plaintext, ...encPayload } = enc;
             encryptedText = JSON.stringify(encPayload);
@@ -559,7 +559,7 @@ const SendMessage = forwardRef(
         }
         optimisticMessage = createTextMessage(
           conversationId,
-          user.id,
+          user._id,
           receiver,
           inputValue && typeof encryptedText === 'string' ? encryptedText : inputValue,
           tempMessageId,
@@ -655,7 +655,7 @@ const SendMessage = forwardRef(
         socket,
         setConversationId,
         conversationId,
-        userId: user.id,
+        userId: user._id,
         receiver,
         inputValue: encryptedText,
         sendMessage,
@@ -664,11 +664,11 @@ const SendMessage = forwardRef(
         replyToMessageId: replyingMessage ? replyingMessage.messageId : null,
         onSuccess: async ({ message, newConversationId }) => {
           // Store plaintext in localStorage for own messages (encrypted with own key)
-          const messageId = message?.id || message?.messageId;
+          const messageId = message?._id || message?.messageId;
           const finalConversationId = newConversationId || conversationId;
           if (finalConversationId && messageId && optimisticMessage?.plainText) {
             try {
-              await storeOwnMessagePlaintext(finalConversationId, messageId, optimisticMessage.plainText, user.id);
+              await storeOwnMessagePlaintext(finalConversationId, messageId, optimisticMessage.plainText, user._id);
               console.log('💾 Stored encrypted own message in localStorage:', { 
                 conversationId: finalConversationId, 
                 messageId
@@ -681,7 +681,7 @@ const SendMessage = forwardRef(
               hasConversationId: !!finalConversationId,
               hasMessageId: !!messageId, 
               hasPlainText: !!optimisticMessage?.plainText,
-              hasUserId: !!user.id,
+              hasUserId: !!user._id,
               message 
             });
           }

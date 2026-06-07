@@ -33,7 +33,7 @@ const createOptimisticMessage = (
     scheduledDeletionTime: tomorrow,
     readBy: [],
     editHistory: [],
-    replyTo: replyTo ? { id: replyTo.id, text: replyTo.text, messageType: replyTo.messageType, media: replyTo.media || [] } : null,
+    replyTo: replyTo ? { id: replyTo._id, text: replyTo.text, messageType: replyTo.messageType, media: replyTo.media || [] } : null,
     createdAt: now,
     updatedAt: now,
     reactions: {},
@@ -134,7 +134,7 @@ const createReplyMessage = (
   clientTempId: any
 ): any => {
   // Validate replyTo structure
-  if (!replyTo || !replyTo.id || !replyTo.messageType) {
+  if (!replyTo || !replyTo._id || !replyTo.messageType) {
     throw new Error("Invalid replyTo: must include id and messageType");
   }
 
@@ -166,7 +166,7 @@ const createReplyMessage = (
     emojiType,
     clientTempId,
     {
-      id: replyTo.id,
+      id: replyTo._id,
       text: replyTo.text || null,
       messageType: replyTo.messageType,
       media: replyTo.media || [],

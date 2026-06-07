@@ -31,7 +31,7 @@ const classSlice = createSlice({
       state.notifications.unshift(action.payload);
     },
     removeNotification: (state, action) => {
-      state.notifications = state.notifications.filter((notification) => notification.id !== action.payload);
+      state.notifications = state.notifications.filter((notification) => notification._id !== action.payload);
     },
     clearNotifications: (state) => {
       state.notifications = [];

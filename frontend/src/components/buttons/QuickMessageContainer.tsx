@@ -57,7 +57,7 @@ const QuickMessage = ({ setConversationId, conversationId }: { setConversationId
 
     let optimisticMessage = createTextMessage(
       conversationId,
-      user.id,
+      user._id,
       receiver,
       inputValue,
       tempMessageId
@@ -70,7 +70,7 @@ const QuickMessage = ({ setConversationId, conversationId }: { setConversationId
         socket,
         setConversationId,
         conversationId,
-        userId: user.id,
+        userId: user._id,
         receiver,
         inputValue,
         sendMessage,
@@ -113,7 +113,7 @@ const QuickMessage = ({ setConversationId, conversationId }: { setConversationId
   // Edit Quick Message
   const handleEdit = async () => {
     if (editTitle && editMessage && selectedMsg) {
-      await editQuickMessage({ id: selectedMsg.id, title: editTitle, message: editMessage });
+      await editQuickMessage({ id: selectedMsg._id, title: editTitle, message: editMessage });
       setOpenEdit(false);
       setSelectedMsg(null);
       // refetch();
@@ -123,7 +123,7 @@ const QuickMessage = ({ setConversationId, conversationId }: { setConversationId
   // Delete Quick Message
   const handleDelete = async () => {
     if (selectedMsg) {
-      await deleteQuickMessage(selectedMsg.id);
+      await deleteQuickMessage(selectedMsg._id);
       setOpenDelete(false);
       setSelectedMsg(null);
       // refetch();
@@ -139,7 +139,7 @@ const QuickMessage = ({ setConversationId, conversationId }: { setConversationId
             {quickMessages.map((data) => (
               <div
                 className={themeCard(themeIndex, "text-sm rounded-full between min-w-24 max-w-32 pl-2 pr-2 shadow-lg")}
-                key={data.id}
+                key={data._id}
               >
                 <Button
                   variant="ghost"

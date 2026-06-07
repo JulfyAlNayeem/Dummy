@@ -11,7 +11,7 @@ const UnblockButton = (): JSX.Element => {
     const handleUnblock = async (): Promise<void> => {
         try {
             const res = await unblockUser({
-                userId: participant.id,
+                userId: participant._id,
                 conversationId,
             }).unwrap();
 

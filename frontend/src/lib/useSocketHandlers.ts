@@ -11,13 +11,13 @@ const useSocketHandlers = ({ socket, conversationId, userId, messages, dispatch,
     if ((message.conversationId || message.conversation) !== conversationId || !isValidMessage(userId)(message)) return;
 
     const existingMessage = messages.find(
-      (m) => (message.clientTempId && m.clientTempId === message.clientTempId) || (message.id && m.id === message.id)
+      (m) => (message.clientTempId && m.clientTempId === message.clientTempId) || (message._id && m._id === message._id)
     );
 
     if (existingMessage) {
       const updatedMessage = {
         ...existingMessage,
-        id: message.id || existingMessage.id,
+        id: message._id || existingMessage._id,
         clientTempId: message.clientTempId || existingMessage.clientTempId,
         status: message.status || existingMessage.status || 'sent',
         readBy: getUniqueReadBy(existingMessage.readBy, message.readBy),
@@ -31,10 +31,10 @@ const useSocketHandlers = ({ socket, conversationId, userId, messages, dispatch,
         conversation: message.conversation || existingMessage.conversation,
         updatedAt: new Date().toISOString(),
       };
-      dispatch(updateMessage({ messageId: existingMessage.id || existingMessage.clientTempId, message: updatedMessage }));
+      dispatch(updateMessage({ messageId: existingMessage._id || existingMessage.clientTempId, message: updatedMessage }));
       const cachedMessages = loadCachedMessages(conversationId, userId);
       const updatedCached = cachedMessages
-        .map((msg) => (msg.id === message.id || msg.clientTempId === message.clientTempId ? updatedMessage : msg))
+        .map((msg) => (msg._id === message._id || msg.clientTempId === message.clientTempId ? updatedMessage : msg))
         .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
       cacheMessages(conversationId, userId, updatedCached);
     } else {
@@ -74,19 +74,19 @@ const useSocketHandlers = ({ socket, conversationId, userId, messages, dispatch,
       dispatch(
         updateMessage({
           messageId,
-          message: hardDelete ? null : { id: messageId, deletedBy: [...(messages.find((m) => m.id === messageId)?.deletedBy || []), userId] },
+          message: hardDelete ? null : { id: messageId, deletedBy: [...(messages.find((m) => m._id === messageId)?.deletedBy || []), userId] },
         })
       );
       const cachedMessages = loadCachedMessages(conversationId, userId);
       const newMessages = hardDelete
-        ? cachedMessages.filter((msg) => msg.id !== messageId)
+        ? cachedMessages.filter((msg) => msg._id !== messageId)
         : cachedMessages
-            .map((msg) => (msg.id === messageId ? { ...msg, deletedBy: [...(msg.deletedBy || []), userId] } : msg))
+            .map((msg) => (msg._id === messageId ? { ...msg, deletedBy: [...(msg.deletedBy || []), userId] } : msg))
             .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
       cacheMessages(conversationId, userId, newMessages);
     });
     socket.on('messageStatus', ({ messageId, status, readBy }) => {
-      const existingMessage = messages.find((m) => m.id === messageId || m.clientTempId === messageId);
+      const existingMessage = messages.find((m) => m._id === messageId || m.clientTempId === messageId);
       if (!existingMessage) return;
       const currentReadBy = existingMessage.readBy || [];
       if (readBy && readBy.some((entry) => currentReadBy.some((existing) => existing.user === entry.user))) return;
@@ -112,7 +112,7 @@ const useSocketHandlers = ({ socket, conversationId, userId, messages, dispatch,
       const cachedMessages = loadCachedMessages(conversationId, userId);
       const updatedMessages = cachedMessages
         .map((msg) =>
-          msg.id === messageId || msg.clientTempId === existingMessage.clientTempId
+          msg._id === messageId || msg.clientTempId === existingMessage.clientTempId
             ? { ...msg, status: isGroup ? msg.status : status, readBy: readBy || msg.readBy }
             : msg
         )
@@ -122,7 +122,7 @@ const useSocketHandlers = ({ socket, conversationId, userId, messages, dispatch,
     socket.on('sendMessageError', ({ clientTempId, message: errorMsg }) => {
       const existingMessage = messages.find((m) => m.clientTempId === clientTempId);
       if (existingMessage) {
-        dispatch(updateMessage({ messageId: existingMessage.id || existingMessage.clientTempId, message: { ...existingMessage, status: 'fail' } }));
+        dispatch(updateMessage({ messageId: existingMessage._id || existingMessage.clientTempId, message: { ...existingMessage, status: 'fail' } }));
         const cachedMessages = loadCachedMessages(conversationId, userId);
         const updatedCached = cachedMessages
           .map((msg) => (msg.clientTempId === clientTempId ? { ...msg, status: 'fail' } : msg))

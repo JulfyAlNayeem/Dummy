@@ -14,7 +14,7 @@ export const useNotifications = (): any => {
     // Auto-remove notification after 5 seconds for success/info types
     if (notification.type === "success" || notification.type === "info") {
       setTimeout(() => {
-        dispatch(removeNotification(notification.id || Date.now()))
+        dispatch(removeNotification(notification._id || Date.now()))
       }, 5000)
     }
   }

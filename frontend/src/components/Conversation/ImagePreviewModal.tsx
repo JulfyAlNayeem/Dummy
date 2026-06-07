@@ -36,7 +36,7 @@ const ImagePreviewModal = ({ previewImage, setPreviewImage, conversationId, user
     if (imageData?.images?.length > 0) {
       setPreviewImages((prev) => {
         const newImages = imageData.images.filter(
-          (img) => !prev.some((existing) => existing.id === img.id)
+          (img) => !prev.some((existing) => existing._id === img._id)
         );
         return direction === 'older' ? [...newImages, ...prev] : [...prev, ...newImages];
       });

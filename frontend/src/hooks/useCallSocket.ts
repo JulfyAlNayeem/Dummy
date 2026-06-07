@@ -17,28 +17,18 @@ import {
 } from '@/redux/slices/callSlice';
 
 /**
- * Hook that manages Socket.IO connection to calling microservice
- * AND the WebRTC peer connection for 1:1 calls.
- *
- * Flow:
- *   Caller clicks call -> initiateCall() -> gets local media -> emits call:initiate
- *   Server creates call -> emits call:incoming to callee, call:initiated to caller
- *   Callee clicks accept -> acceptCall() -> gets local media -> emits call:accept
- *   Server emits call:accepted to both
- *   Caller receives call:accepted -> creates PeerConnection -> creates offer -> emits signal:offer
- *   Callee receives signal:offer -> creates PeerConnection -> sets remote -> creates answer -> emits signal:answer
- *   Caller receives signal:answer -> sets remote description
- *   ICE candidates exchanged -> media flows
+ * Hook that manages Socket.IO connection for calling.
+ * Connects to the SAME /socket.io path as the main socket.
+ * The backend CallingGateway handles all call: and signal: events.
  */
 export const useCallSocket = (): any => {
-    const dispatch = useDispatch();
-    const user: any = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
+  const user: any = useSelector(selectCurrentUser);
   const socketRef = useRef(null);
   const peerConnectionRef = useRef(null);
   const localStreamRef = useRef(null);
   const pendingCandidatesRef = useRef([]);
 
-  // Track call metadata for the P2P flow
   const callMetaRef = useRef({
     callId: null,
     calleeId: null,
@@ -47,12 +37,10 @@ export const useCallSocket = (): any => {
     callType: 'audio',
   });
 
-  // Expose streams as React state so components re-render when streams change
   const [localStream, setLocalStream] = useState(null);
   const [remoteStream, setRemoteStream] = useState(null);
   const [isSocketConnected, setIsSocketConnected] = useState(false);
 
-  // ICE configuration
   const iceConfig = useRef({
     iceServers: [
       { urls: 'stun:stun.l.google.com:19302' },
@@ -62,9 +50,7 @@ export const useCallSocket = (): any => {
     ],
   }).current;
 
-  // ========================================
-  //  MEDIA HELPERS
-  // ========================================
+  // ── MEDIA ────────────────────────────────────────────────────────────────
 
   const getLocalMedia = useCallback(async (callType) => {
     const constraints = {
@@ -94,36 +80,26 @@ export const useCallSocket = (): any => {
     callMetaRef.current = { callId: null, calleeId: null, callerId: null, isCaller: false, callType: 'audio' };
   }, []);
 
-  // ========================================
-  //  WEBRTC P2P FUNCTIONS
-  // ========================================
+  // ── WEBRTC ───────────────────────────────────────────────────────────────
 
   const createPeerConnection = useCallback((callId, targetUserId) => {
-    if (peerConnectionRef.current) {
-      peerConnectionRef.current.close();
-    }
+    if (peerConnectionRef.current) peerConnectionRef.current.close();
     pendingCandidatesRef.current = [];
 
     const pc = new RTCPeerConnection(iceConfig);
 
     pc.onicecandidate = (event) => {
       if (event.candidate && socketRef.current) {
-        socketRef.current.emit('signal:ice-candidate', {
-          callId,
-          targetUserId,
-          candidate: event.candidate,
-        });
+        socketRef.current.emit('signal:ice-candidate', { callId, targetUserId, candidate: event.candidate });
       }
     };
 
     pc.ontrack = (event) => {
-      console.log('[Call] Remote track received:', event.track.kind);
       const stream = event.streams[0];
       if (stream) setRemoteStream(stream);
     };
 
     pc.oniceconnectionstatechange = () => {
-      console.log('[Call] ICE state:', pc.iceConnectionState);
       if (pc.iceConnectionState === 'connected' || pc.iceConnectionState === 'completed') {
         dispatch(setCallConnected());
       }
@@ -133,7 +109,6 @@ export const useCallSocket = (): any => {
     };
 
     pc.onconnectionstatechange = () => {
-      console.log('[Call] Connection state:', pc.connectionState);
       if (pc.connectionState === 'failed') {
         cleanupMedia();
         dispatch(setCallEnded({ reason: 'failed' }));
@@ -153,59 +128,39 @@ export const useCallSocket = (): any => {
     pendingCandidatesRef.current = [];
   }, []);
 
-  // Caller creates and sends WebRTC offer
   const createAndSendOffer = useCallback(async (callId, targetUserId) => {
-    console.log('[Call] Creating offer for:', targetUserId);
     const pc = createPeerConnection(callId, targetUserId);
-
     if (localStreamRef.current) {
-      localStreamRef.current.getTracks().forEach((track) => {
-        pc.addTrack(track, localStreamRef.current);
-      });
+      localStreamRef.current.getTracks().forEach((track) => pc.addTrack(track, localStreamRef.current));
     }
-
     const offer = await pc.createOffer({ offerToReceiveAudio: true, offerToReceiveVideo: true });
     await pc.setLocalDescription(offer);
-
     socketRef.current?.emit('signal:offer', { callId, targetUserId, offer });
-    console.log('[Call] Sent offer to:', targetUserId);
   }, [createPeerConnection]);
 
-  // Callee handles incoming offer
   const handleReceivedOffer = useCallback(async (callId, fromUserId, offer) => {
-    console.log('[Call] Handling offer from:', fromUserId);
     const pc = createPeerConnection(callId, fromUserId);
-
     if (localStreamRef.current) {
-      localStreamRef.current.getTracks().forEach((track) => {
-        pc.addTrack(track, localStreamRef.current);
-      });
+      localStreamRef.current.getTracks().forEach((track) => pc.addTrack(track, localStreamRef.current));
     }
-
     await pc.setRemoteDescription(new RTCSessionDescription(offer));
     await flushPendingCandidates();
-
     const answer = await pc.createAnswer();
     await pc.setLocalDescription(answer);
-
     socketRef.current?.emit('signal:answer', { callId, targetUserId: fromUserId, answer });
-    console.log('[Call] Sent answer to:', fromUserId);
     dispatch(setCallConnected());
   }, [createPeerConnection, flushPendingCandidates, dispatch]);
 
-  // ========================================
-  //  SOCKET CONNECTION + EVENT HANDLERS
-  // ========================================
+  // ── SOCKET CONNECTION ────────────────────────────────────────────────────
 
   useEffect(() => {
-    if (!user?.id) return;
+    if (!user?._id) return;
 
-    const callingUrl = import.meta.env.VITE_CALLING_SOCKET_URL || window.location.origin;
-
-    socketRef.current = io(callingUrl, {
-      path: '/calling-socket',
+    // Same path as main socket — backend CallingGateway handles call: events
+    socketRef.current = io(window.location.origin, {
+      path: '/socket.io',
       withCredentials: true,
-      transports: ['websocket', 'polling'],
+      transports: ['polling', 'websocket'],
       reconnection: true,
       reconnectionDelay: 2000,
       reconnectionAttempts: 15,
@@ -228,20 +183,17 @@ export const useCallSocket = (): any => {
       console.warn('[Call] Socket error:', err.message);
     });
 
-    // ---- Incoming Call (callee side) ----
+    // Incoming calls
     socket.on('call:incoming', (data) => {
-      console.log('[Call] Incoming 1:1 call:', data);
       dispatch(setIncomingCall({ ...data, isGroup: false }));
     });
 
     socket.on('call:incoming-group', (data) => {
-      console.log('[Call] Incoming group call:', data);
       dispatch(setIncomingCall({ ...data, isGroup: true }));
     });
 
-    // ---- Call Initiated (caller side - server confirmed) ----
+    // Caller confirmed
     socket.on('call:initiated', (data) => {
-      console.log('[Call] Call initiated:', data);
       callMetaRef.current.callId = data.callId;
       callMetaRef.current.calleeId = data.calleeId;
       callMetaRef.current.isCaller = true;
@@ -249,12 +201,9 @@ export const useCallSocket = (): any => {
       dispatch(setCallInitiated(data));
     });
 
-    // ---- Call Accepted -> Caller must create P2P offer ----
+    // Callee accepted — caller now creates WebRTC offer
     socket.on('call:accepted', async ({ callId, acceptedBy, callType }) => {
-      console.log('[Call] Accepted by:', acceptedBy);
       dispatch(setCallAccepted({ callId, callType }));
-
-      // If I'm the caller, create the WebRTC offer now
       if (callMetaRef.current.isCaller && callMetaRef.current.callId === callId) {
         try {
           await createAndSendOffer(callId, acceptedBy);
@@ -264,41 +213,34 @@ export const useCallSocket = (): any => {
       }
     });
 
-    // ---- Call Lifecycle ----
     socket.on('call:declined', ({ callId, declinedBy }) => {
-      console.log('[Call] Declined by:', declinedBy);
       cleanupMedia();
       dispatch(setCallEnded({ reason: 'declined' }));
     });
 
     socket.on('call:ended', ({ callId, endedBy, reason, duration }) => {
-      console.log('[Call] Ended by:', endedBy, reason);
       cleanupMedia();
       dispatch(setCallEnded({ reason, duration }));
     });
 
     socket.on('call:cancelled', ({ callId, cancelledBy }) => {
-      console.log('[Call] Cancelled by:', cancelledBy);
       cleanupMedia();
       dispatch(setCallEnded({ reason: 'cancelled' }));
       dispatch(clearIncomingCall());
     });
 
     socket.on('call:missed', ({ callId, type }) => {
-      console.log('[Call] Missed:', type);
       cleanupMedia();
       dispatch(setCallEnded({ reason: 'missed' }));
       dispatch(clearIncomingCall());
     });
 
     socket.on('call:busy', ({ calleeId, message }) => {
-      console.log('[Call] Callee busy:', message);
       cleanupMedia();
       dispatch(setCallEnded({ reason: 'busy' }));
     });
 
     socket.on('call:busy-response', ({ callId, userId }) => {
-      console.log('[Call] Busy response from:', userId);
       cleanupMedia();
       dispatch(setCallEnded({ reason: 'busy' }));
     });
@@ -307,7 +249,7 @@ export const useCallSocket = (): any => {
       console.error('[Call] Error:', message);
     });
 
-    // ---- Group Call Events ----
+    // Group call events
     socket.on('call:group-initiated', (data) => {
       callMetaRef.current.callId = data.callId;
       callMetaRef.current.isCaller = true;
@@ -315,7 +257,6 @@ export const useCallSocket = (): any => {
     });
 
     socket.on('call:group-joined', ({ callId, roomId, callType, participants }) => {
-      console.log('[Call] Joined group, participants:', participants);
       participants.forEach((p) => {
         dispatch(addParticipant({ userId: p.userId, hasAudio: p.hasAudio, hasVideo: p.hasVideo }));
       });
@@ -346,7 +287,7 @@ export const useCallSocket = (): any => {
       dispatch(clearIncomingCall());
     });
 
-    // ---- Media Toggle Events ----
+    // Media toggles
     socket.on('call:audio-toggled', ({ userId, enabled }) => {
       dispatch(updateParticipantMedia({ userId, hasAudio: enabled }));
     });
@@ -359,9 +300,8 @@ export const useCallSocket = (): any => {
       console.log('[Call] Screen share toggled by:', userId, enabled);
     });
 
-    // ---- WebRTC Signaling ----
+    // WebRTC signaling
     socket.on('signal:offer', async ({ callId, fromUserId, offer }) => {
-      console.log('[Call] Received offer from:', fromUserId);
       try {
         await handleReceivedOffer(callId, fromUserId, offer);
       } catch (err) {
@@ -370,7 +310,6 @@ export const useCallSocket = (): any => {
     });
 
     socket.on('signal:answer', async ({ callId, fromUserId, answer }) => {
-      console.log('[Call] Received answer from:', fromUserId);
       try {
         if (peerConnectionRef.current) {
           await peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(answer));
@@ -401,55 +340,43 @@ export const useCallSocket = (): any => {
       socket.disconnect();
       socketRef.current = null;
     };
-  }, [user?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [user?._id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ========================================
-  //  PUBLIC CALL ACTIONS
-  // ========================================
+  // ── PUBLIC CALL ACTIONS ──────────────────────────────────────────────────
 
-  /** Initiate a 1:1 call */
   const initiateCall = useCallback(async (calleeId, callType, conversationId) => {
     await getLocalMedia(callType);
-
     callMetaRef.current.calleeId = calleeId;
     callMetaRef.current.callType = callType;
     callMetaRef.current.isCaller = true;
-
     socketRef.current?.emit('call:initiate', { calleeId, callType, conversationId });
   }, [getLocalMedia]);
 
-  /** Accept an incoming call */
   const acceptCall = useCallback(async (callId, callType) => {
     await getLocalMedia(callType);
-
     callMetaRef.current.callId = callId;
     callMetaRef.current.isCaller = false;
     callMetaRef.current.callType = callType;
-
     socketRef.current?.emit('call:accept', { callId });
   }, [getLocalMedia]);
 
-  /** Decline an incoming call */
   const declineCall = useCallback((callId) => {
     socketRef.current?.emit('call:decline', { callId });
     dispatch(clearIncomingCall());
   }, [dispatch]);
 
-  /** End the current call */
   const endCall = useCallback((callId) => {
     socketRef.current?.emit('call:end', { callId });
     cleanupMedia();
     dispatch(setCallEnded({ reason: 'normal' }));
   }, [cleanupMedia, dispatch]);
 
-  /** Cancel an outgoing call (before answered) */
   const cancelCall = useCallback((callId) => {
     socketRef.current?.emit('call:cancel', { callId });
     cleanupMedia();
     dispatch(setCallEnded({ reason: 'cancelled' }));
   }, [cleanupMedia, dispatch]);
 
-  /** Initiate a group call */
   const initiateGroupCall = useCallback(async (conversationId, callType, participantIds) => {
     await getLocalMedia(callType);
     callMetaRef.current.isCaller = true;
@@ -457,19 +384,16 @@ export const useCallSocket = (): any => {
     socketRef.current?.emit('call:initiate-group', { conversationId, callType, participantIds });
   }, [getLocalMedia]);
 
-  /** Join an existing group call */
   const joinGroupCall = useCallback(async (callId, callType) => {
     await getLocalMedia(callType);
     socketRef.current?.emit('call:join-group', { callId });
   }, [getLocalMedia]);
 
-  /** Leave a group call */
   const leaveGroupCall = useCallback((callId) => {
     socketRef.current?.emit('call:leave-group', { callId });
     cleanupMedia();
   }, [cleanupMedia]);
 
-  /** Toggle microphone */
   const toggleAudio = useCallback((callId, enabled) => {
     if (localStreamRef.current) {
       localStreamRef.current.getAudioTracks().forEach((t) => { t.enabled = enabled; });
@@ -477,7 +401,6 @@ export const useCallSocket = (): any => {
     socketRef.current?.emit('call:toggle-audio', { callId, enabled });
   }, []);
 
-  /** Toggle camera */
   const toggleVideo = useCallback(async (callId, enabled) => {
     if (localStreamRef.current) {
       const videoTracks = localStreamRef.current.getVideoTracks();
@@ -505,7 +428,6 @@ export const useCallSocket = (): any => {
     socketRef.current?.emit('call:toggle-video', { callId, enabled });
   }, []);
 
-  /** Toggle screen sharing */
   const toggleScreenShare = useCallback(async (callId, enabled) => {
     if (!enabled) return;
     try {

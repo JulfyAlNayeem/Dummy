@@ -12,7 +12,7 @@ const ActionMenu = ({ isOwnMessage, themeIndex, msg, openDialog }: { isOwnMessag
       onClick={(e) => {
         e.stopPropagation();
         const buttonRect = buttonRef.current.getBoundingClientRect();
-        openDialog(msg.id || msg.clientTempId, msg.text, buttonRect);
+        openDialog(msg._id || msg.clientTempId, msg.text, buttonRect);
       }}
     >
       <MoreVertical

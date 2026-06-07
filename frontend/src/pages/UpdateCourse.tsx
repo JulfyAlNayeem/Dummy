@@ -28,7 +28,7 @@ const UpdateCourse = (): JSX.Element => {
     e.preventDefault();
     const url = 'http://127.0.0.1:8000/course/createcourse/';
     
-    const method: 'put' | 'post' = formData.id ? 'put' : 'post';
+    const method: 'put' | 'post' = formData._id ? 'put' : 'post';
 
     try {
       const response = await axios({
@@ -54,7 +54,7 @@ const UpdateCourse = (): JSX.Element => {
         <input
           type="text"
           name="id"
-          value={formData.id}
+          value={formData._id}
           onChange={handleChange}
         />
       </div>

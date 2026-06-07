@@ -44,7 +44,7 @@ const GlobalMessageHandler = (): JSX.Element | null => {
    * Handle incoming message from any conversation
    */
   const handleGlobalMessage = useCallback((message) => {
-    if (!message || !user?.id) return;
+    if (!message || !user?._id) return;
     
     const conversationId = message.conversationId || message.conversation;
     if (!conversationId) {
@@ -53,7 +53,7 @@ const GlobalMessageHandler = (): JSX.Element | null => {
     }
 
     // Prevent processing duplicate messages
-    const messageKey = message.id || message.clientTempId;
+    const messageKey = message._id || message.clientTempId;
     if (!messageKey) return;
     
     if (processedMessages.current.has(messageKey)) {
@@ -68,8 +68,8 @@ const GlobalMessageHandler = (): JSX.Element | null => {
     }
 
     // Skip own messages (they are handled optimistically by the sender)
-    const senderId = typeof message.sender === 'object' ? message.sender.id : message.sender;
-    if (senderId === user.id) {
+    const senderId = typeof message.sender === 'object' ? message.sender._id : message.sender;
+    if (senderId === user._id) {
       return;
     }
 
@@ -97,16 +97,16 @@ const GlobalMessageHandler = (): JSX.Element | null => {
 
     // Acknowledge delivery to the server - the message reached this device
     if (socket) {
-      socket.emit('messageDelivered', { conversationId, userId: user.id });
+      socket.emit('messageDelivered', { conversationId, userId: user._id });
     }
 
-  }, [user?.id, activeConversationId, dispatch]);
+  }, [user?._id, activeConversationId, dispatch]);
 
   /**
    * Handle new message notification (for conversations not currently active)
    */
   const handleNewMessageNotification = useCallback((data) => {
-    if (!data || !user?.id) return;
+    if (!data || !user?._id) return;
     
     const { conversationId, message, senderInfo } = data;
     
@@ -124,7 +124,7 @@ const GlobalMessageHandler = (): JSX.Element | null => {
     toast((t) => (
       <div 
         onClick={() => {
-          toast.dismiss(t.id);
+          toast.dismiss(t._id);
           // Navigate to conversation (you can add navigation logic here)
         }}
         className="flex items-center gap-3 cursor-pointer"
@@ -145,17 +145,17 @@ const GlobalMessageHandler = (): JSX.Element | null => {
       position: 'top-right',
     });
 
-  }, [user?.id, activeConversationId]);
+  }, [user?._id, activeConversationId]);
 
   /**
    * Handle conversation updates (new message, status changes, etc.)
    */
   const handleConversationUpdate = useCallback((updatedConversation) => {
-    if (!updatedConversation?.id) return;
+    if (!updatedConversation?._id) return;
     
     // Update the conversation in the list
     const newConversations = allConversations.filter(
-      (c) => c.id !== updatedConversation.id
+      (c) => c._id !== updatedConversation._id
     );
     newConversations.unshift(updatedConversation);
     const limitedConversations = newConversations.slice(0, 30);
@@ -167,7 +167,7 @@ const GlobalMessageHandler = (): JSX.Element | null => {
    * Handle message status updates (delivered, read)
    */
   const handleMessageStatus = useCallback(({ messageId, status, readBy, conversationId }) => {
-    if (!messageId || !user?.id) return;
+    if (!messageId || !user?._id) return;
     
     dispatch(updateMessage({
       messageId,
@@ -179,7 +179,7 @@ const GlobalMessageHandler = (): JSX.Element | null => {
         conversation: conversationId
       }
     }));
-  }, [user?.id, dispatch]);
+  }, [user?._id, dispatch]);
 
   /**
    * Handle message deletion
@@ -209,7 +209,7 @@ const GlobalMessageHandler = (): JSX.Element | null => {
    * Subscribe to global socket events
    */
   useEffect(() => {
-    if (!socket || !user?.id) {
+    if (!socket || !user?._id) {
       return;
     }
 
@@ -233,7 +233,7 @@ const GlobalMessageHandler = (): JSX.Element | null => {
 
     // Listen for messages marked as read by other participants
     const handleMessagesRead = ({ conversationId, userId, messageIds }) => {
-      if (userId === user.id || !messageIds?.length) return;
+      if (userId === user._id || !messageIds?.length) return;
       messageIds.forEach(messageId => {
         dispatch(updateMessage({
           messageId,
@@ -251,7 +251,7 @@ const GlobalMessageHandler = (): JSX.Element | null => {
 
     // Listen for messages marked as delivered to other participants
     const handleMessagesDelivered = ({ conversationId, userId, messageIds }) => {
-      if (userId === user.id || !messageIds?.length) return;
+      if (userId === user._id || !messageIds?.length) return;
       messageIds.forEach(messageId => {
         dispatch(updateMessage({
           messageId,
@@ -272,7 +272,7 @@ const GlobalMessageHandler = (): JSX.Element | null => {
     // Listen for message edits from other participants
     const handleMessageEdited = (editedMessage) => {
       if (!editedMessage) return;
-      const msgId = editedMessage.id || editedMessage._id;
+      const msgId = editedMessage._id || editedMessage._id;
       const convId = editedMessage.conversationId || editedMessage.conversation;
       if (msgId) {
         dispatch(updateMessage({
@@ -305,7 +305,7 @@ const GlobalMessageHandler = (): JSX.Element | null => {
     };
   }, [
     socket, 
-    user?.id, 
+    user?._id, 
     handleGlobalMessage, 
     handleNewMessageNotification, 
     handleConversationUpdate,

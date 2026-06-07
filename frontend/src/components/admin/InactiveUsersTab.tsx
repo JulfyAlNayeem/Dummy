@@ -60,7 +60,7 @@ export default function InactiveUsersTab(): JSX.Element {
                   (new Date() - new Date(lastActivity)) / (1000 * 60 * 60 * 24 * 30),
                 )
                 return (
-                  <TableRow key={user.id} className="border-gray-600 dark:border-purple-300 hover:bg-gray-600 dark:hover:bg-purple-200">
+                  <TableRow key={user._id} className="border-gray-600 dark:border-purple-300 hover:bg-gray-600 dark:hover:bg-purple-200">
                     <TableCell className="font-medium text-white dark:text-gray-900">{user.name}</TableCell>
                     <TableCell className="text-white dark:text-gray-900">{user.email}</TableCell>
                     <TableCell className="text-white dark:text-gray-900">

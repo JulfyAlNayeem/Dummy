@@ -132,7 +132,7 @@ const PendingConversations = ({ themeIndex, activeTab }: { themeIndex: number; a
                     <Badge className="text-xs capitalize bg-gray-600 truncate">{conv.status}</Badge>
                   )}
                 </div>
-                {conv.accepter === user.id && (
+                {conv.accepter === user._id && (
                   <div className="flex items-center gap-2">
                     <Button
                       variant="ghost"

@@ -46,7 +46,7 @@ const SearchGroups = ({ searchQuery, themeIndex }: any): JSX.Element => {
         console.log('Mapping conversation:', { conversation });
         return {
           ...conversation,
-          id: conversation.id, // Ensure id is included for compatibility
+          id: conversation._id, // Ensure id is included for compatibility
           members: conversation.participants?.length || 0, // Add members count
           status: 'active', // Default status for local results
           intro: conversation.groupType || 'N/A', // Use groupType as intro
@@ -73,7 +73,7 @@ const SearchGroups = ({ searchQuery, themeIndex }: any): JSX.Element => {
 
       setAllGroups((prev) => {
         const newGroups = searchResult.groups.filter(
-          (newGroup) => !prev.some((existing) => existing.id === newGroup.id)
+          (newGroup) => !prev.some((existing) => existing._id === newGroup._id)
         );
         console.log('Merging groups:', { prev, newGroups, page });
         return page === 1 ? newGroups : [...prev, ...newGroups];
@@ -148,7 +148,7 @@ const SearchGroups = ({ searchQuery, themeIndex }: any): JSX.Element => {
             <div className="space-y-2">
               {localSearchResults.map((group, index) => (
                 <div
-                  key={group.id}
+                  key={group._id}
                   className={cn(
                     'flex items-center gap-3 p-3 rounded-lg',
                     'hover:bg-black/20 transition-colors cursor-pointer',
@@ -158,7 +158,7 @@ const SearchGroups = ({ searchQuery, themeIndex }: any): JSX.Element => {
                   style={{ animationDuration: '0.2s', animationDelay: `${index * 0.05}s`, animationFillMode: 'backwards' }}
                   onClick={() => {
                     if (group.alreadyMember) {
-                      navigate(`/e2ee/t/${group.id}`);
+                      navigate(`/e2ee/t/${group._id}`);
                     }
                   }}
                 >
@@ -178,14 +178,14 @@ const SearchGroups = ({ searchQuery, themeIndex }: any): JSX.Element => {
                       className="bg-sky-600"
                       onClick={(e) => {
                         e.stopPropagation();
-                        navigate(`/e2ee/t/${group.id}`);
+                        navigate(`/e2ee/t/${group._id}`);
                       }}
                     >
                       Enter Group
                     </Button>
                   ) : (
                     <>
-                      {group.hasPendingRequest || pendingRequests.has(group.id) ? (
+                      {group.hasPendingRequest || pendingRequests.has(group._id) ? (
                         <Badge size="sm" className="bg-gray-600 py-2 text-[11px]">
                           Pending
                         </Badge>
@@ -195,7 +195,7 @@ const SearchGroups = ({ searchQuery, themeIndex }: any): JSX.Element => {
                           className="bg-sky-600"
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleJoinRequest(group.id, group.name);
+                            handleJoinRequest(group._id, group.name);
                           }}
                         >
                           Request To Join
@@ -235,7 +235,7 @@ const SearchGroups = ({ searchQuery, themeIndex }: any): JSX.Element => {
               ) : (
                 allGroups.map((group, index) => (
                   <div
-                    key={group.id}
+                    key={group._id}
                     className={cn(
                       'flex items-center gap-3 p-3 rounded-lg',
                       'hover:bg-black/20 transition-colors cursor-pointer',
@@ -245,7 +245,7 @@ const SearchGroups = ({ searchQuery, themeIndex }: any): JSX.Element => {
                     style={{ animationDuration: '0.2s', animationDelay: `${index * 0.05}s`, animationFillMode: 'backwards' }}
                     onClick={() => {
                       if (group.alreadyMember) {
-                        navigate(`/e2ee/t/${group.id}`);
+                        navigate(`/e2ee/t/${group._id}`);
                       }
                     }}
                   >
@@ -265,14 +265,14 @@ const SearchGroups = ({ searchQuery, themeIndex }: any): JSX.Element => {
                         className="bg-sky-600"
                         onClick={(e) => {
                           e.stopPropagation();
-                          navigate(`/e2ee/t/${group.id}`);
+                          navigate(`/e2ee/t/${group._id}`);
                         }}
                       >
                         Enter Group
                       </Button>
                     ) : (
                       <>
-                        {group.hasPendingRequest || pendingRequests.has(group.id) ? (
+                        {group.hasPendingRequest || pendingRequests.has(group._id) ? (
                           <Badge size="sm" className="bg-gray-600 py-2 text-[11px]">
                             Pending
                           </Badge>
@@ -282,7 +282,7 @@ const SearchGroups = ({ searchQuery, themeIndex }: any): JSX.Element => {
                             className="bg-sky-600"
                             onClick={(e) => {
                               e.stopPropagation();
-                              handleJoinRequest(group.id, group.name);
+                              handleJoinRequest(group._id, group.name);
                             }}
                           >
                             Request To Join
