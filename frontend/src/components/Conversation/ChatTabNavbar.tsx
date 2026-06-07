@@ -11,7 +11,7 @@ import { GraduationCap, Group, Info, Menu, Phone, Video } from 'lucide-react';
 import ChatTabSidebar from './ChattabSidebar';
 import ConversationListSidebar from '../drawer/ConversationListSidebar';
 import { APP_ROUTES } from '@/routes/appRoutes/APP_ROUTES';
-import { useCall } from '@/components/Call/CallProvider';
+import { useCall } from '@/components/call/CallProvider';
 import toast from 'react-hot-toast';
 
 const ChatTabNavbar = ({

@@ -30,7 +30,7 @@ import { useGetUserInfoQuery } from '../../redux/api/user/userApi';
 import chatIcon from '../../assets/icons/chatIcon.svg';
 import MessageContainer from './MessageContainer';
 import Loading from '@/pages/Loading';
-import UnblockButton from '../chat/UnblockButton';
+import UnblockButton from '../chatroom/UnblockButton';
 import { fetchConversationKeys } from '@/utils/messageEncryptionHelperFuction';
 import MissedRemindersAlert from './MissedRemindersAlert';
 

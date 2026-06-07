@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthErrorBoundary from '../ErrorBoundary/AuthErrorBoundary';
+import AuthErrorBoundary from '../../pages/AuthErrorBoundary';
 import ChatTab from './ChatTab';
 
 /**

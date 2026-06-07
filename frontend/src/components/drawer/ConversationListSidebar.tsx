@@ -7,7 +7,7 @@ import { useUserAuth } from '../../context-reducer/UserAuthContext';
 import chatIcon from "@/assets/icons/chatIcon.svg";
 import { sheetColor, sidebarBg } from '../../constant';
 import { Button } from '@/components/ui/button';
-import ProfilePictureUploader from "../popup/ProfilePictureUploader";
+import ProfilePictureUploader from "../settings/ProfilePictureUploader";
 import SettingsModal from '../Conversation/SettingModal';
 import 'animate.css';
 import ActiveUserList from './ActiveUserList';

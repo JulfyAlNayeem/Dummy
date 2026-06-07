@@ -26,7 +26,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from '@/context-reducer/UserAuthContext';
-import ProfilePictureUploader from "../popup/ProfilePictureUploader.js";
+import ProfilePictureUploader from "../settings/ProfilePictureUploader.js";
 import { FaCamera } from 'react-icons/fa';
 import { useFetchConversationByIdQuery, useUpdateGroupImageMutation, useDeleteConversationMutation, useLeaveConversationMutation } from '@/redux/api/conversationApi';
 import { Button } from "../ui/button.js";
@@ -51,7 +51,7 @@ import EndToEndEncryptionSetting from "../chatTabSidebarScreens/EndToEndEncrypti
 import ConversationReminders from "../chatTabSidebarScreens/remiders/ConversationReminders.js";
 import { useUpdateClassMutation } from '@/redux/api/classGroup/classApi';
 import FormsPanel from "./ChatTabSidebar/Forms/FormsPanel.js";
-import { useCall } from "@/components/Call/CallProvider";
+import { useCall } from "@/components/call/CallProvider.js";
 
 // Import extracted components
 import {

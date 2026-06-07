@@ -8,7 +8,7 @@ import { useConversation, setBlockList } from "@/redux/slices/conversationSlice"
 import {
     useBlockUserMutation,
 } from "@/redux/api/user/userApi";
-import UnblockButton from "../chat/UnblockButton";
+import UnblockButton from "../chatroom/UnblockButton";
 
 export const handleBlock = async (blockUser: any, participant: any, conversationId: string, dispatch: any): Promise<void> => {
     console.log(blockUser, participant, conversationId, dispatch)

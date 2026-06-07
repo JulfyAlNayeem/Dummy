@@ -7,9 +7,9 @@ import { addMessage, updateMessage, updateMessageReaction, addMessages, removeMe
 import MessageCards from './MessageCards';
 import TypingIndicator from './TypingIndicator';
 import ImagePreviewModal from './ImagePreviewModal';
-import MessageActionDialog from "../chat/MessageActionDialog";
-import TextSelectionActions from "../chat/TextSelectionActions";
-import NoteModal from "../chat/NoteModal";
+import MessageActionDialog from "../chatroom/MessageActionDialog";
+import TextSelectionActions from "../chatroom/TextSelectionActions";
+import NoteModal from "../chatroom/NoteModal";
 import "../../custom.css";
 import 'animate.css';
 import ScrollUp from '../svg/ScrollUp';

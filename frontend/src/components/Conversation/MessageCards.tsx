@@ -1,23 +1,23 @@
 // @ts-nocheck
 import React, { useState, useRef, useEffect } from 'react';
-import ImageDisplay from '../chat/ImageDisplay';
-import VoiceMessageCard from '../chat/VoiceMessageCard';
-import VideoMessageCard from '../chat/VideoMessageCard';
-import CallCard from '../chat/CallCard';
-import MessageReactions from '../chat/MessageReactions';
-import ReactionPicker from '../chat/ReactionPicker';
+import ImageDisplay from '../chatroom/ImageDisplay';
+import VoiceMessageCard from '../chatroom/VoiceMessageCard';
+import VideoMessageCard from '../chatroom/VideoMessageCard';
+import CallCard from '../chatroom/CallCard';
+import MessageReactions from '../chatroom/MessageReactions';
+import ReactionPicker from '../chatroom/ReactionPicker';
 import { themeSenderMessage, themeReceiverMessage } from '@/lib/themeUtils';
 import { BASE_URL } from '@/utils/baseUrls';
 import { cn } from '@/lib/utils';
 import { useConversation, updateMessageReaction } from '@/redux/slices/conversationSlice';
 import { useUserAuth } from '@/context-reducer/UserAuthContext';
-import ProfileAvatar from '../chat/ProfileAvatar';
-import MessageHeader from '../chat/MessageHeader';
-import ReplyCard from '../chat/ReplyCard';
-import ReactionBottomSheet from '../chat/ReactionBottomSheet';
+import ProfileAvatar from '../chatroom/ProfileAvatar';
+import MessageHeader from '../chatroom/MessageHeader';
+import ReplyCard from '../chatroom/ReplyCard';
+import ReactionBottomSheet from '../chatroom/ReactionBottomSheet';
 import { useDispatch } from 'react-redux';
-import TextMessageCard from '../chat/TextMessageCard';
-import ActionMenu from '../chat/ActionMenu';
+import TextMessageCard from '../chatroom/TextMessageCard';
+import ActionMenu from '../chatroom/ActionMenu';
 
 const MessageCards = ({
   msg,

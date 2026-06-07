@@ -3,11 +3,11 @@ import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateMessage, removeMessage } from '@/redux/slices/conversationSlice';
 import MessageCards from './MessageCards';
-import MessageHeader from '../chat/MessageHeader';
-import ProfileAvatar from '../chat/ProfileAvatar';
-import MessageReactions from '../chat/MessageReactions';
-import EditInput from '../chat/EditInput';
-import MessageActionDialog from '../chat/MessageActionDialog';
+import MessageHeader from '../chatroom/MessageHeader';
+import ProfileAvatar from '../chatroom/ProfileAvatar';
+import MessageReactions from '../chatroom/MessageReactions';
+import EditInput from '../chatroom/EditInput';
+import MessageActionDialog from '../chatroom/MessageActionDialog';
 import { messageSenderCard, defaultProfileImage } from '@/constant';
 import { linkify } from '@/lib/messageUtils';
 

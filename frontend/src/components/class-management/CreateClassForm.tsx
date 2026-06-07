@@ -8,7 +8,7 @@ import { useCreateClassMutation } from "@/redux/api/classGroup/classApi";
 import toast from "react-hot-toast";
 import { useUser } from "@/redux/slices/authSlice";
 import { sheetColor } from "@/constant";
-import ProfilePictureUploader from "../popup/ProfilePictureUploader";
+import ProfilePictureUploader from "../settings/ProfilePictureUploader";
 import { FaCamera } from "react-icons/fa";
 
 export default function CreateClassForm({ onClassCreated, conversationThemeIndex }: { onClassCreated: (c: any) => void; conversationThemeIndex?: number }): JSX.Element {

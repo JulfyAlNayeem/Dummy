@@ -33,7 +33,7 @@ import Notice from "@/pages/Notice";
 import ConversationListPage from "@/pages/ConversationListPage";
 import SiteSecuritypage from "@/pages/SiteSecuritypage";
 import ErrorFallback, { RouterErrorFallback } from "@/pages/ErrorFallback";
-import AuthErrorBoundary from "@/components/ErrorBoundary/AuthErrorBoundary";
+import AuthErrorBoundary from "@/pages/AuthErrorBoundary";
 
 export const Routes = createBrowserRouter(
   createRoutesFromElements(

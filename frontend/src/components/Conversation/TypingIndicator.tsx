@@ -1,7 +1,7 @@
 import React from 'react';
 import { BASE_URL } from '../../utils/baseUrls';
 import { defaultProfileImage, messageSenderCard, secondColor } from '../../constant';
-import ProfileAvatar from '../chat/ProfileAvatar';
+import ProfileAvatar from '../chatroom/ProfileAvatar';
 import { useConversation } from '@/redux/slices/conversationSlice';
 
 const TypingIndicator = ({ typingUsers, user, participant }: any): JSX.Element => {

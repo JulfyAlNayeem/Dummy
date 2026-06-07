@@ -2,7 +2,7 @@
 import React, { memo, useEffect, useRef, useState } from "react";
 import "animate.css";
 import { MessageSquare } from 'lucide-react';
-import ConversationCard from "../card/ConversationCard";
+import ConversationCard from "../chatroom/ConversationCard";
 import ChatListNavbar from "./ConversationListNavbar";
 import { useNavigate } from "react-router-dom";
 import ConversationListFooter from "./ConversationListFooter";
