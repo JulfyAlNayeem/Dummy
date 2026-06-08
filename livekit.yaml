@@ -1,0 +1,33 @@
+# livekit.yaml
+# Place this file at your project root (same level as docker-compose.yml)
+# Documentation: https://docs.livekit.io/home/self-hosting/local/
+
+port: 7880
+
+# WebRTC settings
+rtc:
+  tcp_port: 7881
+  port_range_start: 50000
+  port_range_end: 50200
+  # IMPORTANT: set this to your VPS public IP for production
+  # For local dev, use 127.0.0.1
+  # Use env var so you can override per environment
+  use_external_ip: true   # auto-detect public IP (works on most VPS)
+
+# API keys — must match your .env
+keys:
+  kljdfjl!hjdf: lk8gHkDS   # format: api_key: api_secret
+
+# Logging
+logging:
+  level: info
+  pion_level: error
+
+# Room defaults
+room:
+  # Auto-delete empty rooms after 5 minutes
+  empty_timeout: 300
+  # Max participants per room
+  max_participants: 50
+  # Enable TURN for users behind strict firewalls
+  enable_remote_ice_candidates: true

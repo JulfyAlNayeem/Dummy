@@ -40,7 +40,7 @@ const ClassRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
   const isAdmin = user?.role === "teacher";
 
   const handleApprove = async (classId, userId, requestId) => {
-    try {
+    try {console.log("Approving request:", { classId, userId, requestId });
       setPendingRequests((prev) => new Set([...prev, requestId]));
       await approveRequest({ classId, userId }).unwrap();
       toast.success("Join request approved successfully");

@@ -168,41 +168,60 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }): JSX.Elem
     [logoutMutation, dispatch]
   );
 
-const fetchUserInfo = useCallback(
-  async () => {
-    // No `user` check here — caller decides
-    try {
-      const { data } = await apiInterceptor.get(`${AUTH_URL}me/`);
-      dispatch(setCredentials({ user: data.user }));
-      initializeSocket(data.user);
-      // ... reminders fetch
-    } catch (error) {
-      if (error.response) {
-        dispatch(setCredentials({ user: null, isAuthenticated: false }));
-        if (error.response.status !== 401 && error.response.status !== 403) {
-          console.error("Server error:", error.response.status);
+  const fetchUserInfo = useCallback(
+    async () => {
+      if (user) {
+        try {
+          const { data } = await apiInterceptor.get(`${AUTH_URL}me/`);
+          dispatch(setCredentials({ user: data.user }));
+          initializeSocket(data.user);
+
+          try {
+            const missedResp = await apiInterceptor.get(`${BASE_URL}reminders/missed`);
+            const missed = missedResp.data?.reminders || [];
+            if (missed.length > 0) {
+              missed.forEach(r => {
+                try {
+                  const key = `missed_reminders_${r.conversationId}`;
+                  const existing = JSON.parse(localStorage.getItem(key) || '[]');
+                  const missedBy = Math.max(1, Math.floor((Date.now() - new Date(r.datetime)) / 60000));
+                  const item = { id: r._id, title: r.title, note: r.note, datetime: r.datetime, missedBy };
+                  if (!existing.find(e => e.id === item.id)) {
+                    existing.push(item);
+                    localStorage.setItem(key, JSON.stringify(existing));
+                  }
+                } catch (e) {
+                  console.error('Failed to store missed reminder in localStorage', e);
+                }
+              });
+
+              try {
+                const { toast } = await import('@/hooks/use-toast').then(m => m);
+                toast({ title: `You have ${missed.length} missed reminder${missed.length !== 1 ? 's' : ''}` });
+              } catch (e) {
+                // ignore toast errors
+              }
+            }
+          } catch (e) {
+            console.error('Failed to fetch missed reminders after login', e);
+          }
+        } catch (error) {
+          if (error.response) {
+            dispatch(setCredentials({ user: null, isAuthenticated: false }));
+            if (error.response.status === 401 || error.response.status === 403) {
+              // Unauthenticated user
+            } else {
+              console.error("Server error:", error.response.status);
+            }
+          } else {
+            console.error("Network or unexpected error:", error);
+          }
         }
-      } else {
-        console.error("Network or unexpected error:", error);
       }
-    }
-  },
-  [dispatch, initializeSocket] // truly stable now — no `user`
-);
+    },
+    [dispatch, initializeSocket] // same as original — no `user` dep, so stable
+  );
 
-// useEffect(() => {
-//   if (user) {          
-//     fetchUserInfo();
-//   }
-
-//   return () => {
-//     if (socket.current) {
-//       socket.current.off("loggedUsersUpdate");
-//       socket.current.disconnect();
-//       socket.current = null;
-//     }
-//   };
-// }, [fetchUserInfo]);   
   const updateUserInfo = useCallback(
     async (updateData) => {
       if (!user || !user._id) {

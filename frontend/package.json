@@ -38,6 +38,7 @@
     "clsx": "^2.1.1",
     "crypto-js": "^4.2.0",
     "date-fns": "^3.6.0",
+    "livekit-client": "^2.19.1",
     "lodash": "^4.17.21",
     "lucide-react": "^0.514.0",
     "path": "^0.12.7",

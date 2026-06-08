@@ -37,6 +37,22 @@ services:
     networks:
       - dummy-network
 
+  # LiveKit SFU — handles audio/video for group calls (up to 50 people)
+  livekit:
+    image: livekit/livekit-server:latest
+    container_name: dummy-livekit-prod
+    restart: always
+    ports:
+      - "7880:7880"       # HTTP / WebSocket — frontend connects here
+      - "7881:7881"       # TCP for WebRTC
+      - "50000-50200:50000-50200/udp"  # UDP for WebRTC media
+    environment:
+      - LIVEKIT_CONFIG=/etc/livekit/livekit.yaml
+    volumes:
+      - ./livekit.yaml:/etc/livekit/livekit.yaml  # config file (see below)
+    networks:
+      - dummy-network
+
   # Backend Node.js Application
   backend:
     build:
@@ -57,6 +73,10 @@ services:
       ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
       REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
       ORIGIN_URL: ${ORIGIN_URL}
+      # LiveKit — backend uses these to create rooms and generate tokens
+      LIVEKIT_URL: ${LIVEKIT_URL}
+      LIVEKIT_API_KEY: ${LIVEKIT_API_KEY}
+      LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET}
     volumes:
       - ./backend/uploads:/app/backend/uploads
     depends_on:
@@ -64,6 +84,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      livekit:
+        condition: service_started
     networks:
       - dummy-network
 
@@ -74,6 +96,7 @@ services:
       dockerfile: frontend/Dockerfile-production
       args:
         VITE_BASE_URL: ${VITE_BASE_URL}
+        VITE_LIVEKIT_URL: ${LIVEKIT_URL}  # frontend needs LiveKit URL too
     image: ${DOCKERHUB_USERNAME}/dummy-frontend:latest
     container_name: dummy-frontend-prod
     restart: always

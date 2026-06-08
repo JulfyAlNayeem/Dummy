@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 /**
  * Call state slice - manages the current call state globally.
@@ -7,7 +7,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   // Current call state
   activeCall: null, // { callId, callType, isGroup, conversationId, roomId, calleeInfo }
-  callStatus: 'idle', // idle | ringing | incoming | connecting | ongoing | ended
+  callStatus: "idle", // idle | ringing | incoming | connecting | ongoing | ended
 
   // Incoming call data (shown in IncomingCallDialog)
   incomingCall: null, // { callId, callerId, callerName, callerImage, callType, conversationId, isGroup }
@@ -29,12 +29,13 @@ const initialState = {
 };
 
 const callSlice = createSlice({
-  name: 'call',
+  name: "call",
   initialState,
   reducers: {
     // Outgoing call initiated (caller side)
     setCallInitiated: (state, action) => {
-      const { callId, callType, calleeId, conversationId, calleeInfo } = action.payload;
+      const { callId, callType, calleeId, conversationId, calleeInfo } =
+        action.payload;
       state.activeCall = {
         callId,
         callType,
@@ -42,24 +43,30 @@ const callSlice = createSlice({
         conversationId,
         calleeInfo: calleeInfo || { id: calleeId },
       };
-      state.callStatus = 'ringing';
-      state.localVideo = callType === 'video';
+      state.callStatus = "ringing";
+      state.localVideo = callType === "video";
       state.showCallScreen = true;
     },
 
     // Group call initiated
     setGroupCallInitiated: (state, action) => {
       const { callId, callType, roomId, conversationId } = action.payload;
-      state.activeCall = { callId, callType, isGroup: true, conversationId, roomId };
-      state.callStatus = 'ringing';
-      state.localVideo = callType === 'video';
+      state.activeCall = {
+        callId,
+        callType,
+        isGroup: true,
+        conversationId,
+        roomId,
+      };
+      state.callStatus = "ringing"; // ← stays ringing until someone joins
+      state.localVideo = callType === "video";
       state.showCallScreen = true;
     },
 
     // Incoming call received (callee side)
     setIncomingCall: (state, action) => {
       state.incomingCall = action.payload;
-      state.callStatus = 'incoming';
+      state.callStatus = "incoming";
     },
 
     // Call accepted (by either party)
@@ -79,16 +86,16 @@ const callSlice = createSlice({
             image: state.incomingCall.callerImage,
           },
         };
-        state.localVideo = state.incomingCall.callType === 'video';
+        state.localVideo = state.incomingCall.callType === "video";
         state.incomingCall = null;
       }
-      state.callStatus = 'connecting';
+      state.callStatus = "connecting";
       state.showCallScreen = true;
     },
 
     // Call connected (media flowing)
     setCallConnected: (state) => {
-      state.callStatus = 'ongoing';
+      state.callStatus = "ongoing";
       if (!state.callStartTime) {
         state.callStartTime = Date.now();
       }
@@ -96,7 +103,7 @@ const callSlice = createSlice({
 
     // Call ended
     setCallEnded: (state) => {
-      state.callStatus = 'ended';
+      state.callStatus = "ended";
       state.activeCall = null;
       state.incomingCall = null;
       state.participants = [];
@@ -111,21 +118,25 @@ const callSlice = createSlice({
     // Incoming call cleared
     clearIncomingCall: (state) => {
       state.incomingCall = null;
-      if (state.callStatus === 'incoming') {
-        state.callStatus = 'idle';
+      if (state.callStatus === "incoming") {
+        state.callStatus = "idle";
       }
     },
 
     // Participant management
     addParticipant: (state, action) => {
-      const exists = state.participants.find((p) => p.userId === action.payload.userId);
+      const exists = state.participants.find(
+        (p) => p.userId === action.payload.userId,
+      );
       if (!exists) {
         state.participants.push(action.payload);
       }
     },
 
     removeParticipant: (state, action) => {
-      state.participants = state.participants.filter((p) => p.userId !== action.payload.userId);
+      state.participants = state.participants.filter(
+        (p) => p.userId !== action.payload.userId,
+      );
     },
 
     updateParticipantMedia: (state, action) => {
@@ -183,14 +194,17 @@ export const {
 export const selectActiveCall = (state: any): any => state.call?.activeCall;
 export const selectCallStatus = (state: any): any => state.call?.callStatus;
 export const selectIncomingCall = (state: any): any => state.call?.incomingCall;
-export const selectCallParticipants = (state: any): any => state.call?.participants;
+export const selectCallParticipants = (state: any): any =>
+  state.call?.participants;
 export const selectLocalMedia = (state: any): any => ({
   audio: state.call?.localAudio,
   video: state.call?.localVideo,
   screenSharing: state.call?.screenSharing,
 });
-export const selectCallStartTime = (state: any): any => state.call?.callStartTime;
+export const selectCallStartTime = (state: any): any =>
+  state.call?.callStartTime;
 export const selectIsMinimized = (state: any): any => state.call?.isMinimized;
-export const selectShowCallScreen = (state: any): any => state.call?.showCallScreen;
+export const selectShowCallScreen = (state: any): any =>
+  state.call?.showCallScreen;
 
 export default callSlice.reducer;
