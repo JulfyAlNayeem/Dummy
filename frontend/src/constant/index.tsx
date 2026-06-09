@@ -34,7 +34,7 @@ import astronautMoonSmall from "../assets/background/astronautMoonSmall.webp";
 import Gumbuj from "@/components/Marker/Dome";
 import MarkerTriangle from "@/components/Marker/MarkerTriangle";
 import Wolf from "@/components/Marker/Wolf";
-import ArabicDarkMosque from "@/components/svg/ArabicDarkMosque.jsx";
+import ArabicDarkMosque from "@/components/Svg/ArabicDarkMosque.js";
 import DeerHorn from "@/components/Marker/DeerHorn";
 import Circle from "@/components/Marker/Circle";
 import ElephantHead from "@/components/Marker/ElephantHead";

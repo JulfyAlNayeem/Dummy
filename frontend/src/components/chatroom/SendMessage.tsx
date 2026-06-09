@@ -4,7 +4,7 @@ import { useUserAuth } from "../../context-reducer/UserAuthContext";
 import LessonsButton from "../buttons/LessonsButton";
 import { themeChatInput, themeBorder } from "@/lib/themeUtils";
 import { Edit, LucideMessageSquareReply, MessageSquare } from "lucide-react";
-import Send from "../svg/Send";
+import Send from "../Svg/Send";
 import { useSendMessageMutation, useEditMessageMutation, useReplyMessageMutation } from "@/redux/api/messageApi";
 import { createTextMessage, createMediaMessage, createOptimisticMessage, createReplyMessage } from "@/lib/optimisticMessageFormat";
 import { useDispatch, useSelector } from "react-redux";

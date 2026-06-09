@@ -1,5 +1,5 @@
 import React from 'react'
-import ActiveFirefly2 from '../svg/ActiveFirefly2'
+import ActiveFirefly2 from '../Svg/ActiveFirefly2'
 import activeFireFlyJar from "../../assets/icons/activeFireFlyJar.png";
 
 const ActiveUserList = ({ activeUsers }: { activeUsers: any[] }): JSX.Element => {

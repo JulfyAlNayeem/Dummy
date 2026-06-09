@@ -8,7 +8,7 @@ import { useUser } from "@/redux/slices/authSlice";
 import { useState } from "react";
 import { useUserAuth } from "@/context-reducer/UserAuthContext";
 import { useConversation } from "@/redux/slices/conversationSlice";
-import ActiveFireFly2 from "../svg/ActiveFirefly2";
+import ActiveFireFly2 from "../Svg/ActiveFirefly2";
 
 export default function ChattabActivePersonsSidebar({activeUsers}: { activeUsers: any[] }): JSX.Element {
     const [open, setOpen] = useState<boolean>(false);
