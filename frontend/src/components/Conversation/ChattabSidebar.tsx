@@ -51,7 +51,7 @@ import EndToEndEncryptionSetting from "../chatTabSidebarScreens/EndToEndEncrypti
 import ConversationReminders from "../chatTabSidebarScreens/remiders/ConversationReminders.js";
 import { useUpdateClassMutation } from '@/redux/api/classGroup/classApi';
 import FormsPanel from "./ChatTabSidebar/Forms/FormsPanel.js";
-import { useCall } from "@/components/call/CallProvider.js";
+import { useCall } from "@/components/Call/CallProvider.js";
 
 // Import extracted components
 import {

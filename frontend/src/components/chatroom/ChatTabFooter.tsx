@@ -5,8 +5,8 @@ import { themeFooterBg, themeChatOption, themeCard, themeFooterIcon, themeBorder
 import { sheetColor } from "../../constant";
 import { TbArrowBarRight } from "react-icons/tb";
 import QuickMessage from "@components/buttons/QuickMessageContainer";
-import QuickMessageIcon from "../svg/QuickMessageIcon";
-import Grid from "../svg/Grid";
+import QuickMessageIcon from "../Svg/QuickMessageIcon";
+import Grid from "../Svg/Grid";
 import Smiley from "../buttons/Smiley";
 import EmojiContainer from "../buttons/EmojiContainer";
 import ImageUploader from "../chatroomfooter/ImageUploader";

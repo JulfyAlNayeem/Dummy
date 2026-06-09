@@ -9,11 +9,11 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import toast, { Toaster } from "react-hot-toast";
 import LessonSplitter from "../chatroom/LessonSplitter";
 import QuickLesson from "../Conversation/QuickLessonContainer";
-import Book from "../svg/Book";
+import Book from "../Svg/Book";
 import { secondColor, sheetColor } from "../../constant";
 import { themeIcon, themeBorder } from "@/lib/themeUtils";
 import { useUser } from "@/redux/slices/authSlice";
-import Book2 from "../svg/Book2";
+import Book2 from "../Svg/Book2";
 
 const LessonsButton = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
