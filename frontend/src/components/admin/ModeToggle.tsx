@@ -1,4 +1,4 @@
-// src/components/admin/ModeToggle.jsx
+// src/components/admin/ModeToggle.tsx
 import { Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";

@@ -1,5 +1,5 @@
-export { default as DisappearingMessagesItem } from "./DisappearingMessagesItem.js";
-export { default as MenuSection } from "./MenuSection.js";
-export { default as ReportDialog } from "./ReportDialog.js";
-export { default as MessagePermissionsItem } from "./MessagePermissionsItem.js";
-export { FormsItem } from "./Forms/index.js";
+export { default as DisappearingMessagesItem } from "./DisappearingMessagesItem";
+export { default as MenuSection } from "./MenuSection";
+export { default as ReportDialog } from "./ReportDialog";
+export { default as MessagePermissionsItem } from "./MessagePermissionsItem";
+export { FormsItem } from "./Forms/index";

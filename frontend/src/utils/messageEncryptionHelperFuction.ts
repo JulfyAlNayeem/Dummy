@@ -1,6 +1,6 @@
 // @ts-nocheck
-// messageEncryption.js - Utility for key management (simplified)
-import { BASE_URL } from './baseUrls.js';
+// messageEncryption.ts - Utility for key management (simplified)
+import { BASE_URL } from './baseUrls';
 
 
 // Simplified key storage format - store only active keys
@@ -299,7 +299,7 @@ export async function getOrFetchParticipantKey(conversationId: any, participantU
   
   // Try socket-first if available, then fallback to API
   if (socket && socket.connected) {
-    const { fetchParticipantKeyViaSocket } = await import('./socketEncryptionUtils.js');
+    const { fetchParticipantKeyViaSocket } = await import('./socketEncryptionUtils.ts');
     publicKey = await fetchParticipantKeyViaSocket(socket, conversationId, participantUserId, currentUserId, true);
     if (publicKey) {
       console.log('✅ Fetched key via socket');
@@ -511,7 +511,7 @@ export async function storeOwnMessagePlaintext(conversationId: any, messageId: a
     
     // Try to encrypt plaintext with own key before storing
     try {
-      const { encryptForOwnStorage } = await import('./messageEncryption.js');
+      const { encryptForOwnStorage } = await import('./messageEncryption.ts');
       const encryptedPlaintext = await encryptForOwnStorage(conversationId, plaintext, userId);
       dataToStore = encryptedPlaintext;
       console.log('🔒 Encrypted own message for storage');
@@ -564,7 +564,7 @@ export async function getOwnMessagePlaintext(conversationId: any, messageId: any
     
     // Try to decrypt if it's encrypted, otherwise return as-is (plaintext fallback)
     try {
-      const { decryptFromOwnStorage } = await import('./messageEncryption.js');
+      const { decryptFromOwnStorage } = await import('./messageEncryption.ts');
       const decrypted = await decryptFromOwnStorage(conversationId, message.data, userId);
       console.log('🔓 Decrypted own message from storage');
       return decrypted;
