@@ -123,7 +123,7 @@ const uiSlice = createSlice({
     },
     removeNotification: (state, action) => {
       state.notifications = state.notifications.filter(
-        (notification) => notification.id !== action.payload
+        (notification) => notification._id !== action.payload
       );
     },
     clearNotifications: (state) => {
@@ -152,7 +152,7 @@ const uiSlice = createSlice({
       })
     },
     removeToast: (state, action) => {
-      state.toasts = state.toasts.filter((toast) => toast.id !== action.payload)
+      state.toasts = state.toasts.filter((toast) => toast._id !== action.payload)
     },
   },
 });

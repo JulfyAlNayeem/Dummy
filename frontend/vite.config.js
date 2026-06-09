@@ -2,70 +2,22 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
-const BACKEND_URL = process.env.VITE_BACKEND_URL || 'http://localhost:3001';
+const BACKEND_URL = 'http://localhost:3001';
 
 export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 3002,
     proxy: {
-      '/class-group': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-      },
-      '/messages': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-      },
-      '/conversations': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-      },
-      '/conversation-keys': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-      },
-      '/forms': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-      },
-      '/alarm': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-      },
-      '/social': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-      },
-      '/auth': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-      },
-      '/users': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-      },
+      // All API calls go through /api — Vite strips prefix before forwarding to backend
+      // Matches nginx production behavior exactly
       '/api': {
         target: BACKEND_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
+      // Socket.IO — no prefix needed, goes directly
       '/socket.io': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-        ws: true,
-      },
-      '/message-socket': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-        ws: true,
-      },
-      '/calling-api': {
-        target: BACKEND_URL,
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/calling-api/, ''),
-      },
-      '/calling-socket': {
         target: BACKEND_URL,
         changeOrigin: true,
         ws: true,

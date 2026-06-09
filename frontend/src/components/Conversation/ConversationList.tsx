@@ -2,7 +2,7 @@
 import React, { memo, useEffect, useRef, useState } from "react";
 import "animate.css";
 import { MessageSquare } from 'lucide-react';
-import ConversationCard from "../card/ConversationCard";
+import ConversationCard from "../chatroom/ConversationCard";
 import ChatListNavbar from "./ConversationListNavbar";
 import { useNavigate } from "react-router-dom";
 import ConversationListFooter from "./ConversationListFooter";
@@ -22,7 +22,7 @@ const ConversationList = ({ themeIndex, setShowConversationList }: { themeIndex:
   const { socket }: any = useUserAuth();
   const dispatch = useDispatch();
   const { user }: any = useUser();
-  const userId = user?.id;
+  const userId = user?._id;
   const navigate = useNavigate();
   const navbarRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -65,7 +65,7 @@ const ConversationList = ({ themeIndex, setShowConversationList }: { themeIndex:
 
     const handleConversationUpdate = (updatedConversation) => {
       const newConversations = allConversations.filter(
-        (c) => c.id !== updatedConversation.id
+        (c) => c._id !== updatedConversation._id
       );
       newConversations.unshift(updatedConversation);
       const limitedConversations = newConversations.slice(0, 30);
@@ -182,14 +182,14 @@ const ConversationList = ({ themeIndex, setShowConversationList }: { themeIndex:
                   {allConversations?.map((conversation, index) => (
                     <div
                       className={`w-full animate__animated animate__fadeInUp animate__delay-${index % 1}s`}
-                      onClick={() => openChat(conversation.id)}
-                      key={conversation.id}
+                      onClick={() => openChat(conversation._id)}
+                      key={conversation._id}
                     >
                       <ConversationCard
                         themeIndex={themeIndex}
                         conversationInfo={conversation}
                         participant={conversation.participants.find(
-                          (participant) => participant?.id !== user?.id
+                          (participant) => participant?._id !== user?._id
                         )}
                         setShowConversationList={setShowConversationList} // Pass the prop
                       />

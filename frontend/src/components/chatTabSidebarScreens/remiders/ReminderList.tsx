@@ -10,7 +10,7 @@ export default function ReminderList({ reminders, user, isDeleting, handleEditRe
   return (
     <div className="space-y-2 max-h-96 overflow-y-auto">
       {[...reminders].sort((a, b) => new Date(a.datetime) - new Date(b.datetime)).map(reminder => (
-        <div key={reminder.id} className={`p-3 rounded-2xl border ${isReminderPast(reminder.datetime) ? 'bg-gray-900/50 border-gray-700/50' : reminder.notified ? 'bg-yellow-900/20 border-yellow-500/30' : 'bg-gray-900 border-gray-700'}`}>
+        <div key={reminder._id} className={`p-3 rounded-2xl border ${isReminderPast(reminder.datetime) ? 'bg-gray-900/50 border-gray-700/50' : reminder.notified ? 'bg-yellow-900/20 border-yellow-500/30' : 'bg-gray-900 border-gray-700'}`}>
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
@@ -27,14 +27,14 @@ export default function ReminderList({ reminders, user, isDeleting, handleEditRe
             </div>
 
             <div className="flex gap-1 flex-shrink-0">
-              {!reminder.notified && !isReminderPast(reminder.datetime) && user && reminder.userId === user.id && (
+              {!reminder.notified && !isReminderPast(reminder.datetime) && user && reminder.userId === user._id && (
                 <Button variant="ghost" size="icon" onClick={() => handleEditReminder(reminder)} disabled={isDeleting} className="h-8 w-8 text-blue-400 hover:text-blue-300">
                   <Edit2 className="h-3 w-3" />
                 </Button>
               )}
 
-              {user && reminder.userId === user.id && (
-                <Button variant="ghost" size="icon" onClick={() => handleDeleteReminder(reminder.id)} disabled={isDeleting} className="h-8 w-8 text-red-400 hover:text-red-300">
+              {user && reminder.userId === user._id && (
+                <Button variant="ghost" size="icon" onClick={() => handleDeleteReminder(reminder._id)} disabled={isDeleting} className="h-8 w-8 text-red-400 hover:text-red-300">
                   {isDeleting ? <Loader2 className="h-3 w-3 animate-spin" /> : <Trash2 className="h-3 w-3" />}
                 </Button>
               )}

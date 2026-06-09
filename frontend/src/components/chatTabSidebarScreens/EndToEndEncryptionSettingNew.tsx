@@ -18,7 +18,7 @@ const EndToEndEncryptionSetting = ({ onClose }: { onClose: () => void }): JSX.El
   const { conversationId }: any = useConversation();
   const { user }: any = useUser();
   const { socketRef }: any = useUserAuth();
-  const userId = user?.id;
+  const userId = user?._id;
   const [error, setError] = useState<string>('');
   const [hasUserKey, setHasUserKey] = useState<boolean>(false);
   const [keyVerified, setKeyVerified] = useState<boolean>(false);

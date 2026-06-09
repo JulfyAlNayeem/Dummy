@@ -143,7 +143,7 @@ const FormsPanel = ({ conversationId, onClose }: any): JSX.Element => {
           ) : (
             assignments.map((assignment) => (
               <AssignmentCard
-                key={assignment.id}
+                key={assignment._id}
                 assignment={assignment}
                 conversationId={conversationId}
               />
@@ -171,7 +171,7 @@ const FormsPanel = ({ conversationId, onClose }: any): JSX.Element => {
           ) : (
             myForms.map((form) => (
               <FormListItem
-                key={form.id}
+                key={form._id}
                 form={form}
                 onAssign={() => handleAssignForm(form)}
               />
@@ -197,7 +197,7 @@ const FormsPanel = ({ conversationId, onClose }: any): JSX.Element => {
           ) : (
             publicForms.map((form) => (
               <FormListItem
-                key={form.id}
+                key={form._id}
                 form={form}
                 onAssign={() => handleAssignForm(form)}
                 showCreator

@@ -31,7 +31,7 @@ router.use(requireAuth)
 router.post("/create", requireTeacher, createClass)
 router.get("/search-classes",searchClasses)
 router.get("/list", getUserClasses)
-router.post("/:classId/request-join", requestJoinClass)
+router.post("/:classId/join-request", requestJoinClass)
 router.post("/:classId/leave", leaveClass)
 
 // Class-specific routes
@@ -48,9 +48,9 @@ router.put("/:classId/add-moderator", requireConversationAdmin, addModerator)
 router.put("/:classId/remove-moderator", requireConversationAdmin, removeModerator)
 
 // Join request routes
-router.get("/:classId/requests/", requireConversationAdmin, getJoinRequests)
-router.put("/:classId/approve/:userId", requireConversationAdmin, approveJoinRequest)
-router.put("/:classId/reject/:userId", requireConversationAdmin, rejectJoinRequest)
+router.get("/:classId/join-requests/", requireConversationAdmin, getJoinRequests)
+router.put("/:classId/join-requests/approve/:userId", requireConversationAdmin, approveJoinRequest)
+router.put("/:classId/join-requests/reject/:userId", requireConversationAdmin, rejectJoinRequest)
 
 // Settings routes
 router.put("/:classId/settings", requireConversationAdmin, updateClassSettings)

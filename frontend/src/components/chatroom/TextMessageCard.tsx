@@ -87,7 +87,7 @@ const TextMessageCard = ({ text, plainText, senderId, messageId }: { text: strin
     safeTextRaw,
     conversationId,
     senderId,
-    user?.id,
+    user?._id,
     true // Skip own messages
   );
   
@@ -98,7 +98,7 @@ const TextMessageCard = ({ text, plainText, senderId, messageId }: { text: strin
   const isOwnEncryptedWithoutPlainText = !plainText && !decryptedText && (() => {
     try {
       const parsed = JSON.parse(safeTextRaw);
-      return parsed && parsed.ciphertext && String(senderId) === String(user?.id);
+      return parsed && parsed.ciphertext && String(senderId) === String(user?._id);
     } catch {
       return false;
     }
@@ -112,9 +112,9 @@ const TextMessageCard = ({ text, plainText, senderId, messageId }: { text: strin
     let isMounted = true;
     
     const fetchOwnMessage = async () => {
-      if (isOwnEncryptedWithoutPlainText && messageId && conversationId && user?.id) {
+      if (isOwnEncryptedWithoutPlainText && messageId && conversationId && user?._id) {
         try {
-          const plaintext = await getOwnMessagePlaintext(conversationId, messageId, user.id);
+          const plaintext = await getOwnMessagePlaintext(conversationId, messageId, user._id);
           if (isMounted && plaintext) {
             setOwnMessagePlaintext(plaintext);
             console.log('📖 Retrieved and decrypted own message from localStorage:', { 
@@ -134,7 +134,7 @@ const TextMessageCard = ({ text, plainText, senderId, messageId }: { text: strin
     return () => {
       isMounted = false;
     };
-  }, [isOwnEncryptedWithoutPlainText, messageId, conversationId, user?.id]);
+  }, [isOwnEncryptedWithoutPlainText, messageId, conversationId, user?._id]);
   
   // For own encrypted messages: use Redux plainText, localStorage decrypted plaintext, or show placeholder
   // For other messages: if decryption failed and message is encrypted, show friendly message

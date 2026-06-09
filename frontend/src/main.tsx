@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.js";
 import { Provider } from 'react-redux';
 import { UserAuthProvider } from "./context-reducer/UserAuthContext.js";
-import CallProvider from "./components/Call/CallProvider.js";
+import CallProvider from "./components/call/CallProvider.js";
 import { store, persistor } from "./redux/store.js";
 import { PersistGate } from 'redux-persist/integration/react';
 

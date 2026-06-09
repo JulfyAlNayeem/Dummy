@@ -27,13 +27,13 @@ const ConversationListFooter = ({ themeIndex, uiBounce, isSearchOpen, setIsSearc
   const { socket }: any = useUserAuth();
   const dispatch = useDispatch();
   const { data, isLoading, isError }: any = useGetUnreadRequestCountQuery(
-    { skip: !user?.id }
+    { skip: !user?._id }
   );
 
 
   // Handle socket event for unread counts update
   useEffect(() => {
-    if (!socket || !user?.id) return;
+    if (!socket || !user?._id) return;
 
     const handleUnreadCountsUpdated = (updatedCounts) => {
       console.log('Socket event received: unread_counts_updated', updatedCounts);
@@ -49,7 +49,7 @@ const ConversationListFooter = ({ themeIndex, uiBounce, isSearchOpen, setIsSearc
     return () => {
       socket.off("unread_counts_updated", handleUnreadCountsUpdated);
     };
-  }, [socket, user?.id, dispatch]);
+  }, [socket, user?._id, dispatch]);
 
   const footerRef = useRef(null);
 

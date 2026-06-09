@@ -48,7 +48,7 @@ const MessageActionDialog = ({
         break;
       case 'delete':
         try {
-          socket.emit("deleteMessage", { messageId, userId: user.id });
+          socket.emit("deleteMessage", { messageId, userId: user._id });
         } catch (error: any) {
           console.error("Failed to initiate message deletion:", error);
           toast.error("Failed to initiate message deletion");

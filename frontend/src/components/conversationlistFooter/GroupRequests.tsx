@@ -50,7 +50,7 @@ const GroupRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
         prev
           .map((grp) => ({
             ...grp,
-            requests: grp.requests.filter((req) => req.id !== requestId),
+            requests: grp.requests.filter((req) => req._id !== requestId),
           }))
           .filter((grp) => grp.requests.length > 0)
       );
@@ -74,7 +74,7 @@ const GroupRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
         prev
           .map((grp) => ({
             ...grp,
-            requests: grp.requests.filter((req) => req.id !== requestId),
+            requests: grp.requests.filter((req) => req._id !== requestId),
           }))
           .filter((grp) => grp.requests.length > 0)
       );
@@ -104,7 +104,7 @@ const GroupRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
 
         setAllGroups((prev) => {
           const existingRequestIds = new Set(
-            prev.flatMap((grp) => grp.requests.map((req) => req.id))
+            prev.flatMap((grp) => grp.requests.map((req) => req._id))
           );
           const mergedGroups = [...prev];
 
@@ -113,7 +113,7 @@ const GroupRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
 
             const existingGroup = mergedGroups.find((grp) => grp.groupId === newGroup.groupId);
             const newValidRequests = newGroup.requests.filter(
-              (req) => req.id && !existingRequestIds.has(req.id)
+              (req) => req._id && !existingRequestIds.has(req._id)
             );
 
             if (existingGroup) {
@@ -207,7 +207,7 @@ const GroupRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
                 <div className="space-y-2">
                   {groupItem.requests.map((req, rIndex) => (
                     <div
-                      key={req.id}
+                      key={req._id}
                       className={cn(
                         "px-1.5 py-1 rounded-lg bg-gray-50",
                         themeCard(themeIndex),
@@ -233,13 +233,13 @@ const GroupRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
                             </p>
                           </div>
                         </div>
-                        {req.status === "pending" && !pendingRequests.has(req.id) ? (
+                        {req.status === "pending" && !pendingRequests.has(req._id) ? (
                           <div className="flex gap-2">
                             <Button
                               size="sm"
                               className="bg-green-500 hover:bg-green-600"
                               onClick={() =>
-                                handleApprove(groupItem.groupId, req.user.id, req.id)
+                                handleApprove(groupItem.groupId, req.user._id, req._id)
                               }
                               disabled={isApproving}
                             >
@@ -254,7 +254,7 @@ const GroupRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
                               className="bg-red-500 hover:bg-red-600"
                               variant="destructive"
                               onClick={() =>
-                                handleReject(groupItem.groupId, req.user.id, req.id)
+                                handleReject(groupItem.groupId, req.user._id, req._id)
                               }
                               disabled={isRejecting}
                             >
@@ -267,9 +267,9 @@ const GroupRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
                           </div>
                         ) : (
                           <Badge
-                            className={pendingRequests.has(req.id) ? "bg-gray-600" : "bg-green-600"}
+                            className={pendingRequests.has(req._id) ? "bg-gray-600" : "bg-green-600"}
                           >
-                            {pendingRequests.has(req.id) ? "Processing..." : "Request Approved"}
+                            {pendingRequests.has(req._id) ? "Processing..." : "Request Approved"}
                           </Badge>
                         )}
                       </div>

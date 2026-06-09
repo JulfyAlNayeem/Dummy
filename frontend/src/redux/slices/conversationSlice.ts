@@ -101,7 +101,7 @@ const conversationSlice = createSlice({
       if (conversationId === "new" && !state.conversationId) {
         state.conversationId = "new";
       }
-      const messageId = message.clientTempId || message.id;
+      const messageId = message.clientTempId || message._id;
       // Skip if message already exists to avoid duplicate processing
       if (state.byConversationId[conversationId].messages[messageId]) {
         return;
@@ -155,7 +155,7 @@ const conversationSlice = createSlice({
         return;
       }
 
-      const newId = message.id || oldId;
+      const newId = message._id || oldId;
       if (!newId) {
         console.warn("No valid ID for message update:", message);
         return;
@@ -184,7 +184,7 @@ const conversationSlice = createSlice({
       const baseMessage = existingAtNewId || oldMessage || {};
 
       // For existing messages, allow status/read/reaction-only patches
-      if (!baseMessage.id && !hasRenderableContent && !isPartialPatch) {
+      if (!baseMessage._id && !hasRenderableContent && !isPartialPatch) {
         console.warn("Invalid message:", message);
         return;
       }
@@ -284,7 +284,7 @@ const conversationSlice = createSlice({
       }
 
       messages.forEach((msg) => {
-        const messageId = msg.id || msg.clientTempId;
+        const messageId = msg._id || msg.clientTempId;
         const isValid =
           msg &&
           messageId &&
@@ -293,7 +293,7 @@ const conversationSlice = createSlice({
             msg.voice ||
             msg.call ||
             msg.img) &&
-          !msg.deletedBy?.includes(state.user?.id);
+          !msg.deletedBy?.includes(state.user?._id);
         if (!isValid) {
           console.warn("Skipping invalid message:", msg);
           return;
@@ -358,7 +358,7 @@ const conversationSlice = createSlice({
     updateConversationLastMessage(state, action) {
       const { conversationId, lastMessage, lastMessageTime } = action.payload;
       const conversationIndex = state.allConversations.findIndex(
-        (c) => c.id === conversationId
+        (c) => c._id === conversationId
       );
       if (conversationIndex !== -1) {
         state.allConversations[conversationIndex] = {
@@ -393,7 +393,7 @@ const conversationSlice = createSlice({
         (state, action) => {
           const payload = action.payload;
           state.themeIndex = payload.themeIndex ?? null;
-          state.conversationId = payload.id ?? state.conversationId;
+          state.conversationId = payload._id ?? state.conversationId;
           state.receiver = payload.receiverId ?? null;
           state.isGroup = payload.group?.is_group ?? false;
           state.loading = false;
@@ -431,7 +431,7 @@ const conversationSlice = createSlice({
           const allParticipants = state.oneToOneConversations
             .flatMap((conversation) => conversation.participants || [])
             .reduce((acc, participant) => {
-              if (!acc.some((p) => p.id === participant.id)) {
+              if (!acc.some((p) => p._id === participant._id)) {
                 acc.push(participant);
               }
               return acc;
@@ -465,7 +465,7 @@ const conversationSlice = createSlice({
           }
 
           messages.forEach((msg) => {
-            const messageId = msg.id || msg.clientTempId;
+            const messageId = msg._id || msg.clientTempId;
             const isValid =
               msg &&
               messageId &&
@@ -474,7 +474,7 @@ const conversationSlice = createSlice({
                 msg.voice ||
                 msg.call ||
                 msg.img) &&
-              !msg.deletedBy?.includes(state.user?.id);
+              !msg.deletedBy?.includes(state.user?._id);
             if (!isValid) {
               console.warn("Skipping invalid message:", msg);
               return;

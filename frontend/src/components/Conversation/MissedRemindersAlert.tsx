@@ -52,7 +52,7 @@ const MissedRemindersAlert = ({ conversationId }: { conversationId: string }): J
   };
 
   const handleDismiss = (reminderId) => {
-    const updated = missedReminders.filter(r => r.id !== reminderId);
+    const updated = missedReminders.filter(r => r._id !== reminderId);
     setMissedReminders(updated);
 
     // Update localStorage
@@ -125,14 +125,14 @@ const MissedRemindersAlert = ({ conversationId }: { conversationId: string }): J
         </CardHeader>
         <CardContent className="space-y-2 max-h-96 overflow-y-auto">
           {missedReminders.map((reminder, index) => (
-            <Alert key={reminder.id} className="bg-yellow-800/50 border-yellow-600/50">
+            <Alert key={reminder._id} className="bg-yellow-800/50 border-yellow-600/50">
               <Clock className="h-4 w-4 text-yellow-300" />
               <AlertTitle className="text-white flex items-center justify-between">
                 <span>{reminder.title}</span>
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => handleDismiss(reminder.id)}
+                  onClick={() => handleDismiss(reminder._id)}
                   className="text-yellow-300 hover:text-white hover:bg-yellow-700/50 h-6 w-6 p-0"
                 >
                   <CheckCircle2 className="h-4 w-4" />

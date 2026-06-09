@@ -20,7 +20,7 @@ services:
     networks:
       - dummy-network
 
-  # Redis for sessions and Socket.io adapter
+  # Redis — sessions + Socket.IO adapter
   redis:
     image: redis:7-alpine
     container_name: dummy-redis-prod
@@ -37,11 +37,30 @@ services:
     networks:
       - dummy-network
 
+  # LiveKit SFU — handles audio/video for calls up to 50 people
+  # Runs as a separate process, backend talks to it via HTTP API
+  # Frontend connects directly via WebSocket on port 7880
+  livekit:
+    image: livekit/livekit-server:latest
+    container_name: dummy-livekit-prod
+    restart: always
+    ports:
+      - "7880:7880"                          # HTTP/WebSocket — frontend connects here
+      - "7881:7881"                          # TCP WebRTC fallback
+      - "50000-50200:50000-50200/udp"        # UDP WebRTC media ports
+    command: --config /etc/livekit/livekit.yaml
+    volumes:
+      - ./livekit.yaml:/etc/livekit/livekit.yaml
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:7880"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - dummy-network
+
   # Backend Node.js Application
   backend:
-    build:
-      context: .
-      dockerfile: backend/Dockerfile
     image: ${DOCKERHUB_USERNAME}/dummy-backend:latest
     container_name: dummy-backend-prod
     restart: always
@@ -51,12 +70,20 @@ services:
       NODE_ENV: production
       PORT: 3001
       DATABASE_URL: ${DATABASE_URL}
+      DB_NAME: ${MONGO_DATABASE}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379}
       SESSION_SECRET: ${SESSION_SECRET}
       JWT_SECRET: ${JWT_SECRET}
       ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
       REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
       ORIGIN_URL: ${ORIGIN_URL}
+      CLIENT_URL: ${CLIENT_URL}
+      # LiveKit — backend uses http:// (REST API to create rooms/tokens)
+      # Note: frontend uses ws:// — see LIVEKIT_PUBLIC_URL
+      LIVEKIT_URL: http://livekit:7880
+      LIVEKIT_PUBLIC_URL: ${LIVEKIT_PUBLIC_URL}
+      LIVEKIT_API_KEY: ${LIVEKIT_API_KEY}
+      LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET}
     volumes:
       - ./backend/uploads:/app/backend/uploads
     depends_on:
@@ -64,27 +91,41 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      livekit:
+        condition: service_healthy
     networks:
       - dummy-network
 
-  # Frontend React Application (Production with Nginx)
+  # Frontend React Application
   frontend:
-    build:
-      context: .
-      dockerfile: frontend/Dockerfile-production
-      args:
-        VITE_BASE_URL: ${VITE_BASE_URL}
     image: ${DOCKERHUB_USERNAME}/dummy-frontend:latest
     container_name: dummy-frontend-prod
     restart: always
-    ports:
-      - "80:80"
+    expose:
+      - "80"
     depends_on:
       - backend
     networks:
       - dummy-network
 
-  # Backup Scheduler (Automated Daily Backups)
+  # Nginx Reverse Proxy
+  # Sits in front of everything — routes / to frontend, /api and /socket.io to backend
+  # Recreated LAST in deploy so it picks up correct container IPs
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: dummy-nginx-prod
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-reverse-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - dummy-network
+
+  # Backup Scheduler
   backup-scheduler:
     build:
       context: .

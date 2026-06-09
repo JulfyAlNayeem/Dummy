@@ -42,8 +42,8 @@ const FormAssigner = ({ form, conversationId, onClose, onAssigned }: any): JSX.E
 
   // Fetch conversation to get participants
   const { data: conversationData, isLoading: isLoadingConversation }: any = useFetchConversationByIdQuery(
-    { chatId: conversationId, userId: user?.id },
-    { skip: !conversationId || conversationId === 'new' || !user?.id }
+    { chatId: conversationId, userId: user?._id },
+    { skip: !conversationId || conversationId === 'new' || !user?._id }
   );
 
   // Extract participants from conversation data - handle multiple structures
@@ -66,8 +66,8 @@ const FormAssigner = ({ form, conversationId, onClose, onAssigned }: any): JSX.E
   const availableAssignees = participants.filter(
     (p) => {
       if (!p) return false;
-      const pId = typeof p === "object" ? p.id : p;
-      return pId?.toString() !== user?.id?.toString();
+      const pId = typeof p === "object" ? p._id : p;
+      return pId?.toString() !== user?._id?.toString();
     }
   );
 
@@ -81,7 +81,7 @@ const FormAssigner = ({ form, conversationId, onClose, onAssigned }: any): JSX.E
 
   const selectAll = () => {
     const allIds = availableAssignees.map((p) =>
-      typeof p === "object" ? p.id : p
+      typeof p === "object" ? p._id : p
     );
     setSelectedAssignees(allIds);
   };
@@ -98,7 +98,7 @@ const FormAssigner = ({ form, conversationId, onClose, onAssigned }: any): JSX.E
 
     try {
       await assignForm({
-        formId: form.id,
+        formId: form._id,
         conversationId,
         assignees: selectedAssignees,
         frequency,
@@ -203,7 +203,7 @@ const FormAssigner = ({ form, conversationId, onClose, onAssigned }: any): JSX.E
                 </div>
               ) : (
                 availableAssignees.map((p) => {
-                  const pId = typeof p === "object" ? p.id : p;
+                  const pId = typeof p === "object" ? p._id : p;
                   const pName = typeof p === "object" ? (p.name || p.username || "User") : "User";
                   const pEmail = typeof p === "object" ? p.email : "";
                   const pImage = typeof p === "object" ? p.image : null;

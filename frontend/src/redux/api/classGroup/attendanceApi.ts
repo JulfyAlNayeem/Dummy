@@ -10,17 +10,19 @@ const baseQuery = fetchBaseQuery({
 export const attendanceApi = createApi({
   reducerPath: "attendanceApi",
   baseQuery,
-  tagTypes: ["Attendance", "Session"],
+  tagTypes: ["Attendance", "Session", "User", "Members"],
+
   endpoints: (builder) => ({
     // Session Management
     createManualSession: builder.mutation({
       query: ({ classId, ...sessionData }) => ({
         url: `/sessions/manual/${classId}`,
         method: "POST",
-        body: sessionData, // Only send date, startTime, cutoffTime in body
+        body: sessionData,
       }),
       invalidatesTags: ["Session"],
     }),
+
     autoGenerateSessions: builder.mutation({
       query: (classId) => ({
         url: "/sessions/auto-generate",
@@ -29,6 +31,7 @@ export const attendanceApi = createApi({
       }),
       invalidatesTags: ["Session"],
     }),
+
     deleteSession: builder.mutation({
       query: (sessionId) => ({
         url: `/sessions/${sessionId}`,
@@ -36,14 +39,22 @@ export const attendanceApi = createApi({
       }),
       invalidatesTags: ["Session", "Attendance"],
     }),
+
     getSessions: builder.query({
-      query: (classId) => `/sessions?classId=${classId}`,
+      query: (classId) => ({
+        url: "/sessions",
+        params: { classId },
+      }),
       providesTags: (result, error, classId) => [
         { type: "Session", id: classId },
       ],
     }),
+
     getLastSession: builder.query({
-      query: (classId) => `/last-session?classId=${classId}`,
+      query: (classId) => ({
+        url: "/last-session",
+        params: { classId },
+      }),
       providesTags: (result, error, classId) => [
         { type: "Session", id: classId },
       ],
@@ -51,34 +62,38 @@ export const attendanceApi = createApi({
 
     // Attendance Management
     getClassAttendance: builder.query({
-      query: ({ classId, date, view = "daily" }) =>
-        `/class/${classId}?date=${date}&view=${view}`,
+      query: ({ classId, date, view = "daily" }) => ({
+        url: `/class/${classId}`,
+        params: { date, view },
+      }),
       providesTags: (result, error, { classId }) => [
         { type: "Attendance", id: classId },
       ],
     }),
+
     getSessionAttendance: builder.query({
-      query: (sessionId) => `/session/${sessionId}/logs`,
+      query: (sessionId) => `/session/${sessionId}`,
       providesTags: (result, error, sessionId) => [
         { type: "Attendance", id: sessionId },
       ],
     }),
+
     getStudentAttendance: builder.query({
       query: (studentId) => `/student/${studentId}`,
       providesTags: (result, error, studentId) => [
         { type: "Attendance", id: studentId },
       ],
     }),
+
     markAttendance: builder.mutation({
       query: ({ sessionId, enteredAt }) => ({
         url: "/mark",
         method: "POST",
         body: { sessionId, enteredAt },
       }),
-      invalidatesTags: (result, error, { classId }) => [
-        { type: "Attendance", id: classId },
-      ],
+      invalidatesTags: ["Attendance"],
     }),
+
     editAttendance: builder.mutation({
       query: ({ recordId, data }) => ({
         url: `/edit/${recordId}`,
@@ -89,6 +104,7 @@ export const attendanceApi = createApi({
         { type: "Attendance", id: recordId },
       ],
     }),
+
     bulkUpdateAttendance: builder.mutation({
       query: ({ classId, ...data }) => ({
         url: `/bulk/${classId}`,
@@ -105,10 +121,12 @@ export const attendanceApi = createApi({
         { type: "Attendance", id: `${classId}-stats` },
       ],
     }),
+
     getGlobalAttendanceAnalytics: builder.query({
       query: () => "/analytics/global",
       providesTags: ["Attendance"],
     }),
+
     searchUser: builder.query({
       query: ({ query, page = 1, limit = 10 }) =>
         `/search-user?query=${encodeURIComponent(
@@ -122,18 +140,23 @@ export const attendanceApi = createApi({
         totalPages: response.totalPages || 1,
       }),
     }),
+
     getClassMembers: builder.query({
       query: (classId) => `/members/${classId}`,
       providesTags: (result, error, classId) => [
         { type: "Members", id: classId },
       ],
     }),
+
     getAttendanceOverview: builder.query({
-      query: (classId) => `/${classId}/overview`,
+      query: (classId) => `/${classId}/attendance-overview`,
       transformResponse: (response) => ({
         attendance: response.attendance,
         analytics: response.analytics,
       }),
+      providesTags: (result, error, classId) => [
+        { type: "Attendance", id: `${classId}-overview` },
+      ],
     }),
   }),
 });
@@ -154,5 +177,5 @@ export const {
   useGetAttendanceAnalyticsQuery,
   useGetGlobalAttendanceAnalyticsQuery,
   useGetClassMembersQuery,
-  useGetAttendanceOverviewQuery
+  useGetAttendanceOverviewQuery,
 } = attendanceApi;

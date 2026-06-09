@@ -7,9 +7,9 @@ import { addMessage, updateMessage, updateMessageReaction, addMessages, removeMe
 import MessageCards from './MessageCards';
 import TypingIndicator from './TypingIndicator';
 import ImagePreviewModal from './ImagePreviewModal';
-import MessageActionDialog from "../chat/MessageActionDialog";
-import TextSelectionActions from "../chat/TextSelectionActions";
-import NoteModal from "../chat/NoteModal";
+import MessageActionDialog from "../chatroom/MessageActionDialog";
+import TextSelectionActions from "../chatroom/TextSelectionActions";
+import NoteModal from "../chatroom/NoteModal";
 import "../../custom.css";
 import 'animate.css';
 import ScrollUp from '../svg/ScrollUp';
@@ -48,14 +48,14 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
   const buttonRefs = useRef({});
 
   const fetchMessages = useCallback(async (pageNum, limit = 20) => {
-    if (!conversationId || conversationId === 'new' || !user.id) {
+    if (!conversationId || conversationId === 'new' || !user._id) {
       // Silently return if data is not ready yet (normal during initialization)
       return;
     }
     setIsLoading(true);
     try {
       const res = await fetch(
-        `${BASE_URL}messages/get-messages/${conversationId}?userId=${user.id}&page=${pageNum}&limit=${limit}`,
+        `${BASE_URL}messages/get-messages/${conversationId}?userId=${user._id}&page=${pageNum}&limit=${limit}`,
         {
           method: "GET",
           credentials: "include", // Cookies are sent automatically
@@ -81,7 +81,7 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
     } finally {
       setIsLoading(false);
     }
-  }, [conversationId, user.id, dispatch]);
+  }, [conversationId, user._id, dispatch]);
 
   // Use the infinite scroll hook
   const { showScrollButton } = useInfiniteScroll({
@@ -97,8 +97,8 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
 
   useEffect(() => {
     messages.forEach((msg) => {
-      if (!buttonRefs.current[msg.id || msg.clientTempId]) {
-        buttonRefs.current[msg.id || msg.clientTempId] = React.createRef();
+      if (!buttonRefs.current[msg._id || msg.clientTempId]) {
+        buttonRefs.current[msg._id || msg.clientTempId] = React.createRef();
       }
     });
   }, [messages]);
@@ -109,10 +109,10 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
     if (navigator.onLine) {
       fetchMessages(1);
     }
-  }, [conversationId, user.id, dispatch, fetchMessages]);
+  }, [conversationId, user._id, dispatch, fetchMessages]);
 
   useEffect(() => {
-    if (!socket || !conversationId || !user?.id) return;
+    if (!socket || !conversationId || !user?._id) return;
 
     let messageReadTimeout;
 
@@ -122,12 +122,12 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
         const validMessages = messages.filter(
           (msg) =>
             msg &&
-            (msg.id || msg.clientTempId) &&
+            (msg._id || msg.clientTempId) &&
             (msg.text?.trim() || msg.media?.length > 0 || msg.voice || msg.call || msg.img) &&
-            !msg.deletedBy?.includes(user.id)
+            !msg.deletedBy?.includes(user._id)
         );
         if (validMessages.length > 0) {
-          socket.emit('messageRead', { conversationId, userId: user.id });
+          socket.emit('messageRead', { conversationId, userId: user._id });
         } else {
           console.log(`Skipped messageRead emission for conversation ${conversationId}: no valid messages`);
         }
@@ -136,13 +136,13 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
 
     emitMessageRead();
     const handleMessagesRead = ({ conversationId: receivedConversationId, userId, messageIds }) => {
-      if (receivedConversationId === conversationId && userId !== user.id) {
+      if (receivedConversationId === conversationId && userId !== user._id) {
         if (!messageIds || !Array.isArray(messageIds)) {
           console.warn('Invalid messageIds received:', messageIds);
           return;
         }
         messageIds.forEach((messageId) => {
-          const existingMessage = messages.find(m => m.id === messageId || m.clientTempId === messageId);
+          const existingMessage = messages.find(m => m._id === messageId || m.clientTempId === messageId);
           if (!existingMessage) {
             return;
           }
@@ -172,10 +172,10 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
     };
 
     const handleMessagesDelivered = ({ conversationId: receivedConversationId, userId, messageIds }) => {
-      if (receivedConversationId === conversationId && userId !== user.id) {
+      if (receivedConversationId === conversationId && userId !== user._id) {
         if (!messageIds || !Array.isArray(messageIds)) return;
         messageIds.forEach((messageId) => {
-          const existingMessage = messages.find(m => m.id === messageId || m.clientTempId === messageId);
+          const existingMessage = messages.find(m => m._id === messageId || m.clientTempId === messageId);
           if (!existingMessage || existingMessage.status === 'read') return;
           dispatch(updateMessage({
             messageId,
@@ -211,13 +211,13 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
       socket.off('messagesDelivered', handleMessagesDelivered);
       socket.off('messageReadError', handleMessageReadError);
     };
-  }, [socket, conversationId, user?.id, dispatch, isGroup, messages]);
+  }, [socket, conversationId, user?._id, dispatch, isGroup, messages]);
 
   // Note: Global message reception is now handled by GlobalMessageHandler component
   // This component only handles conversation-specific events like typing, reactions, etc.
 
   useEffect(() => {
-    if (!socket || !conversationId || conversationId === 'new' || !user || !user.id) {
+    if (!socket || !conversationId || conversationId === 'new' || !user || !user._id) {
       // Silently return if dependencies are not ready yet (normal during initialization)
       return;
     }
@@ -230,7 +230,7 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
 
     // Only handle typing indicator locally - messages are handled by GlobalMessageHandler
     const handleTyping = ({ userId, isTyping }) => {
-      if (!userId || userId === user.id || isGroup) return;
+      if (!userId || userId === user._id || isGroup) return;
       setTypingUsers((prev) => {
         if (isTyping && !prev.includes(userId)) return [userId];
         return prev.filter((id) => id !== userId);
@@ -243,7 +243,7 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
       const existingMessage = messages.find(m => m.clientTempId === clientTempId);
       if (existingMessage) {
         dispatch(updateMessage({
-          messageId: existingMessage.id || existingMessage.clientTempId,
+          messageId: existingMessage._id || existingMessage.clientTempId,
           message: { ...existingMessage, status: 'fail' }
         }));
         toast.error(`Failed to send message: ${errorMsg}`);
@@ -284,7 +284,7 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
       socket.off('replyReceiveMessage', handleReplyReceive);
       socket.off('reactionUpdate', handleReactionUpdate);
     };
-  }, [socket, conversationId, isGroup, dispatch, user?.id, messages]);
+  }, [socket, conversationId, isGroup, dispatch, user?._id, messages]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -297,19 +297,19 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
   // Auto-generate keys if missing and fetch other participants' keys
   useEffect(() => {
     const checkAndGenerateKeys = async () => {
-      if (conversationId && conversationId !== 'new' && user && user.id) {
-        console.log('🔑 Key check started for:', { conversationId, userId: user.id });
+      if (conversationId && conversationId !== 'new' && user && user._id) {
+        console.log('🔑 Key check started for:', { conversationId, userId: user._id });
         
         // First, ensure our own keys exist
-        const userKeyExists = hasKeys(conversationId, user.id);
-        console.log('🔍 Key existence check:', { userKeyExists, conversationId, userId: user.id });
+        const userKeyExists = hasKeys(conversationId, user._id);
+        console.log('🔍 Key existence check:', { userKeyExists, conversationId, userId: user._id });
         
         if (!userKeyExists) {
           console.log('⚠️ No keys found for current user, generating NEW keys...');
           try {
             const { publicKey, privateKey, publicKeyForBackend } = await generateKeyPair();
-            storePrivateKey(conversationId, user.id, privateKey);
-            storeUserPublicKey(conversationId, user.id, publicKey);
+            storePrivateKey(conversationId, user._id, privateKey);
+            storeUserPublicKey(conversationId, user._id, publicKey);
             console.log('📤 Sending new public key to backend...');
             await exchangePublicKey(conversationId, publicKeyForBackend);
             console.log('✅ Keys generated, stored locally, and public key sent to backend');
@@ -323,8 +323,8 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
         // Then, ensure all other participants' public keys are cached
         if (participant && Array.isArray(participant)) {
           const otherParticipantIds = participant
-            .filter(p => p.id !== user.id)
-            .map(p => p.id);
+            .filter(p => p._id !== user._id)
+            .map(p => p._id);
 
           if (otherParticipantIds.length > 0) {
             console.log('🔄 Force-refreshing participant keys from server:', otherParticipantIds);
@@ -338,7 +338,7 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
               });
               
               // Now fetch fresh keys from server
-              const results = await ensureAllConversationKeysInStorage(conversationId, otherParticipantIds, user.id);
+              const results = await ensureAllConversationKeysInStorage(conversationId, otherParticipantIds, user._id);
               const successful = results.filter(r => r.success).length;
               const failed = results.filter(r => !r.success).length;
               console.log(`✅ Key refresh complete: ${successful} successful, ${failed} failed`);
@@ -407,7 +407,7 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
     const names = readBy
       .map((entry) => {
         const participantData = Array.isArray(participant)
-          ? participant.find((p) => p.id === entry.user) || { name: 'Unknown' }
+          ? participant.find((p) => p._id === entry.user) || { name: 'Unknown' }
           : { name: 'Unknown' };
         return participantData.name;
       })
@@ -426,7 +426,7 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
     }));
     socket.emit('sendMessage', {
       conversationId,
-      sender: user.id,
+      sender: user._id,
       receiver: message.receiver,
       text: message.text,
       media: message.media,
@@ -461,38 +461,38 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
           .filter((msg) => {
             const isValid =
               msg &&
-              (msg.id || msg.clientTempId) &&
+              (msg._id || msg.clientTempId) &&
               (msg.status === 'fail' ||
                 (msg.text?.trim() || msg.media?.length > 0 || msg.voice || msg.call || msg.img)) &&
-              !msg.deletedBy?.includes(user.id);
+              !msg.deletedBy?.includes(user._id);
             if (!isValid) {
               console.warn('Skipping rendering invalid message:', msg);
             }
             return isValid;
           })
           .map((msg, index) => {
-            const senderId = typeof msg.sender === "object" && msg.sender.id ? msg.sender.id : msg.sender;
-            const isOwnMessage = String(senderId) === String(user.id);
+            const senderId = typeof msg.sender === "object" && msg.sender._id ? msg.sender._id : msg.sender;
+            const isOwnMessage = String(senderId) === String(user._id);
             const sender = isOwnMessage
               ? user
               : Array.isArray(participant)
-                ? (participant.find((p) => p.id === senderId) || { name: 'Unknown', image: defaultProfileImage })
+                ? (participant.find((p) => p._id === senderId) || { name: 'Unknown', image: defaultProfileImage })
                 : { name: 'Unknown', image: defaultProfileImage };
 
             return (
               <div
-                key={msg.id + index}
+                key={msg._id + index}
                 className={`flex mb-0.5 w-full relative ${isOwnMessage ? "items-end justify-end" : "items-start justify-start"} mt-10 animate__animated animate__fadeInUp animate__faster`}
               >
                 <MessageCards
-                  key={msg.id + index}
+                  key={msg._id + index}
                   msg={msg}
                   isOwnMessage={isOwnMessage}
                   themeIndex={themeIndex}
                   onImageClick={(index) => handleImageClick(index, msg.media
                     .filter(media => media.type === "image")
                     .map(media => ({ img: `${BASE_URL}${media.url}` })))}
-                  buttonRef={buttonRefs.current[msg.id || msg.clientTempId]}
+                  buttonRef={buttonRefs.current[msg._id || msg.clientTempId]}
                   openDialog={(messageId, messageText, buttonRect) => openDialog(messageId, messageText, buttonRect)}
                   retryMessage={() => retryMessage(msg.clientTempId)}
                   removeMessage={(conversationId, messageId) => dispatch(removeMessage({ conversationId, messageId }))}

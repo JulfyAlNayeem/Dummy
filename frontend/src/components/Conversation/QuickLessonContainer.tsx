@@ -60,7 +60,7 @@ export default function QuickLesson({ setVisible }: { setVisible: (v: boolean) =
 
     let optimisticMessage = createTextMessage(
       conversationId,
-      user.id,
+      user._id,
       receiver,
       inputValue,
       tempMessageId
@@ -73,7 +73,7 @@ export default function QuickLesson({ setVisible }: { setVisible: (v: boolean) =
         socket,
         setConversationId,
         conversationId,
-        userId: user.id,
+        userId: user._id,
         receiver,
         inputValue,
         sendMessage,
@@ -104,7 +104,7 @@ export default function QuickLesson({ setVisible }: { setVisible: (v: boolean) =
       const updatedParts = [...editPartLesson.lessonParts];
       updatedParts[editPartIdx] = editPartValue;
       await editQuickLesson({
-        id: editPartLesson.id,
+        id: editPartLesson._id,
         lessonName: editPartLesson.lessonName,
         lessonParts: updatedParts,
       });
@@ -127,7 +127,7 @@ export default function QuickLesson({ setVisible }: { setVisible: (v: boolean) =
     if (deletePartLesson && deletePartIdx !== null) {
       const updatedParts = deletePartLesson.lessonParts.filter((_, idx) => idx !== deletePartIdx);
       await editQuickLesson({
-        id: deletePartLesson.id,
+        id: deletePartLesson._id,
         lessonName: deletePartLesson.lessonName,
         lessonParts: updatedParts,
       });
@@ -181,7 +181,7 @@ export default function QuickLesson({ setVisible }: { setVisible: (v: boolean) =
     <div className=" max-h-full overflow-y-auto md:h-[90vh]">
       <Accordion type="multiple" className="w-full space-y-2">
         {quickLessons.map((lesson, index) => (
-          <AccordionItem key={lesson.id} value={`lesson-${index}`} className="border-0">
+          <AccordionItem key={lesson._id} value={`lesson-${index}`} className="border-0">
             <div
               className="rounded-lg px-2 py-1 relative"
               style={{
@@ -195,7 +195,7 @@ export default function QuickLesson({ setVisible }: { setVisible: (v: boolean) =
                     variant="ghost"
                     size="sm"
                     className="text-red-600 hover:text-red-700 hover:bg-red-50 p-1 h-auto"
-                    onClick={() => handleDelete(lesson.id)}
+                    onClick={() => handleDelete(lesson._id)}
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>

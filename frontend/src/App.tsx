@@ -10,7 +10,7 @@ import { Routes } from "./routes/Routes"; // Import the Routes configuration
 import Loading from "./pages/Loading";
 import ErrorFallback from "./pages/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
-import AuthErrorBoundary from "./components/ErrorBoundary/AuthErrorBoundary";
+import AuthErrorBoundary from "./pages/AuthErrorBoundary";
 
 
 function App(): JSX.Element {
@@ -37,7 +37,7 @@ function App(): JSX.Element {
     };
   }, []);
 
-  if (process.env.NODE_ENV === "production") {
+  if (import.meta.env.MODE === "production") {
     console.log = function () { };     // disables console.log
     console.debug = function () { };   // disables console.debug
     console.warn = function () { };    // optionally disable warnings
@@ -50,7 +50,7 @@ function App(): JSX.Element {
         FallbackComponent={ErrorFallback}
         onError={(error, errorInfo) => {
           // Log error in development
-          if (process.env.NODE_ENV === 'development') {
+          if (import.meta.env.MODE === 'development') {
             console.error('App Error Boundary caught:', error, errorInfo);
           }
         }}

@@ -20,7 +20,7 @@ export function useEncryptMessage(conversationId: any, receiver: any): any {
       plainMessage: plainMessage?.substring(0, 50) + '...',
       conversationId,
       receiver,
-      userId: user?.id
+      userId: user?._id
     });
     
     if (!plainMessage || !conversationId) {
@@ -40,7 +40,7 @@ export function useEncryptMessage(conversationId: any, receiver: any): any {
       const result = await prepareAndEncryptMessage({
         message: plainMessage,
         conversationId: conversationId,
-        currentUserId: user.id,
+        currentUserId: user._id,
         otherUserId: receiver, // Can be null - workflow handles it
         exchangeKeyMutation: exchangeKeyMutation,
         getParticipantKeyQuery: getParticipantKey,

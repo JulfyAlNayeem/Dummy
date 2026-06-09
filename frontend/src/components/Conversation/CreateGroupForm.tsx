@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { useCreateGroupMutation } from "@/redux/api/conversationApi";
 import { chatListFooterColor, sheetColor } from "@/constant";
 import { useUser } from "@/redux/slices/authSlice";
-import ProfilePictureUploader from "../popup/ProfilePictureUploader";
+import ProfilePictureUploader from "../settings/ProfilePictureUploader";
 import { FaCamera } from "react-icons/fa";
 
 export default function CreateGroupForm({ onGroupCreated, conversationThemeIndex }: { onGroupCreated?: (g: any) => void; conversationThemeIndex?: number }): JSX.Element {

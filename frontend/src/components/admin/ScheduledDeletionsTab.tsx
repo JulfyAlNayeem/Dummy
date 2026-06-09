@@ -63,7 +63,7 @@ console.log('scheduledDeletionsData',scheduledDeletionsData)
                   (new Date(schedule.scheduled_for) - new Date()) / (1000 * 60 * 60 * 24),
                 )
                 return (
-                  <TableRow key={schedule.id} className="border-gray-600 dark:border-green-300 hover:bg-gray-600 dark:hover:bg-green-200">
+                  <TableRow key={schedule._id} className="border-gray-600 dark:border-green-300 hover:bg-gray-600 dark:hover:bg-green-200">
                     <TableCell>
                       <div>
                         <div className="font-medium text-white dark:text-gray-900">{schedule.user.name}</div>

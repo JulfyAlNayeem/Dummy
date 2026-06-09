@@ -1,6 +1,6 @@
 export const isValidMessage = (userId: any) => (msg: any): boolean =>
   msg &&
-  (msg.id || msg.clientTempId) &&
+  (msg._id || msg.clientTempId) &&
   (msg.status === 'fail' ||
     (msg.text?.trim() || msg.media?.length > 0 || msg.voice || msg.call || msg.img)) &&
   !msg.deletedBy?.includes(userId);
@@ -58,4 +58,4 @@ export const getUniqueReadBy = (existingReadBy: any[], newReadBy: any[]): any[] 
   );
 
 export const isDuplicate = (newMsg: any, existingMsgs: any[]): boolean =>
-  existingMsgs.some((msg) => (msg.id && msg.id === newMsg.id) || (msg.clientTempId && msg.clientTempId === newMsg.clientTempId));
+  existingMsgs.some((msg) => (msg._id && msg._id === newMsg._id) || (msg.clientTempId && msg.clientTempId === newMsg.clientTempId));

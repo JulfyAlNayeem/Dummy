@@ -110,7 +110,7 @@ export default function JoinRequestsPanel({ classId }: { classId: string }): JSX
         ) : (
           <div className="space-y-4">
             {requests.map((request) => (
-              <div key={request.id} className="flex items-center justify-between p-4 border rounded-lg">
+              <div key={request._id} className="flex items-center justify-between p-4 border rounded-lg">
                 <div className="flex items-center space-x-3">
                   <Avatar>
                     <AvatarImage src={request.user?.image || "/placeholder.svg"} />
@@ -127,7 +127,7 @@ export default function JoinRequestsPanel({ classId }: { classId: string }): JSX
                 <div className="flex space-x-2">
                   <Button
                     size="sm"
-                    onClick={() => handleApprove(request.id)}
+                    onClick={() => handleApprove(request._id)}
                     disabled={isApproving}
                     className="bg-green-600 hover:bg-green-700"
                   >
@@ -137,7 +137,7 @@ export default function JoinRequestsPanel({ classId }: { classId: string }): JSX
                   <Button
                     size="sm"
                     variant="outline"
-                    onClick={() => handleReject(request.id)}
+                    onClick={() => handleReject(request._id)}
                     disabled={isRejecting}
                     className="border-red-200 text-red-600 hover:bg-red-50"
                   >

@@ -26,7 +26,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from '@/context-reducer/UserAuthContext';
-import ProfilePictureUploader from "../popup/ProfilePictureUploader.js";
+import ProfilePictureUploader from "../settings/ProfilePictureUploader.js";
 import { FaCamera } from 'react-icons/fa';
 import { useFetchConversationByIdQuery, useUpdateGroupImageMutation, useDeleteConversationMutation, useLeaveConversationMutation } from '@/redux/api/conversationApi';
 import { Button } from "../ui/button.js";
@@ -51,7 +51,7 @@ import EndToEndEncryptionSetting from "../chatTabSidebarScreens/EndToEndEncrypti
 import ConversationReminders from "../chatTabSidebarScreens/remiders/ConversationReminders.js";
 import { useUpdateClassMutation } from '@/redux/api/classGroup/classApi';
 import FormsPanel from "./ChatTabSidebar/Forms/FormsPanel.js";
-import { useCall } from "@/components/Call/CallProvider";
+import { useCall } from "@/components/call/CallProvider.js";
 
 // Import extracted components
 import {
@@ -85,8 +85,8 @@ const ChatTabSidebar = ({ profileImage, name, isOpen, onClose }: { profileImage:
 
   // Fetch full conversation to determine admins/teachers for groups/classes
   const { data: fullConversation }: any = useFetchConversationByIdQuery(
-    { chatId: conversationId, userId: user?.id },
-    { skip: !conversationId || conversationId === 'new' || !user?.id }
+    { chatId: conversationId, userId: user?._id },
+    { skip: !conversationId || conversationId === 'new' || !user?._id }
   );
 
   const groupInfo: any = fullConversation?.group || {};
@@ -97,7 +97,7 @@ const ChatTabSidebar = ({ profileImage, name, isOpen, onClose }: { profileImage:
     if (!user || !groupInfo) return false;
     const admins = groupInfo.admins || [];
     // For classes, admins usually represent teachers
-    return admins.some((a) => a.id === user.id) || user?.role === 'admin' || user?.role === 'teacher';
+    return admins.some((a) => a._id === user._id) || user?.role === 'admin' || user?.role === 'teacher';
   })();
 
   const [deleteConversation] = useDeleteConversationMutation();
@@ -250,10 +250,10 @@ const ChatTabSidebar = ({ profileImage, name, isOpen, onClose }: { profileImage:
   const handleAudioCall = async () => {
     try {
       if (isGroup) {
-        const participantIds = fullConversation?.group?.participants?.map(p => p.id || p) || [];
+        const participantIds = fullConversation?.group?.participants?.map(p => p._id || p) || [];
         await callContext.initiateGroupCall(conversationId, 'audio', participantIds);
       } else {
-        const calleeId = participant?.id || participant;
+        const calleeId = participant?._id || participant;
         await callContext.initiateCall(calleeId, 'audio', conversationId);
       }
       onClose(); // Close sidebar when call starts
@@ -265,10 +265,10 @@ const ChatTabSidebar = ({ profileImage, name, isOpen, onClose }: { profileImage:
   const handleVideoCall = async () => {
     try {
       if (isGroup) {
-        const participantIds = fullConversation?.group?.participants?.map(p => p.id || p) || [];
+        const participantIds = fullConversation?.group?.participants?.map(p => p._id || p) || [];
         await callContext.initiateGroupCall(conversationId, 'video', participantIds);
       } else {
-        const calleeId = participant?.id || participant;
+        const calleeId = participant?._id || participant;
         await callContext.initiateCall(calleeId, 'video', conversationId);
       }
       onClose();

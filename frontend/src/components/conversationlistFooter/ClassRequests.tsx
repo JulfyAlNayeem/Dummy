@@ -40,7 +40,7 @@ const ClassRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
   const isAdmin = user?.role === "teacher";
 
   const handleApprove = async (classId, userId, requestId) => {
-    try {
+    try {console.log("Approving request:", { classId, userId, requestId });
       setPendingRequests((prev) => new Set([...prev, requestId]));
       await approveRequest({ classId, userId }).unwrap();
       toast.success("Join request approved successfully");
@@ -49,7 +49,7 @@ const ClassRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
         prev
           .map((cls) => ({
             ...cls,
-            requests: cls.requests.filter((req) => req.id !== requestId),
+            requests: cls.requests.filter((req) => req._id !== requestId),
           }))
           .filter((cls) => cls.requests.length > 0)
       );
@@ -73,7 +73,7 @@ const ClassRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
         prev
           .map((grp) => ({
             ...grp,
-            requests: grp.requests.filter((req) => req.id !== requestId),
+            requests: grp.requests.filter((req) => req._id !== requestId),
           }))
           .filter((grp) => grp.requests.length > 0)
       );
@@ -102,7 +102,7 @@ const ClassRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
 
         setAllClasses((prev) => {
           const existingRequestIds = new Set(
-            prev.flatMap((cls) => cls.requests.map((req) => req.id))
+            prev.flatMap((cls) => cls.requests.map((req) => req._id))
           );
           const mergedClasses = [...prev];
 
@@ -111,7 +111,7 @@ const ClassRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
             if (!newClass.requests.length) return;
 
             const existingClass = mergedClasses.find((cls) => cls.classId === newClass.classId);
-            const newValidRequests = newClass.requests.filter((req) => req.id && !existingRequestIds.has(req.id));
+            const newValidRequests = newClass.requests.filter((req) => req._id && !existingRequestIds.has(req._id));
 
             if (existingClass) {
               existingClass.requests = [...existingClass.requests, ...newValidRequests];
@@ -199,7 +199,7 @@ const ClassRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
                 <div className="space-y-2">
                   {classItem.requests.map((req, rIndex) => (
                     <div
-                      key={req.id}
+                      key={req._id}
                       className={cn(
                         "px-1.5 py-1 rounded-lg bg-gray-50",
                         themeCard(themeIndex),
@@ -225,13 +225,13 @@ const ClassRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
                             </p>
                           </div>
                         </div>
-                        {req.status === "pending" && !pendingRequests.has(req.id) ? (
+                        {req.status === "pending" && !pendingRequests.has(req._id) ? (
                           <div className="flex gap-2">
                             <Button
                               size="sm"
                               className="bg-green-500 hover:bg-green-600"
                               onClick={() =>
-                                handleApprove(classItem.classId, req.user.id, req.id)
+                                handleApprove(classItem.classId, req.user._id, req._id)
                               }
                               disabled={isApproving}
                             >
@@ -246,7 +246,7 @@ const ClassRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
                               className="bg-red-500 hover:bg-red-600"
                               variant="destructive"
                               onClick={() =>
-                                handleReject(classItem.classId, req.user.id, req.id)
+                                handleReject(classItem.classId, req.user._id, req._id)
                               }
                               disabled={isRejecting}
                             >
@@ -259,9 +259,9 @@ const ClassRequests = ({ themeIndex }: { themeIndex: number }): JSX.Element => {
                           </div>
                         ) : (
                           <Badge
-                            className={pendingRequests.has(req.id) ? "bg-gray-600" : "bg-green-600"}
+                            className={pendingRequests.has(req._id) ? "bg-gray-600" : "bg-green-600"}
                           >
-                            {pendingRequests.has(req.id) ? "Processing..." : "Request Approved"}
+                            {pendingRequests.has(req._id) ? "Processing..." : "Request Approved"}
                           </Badge>
                         )}
                       </div>

@@ -114,7 +114,7 @@ export function AssignmentList({ classId, canManage, openMarkDialog }: any): JSX
           <div className="space-y-4">
             {submissionsData?.submissions.map((submission) => (
               <div
-                key={submission.id}
+                key={submission._id}
                 className="border border-gray-600 dark:border-gray-300 bg-gray-700 dark:bg-white p-4 rounded-md flex justify-between items-start gap-4"
               >
                 <div className="flex-1 min-w-0">
@@ -145,8 +145,8 @@ export function AssignmentList({ classId, canManage, openMarkDialog }: any): JSX
                   </div>
                   {submission.assignmentDescription && (
                     <div className="mt-2">
-                      <p className={`text-[#eff0f3] dark:text-[#1a2332] break-words ${expandedDescriptions[submission.id] ? "" : "truncate"}`}>
-                        {expandedDescriptions[submission.id]
+                      <p className={`text-[#eff0f3] dark:text-[#1a2332] break-words ${expandedDescriptions[submission._id] ? "" : "truncate"}`}>
+                        {expandedDescriptions[submission._id]
                           ? submission.assignmentDescription
                           : `${submission.assignmentDescription.slice(0, 100)}${submission.assignmentDescription.length > 100 ? "..." : ""}`}
                       </p>
@@ -154,16 +154,16 @@ export function AssignmentList({ classId, canManage, openMarkDialog }: any): JSX
                         <Button
                           variant="link"
                           size="sm"
-                          onClick={() => toggleDescription(submission.id)}
+                          onClick={() => toggleDescription(submission._id)}
                           className="text-blue-400 dark:text-blue-600 p-0 h-auto"
                         >
-                          {expandedDescriptions[submission.id] ? "See Less" : "See More"}
+                          {expandedDescriptions[submission._id] ? "See Less" : "See More"}
                         </Button>
                       )}
                       {submission.feedback && (
                         <div className="mt-2">
-                          <p className={`text-sm text-[#eff0f3] dark:text-[#1a2332] opacity-70 break-words ${expandedFeedbacks[submission.id] ? "" : "truncate"}`}>
-                            Feedback: {expandedFeedbacks[submission.id]
+                          <p className={`text-sm text-[#eff0f3] dark:text-[#1a2332] opacity-70 break-words ${expandedFeedbacks[submission._id] ? "" : "truncate"}`}>
+                            Feedback: {expandedFeedbacks[submission._id]
                               ? submission.feedback
                               : `${submission.feedback.slice(0, 100)}${submission.feedback.length > 100 ? "..." : ""}`}
                           </p>
@@ -171,10 +171,10 @@ export function AssignmentList({ classId, canManage, openMarkDialog }: any): JSX
                             <Button
                               variant="link"
                               size="sm"
-                              onClick={() => toggleFeedback(submission.id)}
+                              onClick={() => toggleFeedback(submission._id)}
                               className="text-blue-400 dark:text-blue-600 p-0 h-auto"
                             >
-                              {expandedFeedbacks[submission.id] ? "See Less" : "See More"}
+                              {expandedFeedbacks[submission._id] ? "See Less" : "See More"}
                             </Button>
                           )}
                         </div>

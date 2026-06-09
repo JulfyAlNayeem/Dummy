@@ -39,7 +39,7 @@ class AuthErrorBoundary extends React.Component<any, any> {
     });
 
     // Log error to console in development
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.MODE === 'development') {
       console.error('Error caught by AuthErrorBoundary:', error, errorInfo);
     }
   }

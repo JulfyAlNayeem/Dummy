@@ -88,16 +88,16 @@ export default function AttendanceSystem({ classId }: { classId: string }): JSX.
       
       // Filter out admins/teachers from members list
       const students = members.filter(
-        (member) => !admins.some((admin) => admin.id.toString() === member.id.toString())
+        (member) => !admins.some((admin) => admin._id.toString() === member._id.toString())
       );
 
       const records = attendanceRecords?.attendance || [];
       const newAttendanceData = students.map((member) => {
         const record = records.find(
-          (r) => r.userId.id.toString() === member.id.toString()
+          (r) => r.userId._id.toString() === member._id.toString()
         );
         return {
-          userId: member.id,
+          userId: member._id,
           name: member.name,
           email: member.email,
           status: record?.status || "absent",
@@ -274,8 +274,8 @@ export default function AttendanceSystem({ classId }: { classId: string }): JSX.
                   <SelectContent className="bg-gray-700 dark:bg-gray-100 border-gray-600 dark:border-gray-300">
                     {sessionsData?.sessions?.map((session) => (
                       <SelectItem
-                        key={session.id}
-                        value={session.id}
+                        key={session._id}
+                        value={session._id}
                         className="text-gray-100 dark:text-gray-900 hover:bg-gray-600 dark:hover:bg-gray-300"
                       >
                         {session.date} ({formatTimeWithMeridiem(session.startTime)})
@@ -286,7 +286,7 @@ export default function AttendanceSystem({ classId }: { classId: string }): JSX.
               </div>
               <div className="text-gray-400 dark:text-gray-600 text-sm">
                 {sessionsData?.sessions?.map((session) => (
-                  <div key={session.id}>
+                  <div key={session._id}>
                     • {session.date} ({formatTimeWithMeridiem(session.startTime)})
                   </div>
                 ))}

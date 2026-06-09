@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useRef, useState } from "react";
-import WelcomePage from "../components/other/WelcomePage";
+import WelcomePage from "./WelcomePage";
 import { miniThemeBg, themeBg } from "../constant";
 import { themeClasses } from "@/lib/themeUtils";
 import "../custom.css";

@@ -13,9 +13,9 @@ export default function ConversationCard({ themeIndex, conversationInfo, partici
   // Use the decryption hook for last message
   const { decryptedText: decryptedLastMessage, isEncrypted } = useMessageDecryption(
     conversationInfo?.last_message?.message,
-    conversationInfo?.id,
+    conversationInfo?._id,
     conversationInfo?.last_message?.sender,
-    user?.id,
+    user?._id,
     true 
   );
   

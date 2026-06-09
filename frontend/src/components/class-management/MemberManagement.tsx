@@ -81,14 +81,14 @@ export default function MemberManagement({  }): JSX.Element {
       member.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const isAdmin = (userId) => classData?.class?.admins?.some((admin) => admin.id === userId);
-  const isModerator = (userId) => classData?.class?.moderators?.some((mod) => mod.id === userId);
+  const isAdmin = (userId) => classData?.class?.admins?.some((admin) => admin._id === userId);
+  const isModerator = (userId) => classData?.class?.moderators?.some((mod) => mod._id === userId);
   const canManage = isAdmin || isModerator;
 
 
   const handleAddMember = async (user) => {
     try {
-      await addMember({ classId, userId: user.id }).unwrap();
+      await addMember({ classId, userId: user._id }).unwrap();
 
       toast.success(
         <div className="text-gray-100 dark:text-gray-900">
@@ -224,7 +224,7 @@ export default function MemberManagement({  }): JSX.Element {
                     {searchResult?.users?.length > 0 ? (
                       <div className="space-y-2 max-h-64 overflow-y-auto">
                         {searchResult.users.map((user) => (
-                          <div key={user.id} className="p-3 border border-gray-600 dark:border-gray-300 rounded-lg">
+                          <div key={user._id} className="p-3 border border-gray-600 dark:border-gray-300 rounded-lg">
                             <div className="flex items-center justify-between space-x-3">
                               <div className="flex items-center space-x-3">
                                 <Avatar className="h-8 w-8">
@@ -238,7 +238,7 @@ export default function MemberManagement({  }): JSX.Element {
                               </div>
                               <Button
                                 onClick={() => handleAddMember(user)}
-                                disabled={classData?.class?.participants.some((m) => m.id === user.id)}
+                                disabled={classData?.class?.participants.some((m) => m._id === user._id)}
                                 className="bg-gray-800 dark:bg-gray-100 text-green-400 dark:text-blue-600 hover:bg-blue-500 dark:hover:bg-blue-700 hover:text-gray-100 dark:hover:text-gray-100"
                               >
                                 Add Member
@@ -285,7 +285,7 @@ export default function MemberManagement({  }): JSX.Element {
             <Input placeholder="Search members..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="bg-gray-700 dark:bg-gray-100 text-gray-100 dark:text-gray-900 border-gray-600 dark:border-gray-300 placeholder:text-gray-400 dark:placeholder:text-gray-600" />
             <div className="space-y-3">
               {filteredMembers?.map((member) => (
-                <div key={member.id} className="flex items-center justify-between p-3 border border-gray-600 dark:border-gray-300 rounded-lg">
+                <div key={member._id} className="flex items-center justify-between p-3 border border-gray-600 dark:border-gray-300 rounded-lg">
                   <div className="flex items-center space-x-3">
                     <Avatar>
                       <AvatarImage src={member.image || "/placeholder.svg"} />
@@ -294,13 +294,13 @@ export default function MemberManagement({  }): JSX.Element {
                     <div>
                       <div className="flex items-center gap-2">
                         <p className="font-medium text-gray-100 dark:text-gray-900">{member.name}</p>
-                        {isAdmin(member.id) && (
+                        {isAdmin(member._id) && (
                           <Badge variant="secondary" className="text-xs bg-gray-700 dark:bg-gray-200 text-gray-100 dark:text-gray-900">
                             <Crown className="h-3 w-3 mr-1 text-yellow-400 dark:text-yellow-600" />
                             Admin
                           </Badge>
                         )}
-                        {isModerator(member.id) && (
+                        {isModerator(member._id) && (
                           <Badge variant="outline" className="text-xs border-gray-600 dark:border-gray-300 text-gray-100 dark:text-gray-900">
                             <Shield className="h-3 w-3 mr-1 text-blue-400 dark:text-blue-600" />
                             Moderator
@@ -310,20 +310,20 @@ export default function MemberManagement({  }): JSX.Element {
                       <p className="text-sm text-gray-400 dark:text-gray-600">{member.email}</p>
                     </div>
                   </div>
-                  {canManage && !isAdmin(member.id) && (
+                  {canManage && !isAdmin(member._id) && (
                     <div className="flex space-x-2">
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => handleToggleModerator(member.id, isModerator(member.id))}
+                        onClick={() => handleToggleModerator(member._id, isModerator(member._id))}
                         className="border-gray-600 dark:border-gray-300 bg-gray-800 dark:bg-gray-100 text-green-400 dark:text-blue-600 hover:bg-blue-500 dark:hover:bg-blue-700 hover:text-gray-100 dark:hover:text-gray-100"
                       >
-                        {isModerator(member.id) ? "Remove Mod" : "Make Mod"}
+                        {isModerator(member._id) ? "Remove Mod" : "Make Mod"}
                       </Button>
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => handleRemoveMember(member.id)}
+                        onClick={() => handleRemoveMember(member._id)}
                         className="border-gray-600 dark:border-gray-300 bg-gray-800 dark:bg-gray-100 text-green-400 dark:text-blue-600 hover:bg-red-500 dark:hover:bg-red-700 hover:text-gray-100 dark:hover:text-gray-100"
                       >
                         <UserMinus className="h-4 w-4 text-green-400 dark:text-blue-600" />

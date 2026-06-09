@@ -11,7 +11,7 @@ export default function AttendanceMarking({ classId, dateStr }: { classId: strin
   // Extract session and status
   // Assuming sessionsData is a single session object based on console log
   const session: any = sessionsData;
-  const sessionId = session?.id; // Use 'id' based on console log data
+  const sessionId = session?._id; // Use 'id' based on console log data
   const sessionStatus = session?.status;
 
   const canMarkAttendance = sessionId && (sessionStatus === "scheduled" || sessionStatus === "ongoing");

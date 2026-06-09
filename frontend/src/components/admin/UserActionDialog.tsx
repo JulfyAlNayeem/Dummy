@@ -65,23 +65,23 @@ export default function UserActionDialog({
     if (modals.createUser) {
       onCreateUser(formData)
     } else if (modals.editUser) {
-      onUpdateUser(selectedUser.id, formData)
+      onUpdateUser(selectedUser._id, formData)
     } else if (modals.deleteUser) {
-      onDeleteUser(selectedUser.id, formData.reason)
+      onDeleteUser(selectedUser._id, formData.reason)
     } else if (modals.blockUser) {
-      onBlockUser(selectedUser.id, formData.reason, formData.duration)
+      onBlockUser(selectedUser._id, formData.reason, formData.duration)
     } else if (modals.unblockUser) { // Added unblock user case
-      onUnblockUser(selectedUser.id, formData.reason)
+      onUnblockUser(selectedUser._id, formData.reason)
     } else if (modals.resetPassword) {
-      if (!selectedUser || !selectedUser.id) {
+      if (!selectedUser || !selectedUser._id) {
         console.error("Reset password error: selectedUser is null or missing id", selectedUser);
         return;
       }
-      onResetPassword(selectedUser.id, formData.newPassword)
+      onResetPassword(selectedUser._id, formData.newPassword)
     } else if (modals.preventDeletion) {
-      onPreventDeletion(selectedSchedule.id, formData.reason)
+      onPreventDeletion(selectedSchedule._id, formData.reason)
     } else if (modals.toggleFilePermission) {
-      onToggleFilePermission(selectedUser.id, !selectedUser.fileSendingAllowed)
+      onToggleFilePermission(selectedUser._id, !selectedUser.fileSendingAllowed)
     }
   }
 
@@ -152,10 +152,10 @@ export default function UserActionDialog({
   // Check if submit should be disabled
   const isSubmitDisabled = (): boolean => {
     if (modals.editUser || modals.deleteUser || modals.blockUser || modals.unblockUser || modals.resetPassword) {
-      return !selectedUser || !selectedUser.id;
+      return !selectedUser || !selectedUser._id;
     }
     if (modals.preventDeletion) {
-      return !selectedSchedule || !selectedSchedule.id;
+      return !selectedSchedule || !selectedSchedule._id;
     }
     return false;
   };

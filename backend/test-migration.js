@@ -114,7 +114,7 @@ async function testSockets() {
 
   return new Promise((resolve) => {
     const socket = ioClient(SOCKET_URL, {
-      transports: ['websocket', 'polling'],
+      transports: ['polling', 'websocket'],
       autoConnect: false
     });
 

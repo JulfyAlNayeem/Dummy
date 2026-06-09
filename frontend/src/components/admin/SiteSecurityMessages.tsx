@@ -96,7 +96,7 @@ const SiteSecurityMessages = (): JSX.Element => {
           ) : messages && messages.data?.length > 0 ? (
             <div className="space-y-4">
               {messages.data.map((msg) => (
-                <div key={msg.id} className="border border-gray-600 dark:border-gray-300 bg-gray-700 dark:bg-white p-4 rounded-md">
+                <div key={msg._id} className="border border-gray-600 dark:border-gray-300 bg-gray-700 dark:bg-white p-4 rounded-md">
                   <p className="text-[#eff0f3] dark:text-[#1a2332] mb-2"><strong>Good Message:</strong> {msg.goodMessage}</p>
                   <p className="text-[#eff0f3] dark:text-[#1a2332] mb-2"><strong>Bad Message:</strong> {msg.badMessage}</p>
                   <p className="text-[#eff0f3] dark:text-[#1a2332] opacity-70 text-sm"><strong>Created At:</strong> {new Date(msg.createdAt).toLocaleString()}</p>

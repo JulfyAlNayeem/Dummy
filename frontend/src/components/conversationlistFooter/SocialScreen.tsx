@@ -60,8 +60,8 @@ const SocialScreen = (): JSX.Element => {
   useEffect(() => {
     if (isSuccess && postsData) {
       setPosts((prev) => {
-        const existingIds = new Set(prev.map(p => p.id));
-        const newPosts = postsData.posts.filter(p => !existingIds.has(p.id));
+        const existingIds = new Set(prev.map(p => p._id));
+        const newPosts = postsData.posts.filter(p => !existingIds.has(p._id));
         return [...prev, ...newPosts];
       });
     }
@@ -74,12 +74,12 @@ const SocialScreen = (): JSX.Element => {
       // });
       socket.on('social:postUpdated', (updatedPost) => {
         setPosts((prev) =>
-          prev.map((post) => (post.id === updatedPost.id ? updatedPost : post))
+          prev.map((post) => (post._id === updatedPost._id ? updatedPost : post))
         );
       });
 
       socket.on('social:postDeleted', (postId) => {
-        setPosts((prev) => prev.filter((post) => post.id !== postId));
+        setPosts((prev) => prev.filter((post) => post._id !== postId));
       });
 
       return () => {
@@ -151,7 +151,7 @@ const SocialScreen = (): JSX.Element => {
   };
 
   const handleEditPost = (post) => {
-    setEditingPost(post.id);
+    setEditingPost(post._id);
     setEditContent(post.content);
   };
 
@@ -279,7 +279,7 @@ const SocialScreen = (): JSX.Element => {
                 <span className="text-xs text-gray-400 mt-1">Add Story</span>
               </div>
               {(storiesData?.stories || []).map((story) => (
-                <div key={story.id} className="flex-shrink-0 flex flex-col items-center">
+                <div key={story._id} className="flex-shrink-0 flex flex-col items-center">
                   <div className="w-16 h-24 rounded-lg overflow-hidden ring-2 ring-blue-500">
                     <img src={story.mediaUrl} alt="story" className="w-full h-full object-cover" />
                   </div>
@@ -374,7 +374,7 @@ const SocialScreen = (): JSX.Element => {
           {/* Posts */}
           {posts.map((post, index) => (
             <div
-              key={post.id}
+              key={post._id}
               className={themeCard(themeIndex, "rounded-lg shadow-md p-6")}
               ref={index === posts.length - 1 ? lastPostRef : null}
             >
@@ -390,7 +390,7 @@ const SocialScreen = (): JSX.Element => {
                         {new Date(post.createdAt).toLocaleString()}
                       </p>
                     </div>
-                    {post.user?.id === user.id && (
+                    {post.user?._id === user._id && (
                       <div className="flex space-x-2">
                         <button
                           onClick={() => handleEditPost(post)}
@@ -399,7 +399,7 @@ const SocialScreen = (): JSX.Element => {
                           Edit
                         </button>
                         <button
-                          onClick={() => handleDeletePost(post.id)}
+                          onClick={() => handleDeletePost(post._id)}
                           className="text-sm text-red-500 hover:underline"
                         >
                           Delete
@@ -409,8 +409,8 @@ const SocialScreen = (): JSX.Element => {
                   </div>
                 </div>
               </div>
-              {editingPost === post.id ? (
-                <form onSubmit={(e) => handleEditSubmit(post.id, e)} className="mt-4">
+              {editingPost === post._id ? (
+                <form onSubmit={(e) => handleEditSubmit(post._id, e)} className="mt-4">
                   <textarea
                     value={editContent}
                     onChange={(e) => setEditContent(e.target.value)}
@@ -470,8 +470,8 @@ const SocialScreen = (): JSX.Element => {
                 {/* Reaction Button with Picker */}
                 <div
                   className="relative"
-                  onMouseEnter={() => setShowReactionPicker((prev) => ({ ...prev, [post.id]: true }))}
-                  onMouseLeave={() => setShowReactionPicker((prev) => ({ ...prev, [post.id]: false }))}
+                  onMouseEnter={() => setShowReactionPicker((prev) => ({ ...prev, [post._id]: true }))}
+                  onMouseLeave={() => setShowReactionPicker((prev) => ({ ...prev, [post._id]: false }))}
                 >
                   <button className="flex items-center space-x-1 hover:text-blue-500">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -479,12 +479,12 @@ const SocialScreen = (): JSX.Element => {
                     </svg>
                     <span className='text-sm'>React</span>
                   </button>
-                  {showReactionPicker[post.id] && (
+                  {showReactionPicker[post._id] && (
                     <div className="absolute -top-12 left-0 bg-white rounded-lg shadow-lg p-2 flex space-x-2 z-10">
                       {reactions.map(({ type, emoji }) => (
                         <button
                           key={type}
-                          onClick={() => handleReaction(post.id, type)}
+                          onClick={() => handleReaction(post._id, type)}
                           className="text-2xl hover:scale-125 transition-transform"
                         >
                           {emoji}
@@ -494,7 +494,7 @@ const SocialScreen = (): JSX.Element => {
                   )}
                 </div>
                 <button
-                  onClick={() => toggleComments(post.id)}
+                  onClick={() => toggleComments(post._id)}
                   className="flex items-center space-x-1 hover:text-blue-500"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -504,15 +504,15 @@ const SocialScreen = (): JSX.Element => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <span className='text-sm'>{showComments[post.id] ? 'Hide Comments' : `Show Comments (${(post.comments || []).length})`}</span>
+                  <span className='text-sm'>{showComments[post._id] ? 'Hide Comments' : `Show Comments (${(post.comments || []).length})`}</span>
                 </button>
               </div>
               {/* Comments Section */}
-              {showComments[post.id] && (
+              {showComments[post._id] && (
                 <div className="mt-6">
                   <h3 className="text-sm font-semibold text-gray-400 mb-4">Comments</h3>
                   {(post.comments || []).map((comment) => (
-                    <div key={comment?.id} className="mb-4">
+                    <div key={comment?._id} className="mb-4">
                       {comment && comment.user ? (
                         <div className="flex space-x-4">
                           <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold">
@@ -523,13 +523,13 @@ const SocialScreen = (): JSX.Element => {
                             <p className="text-gray-300">{comment.content || ''}</p>
                             <button
                               className="text-sm text-blue-500 hover:underline mt-1"
-                              onClick={() => setNewReply((prev) => ({ ...prev, [`${post.id}-${comment.id}`]: '' }))}
+                              onClick={() => setNewReply((prev) => ({ ...prev, [`${post._id}-${comment._id}`]: '' }))}
                             >
                               Reply
                             </button>
                             {/* Replies */}
                             {(comment.replies || []).map((reply) => (
-                              <div key={reply?.id} className="ml-8 mt-2">
+                              <div key={reply?._id} className="ml-8 mt-2">
                                 {reply && reply.user ? (
                                   <div className="flex space-x-2">
                                     <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-white font-bold">
@@ -544,18 +544,18 @@ const SocialScreen = (): JSX.Element => {
                               </div>
                             ))}
                             {/* Reply Input */}
-                            {newReply[`${post.id}-${comment.id}`] !== undefined && (
+                            {newReply[`${post._id}-${comment._id}`] !== undefined && (
                               <form
-                                onSubmit={(e) => handleReplySubmit(post.id, comment.id, e)}
+                                onSubmit={(e) => handleReplySubmit(post._id, comment._id, e)}
                                 className="ml-8 mt-2 flex space-x-2"
                               >
                                 <input
                                   type="text"
-                                  value={newReply[`${post.id}-${comment.id}`] || ''}
+                                  value={newReply[`${post._id}-${comment._id}`] || ''}
                                   onChange={(e) =>
                                     setNewReply((prev) => ({
                                       ...prev,
-                                      [`${post.id}-${comment.id}`]: e.target.value,
+                                      [`${post._id}-${comment._id}`]: e.target.value,
                                     }))
                                   }
                                   placeholder="Write a reply..."
@@ -575,11 +575,11 @@ const SocialScreen = (): JSX.Element => {
                     </div>
                   ))}
                   {/* Comment Input */}
-                  <form onSubmit={(e) => handleCommentSubmit(post.id, e)} className="mt-4 flex space-x-2">
+                  <form onSubmit={(e) => handleCommentSubmit(post._id, e)} className="mt-4 flex space-x-2">
                     <input
                       type="text"
-                      value={newComment[post.id] || ''}
-                      onChange={(e) => setNewComment((prev) => ({ ...prev, [post.id]: e.target.value }))}
+                      value={newComment[post._id] || ''}
+                      onChange={(e) => setNewComment((prev) => ({ ...prev, [post._id]: e.target.value }))}
                       placeholder="Write a comment..."
                       className={themeCard(themeIndex, "flex-1 p-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")}
                     />

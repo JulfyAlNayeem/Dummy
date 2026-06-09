@@ -7,45 +7,54 @@ import { BASE_URL } from "@/utils/baseUrls";
  */
 export const userManagementApi = createApi({
   reducerPath: "userManagementApi",
+
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}admin/user-management`,
     credentials: "include",
   }),
+
   tagTypes: ["User", "ScheduledDeletion", "InactiveUser", "UserList"],
+
   endpoints: (builder) => ({
-    // Get All Users
+    // ---------------- GET USERS ----------------
     getAllUsers: builder.query({
       query: ({ page = 1, limit = 20, search, status, role } = {}) => {
         const params = new URLSearchParams({
-          page: page.toString(),
-          limit: limit.toString(),
+          page: String(page),
+          limit: String(limit),
         });
+
         if (search) params.append("search", search);
         if (status) params.append("status", status);
         if (role) params.append("role", role);
 
         return `/users?${params.toString()}`;
       },
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.users.map(({ id }) => ({ type: "User", id: id })),
-              { type: "UserList", id: "LIST" },
-            ]
-          : [{ type: "UserList", id: "LIST" }],
+
+      providesTags: (result) => {
+        const users = result?.users || [];
+
+        return [
+          ...users.map((u) => ({
+            type: "User",
+            id: u.id,
+          })),
+          { type: "UserList", id: "LIST" },
+        ];
+      },
     }),
 
-    // Create User
+    // ---------------- CREATE USER ----------------
     createUser: builder.mutation({
       query: (userData) => ({
         url: "/create",
         method: "POST",
         body: userData,
       }),
-      invalidatesTags: [{ type: "UserList", id: "LIST" }, "DashboardStats"],
+      invalidatesTags: ["UserList"],
     }),
 
-    // Update User
+    // ---------------- UPDATE USER ----------------
     updateUser: builder.mutation({
       query: ({ userId, ...userData }) => ({
         url: `/${userId}`,
@@ -58,7 +67,7 @@ export const userManagementApi = createApi({
       ],
     }),
 
-    // Delete User
+    // ---------------- DELETE USER ----------------
     deleteUser: builder.mutation({
       query: ({ userId, reason }) => ({
         url: `/${userId}`,
@@ -68,11 +77,10 @@ export const userManagementApi = createApi({
       invalidatesTags: (result, error, { userId }) => [
         { type: "User", id: userId },
         { type: "UserList", id: "LIST" },
-        "DashboardStats",
       ],
     }),
 
-    // Block User
+    // ---------------- BLOCK USER ----------------
     blockUser: builder.mutation({
       query: ({ userId, reason, duration }) => ({
         url: `/${userId}/block`,
@@ -85,7 +93,7 @@ export const userManagementApi = createApi({
       ],
     }),
 
-    // Unblock User
+    // ---------------- UNBLOCK USER ----------------
     unblockUser: builder.mutation({
       query: ({ userId }) => ({
         url: `/${userId}/unblock`,
@@ -97,7 +105,7 @@ export const userManagementApi = createApi({
       ],
     }),
 
-    // Reset User Password
+    // ---------------- RESET PASSWORD ----------------
     resetUserPassword: builder.mutation({
       query: ({ userId, newPassword }) => ({
         url: `/${userId}/reset-password`,
@@ -109,54 +117,50 @@ export const userManagementApi = createApi({
       ],
     }),
 
-    // Get Scheduled Deletions
+    // ---------------- SCHEDULED DELETIONS ----------------
     getScheduledDeletions: builder.query({
       query: ({ page = 1, limit = 20 } = {}) =>
         `/scheduled-deletions?page=${page}&limit=${limit}`,
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.deletions.map(({ id }) => ({
-                type: "ScheduledDeletion",
-                id: id,
-              })),
-              { type: "ScheduledDeletion", id: "LIST" },
-            ]
-          : [{ type: "ScheduledDeletion", id: "LIST" }],
-      pollingInterval: 60000, // Refetch every minute
+
+      providesTags: (result) => {
+        const deletions = result?.deletions || [];
+
+        return [
+          ...deletions.map((d) => ({
+            type: "ScheduledDeletion",
+            id: d.id,
+          })),
+          { type: "ScheduledDeletion", id: "LIST" },
+        ];
+      },
+
+      pollingInterval: 60000,
     }),
 
-    // Prevent Deletion
+    // ---------------- PREVENT DELETION ----------------
     preventDeletion: builder.mutation({
       query: ({ scheduleId, reason }) => ({
         url: `/scheduled-deletions/${scheduleId}/prevent`,
         method: "POST",
         body: { reason },
       }),
-      invalidatesTags: (result, error, { scheduleId }) => [
-        { type: "ScheduledDeletion", id: scheduleId },
-        { type: "ScheduledDeletion", id: "LIST" },
-        "DashboardStats",
-      ],
+      invalidatesTags: ["ScheduledDeletion"],
     }),
 
-    // Reschedule Deletion
+    // ---------------- RESCHEDULE DELETION ----------------
     rescheduleDeletion: builder.mutation({
       query: ({ scheduleId }) => ({
         url: `/scheduled-deletions/${scheduleId}/reschedule`,
         method: "POST",
       }),
-      invalidatesTags: (result, error, { scheduleId }) => [
-        { type: "ScheduledDeletion", id: scheduleId },
-        { type: "ScheduledDeletion", id: "LIST" },
-      ],
+      invalidatesTags: ["ScheduledDeletion"],
     }),
 
-    // Get Inactive Users
+    // ---------------- INACTIVE USERS ----------------
     getInactiveUsers: builder.query({
       query: ({ months = 6 } = {}) => `/inactive?months=${months}`,
       providesTags: ["InactiveUser"],
-      pollingInterval: 300000, // Refetch every 5 minutes
+      pollingInterval: 300000,
     }),
   }),
 });

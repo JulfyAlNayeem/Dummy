@@ -1,7 +1,7 @@
 import React from 'react';
 import { BASE_URL } from '../../utils/baseUrls';
 import { defaultProfileImage, messageSenderCard, secondColor } from '../../constant';
-import ProfileAvatar from '../chat/ProfileAvatar';
+import ProfileAvatar from '../chatroom/ProfileAvatar';
 import { useConversation } from '@/redux/slices/conversationSlice';
 
 const TypingIndicator = ({ typingUsers, user, participant }: any): JSX.Element => {
@@ -48,10 +48,10 @@ const TypingIndicator = ({ typingUsers, user, participant }: any): JSX.Element =
       `}</style>
 
       <div className="min-w-full">
-        {typingUsers.length > 0 && user && user.id && participant &&
+        {typingUsers.length > 0 && user && user._id && participant &&
           typingUsers.map((id) => {
             if (!id) return null;
-            if (user && id === user.id) return null; // skip current user
+            if (user && id === user._id) return null; // skip current user
 
             // Resolve avatar user robustly:
             // - If `participant` is an array (group chat), find matching participant by id
@@ -60,16 +60,16 @@ const TypingIndicator = ({ typingUsers, user, participant }: any): JSX.Element =
             // - Otherwise leave as null (ProfileAvatar will show default image)
             let avatarUser = null;
             if (Array.isArray(participant)) {
-              avatarUser = participant.find((p) => p && p.id === id) || null;
-            } else if (participant && participant.id === id) {
+              avatarUser = participant.find((p) => p && p._id === id) || null;
+            } else if (participant && participant._id === id) {
               avatarUser = participant;
-            } else if (user && user.id === id) {
+            } else if (user && user._id === id) {
               avatarUser = user;
             } else {
               avatarUser = null;
             }
 
-            const isOwn = !!(avatarUser && user && avatarUser.id === user.id);
+            const isOwn = !!(avatarUser && user && avatarUser._id === user._id);
 
             return (
               <div key={id} className="flex justify-start items-end gap-2 mb-2">

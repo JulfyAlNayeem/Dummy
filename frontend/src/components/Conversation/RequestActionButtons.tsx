@@ -8,13 +8,13 @@ import { useConversation, setBlockList } from "@/redux/slices/conversationSlice"
 import {
     useBlockUserMutation,
 } from "@/redux/api/user/userApi";
-import UnblockButton from "../chat/UnblockButton";
+import UnblockButton from "../chatroom/UnblockButton";
 
 export const handleBlock = async (blockUser: any, participant: any, conversationId: string, dispatch: any): Promise<void> => {
     console.log(blockUser, participant, conversationId, dispatch)
     try {
         const res = await blockUser({
-            blockedId: participant.id,
+            blockedId: participant._id,
             conversationId,
         }).unwrap();
 
@@ -35,7 +35,7 @@ const RequestActionButtons = (): JSX.Element => {
 
     //  check if participant is blocked
     const isParticipantBlocked = blockList?.some(
-        (entry) => entry.blockedUser === participant.id
+        (entry) => entry.blockedUser === participant._id
     );
 
 

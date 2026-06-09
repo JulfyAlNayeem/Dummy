@@ -41,16 +41,16 @@ const AssignmentCard = ({ assignment, conversationId }: any): JSX.Element => {
   const [deactivateAssignment]: any = useDeactivateAssignmentMutation();
 
   const isAssigner =
-    assignment.assignedBy?.id?.toString() === user?.id?.toString();
+    assignment.assignedBy?._id?.toString() === user?._id?.toString();
   const isAssignee = assignment.assignees?.some(
-    (a: any) => (a.userId || a.user?.id || a.id)?.toString() === user?.id?.toString()
+    (a: any) => (a.userId || a.user?._id || a._id)?.toString() === user?._id?.toString()
   );
 
   const form = assignment.form;
 
   const handleDeactivate = async (): Promise<void> => {
     try {
-      await deactivateAssignment(assignment.id).unwrap();
+      await deactivateAssignment(assignment._id).unwrap();
       toast.success("Assignment deactivated.");
     } catch (err) {
       toast.error("Failed to deactivate.");
@@ -149,7 +149,7 @@ const AssignmentCard = ({ assignment, conversationId }: any): JSX.Element => {
             <div className="flex flex-wrap gap-1">
               {assignment.assignees.map((a) => (
                 <Badge
-                  key={a.id || a.userId}
+                  key={a._id || a.userId}
                   variant="secondary"
                   className="bg-gray-700 text-gray-300 text-[10px] capitalize"
                 >

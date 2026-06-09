@@ -28,8 +28,8 @@ export default function AttendancePanel(): JSX.Element {
   const [selectedStudent, setSelectedStudent] = useState<any>(null);
   const currentUser: any = useSelector(selectCurrentUser)
 
-  const isAdmin = classData?.class.group.admins.some((admin) => admin.id === currentUser?.id)
-  const isModerator = classData?.class.group.moderators.some((mod) => mod.id === currentUser?.id)
+  const isAdmin = classData?.class.group.admins.some((admin) => admin._id === currentUser?._id)
+  const isModerator = classData?.class.group.moderators.some((mod) => mod._id === currentUser?._id)
   const canManage = isAdmin || isModerator
   const dateStr = selectedDate.toISOString().split("T")[0]
 

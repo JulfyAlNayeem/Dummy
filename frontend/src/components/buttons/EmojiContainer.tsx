@@ -178,7 +178,7 @@ const EmojiContainer = ({
     const tempMessageId = `temp-${Date.now()}`;
     const optimisticMessage = createCustomEmojiMessage(
       conversationId,
-      user.id,
+      user._id,
       receiver,
       emojiData.text,
       [{ type: "image", url: emojiData.img, filename: emojiData.text }],
@@ -194,7 +194,7 @@ const EmojiContainer = ({
         socket,
         setConversationId,
         conversationId,
-        userId: user.id,
+        userId: user._id,
         receiver,
         data: {
           text: emojiData.text,

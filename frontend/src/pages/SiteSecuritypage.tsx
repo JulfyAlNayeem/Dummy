@@ -11,8 +11,8 @@ import { Rocket } from "lucide-react";
 const SiteSecuritypage = (): JSX.Element => {
   const navigate = useNavigate();
   const { user }: any = useUserAuth();
-  const { data: conversations }: any = useGetAllConversationsQuery(user?.id, { 
-    skip: !user?.id 
+  const { data: conversations }: any = useGetAllConversationsQuery(user?._id, { 
+    skip: !user?._id 
   });
   const [clickCount, setClickCount] = useState<number>(0);
   const [isLaunched, setIsLaunched] = useState<boolean>(false);
@@ -24,7 +24,7 @@ const SiteSecuritypage = (): JSX.Element => {
   // Redirect logged-in users to their first conversation
   useEffect(() => {
     if (user && conversations) {
-      const firstConvId = conversations[0]?.id;
+      const firstConvId = conversations[0]?._id;
       if (firstConvId) {
         navigate(`/e2ee/t/${firstConvId}`);
       } else {

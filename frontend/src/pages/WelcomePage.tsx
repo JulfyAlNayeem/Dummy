@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import icon from "../../assets/icons/chatIcon.svg";
-import { themeBg } from '../../constant';
+import { themeBg } from '../constant';
 import { useUser } from '@/redux/slices/authSlice';
 
 const WelcomePage = forwardRef((props: any, ref: any): JSX.Element => {

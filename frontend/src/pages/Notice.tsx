@@ -44,15 +44,15 @@ const Notice = (): JSX.Element => {
     socket.on("updateNotice", (data) => {
       setNotices((prev) =>
         prev.map((notice) => {
-          const nid = notice.id ?? notice.noticeId;
-          const incomingId = data.id ?? data.noticeId;
+          const nid = notice._id ?? notice.noticeId;
+          const incomingId = data._id ?? data.noticeId;
           return nid === incomingId ? { ...notice, ...data } : notice;
         })
       );
     });
     socket.on("deleteNotice", (data) => {
-      const incomingId = data.id ?? data.noticeId;
-      setNotices((prev) => prev.filter((notice) => (notice.id ?? notice.noticeId) !== incomingId));
+      const incomingId = data._id ?? data.noticeId;
+      setNotices((prev) => prev.filter((notice) => (notice._id ?? notice.noticeId) !== incomingId));
     });
 
     return () => {
@@ -109,7 +109,7 @@ const Notice = (): JSX.Element => {
       };
 
       if (editingNotice) {
-        await updateNotice({ noticeId: editingNotice.id, ...payload }).unwrap();
+        await updateNotice({ noticeId: editingNotice._id, ...payload }).unwrap();
         setEditingNotice(null);
         toast.success("Notice updated successfully");
       } else {
@@ -459,7 +459,7 @@ const Notice = (): JSX.Element => {
             <div className="space-y-4 p-6">
               {notices.map((notice) => (
                 <div
-                  key={notice.id ?? notice.noticeId}
+                  key={notice._id ?? notice.noticeId}
                   className="border border-gray-600 dark:border-gray-300 bg-gray-700 dark:bg-white p-4 rounded-md flex justify-between items-start gap-4"
                 >
                   <div className="flex-1 min-w-0">
@@ -477,7 +477,7 @@ const Notice = (): JSX.Element => {
                       </div>
                       <div className="flex items-center gap-2 mb-2">
 
-                        {user && notice.creator?.id === user.id && (
+                        {user && notice.creator?._id === user._id && (
                           <div className="flex items-center gap-2">
                             <Button
                               variant="ghost"
@@ -490,7 +490,7 @@ const Notice = (): JSX.Element => {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleDelete(notice.id ?? notice.noticeId)}
+                              onClick={() => handleDelete(notice._id ?? notice.noticeId)}
                               className="text-red-500 p-1 hover:text-red-600 h-auto"
                             >
                               <Trash className="h-5 w-5" />
@@ -501,7 +501,7 @@ const Notice = (): JSX.Element => {
                     </div>
                     <div className="flex items-center">
                       <p className="text-sm text-[#eff0f3] dark:text-[#1a2332] opacity-70 mb-2 break-words">
-                        {showFullContent[notice.id ?? notice.noticeId]
+                        {showFullContent[notice._id ?? notice.noticeId]
                           ? notice.content
                           : notice.content.length > 100
                             ? `${notice.content.substring(0, 100)}...`
@@ -511,10 +511,10 @@ const Notice = (): JSX.Element => {
                         <Button
                           variant="link"
                           size="sm"
-                          onClick={() => toggleContent(notice.id ?? notice.noticeId)}
+                          onClick={() => toggleContent(notice._id ?? notice.noticeId)}
                           className="text-blue-400 dark:text-blue-600 p-0 h-auto"
                         >
-                          {showFullContent[notice.id ?? notice.noticeId] ? "See Less" : "See More"}
+                          {showFullContent[notice._id ?? notice.noticeId] ? "See Less" : "See More"}
                         </Button>
                       )}
                     </div>
