@@ -2,10 +2,10 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { editMessage, replyMessage } from "@/redux/slices/messagesSlice";
 import { Edit, Trash2, MessageSquare, StickyNote, Copy, Quote } from "lucide-react";
-import { useUserAuth } from "../../context-reducer/UserAuthContext.js";
+import { useUserAuth } from "../../context-reducer/UserAuthContext";
 import toast from "react-hot-toast";
 import { useConversation } from "@/redux/slices/conversationSlice";
-import { sheetColor } from "@/constant/index.jsx";
+import { sheetColor } from "@/constant/index";
 
 interface MessageActionDialogProps {
   open: boolean;

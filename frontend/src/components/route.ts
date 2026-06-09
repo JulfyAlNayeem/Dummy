@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { requireTeacher } from "../../../../middlewares/roleMiddleware.js"
-import { createClass } from "../../../../controllers/classController.js"
+import { requireTeacher } from "../../../../middlewares/roleMiddleware"
+import { createClass } from "../../../../controllers/classController"
 
 export async function POST(request: any): Promise<any> {
   try {

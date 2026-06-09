@@ -71,7 +71,7 @@ const ChatTabNavbar = ({
   useEffect(() => {
     if (!user?._id || !convId || !isGroup) return;
 
-    // Note: joinRoom is already emitted in useSocketHandlers.js
+    // Note: joinRoom is already emitted in useSocketHandlers.ts
     // socket.emit('joinRoom', convId, user._id);
     socket.on('activeUsersUpdate', (users) => {
       setActiveUsers(users); // Update state with active users

@@ -2,8 +2,8 @@ import React from 'react'
 
 import { cn } from '@/lib/utils';
 import { themeBg } from '@/lib/themeUtils';
-import ChatLogo from '@/components/Svg/ChatLogo.js';
-import Darud from '@/components/Svg/Darud.js';
+import ChatLogo from '@/components/Svg/ChatLogo';
+import Darud from '@/components/Svg/Darud';
 
 interface LoadingProps {
   themeIndex?: number;

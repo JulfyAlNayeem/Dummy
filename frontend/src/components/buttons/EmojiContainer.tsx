@@ -1,17 +1,17 @@
 // @ts-nocheck
 import React, { useState, useEffect } from "react";
-import { emoji } from "../../constant/index.js";
+import { emoji } from "../../constant/index";
 import { themeBorder } from "@/lib/themeUtils";
-import { Button } from "../ui/button.js";
-import { useSendEmojiMutation } from "@/redux/api/messageApi.js";
-import { useUserAuth } from "../../context-reducer/UserAuthContext.js";
+import { Button } from "../ui/button";
+import { useSendEmojiMutation } from "@/redux/api/messageApi";
+import { useUserAuth } from "../../context-reducer/UserAuthContext";
 import { TriangleAlert } from "lucide-react";
 import "animate.css";
 // Removed useMessage import
-import { createCustomEmojiMessage } from "@/lib/optimisticMessageFormat.js";
+import { createCustomEmojiMessage } from "@/lib/optimisticMessageFormat";
 import { useDispatch, useSelector } from "react-redux";
-import { addMessage, updateMessage } from "@/redux/slices/conversationSlice.js";
-import { store } from "@/redux/store.js";
+import { addMessage, updateMessage } from "@/redux/slices/conversationSlice";
+import { store } from "@/redux/store";
 
 export const sendEmojiUsingSocket = async ({
   socket,

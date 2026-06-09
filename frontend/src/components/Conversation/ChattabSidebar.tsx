@@ -26,32 +26,32 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from '@/context-reducer/UserAuthContext';
-import ProfilePictureUploader from "../settings/ProfilePictureUploader.js";
+import ProfilePictureUploader from "../settings/ProfilePictureUploader";
 import { FaCamera } from 'react-icons/fa';
 import { useFetchConversationByIdQuery, useUpdateGroupImageMutation, useDeleteConversationMutation, useLeaveConversationMutation } from '@/redux/api/conversationApi';
-import { Button } from "../ui/button.js";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar.js";
+import { Button } from "../ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-} from "../ui/dropdown-menu.js";
+} from "../ui/dropdown-menu";
 import { useConversation } from "@/redux/slices/conversationSlice";
 import "animate.css";
 import { sheetColor } from "@/constant";
 import { themeCard, themeChatInput } from "@/lib/themeUtils";
-import { handleBlock } from "./RequestActionButtons.js";
+import { handleBlock } from "./RequestActionButtons";
 import { useDispatch } from "react-redux";
 import toast from 'react-hot-toast';
 import { useBlockUserMutation } from "@/redux/api/user/userApi";
 import { logout } from "@/redux/slices/authSlice";
-import EndToEndEncryptionSetting from "../chatTabSidebarScreens/EndToEndEncryptionSettingNew.js";
-import ConversationReminders from "../chatTabSidebarScreens/remiders/ConversationReminders.js";
+import EndToEndEncryptionSetting from "../chatTabSidebarScreens/EndToEndEncryptionSettingNew";
+import ConversationReminders from "../chatTabSidebarScreens/remiders/ConversationReminders";
 import { useUpdateClassMutation } from '@/redux/api/classGroup/classApi';
-import FormsPanel from "./ChatTabSidebar/Forms/FormsPanel.js";
-import { useCall } from "@/components/Call/CallProvider.js";
+import FormsPanel from "./ChatTabSidebar/Forms/FormsPanel";
+import { useCall } from "@/components/Call/CallProvider";
 
 // Import extracted components
 import {
@@ -60,7 +60,7 @@ import {
   ReportDialog,
   MessagePermissionsItem,
   FormsItem,
-} from "./ChatTabSidebar/index.js";
+} from "./ChatTabSidebar/index";
 
 const ChatTabSidebar = ({ profileImage, name, isOpen, onClose }: { profileImage: string; name: string; isOpen: boolean; onClose: () => void }): JSX.Element => {
   const [currentView, setCurrentView] = useState<string>("profile");
