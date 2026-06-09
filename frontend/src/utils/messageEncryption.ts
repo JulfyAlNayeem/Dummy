@@ -3,10 +3,10 @@
 import {
   getPrivateKey,
   getParticipantPublicKey
-} from "./messageEncryptionHelperFuction.js";
+} from "./messageEncryptionHelperFuction";
 
 // Import shared corruption utilities
-import { addCorruption, removeCorruption } from "./corruptionUtils.js";
+import { addCorruption, removeCorruption } from "./corruptionUtils";
 
 // --- ECDH (P-256) Key Generation ---
 export async function generateKeyPair(): Promise<any> {
@@ -58,7 +58,7 @@ export async function encryptMessage(conversationId: any, text: any, currentUser
   // console.log('🔐 Encryption Debug:', { conversationId, currentUserId, otherUserId });
 
   // Import storage functions
-  const { getConversationKeys, getOrFetchParticipantKey } = await import('./messageEncryptionHelperFuction.js');
+  const { getConversationKeys, getOrFetchParticipantKey } = await import('./messageEncryptionHelperFuction.ts');
   
   // Get our keys from new structured storage
   const ourKeys = getConversationKeys(conversationId, currentUserId);
@@ -173,7 +173,7 @@ export async function decryptMessage(conversationId: any, payload: any, senderUs
   // console.log('🔓 Decryption Debug:', { conversationId, senderUserId, currentUserId, payload });
 
   // Import storage functions
-  const { getConversationKeys, getParticipantAllKeys } = await import('./messageEncryptionHelperFuction.js');
+  const { getConversationKeys, getParticipantAllKeys } = await import('./messageEncryptionHelperFuction.ts');
   
   // Get our keys from new structured storage
   const ourKeys = getConversationKeys(conversationId, currentUserId);
@@ -349,7 +349,7 @@ export async function encryptForOwnStorage(conversationId: any, text: any, userI
   try {
     // Get our own keys
     const ourPrivateKeyJson = getPrivateKey(conversationId, userId);
-    const { getUserPublicKey } = await import('./messageEncryptionHelperFuction.js');
+    const { getUserPublicKey } = await import('./messageEncryptionHelperFuction.ts');
     const ourPublicKeyBase64 = getUserPublicKey(conversationId, userId);
     
     if (!ourPrivateKeyJson || !ourPublicKeyBase64) {
@@ -379,7 +379,7 @@ export async function decryptFromOwnStorage(conversationId: any, encryptedData: 
     
     // Get our own keys
     const ourPrivateKeyJson = getPrivateKey(conversationId, userId);
-    const { getUserPublicKey } = await import('./messageEncryptionHelperFuction.js');
+    const { getUserPublicKey } = await import('./messageEncryptionHelperFuction.ts');
     const ourPublicKeyBase64 = getUserPublicKey(conversationId, userId);
     
     if (!ourPrivateKeyJson || !ourPublicKeyBase64) {
