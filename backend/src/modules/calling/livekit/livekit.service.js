@@ -17,11 +17,8 @@ const LIVEKIT_URL = process.env.LIVEKIT_URL;
 const API_KEY = process.env.LIVEKIT_API_KEY;
 const API_SECRET = process.env.LIVEKIT_API_SECRET;
 
-// HTTP URL for RoomServiceClient (replace ws:// with http://)
-const LIVEKIT_HTTP_URL = LIVEKIT_URL?.replace("ws://", "http://").replace("wss://", "https://");
-
 // Single RoomServiceClient instance
-const roomService = new RoomServiceClient(LIVEKIT_HTTP_URL, API_KEY, API_SECRET);
+const roomService = new RoomServiceClient(LIVEKIT_URL, API_KEY, API_SECRET);
 
 /**
  * Create a LiveKit room for a call.
