@@ -1,17 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.js";
+import App from "./App";
 import { Provider } from 'react-redux';
-import { UserAuthProvider } from "./context-reducer/UserAuthContext.js";
-import CallProvider from "./components/call/CallProvider.js";
-import { store, persistor } from "./redux/store.js";
+import { UserAuthProvider } from "./context-reducer/UserAuthContext";
+import { CallProvider } from "./components/call";
+import { store, persistor } from "./redux/store";
 import { PersistGate } from 'redux-persist/integration/react';
-
-import Loading from "./pages/Loading.js";
-
+import Loading from "./pages/Loading";
 // Import and initialize reminder scheduler
-import reminderScheduler from "../reminderScheduler.js";
-
+import reminderScheduler from "../reminderScheduler";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
