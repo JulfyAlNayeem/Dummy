@@ -1,7 +1,4 @@
-# livekit.yaml
-# Place at project root (same level as docker-compose.prod.yml)
-# LiveKit SFU server configuration
-
+cat > /opt/Dummy/livekit.yaml << 'EOF'
 port: 7880
 
 rtc:
@@ -12,16 +9,14 @@ rtc:
   # This is required so browser WebRTC can reach the server
   use_external_ip: true
 
-# API keys — MUST match LIVEKIT_API_KEY and LIVEKIT_API_SECRET in .env.production
-# Format: "api_key: api_secret" (note the space after colon)
 keys:
-  your_api_key: your_api_secret
+  kljdfjlhfgfdsgfsgssfjdf: lk8gHkDShjsdgfdvbdfh
 
 logging:
   level: info
   pion_level: error
 
 room:
-  empty_timeout: 300        # delete empty room after 5 minutes
-  max_participants: 50      # max people per call
-  enable_remote_ice_candidates: true  # helps users behind strict firewalls
+  empty_timeout: 300
+  max_participants: 50
+EOF
