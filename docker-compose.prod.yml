@@ -61,29 +61,28 @@ services:
 
   # Backend Node.js Application
   backend:
-  image: ${DOCKERHUB_USERNAME}/dummy-backend:latest
-  container_name: dummy-backend-prod
-  restart: always
-  ports:
-    - "3001:3001"
-  env_file:
-    - .env.production        # ← loads ALL vars from file directly
-  environment:
-    LIVEKIT_URL: http://livekit:7880  # ← override only this one
-    # because in .env.production LIVEKIT_URL=http://localhost:7880
-    # but inside Docker it must be http://livekit:7880 (service name)
-  volumes:
-    - ./backend/uploads:/app/backend/uploads
-  depends_on:
-    mongo:
-      condition: service_healthy
-    redis:
-      condition: service_healthy
-    livekit:
-      condition: service_healthy
-  networks:
-    - dummy-network
-
+    image: ${DOCKERHUB_USERNAME}/dummy-backend:latest
+    container_name: dummy-backend-prod
+    restart: always
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env.production        # ← loads ALL vars from file directly
+    environment:
+      LIVEKIT_URL: http://livekit:7880  # ← override only this one
+      # because in .env.production LIVEKIT_URL=http://localhost:7880
+      # but inside Docker it must be http://livekit:7880 (service name)
+    volumes:
+      - ./backend/uploads:/app/backend/uploads
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      livekit:
+        condition: service_healthy
+    networks:
+      - dummy-network
   # Frontend React Application
   frontend:
     image: ${DOCKERHUB_USERNAME}/dummy-frontend:latest
