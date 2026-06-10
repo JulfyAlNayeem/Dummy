@@ -1,22 +1,16 @@
-cat > /opt/Dummy/livekit.yaml << 'EOF'
+cat > /opt/Dummy/livekit.yaml << 'LKEOF'
 port: 7880
-
 rtc:
   tcp_port: 7881
   port_range_start: 50000
   port_range_end: 50200
-  # use_external_ip: true auto-detects your VPS public IP
-  # This is required so browser WebRTC can reach the server
   use_external_ip: true
-
 keys:
   kljdfjlhfgfdsgfsgssfjdf: lk8gHkDShjsdgfdvbdfh
-
 logging:
   level: info
   pion_level: error
-
 room:
   empty_timeout: 300
   max_participants: 50
-EOF
+LKEOF
