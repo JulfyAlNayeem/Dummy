@@ -61,41 +61,28 @@ services:
 
   # Backend Node.js Application
   backend:
-    image: ${DOCKERHUB_USERNAME}/dummy-backend:latest
-    container_name: dummy-backend-prod
-    restart: always
-    ports:
-      - "3001:3001"
-    environment:
-      NODE_ENV: production
-      PORT: 3001
-      DATABASE_URL: ${DATABASE_URL}
-      DB_NAME: ${MONGO_DATABASE}
-      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
-      SESSION_SECRET: ${SESSION_SECRET}
-      JWT_SECRET: ${JWT_SECRET}
-      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
-      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
-      ORIGIN_URL: ${ORIGIN_URL}
-      CLIENT_URL: ${CLIENT_URL}
-      # LiveKit — backend uses http:// (REST API to create rooms/tokens)
-      # Note: frontend uses ws:// — see LIVEKIT_PUBLIC_URL
-      LIVEKIT_URL: http://livekit:7880
-      LIVEKIT_PUBLIC_URL: ${LIVEKIT_PUBLIC_URL}
-      LIVEKIT_API_KEY: ${LIVEKIT_API_KEY}
-      LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET}
-    volumes:
-      - ./backend/uploads:/app/backend/uploads
-      # - ./.env.production:/app/.env.production 
-    depends_on:
-      mongo:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      livekit:
-        condition: service_healthy
-    networks:
-      - dummy-network
+  image: ${DOCKERHUB_USERNAME}/dummy-backend:latest
+  container_name: dummy-backend-prod
+  restart: always
+  ports:
+    - "3001:3001"
+  env_file:
+    - .env.production        # ← loads ALL vars from file directly
+  environment:
+    LIVEKIT_URL: http://livekit:7880  # ← override only this one
+    # because in .env.production LIVEKIT_URL=http://localhost:7880
+    # but inside Docker it must be http://livekit:7880 (service name)
+  volumes:
+    - ./backend/uploads:/app/backend/uploads
+  depends_on:
+    mongo:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+    livekit:
+      condition: service_healthy
+  networks:
+    - dummy-network
 
   # Frontend React Application
   frontend:
