@@ -26,4 +26,5 @@ EXPOSE 3001
 
 # Use --env-file to load env vars before ANY module imports
 # This ensures livekit.service.js and others see process.env at import time
-CMD ["node", "--env-file=../.env.production", "app.js"]
+CMD ["node", "app.js"]
+

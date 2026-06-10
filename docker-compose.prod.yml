@@ -86,6 +86,7 @@ services:
       LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET}
     volumes:
       - ./backend/uploads:/app/backend/uploads
+      # - ./.env.production:/app/.env.production 
     depends_on:
       mongo:
         condition: service_healthy
