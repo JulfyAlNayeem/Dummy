@@ -50,18 +50,23 @@ export const getAllConversations = async (req, res) => {
       .limit(30) // fetch recent 30
       .lean();
 
-    // Decrypt backend-encrypted last_message for each conversation so the
-    // conversation list can display plaintext previews immediately.
+    // Decrypt / clean last_message so ConversationCard always receives plaintext.
     await Promise.all(
       conversations.map(async (convo) => {
         const raw = convo.last_message?.message;
-        if (raw && isBackendEncrypted(raw)) {
-          try {
-            convo.last_message.message = await backendDecrypt(raw);
-          } catch {
-            // Leave as-is rather than crashing the whole list
-          }
+        if (!raw || typeof raw !== 'string') return;
+
+        if (isBackendEncrypted(raw)) {
+          // BENC:... at-rest format — decrypt with server key
+          try { convo.last_message.message = await backendDecrypt(raw); } catch { /* leave as-is */ }
+        } else if (raw.startsWith('__BACKEND_ENCRYPT__:')) {
+          // Legacy transport prefix stored verbatim (old data before fix)
+          convo.last_message.message = raw.slice('__BACKEND_ENCRYPT__:'.length);
+        } else if (raw.startsWith('SMTE:') && raw.split(':').length === 5) {
+          // SMTE transport payload stored verbatim (old data before fix)
+          convo.last_message.message = '[Encrypted message]';
         }
+        // Plain text, ECDH JSON, V1 — leave as-is; useMessageDecryption handles on client
       })
     );
 

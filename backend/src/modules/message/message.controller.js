@@ -51,40 +51,35 @@ const mapMimeTypeToMediaType = (mimeType) => {
  */
 async function handleBackendEncryption(text, conversationId) {
   if (!text || typeof text !== 'string') {
-    return { text, isBackendEncrypted: false };
+    return { text, plaintext: text, isBackendEncrypted: false };
   }
 
   // ── SMTE transport-encrypted text ──────────────────────────────────────
-  // Frontend sends: "SMTE:<version>:<iv>:<authTag>:<ciphertext>"
   if (isSMTEEncrypted(text) && conversationId) {
     try {
       const plaintext = await decryptTransportText(text, conversationId);
-      // Now re-encrypt with backend storage key for at-rest protection
       const encrypted = await backendEncrypt(plaintext);
-      return { text: encrypted, isBackendEncrypted: true };
+      return { text: encrypted, plaintext, isBackendEncrypted: true };
     } catch (error) {
       console.error('❌ SMTE text decryption failed:', error.message);
-      // Re-throw so the caller knows encryption failed — do NOT store raw ciphertext as plaintext.
-      // The message will be rejected rather than saved with visible SMTE ciphertext.
       throw new Error(`SMTE transport decryption failed: ${error.message}`);
     }
   }
 
   // ── Legacy marker ─────────────────────────────────────────────────────
-  // Frontend sends: "__BACKEND_ENCRYPT__:actualMessage"
   if (text.startsWith('__BACKEND_ENCRYPT__:')) {
-    const actualMessage = text.substring('__BACKEND_ENCRYPT__:'.length);
-    const encrypted = await backendEncrypt(actualMessage);
-    return { text: encrypted, isBackendEncrypted: true };
+    const plaintext = text.substring('__BACKEND_ENCRYPT__:'.length);
+    const encrypted = await backendEncrypt(plaintext);
+    return { text: encrypted, plaintext, isBackendEncrypted: true };
   }
-  
-  // Check if already backend encrypted
+
+  // Already backend encrypted (at-rest BENC format)
   if (isBackendEncrypted(text)) {
-    return { text, isBackendEncrypted: true };
+    return { text, plaintext: null, isBackendEncrypted: true };
   }
-  
-  // Plain text or frontend encrypted
-  return { text, isBackendEncrypted: false };
+
+  // Plain text or frontend-only encrypted (ECDH/V1 — server doesn't touch these)
+  return { text, plaintext: text, isBackendEncrypted: false };
 }
 
 /**
@@ -221,10 +216,15 @@ export const sendFileMessage = async (req, res) => {
     // Handle backend encryption if requested
     let processedText = resolvedText;
     let isBackendEncryptedFlag = false;
+    let previewText = resolvedText; // plaintext for last_message preview
     if (resolvedText) {
       const encryptionResult = await handleBackendEncryption(resolvedText, resolvedConversationId);
       processedText = encryptionResult.text;
       isBackendEncryptedFlag = encryptionResult.isBackendEncrypted;
+      // Use decrypted plaintext when available; fall back to resolvedText
+      if (encryptionResult.plaintext != null) {
+        previewText = encryptionResult.plaintext;
+      }
     }
 
     // Prepare base message data
@@ -250,7 +250,7 @@ export const sendFileMessage = async (req, res) => {
     await updateConversationState(
       conversation,
       userId,
-      resolvedText || "[Media]"
+      previewText || "[Media]"
     );
 
     const populatedMessage = await Message.findById(newMessage._id)
@@ -355,6 +355,7 @@ export const sendTextMessage = async ({
     const encryptionResult = await handleBackendEncryption(text, resolvedConversationId);
     const processedText = encryptionResult.text;
     const isBackendEncryptedFlag = encryptionResult.isBackendEncrypted;
+    const previewText = encryptionResult.plaintext ?? text;
 
     // Prepare base message data
     const baseMessageData = {
@@ -375,7 +376,7 @@ export const sendTextMessage = async ({
 
     const newMessage = await Message.create(messageDataWithEncryption);
 
-    await updateConversationState(conversation, sender, text);
+    await updateConversationState(conversation, sender, previewText || "[Media]");
 
     const populatedMessage = await Message.findById(newMessage._id)
       .populate("sender", "username")
