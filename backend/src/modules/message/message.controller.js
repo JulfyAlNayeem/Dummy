@@ -63,8 +63,10 @@ async function handleBackendEncryption(text, conversationId) {
       const encrypted = await backendEncrypt(plaintext);
       return { text: encrypted, isBackendEncrypted: true };
     } catch (error) {
-      console.error('❌ SMTE text decryption failed, storing as-is:', error.message);
-      return { text, isBackendEncrypted: false };
+      console.error('❌ SMTE text decryption failed:', error.message);
+      // Re-throw so the caller knows encryption failed — do NOT store raw ciphertext as plaintext.
+      // The message will be rejected rather than saved with visible SMTE ciphertext.
+      throw new Error(`SMTE transport decryption failed: ${error.message}`);
     }
   }
 

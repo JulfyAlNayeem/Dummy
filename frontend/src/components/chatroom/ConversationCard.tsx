@@ -10,13 +10,16 @@ import { useMessageDecryption } from "@/hooks/useMessageDecryption";
 export default function ConversationCard({ themeIndex, conversationInfo, participant, setShowConversationList = () => {} }: { themeIndex: number; conversationInfo: any; participant: any; setShowConversationList?: (v: boolean) => void }): JSX.Element {
   const { user }: any = useUserAuth();
   
-  // Use the decryption hook for last message
+  // Use the decryption hook for last message.
+  // Pass encryptionMethod from the API response directly — avoids the localStorage
+  // race where localStorage hasn't been written yet on first render.
   const { decryptedText: decryptedLastMessage, isEncrypted } = useMessageDecryption(
     conversationInfo?.last_message?.message,
     conversationInfo?._id,
     conversationInfo?.last_message?.sender,
     user?._id,
-    true 
+    true,
+    conversationInfo?.encryptionMethod
   );
   
   const formatTimestamp = (timestamp: string | number): string => {

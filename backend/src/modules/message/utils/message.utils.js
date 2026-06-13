@@ -68,9 +68,26 @@ export const computeDeletionTime = (conversation) => {
 };
 
 export const updateConversationState = async (conversation, senderId, lastText) => {
+  // Strip encryption prefixes/payloads so last_message always stores plaintext preview.
+  // • __BACKEND_ENCRYPT__:Hello  → "Hello"
+  // • SMTE:1:<iv>:<tag>:<ct>     → "[Encrypted message]"  (transport layer; server already
+  //                                  decrypts before DB, but guard just in case)
+  // • BENC:v1:...                → "[Encrypted message]"  (at-rest; getAllConversations
+  //                                  decrypts this, so it would work, but avoid storing
+  //                                  opaque blobs as preview text)
+  let previewText = lastText;
+  if (typeof previewText === 'string') {
+    if (previewText.startsWith('__BACKEND_ENCRYPT__:')) {
+      previewText = previewText.slice('__BACKEND_ENCRYPT__:'.length);
+    } else if (previewText.startsWith('SMTE:') && previewText.split(':').length === 5) {
+      previewText = '[Encrypted message]';
+    }
+    // BENC:... is already handled by getAllConversations decryption, leave as-is
+  }
+
   // Update last message details
   conversation.last_message = {
-    message: lastText,
+    message: previewText,
     sender: senderId,
     timestamp: new Date(),
   };

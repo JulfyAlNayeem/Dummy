@@ -5,6 +5,10 @@ import mongoose from "mongoose";
 import { formatConversation } from "./utils/conversation.utils.js";
 import { FriendList } from "../../common/models/friendListModel.js";
 import UnreadCount from "../../common/models/unreadCountModel.js";
+import {
+  decryptMessage as backendDecrypt,
+  isBackendEncrypted,
+} from "../../../services/backendEncryptionService.js";
 
 export const createConversation = async (req, res) => {
   const { senderId, receiverId } = req.body;
@@ -45,6 +49,21 @@ export const getAllConversations = async (req, res) => {
       .sort({ updatedAt: -1 }) // sort by activity
       .limit(30) // fetch recent 30
       .lean();
+
+    // Decrypt backend-encrypted last_message for each conversation so the
+    // conversation list can display plaintext previews immediately.
+    await Promise.all(
+      conversations.map(async (convo) => {
+        const raw = convo.last_message?.message;
+        if (raw && isBackendEncrypted(raw)) {
+          try {
+            convo.last_message.message = await backendDecrypt(raw);
+          } catch {
+            // Leave as-is rather than crashing the whole list
+          }
+        }
+      })
+    );
 
     const formattedConversations = conversations.map((convo) =>
       formatConversation(convo, userId)
@@ -882,5 +901,47 @@ export const leaveConversation = async (req, res) => {
   } catch (error) {
     console.error("Error leaving conversation:", error);
     res.status(500).json({ message: "Server error. Could not leave conversation." });
+  }
+};
+
+/**
+ * PATCH /:id/encryption-method
+ * Update the shared encryption method for a conversation.
+ * Only participants may change it. Broadcasts the change to all room members
+ * via Socket.IO so every connected client syncs immediately.
+ */
+export const updateEncryptionMethod = async (req, res) => {
+  const { id } = req.params;
+  const { encryptionMethod } = req.body;
+  const userId = req.user?._id?.toString();
+
+  const VALID_METHODS = ['Backend', 'ECDH', 'V1'];
+  if (!VALID_METHODS.includes(encryptionMethod)) {
+    return res.status(400).json({ message: `Invalid encryptionMethod. Must be one of: ${VALID_METHODS.join(', ')}` });
+  }
+
+  try {
+    const conversation = await Conversation.findById(id).select('participants encryptionMethod');
+    if (!conversation) return res.status(404).json({ message: 'Conversation not found' });
+
+    const isMember = conversation.participants.some((p) => p.toString() === userId);
+    if (!isMember) return res.status(403).json({ message: 'Access denied: not a participant' });
+
+    conversation.encryptionMethod = encryptionMethod;
+    await conversation.save();
+
+    // Broadcast to all room members so their localStorage syncs live
+    if (req.io) {
+      req.io.to(id).emit('conversation:encryptionMethodChanged', {
+        conversationId: id,
+        encryptionMethod,
+        changedBy: userId,
+      });
+    }
+
+    return res.json({ conversationId: id, encryptionMethod });
+  } catch (error) {
+    console.error('Error updating encryptionMethod:', error);
+    return res.status(500).json({ message: 'Server error' });
   }
 };

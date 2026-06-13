@@ -250,6 +250,15 @@ const ChatTab = (): JSX.Element => {
     autoFetchKeys();
   }, [conversationId, user?._id]);
 
+  // Sync encryptionMethod from server into localStorage whenever the conversation loads.
+  // This ensures SendMessage and useMessageDecryption always use the server-authoritative method,
+  // even when the user never opens Encryption Settings.
+  useEffect(() => {
+    if (rawConversation?.encryptionMethod && conversationId && conversationId !== 'new') {
+      localStorage.setItem(`encryptionMethod_${conversationId}`, rawConversation.encryptionMethod);
+    }
+  }, [rawConversation?.encryptionMethod, conversationId]);
+
   const styles = {
     container: {
       backgroundImage: `url(${themeBackground[themeIndex] || themeBackground[0]})`,

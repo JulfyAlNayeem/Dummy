@@ -44,23 +44,30 @@ export class ConversationGateway {
    */
   async handleJoinConversation(socket, conversationId) {
     const userId = socket.user?.id;
-    
-    socket.join(`conv:${conversationId}`);
-    
-    // Track active users with full user data
-    if (!this.activeUsers.has(conversationId)) {
-      this.activeUsers.set(conversationId, new Map());
+
+    // Guard: conversationId must be a non-empty string
+    if (!conversationId || typeof conversationId !== 'string') {
+      logger.warn({ userId, conversationId }, 'handleJoinConversation: invalid conversationId, ignoring');
+      return;
     }
-    
-    // Store full user data
-    const userData = {
-      _id: socket.user?.id,
-      name: socket.user?.name,
-      email: socket.user?.email,
-      image: socket.user?.image
-    };
-    
-    this.activeUsers.get(conversationId).set(userId, userData);
+
+    try {
+      socket.join(`conv:${conversationId}`);
+
+      // Ensure the inner Map always exists before any code path that reads it
+      if (!this.activeUsers.has(conversationId)) {
+        this.activeUsers.set(conversationId, new Map());
+      }
+
+      // Store full user data
+      const userData = {
+        _id: socket.user?.id,
+        name: socket.user?.name,
+        email: socket.user?.email,
+        image: socket.user?.image
+      };
+
+      this.activeUsers.get(conversationId).set(userId, userData);
     
     // Auto-mark attendance if there's an active session
     try {
@@ -212,24 +219,31 @@ export class ConversationGateway {
     } catch (error) {
       logger.error({ error, userId, conversationId }, 'Error auto-marking attendance');
     }
-    
-    // Notify others with full user data
-    const activeUsersList = Array.from(this.activeUsers.get(conversationId).values());
-    
-    this.io.to(`conv:${conversationId}`).emit("conversation:userJoined", {
+
+    // Safe read — the Map entry is guaranteed to exist (set above),
+    // but guard defensively in case a future refactor changes that.
+    const activeUsersList = this.activeUsers.has(conversationId)
+      ? Array.from(this.activeUsers.get(conversationId).values())
+      : [];
+
+    this.io.to(`conv:${conversationId}`).emit('conversation:userJoined', {
       conversationId,
       userId,
       activeUsers: activeUsersList
     });
-    
-    // Also emit the event frontend is listening for
-    this.io.to(`conv:${conversationId}`).emit("activeUsersUpdate", activeUsersList);
-    
-    logger.info({ 
-      socketId: socket.id, 
+
+    this.io.to(`conv:${conversationId}`).emit('activeUsersUpdate', activeUsersList);
+
+    logger.info({
+      socketId: socket.id,
       userId,
-      conversationId 
-    }, "User joined conversation");
+      conversationId
+    }, 'User joined conversation');
+
+    } catch (err) {
+      // Top-level catch: prevents a single bad join from crashing the whole process.
+      logger.error({ err, userId, conversationId }, '❌ handleJoinConversation: unhandled error');
+    }
   }
 
   /**
@@ -237,54 +251,54 @@ export class ConversationGateway {
    */
   handleLeaveConversation(socket, conversationId) {
     const userId = socket.user?.id;
-    
-    socket.leave(`conv:${conversationId}`);
-    
-    // Remove from active users
-    if (this.activeUsers.has(conversationId)) {
-      this.activeUsers.get(conversationId).delete(userId);
-      
-      if (this.activeUsers.get(conversationId).size === 0) {
-        this.activeUsers.delete(conversationId);
-      }
+
+    if (!conversationId || typeof conversationId !== 'string') {
+      logger.warn({ userId, conversationId }, 'handleLeaveConversation: invalid conversationId, ignoring');
+      return;
     }
-    
-    // Notify others with full user data
-    const activeUsersList = this.activeUsers.has(conversationId) 
-      ? Array.from(this.activeUsers.get(conversationId).values())
-      : [];
-      
-    this.io.to(`conv:${conversationId}`).emit("conversation:userLeft", {
-      conversationId,
-      userId,
-      activeUsers: activeUsersList
-    });
-    
-    // Also emit the event frontend is listening for
-    this.io.to(`conv:${conversationId}`).emit("activeUsersUpdate", activeUsersList);
-    
-    logger.info({ 
-      socketId: socket.id, 
-      userId,
-      conversationId 
-    }, "User left conversation");
+
+    try {
+      socket.leave(`conv:${conversationId}`);
+
+      if (this.activeUsers.has(conversationId)) {
+        this.activeUsers.get(conversationId).delete(userId);
+        if (this.activeUsers.get(conversationId).size === 0) {
+          this.activeUsers.delete(conversationId);
+        }
+      }
+
+      const activeUsersList = this.activeUsers.has(conversationId)
+        ? Array.from(this.activeUsers.get(conversationId).values())
+        : [];
+
+      this.io.to(`conv:${conversationId}`).emit('conversation:userLeft', {
+        conversationId,
+        userId,
+        activeUsers: activeUsersList
+      });
+
+      this.io.to(`conv:${conversationId}`).emit('activeUsersUpdate', activeUsersList);
+
+      logger.info({ socketId: socket.id, userId, conversationId }, 'User left conversation');
+    } catch (err) {
+      logger.error({ err, userId, conversationId }, '❌ handleLeaveConversation: unhandled error');
+    }
   }
 
   /**
    * Get active users in conversation
    */
   handleGetActiveUsers(socket, conversationId) {
-    const activeUsers = this.activeUsers.has(conversationId)
-      ? Array.from(this.activeUsers.get(conversationId).values())
-      : [];
-    
-    socket.emit("conversation:activeUsers", {
-      conversationId,
-      activeUsers
-    });
-    
-    // Also emit the event frontend might be listening for
-    socket.emit("activeUsersUpdate", activeUsers);
+    try {
+      const activeUsers = this.activeUsers.has(conversationId)
+        ? Array.from(this.activeUsers.get(conversationId).values())
+        : [];
+
+      socket.emit('conversation:activeUsers', { conversationId, activeUsers });
+      socket.emit('activeUsersUpdate', activeUsers);
+    } catch (err) {
+      logger.error({ err, conversationId }, '❌ handleGetActiveUsers: unhandled error');
+    }
   }
 
   /**

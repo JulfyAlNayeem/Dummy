@@ -534,13 +534,16 @@ const SendMessage = forwardRef(
           
           if (method === 'Backend') {
             // SMTE: encrypt with server-managed transport key before sending
-            if (isSmteAvailable() && socket) {
-              encryptedText = await smteEncryptText(socket, conversationId, textMessage);
+            // Use effectiveConversationId — never send 'new' as the key lookup id;
+            // 'new' is a local placeholder and has no Redis key on the server.
+            const effectiveConvId = conversationId && conversationId !== 'new' ? conversationId : null;
+            if (isSmteAvailable() && socket && effectiveConvId) {
+              encryptedText = await smteEncryptText(socket, effectiveConvId, textMessage);
               console.log('🔐 SMTE transport-encrypted text');
             } else {
               // Fallback: send with legacy marker (server encrypts)
               encryptedText = `__BACKEND_ENCRYPT__:${textMessage}`;
-              console.log('🔐 Marked for backend encryption (SMTE unavailable)');
+              console.log('🔐 Marked for backend encryption (SMTE unavailable or new conversation)');
             }
           } else if (method === 'V1') {
             // V1 encryption returns plain string
@@ -584,17 +587,20 @@ const SendMessage = forwardRef(
 
           // ── SMTE: encrypt text accompanying files ──
           const method = localStorage.getItem(`encryptionMethod_${conversationId}`) || 'Backend';
+          // effectiveConvId: never use 'new' — it has no Redis SMTE key on the server
+          const effectiveConvId = conversationId && conversationId !== 'new' ? conversationId : null;
           let textToSend = inputValue;
           if (method === 'Backend' && inputValue) {
-            if (isSmteAvailable() && socket) {
-              textToSend = await smteEncryptText(socket, conversationId, inputValue);
+            if (isSmteAvailable() && socket && effectiveConvId) {
+              textToSend = await smteEncryptText(socket, effectiveConvId, inputValue);
             } else {
               textToSend = `__BACKEND_ENCRYPT__:${inputValue}`;
             }
           }
           formData.append('text', textToSend);
 
-          if (!conversationId) formData.append('receiver', receiver);
+          // Append receiver when no real conversationId exists yet
+          if (!effectiveConvId) formData.append('receiver', receiver);
           const files = [...selectedImages, ...selectedFiles];
           if (files.length === 0) {
             throw new Error("No valid files selected");
@@ -604,11 +610,12 @@ const SendMessage = forwardRef(
           formData.append('encryptionMethod', method);
 
           // ── SMTE: encrypt file payloads ──
-          if (method === 'Backend' && isSmteAvailable() && socket) {
+          // Only attempt SMTE when we have a real conversationId with a server-side Redis key
+          if (method === 'Backend' && isSmteAvailable() && socket && effectiveConvId) {
             const validFiles = files.filter((f) => f instanceof File);
             const { processedFiles, envelopes } = await smteEncryptFiles(
               socket,
-              conversationId,
+              effectiveConvId,
               validFiles
             );
             processedFiles.forEach((f) => formData.append('media', f));
