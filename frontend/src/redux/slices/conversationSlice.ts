@@ -356,22 +356,41 @@ const conversationSlice = createSlice({
      * This is used by the GlobalMessageHandler to update conversation previews
      */
     updateConversationLastMessage(state, action) {
-      const { conversationId, lastMessage, lastMessageTime } = action.payload;
+      const { conversationId, lastMessage, lastMessageTime, sender, currentUserId, isActiveConversation } = action.payload;
+      const conversationIndex = state.allConversations.findIndex(
+        (c) => c._id === conversationId
+      );
+      if (conversationIndex !== -1) {
+        const prev = state.allConversations[conversationIndex];
+        // Only increment unread if: the message is from someone else AND the conversation is not currently open
+        const shouldIncrement = sender && currentUserId && sender !== currentUserId && !isActiveConversation;
+        state.allConversations[conversationIndex] = {
+          ...prev,
+          last_message: {
+            message: lastMessage,
+            sender: sender || prev.last_message?.sender,
+            timestamp: lastMessageTime || new Date().toISOString(),
+          },
+          unreadMessages: shouldIncrement
+            ? (prev.unreadMessages || 0) + 1
+            : prev.unreadMessages,
+        };
+        // Move updated conversation to top of list
+        const [updatedConversation] = state.allConversations.splice(conversationIndex, 1);
+        state.allConversations.unshift(updatedConversation);
+      }
+    },
+    // Reset unread count when user opens a conversation
+    resetConversationUnread(state, action) {
+      const { conversationId } = action.payload;
       const conversationIndex = state.allConversations.findIndex(
         (c) => c._id === conversationId
       );
       if (conversationIndex !== -1) {
         state.allConversations[conversationIndex] = {
           ...state.allConversations[conversationIndex],
-          last_message: {
-            message: lastMessage,
-            sender: action.payload.sender || state.allConversations[conversationIndex].last_message?.sender,
-            timestamp: lastMessageTime || new Date().toISOString(),
-          },
+          unreadMessages: 0,
         };
-        // Move updated conversation to top of list
-        const [updatedConversation] = state.allConversations.splice(conversationIndex, 1);
-        state.allConversations.unshift(updatedConversation);
       }
     },
     reset: () => initialState,
@@ -529,6 +548,7 @@ export const {
   setBlockList,
   migrateNewConversation,
   updateConversationLastMessage,
+  resetConversationUnread,
   reset,
   clearError,
   checkScheduledDeletions,
