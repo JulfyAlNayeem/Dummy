@@ -95,6 +95,17 @@ const GlobalMessageHandler = (): JSX.Element | null => {
 
     dispatch(addMessage(messageToAdd));
 
+    // Move conversation to top of list and update last message preview.
+    // message.text arrives already decrypted (server handles Backend/SMTE at-rest decryption
+    // before emitting; ECDH/V1 previews are handled by useMessageDecryption on render).
+    const previewText = message.text || (message.media?.length ? '[Media]' : message.voice ? '[Voice]' : '[Message]');
+    dispatch(updateConversationLastMessage({
+      conversationId,
+      lastMessage: previewText,
+      lastMessageTime: message.createdAt || new Date().toISOString(),
+      sender: senderId,
+    }));
+
     // Acknowledge delivery to the server - the message reached this device
     if (socket) {
       socket.emit('messageDelivered', { conversationId, userId: user._id });

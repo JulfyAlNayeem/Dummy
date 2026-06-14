@@ -25,7 +25,7 @@ export const incrementUnreadRequest = async (userId, type, io = null) => {
 
   // Emit socket event to user if io is provided
   if (io) {
-    io.to(userId.toString()).emit("unread_counts_updated", counts);
+    io.to(`user_${userId.toString()}`).emit("unread_counts_updated", counts);
   }
 
   return counts;

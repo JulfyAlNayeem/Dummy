@@ -131,7 +131,8 @@ export const sendFileMessage = async (req, res) => {
     const conversation = await findOrCreateConversation(
       userId,
       resolvedReceiver,
-      resolvedConversationId
+      resolvedConversationId,
+      req.io
     );
     resolvedConversationId = conversation._id.toString();
     // console.log("sendFileMessage: Conversation ID:", resolvedConversationId);
@@ -334,7 +335,8 @@ export const sendTextMessage = async ({
     const conversation = await findOrCreateConversation(
       sender,
       receiver,
-      conversationId
+      conversationId,
+      io
     );
     const resolvedConversationId = conversation._id.toString();
 
