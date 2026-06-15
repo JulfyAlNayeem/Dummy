@@ -307,7 +307,12 @@ export const searchUser = async (req, res) => {
       .lean();
 
     if (!users.length) {
-      return res.status(404).json({ message: "No users found" });
+      return res.status(200).json({
+        users: [],
+        total: 0,
+        page: pageNum,
+        totalPages: 0,
+      });
     }
 
     res.status(200).json({

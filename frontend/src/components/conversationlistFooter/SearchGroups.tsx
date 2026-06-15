@@ -231,7 +231,7 @@ const SearchGroups = ({ searchQuery, themeIndex }: any): JSX.Element => {
                   <p className="text-sm">{error?.data?.error || error?.data?.message || 'An error occurred while searching'}</p>
                 </div>
               ) : allGroups.length === 0 && debouncedQuery.length >= 3 && !isFetching ? (
-                <div className="text-center py-8 text-gray-400">No groups found</div>
+                <div className="text-center py-8 text-gray-400">No groups found. Try a different search term.</div>
               ) : (
                 allGroups.map((group, index) => (
                   <div
