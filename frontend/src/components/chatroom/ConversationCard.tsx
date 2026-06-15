@@ -3,7 +3,7 @@ import React from "react";
 import { defaultProfileImage } from "../../constant";
 import { themeCard, themeIcon } from "@/lib/themeUtils";
 import { GraduationCap, UsersRound } from "lucide-react";
-import { MdGroups } from "react-icons/md";
+import { MdAttachFile, MdGroups, MdSettingsVoice } from "react-icons/md";
 import { useUserAuth } from "@/context-reducer/UserAuthContext";
 import { useMessageDecryption } from "@/hooks/useMessageDecryption";
 
@@ -13,8 +13,8 @@ function getMessagePreview(raw: string): { preview: string; isMedia: boolean } {
   if (!raw) return { preview: '', isMedia: false };
 
   // Media / system markers stored by updateConversationState or GlobalMessageHandler
-  if (raw === '[Media]') return { preview: '📎 Media', isMedia: true };
-  if (raw === '[Voice]') return { preview: '🎤 Voice message', isMedia: true };
+  if (raw === '[Media]') return { preview: <span className="flex"><MdAttachFile className="text-lg" />Media</span>, isMedia: true };
+  if (raw === '[Voice]') return { preview: <span className="flex"> <MdSettingsVoice className={` text-lg`} /> Voice message </span>, isMedia: true };
   if (raw === '[Message]') return { preview: 'Message', isMedia: false };
 
   // HTML emoji — detect by checking for <img or common emoji HTML patterns
