@@ -11,6 +11,63 @@ import { v4 as uuidv4 } from 'uuid';
 import { validateFile, sanitizeFilename, getFileValidationOptions } from '../../common/services/fileValidation.js';
 import { decryptBuffer, isEncryptedFile } from '../../../services/backendEncryptionService.js';
 
+
+export const getLegacyFile = async (req, res) => {
+  try {
+    const { filename } = req.params;
+    const decodedFilename = decodeURIComponent(filename);
+
+    // UUID-only filenames are already clean, but sanitize anyway
+    const sanitizedFilename = decodedFilename.replace(/[^a-zA-Z0-9.\-]/g, '');
+
+    if (
+      sanitizedFilename.includes('..') ||
+      sanitizedFilename.includes('/') ||
+      sanitizedFilename.includes('\\')
+    ) {
+      return res.status(400).json({ success: false, message: 'Invalid filename' });
+    }
+
+    const filePath = path.join(process.cwd(), 'uploads', sanitizedFilename);
+
+    if (!existsSync(filePath)) {
+      return res.status(404).json({ success: false, message: 'File not found' });
+    }
+
+    const ext = sanitizedFilename.split('.').pop()?.toLowerCase();
+    const contentTypeMap = {
+      jpg: 'image/jpeg', jpeg: 'image/jpeg',
+      png: 'image/png', gif: 'image/gif',
+      webp: 'image/webp', svg: 'image/svg+xml',
+      mp4: 'video/mp4', webm: 'video/webm', ogg: 'video/ogg',
+      mp3: 'audio/mpeg', wav: 'audio/wav',
+      pdf: 'application/pdf', txt: 'text/plain',
+      doc: 'application/msword',
+      docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    };
+
+    res.setHeader('Content-Type', contentTypeMap[ext] || 'application/octet-stream');
+    res.setHeader('Cache-Control', 'private, max-age=86400');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+
+    try {
+      const fileBuffer = readFileSync(filePath);
+      if (isEncryptedFile(fileBuffer)) {
+        const decrypted = await decryptBuffer(fileBuffer);
+        return res.send(decrypted);
+      }
+    } catch (decryptErr) {
+      console.error('Decrypt error:', decryptErr.message);
+    }
+
+    return res.sendFile(filePath);
+  } catch (error) {
+    console.error('Get legacy file error:', error);
+    return res.status(500).json({ success: false, message: 'Server error', error: error.message });
+  }
+};
+
 /**
  * Upload image with security validation
  * POST /api/uploads/image
@@ -146,7 +203,8 @@ export const getImage = async (req, res) => {
 
     // Sanitize filename to prevent directory traversal attacks
     // Allow only alphanumeric, spaces, dots, hyphens, and underscores
-    const sanitizedFilename = decodedFilename.replace(/[^a-zA-Z0-9._\-\s]/g, '');
+    const sanitizedFilename = decodedFilename.replace(/[^a-zA-Z0-9._\-\s()]/g, '');
+
 
     // Prevent path traversal
     if (
@@ -225,7 +283,19 @@ export const getDocument = async (req, res) => {
     const decodedFilename = decodeURIComponent(filename);
 
     // Sanitize filename
-    const sanitizedFilename = decodedFilename.replace(/[^a-zA-Z0-9._\-\s]/g, '');
+    const sanitizedFilename = decodedFilename.replace(/[^a-zA-Z0-9._\-\s()]/g, '');
+
+// TEMP DEBUG - remove after fixing
+console.log('=== FILE DEBUG ===');
+console.log('Raw param:', filename);
+console.log('Decoded:', decodedFilename);
+console.log('Sanitized:', sanitizedFilename);
+console.log('Looking for file at:', path.join(process.cwd(), 'uploads', sanitizedFilename));
+console.log('File exists?', existsSync(path.join(process.cwd(), 'uploads', sanitizedFilename)));
+
+// List actual files in uploads dir
+const { readdirSync } = await import('fs');
+console.log('Files in uploads/:', readdirSync(path.join(process.cwd(), 'uploads')));
 
     // Prevent path traversal
     if (
@@ -291,6 +361,7 @@ export const getDocument = async (req, res) => {
 };
 
 export default {
+  getLegacyFile,
   uploadImage,
   uploadDocument,
   getImage,
