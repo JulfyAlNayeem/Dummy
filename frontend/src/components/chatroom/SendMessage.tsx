@@ -16,6 +16,21 @@ import { store } from "@/redux/store";
 import CryptoJS from "crypto-js";
 import { encryptMessage as encryptMessageECDH } from '@/utils/messageEncryption';
 import { encryptMessage as encryptMessageV1 } from '@/utils/messageEncryptionV1';
+
+// Pick the right encrypt function based on the conversation's encryption method.
+// Returns null for Backend/SMTE (server handles it) or if method is unknown.
+const encryptForMethod = async (conversationId: string, text: string, userId: string, receiver: string): Promise<string | null> => {
+  const method = localStorage.getItem(`encryptionMethod_${conversationId}`) || 'Backend';
+  if (method === 'ECDH') {
+    const enc = await encryptMessageECDH(conversationId, text, userId, receiver);
+    return JSON.stringify(enc);
+  }
+  if (method === 'V1') {
+    return encryptMessageV1(text, conversationId) as string;
+  }
+  // Backend/SMTE — encryption handled in sendTextMessage path, no client-side encrypt needed
+  return null;
+};
 import { storeOwnMessagePlaintext, hasKeys } from '@/utils/messageEncryptionHelperFuction';
 import { verifyKeyOnServer } from '@/utils/socketEncryptionUtils';
 import { encryptText as smteEncryptText, encryptFiles as smteEncryptFiles, isSmteAvailable } from '@/utils/smteEncryption';
@@ -145,9 +160,9 @@ const SendMessage = forwardRef(
         // If editing text-only, try to encrypt the new text
         let encryptedPayload = inputValue.trim();
         try {
-          const enc = await encryptMessage(conversationId, inputValue.trim(), user._id, receiver);
+          const enc = await encryptForMethod(conversationId, inputValue.trim(), user._id, receiver);
           // send only the encryption metadata (ciphertext, iv, salt)
-          encryptedPayload = JSON.stringify(enc);
+          encryptedPayload = enc ?? inputValue.trim();
         } catch (e) {
           console.warn('Edit: encryption failed, sending plaintext', e);
         }
@@ -244,7 +259,7 @@ const SendMessage = forwardRef(
       }));
 
       const replyTo = {
-        id: replyingMessage.messageId,
+        _id: replyingMessage.messageId,
         text: replyingMessage.text || null,
         messageType: replyingMessage.messageType || 'text',
         media: replyingMessage.media || [],
@@ -254,9 +269,9 @@ const SendMessage = forwardRef(
       let encryptedReplyText = inputValue.trim() ? inputValue.trim() : '';
       if (!hasFiles && encryptedReplyText) {
         try {
-          const enc = await encryptMessage(conversationId, encryptedReplyText, user._id, receiver);
+          const enc = await encryptForMethod(conversationId, encryptedReplyText, user._id, receiver);
           // send only the encryption metadata
-          encryptedReplyText = JSON.stringify(enc);
+          if (enc) encryptedReplyText = enc;
         } catch (e) {
           console.warn('Reply: encryption failed, sending plaintext', e);
         }
