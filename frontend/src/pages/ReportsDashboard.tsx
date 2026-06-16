@@ -7,6 +7,7 @@ import {
   useUpdateReportStatusMutation,
 } from "@/redux/api/admin/reportsApi";
 import { formatDistanceToNow } from "date-fns";
+import DashboardLayout from "@/components/admin/DashboardLayout";
 
 const STATUS_COLORS = {
   pending:   "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30",
@@ -70,6 +71,7 @@ export default function ReportsDashboard(): JSX.Element {
     : "Misbehaviour and community violation reports";
 
   return (
+    // <DashboardLayout type="admin">
     <div className="min-h-screen bg-gray-950 text-gray-100 p-6">
       <div className="max-w-6xl mx-auto space-y-6">
 
@@ -122,7 +124,7 @@ export default function ReportsDashboard(): JSX.Element {
                   <th className="text-left px-5 py-3 text-gray-400 font-medium">Details</th>
                   <th className="text-left px-5 py-3 text-gray-400 font-medium">Status</th>
                   <th className="text-left px-5 py-3 text-gray-400 font-medium">Submitted</th>
-                  {isAdmin && <th className="text-left px-5 py-3 text-gray-400 font-medium">Action</th>}
+                   <th className="text-left px-5 py-3 text-gray-400 font-medium">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-800">
@@ -152,7 +154,6 @@ export default function ReportsDashboard(): JSX.Element {
                     <td className="px-5 py-4 text-gray-500 text-xs whitespace-nowrap">
                       {formatDistanceToNow(new Date(report.createdAt), { addSuffix: true })}
                     </td>
-                    {isAdmin && (
                       <td className="px-5 py-4">
                         <button
                           onClick={() => {
@@ -166,7 +167,6 @@ export default function ReportsDashboard(): JSX.Element {
                           Review
                         </button>
                       </td>
-                    )}
                   </tr>
                 ))}
               </tbody>
@@ -199,7 +199,7 @@ export default function ReportsDashboard(): JSX.Element {
       </div>
 
       {/* Review modal — admin only */}
-      {isAdmin && selectedReport && (
+      { selectedReport && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
           <div className="bg-gray-900 border border-gray-700 rounded-2xl w-full max-w-md p-6 space-y-4">
             <h2 className="text-lg font-semibold text-white">Review Report</h2>
@@ -269,5 +269,6 @@ export default function ReportsDashboard(): JSX.Element {
         </div>
       )}
     </div>
+    // </DashboardLayout>
   );
 }

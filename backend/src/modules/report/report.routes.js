@@ -20,6 +20,6 @@ router.get("/", requireDeveloper, getReports);
 router.get("/stats", requireDeveloper, getReportStats);
 
 // Only admin/superadmin can update report status (not developer)
-router.patch("/:reportId", requireAdmin, updateReportStatus);
+router.patch("/:reportId", requireDeveloper, updateReportStatus);
 
 export default router;
