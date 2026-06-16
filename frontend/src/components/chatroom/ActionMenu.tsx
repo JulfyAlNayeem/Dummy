@@ -8,7 +8,9 @@ const ActionMenu = ({ isOwnMessage, themeIndex, msg, openDialog }: { isOwnMessag
   return (
     <button
       ref={buttonRef}
-      className={`absolute ${isOwnMessage ? "-left-5" : "-right-5"} top-0 bottom-0 bg-transparent text-xs py-1 rounded-full w-fit transition-opacity`}
+      type="button"
+      title="More options"
+      className="bg-transparent text-xs py-1 rounded-full w-fit transition-opacity"
       onClick={(e) => {
         e.stopPropagation();
         const buttonRect = buttonRef.current.getBoundingClientRect();

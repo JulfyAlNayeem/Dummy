@@ -236,21 +236,22 @@ const conversationSlice = createSlice({
         return;
       }
 
-      // Validate reactions structure
+      // Validate and normalize reactions structure.
+      // Accept both legacy string format ("❤️") and object format ({ emoji, username }).
       const validatedReactions = {};
       for (const [userId, reaction] of Object.entries(reactions || {})) {
-        if (
+        if (typeof reaction === 'string' && reaction.length > 0) {
+          // Legacy string — normalize to object
+          validatedReactions[userId] = { emoji: reaction, username: userId };
+        } else if (
           reaction &&
-          typeof reaction === "object" &&
-          reaction.emoji &&
-          typeof reaction.emoji === "string" &&
-          reaction.username &&
-          typeof reaction.username === "string"
+          typeof reaction === 'object' &&
+          (reaction as any).emoji &&
+          typeof (reaction as any).emoji === 'string'
         ) {
           validatedReactions[userId] = reaction;
-        } else {
-          console.warn(`Invalid reaction format for user ${userId}:`, reaction);
         }
+        // silently skip anything else
       }
 
       state.byConversationId[conversationId].messages[key].reactions =

@@ -155,7 +155,7 @@ const FormCreator = ({ onClose, onCreated }: any): JSX.Element => {
             <Button
               size="sm"
               variant="outline"
-              className="border-gray-600 text-gray-300 hover:bg-gray-700 gap-1"
+              className="border-gray-600 text-gray-300  hover:text-gray-400 bg-gray-700 hover:bg-gray-800 gap-1"
               onClick={addField}
             >
               <Plus className="h-3.5 w-3.5" /> Add Question

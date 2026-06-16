@@ -6,19 +6,20 @@ import {
   getReportStats,
 } from "./report.controller.js";
 import { isLogin } from "../../../middlewares/auth.middleware.js";
-import { requireAdmin } from "../../../middlewares/adminAuth.js";
+import { requireAdmin, requireDeveloper } from "../../../middlewares/adminAuth.js";
 
 const router = express.Router();
 
-// User routes (requires login)
 router.use(isLogin);
 
-// Submit a report for a conversation
+// Any authenticated user can submit a report
 router.post("/conversation/:conversationId", reportConversation);
 
-// Admin routes
-router.get("/", requireAdmin, getReports);
-router.get("/stats", requireAdmin, getReportStats);
+// Developer and admin can view reports (role-filtered inside getReports)
+router.get("/", requireDeveloper, getReports);
+router.get("/stats", requireDeveloper, getReportStats);
+
+// Only admin/superadmin can update report status (not developer)
 router.patch("/:reportId", requireAdmin, updateReportStatus);
 
 export default router;
