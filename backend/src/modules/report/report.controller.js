@@ -4,14 +4,9 @@ import Conversation from "../../common/models/conversationModel.js";
 
 // Valid report reasons
 const VALID_REASONS = [
-  "spam",
-  "harassment",
-  "hate_speech",
-  "violence",
-  "nudity",
-  "false_info",
-  "impersonation",
-  "other",
+  "misbehaviour",
+   "software issue",
+    "other",
 ];
 
 // Submit a report for a conversation

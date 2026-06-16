@@ -5,13 +5,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useReportConversationMutation } from "@/redux/api/conversationApi";
 
 const REPORT_REASONS = [
-  { value: "spam", label: "Spam or scam" },
-  { value: "harassment", label: "Harassment or bullying" },
-  { value: "hate_speech", label: "Hate speech or symbols" },
-  { value: "violence", label: "Violence or dangerous behavior" },
-  { value: "nudity", label: "Nudity or sexual content" },
-  { value: "false_info", label: "False information" },
-  { value: "impersonation", label: "Pretending to be someone else" },
+  { value: "misbehaviour", label: "Misbehaviour" },
+  { value: "software issue", label: "Software Issue" },
   { value: "other", label: "Something else" },
 ];
 

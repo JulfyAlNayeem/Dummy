@@ -252,6 +252,7 @@ export default function UserActionDialog({
                   <SelectContent className="bg-gray-900 dark:bg-blue-100 text-white dark:text-gray-900 border-gray-600 dark:border-blue-300">
                     <SelectItem value="user">User</SelectItem>
                     <SelectItem value="teacher">Teacher</SelectItem>
+                    <SelectItem value="developer">Developer</SelectItem>
                     <SelectItem value="moderator">Moderator</SelectItem>
                     <SelectItem value="admin">Admin</SelectItem>
                   </SelectContent>

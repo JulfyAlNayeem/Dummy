@@ -49,7 +49,7 @@ apiRoute.use("/class-group/files", fileRoutes);
 apiRoute.use("/social", socialRoutes);
 apiRoute.use("/site-security", siteSecurityRoutes);
 apiRoute.use("/conversation-keys", conversationKeyRoutes);
-apiRoute.use("/reports", reportRoutes);
+apiRoute.use("/conversations/reports", reportRoutes);
 apiRoute.use("/permissions", permissionRoutes);
 apiRoute.use("/forms", formRoutes);
 apiRoute.use("/reminders", reminderRoutes);
