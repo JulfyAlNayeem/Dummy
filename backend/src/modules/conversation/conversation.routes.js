@@ -1,5 +1,5 @@
 import express from 'express';
-import { acceptMessageRequest, createConversation, createGroup, deleteConversation, getAllConversations, getConversationById, getGroupJoinRequests, getPendingConversationRequests, getUnreadRequestCounts, searchGroups, updateConversationThemeIndex, updateDisappearingMessages, getDisappearingMessages, updateGroupImage, leaveConversation  } from './conversation.controller.js';
+import { acceptMessageRequest, createConversation, createGroup, deleteConversation, getAllConversations, getConversationById, getGroupJoinRequests, getPendingConversationRequests, getUnreadRequestCounts, searchGroups, updateConversationThemeIndex, updateDisappearingMessages, getDisappearingMessages, updateGroupImage, leaveConversation, updateEncryptionMethod  } from './conversation.controller.js';
 import { isLogin } from "../../../middlewares/auth.middleware.js";
 import { getClassJoinRequests } from '../class/class.controller.js';
 
@@ -17,6 +17,7 @@ router.patch("/:conversationId/image", updateGroupImage);
 router.patch("/:id/theme-index", updateConversationThemeIndex);
 router.patch("/:id/disappearing-messages", updateDisappearingMessages);
 router.get("/:id/disappearing-messages", getDisappearingMessages);
+router.patch("/:id/encryption-method", updateEncryptionMethod);
 router.delete("/conversation/:id", deleteConversation);
 router.post("/leave/:id", leaveConversation);
 

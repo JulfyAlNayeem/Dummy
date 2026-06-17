@@ -5,7 +5,7 @@
 
 import express from 'express';
 import { uploadImage as uploadImageMiddleware, uploadDocument as uploadDocumentMiddleware } from '../../../middlewares/multerConfig.js';
-import { uploadImage, uploadDocument, getImage, getDocument } from '../controllers/uploads.controller.js';
+import { uploadImage, uploadDocument, getImage, getDocument, getLegacyFile } from '../controllers/uploads.controller.js';
 import { isLogin } from '../../../middlewares/auth.middleware.js';
 
 const router = express.Router();
@@ -60,4 +60,9 @@ router.get(
   getDocument
 );
 
+router.get(
+  '/:filename',
+  isLogin,
+  getLegacyFile
+);
 export default router;

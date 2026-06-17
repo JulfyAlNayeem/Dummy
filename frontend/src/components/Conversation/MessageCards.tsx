@@ -1,23 +1,27 @@
 // @ts-nocheck
-import React, { useState, useRef, useEffect } from 'react';
-import ImageDisplay from '../chatroom/ImageDisplay';
-import VoiceMessageCard from '../chatroom/VoiceMessageCard';
-import VideoMessageCard from '../chatroom/VideoMessageCard';
-import CallCard from '../chatroom/CallCard';
-import MessageReactions from '../chatroom/MessageReactions';
-import ReactionPicker from '../chatroom/ReactionPicker';
-import { themeSenderMessage, themeReceiverMessage } from '@/lib/themeUtils';
-import { BASE_URL } from '@/utils/baseUrls';
-import { cn } from '@/lib/utils';
-import { useConversation, updateMessageReaction } from '@/redux/slices/conversationSlice';
-import { useUserAuth } from '@/context-reducer/UserAuthContext';
-import ProfileAvatar from '../chatroom/ProfileAvatar';
-import MessageHeader from '../chatroom/MessageHeader';
-import ReplyCard from '../chatroom/ReplyCard';
-import ReactionBottomSheet from '../chatroom/ReactionBottomSheet';
-import { useDispatch } from 'react-redux';
-import TextMessageCard from '../chatroom/TextMessageCard';
-import ActionMenu from '../chatroom/ActionMenu';
+import React, { useState, useRef, useEffect } from "react";
+import ImageDisplay from "../chatroom/ImageDisplay";
+import VoiceMessageCard from "../chatroom/VoiceMessageCard";
+import VideoMessageCard from "../chatroom/VideoMessageCard";
+import CallCard from "../chatroom/CallCard";
+import MessageReactions from "../chatroom/MessageReactions";
+import ReactionPicker from "../chatroom/ReactionPicker";
+import { themeSenderMessage, themeReceiverMessage } from "@/lib/themeUtils";
+import { BASE_URL } from "@/utils/baseUrls";
+import { cn } from "@/lib/utils";
+import {
+  useConversation,
+  updateMessageReaction,
+} from "@/redux/slices/conversationSlice";
+import { useUserAuth } from "@/context-reducer/UserAuthContext";
+import ProfileAvatar from "../chatroom/ProfileAvatar";
+import MessageHeader from "../chatroom/MessageHeader";
+import ReplyCard from "../chatroom/ReplyCard";
+import ReactionBottomSheet from "../chatroom/ReactionBottomSheet";
+import { useDispatch } from "react-redux";
+import TextMessageCard from "../chatroom/TextMessageCard";
+import ActionMenu from "../chatroom/ActionMenu";
+import { SmilePlus } from "lucide-react";
 
 const MessageCards = ({
   msg,
@@ -37,12 +41,14 @@ const MessageCards = ({
   const { isGroup }: any = useConversation();
   const { socket, user }: any = useUserAuth();
   const dispatch = useDispatch();
-  const [isStatusVisible, setIsStatusVisible] = useState<boolean>(isLastMessage);
-  const [isReactionPickerOpen, setIsReactionPickerOpen] = useState<boolean>(false);
+  const [isStatusVisible, setIsStatusVisible] =
+    useState<boolean>(isLastMessage);
+  const [isReactionPickerOpen, setIsReactionPickerOpen] =
+    useState<boolean>(false);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState<boolean>(false);
   const messageRef = useRef<HTMLDivElement | null>(null);
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  
+
   // Use reactions from msg prop (from Redux store)
   const messageReactions = msg.reactions || {};
 
@@ -50,36 +56,48 @@ const MessageCards = ({
     if (!socket) return;
 
     socket.on("reactionUpdate", ({ messageId, reactions, clientTempId }) => {
-      if (messageId === (msg._id || msg.clientTempId) || clientTempId === msg.clientTempId) {
-        dispatch(updateMessageReaction({
-          conversationId,
-          messageId,
-          clientTempId,
-          reactions,
-        }));
+      if (
+        messageId === (msg._id || msg.clientTempId) ||
+        clientTempId === msg.clientTempId
+      ) {
+        dispatch(
+          updateMessageReaction({
+            conversationId,
+            messageId,
+            clientTempId,
+            reactions,
+          }),
+        );
       }
     });
 
     socket.on("reactionSuccess", ({ messageId, reactions, clientTempId }) => {
-      if (messageId === (msg._id || msg.clientTempId) || clientTempId === msg.clientTempId) {
-        dispatch(updateMessageReaction({
-          conversationId,
-          messageId,
-          clientTempId,
-          reactions,
-        }));
+      if (
+        messageId === (msg._id || msg.clientTempId) ||
+        clientTempId === msg.clientTempId
+      ) {
+        dispatch(
+          updateMessageReaction({
+            conversationId,
+            messageId,
+            clientTempId,
+            reactions,
+          }),
+        );
       }
     });
 
     socket.on("reactionError", ({ message, clientTempId }) => {
       console.error("Reaction error:", message);
       // Revert optimistic update in Redux
-      dispatch(updateMessageReaction({
-        conversationId,
-        messageId: msg._id,
-        clientTempId: msg.clientTempId,
-        reactions: msg.reactions || {},
-      }));
+      dispatch(
+        updateMessageReaction({
+          conversationId,
+          messageId: msg._id,
+          clientTempId: msg.clientTempId,
+          reactions: msg.reactions || {},
+        }),
+      );
     });
 
     return () => {
@@ -87,7 +105,14 @@ const MessageCards = ({
       socket.off("reactionSuccess");
       socket.off("reactionError");
     };
-  }, [socket, msg._id, msg.clientTempId, conversationId, dispatch, msg.reactions]);
+  }, [
+    socket,
+    msg._id,
+    msg.clientTempId,
+    conversationId,
+    dispatch,
+    msg.reactions,
+  ]);
 
   const handleLongPressStart = (e) => {
     e.preventDefault();
@@ -116,12 +141,14 @@ const MessageCards = ({
     if (currentReactions[user._id] === emoji) {
       // Optimistically remove reaction
       const { [user._id]: _, ...otherReactions } = currentReactions;
-      dispatch(updateMessageReaction({
-        conversationId,
-        messageId,
-        clientTempId: msg.clientTempId,
-        reactions: otherReactions,
-      }));
+      dispatch(
+        updateMessageReaction({
+          conversationId,
+          messageId,
+          clientTempId: msg.clientTempId,
+          reactions: otherReactions,
+        }),
+      );
 
       socket.emit("removeReaction", {
         conversationId,
@@ -133,20 +160,22 @@ const MessageCards = ({
       // Optimistically add reaction
       const updatedReactions = {
         ...currentReactions,
-        [user._id]: emoji,
+        [user._id]: { emoji, username: user.name || user._id },
       };
-      dispatch(updateMessageReaction({
-        conversationId,
-        messageId,
-        clientTempId: msg.clientTempId,
-        reactions: updatedReactions,
-      }));
+      dispatch(
+        updateMessageReaction({
+          conversationId,
+          messageId,
+          clientTempId: msg.clientTempId,
+          reactions: updatedReactions,
+        }),
+      );
 
       socket.emit("addReaction", {
         conversationId,
         messageId,
         userId: user._id,
-        emoji,
+        reaction: emoji, // backend expects `reaction` not `emoji`
         clientTempId: msg.clientTempId,
       });
     }
@@ -161,12 +190,14 @@ const MessageCards = ({
     const currentReactions = messageReactions || {};
 
     const { [user._id]: _, ...otherReactions } = currentReactions;
-    dispatch(updateMessageReaction({
-      conversationId,
-      messageId,
-      clientTempId: msg.clientTempId,
-      reactions: otherReactions,
-    }));
+    dispatch(
+      updateMessageReaction({
+        conversationId,
+        messageId,
+        clientTempId: msg.clientTempId,
+        reactions: otherReactions,
+      }),
+    );
 
     socket.emit("removeReaction", {
       conversationId,
@@ -188,7 +219,10 @@ const MessageCards = ({
   };
 
   const showBackground =
-    msg.messageType === "text" && !msg.replyTo && !msg.media?.length && msg.emojiType !== "custom";
+    msg.messageType === "text" &&
+    !msg.replyTo &&
+    !msg.media?.length &&
+    msg.emojiType !== "custom";
 
   return (
     <div className="max-w-[90%] relative ">
@@ -200,13 +234,17 @@ const MessageCards = ({
           isOwnMessage={isOwnMessage}
         />
       )}
-      <div className={`flex ${isOwnMessage ? "justify-end items-end" : null} gap-2 relative`}>
+      <div
+        className={`flex ${isOwnMessage ? "justify-end items-end" : null} gap-2 relative`}
+      >
         {!isOwnMessage && (
           <ProfileAvatar
             isOwnMessage={isOwnMessage}
             sender={sender}
             currentUser={user}
-            setActiveMessageId={() => toggleActiveMessageId(msg._id || msg.clientTempId)}
+            setActiveMessageId={() =>
+              toggleActiveMessageId(msg._id || msg.clientTempId)
+            }
             message={msg}
             setIsStatusVisible={setIsStatusVisible}
           />
@@ -219,13 +257,14 @@ const MessageCards = ({
           onMouseLeave={handleLongPressEnd}
           onTouchStart={handleLongPressStart}
           onTouchEnd={handleLongPressEnd}
-
         >
           {msg.replyTo && (
             <ReplyCard
               themeIndex={themeIndex}
               isOwnMessage={isOwnMessage}
-              replyTo={sender._id === msg.replyTo.sender?._id ? "yourself" : "someone"}
+              replyTo={
+                sender._id === msg.replyTo.sender?._id ? "yourself" : "someone"
+              }
               replyType={msg.replyTo.messageType}
               repliedMessage={
                 msg.replyTo.messageType === "text"
@@ -261,57 +300,85 @@ const MessageCards = ({
             msg.emojiType !== "standard" && (
               <>
                 {msg.text && !msg.replyTo && (
-                  <div className={cn(`${showBackground
-                    ? isOwnMessage
-                      ? themeSenderMessage(themeIndex, "rounded-l-xl rounded-t-xl")
-                      : themeReceiverMessage(themeIndex, "rounded-r-xl rounded-b-xl")
-                    : themeSenderMessage(themeIndex, "rounded-l-xl rounded-t-xl")
-                    } relative ${msg.emojiType === "custom" || msg.replyTo || msg.media?.length ? "p-0" : "p-3"} w-fit text-base max-w-[100%] relative`)}>
-                    <TextMessageCard text={msg.text} plainText={msg.plainText} senderId={sender?._id} messageId={msg._id || msg.messageId} />
-                  </div>
-                )}
-                {msg.media?.length > 0 && msg.media.some(media => media.type === "image") && (
-                  <div className="mt-2">
-                    <ImageDisplay
-                      img={msg.media
-                        .filter(media => media.type === "image")
-                        .map(media => ({ img: `${BASE_URL}${media.url}` }))}
-                      onImageClick={(index) =>
-                        onImageClick(
-                          index,
-                          msg.media
-                            .filter(media => media.type === "image")
-                            .map(media => ({ img: `${BASE_URL}${media.url}` }))
-                        )
-                      }
+                  <div
+                    className={cn(
+                      `${
+                        showBackground
+                          ? isOwnMessage
+                            ? themeSenderMessage(
+                                themeIndex,
+                                "rounded-l-xl rounded-t-xl",
+                              )
+                            : themeReceiverMessage(
+                                themeIndex,
+                                "rounded-r-xl rounded-b-xl",
+                              )
+                          : themeSenderMessage(
+                              themeIndex,
+                              "rounded-l-xl rounded-t-xl",
+                            )
+                      } relative ${msg.emojiType === "custom" || msg.replyTo || msg.media?.length ? "p-0" : "p-3"} w-fit text-base max-w-[100%] relative`,
+                    )}
+                  >
+                    <TextMessageCard
+                      text={msg.text}
+                      plainText={msg.plainText}
+                      senderId={sender?._id}
+                      messageId={msg._id || msg.messageId}
                     />
                   </div>
                 )}
-                {msg.media?.length > 0 && msg.media.some(media => media.type === "audio") && (
-                  <div className="mt-2">
-                    <VoiceMessageCard
-                      duration={msg.media.find(media => media.type === "audio")?.duration || "0:00"}
-                      audioUrl={`${BASE_URL}${msg.media.find(media => media.type === "audio")?.url}`}
-                    />
-                  </div>
-                )}
-                {msg.media?.length > 0 && msg.media.some(media => media.type === "video") && (
-                  <div className="mt-2">
-                    <VideoMessageCard
-                      videoUrl={`${BASE_URL}${msg.media.find(media => media.type === "video")?.url}`}
-                    />
-                  </div>
-                )}
-                {msg.media?.length > 0 && msg.media.some(media => media.type === "file") && (
-                  <div className="mt-2">
-                    <ReplyCard
-                      isOwnMessage={isOwnMessage}
-                      contentType="file"
-                      content={`${BASE_URL}${msg.media.find(media => media.type === "file")?.url}`}
-                      themeIndex={themeIndex}
-                    />
-                  </div>
-                )}
+                {msg.media?.length > 0 &&
+                  msg.media.some((media) => media.type === "image") && (
+                    <div className="mt-2">
+                      <ImageDisplay
+                        img={msg.media
+                          .filter((media) => media.type === "image")
+                          .map((media) => ({ img: `${BASE_URL}${media.url}` }))}
+                        onImageClick={(index) =>
+                          onImageClick(
+                            index,
+                            msg.media
+                              .filter((media) => media.type === "image")
+                              .map((media) => ({
+                                img: `${BASE_URL}${media.url}`,
+                              })),
+                          )
+                        }
+                      />
+                    </div>
+                  )}
+                {msg.media?.length > 0 &&
+                  msg.media.some((media) => media.type === "audio") && (
+                    <div className="mt-2">
+                      <VoiceMessageCard
+                        duration={
+                          msg.media.find((media) => media.type === "audio")
+                            ?.duration || "0:00"
+                        }
+                        audioUrl={`${BASE_URL}${msg.media.find((media) => media.type === "audio")?.url}`}
+                      />
+                    </div>
+                  )}
+                {msg.media?.length > 0 &&
+                  msg.media.some((media) => media.type === "video") && (
+                    <div className="mt-2">
+                      <VideoMessageCard
+                        videoUrl={`${BASE_URL}${msg.media.find((media) => media.type === "video")?.url}`}
+                      />
+                    </div>
+                  )}
+                {msg.media?.length > 0 &&
+                  msg.media.some((media) => media.type === "file") && (
+                    <div className="mt-2">
+                      <ReplyCard
+                        isOwnMessage={isOwnMessage}
+                        contentType="file"
+                        content={`${BASE_URL}${msg.media.find((media) => media.type === "file")?.url}`}
+                        themeIndex={themeIndex}
+                      />
+                    </div>
+                  )}
                 {msg.voice && (
                   <div className="mb-2">
                     <VoiceMessageCard
@@ -332,7 +399,12 @@ const MessageCards = ({
                 )}
                 {msg.img && (
                   <div className="mb-2">
-                    <ImageDisplay img={[{ img: `${BASE_URL}${msg.img}` }]} onImageClick={() => onImageClick(0, [{ img: `${BASE_URL}${msg.img}` }])} />
+                    <ImageDisplay
+                      img={[{ img: `${BASE_URL}${msg.img}` }]}
+                      onImageClick={() =>
+                        onImageClick(0, [{ img: `${BASE_URL}${msg.img}` }])
+                      }
+                    />
                   </div>
                 )}
               </>
@@ -342,12 +414,34 @@ const MessageCards = ({
             onAddReaction={() => setIsBottomSheetOpen(true)}
             showAddButton={false}
           />
-          <ActionMenu
-            isOwnMessage={isOwnMessage}
-            themeIndex={themeIndex}
-            msg={msg}
-            openDialog={openDialog}
-          />
+          <div
+            className={cn(
+              "absolute top-0 bottom-0 flex items-center gap-1",
+              isOwnMessage ? "-left-12" : "-right-12",
+            )}
+          >
+           
+            <ActionMenu
+              isOwnMessage={isOwnMessage}
+              themeIndex={themeIndex}
+              msg={msg}
+              openDialog={openDialog}
+            />
+
+             <button
+              type="button"
+              title="React"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsReactionPickerOpen((v) => !v);
+              }}
+              className="p-1 rounded-full hover:bg-white/10 transition-colors text-base leading-none select-none"
+              aria-label="Add reaction"
+            >
+              <SmilePlus className={`text-gray-200 w-4 h-7 px-0.5 rounded-2xl ${isOwnMessage ? themeSenderMessage(themeIndex) : themeReceiverMessage(themeIndex) } hover:bg-white/20`} />
+            </button>
+            
+          </div>
           {isReactionPickerOpen && (
             <ReactionPicker
               open={isReactionPickerOpen}
@@ -368,7 +462,9 @@ const MessageCards = ({
             isOwnMessage={isOwnMessage}
             sender={sender}
             currentUser={user}
-            setActiveMessageId={() => toggleActiveMessageId(msg._id || msg.clientTempId)}
+            setActiveMessageId={() =>
+              toggleActiveMessageId(msg._id || msg.clientTempId)
+            }
             message={msg}
             setIsStatusVisible={setIsStatusVisible}
           />
@@ -378,12 +474,14 @@ const MessageCards = ({
         <div
           className={`absolute text-xs flex items-center bg-slate-800 rounded-full px-2 text-gray-100 ${isOwnMessage ? "right-8" : "left-0"} -bottom-2 ${isOwnMessage ? "justify-end" : "justify-start"} animate-slide-in `}
           style={{
-            animation: isStatusVisible ? 'slideIn 0.3s ease-in-out' : 'slideOut 0.3s ease-in-out',
+            animation: isStatusVisible
+              ? "slideIn 0.3s ease-in-out"
+              : "slideOut 0.3s ease-in-out",
           }}
         >
-          {msg.status === 'sending' && 'Sending...'}
-          {msg.status === 'fail' && (
-            <div className='flex items-center gap-2 min-w-44'>
+          {msg.status === "sending" && "Sending..."}
+          {msg.status === "fail" && (
+            <div className="flex items-center gap-2 min-w-44">
               <p className="text-red-600">Failed to send</p>
               <button
                 onClick={(e) => {
@@ -405,9 +503,9 @@ const MessageCards = ({
               </button>
             </div>
           )}
-          {msg.status === 'sent' && 'Sent'}
-          {msg.status === 'delivered' && !isGroup && 'Delivered'}
-          {msg.status === 'read' && !isGroup && 'Seen'}
+          {msg.status === "sent" && "Sent"}
+          {msg.status === "delivered" && !isGroup && "Delivered"}
+          {msg.status === "read" && !isGroup && "Seen"}
           {isGroup && msg.readBy && msg.readBy.length > 0 && (
             <span>{getSeenByNames(msg.readBy)}</span>
           )}

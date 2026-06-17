@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "../ui/button";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { ArrowLeft, Shield, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Shield, AlertTriangle, Loader2 } from "lucide-react";
 import { useConversation } from '@/redux/slices/conversationSlice';
 import { hasKeys } from '@/utils/messageEncryptionHelperFuction';
 import { useUser } from '@/redux/slices/authSlice';
 import { verifyKeyOnServer } from '@/utils/socketEncryptionUtils';
 import { useUserAuth } from '@/context-reducer/UserAuthContext';
+import { useFetchConversationByIdQuery, useUpdateEncryptionMethodMutation } from '@/redux/api/conversationApi';
 
 // Import split components
 import EncryptionMethodSelector from './encryption/EncryptionMethodSelector';
@@ -24,19 +25,35 @@ const EndToEndEncryptionSetting = ({ onClose }: { onClose: () => void }): JSX.El
   const [keyVerified, setKeyVerified] = useState<boolean>(false);
   const keyGenerationAttemptedRef = useRef<boolean>(false);
 
-  // Encryption method selection - now with 3 options
+  // ── Encryption method: server is the source of truth ──────────────────────
+  // Seed from localStorage so the UI is instant; server value wins once loaded.
   const [encryptionMethod, setEncryptionMethod] = useState<string>(() => {
     return localStorage.getItem(`encryptionMethod_${conversationId}`) || 'Backend';
   });
+  const [isSaving, setIsSaving] = useState(false);
 
-  // Save encryption method preference
+  // Fetch server-stored method and sync localStorage (so all tabs/devices agree)
+  const { data: conversationData } = useFetchConversationByIdQuery(
+    { chatId: conversationId, userId },
+    { skip: !conversationId || !userId }
+  );
+
   useEffect(() => {
-    if (conversationId && encryptionMethod) {
-      localStorage.setItem(`encryptionMethod_${conversationId}`, encryptionMethod);
+    if (conversationData?.encryptionMethod) {
+      const serverMethod = conversationData.encryptionMethod;
+      // Only override if different — avoids a flicker when already in sync
+      if (serverMethod !== encryptionMethod) {
+        setEncryptionMethod(serverMethod);
+      }
+      // Always write to localStorage so SendMessage / useMessageDecryption pick it up
+      localStorage.setItem(`encryptionMethod_${conversationId}`, serverMethod);
     }
-  }, [encryptionMethod, conversationId]);
+  }, [conversationData, conversationId]);
 
-  // Check if user has keys
+  // RTK mutation to persist the chosen method server-side
+  const [updateEncryptionMethodMutation] = useUpdateEncryptionMethodMutation();
+
+  // Check if user has ECDH keys
   useEffect(() => {
     if (encryptionMethod === 'ECDH' && conversationId && userId) {
       const userKeyExists = hasKeys(conversationId, userId);
@@ -56,9 +73,38 @@ const EndToEndEncryptionSetting = ({ onClose }: { onClose: () => void }): JSX.El
     }
   }, [conversationId, userId, encryptionMethod, socketRef]);
 
-  const handleEncryptionMethodChange = (method: string): void => {
-    setEncryptionMethod(method);
+  // Listen for live changes broadcast by the server when the OTHER participant changes the method
+  useEffect(() => {
+    const socket = socketRef?.current;
+    if (!socket || !conversationId) return;
+
+    const handleRemoteChange = ({ conversationId: cid, encryptionMethod: newMethod, changedBy }: any) => {
+      if (cid !== conversationId) return;
+      if (changedBy === userId) return; // own change already applied
+      localStorage.setItem(`encryptionMethod_${conversationId}`, newMethod);
+      setEncryptionMethod(newMethod);
+    };
+
+    socket.on('conversation:encryptionMethodChanged', handleRemoteChange);
+    return () => socket.off('conversation:encryptionMethodChanged', handleRemoteChange);
+  }, [socketRef, conversationId, userId]);
+
+  const handleEncryptionMethodChange = async (method: string): Promise<void> => {
+    if (method === encryptionMethod) return;
     setError('');
+    setIsSaving(true);
+
+    try {
+      // Persist to server first — this is the source of truth
+      await updateEncryptionMethodMutation({ conversationId, encryptionMethod: method }).unwrap();
+      // Update local state + localStorage (the socket broadcast will also update other participants)
+      setEncryptionMethod(method);
+      localStorage.setItem(`encryptionMethod_${conversationId}`, method);
+    } catch (err: any) {
+      setError(`Failed to save encryption method: ${err?.data?.message || 'Server error'}`);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -73,13 +119,14 @@ const EndToEndEncryptionSetting = ({ onClose }: { onClose: () => void }): JSX.El
         >
           <ArrowLeft className="h-5 w-5 text-gray-300" />
         </Button>
-        <div>
+        <div className="flex-1">
           <h2 className="text-lg font-semibold flex items-center gap-2 text-white">
             <Shield className="h-5 w-5 text-blue-400" />
             Encryption Settings
           </h2>
           <p className="text-xs text-gray-300">Secure your conversations</p>
         </div>
+        {isSaving && <Loader2 className="h-4 w-4 animate-spin text-blue-400" />}
       </div>
 
       {/* Content */}

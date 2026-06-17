@@ -95,6 +95,17 @@ const GlobalMessageHandler = (): JSX.Element | null => {
 
     dispatch(addMessage(messageToAdd));
 
+    // Move conversation to top + update preview + increment unread if not currently viewing
+    const previewText = message.text || (message.media?.length ? '[Media]' : message.voice ? '[Voice]' : '[Message]');
+    dispatch(updateConversationLastMessage({
+      conversationId,
+      lastMessage: previewText,
+      lastMessageTime: message.createdAt || new Date().toISOString(),
+      sender: senderId,
+      currentUserId: user._id,
+      isActiveConversation: conversationId === activeConversationId,
+    }));
+
     // Acknowledge delivery to the server - the message reached this device
     if (socket) {
       socket.emit('messageDelivered', { conversationId, userId: user._id });

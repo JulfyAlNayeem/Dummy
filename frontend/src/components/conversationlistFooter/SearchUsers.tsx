@@ -147,7 +147,7 @@ console.log(searchResult?.users, 'searchResult');
                   </p>
                 </div>
               ) : allUsers.length === 0 && debouncedQuery.length >= 3 && !isFetching ? (
-                <div className="text-center py-8 text-gray-400">No results found</div>
+                <div className="text-center py-8 text-gray-400">No users found. Try a different search term.</div>
               ) : (
                 allUsers.map((user, index) => (
                   <div

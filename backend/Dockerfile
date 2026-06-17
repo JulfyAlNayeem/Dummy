@@ -6,12 +6,15 @@ WORKDIR /app/backend
 # Install pnpm
 RUN npm install -g pnpm
 
-# Copy package files first (better Docker layer caching)
+# Copy ROOT lockfile and workspace files (lockfile is at root, not in backend/)
+COPY pnpm-lock.yaml ../
+COPY pnpm-workspace.yaml ../
+COPY package.json ../
 COPY backend/package.json ./
-COPY backend/pnpm-lock.yaml* ./
 
-# Install dependencies
-RUN pnpm install --frozen-lockfile --ignore-scripts
+
+# Install only backend dependencies using root lockfile
+RUN cd .. && pnpm install --frozen-lockfile --ignore-scripts --filter dummyprojectbackend
 
 # Copy backend source code
 COPY backend/ ./
@@ -23,4 +26,5 @@ EXPOSE 3001
 
 # Use --env-file to load env vars before ANY module imports
 # This ensures livekit.service.js and others see process.env at import time
-CMD ["node", "--env-file=.env.production", "app.js"]
+CMD ["node", "app.js"]
+

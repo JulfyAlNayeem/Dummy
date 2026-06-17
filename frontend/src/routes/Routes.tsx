@@ -34,6 +34,8 @@ import ConversationListPage from "@/pages/ConversationListPage";
 import SiteSecuritypage from "@/pages/SiteSecuritypage";
 import ErrorFallback, { RouterErrorFallback } from "@/pages/ErrorFallback";
 import AuthErrorBoundary from "@/pages/AuthErrorBoundary";
+import ReportsDashboard from "@/pages/ReportsDashboard";
+import DeveloperRoutes from "./private/DeveloperRoutes";
 
 export const Routes = createBrowserRouter(
   createRoutesFromElements(
@@ -66,7 +68,8 @@ export const Routes = createBrowserRouter(
         <Route path={APP_ROUTES.ADMIN_USER_MANAGEMENT} element={<UserManagementTabs />} />
         <Route path={APP_ROUTES.ADMIN_SYSTEM_SETTINGS} element={<SystemSettings />} />
         <Route path={APP_ROUTES.ADMIN_NOTICE} element={<Notice />} />
-        
+        <Route path={APP_ROUTES.ADMIN_REPORTS} element={<ReportsDashboard />} />
+
       </Route>
 
       {/* Teacher Routes Wrapper */}
@@ -80,6 +83,11 @@ export const Routes = createBrowserRouter(
       {/* Student Routes Wrapper */}
       <Route element={<StudentRoutes />}>
         <Route path={APP_ROUTES.STUDENT_ASSIGNMENT_PANEL} element={<StudentAssignmentPanelPage />} />
+      </Route>
+
+       {/* Developer Routes Wrapper */}
+      <Route element={<DeveloperRoutes />}>
+        <Route path={APP_ROUTES.DEVELOPER_REPORTS} element={<ReportsDashboard />} />
       </Route>
 
       {/* Fallback Route */}

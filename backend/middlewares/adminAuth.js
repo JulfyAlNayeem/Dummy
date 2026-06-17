@@ -36,6 +36,20 @@ export const requireAdmin = async (req, res, next) => {
   }
 };
 
+export const requireDeveloper = async (req, res, next) => {
+  try {
+    const user = req.user;
+    if (!user) return res.status(401).json({ message: "Authentication required" });
+    if (!["developer", "admin", "superadmin"].includes(user.role)) {
+      return res.status(403).json({ message: "Developer access required" });
+    }
+    next();
+  } catch (error) {
+    res.status(403).json({ message: "Access denied" });
+  }
+};
+  
+
 export const requireSuperAdmin = async (req, res, next) => {
   try {
     if (!req.user || req.user.role !== "superadmin") {

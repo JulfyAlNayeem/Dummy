@@ -236,21 +236,22 @@ const conversationSlice = createSlice({
         return;
       }
 
-      // Validate reactions structure
+      // Validate and normalize reactions structure.
+      // Accept both legacy string format ("❤️") and object format ({ emoji, username }).
       const validatedReactions = {};
       for (const [userId, reaction] of Object.entries(reactions || {})) {
-        if (
+        if (typeof reaction === 'string' && reaction.length > 0) {
+          // Legacy string — normalize to object
+          validatedReactions[userId] = { emoji: reaction, username: userId };
+        } else if (
           reaction &&
-          typeof reaction === "object" &&
-          reaction.emoji &&
-          typeof reaction.emoji === "string" &&
-          reaction.username &&
-          typeof reaction.username === "string"
+          typeof reaction === 'object' &&
+          (reaction as any).emoji &&
+          typeof (reaction as any).emoji === 'string'
         ) {
           validatedReactions[userId] = reaction;
-        } else {
-          console.warn(`Invalid reaction format for user ${userId}:`, reaction);
         }
+        // silently skip anything else
       }
 
       state.byConversationId[conversationId].messages[key].reactions =
@@ -356,22 +357,41 @@ const conversationSlice = createSlice({
      * This is used by the GlobalMessageHandler to update conversation previews
      */
     updateConversationLastMessage(state, action) {
-      const { conversationId, lastMessage, lastMessageTime } = action.payload;
+      const { conversationId, lastMessage, lastMessageTime, sender, currentUserId, isActiveConversation } = action.payload;
+      const conversationIndex = state.allConversations.findIndex(
+        (c) => c._id === conversationId
+      );
+      if (conversationIndex !== -1) {
+        const prev = state.allConversations[conversationIndex];
+        // Only increment unread if: the message is from someone else AND the conversation is not currently open
+        const shouldIncrement = sender && currentUserId && sender !== currentUserId && !isActiveConversation;
+        state.allConversations[conversationIndex] = {
+          ...prev,
+          last_message: {
+            message: lastMessage,
+            sender: sender || prev.last_message?.sender,
+            timestamp: lastMessageTime || new Date().toISOString(),
+          },
+          unreadMessages: shouldIncrement
+            ? (prev.unreadMessages || 0) + 1
+            : prev.unreadMessages,
+        };
+        // Move updated conversation to top of list
+        const [updatedConversation] = state.allConversations.splice(conversationIndex, 1);
+        state.allConversations.unshift(updatedConversation);
+      }
+    },
+    // Reset unread count when user opens a conversation
+    resetConversationUnread(state, action) {
+      const { conversationId } = action.payload;
       const conversationIndex = state.allConversations.findIndex(
         (c) => c._id === conversationId
       );
       if (conversationIndex !== -1) {
         state.allConversations[conversationIndex] = {
           ...state.allConversations[conversationIndex],
-          last_message: {
-            message: lastMessage,
-            sender: action.payload.sender || state.allConversations[conversationIndex].last_message?.sender,
-            timestamp: lastMessageTime || new Date().toISOString(),
-          },
+          unreadMessages: 0,
         };
-        // Move updated conversation to top of list
-        const [updatedConversation] = state.allConversations.splice(conversationIndex, 1);
-        state.allConversations.unshift(updatedConversation);
       }
     },
     reset: () => initialState,
@@ -529,6 +549,7 @@ export const {
   setBlockList,
   migrateNewConversation,
   updateConversationLastMessage,
+  resetConversationUnread,
   reset,
   clearError,
   checkScheduledDeletions,

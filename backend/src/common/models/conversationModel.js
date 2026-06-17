@@ -128,6 +128,14 @@ const conversationSchema = new Schema(
       type: Number,
       default: 0,
     },
+
+    // Shared encryption method for this conversation — server is the source of truth.
+    // All participants must use the same method; this field keeps them in sync.
+    encryptionMethod: {
+      type: String,
+      enum: ['Backend', 'ECDH', 'V1'],
+      default: 'Backend',
+    },
   },
   { timestamps: true }
 );

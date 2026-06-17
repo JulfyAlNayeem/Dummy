@@ -12,7 +12,7 @@ import { getOrFetchParticipantKey } from '@/utils/messageEncryptionHelperFuction
  * @param {boolean} skipOwnMessages - Whether to skip decrypting own messages (default: true)
  * @returns {Object} { decryptedText, decryptError, isEncrypted }
  */
-export const useMessageDecryption = (messageText: any, conversationId: any, senderId: any, currentUserId: any, skipOwnMessages: boolean = true): any => {
+export const useMessageDecryption = (messageText: any, conversationId: any, senderId: any, currentUserId: any, skipOwnMessages: boolean = true, encryptionMethodOverride?: string): any => {
     const [decryptedText, setDecryptedText] = useState<any>(null);
     const [decryptError, setDecryptError] = useState<any>(null);
 
@@ -57,8 +57,11 @@ export const useMessageDecryption = (messageText: any, conversationId: any, send
       }
 
       try {
-        // Get encryption method preference for this conversation
-        const method = localStorage.getItem(`encryptionMethod_${conversationId}`) || 'Backend';
+        // Use override (passed directly from API response) when available,
+        // otherwise fall back to localStorage — avoids the race on first render.
+        const method = encryptionMethodOverride
+          || localStorage.getItem(`encryptionMethod_${conversationId}`)
+          || 'Backend';
 
         // Handle SMTE transport-encrypted (server should have decrypted, but just in case)
         if (method === 'Backend' && typeof messageText === 'string' && messageText.startsWith('SMTE:')) {
@@ -135,7 +138,7 @@ export const useMessageDecryption = (messageText: any, conversationId: any, send
     return () => {
       isMounted = false;
     };
-  }, [messageText, conversationId, senderId, currentUserId, skipOwnMessages]);
+  }, [messageText, conversationId, senderId, currentUserId, skipOwnMessages, encryptionMethodOverride]);
 
   return {
     decryptedText,

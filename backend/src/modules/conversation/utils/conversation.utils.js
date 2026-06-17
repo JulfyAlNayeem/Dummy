@@ -22,6 +22,7 @@ export const formatConversation = (convo, userId) => {
         image: user.image,
       })),
       unreadMessages: unreadCount,
+      encryptionMethod: convo.encryptionMethod || 'Backend',
     };
   } else {
     return {
@@ -36,6 +37,7 @@ export const formatConversation = (convo, userId) => {
         image: user.image,
       })),
       unreadMessages: unreadCount,
+      encryptionMethod: convo.encryptionMethod || 'Backend',
     };
   }
 };

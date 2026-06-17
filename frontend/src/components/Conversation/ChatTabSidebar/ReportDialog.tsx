@@ -2,16 +2,11 @@ import { useState } from "react";
 import { AlertTriangle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useReportConversationMutation } from "@/redux/api/conversationApi";
+import { useReportConversationMutation } from "@/redux/api/admin/reportsApi";
 
 const REPORT_REASONS = [
-  { value: "spam", label: "Spam or scam" },
-  { value: "harassment", label: "Harassment or bullying" },
-  { value: "hate_speech", label: "Hate speech or symbols" },
-  { value: "violence", label: "Violence or dangerous behavior" },
-  { value: "nudity", label: "Nudity or sexual content" },
-  { value: "false_info", label: "False information" },
-  { value: "impersonation", label: "Pretending to be someone else" },
+  { value: "misbehaviour", label: "Misbehaviour (harassment, abuse, threats)" },
+  { value: "software issue", label: "Software Issue (bug, error, technical problem)" },
   { value: "other", label: "Something else" },
 ];
 

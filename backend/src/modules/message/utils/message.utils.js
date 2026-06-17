@@ -14,7 +14,7 @@ export const isUserInConversation = async (conversationId, userId) => {
 };
 
 
-export const findOrCreateConversation = async (userId, receiverId, conversationId) => {
+export const findOrCreateConversation = async (userId, receiverId, conversationId, io = null) => {
   let conversation;
 
   if (!conversationId) {
@@ -34,8 +34,8 @@ export const findOrCreateConversation = async (userId, receiverId, conversationI
         visibility: "private",
         group: { is_group: false },
       });
-           // Increase unreadFriendRequestCount for the receiver
-      await incrementUnreadRequest(receiverId, 'friend');
+      // Increment unread request count for receiver AND emit socket event immediately
+      await incrementUnreadRequest(receiverId, 'friend', io);
     }
   } else {
     if (!isValidObjectId(conversationId)) {
@@ -68,7 +68,7 @@ export const computeDeletionTime = (conversation) => {
 };
 
 export const updateConversationState = async (conversation, senderId, lastText) => {
-  // Update last message details
+  // Update last message details — callers are responsible for passing plaintext.
   conversation.last_message = {
     message: lastText,
     sender: senderId,

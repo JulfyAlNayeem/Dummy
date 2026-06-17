@@ -61,7 +61,7 @@ const MessageList = ({ messages, user, participant, themeIndex, isGroup, setPrev
 
         return (
           <div
-            key={msg._id + msg.clientTempId}
+            key={msg._id || msg.clientTempId || `msg-${index}`}
             className={`flex mb-0.5 w-full relative ${isOwnMessage ? 'items-end justify-end' : 'items-start justify-start'} mt-10 animate__animated animate__fadeInUp animate__faster`}
           >
             <div className="max-w-[70%]">

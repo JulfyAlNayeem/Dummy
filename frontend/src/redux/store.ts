@@ -12,6 +12,7 @@ import { quickMessageApi } from "./api/quickMessageApi";
 import { lessonApi } from "./api/quickLessonApi";
 import { userApi } from "./api/user/userApi";
 import { adminApi } from "./api/admin/adminApi";
+import { reportsApi } from "./api/admin/reportsApi";
 import { settingsApi } from "./api/admin/settingsApi";
 import { userManagementApi } from "./api/admin/userManagementApi";
 import { classApi } from "./api/classGroup/classApi";
@@ -84,6 +85,7 @@ const reducers = {
   [quickMessageApi.reducerPath]: quickMessageApi.reducer,
   [lessonApi.reducerPath]: lessonApi.reducer,
   [adminApi.reducerPath]: adminApi.reducer,
+  [reportsApi.reducerPath]: reportsApi.reducer,
   [settingsApi.reducerPath]: settingsApi.reducer,
   [userManagementApi.reducerPath]: userManagementApi.reducer,
   [noticeApi.reducerPath]: noticeApi.reducer,
@@ -121,6 +123,7 @@ export const store = configureStore({
       quickMessageApi.middleware,
       lessonApi.middleware,
       adminApi.middleware,
+      reportsApi.middleware,
       settingsApi.middleware,
       userManagementApi.middleware,
       noticeApi.middleware,

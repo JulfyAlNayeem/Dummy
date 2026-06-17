@@ -24,6 +24,7 @@ import {
   setParticipant,
   setBlockList,
   migrateNewConversation,
+  resetConversationUnread,
 } from '../../redux/slices/conversationSlice';
 import ChatTabNavbar from './ChatTabNavbar';
 import { useGetUserInfoQuery } from '../../redux/api/user/userApi';
@@ -197,6 +198,8 @@ const ChatTab = (): JSX.Element => {
       if (!conversation.group.is_group) {
         dispatch(setParticipant(conversation.participants.find((p) => p._id !== user._id) || {}));
       }
+      // Reset unread badge when user opens the conversation
+      dispatch(resetConversationUnread({ conversationId: convId }));
       setConversationNotFoundError('');
     }
     
@@ -249,6 +252,15 @@ const ChatTab = (): JSX.Element => {
 
     autoFetchKeys();
   }, [conversationId, user?._id]);
+
+  // Sync encryptionMethod from server into localStorage whenever the conversation loads.
+  // This ensures SendMessage and useMessageDecryption always use the server-authoritative method,
+  // even when the user never opens Encryption Settings.
+  useEffect(() => {
+    if (rawConversation?.encryptionMethod && conversationId && conversationId !== 'new') {
+      localStorage.setItem(`encryptionMethod_${conversationId}`, rawConversation.encryptionMethod);
+    }
+  }, [rawConversation?.encryptionMethod, conversationId]);
 
   const styles = {
     container: {
@@ -325,6 +337,17 @@ const ChatTab = (): JSX.Element => {
               : user?._id === conversation?.participants[1]?._id)
             ? (
               <MessengeRequestCard messagesContainerRef={messagesContainerRef} />
+            ) : isGroup && conversation &&
+              !conversation.participants?.some((p: any) => (p._id || p) === user?._id)
+            ? (
+              // User has sent a join request but hasn't been approved yet
+              <div className="flex-grow flex flex-col items-center justify-center text-gray-400 p-8 space-y-4">
+                <div className="text-5xl">⏳</div>
+                <p className="text-lg font-semibold text-gray-300">Request Pending</p>
+                <p className="text-sm text-gray-500 text-center">
+                  Your request to join <span className="text-gray-300 font-medium">{conversation?.group?.name}</span> is awaiting approval from an admin.
+                </p>
+              </div>
             ) : (
             <>
               {/* Show MessageContainer for existing conversations or empty state for new users */}

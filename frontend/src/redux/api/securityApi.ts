@@ -10,7 +10,7 @@ const baseQuery = fetchBaseQuery({
 export const securityApi = createApi({
   reducerPath: "securityApi",
   baseQuery,
-  tagTypes: ["Security"],
+  tagTypes: ["SiteVerification"], 
   endpoints: (builder) => ({
 
     createSiteSecurityMessage: builder.mutation({
@@ -29,12 +29,13 @@ export const securityApi = createApi({
       }),
     }),
 
-     verifySecurityMessage: builder.mutation({
+    verifySecurityMessage: builder.mutation({
       query: (body) => ({
         url: `verify-site-security-messages/`,
         method: "POST",
         body: body,
       }),
+      invalidatesTags: ["SiteVerification"], 
     }),
 
     checkSiteVerification: builder.query({
@@ -42,6 +43,7 @@ export const securityApi = createApi({
         url: `check-site-verification`,
         method: "GET",
       }),
+      providesTags: ["SiteVerification"], 
     }),
   }),
 });

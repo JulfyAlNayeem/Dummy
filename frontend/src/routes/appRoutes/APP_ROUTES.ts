@@ -18,6 +18,7 @@ export const APP_ROUTES = {
   ADMIN_USER_MANAGEMENT: "/superadmin/user-management",
   ADMIN_SYSTEM_SETTINGS: "/superadmin/system-settings",
   ADMIN_NOTICE: "/superadmin/notice",
+  ADMIN_REPORTS : "/superadmin/reports",
 
   // Teacher Routes
   TEACHER_ASSIGNMENT_PANEL: "/e2ee/t/teacher/assignmentpanel/:classId",
@@ -30,6 +31,9 @@ export const APP_ROUTES = {
   STUDENT_ASSIGNMENT_PANEL: "/e2ee/t/student/assignmentpanel/:classId",
   STUDENT_ALERTNESS: "/e2ee/t/student/alertness/:classId",
   STUDENT_ATTENDANCE: "/e2ee/t/teacher/attendance/:classId",
+
+  // Developer Routes
+  DEVELOPER_REPORTS : "/developer/reports",
 
   // Forms
   FORMS_PAGE: "/forms",

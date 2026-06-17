@@ -4,14 +4,9 @@ import Conversation from "../../common/models/conversationModel.js";
 
 // Valid report reasons
 const VALID_REASONS = [
-  "spam",
-  "harassment",
-  "hate_speech",
-  "violence",
-  "nudity",
-  "false_info",
-  "impersonation",
-  "other",
+  "misbehaviour",
+  "software issue",
+  "other"
 ];
 
 // Submit a report for a conversation
@@ -92,14 +87,25 @@ export const reportConversation = async (req, res) => {
   }
 };
 
-// Get reports for admin (paginated)
+// Get reports filtered by caller's role (paginated)
 export const getReports = async (req, res) => {
   try {
     const { status, page = 1, limit = 20 } = req.query;
     const pageNum = parseInt(page, 10);
     const limitNum = parseInt(limit, 10);
+    const callerRole = req.user.role;
 
     const query = {};
+
+    // Role-based reason filter:
+    // developer → sees only "software issue" reports
+    // admin / superadmin → sees "misbehaviour" and "other" reports
+    if (callerRole === "developer") {
+      query.reason = "software issue";
+    } else {
+      query.reason = { $in: ["misbehaviour", "other"] };
+    }
+
     if (status && ["pending", "reviewed", "resolved", "dismissed"].includes(status)) {
       query.status = status;
     }
@@ -120,6 +126,7 @@ export const getReports = async (req, res) => {
       totalReports,
       totalPages: Math.ceil(totalReports / limitNum),
       currentPage: pageNum,
+      role: callerRole,
     });
   } catch (error) {
     console.error("Error fetching reports:", error);

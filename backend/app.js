@@ -72,19 +72,23 @@ const waitForDb = () =>
     // Serve uploaded files — decrypt BENC-encrypted files on-the-fly
     app.use("/uploads", async (req, res, next) => {
       try {
-        const safePath = path.normalize(req.path).replace(/^(\.\.[/\\])+/, "");
+        // CRITICAL: decode URL-encoded path so "images%20(7).jpg" matches disk filename
+        const decoded = decodeURIComponent(req.path);
+        const safePath = path.normalize(decoded).replace(/^(\.\.[/\\])+/, "");
         const filePath = path.join(process.cwd(), "uploads", safePath);
 
+        // Path traversal guard
         if (!filePath.startsWith(path.join(process.cwd(), "uploads"))) {
           return res.status(400).send("Invalid path");
         }
 
-        const fs = await import("fs");
-        if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+        // Use named exports from dynamic import
+        const { existsSync, statSync, readFileSync } = await import("fs");
+        if (!existsSync(filePath) || statSync(filePath).isDirectory()) {
           return next();
         }
 
-        const fileBuffer = fs.readFileSync(filePath);
+        const fileBuffer = readFileSync(filePath);
 
         if (isEncryptedFile(fileBuffer)) {
           const decrypted = await decryptBuffer(fileBuffer);
@@ -93,6 +97,7 @@ const waitForDb = () =>
             jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png",
             gif: "image/gif", webp: "image/webp", svg: "image/svg+xml",
             mp4: "video/mp4", webm: "video/webm", mp3: "audio/mpeg",
+            ogg: "audio/ogg", wav: "audio/wav",
             pdf: "application/pdf", doc: "application/msword",
             docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
           };
@@ -102,10 +107,11 @@ const waitForDb = () =>
           return res.send(decrypted);
         }
 
+        // Not BENC encrypted — serve raw file
         return express.static(path.join(process.cwd(), "uploads"))(req, res, next);
       } catch (err) {
         console.error("Upload serve error:", err.message);
-        return res.status(500).send("File error");
+        return next();
       }
     });
 

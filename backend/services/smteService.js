@@ -202,10 +202,15 @@ export async function decryptTransportFile(envelope, conversationId) {
 
 /**
  * Check whether a string looks like an SMTE-encrypted text payload.
+ * Format: SMTE:<version>:<iv_b64>:<authTag_b64>:<ciphertext_b64>
+ * We split on exactly 4 colons (5 parts) and verify each component exists.
  */
 export function isSMTEEncrypted(text) {
   if (!text || typeof text !== 'string') return false;
-  return text.startsWith('SMTE:') && text.split(':').length === 5;
+  if (!text.startsWith('SMTE:')) return false;
+  const parts = text.split(':');
+  // Must have exactly 5 parts and all non-empty
+  return parts.length === 5 && parts.every(p => p.length > 0);
 }
 
 export default {

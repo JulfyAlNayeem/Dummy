@@ -98,19 +98,43 @@ const storage = multer.diskStorage({
 // Legacy file filter
 const fileFilter = (req, file, cb) => {
   const allowedTypes = [
-    "image/jpeg",
-    "image/png",
-    "video/mp4",
-    "audio/mpeg",
-    "audio/webm",
+    // Images
+    "image/jpeg", "image/jpg", "image/png", "image/gif",
+    "image/webp", "image/svg+xml", "image/bmp", "image/tiff",
+    // Video
+    "video/mp4", "video/webm", "video/quicktime", "video/x-msvideo",
+    "video/x-matroska", "video/mpeg",
+    // Audio
+    "audio/mpeg", "audio/mp3", "audio/mp4", "audio/webm",
+    "audio/ogg", "audio/wav", "audio/x-wav", "audio/aac",
+    "audio/flac", "audio/webm;codecs=opus",
+    // Documents
     "application/pdf",
+    "application/msword",
     "application/docx",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.ms-excel",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "application/vnd.ms-powerpoint",
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "text/plain", "text/csv",
+    // Archives
+    "application/zip", "application/x-zip-compressed",
+    // Generic binary (for SMTE-encrypted blobs whose type may not be known)
+    "application/octet-stream",
   ];
-  if (allowedTypes.includes(file.mimetype)) {
+
+  // Accept if in the list OR if the mimetype starts with an allowed category
+  const allowed =
+    allowedTypes.includes(file.mimetype) ||
+    file.mimetype.startsWith("image/") ||
+    file.mimetype.startsWith("audio/") ||
+    file.mimetype.startsWith("video/");
+
+  if (allowed) {
     cb(null, true);
   } else {
-    cb(new Error("Unsupported file type"), false);
+    cb(new Error(`Unsupported file type: ${file.mimetype}`), false);
   }
 };
 
@@ -141,6 +165,8 @@ const handleMulterError = (multerUpload) => {
   };
 };
 
-// Export both the raw Multer instance and the error-handled middleware
-export const rawUpload = upload; // Raw Multer instance
+// rawUpload: the raw multer instance (for .any(), .single() etc usage in routes)
+export const rawUpload = upload;
+// rawUploadAny: pre-wrapped upload.any() with proper error handling for message routes
+export const rawUploadAny = handleMulterError(upload.any());
 export default handleMulterError(upload); // Error-handled middleware

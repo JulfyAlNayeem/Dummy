@@ -23,6 +23,7 @@ import useDynamicHeight from '@/hooks/updateContainerHeight';
 import { hasKeys, storePrivateKey, storeUserPublicKey, exchangePublicKey, ensureAllConversationKeysInStorage } from '@/utils/messageEncryptionHelperFuction';
 import { generateKeyPair } from '@/utils/messageEncryption';
 import '@/utils/debugEncryption'; // Load debug utilities
+import { replyMessage } from '@/redux/slices/messagesSlice';
 
 const MessageContainer = ({ messagesContainerRef, participant }: { messagesContainerRef: React.RefObject<any>; participant: any }): JSX.Element => {
 
@@ -367,8 +368,16 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
     setIsEditing(false);
   };
 
-  const handleReply = (msgId, originalText, senderName) => {
-    console.log(`Replying to message ${msgId}: ${originalText}`);
+  const handleReply = (msgId?: string, _text?: string, _senderName?: string) => {
+    // Find the full message object so we can pass messageType and media to replyMessage
+    const id = msgId || currentMessageId;
+    const fullMsg = messages.find((m: any) => (m._id || m.clientTempId) === id);
+    dispatch(replyMessage({
+      messageId: id,
+      text: fullMsg?.text || fullMsg?.plainText || _text || '',
+      messageType: fullMsg?.messageType || 'text',
+      media: fullMsg?.media || [],
+    }));
   };
 
   const handleNote = (msgId, selectedText) => {
@@ -481,11 +490,11 @@ const MessageContainer = ({ messagesContainerRef, participant }: { messagesConta
 
             return (
               <div
-                key={msg._id + index}
+                key={msg._id || msg.clientTempId || `msg-${index}`}
                 className={`flex mb-0.5 w-full relative ${isOwnMessage ? "items-end justify-end" : "items-start justify-start"} mt-10 animate__animated animate__fadeInUp animate__faster`}
               >
                 <MessageCards
-                  key={msg._id + index}
+                  key={msg._id || msg.clientTempId || `card-${index}`}
                   msg={msg}
                   isOwnMessage={isOwnMessage}
                   themeIndex={themeIndex}

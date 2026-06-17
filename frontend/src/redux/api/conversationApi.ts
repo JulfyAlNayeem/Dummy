@@ -173,13 +173,16 @@ export const conversationApi = createApi({
       invalidatesTags: ["Conversation"],
     }),
 
-    // Report a conversation
-    reportConversation: builder.mutation({
-      query: ({ conversationId, reason, details }) => ({
-        url: `/reports/conversation/${conversationId}`,
-        method: "POST",
-        body: { reason, details },
+ 
+
+    // Update the shared encryption method for a conversation (persisted server-side)
+    updateEncryptionMethod: builder.mutation({
+      query: ({ conversationId, encryptionMethod }) => ({
+        url: `/${conversationId}/encryption-method`,
+        method: "PATCH",
+        body: { encryptionMethod },
       }),
+      invalidatesTags: ["Conversation"],
     }),
 
     // (permission endpoints moved to permissionApi)
@@ -204,6 +207,6 @@ export const {
   useGetDisappearingMessagesQuery,
   useUpdateDisappearingMessagesMutation,
   useUpdateGroupImageMutation,
-  useReportConversationMutation,
+  useUpdateEncryptionMethodMutation,
   // permission hooks moved to permissionApi
 } = conversationApi;
