@@ -27,7 +27,7 @@ export const reportsApi = createApi({
    // Report a conversation
     reportConversation: builder.mutation({
       query: ({ conversationId, reason, details }) => ({
-        url: `/reports/conversation/${conversationId}`,
+        url: `/conversation/${conversationId}`,
         method: "POST",
         body: { reason, details },
       }),
